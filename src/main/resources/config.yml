@@ -34,3 +34,38 @@ economy:
 
   # Maximum balance a player can have (set to -1 for unlimited)
   max-balance: -1
+
+teleport:
+  tpa:
+    # Cooldown between TPA requests (in seconds)
+    cooldown: 60
+
+    # Warmup time before teleport happens (in seconds). Set to 0 for instant.
+    warmup: 3
+
+    # How long until request expires (in seconds)
+    timeout: 60
+
+    # Max pending requests a player can have at once
+    max-pending: 5
+
+    # Max outgoing requests a player can send at once
+    max-outgoing: 1
+
+    # Economy cost per teleport (requires economy enabled). Set to 0 to disable.
+    cost: 0.0
+
+    # Cancel teleport if player moves during warmup
+    deny-movement: true
+
+    # Show particle effects
+    particles: true
+
+    # Play sound effects
+    sounds: true
+
+    # Worlds where TPA is disabled
+    blocked-worlds: []
+    # blocked-worlds:
+    #   - spawn_world
+    #   - arena

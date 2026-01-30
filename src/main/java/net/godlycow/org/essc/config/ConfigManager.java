@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ConfigManager {
     private final EssentialsC plugin;
@@ -60,6 +61,46 @@ public class ConfigManager {
 
     public String getEconomyFormat() {
         return config.getString("economy.format", "#,##0.00");
+    }
+
+    public long getTPACooldown() {
+        return config.getLong("teleport.tpa.cooldown", 60);
+    }
+
+    public long getTPAWarmup() {
+        return config.getLong("teleport.tpa.warmup", 3);
+    }
+
+    public long getTPATimeout() {
+        return config.getLong("teleport.tpa.timeout", 60);
+    }
+
+    public int getTPAMaxPending() {
+        return config.getInt("teleport.tpa.max-pending", 5);
+    }
+
+    public int getTPAMaxOutgoing() {
+        return config.getInt("teleport.tpa.max-outgoing", 1);
+    }
+
+    public double getTPACost() {
+        return config.getDouble("teleport.tpa.cost", 0.0);
+    }
+
+    public boolean isTPADenyMovement() {
+        return config.getBoolean("teleport.tpa.deny-movement", true);
+    }
+
+    public boolean isTPAParticles() {
+        return config.getBoolean("teleport.tpa.particles", true);
+    }
+
+    public boolean isTPASounds() {
+        return config.getBoolean("teleport.tpa.sounds", true);
+    }
+
+    public List<String> getTPABlockedWorlds() {
+        return config.getStringList("teleport.tpa.blocked-worlds");
     }
 
     public FileConfiguration getConfig() {

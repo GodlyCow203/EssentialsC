@@ -40,6 +40,52 @@ commands:
     aliases: [balancetop]
     permission: essentialsc.baltop
 
+  tpa:
+    description: Request to teleport to a player
+    usage: /tpa <player>
+    aliases: [ tpask, call ]
+    permission: essentialsc.tpa
+
+  tpahere:
+    description: Request a player to teleport to you
+    usage: /tpahere <player>
+    aliases: [ tphere, s ]
+    permission: essentialsc.tpahere
+
+  tpaccept:
+    description: Accept a teleport request
+    usage: /tpaccept [player]
+    aliases: [ tpyes, tpallow ]
+    permission: essentialsc.tpaccept
+
+  tpdeny:
+    description: Deny a teleport request
+    usage: /tpdeny [player]
+    aliases: [ tpno, tpreject ]
+    permission: essentialsc.tpdeny
+
+  tpcancel:
+    description: Cancel your outgoing teleport request
+    usage: /tpcancel [player]
+    aliases: [ tpc ]
+    permission: essentialsc.tpcancel
+
+  tpaignore:
+    description: Ignore TPA requests from a player
+    usage: /tpaignore <player>
+    permission: essentialsc.tpaignore
+
+  tpatoggle:
+    description: Toggle TPA requests on/off
+    usage: /tpatoggle
+    permission: essentialsc.tpatoggle
+
+  tpaqueue:
+    description: View pending TPA requests
+    usage: /tpaqueue
+    aliases: [ tpalist, tpalist ]
+    permission: essentialsc.tpaqueue
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -59,3 +105,33 @@ permissions:
   essentialsc.baltop:
     description: View top balances
     default: true
+  essentialsc.tpa:
+    description: Request teleport to player
+    default: true
+  essentialsc.tpahere:
+    description: Request player to teleport to you
+    default: true
+  essentialsc.tpaccept:
+    description: Accept teleport requests
+    default: true
+  essentialsc.tpdeny:
+    description: Deny teleport requests
+    default: true
+  essentialsc.tpcancel:
+    description: Cancel outgoing requests
+    default: true
+  essentialsc.tpaignore:
+    description: Ignore players
+    default: true
+  essentialsc.tpatoggle:
+    description: Toggle TPA on/off
+    default: true
+  essentialsc.tpaqueue:
+    description: View request queue
+    default: true
+  essentialsc.tpa.bypasscooldown:
+    description: Bypass TPA cooldown
+    default: op
+  essentialsc.tpa.bypasscost:
+    description: Bypass TPA cost
+    default: op

@@ -1,10 +1,12 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.command.*;
+import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.PluginCommand;
@@ -19,6 +21,7 @@ public final class EssentialsC extends JavaPlugin {
     private LanguageManager languageManager;
     private EconomyManager economyManager;
     private VaultHook vaultHook;
+    private TPAManager tpaManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -43,6 +46,10 @@ public final class EssentialsC extends JavaPlugin {
         } else {
             unregisterEconomyCommands();
         }
+
+        tpaManager = new TPAManager(this);
+        registerTPACommands();
+
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -121,6 +128,17 @@ public final class EssentialsC extends JavaPlugin {
         debug("Registered command: " + name);
     }
 
+    private void registerTPACommands() {
+        registerCommand("tpa", new TPACommand(this));
+        registerCommand("tpahere", new TPAHereCommand(this));
+        registerCommand("tpaccept", new TPAcceptCommand(this));
+        registerCommand("tpdeny", new TPADenyCommand(this));
+        registerCommand("tpcancel", new TPACancelCommand(this));
+        registerCommand("tpaignore", new TPAIgnoreCommand(this));
+        registerCommand("tpatoggle", new TPAToggleCommand(this));
+        registerCommand("tpaqueue", new TPAQueueCommand(this));
+    }
+
     public void debug(String message) {
         if (configManager != null && configManager.isDebug()) {
             getLogger().info("[DEBUG] " + message);
@@ -157,5 +175,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public List<String> getEconomyCommands() {
         return new ArrayList<>(economyCommands);
+    }
+
+    public TPAManager getTPAManager() {
+        return tpaManager;
     }
 }

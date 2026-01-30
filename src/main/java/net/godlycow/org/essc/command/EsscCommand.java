@@ -43,6 +43,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Economy configuration reloaded");
                 }
 
+                if (plugin.getTPAManager() != null) {
+                    plugin.getTPAManager().reload();
+                    plugin.debug("TPA configuration reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
