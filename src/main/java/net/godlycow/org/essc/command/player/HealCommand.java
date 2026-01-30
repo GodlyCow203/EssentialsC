@@ -1,6 +1,7 @@
-package net.godlycow.org.essc.command;
+package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.command.Command;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

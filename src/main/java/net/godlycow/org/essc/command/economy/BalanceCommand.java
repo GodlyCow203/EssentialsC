@@ -1,11 +1,11 @@
-package net.godlycow.org.essc.command;
+package net.godlycow.org.essc.command.economy;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.command.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

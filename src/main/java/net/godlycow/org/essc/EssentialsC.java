@@ -1,6 +1,11 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.command.*;
+import net.godlycow.org.essc.command.economy.BalanceCommand;
+import net.godlycow.org.essc.command.economy.BaltopCommand;
+import net.godlycow.org.essc.command.economy.EcoCommand;
+import net.godlycow.org.essc.command.economy.PayCommand;
+import net.godlycow.org.essc.command.player.HealCommand;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
