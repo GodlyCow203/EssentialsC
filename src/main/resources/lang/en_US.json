@@ -1,0 +1,63 @@
+{
+  "prefix": "<dark_gray>[<#00FF00>EssC</#00FF00>]</dark_gray>",
+
+  "heal.success": "<prefix> <green>You have been fully healed!</green>",
+  "heal.other": "<prefix> <green>You healed <target>.</green>",
+
+  "essc.reload.success": "<prefix> <green>Configuration and languages reloaded.</green>",
+  "essc.reload.economy_disabled": "<prefix> <yellow>Economy system disabled.</yellow>",
+  "essc.reload.economy_enabled": "<prefix> <green>Economy system enabled.</green>",
+  "essc.version": "<prefix> <gray>Running EssentialsC version <green><version></green></gray>",
+  "essc.debug.toggled": "<prefix> <gray>Debug mode <green><state></green>.</gray>",
+  "essc.help.header": "<prefix> <yellow>EssentialsC Administration</yellow>",
+  "essc.help.reload": "<gray>/essc reload</gray> <dark_gray>-</dark_gray> <white>Reload config and languages</white>",
+  "essc.help.version": "<gray>/essc version</gray> <dark_gray>-</dark_gray> <white>Show plugin version</white>",
+  "essc.help.debug": "<gray>/essc debug</gray> <dark_gray>-</dark_gray> <white>Toggle debug mode</white>",
+  "essc.error.unknown_arg": "<prefix> <red>Unknown subcommand. Use /essc help</red>",
+
+  "command.usage.heal": "<prefix> <red>Usage: /heal</red>",
+  "command.usage.essc": "<prefix> <red>Usage: /essc <reload|version|debug|help></red>",
+
+  "error.player_only": "<prefix> <red>This command can only be used by players.</red>",
+  "error.no_permission": "<prefix> <red>You don't have permission to use this.</red>",
+  "error.internal": "<prefix> <red>An internal error occurred. Check console.</red>",
+  "error.missing_key": "<red>Missing message key: <key></red>",
+  "error.player_not_found": "<prefix> <red>Player <yellow><player></yellow> not found.</red>",
+  "error.invalid_amount": "<prefix> <red>Invalid amount specified.</red>",
+  "error.invalid_number": "<prefix> <red><yellow><input></yellow> is not a valid number.</red>",
+  "error.negative_amount": "<prefix> <red>Amount cannot be negative.</red>",
+  "error.self_transaction": "<prefix> <red>You cannot transact with yourself.</red>",
+  "error.insufficient_funds": "<prefix> <red>You don't have <yellow><amount></yellow>!</red>",
+
+  "balance.self": "<prefix> <gray>Your balance: <#00FF00><balance></#00FF00></gray>",
+  "balance.other": "<prefix> <gray><yellow><player></yellow>'s balance: <#00FF00><balance></#00FF00></gray>",
+  "balance.console": "<prefix> <gray>Console balance: <#00FF00>Unlimited</#00FF00></gray>",
+
+  "pay.self": "<prefix> <red>You cannot pay yourself.</red>",
+  "pay.sent": "<prefix> <green>You sent <#00FF00><amount></#00FF00> to <yellow><player></yellow>.</green>",
+  "pay.received": "<prefix> <green>You received <#00FF00><amount></#00FF00> from <yellow><player></yellow>.</green>",
+  "pay.min_amount": "<prefix> <red>Minimum payment is <yellow><amount></yellow>.</red>",
+
+  "eco.give": "<prefix> <green>Gave <#00FF00><amount></#00FF00> to <yellow><player></yellow>.</green>",
+  "eco.give.notify": "<prefix> <green>An admin gave you <#00FF00><amount></#00FF00>.</green>",
+  "eco.take": "<prefix> <green>Took <#00FF00><amount></#00FF00> from <yellow><player></yellow>.</green>",
+  "eco.take.notify": "<prefix> <red>An admin took <yellow><amount></yellow> from you.</red>",
+  "eco.take.failed": "<prefix> <red>Could not take <yellow><amount></yellow> from <yellow><player></yellow> (insufficient funds).</red>",
+  "eco.set": "<prefix> <green>Set <yellow><player></yellow>'s balance to <#00FF00><amount></#00FF00>.</green>",
+  "eco.set.notify": "<prefix> <yellow>Your balance was set to <#00FF00><amount></#00FF00>.</yellow>",
+  "eco.reset": "<prefix> <green>Reset <yellow><player></yellow>'s balance to <#00FF00><balance></#00FF00>.</green>",
+  "eco.reset.notify": "<prefix> <yellow>Your balance was reset to <#00FF00><balance></#00FF00>.</yellow>",
+  "eco.max_balance": "<prefix> <red>Cannot exceed maximum balance of <yellow><amount></yellow>.</red>",
+
+  "baltop.header": "<dark_gray>═══<gray>╡ <yellow>Top Balances <gray>Page <#00FF00><page></#00FF00> <gray>╞</gray>═══</dark_gray>",
+  "baltop.entry": "<gray><#00FF00><rank>.</#00FF00> <yellow><player></yellow> <dark_gray>»</dark_gray> <gray><balance></gray>",
+  "baltop.empty": "<prefix> <red>No entries found for this page.</red>",
+  "baltop.loading": "<prefix> <gray>Loading top balances...</gray>",
+  "baltop.footer": "<dark_gray>═══════════════════════</dark_gray>",
+  "baltop.next": "<gray>Type <white>/baltop <page></white> for more</gray>",
+
+  "command.usage.balance": "<prefix> <red>Usage: /balance [player]</red>",
+  "command.usage.pay": "<prefix> <red>Usage: /pay <player> <amount></red>",
+  "command.usage.eco": "<prefix> <red>Usage: /eco <give|take|set|reset> <player> <amount></red>",
+  "command.usage.baltop": "<prefix> <red>Usage: /baltop [page]</red>"
+}

@@ -1,0 +1,23 @@
+{
+  "prefix": "<dark_gray>[<#00FF00>EssC</#00FF00>]</dark_gray>",
+
+  "heal.success": "<prefix> <green>Du wurdest vollständig geheilt!</green>",
+  "heal.other": "<prefix> <green>Du hast <target> geheilt.</green>",
+
+  "essc.reload.success": "<prefix> <green>Konfiguration und Sprachen neu geladen.</green>",
+  "essc.version": "<prefix> <gray>EssentialsC Version <green><version></green> wird ausgeführt</gray>",
+  "essc.debug.toggled": "<prefix> <gray>Debug-Modus <green><state></green>.</gray>",
+  "essc.help.header": "<prefix> <yellow>EssentialsC Administration</yellow>",
+  "essc.help.reload": "<gray>/essc reload</gray> <dark_gray>-</dark_gray> <white>Konfiguration und Sprachen neu laden</white>",
+  "essc.help.version": "<gray>/essc version</gray> <dark_gray>-</dark_gray> <white>Plugin-Version anzeigen</white>",
+  "essc.help.debug": "<gray>/essc debug</gray> <dark_gray>-</dark_gray> <white>Debug-Modus umschalten</white>",
+  "essc.error.unknown_arg": "<prefix> <red>Unbekannter Unterbefehl. Nutze /essc help</red>",
+
+  "command.usage.heal": "<prefix> <red>Verwendung: /heal</red>",
+  "command.usage.essc": "<prefix> <red>Verwendung: /essc <reload|version|debug|help></red>",
+
+  "error.player_only": "<prefix> <red>Dieser Befehl kann nur von Spielern genutzt werden.</red>",
+  "error.no_permission": "<prefix> <red>Du hast keine Berechtigung, dies zu verwenden.</red>",
+  "error.internal": "<prefix> <red>Ein interner Fehler ist aufgetreten. Siehe Konsole.</red>",
+  "error.missing_key": "<red>Fehlender Nachrichtenschlüssel: <key></red>"
+}

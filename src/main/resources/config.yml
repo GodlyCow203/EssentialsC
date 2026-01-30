@@ -1,0 +1,36 @@
+# EssentialsC Configuration
+# Valid options: true, false
+debug: true
+
+# Default language file (without .json extension)
+# Files are stored in /plugins/EssentialsC/lang/
+default-language: en_US
+
+# Heal command settings
+heal:
+  # Restore hunger and saturation
+  feed-player: true
+  # Remove poison, wither, weakness, etc.
+  clear-negative-effects: true
+
+# Economy Settings
+economy:
+  enabled: true
+
+  # Starting balance for new players
+  starting-balance: "100.00"
+
+  # Currency names
+  currency:
+    singular: "Dollar"
+    plural: "Dollars"
+
+  # Number format (Java DecimalFormat pattern)
+  # Examples: "#,##0.00" = 1,234.56 | "0.00" = 1234.56 | "#,##0.##" = 1,234.5
+  format: "#,##0.00"
+
+  # Minimum amount allowed in transactions (prevent micro-transactions)
+  minimum-transaction: "0.01"
+
+  # Maximum balance a player can have (set to -1 for unlimited)
+  max-balance: -1
