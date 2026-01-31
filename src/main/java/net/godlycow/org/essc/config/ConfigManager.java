@@ -159,6 +159,14 @@ public class ConfigManager {
         return config.getBoolean("spawn.cancel-on-movement", true);
     }
 
+    public boolean isJoinLeaveEnabled() {
+        return config.getBoolean("join-leave-messages.enabled", true);
+    }
+
+    public String getJoinMessage() {return config.getString("join-leave-messages.join", "<yellow><player> joined the game");  }
+
+    public String getLeaveMessage() {return config.getString("join-leave-messages.leave", "<yellow><player> left the game");}
+
     public FileConfiguration getConfig() {
         return config;
     }

@@ -59,6 +59,12 @@ public class EsscCommand extends Command {
                     plugin.debug("Spawn configuration reloaded");
                 }
 
+                if (plugin.getJoinLeaveListener() != null) {
+                    plugin.getJoinLeaveListener().reload();
+                    plugin.debug("Join / Leave messages reloaded");
+                }
+
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

@@ -47,3 +47,8 @@ spawn:
   particles: true
   sounds: true
   cancel-on-movement: true
+
+join-leave-messages:
+  enabled: true
+  join: "<white><player> <#FFCE00>joined the game"
+  leave: "<white><player> <#FF4000>left the game"

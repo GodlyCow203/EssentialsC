@@ -18,6 +18,7 @@ import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
@@ -37,6 +38,7 @@ public final class EssentialsC extends JavaPlugin {
     private TPAManager tpaManager;
     private HomeManager homeManager;
     private SpawnManager spawnManager;
+    private JoinLeaveListener joinLeaveListener;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -70,6 +72,9 @@ public final class EssentialsC extends JavaPlugin {
 
         spawnManager = new SpawnManager(this);
         registerSpawnCommands();
+
+        getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
+
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -216,4 +221,6 @@ public final class EssentialsC extends JavaPlugin {
     public HomeManager getHomeManager() { return homeManager; }
 
     public SpawnManager getSpawnManager() {return spawnManager;}
+
+    public JoinLeaveListener getJoinLeaveListener() { return joinLeaveListener; }
 }
