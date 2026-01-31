@@ -10,50 +10,36 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
+
 public class Database {
     private final EssentialsC plugin;
-    private Connection connection;
     private final String dbPath;
+    private Connection connection;
 
     public Database(EssentialsC plugin) {
+        this(plugin, "economy.db");
+    }
+
+    public Database(EssentialsC plugin, String filename) {
         this.plugin = plugin;
-        this.dbPath = new File(plugin.getDataFolder(), "economy.db").getAbsolutePath();
+        this.dbPath = new File(plugin.getDataFolder(), filename).getAbsolutePath();
     }
 
     public void connect() throws SQLException {
         if (connection != null && !connection.isClosed()) return;
 
         connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-        plugin.debug("Connected to SQLite database");
-        createTables();
+        plugin.debug("Connected to SQLite database: " + new File(dbPath).getName());
     }
 
     public void disconnect() {
         if (connection != null) {
             try {
                 connection.close();
-                plugin.debug("Disconnected from SQLite database");
+                plugin.debug("Disconnected from SQLite database: " + new File(dbPath).getName());
             } catch (SQLException e) {
                 plugin.getLogger().log(Level.SEVERE, "Error closing database connection", e);
             }
-        }
-    }
-
-    private void createTables() throws SQLException {
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute("""
-                CREATE TABLE IF NOT EXISTS economy (
-                    uuid TEXT PRIMARY KEY,
-                    username TEXT NOT NULL,
-                    balance REAL DEFAULT 0.0,
-                    last_updated INTEGER DEFAULT (strftime('%s', 'now'))
-                )
-            """);
-
-            stmt.execute("""
-                CREATE INDEX IF NOT EXISTS idx_balance ON economy(balance DESC)
-            """);
-            plugin.debug("Database tables initialized");
         }
     }
 

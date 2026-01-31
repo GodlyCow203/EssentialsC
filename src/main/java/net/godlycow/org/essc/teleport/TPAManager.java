@@ -430,7 +430,7 @@ public class TPAManager implements Listener {
 
                 cooldowns.entrySet().removeIf(e -> e.getValue() <= now);
             }
-        }.runTaskTimer(plugin, 20L, 20L); // Run every second
+        }.runTaskTimer(plugin, 20L, 20L);
     }
 
     private void notifyExpired(TPARequest request) {

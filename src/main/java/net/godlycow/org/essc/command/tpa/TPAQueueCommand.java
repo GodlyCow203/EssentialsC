@@ -47,7 +47,6 @@ public class TPAQueueCommand extends Command {
             }
         }
 
-        // Outgoing
         if (!outgoing.isEmpty()) {
             sender.sendMessage(lang.get(sender, "tpa.queue.header_outgoing"));
             for (TPARequest req : outgoing) {

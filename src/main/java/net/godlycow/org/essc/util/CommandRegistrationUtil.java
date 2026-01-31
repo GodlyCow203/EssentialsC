@@ -39,7 +39,6 @@ public class CommandRegistrationUtil {
 
         Command removed = knownCommands.remove(name.toLowerCase());
         if (removed != null) {
-            // Also remove aliases
             removed.getAliases().forEach(alias -> knownCommands.remove(alias.toLowerCase()));
             removed.unregister(commandMap);
             Bukkit.getLogger().info("[EssentialsC] Unregistered command: " + name);

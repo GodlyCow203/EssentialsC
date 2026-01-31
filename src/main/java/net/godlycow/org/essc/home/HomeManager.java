@@ -30,7 +30,7 @@ public class HomeManager implements Listener {
 
     public HomeManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.database = new Database(plugin);
+        this.database = new Database(plugin, "homes.db");
         try {
             database.connect();
             createTables();
@@ -38,7 +38,7 @@ public class HomeManager implements Listener {
             plugin.getLogger().severe("Failed to initialize home database: " + e.getMessage());
         }
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        plugin.debug("HomeManager initialized");
+        plugin.debug("HomeManager initialized with homes.db");
     }
 
     private void createTables() throws SQLException {
@@ -67,8 +67,9 @@ public class HomeManager implements Listener {
              )) {
             stmt.execute();
         }
-        plugin.debug("Home database tables initialized");
+        plugin.debug("Home database tables initialized in homes.db");
     }
+
 
     public int getMaxHomes(Player player) {
         if (player.hasPermission("essentialsc.sethome.admin") || player.hasPermission("essentialsc.sethome.unlimited")) {
@@ -110,7 +111,7 @@ public class HomeManager implements Listener {
     }
 
     public CompletableFuture<Boolean> setHome(Player player, String name, Location location) {
-        plugin.debug("Setting home '" + name + "' for " + player.getName());
+        plugin.debug("Setting home '" + name + "' for " + player.getName() + " in homes.db");
 
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("""
@@ -136,14 +137,14 @@ public class HomeManager implements Listener {
                 stmt.executeUpdate();
                 return true;
             } catch (SQLException e) {
-                plugin.getLogger().severe("Failed to set home: " + e.getMessage());
+                plugin.getLogger().severe("Failed to set home in homes.db: " + e.getMessage());
                 throw new RuntimeException(e);
             }
         });
     }
 
     public CompletableFuture<Boolean> deleteHome(UUID uuid, String name) {
-        plugin.debug("Deleting home '" + name + "' for " + uuid);
+        plugin.debug("Deleting home '" + name + "' for " + uuid + " from homes.db");
 
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
@@ -328,7 +329,7 @@ public class HomeManager implements Listener {
         pendingTeleports.values().forEach(BukkitTask::cancel);
         pendingTeleports.clear();
         database.disconnect();
-        plugin.debug("HomeManager shutdown complete");
+        plugin.debug("HomeManager shutdown complete (homes.db)");
     }
 
     public void reload() {
