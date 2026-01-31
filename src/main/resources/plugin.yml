@@ -86,52 +86,142 @@ commands:
     aliases: [ tpalist, tpalist ]
     permission: essentialsc.tpaqueue
 
+  sethome:
+    description: Set a home at your current location
+    usage: /<command> [name]
+    aliases: [ createhome ]
+    permission: essentialsc.sethome
+
+  home:
+    description: Teleport to one of your homes
+    usage: /<command> [name]
+    permission: essentialsc.home
+
+  delhome:
+    description: Delete one of your homes
+    usage: /<command> <name>
+    aliases: [ deletehome ]
+    permission: essentialsc.delhome
+
+  homes:
+    description: List all your homes
+    usage: /<command> [player]
+    permission: essentialsc.homes
+
+
 permissions:
   essentialsc.heal:
     description: Heal command
     default: true
+
   essentialsc.balance:
     description: Check own balance
     default: true
+
   essentialsc.balance.others:
     description: Check others' balance
     default: op
+
   essentialsc.pay:
     description: Pay other players
     default: true
+
   essentialsc.eco.admin:
     description: Admin economy management
     default: op
+
   essentialsc.baltop:
     description: View top balances
     default: true
+
   essentialsc.tpa:
     description: Request teleport to player
     default: true
+
   essentialsc.tpahere:
     description: Request player to teleport to you
     default: true
+
   essentialsc.tpaccept:
     description: Accept teleport requests
     default: true
+
   essentialsc.tpdeny:
     description: Deny teleport requests
     default: true
+
   essentialsc.tpcancel:
     description: Cancel outgoing requests
     default: true
+
   essentialsc.tpaignore:
     description: Ignore players
     default: true
+
   essentialsc.tpatoggle:
     description: Toggle TPA on/off
     default: true
+
   essentialsc.tpaqueue:
     description: View request queue
     default: true
+
   essentialsc.tpa.bypasscooldown:
     description: Bypass TPA cooldown
     default: op
+
   essentialsc.tpa.bypasscost:
     description: Bypass TPA cost
+    default: op
+
+  essentialsc.sethome:
+    description: Allow setting homes
+    default: true
+
+  essentialsc.home:
+    description: Allow teleporting to homes
+    default: true
+
+  essentialsc.delhome:
+    description: Allow deleting homes
+    default: true
+
+  essentialsc.homes:
+    description: Allow listing homes
+    default: true
+
+  essentialsc.sethome.1:
+    description: Allow 1 home
+    default: false
+
+  essentialsc.sethome.2:
+    description: Allow 2 homes
+    default: false
+
+  essentialsc.sethome.3:
+    description: Allow 3 homes
+    default: false
+
+  essentialsc.sethome.5:
+    description: Allow 5 homes
+    default: false
+
+  essentialsc.sethome.10:
+    description: Allow 10 homes
+    default: false
+
+  essentialsc.sethome.25:
+    description: Allow 25 homes
+    default: false
+
+  essentialsc.sethome.unlimited:
+    description: Allow unlimited homes
+    default: op
+
+  essentialsc.sethome.admin:
+    description: Bypass home limits and blocked worlds
+    default: op
+
+  essentialsc.home.admin:
+    description: Teleport to other players' homes
     default: op

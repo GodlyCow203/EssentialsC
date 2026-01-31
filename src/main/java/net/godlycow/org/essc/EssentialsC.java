@@ -5,11 +5,16 @@ import net.godlycow.org.essc.command.economy.BalanceCommand;
 import net.godlycow.org.essc.command.economy.BaltopCommand;
 import net.godlycow.org.essc.command.economy.EcoCommand;
 import net.godlycow.org.essc.command.economy.PayCommand;
+import net.godlycow.org.essc.command.home.DelHomeCommand;
+import net.godlycow.org.essc.command.home.HomeCommand;
+import net.godlycow.org.essc.command.home.HomesCommand;
+import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.player.HealCommand;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
+import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
@@ -27,6 +32,7 @@ public final class EssentialsC extends JavaPlugin {
     private EconomyManager economyManager;
     private VaultHook vaultHook;
     private TPAManager tpaManager;
+    private HomeManager homeManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -55,6 +61,8 @@ public final class EssentialsC extends JavaPlugin {
         tpaManager = new TPAManager(this);
         registerTPACommands();
 
+        homeManager = new HomeManager(this);
+        registerHomeCommands();
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -144,6 +152,14 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("tpaqueue", new TPAQueueCommand(this));
     }
 
+    private void registerHomeCommands() {
+        registerCommand("sethome", new SetHomeCommand(this));
+        registerCommand("home", new HomeCommand(this));
+        registerCommand("delhome", new DelHomeCommand(this));
+        registerCommand("homes", new HomesCommand(this));
+    }
+
+
     public void debug(String message) {
         if (configManager != null && configManager.isDebug()) {
             getLogger().info("[DEBUG] " + message);
@@ -184,5 +200,8 @@ public final class EssentialsC extends JavaPlugin {
 
     public TPAManager getTPAManager() {
         return tpaManager;
+    }
+
+    public HomeManager getHomeManager() { return homeManager;
     }
 }

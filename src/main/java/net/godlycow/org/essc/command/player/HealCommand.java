@@ -22,7 +22,7 @@ public class HealCommand extends Command {
 
         plugin.debug("Healing initiated for " + player.getName());
 
-        double maxHealth = player.getAttribute(Attribute.MAX_HEALTH).getValue();
+        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         player.setHealth(maxHealth);
         plugin.debug("Set health to " + maxHealth);
 

@@ -48,6 +48,12 @@ public class EsscCommand extends Command {
                     plugin.debug("TPA configuration reloaded");
                 }
 
+                if (plugin.getHomeManager() != null) {
+                    plugin.getHomeManager().reload();
+                    sender.sendMessage(lang.get(sender, "essc.reload.home"));
+                    plugin.debug("Home configuration reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

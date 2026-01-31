@@ -103,6 +103,38 @@ public class ConfigManager {
         return config.getStringList("teleport.tpa.blocked-worlds");
     }
 
+    public int getMaxHomes() {
+        return config.getInt("home.max-homes", 3);
+    }
+
+    public long getHomeCooldown() {
+        return config.getLong("home.cooldown", 5);
+    }
+
+    public long getHomeWarmup() {
+        return config.getLong("home.warmup", 3);
+    }
+
+    public boolean isHomeCancelOnMovement() {
+        return config.getBoolean("home.cancel-on-movement", true);
+    }
+
+    public boolean isHomeParticles() {
+        return config.getBoolean("home.particles", true);
+    }
+
+    public boolean isHomeSounds() {
+        return config.getBoolean("home.sounds", true);
+    }
+
+    public List<String> getHomeBlockedWorlds() {
+        return config.getStringList("home.blocked-worlds");
+    }
+
+    public String getDefaultHomeName() {
+        return config.getString("home.default-name", "home");
+    }
+
     public FileConfiguration getConfig() {
         return config;
     }

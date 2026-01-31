@@ -1,71 +1,41 @@
-# EssentialsC Configuration
-# Valid options: true, false
 debug: true
 
-# Default language file (without .json extension)
-# Files are stored in /plugins/EssentialsC/lang/
 default-language: en_US
 
-# Heal command settings
 heal:
-  # Restore hunger and saturation
   feed-player: true
-  # Remove poison, wither, weakness, etc.
   clear-negative-effects: true
 
-# Economy Settings
 economy:
   enabled: true
-
-  # Starting balance for new players
   starting-balance: "100.00"
-
-  # Currency names
   currency:
     singular: "Dollar"
     plural: "Dollars"
-
-  # Number format (Java DecimalFormat pattern)
-  # Examples: "#,##0.00" = 1,234.56 | "0.00" = 1234.56 | "#,##0.##" = 1,234.5
-  format: "#,##0.00"
-
-  # Minimum amount allowed in transactions (prevent micro-transactions)
   minimum-transaction: "0.01"
-
-  # Maximum balance a player can have (set to -1 for unlimited)
   max-balance: -1
 
 teleport:
   tpa:
-    # Cooldown between TPA requests (in seconds)
     cooldown: 60
-
-    # Warmup time before teleport happens (in seconds). Set to 0 for instant.
     warmup: 3
-
-    # How long until request expires (in seconds)
     timeout: 60
-
-    # Max pending requests a player can have at once
     max-pending: 5
-
-    # Max outgoing requests a player can send at once
     max-outgoing: 1
-
-    # Economy cost per teleport (requires economy enabled). Set to 0 to disable.
     cost: 0.0
-
-    # Cancel teleport if player moves during warmup
     deny-movement: true
-
-    # Show particle effects
     particles: true
-
-    # Play sound effects
     sounds: true
-
-    # Worlds where TPA is disabled
     blocked-worlds: []
-    # blocked-worlds:
-    #   - spawn_world
-    #   - arena
+
+home:
+  max-homes: 3
+  default-name: "home"
+  cooldown: 5
+  warmup: 3
+  cancel-on-movement: true
+  particles: true
+  sounds: true
+  blocked-worlds:
+    - "world_nether"
+    - "world_the_end"
