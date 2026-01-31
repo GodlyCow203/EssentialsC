@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.economy.BalanceCommand;
 import net.godlycow.org.essc.command.economy.BaltopCommand;
@@ -39,6 +40,7 @@ public final class EssentialsC extends JavaPlugin {
     private HomeManager homeManager;
     private SpawnManager spawnManager;
     private JoinLeaveListener joinLeaveListener;
+    private BackManager backManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -75,6 +77,8 @@ public final class EssentialsC extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
 
+        backManager = new BackManager(this);
+        registerCommand("back", new BackCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -82,9 +86,6 @@ public final class EssentialsC extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (economyManager != null) {
-            economyManager.shutdown();
-        }
         getLogger().info("EssentialsC disabled");
     }
 
@@ -223,4 +224,6 @@ public final class EssentialsC extends JavaPlugin {
     public SpawnManager getSpawnManager() {return spawnManager;}
 
     public JoinLeaveListener getJoinLeaveListener() { return joinLeaveListener; }
+
+    public BackManager getBackManager() { return backManager;}
 }

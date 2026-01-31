@@ -118,6 +118,11 @@ commands:
     usage: /setspawn
     permission: essentialsc.setspawn
 
+  back:
+    description: Return to your last location (death or teleport)
+    usage: /back
+    permission: essentialsc.back
+
 
 permissions:
   essentialsc.heal:
@@ -246,4 +251,12 @@ permissions:
 
   essentialsc.setspawn:
     description: Allow setting the spawn location
+    default: op
+
+  essentialsc.back:
+    description: Return to previous location
+    default: true
+
+  essentialsc.back.admin:
+    description: Bypass cooldowns and warmup for /back
     default: op

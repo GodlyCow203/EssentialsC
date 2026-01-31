@@ -167,6 +167,16 @@ public class ConfigManager {
 
     public String getLeaveMessage() {return config.getString("join-leave-messages.leave", "<yellow><player> left the game");}
 
+    public long getBackWarmup() { return config.getLong("back.warmup", 0);}
+
+    public long getBackCooldown() { return config.getLong("back.cooldown", 0);}
+
+    public boolean isBackParticles() {return config.getBoolean("back.particles", true);}
+
+    public boolean isBackSounds() {return config.getBoolean("back.sounds", true);}
+
+    public boolean isBackCancelOnMovement() {  return config.getBoolean("back.cancel-on-movement", true);}
+
     public FileConfiguration getConfig() {
         return config;
     }

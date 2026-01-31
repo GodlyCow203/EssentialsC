@@ -130,5 +130,13 @@
   "spawn.cooldown": "<prefix> <color:#FF9999>Please wait <color:#FFD580><seconds></color> seconds before teleporting to spawn again.</color>",
   "spawn.already_pending": "<prefix> <color:#FF9999>You already have a pending teleport!</color>",
   "spawn.not_set": "<prefix> <color:#FF9999>Spawn has not been set yet! Ask an admin to use /setspawn.</color>",
-  "spawn.admin.teleported_other": "<prefix> <color:#7FC97F>Teleported <color:#FFD580><player></color> to spawn.</color>"
+  "spawn.admin.teleported_other": "<prefix> <color:#7FC97F>Teleported <color:#FFD580><player></color> to spawn.</color>",
+  "back.success": "<prefix> <color:#7FC97F>Teleported to your previous location.</color>",
+  "back.no_location": "<prefix> <color:#FF9999>You have no location to return to.</color>",
+  "back.pending": "<prefix> <color:#FFD580>Teleporting in <color:#7FC97F><seconds></color> seconds... Don't move!</color>",
+  "back.already_pending": "<prefix> <color:#FF9999>You are already preparing to teleport!</color>",
+  "back.cooldown": "<prefix> <color:#FF9999>Please wait <color:#FFD580><seconds></color> seconds before using /back again.</color>",
+  "back.cancelled.move": "<prefix> <color:#FF9999>Teleport cancelled because you moved.</color>",
+  "back.cancelled": "<prefix> <color:#FF9999>Teleport cancelled.</color>",
+  "back.world_unloaded": "<prefix> <color:#FF9999>The world you died in is no longer available.</color>"
 }

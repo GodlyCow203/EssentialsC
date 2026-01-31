@@ -194,16 +194,18 @@ public class EconomyManager implements EconomyService, Listener {
         }
 
         if (maxBalance != null) {
-            try {
-                BigDecimal current = getBalance(uuid).get();
+            return getBalance(uuid).thenCompose(current -> {
                 if (current.add(amount).compareTo(maxBalance) > 0) {
                     return CompletableFuture.completedFuture(false);
                 }
-            } catch (Exception e) {
-                plugin.getLogger().warning("Failed to check balance for max limit: " + e.getMessage());
-            }
+                return performDeposit(uuid, amount);
+            });
         }
 
+        return performDeposit(uuid, amount);
+    }
+
+    private CompletableFuture<Boolean> performDeposit(UUID uuid, BigDecimal amount) {
         return database.async(conn -> {
             try (PreparedStatement ps = conn.prepareStatement(
                     "UPDATE economy SET balance = balance + ?, last_updated = strftime('%s', 'now') WHERE uuid = ?"

@@ -64,6 +64,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Join / Leave messages reloaded");
                 }
 
+                if (plugin.getBackManager() != null) {
+                    plugin.getBackManager().reload();
+                    plugin.debug("Back Manager reloaded");
+                }
+
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
