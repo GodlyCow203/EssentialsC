@@ -50,8 +50,13 @@ public class EsscCommand extends Command {
 
                 if (plugin.getHomeManager() != null) {
                     plugin.getHomeManager().reload();
-                    sender.sendMessage(lang.get(sender, "essc.reload.home"));
                     plugin.debug("Home configuration reloaded");
+                }
+
+                if (plugin.getSpawnManager() != null) {
+                    plugin.getSpawnManager().reload();
+                    sender.sendMessage(lang.get(sender, "essc.reload.spawn"));
+                    plugin.debug("Spawn configuration reloaded");
                 }
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));

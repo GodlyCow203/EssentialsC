@@ -5,6 +5,8 @@
   "essc.reload.success": "<prefix> <color:#7FC97F>Configuration and languages reloaded.</color>",
   "essc.reload.economy_disabled": "<prefix> <color:#80BFFF>Economy system disabled.</color>",
   "essc.reload.economy_enabled": "<prefix> <color:#7FC97F>Economy system enabled.</color>",
+  "essc.reload.spawn": "<prefix> <color:#7FC97F>Spawn system configuration reloaded.</color>",
+  "essc.reload.home": "<prefix> <color:#7FC97F>Home system configuration reloaded.</color>",
   "essc.version": "<prefix> <color:#AAAAAA>Running EssentialsC version <color:#FFFFFF><version></color></color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>Debug mode <color:#7FC97F><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFD580>EssentialsC Administration</color>",
@@ -120,6 +122,13 @@
   "home.list.entries": "<prefix> <color:#AAAAAA>Click to teleport: <homes></color>",
   "home.list.entry": "<color:#AAAAAA>- <click:run_command:/home <name>><color:#FFD580><name></color></click> <color:#777777>(<color:#AAAAAA><world></color>)</color>",
   "home.admin.not_found": "<prefix> <color:#FF9999>Home '<color:#FFD580><name></color>' not found for <color:#FFD580><player></color>.</color>",
-  "home.admin.teleported": "<prefix> <color:#7FC97F>Teleported to <color:#FFD580><player></color>'s home '<color:#FFD580><name></color>'.</color>"
-
+  "home.admin.teleported": "<prefix> <color:#7FC97F>Teleported to <color:#FFD580><player></color>'s home '<color:#FFD580><name></color>'.</color>",
+  "spawn.set.success": "<prefix> <color:#7FC97F>Spawn location set to your current position!</color>",
+  "spawn.success": "<prefix> <color:#7FC97F>Teleported to spawn!</color>",
+  "spawn.pending": "<prefix> <color:#FFD580>Teleporting to spawn in <color:#7FC97F><seconds></color> seconds... Don't move!</color>",
+  "spawn.cancelled": "<prefix> <color:#FF9999>Teleport to spawn cancelled due to movement!</color>",
+  "spawn.cooldown": "<prefix> <color:#FF9999>Please wait <color:#FFD580><seconds></color> seconds before teleporting to spawn again.</color>",
+  "spawn.already_pending": "<prefix> <color:#FF9999>You already have a pending teleport!</color>",
+  "spawn.not_set": "<prefix> <color:#FF9999>Spawn has not been set yet! Ask an admin to use /setspawn.</color>",
+  "spawn.admin.teleported_other": "<prefix> <color:#7FC97F>Teleported <color:#FFD580><player></color> to spawn.</color>"
 }

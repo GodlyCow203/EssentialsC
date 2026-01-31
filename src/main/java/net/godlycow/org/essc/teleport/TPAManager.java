@@ -59,7 +59,7 @@ public class TPAManager implements Listener {
         String path = "teleport.tpa.";
 
         this.cooldownDuration = config.getLong(path + "cooldown", 60) * 1000;
-        this.warmupDuration = config.getLong(path + "warmup", 3) * 20; // ticks
+        this.warmupDuration = config.getLong(path + "warmup", 3) * 20;
         this.timeoutDuration = config.getLong(path + "timeout", 60) * 1000;
         this.maxPending = config.getInt(path + "max-pending", 5);
         this.maxOutgoing = config.getInt(path + "max-outgoing", 1);

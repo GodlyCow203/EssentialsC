@@ -2,7 +2,6 @@ package net.godlycow.org.essc.economy;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.database.Database;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,11 +41,38 @@ public class EconomyManager implements EconomyService, Listener {
 
         try {
             database.connect();
+            createTables();
             plugin.getServer().getPluginManager().registerEvents(this, plugin);
             plugin.debug("EconomyManager initialized");
         } catch (Exception e) {
             plugin.getLogger().severe("Failed to initialize economy database: " + e.getMessage());
         }
+    }
+
+    private void createTables() throws SQLException {
+        Connection conn = database.getConnection();
+        if (conn == null) {
+            throw new SQLException("Could not get database connection");
+        }
+
+        try (PreparedStatement stmt = conn.prepareStatement("""
+            CREATE TABLE IF NOT EXISTS economy (
+                uuid TEXT PRIMARY KEY,
+                username TEXT NOT NULL,
+                balance REAL DEFAULT 0.0,
+                last_updated INTEGER DEFAULT (strftime('%s', 'now'))
+            )
+        """)) {
+            stmt.execute();
+        }
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "CREATE INDEX IF NOT EXISTS idx_balance ON economy(balance DESC)"
+        )) {
+            stmt.execute();
+        }
+
+        plugin.debug("Economy database tables initialized/verified");
     }
 
     public void reload() {
@@ -80,6 +106,9 @@ public class EconomyManager implements EconomyService, Listener {
             if (success) {
                 plugin.debug("Created/Verified economy account for " + player.getName());
             }
+        }).exceptionally(ex -> {
+            plugin.getLogger().severe("Failed to create account for " + player.getName() + ": " + ex.getMessage());
+            return null;
         });
     }
 

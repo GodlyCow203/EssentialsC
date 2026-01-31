@@ -10,12 +10,15 @@ import net.godlycow.org.essc.command.home.HomeCommand;
 import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.player.HealCommand;
+import net.godlycow.org.essc.command.spawn.SetSpawnCommand;
+import net.godlycow.org.essc.command.spawn.SpawnCommand;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -33,6 +36,7 @@ public final class EssentialsC extends JavaPlugin {
     private VaultHook vaultHook;
     private TPAManager tpaManager;
     private HomeManager homeManager;
+    private SpawnManager spawnManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -63,6 +67,9 @@ public final class EssentialsC extends JavaPlugin {
 
         homeManager = new HomeManager(this);
         registerHomeCommands();
+
+        spawnManager = new SpawnManager(this);
+        registerSpawnCommands();
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -159,6 +166,10 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("homes", new HomesCommand(this));
     }
 
+    private void registerSpawnCommands() {
+        registerCommand("spawn", new SpawnCommand(this));
+        registerCommand("setspawn", new SetSpawnCommand(this));
+    }
 
     public void debug(String message) {
         if (configManager != null && configManager.isDebug()) {
@@ -202,6 +213,7 @@ public final class EssentialsC extends JavaPlugin {
         return tpaManager;
     }
 
-    public HomeManager getHomeManager() { return homeManager;
-    }
+    public HomeManager getHomeManager() { return homeManager; }
+
+    public SpawnManager getSpawnManager() {return spawnManager;}
 }

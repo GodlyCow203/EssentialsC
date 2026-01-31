@@ -88,25 +88,35 @@ commands:
 
   sethome:
     description: Set a home at your current location
-    usage: /<command> [name]
+    usage: /sethome [name]
     aliases: [ createhome ]
     permission: essentialsc.sethome
 
   home:
     description: Teleport to one of your homes
-    usage: /<command> [name]
+    usage: /home [name]
     permission: essentialsc.home
 
   delhome:
     description: Delete one of your homes
-    usage: /<command> <name>
+    usage: /delhome <name>
     aliases: [ deletehome ]
     permission: essentialsc.delhome
 
   homes:
     description: List all your homes
-    usage: /<command> [player]
+    usage: /homes [player]
     permission: essentialsc.homes
+
+  spawn:
+    description: Teleport to the server spawn
+    usage: /spawn [player]
+    permission: essentialsc.spawn
+
+  setspawn:
+    description: Set the server spawn location
+    usage: /setspawn
+    permission: essentialsc.setspawn
 
 
 permissions:
@@ -224,4 +234,16 @@ permissions:
 
   essentialsc.home.admin:
     description: Teleport to other players' homes
+    default: op
+
+  essentialsc.spawn:
+    description: Allow teleporting to spawn
+    default: true
+
+  essentialsc.spawn.admin:
+    description: Bypass spawn cooldowns/warmup and teleport others
+    default: op
+
+  essentialsc.setspawn:
+    description: Allow setting the spawn location
     default: op

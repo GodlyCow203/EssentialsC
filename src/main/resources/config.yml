@@ -39,3 +39,11 @@ home:
   blocked-worlds:
     - "world_nether"
     - "world_the_end"
+
+spawn:
+  cooldown: 5
+  warmup: 3
+  teleport-on-first-join: true
+  particles: true
+  sounds: true
+  cancel-on-movement: true

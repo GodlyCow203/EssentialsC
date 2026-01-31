@@ -135,6 +135,30 @@ public class ConfigManager {
         return config.getString("home.default-name", "home");
     }
 
+    public long getSpawnCooldown() {
+        return config.getLong("spawn.cooldown", 5);
+    }
+
+    public long getSpawnWarmup() {
+        return config.getLong("spawn.warmup", 3);
+    }
+
+    public boolean isSpawnFirstJoin() {
+        return config.getBoolean("spawn.teleport-on-first-join", true);
+    }
+
+    public boolean isSpawnParticles() {
+        return config.getBoolean("spawn.particles", true);
+    }
+
+    public boolean isSpawnSounds() {
+        return config.getBoolean("spawn.sounds", true);
+    }
+
+    public boolean isSpawnCancelOnMovement() {
+        return config.getBoolean("spawn.cancel-on-movement", true);
+    }
+
     public FileConfiguration getConfig() {
         return config;
     }
