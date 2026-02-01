@@ -179,5 +179,10 @@
   "scoreboard.reloaded": "<prefix> <color:#7FC97F>Scoreboard configuration reloaded successfully.</color>",
   "scoreboard.usage": "<prefix> <color:#FFD580>Scoreboard commands:</color>",
   "scoreboard.help_toggle": "<color:#AAAAAA>/scoreboard toggle <color:#777777>-</color> <color:#FFFFFF>Toggle scoreboard visibility</color>",
-  "scoreboard.help_reload": "<color:#AAAAAA>/scoreboard reload <color:#777777>-</color> <color:#FFFFFF>Reload configuration</color>"
+  "scoreboard.help_reload": "<color:#AAAAAA>/scoreboard reload <color:#777777>-</color> <color:#FFFFFF>Reload configuration</color>",
+  "feed.success": "<prefix> <color:#7FC97F>Your appetite has been satisfied!</color>",
+  "feed.success.other": "<prefix> <color:#7FC97F>You have fed <color:#FFD580><target></color>.</color>",
+  "feed.success.by": "<prefix> <color:#7FC97F>You have been fed by <color:#FFD580><feeder></color>.</color>",
+  "command.usage.feed": "<prefix> <color:#FF9999>Usage: /feed [player]</color>"
+
 }

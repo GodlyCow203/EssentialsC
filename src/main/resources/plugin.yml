@@ -137,6 +137,11 @@ commands:
     usage: /scoreboard [toggle|reload]
     permission: essentialsc.scoreboard.toggle
 
+  feed:
+    description: Feed yourself or another player
+    usage: /feed [player]
+    permission: essentialsc.feed
+
 
 permissions:
   essentialsc.heal:
@@ -296,3 +301,11 @@ permissions:
   essentialsc.scoreboard.reload:
     default: op
     description: Reload the scoreboard
+
+  essentialsc.heal.others:
+    default: op
+    description: Heal other players
+
+  essentialsc.feed.others:
+    default: op
+    description: Feed other players
