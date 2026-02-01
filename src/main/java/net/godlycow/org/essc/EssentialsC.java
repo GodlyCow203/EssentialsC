@@ -13,6 +13,7 @@ import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.FeedCommand;
+import net.godlycow.org.essc.command.player.FlyCommand;
 import net.godlycow.org.essc.command.player.HealCommand;
 import net.godlycow.org.essc.command.player.PingCommand;
 import net.godlycow.org.essc.command.spawn.SetSpawnCommand;
@@ -21,6 +22,7 @@ import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
+import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
@@ -99,6 +101,9 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("scoreboard", new ScoreboardCommand(this));
         registerCommand("feed", new FeedCommand(this));
         registerCommand("ping", new PingCommand(this));
+
+        new FlyManager(this);
+        registerCommand("fly", new FlyCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");

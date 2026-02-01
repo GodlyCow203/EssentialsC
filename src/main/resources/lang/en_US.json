@@ -186,5 +186,8 @@
   "command.usage.feed": "<prefix> <color:#FF9999>Usage: /feed [player]</color>",
   "ping.self": "<prefix> <color:#7FC97F>Your ping: <color:#FFD580><ping></color>ms</color>",
   "ping.other": "<prefix> <color:#7FC97F><color:#FFD580><target></color>'s ping: <color:#FFD580><ping></color>ms</color>",
-  "command.usage.ping": "<prefix> <color:#FF9999>Usage: /ping [player]</color>"
+  "command.usage.ping": "<prefix> <color:#FF9999>Usage: /ping [player]</color>",
+  "fly.enabled": "<prefix> <color:#7FC97F>Fly mode enabled</color>",
+  "fly.disabled": "<prefix> <color:#FF9999>Fly mode disabled</color>",
+  "command.usage.fly": "<prefix> <color:#FF9999>Usage: /fly</color>"
 }

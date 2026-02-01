@@ -147,6 +147,11 @@ commands:
     usage: /ping [player]
     permission: essentialsc.ping
 
+  fly:
+    description: Fly
+    usage: /fly
+    permission: essentialsc.fly
+
 
 permissions:
   essentialsc.heal:
@@ -318,3 +323,6 @@ permissions:
   essentialsc.ping.others:
     default: op
     description: See the ping of other players
+
+  essentialsc.fly.disable-on-join:
+    description: Auto disable /fly on join
