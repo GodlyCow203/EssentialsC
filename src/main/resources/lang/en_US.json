@@ -222,5 +222,9 @@
   "speed.invalid_number": "<prefix> <color:#FF6B6B>Please enter a valid number</color>",
   "speed.invalid_range": "<prefix> <color:#FF6B6B>Speed must be between -1.0 and 1.0</color>",
   "anvil.opened": "<prefix> <color:#06FFA5>Opening anvil...</color>",
-  "command.usage.anvil": "<prefix> <color:#FF6B6B>Usage: /anvil</color>"
+  "command.usage.anvil": "<prefix> <color:#FF6B6B>Usage: /anvil</color>",
+  "rename.success": "<prefix> <color:#06FFA5>Item renamed to '<color:#FFE66D><name></color>'</color>",
+  "rename.no_item": "<prefix> <color:#FF6B6B>You must hold an item in your hand.</color>",
+  "rename.cannot_rename": "<prefix> <color:#FF6B6B>This item cannot be renamed.</color>",
+  "rename.blacklisted": "<prefix> <color:#FF6B6B>You cannot use '<color:#FFE66D><word></color>' in item names.</color>"
 }

@@ -48,6 +48,7 @@ public final class EssentialsC extends JavaPlugin {
     private HomeManager homeManager;
     private SpawnManager spawnManager;
     private JoinLeaveListener joinLeaveListener;
+    private RenameCommand renameCommand;
     private BackManager backManager;
     private KitManager kitManager;
     private ScoreboardManager scoreboardManager;
@@ -116,6 +117,9 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("endersee", new EnderSeeCommand(this));
         registerCommand("speed", new SpeedCommand(this));
         registerCommand("anvil", new AnvilCommand(this));
+        this.renameCommand = new RenameCommand(this);
+        registerCommand("rename", renameCommand);
+
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -267,4 +271,6 @@ public final class EssentialsC extends JavaPlugin {
     public KitManager getKitManager() { return kitManager;}
 
     public ScoreboardManager getScoreboardManager() { return scoreboardManager;}
+
+    public RenameCommand getRenameCommand() {return renameCommand;}
 }

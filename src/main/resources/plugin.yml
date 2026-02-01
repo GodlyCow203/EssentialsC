@@ -192,6 +192,11 @@ commands:
     usage: /anvil
     permission: essentialsc.anvil
 
+  rename:
+    description: rename any item
+    usage: /rename
+    permission: essentialsc.rename
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -400,6 +405,10 @@ permissions:
 
   essentialsc.speed.fly:
     description: Change fly speed
+    default: op
+
+  essentialsc.rename.bypass:
+    description: bypass rename config options
     default: op
 
 

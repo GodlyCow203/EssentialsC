@@ -182,4 +182,8 @@ public class ConfigManager {
     }
 
     public boolean isScoreboardEnabled() {return config.getBoolean("scoreboard.enabled", false);}
+
+    public boolean isRenameBlacklistEnabled() {return config.getBoolean("rename.blacklist-enabled", true);}
+
+    public List<String> getRenameBlacklistWords() { return config.getStringList("rename.blacklist-words");}
 }

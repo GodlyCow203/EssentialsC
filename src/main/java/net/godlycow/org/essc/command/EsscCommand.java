@@ -79,7 +79,10 @@ public class EsscCommand extends Command {
                     plugin.debug("Scoreboard System reloaded");
                 }
 
-
+                if (plugin.getRenameCommand() != null) {
+                    plugin.getRenameCommand().loadConfig();
+                    plugin.debug("Rename command reloaded");
+                }
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");

@@ -73,3 +73,10 @@ scoreboard:
     - "<#FF3000>| <white>Kills: <#FFAC96>%statistic_player_kills%"
     - ""
     - "<#FFAC96>play.myserver.net"
+
+rename:
+  blacklist-enabled: true
+  blacklist-words:
+    - "badword1"
+
+
