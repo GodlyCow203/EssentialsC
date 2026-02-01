@@ -14,6 +14,7 @@ import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.FeedCommand;
 import net.godlycow.org.essc.command.player.HealCommand;
+import net.godlycow.org.essc.command.player.PingCommand;
 import net.godlycow.org.essc.command.spawn.SetSpawnCommand;
 import net.godlycow.org.essc.command.spawn.SpawnCommand;
 import net.godlycow.org.essc.command.tpa.*;
@@ -97,6 +98,7 @@ public final class EssentialsC extends JavaPlugin {
 
         registerCommand("scoreboard", new ScoreboardCommand(this));
         registerCommand("feed", new FeedCommand(this));
+        registerCommand("ping", new PingCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");

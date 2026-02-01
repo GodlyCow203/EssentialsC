@@ -183,6 +183,8 @@
   "feed.success": "<prefix> <color:#7FC97F>Your appetite has been satisfied!</color>",
   "feed.success.other": "<prefix> <color:#7FC97F>You have fed <color:#FFD580><target></color>.</color>",
   "feed.success.by": "<prefix> <color:#7FC97F>You have been fed by <color:#FFD580><feeder></color>.</color>",
-  "command.usage.feed": "<prefix> <color:#FF9999>Usage: /feed [player]</color>"
-
+  "command.usage.feed": "<prefix> <color:#FF9999>Usage: /feed [player]</color>",
+  "ping.self": "<prefix> <color:#7FC97F>Your ping: <color:#FFD580><ping></color>ms</color>",
+  "ping.other": "<prefix> <color:#7FC97F><color:#FFD580><target></color>'s ping: <color:#FFD580><ping></color>ms</color>",
+  "command.usage.ping": "<prefix> <color:#FF9999>Usage: /ping [player]</color>"
 }

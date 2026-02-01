@@ -142,6 +142,11 @@ commands:
     usage: /feed [player]
     permission: essentialsc.feed
 
+  ping:
+    description: See your ping
+    usage: /ping [player]
+    permission: essentialsc.ping
+
 
 permissions:
   essentialsc.heal:
@@ -309,3 +314,7 @@ permissions:
   essentialsc.feed.others:
     default: op
     description: Feed other players
+
+  essentialsc.ping.others:
+    default: op
+    description: See the ping of other players
