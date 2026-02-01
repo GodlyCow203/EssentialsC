@@ -167,6 +167,11 @@ commands:
     usage: /invsee <player>
     permission: essentialsc.invsee
 
+  clearinventory:
+    description: Clear your inventory or another player's inventory
+    usage: /clearinventory [player]
+    permission: essentialsc.clearinventory
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -347,4 +352,8 @@ permissions:
 
   essentialsc.invsee.modify:
     description: Modify other inventories
+    default: op
+
+  essentialsc.clearinventory.others:
+    description: Clear other players inventories
     default: op

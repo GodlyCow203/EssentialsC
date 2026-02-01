@@ -203,5 +203,9 @@
   "invsee.opened": "<prefix> <color:#06FFA5>Opening <color:#FFE66D><target></color>'s inventory</color>",
   "invsee.self": "<prefix> <color:#FF6B6B>You cannot view your own inventory</color>",
   "command.usage.invsee": "<prefix> <color:#FF6B6B>Usage: /invsee <player></color>",
-  "invsee.no_modify": "<prefix> <color:#FF6B6B>You don't have permission to modify this inventory</color>"
+  "invsee.no_modify": "<prefix> <color:#FF6B6B>You don't have permission to modify this inventory</color>",
+  "clearinventory.success": "<prefix> <color:#06FFA5>Your inventory has been cleared</color>",
+  "clearinventory.success.other": "<prefix> <color:#06FFA5>Cleared <color:#FFE66D><target></color>'s inventory</color>",
+  "clearinventory.success.by": "<prefix> <color:#FF6B6B>Your inventory was cleared by <color:#FFE66D><player></color></color>",
+  "command.usage.clearinventory": "<prefix> <color:#FF6B6B>Usage: /clearinventory [player]</color>"
 }
