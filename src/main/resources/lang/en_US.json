@@ -226,5 +226,8 @@
   "rename.success": "<prefix> <color:#06FFA5>Item renamed to '<color:#FFE66D><name></color>'</color>",
   "rename.no_item": "<prefix> <color:#FF6B6B>You must hold an item in your hand.</color>",
   "rename.cannot_rename": "<prefix> <color:#FF6B6B>This item cannot be renamed.</color>",
-  "rename.blacklisted": "<prefix> <color:#FF6B6B>You cannot use '<color:#FFE66D><word></color>' in item names.</color>"
+  "rename.blacklisted": "<prefix> <color:#FF6B6B>You cannot use '<color:#FFE66D><word></color>' in item names.</color>",
+  "command.rename.usage": "<prefix> <color:#FF6B6B>Usage: /rename</color>",
+  "rename.too_long": "<prefix> <color:#FF6B6B>Name too long! Maximum is <color:#FFE66D>{max}</color> characters (you used <color:#FFE66D>{current}</color>).</color>",
+  "rename.too_short": "<prefix> <color:#FF6B6B>Name too short! Minimum is <color:#FFE66D>{min}</color> characters (you used <color:#FFE66D>{current}</color>).</color>"
 }

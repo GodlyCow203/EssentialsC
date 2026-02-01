@@ -186,4 +186,12 @@ public class ConfigManager {
     public boolean isRenameBlacklistEnabled() {return config.getBoolean("rename.blacklist-enabled", true);}
 
     public List<String> getRenameBlacklistWords() { return config.getStringList("rename.blacklist-words");}
+
+    public int getRenameMaxLength() {return config.getInt("rename.max-length", 50);}
+
+    public int getRenameMinLength() {return config.getInt("rename.min-length", 1);}
+
+    public boolean isRenameNormalizeEnabled() {return config.getBoolean("rename.normalize-enabled", true);}
+
+    public boolean isRenameStripColorsEnabled() {return config.getBoolean("rename.strip-colors-for-check", true);}
 }

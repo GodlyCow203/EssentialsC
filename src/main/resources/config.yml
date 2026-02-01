@@ -77,6 +77,11 @@ scoreboard:
 rename:
   blacklist-enabled: true
   blacklist-words:
-    - "badword1"
+    - "badword"
+    - "hello"
+  max-length: 50
+  min-length: 1
+  normalize-enabled: true
+  strip-colors-for-check: true
 
 

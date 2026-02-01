@@ -13,11 +13,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RenameCommand extends Command {
     private final MiniMessage miniMessage;
+    private final Pattern tagPattern = Pattern.compile("<[^>]+>");
     private List<String> blacklist;
     private boolean blacklistEnabled;
+    private int maxLength;
+    private int minLength;
+    private boolean normalizeEnabled;
+    private boolean stripColorsEnabled;
 
     public RenameCommand(EssentialsC plugin) {
         super(plugin, "rename", "essentialsc.rename", true, 1, "command.usage.rename");
@@ -28,7 +34,12 @@ public class RenameCommand extends Command {
     public void loadConfig() {
         this.blacklistEnabled = plugin.getConfigManager().isRenameBlacklistEnabled();
         this.blacklist = plugin.getConfigManager().getRenameBlacklistWords();
-        plugin.debug("Loaded " + blacklist.size() + " blacklisted words for rename");
+        this.maxLength = plugin.getConfigManager().getRenameMaxLength();
+        this.minLength = plugin.getConfigManager().getRenameMinLength();
+        this.normalizeEnabled = plugin.getConfigManager().isRenameNormalizeEnabled();
+        this.stripColorsEnabled = plugin.getConfigManager().isRenameStripColorsEnabled();
+        plugin.debug("Loaded rename config: max=" + maxLength + ", min=" + minLength +
+                ", normalize=" + normalizeEnabled + ", blacklist=" + blacklist.size() + " words");
     }
 
     @Override
@@ -37,14 +48,36 @@ public class RenameCommand extends Command {
 
         String newName = String.join(" ", args);
 
+        String checkString = stripColorsEnabled ? tagPattern.matcher(newName).replaceAll("") : newName;
+
+        if (checkString.length() > maxLength) {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("max", String.valueOf(maxLength));
+            placeholders.put("current", String.valueOf(checkString.length()));
+            player.sendMessage(lang.get(player, "rename.too_long", placeholders));
+            return true;
+        }
+
+        if (checkString.length() < minLength) {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("min", String.valueOf(minLength));
+            placeholders.put("current", String.valueOf(checkString.length()));
+            player.sendMessage(lang.get(player, "rename.too_short", placeholders));
+            return true;
+        }
+
         if (blacklistEnabled && !player.hasPermission("essentialsc.rename.bypass")) {
-            String checkName = newName.toLowerCase();
+            String normalizedName = normalizeEnabled ? normalizeString(checkString) : checkString.toLowerCase();
+
             for (String word : blacklist) {
-                if (checkName.contains(word.toLowerCase())) {
+                String checkWord = normalizeEnabled ? normalizeString(word) : word.toLowerCase();
+
+                if (checkWord.length() > 0 && normalizedName.contains(checkWord)) {
                     Map<String, String> placeholders = new HashMap<>();
                     placeholders.put("word", word);
                     player.sendMessage(lang.get(player, "rename.blacklisted", placeholders));
-                    plugin.debug(player.getName() + " tried to use blacklisted word: " + word);
+                    plugin.debug(player.getName() + " tried to use blacklisted word: " + word +
+                            " | Input: " + newName + " | Normalized: " + normalizedName);
                     return true;
                 }
             }
@@ -72,6 +105,34 @@ public class RenameCommand extends Command {
         plugin.debug(player.getName() + " renamed item to: " + newName);
 
         return true;
+    }
+
+    private String normalizeString(String input) {
+        if (input == null) return "";
+
+        String normalized = input.toLowerCase();
+
+        normalized = normalized.replace("0", "o")
+                .replace("1", "i")
+                .replace("3", "e")
+                .replace("4", "a")
+                .replace("5", "s")
+                .replace("7", "t")
+                .replace("2", "z");
+
+        normalized = normalized.replace("@", "a")
+                .replace("$", "s")
+                .replace("!", "i")
+                .replace("|", "i")
+                .replace("+", "t")
+                .replace("(", "c")
+                .replace("[", "c")
+                .replace("{", "c")
+                .replace(")", "c")
+                .replace("]", "c")
+                .replace("}", "c");
+
+        return normalized.replaceAll("[^a-z0-9]", "");
     }
 
     @Override
