@@ -210,6 +210,9 @@
   "command.usage.clearinventory": "<prefix> <color:#FF6B6B>Usage: /clearinventory [player]</color>",
   "enderchest.opened": "<prefix> <color:#06FFA5>Opening enderchest...</color>",
   "enderchest.opened.other": "<prefix> <color:#06FFA5>Opening <color:#FFE66D><target></color>'s enderchest</color>",
-  "command.usage.enderchest": "<prefix> <color:#FF6B6B>Usage: /enderchest [player]</color>"
-
+  "command.usage.enderchest": "<prefix> <color:#FF6B6B>Usage: /enderchest [player]</color>",
+  "endersee.opened": "<prefix> <color:#06FFA5>Opening <color:#FFE66D><target></color>'s enderchest</color>",
+  "endersee.self": "<prefix> <color:#FF6B6B>You cannot view your own enderchest with this command</color>",
+  "endersee.no_modify": "<prefix> <color:#FF6B6B>You don't have permission to modify this enderchest</color>",
+  "command.usage.endersee": "<prefix> <color:#FF6B6B>Usage: /endersee <player></color>"
 }

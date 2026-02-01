@@ -10,10 +10,7 @@ import net.godlycow.org.essc.command.home.DelHomeCommand;
 import net.godlycow.org.essc.command.home.HomeCommand;
 import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
-import net.godlycow.org.essc.command.inv.ClearInventoryCommand;
-import net.godlycow.org.essc.command.inv.CraftingTableCommand;
-import net.godlycow.org.essc.command.inv.EnderChestCommand;
-import net.godlycow.org.essc.command.inv.InvseeCommand;
+import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.*;
@@ -27,6 +24,7 @@ import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.listener.EnderSeeListener;
 import net.godlycow.org.essc.listener.InvseeListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
@@ -89,6 +87,8 @@ public final class EssentialsC extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
         getServer().getPluginManager().registerEvents(new InvseeListener(this), this);
+        getServer().getPluginManager().registerEvents(new EnderSeeListener(this), this);
+
 
 
         backManager = new BackManager(this);
@@ -108,16 +108,12 @@ public final class EssentialsC extends JavaPlugin {
 
         new FlyManager(this);
         registerCommand("fly", new FlyCommand(this));
-
         registerCommand("craftingtable", new CraftingTableCommand(this));
-
         registerCommand("god", new GodCommand(this));
-
         registerCommand("invsee", new InvseeCommand(this));
-
         registerCommand("clearinventory", new ClearInventoryCommand(this));
-
         registerCommand("enderchest", new EnderChestCommand(this));
+        registerCommand("endersee", new EnderSeeCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");

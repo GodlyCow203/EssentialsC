@@ -177,6 +177,11 @@ commands:
     usage: /enderchest [player]
     permission: essentialsc.enderchest
 
+  endersee:
+    description: View another player's enderchest
+    usage: /endersee [player]
+    permission: essentialsc.endersee
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -365,6 +370,10 @@ permissions:
 
   essentialsc.enderchest.others:
     description: View other players enderchests
+    default: op
+
+  essentialsc.endersee.modify:
+    description: Modify items in other players enderchests
     default: op
 
 
