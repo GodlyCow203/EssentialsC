@@ -157,6 +157,11 @@ commands:
     usage: /craftingtable
     permission: essentialsc.craftingtable
 
+  god:
+    description: Enable God Mode
+    usage: /god [player]
+    permission: essentialsc.god
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -330,3 +335,7 @@ permissions:
 
   essentialsc.fly.disable-on-join:
     description: Auto disable /fly on join
+
+  essentialsc.god.others:
+    description: Enable / Disable god mode for others
+    default: op

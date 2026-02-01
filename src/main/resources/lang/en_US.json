@@ -191,5 +191,12 @@
   "fly.disabled": "<prefix> <color:#FF9999>Fly mode disabled</color>",
   "command.usage.fly": "<prefix> <color:#FF9999>Usage: /fly</color>",
   "craftingtable.opened": "<prefix> <color:#7FC97F>Opening crafting table...</color>",
-  "command.usage.craftingtable": "<prefix> <color:#FF9999>Usage: /craftingtable</color>"
+  "command.usage.craftingtable": "<prefix> <color:#FF9999>Usage: /craftingtable</color>",
+  "god.enabled": "<prefix> <color:#7FC97F>God mode enabled</color>",
+  "god.disabled": "<prefix> <color:#FF9999>God mode disabled</color>",
+  "god.enabled.other": "<prefix> <color:#7FC97F>God mode enabled for <color:#FFD580><target></color></color>",
+  "god.disabled.other": "<prefix> <color:#FF9999>God mode disabled for <color:#FFD580><target></color></color>",
+  "god.enabled.by": "<prefix> <color:#7FC97F>God mode enabled by <color:#FFD580><player></color></color>",
+  "god.disabled.by": "<prefix> <color:#FF9999>God mode disabled by <color:#FFD580><player></color></color>",
+  "command.usage.god": "<prefix> <color:#FF9999>Usage: /god [player]</color>"
 }
