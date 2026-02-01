@@ -207,5 +207,9 @@
   "clearinventory.success": "<prefix> <color:#06FFA5>Your inventory has been cleared</color>",
   "clearinventory.success.other": "<prefix> <color:#06FFA5>Cleared <color:#FFE66D><target></color>'s inventory</color>",
   "clearinventory.success.by": "<prefix> <color:#FF6B6B>Your inventory was cleared by <color:#FFE66D><player></color></color>",
-  "command.usage.clearinventory": "<prefix> <color:#FF6B6B>Usage: /clearinventory [player]</color>"
+  "command.usage.clearinventory": "<prefix> <color:#FF6B6B>Usage: /clearinventory [player]</color>",
+  "enderchest.opened": "<prefix> <color:#06FFA5>Opening enderchest...</color>",
+  "enderchest.opened.other": "<prefix> <color:#06FFA5>Opening <color:#FFE66D><target></color>'s enderchest</color>",
+  "command.usage.enderchest": "<prefix> <color:#FF6B6B>Usage: /enderchest [player]</color>"
+
 }

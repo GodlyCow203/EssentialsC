@@ -172,6 +172,11 @@ commands:
     usage: /clearinventory [player]
     permission: essentialsc.clearinventory
 
+  enderchest:
+    description: Open your enderchest or view another players enderchest
+    usage: /enderchest [player]
+    permission: essentialsc.enderchest
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -357,3 +362,9 @@ permissions:
   essentialsc.clearinventory.others:
     description: Clear other players inventories
     default: op
+
+  essentialsc.enderchest.others:
+    description: View other players enderchests
+    default: op
+
+

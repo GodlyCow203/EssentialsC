@@ -12,6 +12,7 @@ import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.inv.ClearInventoryCommand;
 import net.godlycow.org.essc.command.inv.CraftingTableCommand;
+import net.godlycow.org.essc.command.inv.EnderChestCommand;
 import net.godlycow.org.essc.command.inv.InvseeCommand;
 import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
@@ -115,6 +116,8 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("invsee", new InvseeCommand(this));
 
         registerCommand("clearinventory", new ClearInventoryCommand(this));
+
+        registerCommand("enderchest", new EnderChestCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
