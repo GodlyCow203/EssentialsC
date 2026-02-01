@@ -194,4 +194,12 @@ public class ConfigManager {
     public boolean isRenameNormalizeEnabled() {return config.getBoolean("rename.normalize-enabled", true);}
 
     public boolean isRenameStripColorsEnabled() {return config.getBoolean("rename.strip-colors-for-check", true);}
+
+    public boolean isVanishHideFromTab() {return config.getBoolean("vanish.hide-from-tab", true);}
+
+    public boolean isVanishNightVision() {return config.getBoolean("vanish.give-night-vision", true);}
+
+    public boolean isVanishPreventMobTarget() {return config.getBoolean("vanish.prevent-mob-target", true);}
+
+    public boolean isVanishDisableCollisions() {return config.getBoolean("vanish.disable-collisions", true);}
 }

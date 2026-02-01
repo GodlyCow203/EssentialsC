@@ -197,6 +197,11 @@ commands:
     usage: /rename
     permission: essentialsc.rename
 
+  vanish:
+    description: Toggle vanish mode
+    usage: /vanish
+    permission: essentialsc.vanish
+
 permissions:
   essentialsc.heal:
     description: Heal command

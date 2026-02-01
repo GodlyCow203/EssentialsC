@@ -84,4 +84,10 @@ rename:
   normalize-enabled: true
   strip-colors-for-check: true
 
+vanish:
+  hide-from-tab: true
+  give-night-vision: true
+  prevent-mob-target: true
+  disable-collisions: true
+
 

@@ -31,6 +31,7 @@ import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
+import net.godlycow.org.essc.vanish.VanishManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +47,7 @@ public final class EssentialsC extends JavaPlugin {
     private VaultHook vaultHook;
     private TPAManager tpaManager;
     private HomeManager homeManager;
+    private VanishManager vanishManager;
     private SpawnManager spawnManager;
     private JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
@@ -119,6 +121,9 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("anvil", new AnvilCommand(this));
         this.renameCommand = new RenameCommand(this);
         registerCommand("rename", renameCommand);
+
+        vanishManager = new VanishManager(this);
+        registerCommand("vanish", new VanishCommand(this));
 
 
         debug("Plugin enabled successfully");
@@ -273,4 +278,7 @@ public final class EssentialsC extends JavaPlugin {
     public ScoreboardManager getScoreboardManager() { return scoreboardManager;}
 
     public RenameCommand getRenameCommand() {return renameCommand;}
+
+    public VanishManager getVanishManager() {return vanishManager;}
+
 }

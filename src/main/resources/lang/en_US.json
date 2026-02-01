@@ -229,5 +229,8 @@
   "rename.blacklisted": "<prefix> <color:#FF6B6B>You cannot use '<color:#FFE66D><word></color>' in item names.</color>",
   "command.usage.rename": "<prefix> <color:#FF6B6B>Usage: /rename</color>",
   "rename.too_long": "<prefix> <color:#FF6B6B>Name too long! Maximum is <color:#FFE66D>{max}</color> characters (you used <color:#FFE66D>{current}</color>).</color>",
-  "rename.too_short": "<prefix> <color:#FF6B6B>Name too short! Minimum is <color:#FFE66D>{min}</color> characters (you used <color:#FFE66D>{current}</color>).</color>"
+  "rename.too_short": "<prefix> <color:#FF6B6B>Name too short! Minimum is <color:#FFE66D>{min}</color> characters (you used <color:#FFE66D>{current}</color>).</color>",
+  "vanish.enabled": "<prefix> <color:#06FFA5>You are now vanished!</color>",
+  "vanish.disabled": "<prefix> <color:#FF6B6B>You are no longer vanished!</color>",
+  "command.usage.vanish": "<prefix> <color:#FF6B6B>Usage: /vanish</color>"
 }

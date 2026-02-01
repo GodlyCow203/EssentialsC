@@ -84,6 +84,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Rename command reloaded");
                 }
 
+                if (plugin.getVanishManager() != null) {
+                    plugin.getVanishManager().loadConfig();
+                    plugin.debug("Vanish config options reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
