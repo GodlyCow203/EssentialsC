@@ -182,6 +182,11 @@ commands:
     usage: /endersee [player]
     permission: essentialsc.endersee
 
+  speed:
+    description: Manage your movement speed
+    usage: /speed <reset|walkspeed|flyspeed> [speed]
+    permission: essentialsc.speed
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -374,6 +379,22 @@ permissions:
 
   essentialsc.endersee.modify:
     description: Modify items in other players enderchests
+    default: op
+
+  essentialsc.speed:
+    description: Access to speed command
+    default: op
+
+  essentialsc.speed.reset:
+    description: Reset speed to default
+    default: op
+
+  essentialsc.speed.walk:
+    description: Change walk speed
+    default: op
+
+  essentialsc.speed.fly:
+    description: Change fly speed
     default: op
 
 

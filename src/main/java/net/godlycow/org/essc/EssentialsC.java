@@ -114,6 +114,7 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("clearinventory", new ClearInventoryCommand(this));
         registerCommand("enderchest", new EnderChestCommand(this));
         registerCommand("endersee", new EnderSeeCommand(this));
+        registerCommand("speed", new SpeedCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
