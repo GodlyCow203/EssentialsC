@@ -10,6 +10,7 @@ import net.godlycow.org.essc.command.home.DelHomeCommand;
 import net.godlycow.org.essc.command.home.HomeCommand;
 import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
+import net.godlycow.org.essc.command.inv.CraftingTableCommand;
 import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.FeedCommand;
@@ -104,6 +105,8 @@ public final class EssentialsC extends JavaPlugin {
 
         new FlyManager(this);
         registerCommand("fly", new FlyCommand(this));
+
+        registerCommand("craftingtable", new CraftingTableCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");

@@ -189,5 +189,7 @@
   "command.usage.ping": "<prefix> <color:#FF9999>Usage: /ping [player]</color>",
   "fly.enabled": "<prefix> <color:#7FC97F>Fly mode enabled</color>",
   "fly.disabled": "<prefix> <color:#FF9999>Fly mode disabled</color>",
-  "command.usage.fly": "<prefix> <color:#FF9999>Usage: /fly</color>"
+  "command.usage.fly": "<prefix> <color:#FF9999>Usage: /fly</color>",
+  "craftingtable.opened": "<prefix> <color:#7FC97F>Opening crafting table...</color>",
+  "command.usage.craftingtable": "<prefix> <color:#FF9999>Usage: /craftingtable</color>"
 }

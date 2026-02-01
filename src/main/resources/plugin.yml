@@ -152,6 +152,10 @@ commands:
     usage: /fly
     permission: essentialsc.fly
 
+  craftingtable:
+    description: Open a crafting table
+    usage: /craftingtable
+    permission: essentialsc.craftingtable
 
 permissions:
   essentialsc.heal:
