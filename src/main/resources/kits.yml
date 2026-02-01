@@ -1,0 +1,236 @@
+kits:
+  starter:
+    display-name: "<#2791F5>Starter Kit"
+    description: "Basic items"
+    cooldown: 86400 # 24 hours
+    one-time: false
+    first-join: true
+    max-claims: 10
+    items:
+      - type: STONE_SWORD
+        amount: 1
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: STONE_PICKAXE
+        amount: 1
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: STONE_SHOVEL
+        amount: 1
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: BREAD
+        amount: 16
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: SUGAR_CANE
+        amount: 16
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: CARROT
+        amount: 4
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: { }
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: POTATO
+        amount: 4
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: GOLDEN_APPLE
+        amount: 1
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: APPLE
+        amount: 8
+        name: "<b><#2791F5>Kit Starter"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+  tools:
+    display-name: "<#FF5D00>Tools Kit"
+    description: "Basic tools for gathering resources"
+    cooldown: 43200 # 12 hours
+    one-time: false
+    first-join: false
+    max-claims: 0
+    items:
+      - type: IRON_PICKAXE
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_AXE
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_SHOVEL
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_SWORD
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_HOE
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: FLINT_AND_STEEL
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: FISHING_ROD
+        amount: 1
+        name: "<b><#FF5D00>Kit Tools"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+  member:
+    display-name: "<#FFD400>Member Kit"
+    description: "Rewards for server members"
+    cooldown: 604800 # 7 days
+    one-time: false
+    first-join: false
+    max-claims: 0
+    items:
+      - type: GOLDEN_SWORD
+        amount: 1
+        name: "<b><#FFD400>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: GOLDEN_PICKAXE
+        amount: 1
+        name: "<b><#FFD400>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: COOKED_BEEF
+        amount: 32
+        name: "<b><#FFD400>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: GOLDEN_APPLE
+        amount: 8
+        name: "<b><#FFD400>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: OAK_LOG
+        amount: 32
+        name: "<b><#FFD400>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+

@@ -69,6 +69,17 @@ public class EsscCommand extends Command {
                     plugin.debug("Back Manager reloaded");
                 }
 
+                if (plugin.getKitManager() != null) {
+                    plugin.getKitManager().reload();
+                    plugin.debug("Back Manager reloaded");
+                }
+
+                if (plugin.getScoreboardManager() != null) {
+                    plugin.getScoreboardManager().reload();
+                    plugin.debug("Scoreboard System reloaded");
+                }
+
+
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");

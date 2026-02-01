@@ -123,6 +123,20 @@ commands:
     usage: /back
     permission: essentialsc.back
 
+  kit:
+    description: Claim and manage kits
+    usage: /kit [claim|cooldown|debug] <kit>
+
+  kits:
+    description: List and manage kits
+    usage: /kits [list|reload]
+    permission: essentialsc.kits.list
+
+  scoreboard:
+    description: Toggle or manage scoreboard
+    usage: /scoreboard [toggle|reload]
+    permission: essentialsc.scoreboard.toggle
+
 
 permissions:
   essentialsc.heal:
@@ -259,4 +273,24 @@ permissions:
 
   essentialsc.back.admin:
     description: Bypass cooldowns and warmup for /back
+    default: op
+
+  essentialsc.kits.*:
+    description: Access to all kit features
+    default: op
+    children:
+      essentialsc.kits.admin: true
+
+  essentialsc.kits.admin:
+    description: Admin kit management
+    default: op
+
+  essentialsc.kits.list:
+    description: View available kits
+    default: true
+
+  essentialsc.scoreboard.toggle:
+    default: true
+
+  essentialsc.scoreboard.reload:
     default: op

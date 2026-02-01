@@ -10,6 +10,8 @@ import net.godlycow.org.essc.command.home.DelHomeCommand;
 import net.godlycow.org.essc.command.home.HomeCommand;
 import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
+import net.godlycow.org.essc.command.kit.KitCommand;
+import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.HealCommand;
 import net.godlycow.org.essc.command.spawn.SetSpawnCommand;
 import net.godlycow.org.essc.command.spawn.SpawnCommand;
@@ -18,8 +20,10 @@ import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.home.HomeManager;
+import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
+import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
@@ -41,6 +45,8 @@ public final class EssentialsC extends JavaPlugin {
     private SpawnManager spawnManager;
     private JoinLeaveListener joinLeaveListener;
     private BackManager backManager;
+    private KitManager kitManager;
+    private ScoreboardManager scoreboardManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     private final List<String> economyCommands = List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
@@ -79,6 +85,15 @@ public final class EssentialsC extends JavaPlugin {
 
         backManager = new BackManager(this);
         registerCommand("back", new BackCommand(this));
+
+        kitManager = new KitManager(this);
+        registerCommand("kit", new KitCommand(this));
+        registerCommand("kits", new KitsCommand(this));
+
+        if (configManager.isScoreboardEnabled()) {
+            scoreboardManager = new ScoreboardManager(this);
+        }
+        registerCommand("scoreboard", new ScoreboardCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");
@@ -226,4 +241,8 @@ public final class EssentialsC extends JavaPlugin {
     public JoinLeaveListener getJoinLeaveListener() { return joinLeaveListener; }
 
     public BackManager getBackManager() { return backManager;}
+
+    public KitManager getKitManager() { return kitManager;}
+
+    public ScoreboardManager getScoreboardManager() { return scoreboardManager;}
 }

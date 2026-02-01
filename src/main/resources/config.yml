@@ -59,3 +59,17 @@ back:
   particles: true
   sounds: true
   cancel-on-movement: true
+
+scoreboard:
+  enabled: true
+  update-interval: 20
+  title: "<#FF3000><b>MyServer"
+  lines:
+    - ""
+    - "<#FF3000>| <white>Player: <#FFAC96>%player_name%"
+    - "<#FF3000>| <white>Rank: <#FFAC96>%luckperms_prefix%"
+    - "<#FF3000>| <white>Balance: <#FFAC96>%vault_eco_balance_formatted%"
+    - "<#FF3000>| <white>Online: <#FFAC96>%server_online%<gray>/<#FFAC96>%server_max_players%"
+    - "<#FF3000>| <white>Kills: <#FFAC96>%statistic_player_kills%"
+    - ""
+    - "<#FFAC96>play.myserver.net"

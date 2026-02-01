@@ -180,4 +180,6 @@ public class ConfigManager {
     public FileConfiguration getConfig() {
         return config;
     }
+
+    public boolean isScoreboardEnabled() {return config.getBoolean("scoreboard.enabled", false);}
 }
