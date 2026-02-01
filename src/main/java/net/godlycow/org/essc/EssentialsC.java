@@ -11,6 +11,7 @@ import net.godlycow.org.essc.command.home.HomeCommand;
 import net.godlycow.org.essc.command.home.HomesCommand;
 import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.inv.CraftingTableCommand;
+import net.godlycow.org.essc.command.inv.InvseeCommand;
 import net.godlycow.org.essc.command.kit.KitCommand;
 import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.*;
@@ -24,6 +25,7 @@ import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.listener.InvseeListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
@@ -84,6 +86,8 @@ public final class EssentialsC extends JavaPlugin {
         registerSpawnCommands();
 
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(this), this);
+        getServer().getPluginManager().registerEvents(new InvseeListener(this), this);
+
 
         backManager = new BackManager(this);
         registerCommand("back", new BackCommand(this));
@@ -106,6 +110,8 @@ public final class EssentialsC extends JavaPlugin {
         registerCommand("craftingtable", new CraftingTableCommand(this));
 
         registerCommand("god", new GodCommand(this));
+
+        registerCommand("invsee", new InvseeCommand(this));
 
         debug("Plugin enabled successfully");
         getLogger().info("EssentialsC enabled");

@@ -198,5 +198,9 @@
   "god.disabled.other": "<prefix> <color:#FF9999>God mode disabled for <color:#FFD580><target></color></color>",
   "god.enabled.by": "<prefix> <color:#7FC97F>God mode enabled by <color:#FFD580><player></color></color>",
   "god.disabled.by": "<prefix> <color:#FF9999>God mode disabled by <color:#FFD580><player></color></color>",
-  "command.usage.god": "<prefix> <color:#FF9999>Usage: /god [player]</color>"
+  "command.usage.god": "<prefix> <color:#FF9999>Usage: /god [player]</color>",
+  "invsee.opened": "<prefix> <color:#7FC97F>Opening <color:#FFD580><target></color>'s inventory</color>",
+  "invsee.self": "<prefix> <color:#FF9999>You cannot view your own inventory</color>",
+  "command.usage.invsee": "<prefix> <color:#FF9999>Usage: /invsee <player></color>",
+  "invsee.no_modify": "<prefix> <color:#FF9999>You don't have permission to modify this inventory</color>"
 }

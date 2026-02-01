@@ -162,6 +162,11 @@ commands:
     usage: /god [player]
     permission: essentialsc.god
 
+  invsee:
+    description: View another player's inventory
+    usage: /invsee <player>
+    permission: essentialsc.invsee
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -338,4 +343,8 @@ permissions:
 
   essentialsc.god.others:
     description: Enable / Disable god mode for others
+    default: op
+
+  essentialsc.invsee.modify:
+    description: Modify other inventories
     default: op
