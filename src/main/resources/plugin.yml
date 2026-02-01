@@ -187,6 +187,11 @@ commands:
     usage: /speed <reset|walkspeed|flyspeed> [speed]
     permission: essentialsc.speed
 
+  anvil:
+    description: Open a virtual anvil
+    usage: /anvil
+    permission: essentialsc.anvil
+
 permissions:
   essentialsc.heal:
     description: Heal command

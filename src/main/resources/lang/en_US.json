@@ -220,5 +220,7 @@
   "speed.walk.success": "<prefix> <color:#06FFA5>Walk speed set to <color:#FFE66D><speed></color></color>",
   "speed.fly.success": "<prefix> <color:#06FFA5>Fly speed set to <color:#FFE66D><speed></color></color>",
   "speed.invalid_number": "<prefix> <color:#FF6B6B>Please enter a valid number</color>",
-  "speed.invalid_range": "<prefix> <color:#FF6B6B>Speed must be between -1.0 and 1.0</color>"
+  "speed.invalid_range": "<prefix> <color:#FF6B6B>Speed must be between -1.0 and 1.0</color>",
+  "anvil.opened": "<prefix> <color:#06FFA5>Opening anvil...</color>",
+  "command.usage.anvil": "<prefix> <color:#FF6B6B>Usage: /anvil</color>"
 }
