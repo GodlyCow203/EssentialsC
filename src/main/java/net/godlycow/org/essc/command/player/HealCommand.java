@@ -7,6 +7,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class HealCommand extends Command {
 
     public HealCommand(EssentialsC plugin) {
@@ -15,36 +20,74 @@ public class HealCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage("This command can only be run by a player.");
-            return true;
+        Player player = (Player) sender;
+        Player target;
+
+        if (args.length > 0) {
+            target = plugin.getServer().getPlayer(args[0]);
+            if (target == null) {
+                Map<String, String> placeholders = new HashMap<>();
+                placeholders.put("player", args[0]);
+                player.sendMessage(lang.get(player, "error.player_not_found", placeholders));
+                return true;
+            }
+
+            if (target != player && !player.hasPermission("essentialsc.heal.others")) {
+                player.sendMessage(lang.get(player, "error.no_permission"));
+                plugin.debug("Denied: " + player.getName() + " lacks permission essentialsc.heal.others");
+                return true;
+            }
+        } else {
+            target = player;
         }
 
-        plugin.debug("Healing initiated for " + player.getName());
+        plugin.debug("Healing initiated for " + target.getName() + " by " + player.getName());
 
-        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        player.setHealth(maxHealth);
+        double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        target.setHealth(maxHealth);
         plugin.debug("Set health to " + maxHealth);
 
         if (plugin.getConfig().getBoolean("heal.feed-player", true)) {
-            player.setFoodLevel(20);
-            player.setSaturation(20);
+            target.setFoodLevel(20);
+            target.setSaturation(20);
             plugin.debug("Fed player to full saturation");
         }
 
-        player.setFireTicks(0);
+        target.setFireTicks(0);
 
         if (plugin.getConfig().getBoolean("heal.clear-negative-effects", true)) {
-            var badEffects = player.getActivePotionEffects().stream()
+            var badEffects = target.getActivePotionEffects().stream()
                     .filter(e -> isNegativeEffect(e.getType()))
                     .toList();
 
-            badEffects.forEach(e -> player.removePotionEffect(e.getType()));
+            badEffects.forEach(e -> target.removePotionEffect(e.getType()));
             plugin.debug("Cleared " + badEffects.size() + " negative effects");
         }
 
-        player.sendMessage(lang.get(player, "heal.success"));
+        if (target == player) {
+            player.sendMessage(lang.get(player, "heal.success"));
+        } else {
+            Map<String, String> senderPlaceholders = new HashMap<>();
+            senderPlaceholders.put("target", target.getName());
+            player.sendMessage(lang.get(player, "heal.success.other", senderPlaceholders));
+
+            Map<String, String> targetPlaceholders = new HashMap<>();
+            targetPlaceholders.put("healer", player.getName());
+            target.sendMessage(lang.get(target, "heal.success.by", targetPlaceholders));
+        }
+
         return true;
+    }
+
+    @Override
+    public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (args.length == 1 && sender.hasPermission("essentialsc.heal.others")) {
+            return plugin.getServer().getOnlinePlayers().stream()
+                    .map(Player::getName)
+                    .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
+                    .toList();
+        }
+        return Collections.emptyList();
     }
 
     private boolean isNegativeEffect(PotionEffectType type) {

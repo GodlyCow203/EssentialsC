@@ -1,6 +1,7 @@
 {
   "prefix": "<color:#AAAAAA>[<color:#FFFFFF>EssC</color>]</color>",
   "heal.success": "<prefix> <color:#7FC97F>You have been fully healed!</color>",
+  "heal.success.by": "prefix <color:#7FC97F>You have been healed by <healer>",
   "heal.other": "<prefix> <color:#7FC97F>You healed <color:#FFD580><target></color>.</color>",
   "essc.reload.success": "<prefix> <color:#7FC97F>Configuration and languages reloaded.</color>",
   "essc.reload.economy_disabled": "<prefix> <color:#80BFFF>Economy system disabled.</color>",

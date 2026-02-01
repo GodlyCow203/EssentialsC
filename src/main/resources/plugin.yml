@@ -291,6 +291,8 @@ permissions:
 
   essentialsc.scoreboard.toggle:
     default: true
+    description: Reload the Scoreboard
 
   essentialsc.scoreboard.reload:
     default: op
+    description: Reload the scoreboard
