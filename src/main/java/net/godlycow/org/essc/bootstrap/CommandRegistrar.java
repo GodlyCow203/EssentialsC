@@ -60,7 +60,10 @@ public class CommandRegistrar {
         register("back", new BackCommand(plugin));
         register("kit", new KitCommand(plugin));
         register("kits", new KitsCommand(plugin));
-        register("nick", new NickCommand(plugin));
+        if (plugin.getConfigManager().isNickEnabled()) {
+            register("nick", new NickCommand(plugin));
+            register("realname", new RealNameCommand(plugin));
+        }
         register("realname", new RealNameCommand(plugin));
         register("playtime", new PlaytimeCommand(plugin));
     }
