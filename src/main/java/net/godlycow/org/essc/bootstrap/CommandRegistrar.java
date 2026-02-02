@@ -62,6 +62,7 @@ public class CommandRegistrar {
         register("kits", new KitsCommand(plugin));
         register("nick", new NickCommand(plugin));
         register("realname", new RealNameCommand(plugin));
+        register("playtime", new PlaytimeCommand(plugin));
     }
 
     private void register(String name, Command command) {

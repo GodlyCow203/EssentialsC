@@ -253,5 +253,8 @@
   "realname.success": "<prefix> <color:#06FFA5>Real name of <color:#FFE66D><nick></color> is <color:#FFE66D><real></color></color>",
   "realname.error.not_found": "<prefix> <color:#FF6B6B>No player found with that nickname!</color>",
   "command.usage.nick": "<prefix> <color:#FF6B6B>Usage: /nick <nickname|off> or /nick <player> <nickname|off></color>",
-  "command.usage.realname": "<prefix> <color:#FF6B6B>Usage: /realname <nickname></color>"
+  "command.usage.realname": "<prefix> <color:#FF6B6B>Usage: /realname <nickname></color>",
+  "playtime.self": "<prefix> <color:#06FFA5>Your playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
+  "playtime.other": "<prefix> <color:#06FFA5><color:#FFE66D><player></color>'s playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
+  "command.usage.playtime": "<prefix> <color:#FF6B6B>Usage: /playtime [<player>]</color>"
 }

@@ -218,6 +218,11 @@ commands:
     usage: /realname [player]
     permission: essentialsc.realname
 
+  playtime:
+    description: Check your or another player playtime
+    usage: /playtime [player]
+    permission: essentialsc.playtime
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -443,6 +448,10 @@ permissions:
   essentialsc.nick.reset:
     default: op
     description: Allow resetting/removing others' nicknames
+
+  essentialsc.playtime.others:
+    description: Allows checking other players playtime
+    default: op
 
 
 
