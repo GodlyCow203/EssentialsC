@@ -1,6 +1,8 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -32,11 +34,11 @@ public class EsscCommand extends Command {
 
                 if (wasEconomyEnabled && !isEconomyEnabled) {
                     plugin.debug("Disabling economy due to config change");
-                    plugin.disableEconomy();
+                    plugin.getEconomyRegistrar().disable();
                     sender.sendMessage(lang.get(sender, "essc.reload.economy_disabled"));
                 } else if (!wasEconomyEnabled && isEconomyEnabled) {
                     plugin.debug("Enabling economy due to config change");
-                    plugin.enableEconomy();
+                    plugin.getEconomyRegistrar().enable();
                     sender.sendMessage(lang.get(sender, "essc.reload.economy_enabled"));
                 } else if (isEconomyEnabled && plugin.getEconomyManager() != null) {
                     plugin.getEconomyManager().reload();
