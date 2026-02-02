@@ -124,6 +124,7 @@ public final class EssentialsC extends JavaPlugin {
 
         vanishManager = new VanishManager(this);
         registerCommand("vanish", new VanishCommand(this));
+        registerCommand("repair", new RepairCommand(this));
 
 
         debug("Plugin enabled successfully");

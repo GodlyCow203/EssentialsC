@@ -202,6 +202,11 @@ commands:
     usage: /vanish
     permission: essentialsc.vanish
 
+  repair:
+    description: Repair the item in your hand
+    usage: /repair [player]
+    permission: essentialsc.repair
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -415,5 +420,9 @@ permissions:
   essentialsc.rename.bypass:
     description: bypass rename config options
     default: op
+
+  essentialsc.repair.others:
+    default: op
+    description: Allow repairing other players items
 
 

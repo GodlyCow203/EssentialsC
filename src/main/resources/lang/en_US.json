@@ -232,5 +232,12 @@
   "rename.too_short": "<prefix> <color:#FF6B6B>Name too short! Minimum is <color:#FFE66D>{min}</color> characters (you used <color:#FFE66D>{current}</color>).</color>",
   "vanish.enabled": "<prefix> <color:#06FFA5>You are now vanished!</color>",
   "vanish.disabled": "<prefix> <color:#FF6B6B>You are no longer vanished!</color>",
-  "command.usage.vanish": "<prefix> <color:#FF6B6B>Usage: /vanish</color>"
+  "command.usage.vanish": "<prefix> <color:#FF6B6B>Usage: /vanish</color>",
+  "repair.success": "<prefix> <color:#06FFA5>Your <color:#FFE66D>{item}</color> has been repaired!</color>",
+  "repair.success.other": "<prefix> <color:#06FFA5>You repaired <color:#FFE66D>{target}</color>'s <color:#FFE66D>{item}</color>!</color>",
+  "repair.success.by": "<prefix> <color:#06FFA5>Your <color:#FFE66D>{item}</color> was repaired by <color:#FFE66D>{repairer}</color>!</color>",
+  "repair.error.no_item": "<prefix> <color:#FF6B6B>You must hold an item in your hand to repair it.</color>",
+  "repair.error.not_repairable": "<prefix> <color:#FF6B6B>This item cannot be repaired.</color>",
+  "repair.error.already_repaired": "<prefix> <color:#FF6B6B>This item is already at full durability.</color>",
+  "command.usage.repair": "<prefix> <color:#FF6B6B>Usage: /repair [player]</color>"
 }
