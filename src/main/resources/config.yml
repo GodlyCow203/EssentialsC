@@ -102,5 +102,20 @@ nickname:
   unique: true
   update-tab: true
 
+shop:
+  enabled: true
+  main-menu-title: "<#F52727><b>Server Shop"
+  main-menu-size: 54
+  category-title: "<#F52727><category>"
+  category-menu-title: "<#F52727>Shop - <category>"
+  close-button-enabled: true
+  items-per-page: 28
+  fill-empty-slots: true
+  fill-material: "BLACK_STAINED_GLASS_PANE"
+  log-transactions: true
+  currency:
+    singular: "Dollar"
+    plural: "Dollars"
+
 
 

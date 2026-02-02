@@ -68,6 +68,8 @@ public class CommandRegistrar {
         register("realname", new RealNameCommand(plugin));
         register("playtime", new PlaytimeCommand(plugin));
         register("uptime", new UptimeCommand(plugin));
+        register("shop", new ShopCommand(plugin));
+
     }
 
     private void register(String name, Command command) {

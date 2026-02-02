@@ -228,6 +228,11 @@ commands:
     usage: /uptime
     permission: essentialsc.uptime
 
+  shop:
+    description: Open the server shop
+    usage: /shop [category|reload] [page]
+    permission: essentialsc.shop
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -457,6 +462,14 @@ permissions:
   essentialsc.playtime.others:
     description: Allows checking other players playtime
     default: op
+
+  essentialsc.shop.admin:
+    default: op
+    description: Allow reloading shop configuration
+
+  essentialsc.shop.bypass:
+    default: op
+    description: Bypass shop restrictions
 
 
 

@@ -96,6 +96,11 @@ public class EsscCommand extends Command {
                     plugin.debug("NickManager reloaded");
                 }
 
+                if (plugin.getShopManager() != null) {
+                    plugin.getShopManager().reload();
+                    plugin.debug("Shop reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

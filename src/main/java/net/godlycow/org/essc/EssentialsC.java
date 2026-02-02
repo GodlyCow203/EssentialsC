@@ -5,6 +5,7 @@ import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
 import net.godlycow.org.essc.command.player.RenameCommand;
+import net.godlycow.org.essc.command.player.ShopCommand;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
@@ -15,6 +16,8 @@ import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.nick.NickManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
+import net.godlycow.org.essc.shop.ShopListener;
+import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.vanish.VanishManager;
@@ -41,6 +44,7 @@ public final class EssentialsC extends JavaPlugin {
     private EconomyRegistrar economyRegistrar;
     private JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
+    private ShopManager shopManager;
     private NickManager nickManager;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -80,6 +84,14 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isEconomyEnabled()) {
             new EconomyRegistrar(this).enable();
         }
+
+        if (configManager.isShopEnabled()) {
+            shopManager = new ShopManager(this);
+            ShopListener shopListener = new ShopListener(this, shopManager);
+            shopManager.setShopListener(shopListener);
+            getServer().getPluginManager().registerEvents(shopListener, this);
+        }
+
 
         getLogger().info("EssentialsC enabled");
     }
@@ -179,5 +191,7 @@ public final class EssentialsC extends JavaPlugin {
         return nickManager;
     }
 
-
+    public ShopManager getShopManager() {
+        return shopManager;
+    }
 }

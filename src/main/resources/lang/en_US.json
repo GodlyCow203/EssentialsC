@@ -257,6 +257,17 @@
   "playtime.self": "<prefix> <color:#06FFA5>Your playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
   "playtime.other": "<prefix> <color:#06FFA5><color:#FFE66D><player></color>'s playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
   "command.usage.playtime": "<prefix> <color:#FF6B6B>Usage: /playtime [<player>]</color>",
-  "uptime.message": "<prefix> <color:#06FFA5>Server uptime: <color:#FFE66D>{days}</color>d <color:#FFE66D>{hours}</color>h <color:#FFE66D>{minutes}</color>m <color:#FFE66D>{seconds}</color>s</color>",
-  "command.usage.uptime": "<prefix> <color:#FF6B6B>Usage: /uptime</color>"
+  "uptime.message": "<prefix> <color:#06FFA5>Server uptime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
+  "command.usage.uptime": "<prefix> <color:#FF6B6B>Usage: /uptime</color>",
+  "shop.disabled": "<prefix> <color:#FF6B6B>The shop is currently disabled.</color>",
+  "shop.invalid-category": "<prefix> <color:#FF6B6B>That category doesn't exist!</color>",
+  "shop.not-buyable": "<prefix> <color:#FF6B6B>This item cannot be purchased!</color>",
+  "shop.not-sellable": "<prefix> <color:#FF6B6B>This item cannot be sold!</color>",
+  "shop.out-of-stock": "<prefix> <color:#FF6B6B>This item is out of stock!</color>",
+  "shop.not-enough-money": "<prefix> <color:#FF6B6B>You don't have enough money!</color>",
+  "shop.not-enough-items": "<prefix> <color:#FF6B6B>You don't have enough items to sell!</color>",
+  "shop.purchase-success": "<prefix> <color:#06FFA5>You bought <color:#FFE66D><amount>x <item></color> for <color:#FFE66D><price></color>!</color>",
+  "shop.sale-success": "<prefix> <color:#06FFA5>You sold <color:#FFE66D><amount>x <item></color> for <color:#FFE66D><price></color>!</color>",
+  "shop.reload-success": "<prefix> <color:#06FFA5>Shop configuration reloaded!</color>",
+  "command.usage.shop": "<prefix> <color:#FF6B6B>Usage: /shop [category] [page]</color>"
 }
