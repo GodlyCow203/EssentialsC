@@ -90,4 +90,17 @@ vanish:
   prevent-mob-target: true
   disable-collisions: true
 
+nickname:
+  enabled: true
+  min-length: 3
+  max-length: 16
+  allow-colors: true
+  allow-formats: true
+  blacklist-enabled: true
+  blacklist-words: []
+  normalize-enabled: true
+  unique: true
+  update-tab: true
+
+
 
