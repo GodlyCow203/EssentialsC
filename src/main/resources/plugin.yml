@@ -223,6 +223,11 @@ commands:
     usage: /playtime [player]
     permission: essentialsc.playtime
 
+  uptime:
+    description: Check the server uptime
+    usage: /uptime
+    permission: essentialsc.uptime
+
 permissions:
   essentialsc.heal:
     description: Heal command

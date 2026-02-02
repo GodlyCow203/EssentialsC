@@ -7,6 +7,7 @@ import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.kit.*;
 import net.godlycow.org.essc.command.player.*;
+import net.godlycow.org.essc.command.server.UptimeCommand;
 import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
@@ -66,6 +67,7 @@ public class CommandRegistrar {
         }
         register("realname", new RealNameCommand(plugin));
         register("playtime", new PlaytimeCommand(plugin));
+        register("uptime", new UptimeCommand(plugin));
     }
 
     private void register(String name, Command command) {

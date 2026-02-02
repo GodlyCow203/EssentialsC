@@ -256,5 +256,7 @@
   "command.usage.realname": "<prefix> <color:#FF6B6B>Usage: /realname <nickname></color>",
   "playtime.self": "<prefix> <color:#06FFA5>Your playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
   "playtime.other": "<prefix> <color:#06FFA5><color:#FFE66D><player></color>'s playtime: <color:#FFE66D><days></color>d <color:#FFE66D><hours></color>h <color:#FFE66D><minutes></color>m <color:#FFE66D><seconds></color>s</color>",
-  "command.usage.playtime": "<prefix> <color:#FF6B6B>Usage: /playtime [<player>]</color>"
+  "command.usage.playtime": "<prefix> <color:#FF6B6B>Usage: /playtime [<player>]</color>",
+  "uptime.message": "<prefix> <color:#06FFA5>Server uptime: <color:#FFE66D>{days}</color>d <color:#FFE66D>{hours}</color>h <color:#FFE66D>{minutes}</color>m <color:#FFE66D>{seconds}</color>s</color>",
+  "command.usage.uptime": "<prefix> <color:#FF6B6B>Usage: /uptime</color>"
 }
