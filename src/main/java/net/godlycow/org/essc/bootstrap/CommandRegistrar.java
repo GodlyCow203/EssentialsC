@@ -2,6 +2,7 @@ package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.*;
+import net.godlycow.org.essc.command.admin.RealNameCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.kit.*;
@@ -59,6 +60,8 @@ public class CommandRegistrar {
         register("back", new BackCommand(plugin));
         register("kit", new KitCommand(plugin));
         register("kits", new KitsCommand(plugin));
+        register("nick", new NickCommand(plugin));
+        register("realname", new RealNameCommand(plugin));
     }
 
     private void register(String name, Command command) {

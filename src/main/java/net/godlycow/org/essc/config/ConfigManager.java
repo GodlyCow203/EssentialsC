@@ -202,4 +202,44 @@ public class ConfigManager {
     public boolean isVanishPreventMobTarget() {return config.getBoolean("vanish.prevent-mob-target", true);}
 
     public boolean isVanishDisableCollisions() {return config.getBoolean("vanish.disable-collisions", true);}
+
+    public boolean isNickEnabled() {
+        return config.getBoolean("nickname.enabled", true);
+    }
+
+    public int getNickMinLength() {
+        return config.getInt("nickname.min-length", 3);
+    }
+
+    public int getNickMaxLength() {
+        return config.getInt("nickname.max-length", 16);
+    }
+
+    public boolean isNickColorsAllowed() {
+        return config.getBoolean("nickname.allow-colors", true);
+    }
+
+    public boolean isNickFormatAllowed() {
+        return config.getBoolean("nickname.allow-formats", true);
+    }
+
+    public boolean isNickBlacklistEnabled() {
+        return config.getBoolean("nickname.blacklist-enabled", true);
+    }
+
+    public List<String> getNickBlacklistWords() {
+        return config.getStringList("nickname.blacklist-words");
+    }
+
+    public boolean isNickNormalizeEnabled() {
+        return config.getBoolean("nickname.normalize-enabled", true);
+    }
+
+    public boolean isNickUnique() {
+        return config.getBoolean("nickname.unique", true);
+    }
+
+    public boolean isNickTabEnabled() {
+        return config.getBoolean("nickname.update-tab", true);
+    }
 }

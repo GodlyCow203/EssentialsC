@@ -13,6 +13,7 @@ import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
+import net.godlycow.org.essc.nick.NickManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
@@ -40,6 +41,7 @@ public final class EssentialsC extends JavaPlugin {
     private EconomyRegistrar economyRegistrar;
     private JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
+    private NickManager nickManager;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -66,6 +68,10 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isScoreboardEnabled()) {
             scoreboardManager = new ScoreboardManager(this);
+        }
+
+        if (configManager.isNickEnabled()) {
+            nickManager = new NickManager(this);
         }
 
         new ListenerRegistrar(this);
@@ -168,5 +174,10 @@ public final class EssentialsC extends JavaPlugin {
     public RenameCommand getRenameCommand(){
         return renameCommand;
     }
+
+    public NickManager getNickManager() {
+        return nickManager;
+    }
+
 
 }

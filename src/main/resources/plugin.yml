@@ -207,6 +207,17 @@ commands:
     usage: /repair [player]
     permission: essentialsc.repair
 
+  nick:
+    description: Set your nickname
+    usage: /nick <nickname|off>
+    aliases: [nickname]
+    permission: essentialsc.nick
+
+  realname:
+    description: Lookup real name by nickname or reset player nick
+    usage: /realname [player]
+    permission: essentialsc.realname
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -424,5 +435,14 @@ permissions:
   essentialsc.repair.others:
     default: op
     description: Allow repairing other players items
+
+  essentialsc.nick.others:
+    default: op
+    description: Allow setting others' nicknames
+
+  essentialsc.nick.reset:
+    default: op
+    description: Allow resetting/removing others' nicknames
+
 
 

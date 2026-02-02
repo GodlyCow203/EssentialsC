@@ -91,6 +91,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Vanish config options reloaded");
                 }
 
+                if (plugin.getNickManager() != null) {
+                    plugin.getNickManager().reload();
+                    plugin.debug("NickManager reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
