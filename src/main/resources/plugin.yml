@@ -248,6 +248,11 @@ commands:
     usage: /unenchant [enchantment]
     permission: essentialsc.unenchant
 
+  hat:
+    description: Wear custom items as your hat
+    usage: /hat
+    permission: essentialsc.hat
+
 
 permissions:
   essentialsc.heal:
@@ -486,5 +491,17 @@ permissions:
   essentialsc.shop.bypass:
     default: op
     description: Bypass shop restrictions
+
+  essentialsc.hat:
+    description: Allows using /hat command
+    default: true
+
+  essentialsc.hat.blocks:
+    description: Allows wearing blocks as hats (when blocked in config)
+    default: op
+
+  essentialsc.hat.binding_bypass:
+    description: Allows replacing helmets with curse of binding
+    default: op
 
 

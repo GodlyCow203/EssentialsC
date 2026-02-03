@@ -282,5 +282,13 @@
   "unenchant.success.all": "<prefix> <color:#06FFA5>All enchantments removed!</color>",
   "unenchant.success.single": "<prefix> <color:#06FFA5>Removed <color:#FFE66D><enchantment></color>!</color>",
   "unenchant.not_found": "<prefix> <color:#FF6B6B>Item doesn't have <color:#FFE66D><enchantment></color>.</color>",
-  "command.usage.unenchant": "<prefix> <color:#FF6B6B>Usage: /unenchant [enchantment]</color>"
+  "command.usage.unenchant": "<prefix> <color:#FF6B6B>Usage: /unenchant [enchantment]</color>",
+  "hat.success": "<prefix> <color:#06FFA5>You are now wearing <color:#FFE66D><item></color>!</color>",
+  "hat.no_item": "<prefix> <color:#FF6B6B>You must hold an item in your hand.</color>",
+  "hat.blacklisted": "<prefix> <color:#FF6B6B>This item cannot be worn as a hat.</color>",
+  "hat.no_blocks": "<prefix> <color:#FF6B6B>You cannot wear blocks as hats.</color>",
+  "hat.no_lore": "<prefix> <color:#FF6B6B>This item must have lore to be worn.</color>",
+  "hat.no_name": "<prefix> <color:#FF6B6B>This item must have a custom name to be worn.</color>",
+  "hat.binding_curse": "<prefix> <color:#FF6B6B>You cannot remove your cursed helmet!</color>",
+  "command.usage.hat": "<prefix> <color:#FF6B6B>Usage: /hat</color>"
 }

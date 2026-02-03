@@ -4,6 +4,7 @@ import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
+import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.command.player.ShopCommand;
 import net.godlycow.org.essc.config.ConfigManager;
@@ -46,6 +47,7 @@ public final class EssentialsC extends JavaPlugin {
     private RenameCommand renameCommand;
     private ShopManager shopManager;
     private NickManager nickManager;
+    private HatCommand hatCommand;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -193,5 +195,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public ShopManager getShopManager() {
         return shopManager;
+    }
+
+    public HatCommand getHatCommand() {
+        return hatCommand;
     }
 }

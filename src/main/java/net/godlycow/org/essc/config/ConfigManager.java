@@ -290,4 +290,24 @@ public class ConfigManager {
     public boolean isShopLogTransactions() {
         return config.getBoolean("shop.log-transactions", true);
     }
+
+    public boolean isHatBlacklistEnabled() {
+        return config.getBoolean("hat.blacklist-enabled", true);
+    }
+
+    public List<String> getHatBlacklistItems() {
+        return config.getStringList("hat.blacklist-items");
+    }
+
+    public boolean isHatAllowBlocks() {
+        return config.getBoolean("hat.allow-blocks", false);
+    }
+
+    public boolean isHatRequireLore() {
+        return config.getBoolean("hat.require-lore", false);
+    }
+
+    public boolean isHatRequireName() {
+        return config.getBoolean("hat.require-custom-name", false);
+    }
 }

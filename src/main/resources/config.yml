@@ -117,5 +117,18 @@ shop:
     singular: "Dollar"
     plural: "Dollars"
 
+hat:
+  blacklist-enabled: true
+  blacklist-items:
+    - bedrock
+    - barrier
+    - command_block
+    - structure_void
+    - jigsaw
+    - light
+  allow-blocks: false # "blocks" = blacklisted-items
+  require-lore: false
+  require-custom-name: false
+
 
 

@@ -101,6 +101,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Shop reloaded");
                 }
 
+                if (plugin.getHatCommand() != null) {
+                    plugin.getHatCommand().reload();
+                    plugin.debug("Hat config reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
