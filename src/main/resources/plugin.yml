@@ -238,6 +238,16 @@ commands:
     usage: /broadcast <message>
     permission: essentialsc.broadcast
 
+  enchant:
+    description: Enchant the item in your hand
+    usage: /enchant <enchantment> [level]
+    permission: essentialsc.enchant
+
+  unenchant:
+    description: Remove enchantments from the item in your hand
+    usage: /unenchant [enchantment]
+    permission: essentialsc.unenchant
+
 
 permissions:
   essentialsc.heal:
@@ -476,4 +486,5 @@ permissions:
   essentialsc.shop.bypass:
     default: op
     description: Bypass shop restrictions
+
 

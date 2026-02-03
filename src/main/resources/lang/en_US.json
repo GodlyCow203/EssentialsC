@@ -273,5 +273,14 @@
   "broadcast.format": "<prefix> <color:#06FFA5><message></color>",
   "broadcast.success": "<prefix> <color:#06FFA5>Broadcast sent!</color>",
   "broadcast.world.selected": "<prefix> <color:#06FFA5>Broadcasting to world <color:#FFE66D><world></color>...</color>",
-  "command.usage.broadcast": "<prefix> <color:#FF6B6B>Usage: /broadcast [world] <message></color>"
+  "command.usage.broadcast": "<prefix> <color:#FF6B6B>Usage: /broadcast [world] <message></color>",
+  "enchant.success": "<prefix> <color:#06FFA5>Added <color:#FFE66D><enchantment></color> level <color:#FFE66D><level></color>!</color>",
+  "enchant.no_item": "<prefix> <color:#FF6B6B>You must hold an item in your hand.</color>",
+  "enchant.invalid": "<prefix> <color:#FF6B6B>Enchantment '<color:#FFE66D><enchantment></color>' not found.</color>",
+  "enchant.invalid_level": "<prefix> <color:#FF6B6B>Invalid level.</color>",
+  "command.usage.enchant": "<prefix> <color:#FF6B6B>Usage: /enchant <enchantment> [level]</color>",
+  "unenchant.success.all": "<prefix> <color:#06FFA5>All enchantments removed!</color>",
+  "unenchant.success.single": "<prefix> <color:#06FFA5>Removed <color:#FFE66D><enchantment></color>!</color>",
+  "unenchant.not_found": "<prefix> <color:#FF6B6B>Item doesn't have <color:#FFE66D><enchantment></color>.</color>",
+  "command.usage.unenchant": "<prefix> <color:#FF6B6B>Usage: /unenchant [enchantment]</color>"
 }

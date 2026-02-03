@@ -5,6 +5,8 @@ import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.admin.RealNameCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
+import net.godlycow.org.essc.command.item.EnchantCommand;
+import net.godlycow.org.essc.command.item.UnenchantCommand;
 import net.godlycow.org.essc.command.kit.*;
 import net.godlycow.org.essc.command.player.*;
 import net.godlycow.org.essc.command.server.BroadcastCommand;
@@ -71,6 +73,8 @@ public class CommandRegistrar {
         register("uptime", new UptimeCommand(plugin));
         register("shop", new ShopCommand(plugin));
         register("broadcast", new BroadcastCommand(plugin));
+        register("enchant", new EnchantCommand(plugin));
+        register("unenchant", new UnenchantCommand(plugin));
     }
 
     private void register(String name, Command command) {
