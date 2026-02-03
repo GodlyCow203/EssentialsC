@@ -73,13 +73,16 @@ public class ShopGUI {
             fillEmptySlots(inv);
         }
 
+        String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
+        String currencyPlural = plugin.getConfigManager().getShopCurrencyPlural();
+
         Map<Integer, ShopItem> pageItems = category.getPageItems(page);
 
         for (Map.Entry<Integer, ShopItem> entry : pageItems.entrySet()) {
             ShopItem item = entry.getValue();
             if (item.getPermission() != null && !player.hasPermission(item.getPermission())) continue;
 
-            ItemStack display = item.createDisplayItem(cachedBalance);
+            ItemStack display = item.createDisplayItem(cachedBalance, currencySingular, currencyPlural);
             inv.setItem(entry.getKey(), display);
         }
 
@@ -120,12 +123,14 @@ public class ShopGUI {
 
         String formattedBalance = String.format("%.2f", cachedBalance);
 
+        String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
+        String currencyPlural = plugin.getConfigManager().getShopCurrencyPlural();
+        String currency = cachedBalance == 1.0 ? currencySingular : currencyPlural;
+
         meta.displayName(mm.deserialize("<color:#06FFA5>Your Balance"));
 
         List<Component> lore = new ArrayList<>();
-        lore.add(mm.deserialize("<color:#FFE66D>" + formattedBalance + " " +
-                (cachedBalance == 1 ? plugin.getConfigManager().getShopCurrencySingular() :
-                        plugin.getConfigManager().getShopCurrencyPlural())));
+        lore.add(mm.deserialize("<color:#FFE66D>" + formattedBalance + " " + currency));
         lore.add(mm.deserialize(""));
         lore.add(mm.deserialize("<color:#AAAAAA>Click to refresh"));
 
@@ -133,7 +138,6 @@ public class ShopGUI {
         head.setItemMeta(meta);
         inv.setItem(slot, head);
     }
-
     private void addNavigation(Inventory inv, ShopCategory category, int currentPage) {
         int maxPage = category.getMaxPage();
 

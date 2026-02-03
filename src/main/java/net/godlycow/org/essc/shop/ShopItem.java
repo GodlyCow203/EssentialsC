@@ -221,21 +221,21 @@ public class ShopItem {
         }
     }
 
-    public ItemStack createDisplayItem(double playerBalance) {
+    public ItemStack createDisplayItem(double playerBalance, String currencySingular, String currencyPlural) {
         ItemStack item = createItemStack();
         ItemMeta meta = item.getItemMeta();
 
         List<net.kyori.adventure.text.Component> newLore = new ArrayList<>();
 
         if (buyable) {
-            String buyText = "<color:#06FFA5>Buy: <color:#FFE66D>" + buyPrice + " " +
-                    (buyPrice == 1 ? "Coin" : "Coins");
+            String currency = buyPrice == 1.0 ? currencySingular : currencyPlural;
+            String buyText = "<color:#06FFA5>Buy: <color:#FFE66D>" + buyPrice + " " + currency;
             newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(buyText));
         }
 
         if (sellable) {
-            String sellText = "<color:#FF6B6B>Sell: <color:#FFE66D>" + sellPrice + " " +
-                    (sellPrice == 1 ? "Coin" : "Coins");
+            String currency = sellPrice == 1.0 ? currencySingular : currencyPlural;
+            String sellText = "<color:#FF6B6B>Sell: <color:#FFE66D>" + sellPrice + " " + currency;
             newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(sellText));
         }
 
@@ -260,6 +260,11 @@ public class ShopItem {
         meta.lore(newLore);
         item.setItemMeta(meta);
         return item;
+    }
+
+    @Deprecated
+    public ItemStack createDisplayItem(double playerBalance) {
+        return createDisplayItem(playerBalance, "Coin", "Coins");
     }
 
     public String getId() { return id; }

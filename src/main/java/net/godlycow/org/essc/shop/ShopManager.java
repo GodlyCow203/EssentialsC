@@ -497,8 +497,20 @@ public class ShopManager {
 
     public void reload() {
         categories.clear();
-        loadShop();
-        plugin.debug("Shop reloaded");
+
+        File mainFile = new File(shopFolder, "main.yml");
+        if (mainFile.exists()) {
+            mainConfig = YamlConfiguration.loadConfiguration(mainFile);
+        }
+
+        ConfigurationSection catsSection = mainConfig.getConfigurationSection("categories");
+        if (catsSection != null) {
+            for (String key : catsSection.getKeys(false)) {
+                loadCategory(key, catsSection.getConfigurationSection(key));
+            }
+        }
+
+        plugin.debug("Shop reloaded with " + categories.size() + " categories");
     }
 
     public void shutdown() {
