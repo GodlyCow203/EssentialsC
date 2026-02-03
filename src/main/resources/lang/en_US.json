@@ -269,5 +269,9 @@
   "shop.purchase-success": "<prefix> <color:#06FFA5>You bought <color:#FFE66D><amount>x <item></color> for <color:#FFE66D><price></color>!</color>",
   "shop.sale-success": "<prefix> <color:#06FFA5>You sold <color:#FFE66D><amount>x <item></color> for <color:#FFE66D><price></color>!</color>",
   "shop.reload-success": "<prefix> <color:#06FFA5>Shop configuration reloaded!</color>",
-  "command.usage.shop": "<prefix> <color:#FF6B6B>Usage: /shop [category] [page]</color>"
+  "command.usage.shop": "<prefix> <color:#FF6B6B>Usage: /shop [category] [page]</color>",
+  "broadcast.format": "<prefix> <color:#06FFA5><message></color>",
+  "broadcast.success": "<prefix> <color:#06FFA5>Broadcast sent!</color>",
+  "broadcast.world.selected": "<prefix> <color:#06FFA5>Broadcasting to world <color:#FFE66D><world></color>...</color>",
+  "command.usage.broadcast": "<prefix> <color:#FF6B6B>Usage: /broadcast [world] <message></color>"
 }

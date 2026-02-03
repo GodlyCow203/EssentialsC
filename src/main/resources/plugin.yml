@@ -233,6 +233,12 @@ commands:
     usage: /shop [category|reload] [page]
     permission: essentialsc.shop
 
+  broadcast:
+    description: Broadcast a message to all players or a specific world
+    usage: /broadcast <message>
+    permission: essentialsc.broadcast
+
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -470,6 +476,4 @@ permissions:
   essentialsc.shop.bypass:
     default: op
     description: Bypass shop restrictions
-
-
 
