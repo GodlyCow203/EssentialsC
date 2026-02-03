@@ -221,6 +221,7 @@ public class ShopItem {
         }
     }
 
+
     public ItemStack createDisplayItem(double playerBalance, String currencySingular, String currencyPlural) {
         ItemStack item = createItemStack();
         ItemMeta meta = item.getItemMeta();
@@ -262,10 +263,6 @@ public class ShopItem {
         return item;
     }
 
-    @Deprecated
-    public ItemStack createDisplayItem(double playerBalance) {
-        return createDisplayItem(playerBalance, "Coin", "Coins");
-    }
 
     public String getId() { return id; }
     public Material getMaterial() { return material; }
