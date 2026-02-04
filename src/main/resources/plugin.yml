@@ -253,6 +253,11 @@ commands:
     usage: /hat
     permission: essentialsc.hat
 
+  sudo:
+    description: Force a player to run a command or send a message
+    usage: /sudo <player> <command/message>
+    permission: essentialsc.sudo
+
 
 permissions:
   essentialsc.heal:
@@ -503,5 +508,17 @@ permissions:
   essentialsc.hat.binding_bypass:
     description: Allows replacing helmets with curse of binding
     default: op
+
+  essentialsc.sudo:
+    description: Allows using /sudo
+    default: op
+
+  essentialsc.sudo.exempt:
+    description: Prevents being targeted by sudo
+    default: op
+
+  essentialsc.sudo.override:
+    description: Allows sudoing exempt players
+    default: false
 
 

@@ -3,6 +3,7 @@ package net.godlycow.org.essc.bootstrap;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.admin.RealNameCommand;
+import net.godlycow.org.essc.command.admin.SudoCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
@@ -77,6 +78,7 @@ public class CommandRegistrar {
         register("enchant", new EnchantCommand(plugin));
         register("unenchant", new UnenchantCommand(plugin));
         register("hat", new HatCommand(plugin));
+        register("sudo", new SudoCommand(plugin));
     }
 
     private void register(String name, Command command) {

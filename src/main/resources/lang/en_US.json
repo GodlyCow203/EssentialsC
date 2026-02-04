@@ -290,5 +290,9 @@
   "hat.no_lore": "<prefix> <color:#FF6B6B>This item must have lore to be worn.</color>",
   "hat.no_name": "<prefix> <color:#FF6B6B>This item must have a custom name to be worn.</color>",
   "hat.binding_curse": "<prefix> <color:#FF6B6B>You cannot remove your cursed helmet!</color>",
-  "command.usage.hat": "<prefix> <color:#FF6B6B>Usage: /hat</color>"
+  "command.usage.hat": "<prefix> <color:#FF6B6B>Usage: /hat</color>",
+  "sudo.success.chat": "<prefix> <color:#06FFA5>Forced <color:#FFE66D><player></color> to say: <color:#FFFFFF><command></color></color>",
+  "sudo.success.command": "<prefix> <color:#06FFA5>Forced <color:#FFE66D><player></color> to run: <color:#FFFFFF><command></color></color>",
+  "sudo.exempt": "<prefix> <color:#FF6B6B>That player cannot be sudoed.</color>",
+  "command.usage.sudo": "<prefix> <color:#FF6B6B>Usage: /sudo <player> <command/message></color>"
 }
