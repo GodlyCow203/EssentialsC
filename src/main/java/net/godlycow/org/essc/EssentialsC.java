@@ -12,9 +12,11 @@ import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
+import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
+import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
@@ -50,6 +52,8 @@ public final class EssentialsC extends JavaPlugin {
     private NickManager nickManager;
     private HatCommand hatCommand;
     private PunishmentManager punishmentManager;
+    private IgnoreManager ignoreManager;
+    private ReplyManager replyManager;
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -73,6 +77,8 @@ public final class EssentialsC extends JavaPlugin {
         kitManager = new KitManager(this);
         vanishManager = new VanishManager(this);
         punishmentManager = new PunishmentManager(this);
+        ignoreManager = new IgnoreManager(this);
+        replyManager = new ReplyManager();
 
 
         new FlyManager(this);
@@ -208,5 +214,13 @@ public final class EssentialsC extends JavaPlugin {
 
     public PunishmentManager getPunishmentManager() {
         return punishmentManager;
+    }
+
+    public IgnoreManager getIgnoreManager() {
+        return ignoreManager;
+    }
+
+    public ReplyManager getReplyManager() {
+        return replyManager;
     }
 }

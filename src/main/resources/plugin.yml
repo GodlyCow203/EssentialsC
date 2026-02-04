@@ -288,6 +288,42 @@ commands:
     usage: /checkpunish <player>
     permission: essentialsc.checkpunish
 
+  ignore:
+    description: Ignore or unignore a player
+    usage: /ignore [player]
+    permission: essentialsc.ignore
+
+  msg:
+    description: Send a private message to a player
+    usage: /msg <player> <message>
+    permission: essentialsc.msg
+
+  reply:
+    description: Reply to the last private message
+    usage: /reply <message>
+    permission: essentialsc.reply
+
+  seen:
+    description: Check when a player was last online
+    usage: /seen <player>
+    permission: essentialsc.seen
+
+  top:
+    description: Teleport to the highest block above you
+    usage: /top
+    permission: essentialsc.top
+
+  ptime:
+    description: Set your personal time
+    usage: /ptime [time|day|night|reset] [locked]
+    permission: essentialsc.ptime
+
+  pweather:
+    description: Set your personal weather
+    usage: /pweather [clear|rain|storm|reset]
+    permission: essentialsc.pweather
+
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -617,5 +653,57 @@ permissions:
   essentialsc.checkpunish.others:
     description: Check anyone's punishment status
     default: op
+
+  essentialsc.ignore:
+    description: Ignore/unignore players
+    default: true
+
+  essentialsc.ignore.exempt:
+    description: Cannot be ignored
+    default: op
+
+  essentialsc.msg:
+    description: Send private messages
+    default: true
+
+  essentialsc.msg.spy:
+    description: See all private messages
+    default: op
+
+  essentialsc.reply:
+    description: Reply to messages
+    default: true
+
+  essentialsc.seen:
+    description: Check online players
+    default: true
+
+  essentialsc.seen.offline:
+    description: Check offline players
+    default: op
+
+  essentialsc.seen.ip:
+    description: See player IP addresses
+    default: op
+
+  essentialsc.seen.uuid:
+    description: See player UUID
+    default: op
+
+  essentialsc.seen.exempt:
+    description: IP/location hidden from seen
+    default: op
+
+  essentialsc.top:
+    description: Teleport to top block
+    default: true
+
+  essentialsc.ptime:
+    description: Set personal time
+    default: true
+
+  essentialsc.pweather:
+    description: Set personal weather
+    default: true
 
 

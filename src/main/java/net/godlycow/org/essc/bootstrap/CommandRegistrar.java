@@ -89,6 +89,13 @@ public class CommandRegistrar {
         register("mute", new MuteCommand(plugin, punishmentManager));
         register("unmute", new UnmuteCommand(plugin, punishmentManager));
         register("checkpunish", new CheckpunishCommand(plugin, punishmentManager));
+        register("ignore", new IgnoreCommand(plugin));
+        register("msg", new MsgCommand(plugin));
+        register("reply", new ReplyCommand(plugin));
+        register("seen", new SeenCommand(plugin));
+        register("top", new TopCommand(plugin));
+        register("ptime", new PtimeCommand(plugin));
+        register("pweather", new PweatherCommand(plugin));
     }
 
     private void register(String name, Command command) {
