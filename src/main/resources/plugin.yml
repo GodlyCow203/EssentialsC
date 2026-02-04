@@ -258,6 +258,35 @@ commands:
     usage: /sudo <player> <command/message>
     permission: essentialsc.sudo
 
+  kick:
+    description: Kick a Player
+    usage: /kick <player>
+    permission: essentialsc.kick
+
+  ban:
+    description: Ban a player from the server
+    usage: /ban <player> [duration] [reason]
+    permission: essentialsc.ban
+
+  unban:
+    description: Unban a player
+    usage: /unban <player>
+    permission: essentialsc.unban
+
+  mute:
+    description: Mute a player
+    usage: /mute <player> [duration] [reason]
+    permission: essentialsc.mute
+
+  unmute:
+    description: Unmute a player
+    usage: /unmute <player>
+    permission: essentialsc.unmute
+
+  checkpunish:
+    description: Check punishment status of a player
+    usage: /checkpunish <player>
+    permission: essentialsc.checkpunish
 
 permissions:
   essentialsc.heal:
@@ -520,5 +549,73 @@ permissions:
   essentialsc.sudo.override:
     description: Allows sudoing exempt players
     default: false
+
+  essentialsc.kick:
+    description: Allows kicking players
+    default: op
+
+  essentialsc.kick.others:
+    description: Allows kicking other players (implied by base permission)
+    default: op
+
+  essentialsc.kick.exempt:
+    description: Prevents the player from being kicked
+    default: op
+
+  essentialsc.kick.exempt.bypass:
+    description: Allows kicking exempt players
+    default: false
+
+  essentialsc.kick.notify:
+    description: Receive broadcast notifications when players are kicked
+    default: op
+
+  essentialsc.ban:
+    description: Ban players
+    default: op
+
+  essentialsc.ban.exempt:
+    description: Cannot be banned
+    default: op
+
+  essentialsc.ban.exempt.bypass:
+    description: Can ban exempt players
+    default: false
+
+  essentialsc.ban.notify:
+    description: Receive ban notifications
+    default: op
+
+  essentialsc.unban:
+    description: Unban players
+    default: op
+
+  essentialsc.mute:
+    description: Mute players
+    default: op
+
+  essentialsc.mute.exempt:
+    description: Cannot be muted
+    default: op
+
+  essentialsc.mute.exempt.bypass:
+    description: Can mute exempt players
+    default: false
+
+  essentialsc.mute.notify:
+    description: Receive mute notifications
+    default: op
+
+  essentialsc.unmute:
+    description: Unmute players
+    default: op
+
+  essentialsc.checkpunish:
+    description: Check punishment status
+    default: op
+
+  essentialsc.checkpunish.others:
+    description: Check anyone's punishment status
+    default: op
 
 

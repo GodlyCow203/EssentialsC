@@ -2,8 +2,7 @@ package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.*;
-import net.godlycow.org.essc.command.admin.RealNameCommand;
-import net.godlycow.org.essc.command.admin.SudoCommand;
+import net.godlycow.org.essc.command.admin.*;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
@@ -15,15 +14,20 @@ import net.godlycow.org.essc.command.server.BroadcastCommand;
 import net.godlycow.org.essc.command.server.UptimeCommand;
 import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
+import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import org.bukkit.command.PluginCommand;
 
 public class CommandRegistrar {
 
     private final EssentialsC plugin;
+    private final PunishmentManager punishmentManager;
+
+
 
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
+        this.punishmentManager = plugin.getPunishmentManager();
     }
 
     public void registerAll() {
@@ -79,6 +83,12 @@ public class CommandRegistrar {
         register("unenchant", new UnenchantCommand(plugin));
         register("hat", new HatCommand(plugin));
         register("sudo", new SudoCommand(plugin));
+        register("kick", new KickCommand(plugin));
+        register("ban", new BanCommand(plugin, punishmentManager));
+        register("unban", new UnbanCommand(plugin, punishmentManager));
+        register("mute", new MuteCommand(plugin, punishmentManager));
+        register("unmute", new UnmuteCommand(plugin, punishmentManager));
+        register("checkpunish", new CheckpunishCommand(plugin, punishmentManager));
     }
 
     private void register(String name, Command command) {

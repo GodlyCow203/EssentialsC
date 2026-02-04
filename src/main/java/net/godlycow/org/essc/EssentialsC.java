@@ -16,6 +16,7 @@ import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.nick.NickManager;
+import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
@@ -48,6 +49,8 @@ public final class EssentialsC extends JavaPlugin {
     private ShopManager shopManager;
     private NickManager nickManager;
     private HatCommand hatCommand;
+    private PunishmentManager punishmentManager;
+
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -69,6 +72,8 @@ public final class EssentialsC extends JavaPlugin {
         backManager = new BackManager(this);
         kitManager = new KitManager(this);
         vanishManager = new VanishManager(this);
+        punishmentManager = new PunishmentManager(this);
+
 
         new FlyManager(this);
 
@@ -199,5 +204,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public HatCommand getHatCommand() {
         return hatCommand;
+    }
+
+    public PunishmentManager getPunishmentManager() {
+        return punishmentManager;
     }
 }
