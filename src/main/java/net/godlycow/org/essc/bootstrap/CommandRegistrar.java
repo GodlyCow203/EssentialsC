@@ -3,6 +3,7 @@ package net.godlycow.org.essc.bootstrap;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.admin.*;
+import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
@@ -96,6 +97,7 @@ public class CommandRegistrar {
         register("top", new TopCommand(plugin));
         register("ptime", new PtimeCommand(plugin));
         register("pweather", new PweatherCommand(plugin));
+        register("ah", new AhCommand(plugin));
     }
 
     private void register(String name, Command command) {

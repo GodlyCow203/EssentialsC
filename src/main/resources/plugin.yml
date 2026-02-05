@@ -323,6 +323,10 @@ commands:
     usage: /pweather [clear|rain|storm|reset]
     permission: essentialsc.pweather
 
+  ah:
+    description: Auction House commands
+    usage: /ah [sell|cancel|expired|listings|page]
+    permission: essentialsc.ah.use
 
 permissions:
   essentialsc.heal:
@@ -705,5 +709,45 @@ permissions:
   essentialsc.pweather:
     description: Set personal weather
     default: true
+
+  essentialsc.ah.use:
+    description: Allows access to the Auction House
+    default: true
+
+  essentialsc.ah.sell:
+    description: Allows selling items in the Auction House
+    default: true
+
+  essentialsc.ah.buy:
+    description: Allows buying items from the Auction House
+    default: true
+
+  essentialsc.ah.cancel:
+    description: Allows canceling own auctions
+    default: true
+
+  essentialsc.ah.admin:
+    description: Allows canceling any auction and full admin control
+    default: op
+
+  essentialsc.ah.bypass.limit:
+    description: Bypasses the max auctions per player limit
+    default: op
+
+  essentialsc.ah.bypass.price.min:
+    description: Bypasses the minimum price restriction
+    default: op
+
+  essentialsc.ah.bypass.price.max:
+    description: Bypasses the maximum price restriction
+    default: op
+
+  essentialsc.ah.reload:
+    description: Allows reloading Auction House configuration
+    default: op
+
+  essentialsc.ah.expired.others:
+    description: Allows claiming expired items from other players
+    default: op
 
 

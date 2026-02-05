@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
@@ -15,6 +16,7 @@ import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.listener.AhListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
@@ -54,6 +56,7 @@ public final class EssentialsC extends JavaPlugin {
     private PunishmentManager punishmentManager;
     private IgnoreManager ignoreManager;
     private ReplyManager replyManager;
+    private AuctionManager auctionManager;
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -103,6 +106,12 @@ public final class EssentialsC extends JavaPlugin {
             ShopListener shopListener = new ShopListener(this, shopManager);
             shopManager.setShopListener(shopListener);
             getServer().getPluginManager().registerEvents(shopListener, this);
+        }
+
+        if (configManager.isAHEnabled()) {
+            auctionManager = new AuctionManager(this);
+            AhListener ahListener = new AhListener(this);
+            getServer().getPluginManager().registerEvents(ahListener, this);
         }
 
 
@@ -222,5 +231,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public ReplyManager getReplyManager() {
         return replyManager;
+    }
+
+    public AuctionManager getAuctionManager() {
+        return auctionManager;
     }
 }

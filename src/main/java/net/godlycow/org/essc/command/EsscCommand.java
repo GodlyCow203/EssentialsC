@@ -106,6 +106,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Hat config reloaded");
                 }
 
+                if (plugin.getAuctionManager() != null) {
+                    plugin.getAuctionManager().reload();
+                    plugin.debug("Hat config reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

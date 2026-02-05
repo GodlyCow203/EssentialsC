@@ -130,5 +130,12 @@ hat:
   require-lore: false
   require-custom-name: false
 
+auction-house:
+  enabled: true
+  max-auctions-per-player: 5
+  duration-hours: 48
+  min-price: "1.00"
+  max-price: "-1"  # -1 for unlimited
+
 
 

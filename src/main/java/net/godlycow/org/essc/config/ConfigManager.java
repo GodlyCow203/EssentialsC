@@ -310,4 +310,26 @@ public class ConfigManager {
     public boolean isHatRequireName() {
         return config.getBoolean("hat.require-custom-name", false);
     }
+
+    public boolean isAHEnabled() {
+        return config.getBoolean("auction-house.enabled", true);
+    }
+
+    public int getAHMaxAuctions() {
+        return config.getInt("auction-house.max-auctions-per-player", 5);
+    }
+
+    public long getAHDuration() {
+        return config.getLong("auction-house.duration-hours", 48) * 60 * 60 * 1000;
+    }
+
+    public BigDecimal getAHMinPrice() {
+        return new BigDecimal(config.getString("auction-house.min-price", "1.00"));
+    }
+
+    public BigDecimal getAHMaxPrice() {
+        String val = config.getString("auction-house.max-price", "-1");
+        return val.equals("-1") ? null : new BigDecimal(val);
+    }
+
 }

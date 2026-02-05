@@ -12,5 +12,5 @@ public class ListenerRegistrar {
         plugin.getServer().getPluginManager().registerEvents(new InvseeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new EnderSeeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
-}
+    }
 }
