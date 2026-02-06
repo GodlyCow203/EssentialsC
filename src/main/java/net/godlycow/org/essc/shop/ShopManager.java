@@ -47,6 +47,7 @@ public class ShopManager {
     }
 
     private void loadShop() {
+        saveResourceFiles();
         shopFolder = new File(plugin.getDataFolder(), "shop");
         if (!shopFolder.exists()) {
             shopFolder.mkdirs();
@@ -66,7 +67,47 @@ public class ShopManager {
             }
         }
 
+        File[] files = shopFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.equals("main.yml"));
+        if (files != null) {
+            for (File file : files) {
+                String fileName = file.getName();
+                String categoryId = fileName.substring(0, fileName.length() - 4);
+
+                if (!categories.containsKey(categoryId)) {
+                    YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+                    ShopCategory category = new ShopCategory(categoryId);
+                    category.setDisplayName(config.getString("name", categoryId));
+                    category.setIcon(Material.valueOf(config.getString("material", "CHEST")));
+                    category.setTextureUrl(config.getString("texture"));
+                    category.setLore(config.getStringList("lore"));
+                    category.setSlot(config.getInt("slot", 0));
+                    category.setFileName(fileName);
+                    category.setPermission(config.getString("permission"));
+                    category.setEnabled(config.getBoolean("enabled", true));
+
+                    loadItems(category, config);
+                    categories.put(categoryId, category);
+                }
+            }
+        }
+
         plugin.debug("Loaded " + categories.size() + " shop categories");
+    }
+
+    private void saveResourceFiles() {
+        File shopDir = new File(plugin.getDataFolder(), "shop");
+        if (!shopDir.exists()) {
+            shopDir.mkdirs();
+        }
+
+        String[] files = {"main.yml", "farming.yml", "mining.yml", "spawners.yml", "enchanted_books.yml", "tools.yml", "blocks.yml", "redstone.yml", "misc.yml" };
+
+        for (String fileName : files) {
+            File file = new File(shopDir, fileName);
+            if (!file.exists()) {
+                plugin.saveResource("shop/" + fileName, false);
+            }
+        }
     }
 
     private void loadCategory(String id, ConfigurationSection section) {

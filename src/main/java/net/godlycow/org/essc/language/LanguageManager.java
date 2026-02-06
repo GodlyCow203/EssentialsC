@@ -38,6 +38,8 @@ public class LanguageManager {
         if (!langFolder.exists()) {
             langFolder.mkdirs();
             plugin.saveResource("lang/en_US.json", false);
+            plugin.saveResource("lang/de_DE.json", false);
+
         }
 
         loadIntoCache(defaultLanguage);

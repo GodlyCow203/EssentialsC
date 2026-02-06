@@ -1,6 +1,6 @@
 debug: true
 
-default-language: en_US
+default-language: de_DE
 
 heal:
   feed-player: true
