@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class LanguageManager {
     private final EssentialsC plugin;
@@ -21,6 +22,7 @@ public class LanguageManager {
     private final Gson gson = new Gson();
 
     private final Map<String, Map<String, String>> cache = new HashMap<>();
+    private final Map<UUID, String> playerLanguages = new HashMap<>();
     private String defaultLang;
 
     public LanguageManager(EssentialsC plugin) {
@@ -68,8 +70,14 @@ public class LanguageManager {
 
     public Component get(CommandSender sender, String key, Map<String, String> placeholders) {
         String locale = defaultLang;
+
         if (sender instanceof Player player) {
-            locale = player.locale().toString();
+            String playerLang = playerLanguages.get(player.getUniqueId());
+            if (playerLang != null) {
+                locale = playerLang;
+            } else {
+                locale = player.locale().toString();
+            }
         }
 
         if (!cache.containsKey(locale)) {
@@ -110,6 +118,33 @@ public class LanguageManager {
 
     public Component get(CommandSender sender, String key) {
         return get(sender, key, null);
+    }
+
+    public void setPlayerLanguage(UUID playerUuid, String languageCode) {
+        playerLanguages.put(playerUuid, languageCode);
+        if (!cache.containsKey(languageCode)) {
+            loadIntoCache(languageCode);
+        }
+    }
+
+    public void removePlayerLanguage(UUID playerUuid) {
+        playerLanguages.remove(playerUuid);
+    }
+
+    public String getPlayerLanguage(UUID playerUuid) {
+        return playerLanguages.get(playerUuid);
+    }
+
+    public boolean hasPlayerLanguage(UUID playerUuid) {
+        return playerLanguages.containsKey(playerUuid);
+    }
+
+    public Map<UUID, String> getPlayerLanguages() {
+        return new HashMap<>(playerLanguages);
+    }
+
+    public String getDefaultLang() {
+        return defaultLang;
     }
 
     public void reload() {

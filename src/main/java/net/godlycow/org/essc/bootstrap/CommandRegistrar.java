@@ -15,6 +15,7 @@ import net.godlycow.org.essc.command.server.BroadcastCommand;
 import net.godlycow.org.essc.command.server.UptimeCommand;
 import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
+import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import org.bukkit.command.PluginCommand;
@@ -98,6 +99,7 @@ public class CommandRegistrar {
         register("ptime", new PtimeCommand(plugin));
         register("pweather", new PweatherCommand(plugin));
         register("ah", new AhCommand(plugin));
+        register("language", new LanguageCommand(plugin));
     }
 
     private void register(String name, Command command) {

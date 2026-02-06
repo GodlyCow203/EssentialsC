@@ -328,6 +328,10 @@ commands:
     usage: /ah [sell|cancel|expired|listings|page]
     permission: essentialsc.ah.use
 
+  language:
+    description: Change your language
+    usage: /language <lang_key>
+
 permissions:
   essentialsc.heal:
     description: Heal command
