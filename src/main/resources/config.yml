@@ -137,5 +137,21 @@ auction-house:
   min-price: "1.00"
   max-price: "-1"  # -1 for unlimited
 
+warp:
+  enabled: true
+  cooldown: 5
+  warmup: 3
+  cancel-on-movement: true
+  particles: true
+  sounds: true
+  blocked-worlds:
+    - world_nether
+    - world_the_end
+  group-by-category: true
+  max-name-length: 16
+  limit-per-player:
+    enabled: false
+    max: 5
+
 
 

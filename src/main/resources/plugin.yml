@@ -332,6 +332,31 @@ commands:
     description: Change your language
     usage: /language <lang_key>
 
+  warp:
+    description: Teleport to a warp location
+    usage: /warp [name]
+    permission: essentialsc.warp
+
+  setwarp:
+    description: Create a new warp
+    usage: /setwarp <name>
+    permission: essentialsc.setwarp
+
+  delwarp:
+    description: Delete a warp
+    usage: /delwarp <name>
+    permission: essentialsc.delwarp
+
+  warps:
+    description: List all available warps
+    usage: /warps
+    permission: essentialsc.warps
+
+  warpadmin:
+    description: Admin warp management
+    usage: /warpadmin <setperm|setcost|setdesc|setcategory|hide|unhide|move|info|reload>
+    permission: essentialsc.warpadmin
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -752,6 +777,66 @@ permissions:
 
   essentialsc.ah.expired.others:
     description: Allows claiming expired items from other players
+    default: op
+
+  essentialsc.warp:
+    description: Allow using warp command
+    default: true
+
+  essentialsc.warp.others:
+    description: Warp other players
+    default: op
+
+  essentialsc.warp.bypass:
+    description: Bypass warp-specific permissions
+    default: op
+
+  essentialsc.warp.bypass.cooldown:
+    description: Bypass warp cooldown
+    default: op
+
+  essentialsc.warp.bypass.warmup:
+    description: Bypass warp warmup
+    default: op
+
+  essentialsc.warp.free:
+    description: Free warps regardless of cost
+    default: op
+
+  essentialsc.setwarp:
+    description: Create warps
+    default: op
+
+  essentialsc.setwarp.overwrite:
+    description: Overwrite existing warps
+    default: op
+
+  essentialsc.setwarp.unlimited:
+    description: Bypass warp creation limits
+    default: op
+
+  essentialsc.delwarp:
+    description: Delete own warps
+    default: op
+
+  essentialsc.delwarp.own:
+    description: Delete warps starting with player name
+    default: op
+
+  essentialsc.delwarp.others:
+    description: Delete other players' warps
+    default: op
+
+  essentialsc.delwarp.all:
+    description: Delete any warp
+    default: op
+
+  essentialsc.warps:
+    description: List warps
+    default: true
+
+  essentialsc.warpadmin:
+    description: Admin warp management
     default: op
 
 

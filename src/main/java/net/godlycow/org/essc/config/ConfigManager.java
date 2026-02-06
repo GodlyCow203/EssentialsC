@@ -332,4 +332,48 @@ public class ConfigManager {
         return val.equals("-1") ? null : new BigDecimal(val);
     }
 
+    public boolean isWarpEnabled() {
+        return config.getBoolean("warp.enabled", true);
+    }
+
+    public long getWarpCooldown() {
+        return config.getLong("warp.cooldown", 5);
+    }
+
+    public long getWarpWarmup() {
+        return config.getLong("warp.warmup", 3);
+    }
+
+    public boolean isWarpCancelOnMovement() {
+        return config.getBoolean("warp.cancel-on-movement", true);
+    }
+
+    public boolean isWarpParticles() {
+        return config.getBoolean("warp.particles", true);
+    }
+
+    public boolean isWarpSounds() {
+        return config.getBoolean("warp.sounds", true);
+    }
+
+    public List<String> getWarpBlockedWorlds() {
+        return config.getStringList("warp.blocked-worlds");
+    }
+
+    public boolean isWarpGroupByCategory() {
+        return config.getBoolean("warp.group-by-category", true);
+    }
+
+    public int getWarpMaxNameLength() {
+        return config.getInt("warp.max-name-length", 16);
+    }
+
+    public boolean isWarpLimitEnabled() {
+        return config.getBoolean("warp.limit-per-player.enabled", false);
+    }
+
+    public int getWarpMaxPerPlayer() {
+        return config.getInt("warp.limit-per-player.max", 5);
+    }
+
 }

@@ -27,6 +27,7 @@ import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.vanish.VanishManager;
+import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +58,7 @@ public final class EssentialsC extends JavaPlugin {
     private IgnoreManager ignoreManager;
     private ReplyManager replyManager;
     private AuctionManager auctionManager;
+    private WarpManager warpManager;
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -112,6 +114,11 @@ public final class EssentialsC extends JavaPlugin {
             auctionManager = new AuctionManager(this);
             AhListener ahListener = new AhListener(this);
             getServer().getPluginManager().registerEvents(ahListener, this);
+        }
+
+        if (configManager.isWarpEnabled()) {
+            warpManager = new WarpManager(this);
+            getServer().getPluginManager().registerEvents(new net.godlycow.org.essc.listener.WarpListener(this), this);
         }
 
 
@@ -236,4 +243,6 @@ public final class EssentialsC extends JavaPlugin {
     public AuctionManager getAuctionManager() {
         return auctionManager;
     }
+
+    public WarpManager getWarpManager() { return warpManager;}
 }

@@ -15,6 +15,7 @@ import net.godlycow.org.essc.command.server.BroadcastCommand;
 import net.godlycow.org.essc.command.server.UptimeCommand;
 import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
+import net.godlycow.org.essc.command.warp.*;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
@@ -100,6 +101,11 @@ public class CommandRegistrar {
         register("pweather", new PweatherCommand(plugin));
         register("ah", new AhCommand(plugin));
         register("language", new LanguageCommand(plugin));
+        register("warp", new WarpCommand(plugin));
+        register("setwarp", new SetWarpCommand(plugin));
+        register("delwarp", new DelWarpCommand(plugin));
+        register("warps", new WarpsCommand(plugin));
+        register("warpadmin", new WarpAdminCommand(plugin));
     }
 
     private void register(String name, Command command) {
