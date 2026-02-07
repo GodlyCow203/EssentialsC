@@ -100,7 +100,7 @@ public class ShopManager {
             shopDir.mkdirs();
         }
 
-        String[] files = {"main.yml", "farming.yml", "mining.yml", "spawners.yml", "enchanted_books.yml", "tools.yml", "blocks.yml", "redstone.yml", "misc.yml" };
+        String[] files = {"main.yml", "farming.yml", "mining.yml", "spawners.yml", "enchanted_books.yml", "tools.yml", "blocks.yml", "redstone.yml", "misc.yml", "combat.yml" };
 
         for (String fileName : files) {
             File file = new File(shopDir, fileName);

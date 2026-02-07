@@ -2,6 +2,7 @@ package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.listener.*;
+import net.godlycow.org.essc.version.VersionChecker;
 
 
 public class ListenerRegistrar {
@@ -15,5 +16,7 @@ public class ListenerRegistrar {
         if (plugin.getConfigManager().isWarpEnabled()) {
             plugin.getServer().getPluginManager().registerEvents(new WarpListener(plugin), plugin);
         }
-    }
+
+        plugin.getServer().getPluginManager().registerEvents(new VersionChecker(plugin), plugin);
+        }
 }

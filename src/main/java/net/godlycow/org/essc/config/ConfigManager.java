@@ -376,4 +376,76 @@ public class ConfigManager {
         return config.getInt("warp.limit-per-player.max", 5);
     }
 
+    public boolean isAfkEnabled() {
+        return config.getBoolean("afk.enabled", true);
+    }
+
+    public long getAfkTimeout() {
+        return config.getLong("afk.timeout-seconds", 300);
+    }
+
+    public long getAfkKickTimeout() {
+        return config.getLong("afk.kick-timeout-seconds", 1800);
+    }
+
+    public boolean isAfkKickEnabled() {
+        return config.getLong("afk.kick-timeout-seconds", 1800) > 0;
+    }
+
+    public boolean isAfkTabPlaceholderEnabled() {
+        return config.getBoolean("afk.tab-placeholder-enabled", true);
+    }
+
+    public String getAfkTabPlaceholder() {
+        return config.getString("afk.tab-placeholder", "[AFK] ");
+    }
+
+    public boolean isAfkBroadcastEnabled() {
+        return config.getBoolean("afk.broadcast-enabled", true);
+    }
+
+    public boolean isAfkTitleEnabled() {
+        return config.getBoolean("afk.title-enabled", true);
+    }
+
+    public String getAfkTitle() {
+        return config.getString("afk.title", "<color:#FF6B6B>You are now AFK</color>");
+    }
+
+    public String getAfkSubtitle() {
+        return config.getString("afk.subtitle", "<color:#FFE66D>Move to return</color>");
+    }
+
+    public boolean isAfkPreventDamage() {
+        return config.getBoolean("afk.prevent-damage", true);
+    }
+
+    public boolean isAfkPreventMobTarget() {
+        return config.getBoolean("afk.prevent-mob-target", true);
+    }
+
+    public boolean isAfkPreventPickup() {
+        return config.getBoolean("afk.prevent-pickup", true);
+    }
+
+    public boolean isAfkFreezePlayer() {
+        return config.getBoolean("afk.freeze-player", true);
+    }
+
+    public List<String> getAfkBlockedCommands() {
+        return config.getStringList("afk.blocked-commands");
+    }
+
+    public boolean isAfkListShowLocation() {
+        return config.getBoolean("afk.list-show-location", true);
+    }
+
+    public boolean isAfkListShowWorld() {
+        return config.getBoolean("afk.list-show-world", true);
+    }
+
+    public String getAfkListSortBy() {
+        return config.getString("afk.list-sort-by", "time");
+    }
+
 }

@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.afk.AFKManager;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
@@ -27,6 +28,7 @@ import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.vanish.VanishManager;
+import net.godlycow.org.essc.version.VersionChecker;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -59,6 +61,7 @@ public final class EssentialsC extends JavaPlugin {
     private ReplyManager replyManager;
     private AuctionManager auctionManager;
     private WarpManager warpManager;
+    private AFKManager afkManager;
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -84,6 +87,7 @@ public final class EssentialsC extends JavaPlugin {
         punishmentManager = new PunishmentManager(this);
         ignoreManager = new IgnoreManager(this);
         replyManager = new ReplyManager();
+
 
 
         new FlyManager(this);
@@ -119,6 +123,10 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isWarpEnabled()) {
             warpManager = new WarpManager(this);
             getServer().getPluginManager().registerEvents(new net.godlycow.org.essc.listener.WarpListener(this), this);
+        }
+
+        if (configManager.isAfkEnabled()) {
+            afkManager = new AFKManager(this);
         }
 
 
@@ -245,4 +253,6 @@ public final class EssentialsC extends JavaPlugin {
     }
 
     public WarpManager getWarpManager() { return warpManager;}
+
+    public AFKManager getAfkManager() { return afkManager;}
 }

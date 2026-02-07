@@ -1,0 +1,576 @@
+items:
+  chest:
+    material: CHEST
+    name: "<color:#8B4513>Chest"
+    buy-price: 80
+    sell-price: 25
+    slot: 10
+    page: 1
+
+  trapped_chest:
+    material: TRAPPED_CHEST
+    name: "<color:#8B4513>Trapped Chest"
+    buy-price: 150
+    sell-price: 50
+    slot: 11
+    page: 1
+
+  barrel:
+    material: BARREL
+    name: "<color:#8B4513>Barrel"
+    buy-price: 90
+    sell-price: 30
+    slot: 12
+    page: 1
+
+  ender_chest:
+    material: ENDER_CHEST
+    name: "<color:#9932CC>Ender Chest"
+    buy-price: 5000
+    sell-price: 1600
+    slot: 14
+    page: 1
+
+  shulker_box:
+    material: SHULKER_BOX
+    name: "<color:#9932CC>Shulker Box"
+    buy-price: 8000
+    sell-price: 2600
+    slot: 15
+    page: 1
+
+  bundle:
+    material: BUNDLE
+    name: "<color:#8B4513>Bundle"
+    buy-price: 600
+    sell-price: 200
+    slot: 16
+    page: 1
+
+  crafting_table:
+    material: CRAFTING_TABLE
+    name: "<color:#8B4513>Crafting Table"
+    buy-price: 40
+    sell-price: 12
+    slot: 19
+    page: 1
+
+  furnace:
+    material: FURNACE
+    name: "<color:#808080>Furnace"
+    buy-price: 120
+    sell-price: 40
+    slot: 20
+    page: 1
+
+  blast_furnace:
+    material: BLAST_FURNACE
+    name: "<color:#696969>Blast Furnace"
+    buy-price: 800
+    sell-price: 260
+    slot: 21
+    page: 1
+
+  smoker:
+    material: SMOKER
+    name: "<color:#8B4513>Smoker"
+    buy-price: 600
+    sell-price: 200
+    slot: 23
+    page: 1
+
+  cartography_table:
+    material: CARTOGRAPHY_TABLE
+    name: "<color:#8B4513>Cartography Table"
+    buy-price: 300
+    sell-price: 100
+    slot: 24
+    page: 1
+
+  fletching_table:
+    material: FLETCHING_TABLE
+    name: "<color:#8B4513>Fletching Table"
+    buy-price: 250
+    sell-price: 80
+    slot: 25
+    page: 1
+
+  anvil:
+    material: ANVIL
+    name: "<color:#C0C0C0>Anvil"
+    buy-price: 2500
+    sell-price: 800
+    slot: 28
+    page: 1
+
+  chipped_anvil:
+    material: CHIPPED_ANVIL
+    name: "<color:#C0C0C0>Chipped Anvil"
+    buy-price: 1800
+    sell-price: 600
+    slot: 29
+    page: 1
+
+  damaged_anvil:
+    material: DAMAGED_ANVIL
+    name: "<color:#C0C0C0>Damaged Anvil"
+    buy-price: 1200
+    sell-price: 400
+    slot: 30
+    page: 1
+
+  grindstone:
+    material: GRINDSTONE
+    name: "<color:#808080>Grindstone"
+    buy-price: 400
+    sell-price: 130
+    slot: 32
+    page: 1
+
+  smithing_table:
+    material: SMITHING_TABLE
+    name: "<color:#8B4513>Smithing Table"
+    buy-price: 900
+    sell-price: 300
+    slot: 33
+    page: 1
+
+  loom:
+    material: LOOM
+    name: "<color:#8B4513>Loom"
+    buy-price: 250
+    sell-price: 80
+    slot: 34
+    page: 1
+
+  enchanting_table:
+    material: ENCHANTING_TABLE
+    name: "<color:#9932CC>Enchanting Table"
+    buy-price: 3500
+    sell-price: 1150
+    slot: 37
+    page: 1
+
+  brewing_stand:
+    material: BREWING_STAND
+    name: "<color:#2F2F2F>Brewing Stand"
+    buy-price: 600
+    sell-price: 200
+    slot: 38
+    page: 1
+
+  cauldron:
+    material: CAULDRON
+    name: "<color:#708090>Cauldron"
+    buy-price: 700
+    sell-price: 230
+    slot: 39
+    page: 1
+
+  end_crystal:
+    material: END_CRYSTAL
+    name: "<color:#FF69B4>End Crystal"
+    buy-price: 1500
+    sell-price: 500
+    slot: 41
+    page: 1
+
+  beacon:
+    material: BEACON
+    name: "<color:#00CED1>Beacon"
+    buy-price: 25000
+    sell-price: 8000
+    slot: 42
+    page: 1
+
+  conduit:
+    material: CONDUIT
+    name: "<color:#FF69B4>Conduit"
+    buy-price: 8000
+    sell-price: 2600
+    slot: 43
+    page: 1
+
+  torch:
+    material: TORCH
+    name: "<color:#FFA500>Torch"
+    buy-price: 15
+    sell-price: 5
+    slot: 10
+    page: 2
+
+  soul_torch:
+    material: SOUL_TORCH
+    name: "<color:#00CED1>Soul Torch"
+    buy-price: 25
+    sell-price: 8
+    slot: 11
+    page: 2
+
+  lantern:
+    material: LANTERN
+    name: "<color:#FFA500>Lantern"
+    buy-price: 180
+    sell-price: 60
+    slot: 12
+    page: 2
+
+  soul_lantern:
+    material: SOUL_LANTERN
+    name: "<color:#00CED1>Soul Lantern"
+    buy-price: 220
+    sell-price: 70
+    slot: 14
+    page: 2
+
+  candle:
+    material: CANDLE
+    name: "<color:#F5DEB3>Candle"
+    buy-price: 80
+    sell-price: 25
+    slot: 15
+    page: 2
+
+  end_rod:
+    material: END_ROD
+    name: "<color:#F5F5DC>End Rod"
+    buy-price: 350
+    sell-price: 110
+    slot: 16
+    page: 2
+
+  painting:
+    material: PAINTING
+    name: "<color:#8B4513>Painting"
+    buy-price: 100
+    sell-price: 30
+    slot: 19
+    page: 2
+
+  item_frame:
+    material: ITEM_FRAME
+    name: "<color:#8B4513>Item Frame"
+    buy-price: 150
+    sell-price: 50
+    slot: 20
+    page: 2
+
+  glow_item_frame:
+    material: GLOW_ITEM_FRAME
+    name: "<color:#90EE90>Glow Item Frame"
+    buy-price: 400
+    sell-price: 130
+    slot: 21
+    page: 2
+
+  armor_stand:
+    material: ARMOR_STAND
+    name: "<color:#8B4513>Armor Stand"
+    buy-price: 200
+    sell-price: 65
+    slot: 23
+    page: 2
+
+  flower_pot:
+    material: FLOWER_POT
+    name: "<color:#D2691E>Flower Pot"
+    buy-price: 60
+    sell-price: 20
+    slot: 24
+    page: 2
+
+  lectern:
+    material: LECTERN
+    name: "<color:#8B4513>Lectern"
+    buy-price: 350
+    sell-price: 110
+    slot: 25
+    page: 2
+
+  jukebox:
+    material: JUKEBOX
+    name: "<color:#8B4513>Jukebox"
+    buy-price: 2500
+    sell-price: 800
+    slot: 28
+    page: 2
+
+  note_block:
+    material: NOTE_BLOCK
+    name: "<color:#8B4513>Note Block"
+    buy-price: 200
+    sell-price: 65
+    slot: 29
+    page: 2
+
+  bell:
+    material: BELL
+    name: "<color:#FFD700>Bell"
+    buy-price: 1500
+    sell-price: 500
+    slot: 30
+    page: 2
+
+  campfire:
+    material: CAMPFIRE
+    name: "<color:#FF4500>Campfire"
+    buy-price: 300
+    sell-price: 100
+    slot: 32
+    page: 2
+
+  soul_campfire:
+    material: SOUL_CAMPFIRE
+    name: "<color:#00CED1>Soul Campfire"
+    buy-price: 350
+    sell-price: 115
+    slot: 33
+    page: 2
+
+  lodestone:
+    material: LODESTONE
+    name: "<color:#708090>Lodestone"
+    buy-price: 2000
+    sell-price: 650
+    slot: 34
+    page: 2
+
+  clock:
+    material: CLOCK
+    name: "<color:#FFD700>Clock"
+    buy-price: 600
+    sell-price: 200
+    slot: 37
+    page: 2
+
+  compass:
+    material: COMPASS
+    name: "<color:#C0C0C0>Compass"
+    buy-price: 450
+    sell-price: 150
+    slot: 38
+    page: 2
+
+  recovery_compass:
+    material: RECOVERY_COMPASS
+    name: "<color:#00CED1>Recovery Compass"
+    buy-price: 2500
+    sell-price: 800
+    slot: 39
+    page: 2
+
+  name_tag:
+    material: NAME_TAG
+    name: "<color:#FFD700>Name Tag"
+    buy-price: 800
+    sell-price: 260
+    slot: 41
+    page: 2
+
+  saddle:
+    material: SADDLE
+    name: "<color:#8B4513>Saddle"
+    buy-price: 1200
+    sell-price: 400
+    slot: 42
+    page: 2
+
+  lead:
+    material: LEAD
+    name: "<color:#8B4513>Lead"
+    buy-price: 150
+    sell-price: 50
+    slot: 43
+    page: 2
+
+  totem_of_undying:
+    material: TOTEM_OF_UNDYING
+    name: "<color:#FFD700>Totem of Undying"
+    buy-price: 50000
+    sell-price: 15000
+    slot: 10
+    page: 3
+
+  no_dragon_egg:
+    material:
+    name: "<color:#9932CC>Dragon Egg"
+    buy-price: 100000
+    sell-price: 30000
+    slot: 11
+    page: 3
+
+  elytra:
+    material: ELYTRA
+    name: "<color:#9932CC>Elytra"
+    buy-price: 25000
+    sell-price: 8000
+    slot: 12
+    page: 3
+
+  dragon_head:
+    material: DRAGON_HEAD
+    name: "<color:#2F2F2F>Dragon Head"
+    buy-price: 15000
+    sell-price: 5000
+    slot: 14
+    page: 3
+
+  player_head:
+    material: PLAYER_HEAD
+    name: "<color:#F4A460>Player Head"
+    buy-price: 5000
+    sell-price: 1600
+    slot: 15
+    page: 3
+
+  creeper_head:
+    material: CREEPER_HEAD
+    name: "<color:#228B22>Creeper Head"
+    buy-price: 3000
+    sell-price: 1000
+    slot: 16
+    page: 3
+
+  zombie_head:
+    material: ZOMBIE_HEAD
+    name: "<color:#2F4F4F>Zombie Head"
+    buy-price: 2500
+    sell-price: 800
+    slot: 19
+    page: 3
+
+  skeleton_skull:
+    material: SKELETON_SKULL
+    name: "<color:#F5F5DC>Skeleton Skull"
+    buy-price: 2500
+    sell-price: 800
+    slot: 20
+    page: 3
+
+  wither_skeleton_skull:
+    material: WITHER_SKELETON_SKULL
+    name: "<color:#2F2F2F>Wither Skeleton Skull"
+    buy-price: 8000
+    sell-price: 2600
+    slot: 21
+    page: 3
+
+  piglin_head:
+    material: PIGLIN_HEAD
+    name: "<color:#FF69B4>Piglin Head"
+    buy-price: 4000
+    sell-price: 1300
+    slot: 23
+    page: 3
+
+  experience_bottle:
+    material: EXPERIENCE_BOTTLE
+    name: "<color:#90EE90>Bottle o' Enchanting"
+    buy-price: 150
+    sell-price: 50
+    slot: 24
+    page: 3
+
+  enchanted_book:
+    material: ENCHANTED_BOOK
+    name: "<color:#9932CC>Enchanted Book"
+    buy-price: 1000
+    sell-price: 300
+    slot: 25
+    page: 3
+
+  respawn_anchor:
+    material: RESPAWN_ANCHOR
+    name: "<color:#4B0082>Respawn Anchor"
+    buy-price: 3000
+    sell-price: 1000
+    slot: 28
+    page: 3
+
+  crying_obsidian:
+    material: CRYING_OBSIDIAN
+    name: "<color:#4B0082>Crying Obsidian"
+    buy-price: 800
+    sell-price: 260
+    slot: 29
+    page: 3
+
+  sponge:
+    material: SPONGE
+    name: "<color:#FFD700>Sponge"
+    buy-price: 2000
+    sell-price: 650
+    slot: 30
+    page: 3
+
+  wet_sponge:
+    material: WET_SPONGE
+    name: "<color:#FFD700>Wet Sponge"
+    buy-price: 500
+    sell-price: 160
+    slot: 32
+    page: 3
+
+  sea_pickle:
+    material: SEA_PICKLE
+    name: "<color:#9ACD32>Sea Pickle"
+    buy-price: 80
+    sell-price: 25
+    slot: 33
+    page: 3
+
+  turtle_egg:
+    material: TURTLE_EGG
+    name: "<color:#F5F5DC>Turtle Egg"
+    buy-price: 500
+    sell-price: 160
+    slot: 34
+    page: 3
+
+  snowball:
+    material: SNOWBALL
+    name: "<color:#F0F8FF>Snowball"
+    buy-price: 10
+    sell-price: 3
+    slot: 37
+    page: 3
+
+  egg:
+    material: EGG
+    name: "<color:#F5F5DC>Egg"
+    buy-price: 20
+    sell-price: 6
+    slot: 38
+    page: 3
+
+  bone:
+    material: BONE
+    name: "<color:#F5F5DC>Bone"
+    buy-price: 30
+    sell-price: 10
+    slot: 39
+    page: 3
+
+  slime_ball:
+    material: SLIME_BALL
+    name: "<color:#90EE90>Slimeball"
+    buy-price: 150
+    sell-price: 50
+    slot: 41
+    page: 3
+
+  magma_cream:
+    material: MAGMA_CREAM
+    name: "<color:#FF4500>Magma Cream"
+    buy-price: 200
+    sell-price: 65
+    slot: 42
+    page: 3
+
+  blaze_rod:
+    material: BLAZE_ROD
+    name: "<color:#FF8C00>Blaze Rod"
+    buy-price: 300
+    sell-price: 100
+    slot: 43
+    page: 3

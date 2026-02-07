@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,7 +71,7 @@ public class LanguageManager {
         }
     }
 
-    public Component get(CommandSender sender, String key, Map<String, String> placeholders) {
+    public @NotNull Component get(CommandSender sender, String key, Map<String, String> placeholders) {
         String locale = defaultLang;
 
         if (sender instanceof Player player) {

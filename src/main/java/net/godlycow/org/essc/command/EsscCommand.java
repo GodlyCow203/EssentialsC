@@ -116,6 +116,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Hat config reloaded");
                 }
 
+                if (plugin.getAfkManager() != null) {
+                    plugin.getAfkManager().reload();
+                    plugin.debug("Afk system reloaded");
+                }
+
 
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));

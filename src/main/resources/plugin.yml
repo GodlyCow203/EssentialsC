@@ -357,6 +357,16 @@ commands:
     usage: /warpadmin <setperm|setcost|setdesc|setcategory|hide|unhide|move|info|reload>
     permission: essentialsc.warpadmin
 
+  afk:
+    description: Toggle your AFK status
+    usage: /afk
+    permission: essentialsc.afk
+
+  afklist:
+    description: List all AFK players
+    usage: /afklist
+    permission: essentialsc.afklist
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -837,6 +847,22 @@ permissions:
 
   essentialsc.warpadmin:
     description: Admin warp management
+    default: op
+
+  essentialsc.afk.bypass.auto:
+    description: Prevents automatic AFK detection
+    default: op
+
+  essentialsc.afk.bypass.kick:
+    description: Prevents being kicked for AFK
+    default: op
+
+  essentialsc.afk.see.hidden:
+    description: See detailed AFK info in /afklist
+    default: op
+
+  essc.version.notify:
+    description: Notifies admins of updates on join
     default: op
 
 

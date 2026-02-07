@@ -3,6 +3,8 @@ package net.godlycow.org.essc.bootstrap;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.admin.*;
+import net.godlycow.org.essc.command.afk.AFKCommand;
+import net.godlycow.org.essc.command.afk.AFKListCommand;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
@@ -106,6 +108,8 @@ public class CommandRegistrar {
         register("delwarp", new DelWarpCommand(plugin));
         register("warps", new WarpsCommand(plugin));
         register("warpadmin", new WarpAdminCommand(plugin));
+        register("afk", new AFKCommand(plugin));
+        register("afklist", new AFKListCommand(plugin));
     }
 
     private void register(String name, Command command) {

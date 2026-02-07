@@ -153,5 +153,39 @@ warp:
     enabled: false
     max: 5
 
+afk:
+  enabled: true
+
+  timeout-seconds: 300
+
+  kick-timeout-seconds: 1800
+
+  tab-placeholder-enabled: true
+  tab-placeholder: "<color:#FF6B6B>[AFK]</color> "
+
+  broadcast-enabled: true
+
+  title-enabled: true
+  title: "<color:#FF6B6B>You are now AFK</color>"
+  subtitle: "<color:#FFE66D>Move to return</color>"
+
+  prevent-damage: true
+  prevent-mob-target: true
+  prevent-pickup: true
+
+  freeze-player: true
+
+  blocked-commands:
+    - spawn
+    - home
+    - tpa
+    - tpahere
+    - warp
+    - shop
+
+  list-show-location: true
+  list-show-world: true
+  list-sort-by: "time"  # Options: time, name, world
+
 
 
