@@ -33,6 +33,9 @@
   "essc.help.version": "<color:#AAAAAA>/essc version</color> <color:#666666>-</color> <color:#DDDDDD>پلگ ان ورژن دکھائیں</color>",
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>ڈیبگ موڈ ٹوگل کریں</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>نامعلوم ذیلی کمانڈ۔ /essc help استعمال کریں</color>",
+  "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC پلیس ہولڈرز ===</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>کل: <color:#FFFFFF>%count%</color> پلیس ہولڈرز دستیاب</color>",
+  "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- تمام دستیاب پلیس ہولڈرز کی فہرست</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>استعمال: /heal</color>",
   "command.usage.essc": "<prefix> <color:#FF4444>استعمال: /essc <reload|version|debug|help></color>",

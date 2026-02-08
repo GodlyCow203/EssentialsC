@@ -22,6 +22,7 @@ import net.godlycow.org.essc.listener.BanListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
+import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.shop.ShopListener;
@@ -64,6 +65,8 @@ public final class EssentialsC extends JavaPlugin {
     private AuctionManager auctionManager;
     private WarpManager warpManager;
     private AFKManager afkManager;
+    private PlaceholderHook placeholderHook;
+
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -94,7 +97,7 @@ public final class EssentialsC extends JavaPlugin {
         Metrics metrics = new Metrics(this, pluginId);
         getLogger().info("bStats Metrics initialized successfully!");
 
-
+        registerPlaceholderAPI();
 
 
 
@@ -150,6 +153,21 @@ public final class EssentialsC extends JavaPlugin {
         }
 
         getLogger().info("EssentialsC disabled");
+    }
+
+    private void registerPlaceholderAPI() {
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            getLogger().info("PlaceholderAPI not found, skipping placeholder registration.");
+            return;
+        }
+
+        placeholderHook = new PlaceholderHook(this);
+
+        if (placeholderHook.register()) {
+            getLogger().info("PlaceholderAPI hook registered successfully!");
+        } else {
+            getLogger().warning("Failed to register PlaceholderAPI hook!");
+        }
     }
 
     public void debug(String message) {
@@ -265,4 +283,6 @@ public final class EssentialsC extends JavaPlugin {
     public WarpManager getWarpManager() { return warpManager;}
 
     public AFKManager getAfkManager() { return afkManager;}
+
+    public PlaceholderHook getPlaceholderHook() { return placeholderHook;}
 }

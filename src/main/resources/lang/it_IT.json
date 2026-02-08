@@ -33,6 +33,9 @@
   "essc.help.version": "<color:#AAAAAA>/essc version</color> <color:#666666>-</color> <color:#DDDDDD>Mostra versione plugin</color>",
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Attiva/disattiva modalità debug</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Sottocomando sconosciuto. Usa /essc help</color>",
+  "essc.placeholders.header": "<prefix> <color:#FFB300>=== Placeholder EssentialsC ===</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Totale: <color:#FFFFFF>%count%</color> placeholder disponibili</color>",
+  "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Elenca tutti i placeholder disponibili</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Uso: /heal</color>",
   "command.usage.essc": "<prefix> <color:#FF4444>Uso: /essc <reload|version|debug|help></color>",

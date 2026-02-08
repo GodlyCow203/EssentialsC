@@ -84,7 +84,6 @@
             <artifactId>json</artifactId>
             <version>20251224</version>
         </dependency>
-
     </dependencies>
 
     <build>

@@ -1,8 +1,7 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
-import net.milkbowl.vault.economy.Economy;
+import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -121,8 +120,6 @@ public class EsscCommand extends Command {
                     plugin.debug("Afk system reloaded");
                 }
 
-
-
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
@@ -141,6 +138,21 @@ public class EsscCommand extends Command {
                 plugin.getLogger().info("Debug mode " + state + " by " + sender.getName());
             }
 
+            case "placeholders" -> {
+                sender.sendMessage(lang.get(sender, "essc.placeholders.header"));
+                sender.sendMessage("");
+
+                List<String> placeholders = PlaceholderHook.getAllPlaceholders();
+                for (String placeholder : placeholders) {
+                    sender.sendMessage("§7• §f" + placeholder);
+                }
+
+                sender.sendMessage("");
+                sender.sendMessage(lang.get(sender, "essc.placeholders.footer",
+                        Map.of("count", String.valueOf(placeholders.size()))));
+                plugin.debug("Placeholders listed by " + sender.getName());
+            }
+
             case "help" -> showHelp(sender);
 
             default -> {
@@ -157,12 +169,13 @@ public class EsscCommand extends Command {
         sender.sendMessage(lang.get(sender, "essc.help.reload"));
         sender.sendMessage(lang.get(sender, "essc.help.version"));
         sender.sendMessage(lang.get(sender, "essc.help.debug"));
+        sender.sendMessage(lang.get(sender, "essc.help.placeholders"));
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return List.of("reload", "version", "debug", "help");
+            return List.of("reload", "version", "debug", "help", "placeholders");
         }
         return super.tabComplete(sender, args);
     }

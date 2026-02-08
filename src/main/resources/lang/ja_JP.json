@@ -33,6 +33,9 @@
   "essc.help.version": "<color:#AAAAAA>/essc version</color> <color:#666666>-</color> <color:#DDDDDD>プラグインバージョンを表示</color>",
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>デバッグモードを切り替え</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>不明なサブコマンドです。/essc help を使用してください</color>",
+  "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC プレースホルダー ===</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>合計: <color:#FFFFFF>%count%</color> 個のプレースホルダーが利用可能</color>",
+  "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- 利用可能なすべてのプレースホルダーを一覧表示</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>使用方法: /heal</color>",
   "command.usage.essc": "<prefix> <color:#FF4444>使用方法: /essc <reload|version|debug|help></color>",

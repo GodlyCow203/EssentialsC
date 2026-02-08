@@ -33,6 +33,9 @@
   "essc.help.version": "<color:#AAAAAA>/essc version</color> <color:#666666>-</color> <color:#DDDDDD>Eklenti sürümünü göster</color>",
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Hata ayıklama modunu aç/kapat</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Bilinmeyen alt komut. /essc help kullanın</color>",
+  "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC Yer Tutucular ===</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Toplam: <color:#FFFFFF>%count%</color> yer tutucu mevcut</color>",
+  "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Tüm mevcut yer tutucuları listele</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Kullanım: /heal</color>",
   "command.usage.essc": "<prefix> <color:#FF4444>Kullanım: /essc <reload|version|debug|help></color>",
