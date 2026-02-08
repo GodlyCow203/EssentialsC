@@ -36,44 +36,28 @@ public class LanguageManager {
         cache.clear();
 
         File langFolder = new File(plugin.getDataFolder(), "lang");
-        if (!langFolder.exists()) {
-            langFolder.mkdirs();
-            plugin.saveResource("lang/th_TH.json", false);
-            plugin.saveResource("lang/sv_SE.json", false);
-            plugin.saveResource("lang/fil_PH.json", false);
-            plugin.saveResource("lang/vi_VN.json", false);
-            plugin.saveResource("lang/id_ID.json", false);
-            plugin.saveResource("lang/uk_UA.json", false);
-            plugin.saveResource("lang/pl_PL.json", false);
-            plugin.saveResource("lang/nl_NL.json", false);
-            plugin.saveResource("lang/it_IT.json", false);
-            plugin.saveResource("lang/te_IN.json", false);
-            plugin.saveResource("lang/ta_IN.json", false);
-            plugin.saveResource("lang/gu_IN.json", false);
-            plugin.saveResource("lang/bn_BD.json", false);
-            plugin.saveResource("lang/mr_IN.json", false);
-            plugin.saveResource("lang/hi_IN.json", false);
-            plugin.saveResource("lang/de_DE.json", false);
-            plugin.saveResource("lang/ur_PK.json", false);
-            plugin.saveResource("lang/tr_TR.json", false);
-            plugin.saveResource("lang/ar_SA.json", false);
-            plugin.saveResource("lang/ar_EG.json", false);
-            plugin.saveResource("lang/ko_KR.json", false);
-            plugin.saveResource("lang/ru_RU.json", false);
-            plugin.saveResource("lang/ja_JP.json", false);
-            plugin.saveResource("lang/fr_FR.json", false);
-            plugin.saveResource("lang/zh_CN.json", false);
-            plugin.saveResource("lang/pt_BR.json", false);
-            plugin.saveResource("lang/de_CH.json", false);
-            plugin.saveResource("lang/es_ES.json", false);
-            plugin.saveResource("lang/en_GB.json", false);
-            plugin.saveResource("lang/en_US.json", false);
+        if (!langFolder.exists()) langFolder.mkdirs();
 
+        String[] languages = {
+                "th_TH","sv_SE","fil_PH","vi_VN","id_ID","uk_UA","pl_PL","nl_NL",
+                "it_IT","te_IN","ta_IN","gu_IN","bn_BD","mr_IN","hi_IN","de_DE",
+                "ur_PK","tr_TR","ar_SA","ar_EG","ko_KR","ru_RU","ja_JP","fr_FR",
+                "zh_CN","pt_BR","de_CH","es_ES","en_GB","en_US"
+        };
+
+        for (String lang : languages) {
+            plugin.saveResource("lang/" + lang + ".json", false);
+        }
+        loadIntoCache(defaultLanguage);
+        for (String lang : languages) {
+            if (!cache.containsKey(lang)) {
+                loadIntoCache(lang);
+            }
         }
 
-        loadIntoCache(defaultLanguage);
         plugin.debug("Loaded default language: " + defaultLanguage);
     }
+
 
     private void loadIntoCache(String code) {
         File file = new File(plugin.getDataFolder(), "lang/" + code + ".json");
