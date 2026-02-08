@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import org.bstats.bukkit.Metrics;
 import net.godlycow.org.essc.afk.AFKManager;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
@@ -87,6 +88,9 @@ public final class EssentialsC extends JavaPlugin {
         punishmentManager = new PunishmentManager(this);
         ignoreManager = new IgnoreManager(this);
         replyManager = new ReplyManager();
+
+        int pluginId = 29401;
+        Metrics metrics = new Metrics(this, pluginId);
 
 
 
