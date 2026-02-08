@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>ડિબગ મોડ ટૉગલ કરો</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>અજ્ઞાત ઉપઆદેશ. /essc help વાપરો</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC પ્લેસહોલ્ડર્સ ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>કુલ: <color:#FFFFFF>%count%</color> પ્લેસહોલ્ડર્સ ઉપલબ્ધ</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>કુલ: <color:#FFFFFF><count></color> પ્લેસહોલ્ડર્સ ઉપલબ્ધ</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- તમામ ઉપલબ્ધ પ્લેસહોલ્ડર્સ સૂચિબદ્ધ કરો</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>વપરાશ: /heal</color>",

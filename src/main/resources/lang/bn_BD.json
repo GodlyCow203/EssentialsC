@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>ডিবাগ মোড টগল করুন</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>অজানা সাবকমান্ড। /essc help ব্যবহার করুন</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC প্লেসহোল্ডার ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>মোট: <color:#FFFFFF>%count%</color> প্লেসহোল্ডার উপলব্ধ</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>মোট: <color:#FFFFFF><count></color> প্লেসহোল্ডার উপলব্ধ</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- সব উপলব্ধ প্লেসহোল্ডার তালিকাভুক্ত করুন</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>ব্যবহার: /heal</color>",

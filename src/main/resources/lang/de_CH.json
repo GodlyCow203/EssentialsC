@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Debug-Modus umschalte</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Unbekannte Unterbefehl. Nutz /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC Platzhalter ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF>%count%</color> Platzhalter verfügbar</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF><count></color> Platzhalter verfügbar</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Liste aller verfügbaren Platzhalter</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Nutzig: /heal</color>",

@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Bật/tắt chế độ gỡ lỗi</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Lệnh phụ không xác định. Sử dụng /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== Placeholder EssentialsC ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Tổng cộng: <color:#FFFFFF>%count%</color> placeholder khả dụng</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Tổng cộng: <color:#FFFFFF><count></color> placeholder khả dụng</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Liệt kê tất cả placeholder có sẵn</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Cách dùng: /heal</color>",

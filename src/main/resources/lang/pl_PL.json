@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Przełącz tryb debugowania</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Nieznana podkomenda. Użyj /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== Placeholdery EssentialsC ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Łącznie: <color:#FFFFFF>%count%</color> dostępnych placeholderów</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Łącznie: <color:#FFFFFF><count></color> dostępnych placeholderów</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Wyświetl wszystkie dostępne placeholdery</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Użycie: /heal</color>",

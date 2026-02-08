@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>切换调试模式</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>未知子命令。使用 /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC 占位符 ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>总计: <color:#FFFFFF>%count%</color> 个可用占位符</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>总计: <color:#FFFFFF><count></color> 个可用占位符</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- 列出所有可用占位符</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>用法: /heal</color>",

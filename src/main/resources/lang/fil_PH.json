@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>I-toggle ang debug mode</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Hindi kilalang subcommand. Gamitin ang /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC Mga Placeholder ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Kabuuan: <color:#FFFFFF>%count%</color> available na placeholder</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Kabuuan: <color:#FFFFFF><count></color> available na placeholder</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Ilista ang lahat ng available na placeholder</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Paggamit: /heal</color>",

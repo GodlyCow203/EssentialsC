@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>डीबग मोड टॉगल करें</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>अज्ञात उप-कमांड। /essc help का उपयोग करें</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC प्लेसहोल्डर्स ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>कुल: <color:#FFFFFF>%count%</color> प्लेसहोल्डर्स उपलब्ध</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>कुल: <color:#FFFFFF><count></color> प्लेसहोल्डर्स उपलब्ध</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- सभी उपलब्ध प्लेसहोल्डर्स सूचीबद्ध करें</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>उपयोग: /heal</color>",

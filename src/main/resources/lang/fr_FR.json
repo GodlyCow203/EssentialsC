@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Activer/désactiver le mode débogage</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Sous-commande inconnue. Utilisez /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== Placeholders EssentialsC ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total : <color:#FFFFFF>%count%</color> placeholders disponibles</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total : <color:#FFFFFF><count></color> placeholders disponibles</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Lister tous les placeholders disponibles</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Utilisation : /heal</color>",

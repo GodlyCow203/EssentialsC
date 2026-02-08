@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Увімкнути/вимкнути режим налагодження</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Невідома підкоманда. Використовуйте /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== Плейсхолдери EssentialsC ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Всього: <color:#FFFFFF>%count%</color> доступних плейсхолдерів</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Всього: <color:#FFFFFF><count></color> доступних плейсхолдерів</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Список усіх доступних плейсхолдерів</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Використання: /heal</color>",

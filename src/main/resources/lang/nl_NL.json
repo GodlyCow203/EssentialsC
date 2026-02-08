@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Schakel debug modus in/uit</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Onbekend subcommando. Gebruik /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC Placeholders ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Totaal: <color:#FFFFFF>%count%</color> beschikbare placeholders</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Totaal: <color:#FFFFFF><count></color> beschikbare placeholders</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- Toon alle beschikbare placeholders</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>Gebruik: /heal</color>",

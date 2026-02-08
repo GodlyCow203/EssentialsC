@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>สลับโหมดดีบั๊ก</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>คำสั่งย่อยที่ไม่รู้จัก ใช้ /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== ตัวแปร EssentialsC ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>ทั้งหมด: <color:#FFFFFF>%count%</color> ตัวแปรที่พร้อมใช้งาน</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>ทั้งหมด: <color:#FFFFFF><count></color> ตัวแปรที่พร้อมใช้งาน</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- แสดงตัวแปรทั้งหมดที่มี</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>วิธีใช้: /heal</color>",

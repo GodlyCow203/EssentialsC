@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>Toggle debug mode</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>Unknown subcommand. Use /essc help</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC Placeholders ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF>%count%</color> placeholders available</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF><count></color> placeholders available</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- List all available placeholders</color></color>",
 
 

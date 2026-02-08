@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>డీబగ్ మోడ్ టోగుల్ చేయండి</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>తెలియని ఉపఆదేశం. /essc help ఉపయోగించండి</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC ప్లేస్‌హోల్డర్లు ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>మొత్తం: <color:#FFFFFF>%count%</color> ప్లేస్‌హోల్డర్లు అందుబాటులో ఉన్నాయి</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>మొత్తం: <color:#FFFFFF><count></color> ప్లేస్‌హోల్డర్లు అందుబాటులో ఉన్నాయి</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- అందుబాటులో ఉన్న అన్ని ప్లేస్‌హోల్డర్లను చూపించు</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>ఉపయోగం: /heal</color>",

@@ -34,7 +34,7 @@
   "essc.help.debug": "<color:#AAAAAA>/essc debug</color> <color:#666666>-</color> <color:#DDDDDD>பிழைத்திருத்த முறையை மாற்றவும்</color>",
   "essc.error.unknown_arg": "<prefix> <color:#FF4444>தெரியாத உபகட்டளை. /essc help ஐப் பயன்படுத்தவும்</color>",
   "essc.placeholders.header": "<prefix> <color:#FFB300>=== EssentialsC பிளேஸ்ஹோல்டர்கள் ===</color>",
-  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>மொத்தம்: <color:#FFFFFF>%count%</color> பிளேஸ்ஹோல்டர்கள் கிடைக்கின்றன</color>",
+  "essc.placeholders.footer": "<prefix> <color:#AAAAAA>மொத்தம்: <color:#FFFFFF><count></color> பிளேஸ்ஹோல்டர்கள் கிடைக்கின்றன</color>",
   "essc.help.placeholders": "<prefix> <color:#FFB300>/essc placeholders <color:#AAAAAA>- கிடைக்கக்கூடிய அனைத்து பிளேஸ்ஹோல்டர்களையும் பட்டியலிடு</color></color>",
 
   "command.usage.heal": "<prefix> <color:#FF4444>பயன்பாடு: /heal</color>",
