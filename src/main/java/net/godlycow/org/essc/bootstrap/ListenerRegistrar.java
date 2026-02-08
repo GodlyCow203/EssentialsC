@@ -6,8 +6,6 @@ import net.godlycow.org.essc.version.VersionChecker;
 
 
 public class ListenerRegistrar {
-
-
     public ListenerRegistrar(EssentialsC plugin) {
         plugin.getServer().getPluginManager().registerEvents(new JoinLeaveListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InvseeListener(plugin), plugin);
@@ -16,7 +14,7 @@ public class ListenerRegistrar {
         if (plugin.getConfigManager().isWarpEnabled()) {
             plugin.getServer().getPluginManager().registerEvents(new WarpListener(plugin), plugin);
         }
-
         plugin.getServer().getPluginManager().registerEvents(new VersionChecker(plugin), plugin);
-        }
+    }
+
 }

@@ -18,6 +18,7 @@ import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.AhListener;
+import net.godlycow.org.essc.listener.BanListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
@@ -135,6 +136,8 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isAfkEnabled()) {
             afkManager = new AFKManager(this);
         }
+
+        getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
 
 
         getLogger().info("EssentialsC enabled");
