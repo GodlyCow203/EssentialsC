@@ -26,16 +26,16 @@ public class BanListener implements Listener {
         if (punishmentManager.isBanned(event.getUniqueId())) {
             PunishmentManager.BanEntry banEntry = punishmentManager.getBanEntry(event.getUniqueId());
 
-            String kickMessage;
+            Component kickMessage;
             if (banEntry != null) {
                 Map<String, String> placeholders = Map.of(
                         "reason", banEntry.reason(),
                         "banner", banEntry.banner(),
                         "duration", formatDuration(banEntry.expires())
                 );
-                kickMessage = String.valueOf(plugin.getLanguageManager().get(null, "ban.screen_message", placeholders));
+                kickMessage = plugin.getLanguageManager().get(null, "ban.screen_message", placeholders);
             } else {
-                kickMessage = "You are banned from this server.";
+                kickMessage = Component.text("You are banned from this server.");
             }
 
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, kickMessage);
