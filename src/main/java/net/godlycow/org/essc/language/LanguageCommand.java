@@ -2,6 +2,8 @@ package net.godlycow.org.essc.language;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -24,11 +26,11 @@ public class LanguageCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            String currentLang = getCurrentLanguage(player);
-            sender.sendMessage(lang.get(sender, "language.current", Map.of("language", currentLang)));
+            sender.sendMessage(getCurrentLanguage(player));
             showAvailableLanguages(sender);
             return true;
         }
+
 
         String subCommand = args[0].toLowerCase();
 
@@ -62,13 +64,16 @@ public class LanguageCommand extends Command {
         return true;
     }
 
-    private String getCurrentLanguage(Player player) {
-        String playerLang = plugin.getLanguageManager().getPlayerLanguage(player.getUniqueId());
-        if (playerLang != null) {
-            return playerLang + " " + lang.get(player, "language.custom");
-        }
-        return player.locale().toString() + " " + lang.get(player, "language.auto");
+    private Component getCurrentLanguage(Player player) {
+        LanguageManager lm = plugin.getLanguageManager();
+        String playerLang = lm.getPlayerLanguage(player.getUniqueId());
+
+        String langStr = (playerLang != null) ? playerLang + " (custom)" : player.locale().toString() + " (auto)";
+
+        return lm.get(player, "language.current").replaceText(t -> t.matchLiteral("<language>").replacement(langStr));
     }
+
+
 
     private void setLanguage(Player player, String langCode) {
         if (!isValidLanguage(langCode)) {
