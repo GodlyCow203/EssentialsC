@@ -26,7 +26,8 @@ public class PtimeCommand extends Command {
                 player.resetPlayerTime();
                 player.sendMessage(lang.get(player, "ptime.reset"));
             } else {
-                player.sendMessage(lang.get(player, "ptime.current", Map.of("time", String.valueOf(player.getPlayerTime()))));
+                player.sendMessage(lang.get(player, "ptime.current",
+                        Map.of("time", String.valueOf(player.getPlayerTime()))));
             }
             return true;
         }
@@ -73,14 +74,17 @@ public class PtimeCommand extends Command {
 
         player.setPlayerTime(time, relative);
 
+        var typeComponent = relative ? lang.get(player, "ptime.relative") : lang.get(player, "ptime.locked");
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("time", String.valueOf(time));
-        placeholders.put("type", relative ? lang.get(player, "ptime.relative").toString() : lang.get(player, "ptime.locked").toString());
+        placeholders.put("type", plugin.getMiniMessage().serialize(typeComponent));
+
         player.sendMessage(lang.get(player, "ptime.set", placeholders));
 
         plugin.debug(player.getName() + " set time to " + time + " (relative: " + relative + ")");
         return true;
     }
+
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
