@@ -1,6 +1,5 @@
 package net.godlycow.org.essc;
 
-import org.bstats.bukkit.Metrics;
 import net.godlycow.org.essc.afk.AFKManager;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
@@ -32,6 +31,7 @@ import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.version.VersionChecker;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EssentialsC extends JavaPlugin {
@@ -91,6 +91,9 @@ public final class EssentialsC extends JavaPlugin {
 
         int pluginId = 29401;
         Metrics metrics = new Metrics(this, pluginId);
+        getLogger().info("bStats Metrics initialized successfully!");
+
+
 
 
 
