@@ -38,8 +38,36 @@ public class LanguageManager {
         File langFolder = new File(plugin.getDataFolder(), "lang");
         if (!langFolder.exists()) {
             langFolder.mkdirs();
-            plugin.saveResource("lang/en_US.json", false);
+            plugin.saveResource("lang/th_TH.json", false);
+            plugin.saveResource("lang/sv_SE.json", false);
+            plugin.saveResource("lang/fil_PH.json", false);
+            plugin.saveResource("lang/vi_VN.json", false);
+            plugin.saveResource("lang/id_ID.json", false);
+            plugin.saveResource("lang/uk_UA.json", false);
+            plugin.saveResource("lang/pl_PL.json", false);
+            plugin.saveResource("lang/nl_NL.json", false);
+            plugin.saveResource("lang/it_IT.json", false);
+            plugin.saveResource("lang/te_IN.json", false);
+            plugin.saveResource("lang/ta_IN.json", false);
+            plugin.saveResource("lang/gu_IN.json", false);
+            plugin.saveResource("lang/bn_BD.json", false);
+            plugin.saveResource("lang/mr_IN.json", false);
+            plugin.saveResource("lang/hi_IN.json", false);
             plugin.saveResource("lang/de_DE.json", false);
+            plugin.saveResource("lang/ur_PK.json", false);
+            plugin.saveResource("lang/tr_TR.json", false);
+            plugin.saveResource("lang/ar_SA.json", false);
+            plugin.saveResource("lang/ar_EG.json", false);
+            plugin.saveResource("lang/ko_KR.json", false);
+            plugin.saveResource("lang/ru_RU.json", false);
+            plugin.saveResource("lang/ja_JP.json", false);
+            plugin.saveResource("lang/fr_FR.json", false);
+            plugin.saveResource("lang/zh_CN.json", false);
+            plugin.saveResource("lang/pt_BR.json", false);
+            plugin.saveResource("lang/de_CH.json", false);
+            plugin.saveResource("lang/es_ES.json", false);
+            plugin.saveResource("lang/en_GB.json", false);
+            plugin.saveResource("lang/en_US.json", false);
 
         }
 
