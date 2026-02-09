@@ -90,23 +90,23 @@ public class AhCommand extends Command {
             int totalPages = 1;
             page = 1;
 
-            String title = "<#474747><b>Auction House<reset> <#000000>|</#000000> <gray>Page " + page + "/" + totalPages;
+            String title = "<color:#FFB300><b>Auction House<reset> <color:#666666>|<reset> <color:#AAAAAA>Page " + page + "/" + totalPages;
             Inventory gui = Bukkit.createInventory(null, 54, mm.deserialize(title));
 
             fillBorders(gui, Material.BLACK_STAINED_GLASS_PANE);
             setCornerDecorations(gui, false);
 
             gui.setItem(49, createInfoCenterItem(player));
-            gui.setItem(45, createUtilityItem(Material.CHEST, "<#474747>Your Listings", "listings", 0));
-            gui.setItem(46, createUtilityItem(Material.BARRIER, "<#474747>Expired Items", "expired", 0));
-            gui.setItem(52, createUtilityItem(Material.EMERALD, "<#474747>Sell Item", "sell", 0));
+            gui.setItem(45, createUtilityItem(Material.CHEST, "<color:#FFB300>Your Listings", "listings", 0));
+            gui.setItem(46, createUtilityItem(Material.BARRIER, "<color:#FFB300>Expired Items", "expired", 0));
+            gui.setItem(52, createUtilityItem(Material.EMERALD, "<color:#FFB300>Sell Item", "sell", 0));
             gui.setItem(53, createCloseItem());
 
-            ItemStack empty = createGlassPane(Material.BARRIER, "<#FF6B6B>No Active Auctions");
+            ItemStack empty = createGlassPane(Material.BARRIER, "<color:#FF4444>No Active Auctions");
             ItemMeta meta = empty.getItemMeta();
             List<Component> lore = new ArrayList<>();
-            lore.add(mm.deserialize("<gray>Be the first to sell something!"));
-            lore.add(mm.deserialize("<gray>Use <color:#06FFA5>/ah sell <price>"));
+            lore.add(mm.deserialize("<color:#AAAAAA>Be the first to sell something!"));
+            lore.add(mm.deserialize("<color:#AAAAAA>Use <color:#66AAFF>/ah sell <price>"));
             meta.lore(lore);
             empty.setItemMeta(meta);
             gui.setItem(31, empty);
@@ -123,7 +123,7 @@ public class AhCommand extends Command {
         int end = Math.min(start + ITEMS_PER_PAGE, auctions.size());
         List<Auction> pageAuctions = auctions.subList(start, end);
 
-        String title = "<#474747><b>Auction House<reset> <#000000>|</#000000> <gray>Page " + page + "/" + totalPages;
+        String title = "<color:#FFB300><b>Auction House<reset> <color:#666666>|<reset> <color:#AAAAAA>Page " + page + "/" + totalPages;
 
         Inventory gui = Bukkit.createInventory(null, 54, mm.deserialize(title));
 
@@ -136,17 +136,17 @@ public class AhCommand extends Command {
         }
 
         if (page > 1) {
-            gui.setItem(48, createNavigationItem(Material.ARROW, "<#474747>← Previous Page", page - 1, false));
+            gui.setItem(48, createNavigationItem(Material.ARROW, "<color:#FFB300>← Previous Page", page - 1, false));
         }
 
         if (page < totalPages) {
-            gui.setItem(50, createNavigationItem(Material.ARROW, "<#474747>Next Page →", page + 1, false));
+            gui.setItem(50, createNavigationItem(Material.ARROW, "<color:#FFB300>Next Page →", page + 1, false));
         }
 
         gui.setItem(49, createInfoCenterItem(player));
-        gui.setItem(45, createUtilityItem(Material.CHEST, "<#474747>Your Listings", "listings", 0));
-        gui.setItem(46, createUtilityItem(Material.BARRIER, "<#474747>Expired Items", "expired", 0));
-        gui.setItem(52, createUtilityItem(Material.EMERALD, "<#474747>Sell Item", "sell", 0));
+        gui.setItem(45, createUtilityItem(Material.CHEST, "<color:#FFB300>Your Listings", "listings", 0));
+        gui.setItem(46, createUtilityItem(Material.BARRIER, "<color:#FFB300>Expired Items", "expired", 0));
+        gui.setItem(52, createUtilityItem(Material.EMERALD, "<color:#FFB300>Sell Item", "sell", 0));
         gui.setItem(53, createCloseItem());
 
         player.openInventory(gui);
@@ -161,7 +161,7 @@ public class AhCommand extends Command {
             return;
         }
 
-        String title = "<#474747><b>Expired Items<reset> <#000000>|<#000000> <gray>Click to Claim";
+        String title = "<color:#FFB300><b>Expired Items<reset> <color:#666666>|<reset> <color:#AAAAAA>Click to Claim";
         Inventory gui = Bukkit.createInventory(null, 54, mm.deserialize(title));
 
         fillBorders(gui, Material.RED_STAINED_GLASS_PANE);
@@ -184,7 +184,7 @@ public class AhCommand extends Command {
 
             List<Component> lore = meta.hasLore() ? new ArrayList<>(meta.lore()) : new ArrayList<>();
             lore.add(Component.empty());
-            lore.add(mm.deserialize("<#474747>Click to claim this item!"));
+            lore.add(mm.deserialize("<color:#FFB300>Click to claim this item!"));
             meta.lore(lore);
 
             container.set(
@@ -197,7 +197,7 @@ public class AhCommand extends Command {
             slot++;
         }
 
-        gui.setItem(49, createNavigationItem(Material.BARRIER, "<#474747>Back to Auction House", 1, false));
+        gui.setItem(49, createNavigationItem(Material.BARRIER, "<color:#FFB300>Back to Auction House", 1, false));
         gui.setItem(53, createCloseItem());
 
         player.openInventory(gui);
@@ -219,7 +219,7 @@ public class AhCommand extends Command {
 
     private void setCornerDecorations(Inventory gui, boolean isExpired) {
         Material mat = isExpired ? Material.REDSTONE_BLOCK : Material.GOLD_BLOCK;
-        String color = isExpired ? "<color:#FF6B6B>" : "<color:#FFD700>";
+        String color = isExpired ? "<color:#FF4444>" : "<color:#FFD700>";
 
         ItemStack corner = createDecorationItem(mat, color + (""));
         gui.setItem(0, corner);
@@ -250,36 +250,36 @@ public class AhCommand extends Command {
 
         List<Component> lore = new ArrayList<>();
 
-        lore.add(mm.deserialize("<dark_gray>━━━━━━━━━━━━━━━━━━</dark_gray>"));
+        lore.add(mm.deserialize("<color:#666666>━━━━━━━━━━━━━━━━━━</color>"));
         lore.add(mm.deserialize(" "));
-        lore.add(mm.deserialize("<#474747>Price: <gray>" +
+        lore.add(mm.deserialize("<color:#FFB300>Price: <color:#AAAAAA>" +
                 plugin.getEconomyManager().format(auction.getPrice()) + ""));
-        lore.add(mm.deserialize("<#474747>Seller: <gray>" + auction.getSellerName()));
+        lore.add(mm.deserialize("<color:#FFB300>Seller: <color:#AAAAAA>" + auction.getSellerName()));
 
         long hours = TimeUnit.MILLISECONDS.toHours(auction.getTimeRemaining());
         long minutes = TimeUnit.MILLISECONDS.toMinutes(auction.getTimeRemaining()) % 60;
         String timeStr = hours > 0 ? hours + "h " + minutes + "m" : minutes + "m";
-        lore.add(mm.deserialize("<#474747>Time: <gray>" + timeStr));
+        lore.add(mm.deserialize("<color:#FFB300>Time: <color:#AAAAAA>" + timeStr));
 
         lore.add(mm.deserialize(" "));
 
         boolean isOwn = auction.getSellerUuid().equals(viewer.getUniqueId());
 
         if (isOwn) {
-            lore.add(mm.deserialize("<gray>This is your auction"));
+            lore.add(mm.deserialize("<color:#AAAAAA>This is your auction"));
             if (viewer.hasPermission(AuctionManager.PERM_CANCEL)) {
-                lore.add(mm.deserialize("<gray>Right-click to cancel"));
+                lore.add(mm.deserialize("<color:#AAAAAA>Right-click to cancel"));
             }
         } else {
             if (viewer.hasPermission(AuctionManager.PERM_BUY)) {
-                lore.add(mm.deserialize("<gray>➜ Click to purchase!"));
+                lore.add(mm.deserialize("<color:#AAAAAA>➜ Click to purchase!"));
             } else {
-                lore.add(mm.deserialize("<gray>You cannot buy items"));
+                lore.add(mm.deserialize("<color:#AAAAAA>You cannot buy items"));
             }
         }
 
-        lore.add(mm.deserialize("<dark_gray>━━━━━━━━━━━━━━━━━━</dark_gray>"));
-        lore.add(mm.deserialize("<gray>Auction ID: #" + auction.getId()));
+        lore.add(mm.deserialize("<color:#666666>━━━━━━━━━━━━━━━━━━</color>"));
+        lore.add(mm.deserialize("<color:#AAAAAA>Auction ID: #" + auction.getId()));
 
         meta.lore(lore);
 
@@ -323,7 +323,7 @@ public class AhCommand extends Command {
 
         List<Component> lore = new ArrayList<>();
         lore.add(mm.deserialize(" "));
-        lore.add(mm.deserialize("<gray>Click to execute"));
+        lore.add(mm.deserialize("<color:#AAAAAA>Click to execute"));
         meta.lore(lore);
 
         meta.getPersistentDataContainer().set(
@@ -339,29 +339,29 @@ public class AhCommand extends Command {
     private ItemStack createInfoCenterItem(Player player) {
         ItemStack item = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<#474747><b>Auction House"));
+        meta.displayName(mm.deserialize("<color:#FFB300><b>Auction House"));
 
         int activeAuctions = plugin.getAuctionManager().getPlayerAuctions(player.getUniqueId()).size();
         int maxAuctions = plugin.getConfigManager().getAHMaxAuctions();
         boolean bypass = player.hasPermission(AuctionManager.PERM_BYPASS_LIMIT);
 
         List<Component> lore = new ArrayList<>();
-        lore.add(mm.deserialize("<dark_gray>━━━━━━━━━━━━━━━━━━</dark_gray>"));
+        lore.add(mm.deserialize("<color:#666666>━━━━━━━━━━━━━━━━━━</color>"));
         lore.add(mm.deserialize(" "));
 
         if (bypass) {
-            lore.add(mm.deserialize("<#474747>Your Active Listings: <gray>" + activeAuctions + "/∞"));
+            lore.add(mm.deserialize("<color:#FFB300>Your Active Listings: <color:#AAAAAA>" + activeAuctions + "/∞"));
         } else {
-            lore.add(mm.deserialize("<#474747>Your Active Listings: <gray>" + activeAuctions + "/" + maxAuctions));
+            lore.add(mm.deserialize("<color:#FFB300>Your Active Listings: <color:#AAAAAA>" + activeAuctions + "/" + maxAuctions));
         }
 
         lore.add(mm.deserialize(" "));
-        lore.add(mm.deserialize("<#474747>/ah sell <price> <white>- <gray>Sell held item"));
-        lore.add(mm.deserialize("<#474747>/ah cancel <id> <white>- <gray>Cancel auction"));
-        lore.add(mm.deserialize("<#474747>/ah expired <white>- <gray>Claim returned items"));
-        lore.add(mm.deserialize("<#474747>/ah listings <white>- <gray>View your auctions"));
+        lore.add(mm.deserialize("<color:#FFB300>/ah sell <price> <color:#FFFFFF>- <color:#AAAAAA>Sell held item"));
+        lore.add(mm.deserialize("<color:#FFB300>/ah cancel <id> <color:#FFFFFF>- <color:#AAAAAA>Cancel auction"));
+        lore.add(mm.deserialize("<color:#FFB300>/ah expired <color:#FFFFFF>- <color:#AAAAAA>Claim returned items"));
+        lore.add(mm.deserialize("<color:#FFB300>/ah listings <color:#FFFFFF>- <color:#AAAAAA>View your auctions"));
         lore.add(mm.deserialize(" "));
-        lore.add(mm.deserialize("<dark_gray>━━━━━━━━━━━━━━━━━━</dark_gray>"));
+        lore.add(mm.deserialize("<color:#666666>━━━━━━━━━━━━━━━━━━</color>"));
 
         meta.lore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -375,7 +375,7 @@ public class AhCommand extends Command {
     private ItemStack createCloseItem() {
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<#474747>✕ Close"));
+        meta.displayName(mm.deserialize("<color:#FF4444>✕ Close"));
 
         meta.getPersistentDataContainer().set(
                 new NamespacedKey(plugin, "ah_close"),
