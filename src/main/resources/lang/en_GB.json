@@ -61,14 +61,19 @@
 
   "eco.give": "<prefix> <color:#FFB300>Gave <color:#FFB300><amount></color> to <color:#FFFFFF><player></color>.</color>",
   "eco.give.notify": "<prefix> <color:#FFB300>An admin gave you <color:#FFB300><amount></color>.</color>",
+  "eco.give.everyone": "<prefix> <color:#FFB300>Gave <color:#FFB300><amount></color> to <color:#FFFFFF><count></color> players.</color>",
   "eco.take": "<prefix> <color:#FFB300>Took <color:#FFB300><amount></color> from <color:#FFFFFF><player></color>.</color>",
   "eco.take.notify": "<prefix> <color:#FF4444>An admin took <color:#FFFFFF><amount></color> from you.</color>",
   "eco.take.failed": "<prefix> <color:#FF4444>Could not take <color:#FFFFFF><amount></color> from <color:#FFFFFF><player></color> (insufficient funds).</color>",
+  "eco.take.everyone": "<prefix> <color:#FFB300>Took <color:#FFB300><amount></color> from <color:#FFFFFF><count></color> players.</color>",
   "eco.set": "<prefix> <color:#FFB300>Set <color:#FFFFFF><player></color>'s balance to <color:#FFB300><amount></color>.</color>",
   "eco.set.notify": "<prefix> <color:#FFFFFF>Your balance was set to <color:#FFB300><amount></color>.</color>",
+  "eco.set.everyone": "<prefix> <color:#FFB300>Set <color:#FFFFFF><count></color> players' balance to <color:#FFB300><amount></color>.</color>",
   "eco.reset": "<prefix> <color:#FFB300>Reset <color:#FFFFFF><player></color>'s balance to <color:#FFB300><balance></color>.</color>",
   "eco.reset.notify": "<prefix> <color:#FFFFFF>Your balance was reset to <color:#FFB300><balance></color>.</color>",
+  "eco.reset.everyone": "<prefix> <color:#FFB300>Reset <color:#FFFFFF><count></color> players' balance to <color:#FFB300><balance></color>.</color>",
   "eco.max_balance": "<prefix> <color:#FF4444>Cannot exceed maximum balance of <color:#66AAFF><amount></color>.</color>",
+  "command.usage.eco": "<prefix> <color:#FF4444>Usage: /eco <give|take|set|reset> <player|@everyone> <amount></color>",
 
   "baltop.header": "<color:#666666>═══<color:#666666>╡ <color:#FFFFFF>Top Balances <color:#AAAAAA>Page <color:#FFB300><page></color> <color:#666666>╞</color>═══</color>",
   "baltop.entry": "<color:#AAAAAA><color:#FFB300><rank>.</color> <color:#FFFFFF><player></color> <color:#666666>»</color> <color:#AAAAAA><balance></color>",
@@ -79,7 +84,6 @@
 
   "command.usage.balance": "<prefix> <color:#FF4444>Usage: /balance [player]</color>",
   "command.usage.pay": "<prefix> <color:#FF4444>Usage: /pay <player> <amount></color>",
-  "command.usage.eco": "<prefix> <color:#FF4444>Usage: /eco <give|take|set|reset> <player> <amount></color>",
   "command.usage.baltop": "<prefix> <color:#FF4444>Usage: /baltop [page]</color>",
 
   "command.usage.tpa": "<prefix> <color:#FF4444>Usage: /tpa <player></color>",

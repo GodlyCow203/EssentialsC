@@ -144,8 +144,8 @@ public class AFKManager implements Listener {
             long afkDuration = Duration.between(afkStart, now).getSeconds();
 
             if (afkDuration >= kickTimeoutSeconds) {
-                String kickMessage = String.valueOf(plugin.getLanguageManager().get(player, "afk.kick.message"));
-                player.kick(miniMessage.deserialize(kickMessage));
+                Component kickMessage = plugin.getLanguageManager().get(player, "afk.kick.message");
+                player.kick(kickMessage);
 
                 if (config.isAfkBroadcastEnabled()) {
                     broadcastKick(player);
@@ -190,9 +190,7 @@ public class AFKManager implements Listener {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", player.getName());
 
-                Component message = miniMessage.deserialize(
-                        String.valueOf(plugin.getLanguageManager().get(player, "afk.broadcast.enter", placeholders))
-                );
+                Component message = plugin.getLanguageManager().get(player, "afk.broadcast.enter", placeholders);
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (!online.getUniqueId().equals(uuid)) {
@@ -214,9 +212,7 @@ public class AFKManager implements Listener {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", player.getName());
 
-                Component message = miniMessage.deserialize(
-                        String.valueOf(plugin.getLanguageManager().get(player, "afk.broadcast.leave", placeholders))
-                );
+                Component message = plugin.getLanguageManager().get(player, "afk.broadcast.leave", placeholders);
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (!online.getUniqueId().equals(uuid)) {
@@ -330,9 +326,7 @@ public class AFKManager implements Listener {
         placeholders.put("player", player.getName());
         placeholders.put("duration", String.valueOf(config.getAfkKickTimeout() / 60));
 
-        Component message = miniMessage.deserialize(
-                String.valueOf(plugin.getLanguageManager().get(player, "afk.kick.broadcast", placeholders))
-        );
+        Component message = plugin.getLanguageManager().get(player, "afk.kick.broadcast", placeholders);
 
         Bukkit.broadcast(message);
     }

@@ -60,15 +60,21 @@
   "pay.min_amount": "<prefix> <color:#FF4444>จำนวนการจ่ายขั้นต่ำคือ <color:#66AAFF><amount></color>.</color>",
 
   "eco.give": "<prefix> <color:#FFB300>ให้ <color:#FFB300><amount></color> แก่ <color:#FFFFFF><player></color>.</color>",
-  "eco.give.notify": "<prefix> <color:#FFB300>แอดมินให้คุณ <color:#FFB300><amount></color>.</color>",
+  "eco.give.notify": "<prefix> <color:#FFB300>ผู้ดูแลให้คุณ <color:#FFB300><amount></color>.</color>",
+  "eco.give.everyone": "<prefix> <color:#FFB300>ให้ <color:#FFB300><amount></color> แก่ผู้เล่น <color:#FFFFFF><count></color> คน.</color>",
   "eco.take": "<prefix> <color:#FFB300>เอา <color:#FFB300><amount></color> จาก <color:#FFFFFF><player></color>.</color>",
-  "eco.take.notify": "<prefix> <color:#FF4444>แอดมินเอา <color:#FFFFFF><amount></color> จากคุณ</color>",
-  "eco.take.failed": "<prefix> <color:#FF4444>ไม่สามารถเอา <color:#FFFFFF><amount></color> จาก <color:#FFFFFF><player></color> ได้ (ยอดเงินไม่พอ)</color>",
-  "eco.set": "<prefix> <color:#FFB300>ตั้งค่ายอดเงินของ <color:#FFFFFF><player></color> เป็น <color:#FFB300><amount></color>.</color>",
+  "eco.take.notify": "<prefix> <color:#FF4444>ผู้ดูแลเอา <color:#FFFFFF><amount></color> จากคุณ.</color>",
+  "eco.take.failed": "<prefix> <color:#FF4444>ไม่สามารถเอา <color:#FFFFFF><amount></color> จาก <color:#FFFFFF><player></color> ได้ (เงินไม่เพียงพอ).</color>",
+  "eco.take.everyone": "<prefix> <color:#FFB300>เอา <color:#FFB300><amount></color> จากผู้เล่น <color:#FFFFFF><count></color> คน.</color>",
+  "eco.set": "<prefix> <color:#FFB300>ตั้งค่าเงินของ <color:#FFFFFF><player></color> เป็น <color:#FFB300><amount></color>.</color>",
   "eco.set.notify": "<prefix> <color:#FFFFFF>ยอดเงินของคุณถูกตั้งค่าเป็น <color:#FFB300><amount></color>.</color>",
+  "eco.set.everyone": "<prefix> <color:#FFB300>ตั้งค่าเงินของผู้เล่น <color:#FFFFFF><count></color> คน เป็น <color:#FFB300><amount></color>.</color>",
   "eco.reset": "<prefix> <color:#FFB300>รีเซ็ตยอดเงินของ <color:#FFFFFF><player></color> เป็น <color:#FFB300><balance></color>.</color>",
   "eco.reset.notify": "<prefix> <color:#FFFFFF>ยอดเงินของคุณถูกรีเซ็ตเป็น <color:#FFB300><balance></color>.</color>",
+  "eco.reset.everyone": "<prefix> <color:#FFB300>รีเซ็ตยอดเงินของผู้เล่น <color:#FFFFFF><count></color> คน เป็น <color:#FFB300><balance></color>.</color>",
   "eco.max_balance": "<prefix> <color:#FF4444>ไม่สามารถเกินยอดเงินสูงสุด <color:#66AAFF><amount></color>.</color>",
+  "command.usage.eco": "<prefix> <color:#FF4444>การใช้งาน: /eco <give|take|set|reset> <player|@everyone> <amount></color>",
+
 
   "baltop.header": "<color:#666666>═══<color:#666666>╡ <color:#FFFFFF>อันดับเงินมากที่สุด <color:#AAAAAA>หน้า <color:#FFB300><page></color> <color:#666666>╞</color>═══</color>",
   "baltop.entry": "<color:#AAAAAA><color:#FFB300><rank>.</color> <color:#FFFFFF><player></color> <color:#666666>»</color> <color:#AAAAAA><balance></color>",
@@ -79,7 +85,6 @@
 
   "command.usage.balance": "<prefix> <color:#FF4444>วิธีใช้: /balance [player]</color>",
   "command.usage.pay": "<prefix> <color:#FF4444>วิธีใช้: /pay <player> <amount></color>",
-  "command.usage.eco": "<prefix> <color:#FF4444>วิธีใช้: /eco <give|take|set|reset> <player> <amount></color>",
   "command.usage.baltop": "<prefix> <color:#FF4444>วิธีใช้: /baltop [page]</color>",
 
   "command.usage.tpa": "<prefix> <color:#FF4444>วิธีใช้: /tpa <player></color>",

@@ -61,14 +61,19 @@
 
   "eco.give": "<prefix> <color:#FFB300>Gav <color:#FFB300><amount></color> till <color:#FFFFFF><player></color>.</color>",
   "eco.give.notify": "<prefix> <color:#FFB300>En admin gav dig <color:#FFB300><amount></color>.</color>",
-  "eco.take": "<prefix> <color:#FFB300>Tog <color:#FFB300><amount></color> från <color:#FFFFFF><player></color>.</color>",
+  "eco.give.everyone": "<prefix> <color:#FFB300>Gav <color:#FFB300><amount></color> till <color:#FFFFFF><count></color> spelare.</color>",
+  "eco.take": "<prefix> <color:#FFB300>Tagit <color:#FFB300><amount></color> från <color:#FFFFFF><player></color>.</color>",
   "eco.take.notify": "<prefix> <color:#FF4444>En admin tog <color:#FFFFFF><amount></color> från dig.</color>",
   "eco.take.failed": "<prefix> <color:#FF4444>Kunde inte ta <color:#FFFFFF><amount></color> från <color:#FFFFFF><player></color> (otillräckliga medel).</color>",
-  "eco.set": "<prefix> <color:#FFB300>Satte <color:#FFFFFF><player></color>s balans till <color:#FFB300><amount></color>.</color>",
-  "eco.set.notify": "<prefix> <color:#FFFFFF>Din balans sattes till <color:#FFB300><amount></color>.</color>",
-  "eco.reset": "<prefix> <color:#FFB300>Återställde <color:#FFFFFF><player></color>s balans till <color:#FFB300><balance></color>.</color>",
-  "eco.reset.notify": "<prefix> <color:#FFFFFF>Din balans återställdes till <color:#FFB300><balance></color>.</color>",
-  "eco.max_balance": "<prefix> <color:#FF4444>Kan inte överstiga maximal balans på <color:#66AAFF><amount></color>.</color>",
+  "eco.take.everyone": "<prefix> <color:#FFB300>Tagit <color:#FFB300><amount></color> från <color:#FFFFFF><count></color> spelare.</color>",
+  "eco.set": "<prefix> <color:#FFB300>Ställde in <color:#FFFFFF><player></color>s saldo till <color:#FFB300><amount></color>.</color>",
+  "eco.set.notify": "<prefix> <color:#FFFFFF>Ditt saldo sattes till <color:#FFB300><amount></color>.</color>",
+  "eco.set.everyone": "<prefix> <color:#FFB300>Ställde in saldo för <color:#FFFFFF><count></color> spelare till <color:#FFB300><amount></color>.</color>",
+  "eco.reset": "<prefix> <color:#FFB300>Återställde <color:#FFFFFF><player></color>s saldo till <color:#FFB300><balance></color>.</color>",
+  "eco.reset.notify": "<prefix> <color:#FFFFFF>Ditt saldo återställdes till <color:#FFB300><balance></color>.</color>",
+  "eco.reset.everyone": "<prefix> <color:#FFB300>Återställde saldo för <color:#FFFFFF><count></color> spelare till <color:#FFB300><balance></color>.</color>",
+  "eco.max_balance": "<prefix> <color:#FF4444>Kan inte överstiga maxsaldo på <color:#66AAFF><amount></color>.</color>",
+  "command.usage.eco": "<prefix> <color:#FF4444>Användning: /eco <give|take|set|reset> <player|@everyone> <amount></color>",
 
   "baltop.header": "<color:#666666>═══<color:#666666>╡ <color:#FFFFFF>Toppbalanser <color:#AAAAAA>Sida <color:#FFB300><page></color> <color:#666666>╞</color>═══</color>",
   "baltop.entry": "<color:#AAAAAA><color:#FFB300><rank>.</color> <color:#FFFFFF><player></color> <color:#666666>»</color> <color:#AAAAAA><balance></color>",
@@ -79,7 +84,6 @@
 
   "command.usage.balance": "<prefix> <color:#FF4444>Användning: /balance [spelare]</color>",
   "command.usage.pay": "<prefix> <color:#FF4444>Användning: /pay <spelare> <belopp></color>",
-  "command.usage.eco": "<prefix> <color:#FF4444>Användning: /eco <give|take|set|reset> <spelare> <belopp></color>",
   "command.usage.baltop": "<prefix> <color:#FF4444>Användning: /baltop [sida]</color>",
 
   "command.usage.tpa": "<prefix> <color:#FF4444>Användning: /tpa <spelare></color>",

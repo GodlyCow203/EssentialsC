@@ -61,14 +61,19 @@
 
   "eco.give": "<prefix> <color:#FFB300>Выдано <color:#FFB300><amount></color> игроку <color:#FFFFFF><player></color>.</color>",
   "eco.give.notify": "<prefix> <color:#FFB300>Администратор выдал вам <color:#FFB300><amount></color>.</color>",
+  "eco.give.everyone": "<prefix> <color:#FFB300>Выдано <color:#FFB300><amount></color> <color:#FFFFFF><count></color> игрокам.</color>",
   "eco.take": "<prefix> <color:#FFB300>Снято <color:#FFB300><amount></color> с <color:#FFFFFF><player></color>.</color>",
   "eco.take.notify": "<prefix> <color:#FF4444>Администратор снял с вас <color:#FFFFFF><amount></color>.</color>",
   "eco.take.failed": "<prefix> <color:#FF4444>Невозможно снять <color:#FFFFFF><amount></color> с <color:#FFFFFF><player></color> (недостаточно средств).</color>",
-  "eco.set": "<prefix> <color:#FFB300>Баланс <color:#FFFFFF><player></color> установлен на <color:#FFB300><amount></color>.</color>",
+  "eco.take.everyone": "<prefix> <color:#FFB300>Снято <color:#FFB300><amount></color> с <color:#FFFFFF><count></color> игроков.</color>",
+  "eco.set": "<prefix> <color:#FFB300>Баланс игрока <color:#FFFFFF><player></color> установлен на <color:#FFB300><amount></color>.</color>",
   "eco.set.notify": "<prefix> <color:#FFFFFF>Ваш баланс установлен на <color:#FFB300><amount></color>.</color>",
-  "eco.reset": "<prefix> <color:#FFB300>Баланс <color:#FFFFFF><player></color> сброшен на <color:#FFB300><balance></color>.</color>",
-  "eco.reset.notify": "<prefix> <color:#FFFFFF>Ваш баланс сброшен на <color:#FFB300><balance></color>.</color>",
-  "eco.max_balance": "<prefix> <color:#FF4444>Невозможно превысить максимальный баланс <color:#66AAFF><amount></color>.</color>",
+  "eco.set.everyone": "<prefix> <color:#FFB300>Баланс <color:#FFFFFF><count></color> игроков установлен на <color:#FFB300><amount></color>.</color>",
+  "eco.reset": "<prefix> <color:#FFB300>Баланс игрока <color:#FFFFFF><player></color> сброшен до <color:#FFB300><balance></color>.</color>",
+  "eco.reset.notify": "<prefix> <color:#FFFFFF>Ваш баланс сброшен до <color:#FFB300><balance></color>.</color>",
+  "eco.reset.everyone": "<prefix> <color:#FFB300>Баланс <color:#FFFFFF><count></color> игроков сброшен до <color:#FFB300><balance></color>.</color>",
+  "eco.max_balance": "<prefix> <color:#FF4444>Нельзя превышать максимальный баланс <color:#66AAFF><amount></color>.</color>",
+  "command.usage.eco": "<prefix> <color:#FF4444>Использование: /eco <give|take|set|reset> <player|@everyone> <amount></color>",
 
   "baltop.header": "<color:#666666>═══<color:#666666>╡ <color:#FFFFFF>Топ балансов <color:#AAAAAA>Страница <color:#FFB300><page></color> <color:#666666>╞</color>═══</color>",
   "baltop.entry": "<color:#AAAAAA><color:#FFB300><rank>.</color> <color:#FFFFFF><player></color> <color:#666666>»</color> <color:#AAAAAA><balance></color>",
@@ -79,7 +84,6 @@
 
   "command.usage.balance": "<prefix> <color:#FF4444>Использование: /balance [игрок]</color>",
   "command.usage.pay": "<prefix> <color:#FF4444>Использование: /pay <игрок> <сумма></color>",
-  "command.usage.eco": "<prefix> <color:#FF4444>Использование: /eco <give|take|set|reset> <игрок> <сумма></color>",
   "command.usage.baltop": "<prefix> <color:#FF4444>Использование: /baltop [страница]</color>",
 
   "command.usage.tpa": "<prefix> <color:#FF4444>Использование: /tpa <игрок></color>",
