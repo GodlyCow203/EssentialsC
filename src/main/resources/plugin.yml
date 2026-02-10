@@ -867,4 +867,24 @@ permissions:
     description: Notifies admins of updates on join
     default: op
 
+  essentialsc.eco.give:
+    description: Allow giving money to players
+    default: op
+
+  essentialsc.eco.take:
+    description: Allow taking money from players
+    default: op
+
+  essentialsc.eco.set:
+    description: Allow setting player balances
+    default: op
+
+  essentialsc.eco.reset:
+    description: Allow resetting player balances
+    default: op
+
+  essentialsc.eco.everyone:
+    description: Allow using @everyone for mass operations
+    default: op
+
 
