@@ -107,12 +107,12 @@ public class EsscCommand extends Command {
 
                 if (plugin.getAuctionManager() != null) {
                     plugin.getAuctionManager().reload();
-                    plugin.debug("Hat config reloaded");
+                    plugin.debug("Auction reloaded");
                 }
 
                 if (plugin.getWarpManager() != null) {
                     plugin.getWarpManager().reload();
-                    plugin.debug("Hat config reloaded");
+                    plugin.debug("Warps reloaded");
                 }
 
                 if (plugin.getAfkManager() != null) {

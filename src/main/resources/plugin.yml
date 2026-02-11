@@ -5,8 +5,9 @@ api-version: '1.21'
 description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
 author: _GodlyCow
 softdepend:
-  - PlaceholderAPI
   - Vault
+  - PlaceholderAPI
+
 
 commands:
   essc:
