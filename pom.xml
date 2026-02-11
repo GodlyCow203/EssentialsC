@@ -25,6 +25,12 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+
+        <repository>
+            <id>thenextlvl-releases</id>
+            <name>TheNextLvl</name>
+            <url>https://repo.thenextlvl.net/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -83,6 +89,12 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20251224</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.faststats.metrics</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>0.14.0</version>
         </dependency>
     </dependencies>
 
