@@ -154,6 +154,11 @@ public class AhCommand extends Command {
     }
 
     private void openExpiredGui(Player player) {
+        if (!plugin.getConfigManager().isAHEnabled()) {
+            player.sendMessage(lang.get(player, "ah.disabled"));
+            return;
+        }
+
         List<org.bukkit.inventory.ItemStack> expiredItems = plugin.getAuctionManager().getPlayerExpiredItems(player.getUniqueId());
 
         if (expiredItems.isEmpty()) {
@@ -388,6 +393,11 @@ public class AhCommand extends Command {
     }
 
     private void handleSell(Player player, String[] args) {
+        if (!plugin.getConfigManager().isAHEnabled()) {
+            player.sendMessage(lang.get(player, "ah.disabled"));
+            return;
+        }
+
         if (!player.hasPermission(AuctionManager.PERM_SELL)) {
             player.sendMessage(lang.get(player, "error.no_permission"));
             return;
@@ -450,6 +460,11 @@ public class AhCommand extends Command {
     }
 
     private void handleCancel(Player player, String[] args) {
+        if (!plugin.getConfigManager().isAHEnabled()) {
+            player.sendMessage(lang.get(player, "ah.disabled"));
+            return;
+        }
+
         if (args.length < 2) {
             player.sendMessage(lang.get(player, "command.usage.ah_cancel"));
             return;
@@ -475,6 +490,11 @@ public class AhCommand extends Command {
     }
 
     private void handleReload(Player player) {
+        if (!plugin.getConfigManager().isAHEnabled()) {
+            player.sendMessage(lang.get(player, "ah.disabled"));
+            return;
+        }
+
         if (!player.hasPermission(AuctionManager.PERM_RELOAD)) {
             player.sendMessage(lang.get(player, "error.no_permission"));
             return;
@@ -486,6 +506,11 @@ public class AhCommand extends Command {
     }
 
     private void handleListings(Player player) {
+        if (!plugin.getConfigManager().isAHEnabled()) {
+            player.sendMessage(lang.get(player, "ah.disabled"));
+            return;
+        }
+
         List<Auction> auctions = plugin.getAuctionManager().getPlayerAuctions(player.getUniqueId());
 
         if (auctions.isEmpty()) {
@@ -509,6 +534,10 @@ public class AhCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (!sender.hasPermission(AuctionManager.PERM_USE)) {
+            return Collections.emptyList();
+        }
+
+        if (!plugin.getConfigManager().isAHEnabled()) {
             return Collections.emptyList();
         }
 
