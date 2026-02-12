@@ -1,0 +1,329 @@
+items:
+  wooden_sword:
+    material: WOODEN_SWORD
+    name: "<color:#8B4513>Wooden Sword"
+    buy-price: 200
+    sell-price: 65
+    slot: 10
+    page: 1
+
+  stone_sword:
+    material: STONE_SWORD
+    name: "<color:#808080>Stone Sword"
+    buy-price: 400
+    sell-price: 130
+    slot: 11
+    page: 1
+
+  iron_sword:
+    material: IRON_SWORD
+    name: "<color:#C0C0C0>Iron Sword"
+    buy-price: 1500
+    sell-price: 500
+    slot: 12
+    page: 1
+
+  golden_sword:
+    material: GOLDEN_SWORD
+    name: "<color:#FFD700>Golden Sword"
+    buy-price: 2800
+    sell-price: 900
+    slot: 14
+    page: 1
+
+  diamond_sword:
+    material: DIAMOND_SWORD
+    name: "<color:#00CED1>Diamond Sword"
+    buy-price: 7000
+    sell-price: 2300
+    slot: 15
+    page: 1
+
+  netherite_sword:
+    material: NETHERITE_SWORD
+    name: "<color:#4B0082>Netherite Sword"
+    buy-price: 18000
+    sell-price: 6000
+    slot: 16
+    page: 1
+
+  leather_helmet:
+    material: LEATHER_HELMET
+    name: "<color:#8B4513>Leather Helmet"
+    buy-price: 300
+    sell-price: 100
+    slot: 19
+    page: 1
+
+  chainmail_helmet:
+    material: CHAINMAIL_HELMET
+    name: "<color:#A9A9A9>Chainmail Helmet"
+    buy-price: 800
+    sell-price: 250
+    slot: 20
+    page: 1
+
+  iron_helmet:
+    material: IRON_HELMET
+    name: "<color:#C0C0C0>Iron Helmet"
+    buy-price: 2000
+    sell-price: 650
+    slot: 21
+    page: 1
+
+  golden_helmet:
+    material: GOLDEN_HELMET
+    name: "<color:#FFD700>Golden Helmet"
+    buy-price: 3500
+    sell-price: 1100
+    slot: 23
+    page: 1
+
+  diamond_helmet:
+    material: DIAMOND_HELMET
+    name: "<color:#00CED1>Diamond Helmet"
+    buy-price: 8500
+    sell-price: 2800
+    slot: 24
+    page: 1
+
+  netherite_helmet:
+    material: NETHERITE_HELMET
+    name: "<color:#4B0082>Netherite Helmet"
+    buy-price: 20000
+    sell-price: 6500
+    slot: 25
+    page: 1
+
+  leather_chestplate:
+    material: LEATHER_CHESTPLATE
+    name: "<color:#8B4513>Leather Chestplate"
+    buy-price: 480
+    sell-price: 160
+    slot: 28
+    page: 1
+
+  chainmail_chestplate:
+    material: CHAINMAIL_CHESTPLATE
+    name: "<color:#A9A9A9>Chainmail Chestplate"
+    buy-price: 1200
+    sell-price: 400
+    slot: 29
+    page: 1
+
+  iron_chestplate:
+    material: IRON_CHESTPLATE
+    name: "<color:#C0C0C0>Iron Chestplate"
+    buy-price: 3200
+    sell-price: 1050
+    slot: 30
+    page: 1
+
+  golden_chestplate:
+    material: GOLDEN_CHESTPLATE
+    name: "<color:#FFD700>Golden Chestplate"
+    buy-price: 5600
+    sell-price: 1850
+    slot: 32
+    page: 1
+
+  diamond_chestplate:
+    material: DIAMOND_CHESTPLATE
+    name: "<color:#00CED1>Diamond Chestplate"
+    buy-price: 13000
+    sell-price: 4300
+    slot: 33
+    page: 1
+
+  netherite_chestplate:
+    material: NETHERITE_CHESTPLATE
+    name: "<color:#4B0082>Netherite Chestplate"
+    buy-price: 32000
+    sell-price: 10500
+    slot: 34
+    page: 1
+
+  leather_leggings:
+    material: LEATHER_LEGGINGS
+    name: "<color:#8B4513>Leather Leggings"
+    buy-price: 420
+    sell-price: 140
+    slot: 37
+    page: 1
+
+  chainmail_leggings:
+    material: CHAINMAIL_LEGGINGS
+    name: "<color:#A9A9A9>Chainmail Leggings"
+    buy-price: 1050
+    sell-price: 350
+    slot: 38
+    page: 1
+
+  iron_leggings:
+    material: IRON_LEGGINGS
+    name: "<color:#C0C0C0>Iron Leggings"
+    buy-price: 2800
+    sell-price: 900
+    slot: 39
+    page: 1
+
+  golden_leggings:
+    material: GOLDEN_LEGGINGS
+    name: "<color:#FFD700>Golden Leggings"
+    buy-price: 4900
+    sell-price: 1600
+    slot: 41
+    page: 1
+
+  diamond_leggings:
+    material: DIAMOND_LEGGINGS
+    name: "<color:#00CED1>Diamond Leggings"
+    buy-price: 11500
+    sell-price: 3800
+    slot: 42
+    page: 1
+
+  netherite_leggings:
+    material: NETHERITE_LEGGINGS
+    name: "<color:#4B0082>Netherite Leggings"
+    buy-price: 28000
+    sell-price: 9200
+    slot: 43
+    page: 1
+
+  leather_boots:
+    material: LEATHER_BOOTS
+    name: "<color:#8B4513>Leather Boots"
+    buy-price: 360
+    sell-price: 120
+    slot: 10
+    page: 2
+
+  chainmail_boots:
+    material: CHAINMAIL_BOOTS
+    name: "<color:#A9A9A9>Chainmail Boots"
+    buy-price: 900
+    sell-price: 300
+    slot: 11
+    page: 2
+
+  iron_boots:
+    material: IRON_BOOTS
+    name: "<color:#C0C0C0>Iron Boots"
+    buy-price: 2400
+    sell-price: 800
+    slot: 12
+    page: 2
+
+  golden_boots:
+    material: GOLDEN_BOOTS
+    name: "<color:#FFD700>Golden Boots"
+    buy-price: 4200
+    sell-price: 1400
+    slot: 14
+    page: 2
+
+  diamond_boots:
+    material: DIAMOND_BOOTS
+    name: "<color:#00CED1>Diamond Boots"
+    buy-price: 10000
+    sell-price: 3300
+    slot: 15
+    page: 2
+
+  netherite_boots:
+    material: NETHERITE_BOOTS
+    name: "<color:#4B0082>Netherite Boots"
+    buy-price: 25000
+    sell-price: 8200
+    slot: 16
+    page: 2
+
+  bow:
+    material: BOW
+    name: "<color:#8B4513>Bow"
+    buy-price: 1200
+    sell-price: 400
+    slot: 19
+    page: 2
+
+  crossbow:
+    material: CROSSBOW
+    name: "<color:#696969>Crossbow"
+    buy-price: 2500
+    sell-price: 800
+    slot: 20
+    page: 2
+
+  arrow:
+    material: ARROW
+    name: "<color:#D3D3D3>Arrow"
+    buy-price: 10
+    sell-price: 3
+    slot: 21
+    page: 2
+
+  spectral_arrow:
+    material: SPECTRAL_ARROW
+    name: "<color:#FFD700>Spectral Arrow"
+    buy-price: 50
+    sell-price: 15
+    slot: 23
+    page: 2
+
+  tipped_arrow:
+    material: TIPPED_ARROW
+    name: "<color:#9932CC>Tipped Arrow"
+    buy-price: 150
+    sell-price: 50
+    slot: 24
+    page: 2
+
+  shield:
+    material: SHIELD
+    name: "<color:#8B4513>Shield"
+    buy-price: 1500
+    sell-price: 500
+    slot: 25
+    page: 2
+
+  trident:
+    material: TRIDENT
+    name: "<color:#00CED1>Trident"
+    buy-price: 8000
+    sell-price: 2500
+    slot: 28
+    page: 2
+
+  mace:
+    material: MACE
+    name: "<color:#4B0082>Mace"
+    buy-price: 18000
+    sell-price: 6000
+    slot: 29
+    page: 2
+
+  turtle_helmet:
+    material: TURTLE_HELMET
+    name: "<color:#228B22>Turtle Helmet"
+    buy-price: 5000
+    sell-price: 1600
+    slot: 30
+    page: 2
+
+  totem_of_undying:
+    material: TOTEM_OF_UNDYING
+    name: "<color:#FFD700>Totem of Undying"
+    buy-price: 50000
+    sell-price: 15000
+    slot: 32
+    page: 2
+
+  arrow_bundle:
+    material: ARROW
+    name: "<color:#D3D3D3>Arrow (x64)"
+    buy-price: 500
+    sell-price: 150
+    slot: 33
+    page: 2
+    amount: 64
