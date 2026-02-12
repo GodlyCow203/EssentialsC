@@ -24,11 +24,6 @@ public class AFKCommand extends Command {
             return true;
         }
 
-        if (player.hasPermission("essentialsc.afk.bypass.auto")) {
-            player.sendMessage(lang.get(player, "afk.error.bypass"));
-            return true;
-        }
-
         plugin.getAfkManager().toggleAFK(player);
 
         return true;

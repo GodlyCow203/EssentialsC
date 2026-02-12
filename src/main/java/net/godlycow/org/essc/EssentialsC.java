@@ -12,6 +12,7 @@ import net.godlycow.org.essc.command.player.ShopCommand;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
+import net.godlycow.org.essc.faststats.FastStatsManager;
 import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.ignore.IgnoreManager;
@@ -66,6 +67,8 @@ public final class EssentialsC extends JavaPlugin {
     private WarpManager warpManager;
     private AFKManager afkManager;
     private PlaceholderHook placeholderHook;
+    private FastStatsManager fastStats;
+
 
 
 
@@ -98,6 +101,9 @@ public final class EssentialsC extends JavaPlugin {
         getLogger().info("bStats Metrics initialized successfully!");
 
         registerPlaceholderAPI();
+
+        fastStats = new FastStatsManager();
+        fastStats.init(this);
 
 
 

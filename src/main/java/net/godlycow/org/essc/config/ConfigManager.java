@@ -163,45 +163,80 @@ public class ConfigManager {
         return config.getBoolean("join-leave-messages.enabled", true);
     }
 
-    public String getJoinMessage() {return config.getString("join-leave-messages.join", "<yellow><player> joined the game");  }
+    public String getJoinMessage() {
+        return config.getString("join-leave-messages.join", "<yellow><player> joined the game");  }
 
-    public String getLeaveMessage() {return config.getString("join-leave-messages.leave", "<yellow><player> left the game");}
+    public String getLeaveMessage() {
+        return config.getString("join-leave-messages.leave", "<yellow><player> left the game");
+    }
 
-    public long getBackWarmup() { return config.getLong("back.warmup", 0);}
+    public long getBackWarmup() {
+        return config.getLong("back.warmup", 0);
+    }
 
-    public long getBackCooldown() { return config.getLong("back.cooldown", 0);}
+    public long getBackCooldown() {
+        return config.getLong("back.cooldown", 0);
+    }
 
-    public boolean isBackParticles() {return config.getBoolean("back.particles", true);}
+    public boolean isBackParticles() {
+        return config.getBoolean("back.particles", true);
+    }
 
-    public boolean isBackSounds() {return config.getBoolean("back.sounds", true);}
+    public boolean isBackSounds() {
+        return config.getBoolean("back.sounds", true);
+    }
 
-    public boolean isBackCancelOnMovement() {  return config.getBoolean("back.cancel-on-movement", true);}
+    public boolean isBackCancelOnMovement() {
+        return config.getBoolean("back.cancel-on-movement", true);
+    }
 
     public FileConfiguration getConfig() {
         return config;
     }
 
-    public boolean isScoreboardEnabled() {return config.getBoolean("scoreboard.enabled", false);}
+    public boolean isScoreboardEnabled() {
+        return config.getBoolean("scoreboard.enabled", false);
+    }
 
-    public boolean isRenameBlacklistEnabled() {return config.getBoolean("rename.blacklist-enabled", true);}
+    public boolean isRenameBlacklistEnabled() {
+        return config.getBoolean("rename.blacklist-enabled", true);
+    }
 
-    public List<String> getRenameBlacklistWords() { return config.getStringList("rename.blacklist-words");}
+    public List<String> getRenameBlacklistWords() {
+        return config.getStringList("rename.blacklist-words");
+    }
 
-    public int getRenameMaxLength() {return config.getInt("rename.max-length", 50);}
+    public int getRenameMaxLength() {
+        return config.getInt("rename.max-length", 50);
+    }
 
-    public int getRenameMinLength() {return config.getInt("rename.min-length", 1);}
+    public int getRenameMinLength() {
+        return config.getInt("rename.min-length", 1);
+    }
 
-    public boolean isRenameNormalizeEnabled() {return config.getBoolean("rename.normalize-enabled", true);}
+    public boolean isRenameNormalizeEnabled() {
+        return config.getBoolean("rename.normalize-enabled", true);
+    }
 
-    public boolean isRenameStripColorsEnabled() {return config.getBoolean("rename.strip-colors-for-check", true);}
+    public boolean isRenameStripColorsEnabled() {
+        return config.getBoolean("rename.strip-colors-for-check", true);
+    }
 
-    public boolean isVanishHideFromTab() {return config.getBoolean("vanish.hide-from-tab", true);}
+    public boolean isVanishHideFromTab() {
+        return config.getBoolean("vanish.hide-from-tab", true);
+    }
 
-    public boolean isVanishNightVision() {return config.getBoolean("vanish.give-night-vision", true);}
+    public boolean isVanishNightVision() {
+        return config.getBoolean("vanish.give-night-vision", true);
+    }
 
-    public boolean isVanishPreventMobTarget() {return config.getBoolean("vanish.prevent-mob-target", true);}
+    public boolean isVanishPreventMobTarget() {
+        return config.getBoolean("vanish.prevent-mob-target", true);
+    }
 
-    public boolean isVanishDisableCollisions() {return config.getBoolean("vanish.disable-collisions", true);}
+    public boolean isVanishDisableCollisions() {
+        return config.getBoolean("vanish.disable-collisions", true);
+    }
 
     public boolean isNickEnabled() {
         return config.getBoolean("nickname.enabled", true);
