@@ -154,8 +154,36 @@ public final class EssentialsC extends JavaPlugin {
 
     @Override
     public void onDisable() {
+
         if (economyManager != null) {
             economyManager.shutdown();
+        }
+        if (afkManager != null) {
+            afkManager.shutdown();
+        }
+        if (homeManager != null) {
+            homeManager.shutdown();
+        }
+        if (auctionManager != null) {
+            auctionManager.shutdown();
+        }
+        if (shopManager != null) {
+            shopManager.shutdown();
+        }
+        if (kitManager != null) {
+            kitManager.shutdown();
+        }
+        if (nickManager != null) {
+            nickManager.shutdown();
+        }
+        if (scoreboardManager != null) {
+            scoreboardManager.shutdown();
+        }
+        if (economyManager != null) {
+            economyManager.shutdown();
+        }
+        if (backManager != null) {
+            backManager.shutdown();
         }
 
         getLogger().info("EssentialsC disabled");
