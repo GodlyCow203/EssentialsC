@@ -1,4 +1,891 @@
-name: EssCMaven
-version: '0.0.1'
-main: net.godlycow.org.essCMaven.EssCMaven
+name: EssentialsC
+version: '4.0.7'
+main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
+description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
+author: _GodlyCow
+softdepend:
+  - Vault
+  - PlaceholderAPI
+
+
+commands:
+  essc:
+    description: Main plugin command
+    usage: /essc <reload|version|debug|help>
+    permission: essentialsc.admin
+    aliases: [essentialsc]
+
+  heal:
+    description: Heal yourself
+    usage: /heal
+    permission: essentialsc.heal
+
+  balance:
+    description: Check your balance
+    usage: /balance [player]
+    aliases: [bal, money]
+    permission: essentialsc.balance
+
+  pay:
+    description: Pay another player
+    usage: /pay <player> <amount>
+    permission: essentialsc.pay
+
+  eco:
+    description: Admin economy commands
+    usage: /eco <give|take|set|reset> <player> <amount>
+    permission: essentialsc.eco.admin
+
+  baltop:
+    description: View top balances
+    usage: /baltop [page]
+    aliases: [balancetop]
+    permission: essentialsc.baltop
+
+  tpa:
+    description: Request to teleport to a player
+    usage: /tpa <player>
+    aliases: [ tpask, call ]
+    permission: essentialsc.tpa
+
+  tpahere:
+    description: Request a player to teleport to you
+    usage: /tpahere <player>
+    aliases: [ tphere, s ]
+    permission: essentialsc.tpahere
+
+  tpaccept:
+    description: Accept a teleport request
+    usage: /tpaccept [player]
+    aliases: [ tpyes, tpallow ]
+    permission: essentialsc.tpaccept
+
+  tpdeny:
+    description: Deny a teleport request
+    usage: /tpdeny [player]
+    aliases: [ tpno, tpreject ]
+    permission: essentialsc.tpdeny
+
+  tpcancel:
+    description: Cancel your outgoing teleport request
+    usage: /tpcancel [player]
+    aliases: [ tpc ]
+    permission: essentialsc.tpcancel
+
+  tpaignore:
+    description: Ignore TPA requests from a player
+    usage: /tpaignore <player>
+    permission: essentialsc.tpaignore
+
+  tpatoggle:
+    description: Toggle TPA requests on/off
+    usage: /tpatoggle
+    permission: essentialsc.tpatoggle
+
+  tpaqueue:
+    description: View pending TPA requests
+    usage: /tpaqueue
+    aliases: [ tpalist, tpalist ]
+    permission: essentialsc.tpaqueue
+
+  sethome:
+    description: Set a home at your current location
+    usage: /sethome [name]
+    aliases: [ createhome ]
+    permission: essentialsc.sethome
+
+  home:
+    description: Teleport to one of your homes
+    usage: /home [name]
+    permission: essentialsc.home
+
+  delhome:
+    description: Delete one of your homes
+    usage: /delhome <name>
+    aliases: [ deletehome ]
+    permission: essentialsc.delhome
+
+  homes:
+    description: List all your homes
+    usage: /homes [player]
+    permission: essentialsc.homes
+
+  spawn:
+    description: Teleport to the server spawn
+    usage: /spawn [player]
+    permission: essentialsc.spawn
+
+  setspawn:
+    description: Set the server spawn location
+    usage: /setspawn
+    permission: essentialsc.setspawn
+
+  back:
+    description: Return to your last location (death or teleport)
+    usage: /back
+    permission: essentialsc.back
+
+  kit:
+    description: Claim and manage kits
+    usage: /kit [claim|cooldown|debug] <kit>
+
+  kits:
+    description: List and manage kits
+    usage: /kits [list|reload]
+    permission: essentialsc.kits.list
+
+  scoreboard:
+    description: Toggle or manage scoreboard
+    usage: /scoreboard [toggle|reload]
+    permission: essentialsc.scoreboard.toggle
+
+  feed:
+    description: Feed yourself or another player
+    usage: /feed [player]
+    permission: essentialsc.feed
+
+  ping:
+    description: See your ping
+    usage: /ping [player]
+    permission: essentialsc.ping
+
+  fly:
+    description: Fly
+    usage: /fly
+    permission: essentialsc.fly
+
+  craftingtable:
+    description: Open a crafting table
+    usage: /craftingtable
+    permission: essentialsc.craftingtable
+
+  god:
+    description: Enable God Mode
+    usage: /god [player]
+    permission: essentialsc.god
+
+  invsee:
+    description: View another player's inventory
+    usage: /invsee <player>
+    permission: essentialsc.invsee
+
+  clearinventory:
+    description: Clear your inventory or another player's inventory
+    usage: /clearinventory [player]
+    permission: essentialsc.clearinventory
+
+  enderchest:
+    description: Open your enderchest or view another players enderchest
+    usage: /enderchest [player]
+    permission: essentialsc.enderchest
+
+  endersee:
+    description: View another player's enderchest
+    usage: /endersee [player]
+    permission: essentialsc.endersee
+
+  speed:
+    description: Manage your movement speed
+    usage: /speed <reset|walkspeed|flyspeed> [speed]
+    permission: essentialsc.speed
+
+  anvil:
+    description: Open a virtual anvil
+    usage: /anvil
+    permission: essentialsc.anvil
+
+  rename:
+    description: rename any item
+    usage: /rename
+    permission: essentialsc.rename
+
+  vanish:
+    description: Toggle vanish mode
+    usage: /vanish
+    permission: essentialsc.vanish
+
+  repair:
+    description: Repair the item in your hand
+    usage: /repair [player]
+    permission: essentialsc.repair
+
+  nick:
+    description: Set your nickname
+    usage: /nick <nickname|off>
+    aliases: [nickname]
+    permission: essentialsc.nick
+
+  realname:
+    description: Lookup real name by nickname or reset player nick
+    usage: /realname [player]
+    permission: essentialsc.realname
+
+  playtime:
+    description: Check your or another player playtime
+    usage: /playtime [player]
+    permission: essentialsc.playtime
+
+  uptime:
+    description: Check the server uptime
+    usage: /uptime
+    permission: essentialsc.uptime
+
+  shop:
+    description: Open the server shop
+    usage: /shop [category|reload] [page]
+    permission: essentialsc.shop
+
+  broadcast:
+    description: Broadcast a message to all players or a specific world
+    usage: /broadcast <message>
+    permission: essentialsc.broadcast
+
+  enchant:
+    description: Enchant the item in your hand
+    usage: /enchant <enchantment> [level]
+    permission: essentialsc.enchant
+
+  unenchant:
+    description: Remove enchantments from the item in your hand
+    usage: /unenchant [enchantment]
+    permission: essentialsc.unenchant
+
+  hat:
+    description: Wear custom items as your hat
+    usage: /hat
+    permission: essentialsc.hat
+
+  sudo:
+    description: Force a player to run a command or send a message
+    usage: /sudo <player> <command/message>
+    permission: essentialsc.sudo
+
+  kick:
+    description: Kick a Player
+    usage: /kick <player>
+    permission: essentialsc.kick
+
+  ban:
+    description: Ban a player from the server
+    usage: /ban <player> [duration] [reason]
+    permission: essentialsc.ban
+
+  unban:
+    description: Unban a player
+    usage: /unban <player>
+    permission: essentialsc.unban
+
+  mute:
+    description: Mute a player
+    usage: /mute <player> [duration] [reason]
+    permission: essentialsc.mute
+
+  unmute:
+    description: Unmute a player
+    usage: /unmute <player>
+    permission: essentialsc.unmute
+
+  checkpunish:
+    description: Check punishment status of a player
+    usage: /checkpunish <player>
+    permission: essentialsc.checkpunish
+
+  ignore:
+    description: Ignore or unignore a player
+    usage: /ignore [player]
+    permission: essentialsc.ignore
+
+  msg:
+    description: Send a private message to a player
+    usage: /msg <player> <message>
+    permission: essentialsc.msg
+
+  reply:
+    description: Reply to the last private message
+    usage: /reply <message>
+    permission: essentialsc.reply
+
+  seen:
+    description: Check when a player was last online
+    usage: /seen <player>
+    permission: essentialsc.seen
+
+  top:
+    description: Teleport to the highest block above you
+    usage: /top
+    permission: essentialsc.top
+
+  ptime:
+    description: Set your personal time
+    usage: /ptime [time|day|night|reset] [locked]
+    permission: essentialsc.ptime
+
+  pweather:
+    description: Set your personal weather
+    usage: /pweather [clear|rain|storm|reset]
+    permission: essentialsc.pweather
+
+  ah:
+    description: Auction House commands
+    usage: /ah [sell|cancel|expired|listings|page]
+    permission: essentialsc.ah.use
+
+  language:
+    description: Change your language
+    usage: /language <lang_key>
+
+  warp:
+    description: Teleport to a warp location
+    usage: /warp [name]
+    permission: essentialsc.warp
+
+  setwarp:
+    description: Create a new warp
+    usage: /setwarp <name>
+    permission: essentialsc.setwarp
+
+  delwarp:
+    description: Delete a warp
+    usage: /delwarp <name>
+    permission: essentialsc.delwarp
+
+  warps:
+    description: List all available warps
+    usage: /warps
+    permission: essentialsc.warps
+
+  warpadmin:
+    description: Admin warp management
+    usage: /warpadmin <setperm|setcost|setdesc|setcategory|hide|unhide|move|info|reload>
+    permission: essentialsc.warpadmin
+
+  afk:
+    description: Toggle your AFK status
+    usage: /afk
+    permission: essentialsc.afk
+
+  afklist:
+    description: List all AFK players
+    usage: /afklist
+    permission: essentialsc.afklist
+
+permissions:
+  essentialsc.heal:
+    description: Heal command
+    default: true
+
+  essentialsc.balance:
+    description: Check own balance
+    default: true
+
+  essentialsc.balance.others:
+    description: Check others' balance
+    default: op
+
+  essentialsc.pay:
+    description: Pay other players
+    default: true
+
+  essentialsc.eco.admin:
+    description: Admin economy management
+    default: op
+
+  essentialsc.baltop:
+    description: View top balances
+    default: true
+
+  essentialsc.tpa:
+    description: Request teleport to player
+    default: true
+
+  essentialsc.tpahere:
+    description: Request player to teleport to you
+    default: true
+
+  essentialsc.tpaccept:
+    description: Accept teleport requests
+    default: true
+
+  essentialsc.tpdeny:
+    description: Deny teleport requests
+    default: true
+
+  essentialsc.tpcancel:
+    description: Cancel outgoing requests
+    default: true
+
+  essentialsc.tpaignore:
+    description: Ignore players
+    default: true
+
+  essentialsc.tpatoggle:
+    description: Toggle TPA on/off
+    default: true
+
+  essentialsc.tpaqueue:
+    description: View request queue
+    default: true
+
+  essentialsc.tpa.bypasscooldown:
+    description: Bypass TPA cooldown
+    default: op
+
+  essentialsc.tpa.bypasscost:
+    description: Bypass TPA cost
+    default: op
+
+  essentialsc.sethome:
+    description: Allow setting homes
+    default: true
+
+  essentialsc.home:
+    description: Allow teleporting to homes
+    default: true
+
+  essentialsc.delhome:
+    description: Allow deleting homes
+    default: true
+
+  essentialsc.homes:
+    description: Allow listing homes
+    default: true
+
+  essentialsc.sethome.1:
+    description: Allow 1 home
+    default: false
+
+  essentialsc.sethome.2:
+    description: Allow 2 homes
+    default: false
+
+  essentialsc.sethome.3:
+    description: Allow 3 homes
+    default: false
+
+  essentialsc.sethome.5:
+    description: Allow 5 homes
+    default: false
+
+  essentialsc.sethome.10:
+    description: Allow 10 homes
+    default: false
+
+  essentialsc.sethome.25:
+    description: Allow 25 homes
+    default: false
+
+  essentialsc.sethome.unlimited:
+    description: Allow unlimited homes
+    default: op
+
+  essentialsc.sethome.admin:
+    description: Bypass home limits and blocked worlds
+    default: op
+
+  essentialsc.home.admin:
+    description: Teleport to other players' homes
+    default: op
+
+  essentialsc.spawn:
+    description: Allow teleporting to spawn
+    default: true
+
+  essentialsc.spawn.admin:
+    description: Bypass spawn cooldowns/warmup and teleport others
+    default: op
+
+  essentialsc.setspawn:
+    description: Allow setting the spawn location
+    default: op
+
+  essentialsc.back:
+    description: Return to previous location
+    default: true
+
+  essentialsc.back.admin:
+    description: Bypass cooldowns and warmup for /back
+    default: op
+
+  essentialsc.kits.*:
+    description: Access to all kit features
+    default: op
+    children:
+      essentialsc.kits.admin: true
+
+  essentialsc.kits.admin:
+    description: Admin kit management
+    default: op
+
+  essentialsc.kits.list:
+    description: View available kits
+    default: true
+
+  essentialsc.scoreboard.toggle:
+    default: true
+    description: Reload the Scoreboard
+
+  essentialsc.scoreboard.reload:
+    default: op
+    description: Reload the scoreboard
+
+  essentialsc.heal.others:
+    default: op
+    description: Heal other players
+
+  essentialsc.feed.others:
+    default: op
+    description: Feed other players
+
+  essentialsc.ping.others:
+    default: op
+    description: See the ping of other players
+
+  essentialsc.fly.disable-on-join:
+    description: Auto disable /fly on join
+
+  essentialsc.god.others:
+    description: Enable / Disable god mode for others
+    default: op
+
+  essentialsc.invsee.modify:
+    description: Modify other inventories
+    default: op
+
+  essentialsc.clearinventory.others:
+    description: Clear other players inventories
+    default: op
+
+  essentialsc.enderchest.others:
+    description: View other players enderchests
+    default: op
+
+  essentialsc.endersee.modify:
+    description: Modify items in other players enderchests
+    default: op
+
+  essentialsc.speed:
+    description: Access to speed command
+    default: op
+
+  essentialsc.speed.reset:
+    description: Reset speed to default
+    default: op
+
+  essentialsc.speed.walk:
+    description: Change walk speed
+    default: op
+
+  essentialsc.speed.fly:
+    description: Change fly speed
+    default: op
+
+  essentialsc.rename.bypass:
+    description: bypass rename config options
+    default: op
+
+  essentialsc.repair.others:
+    default: op
+    description: Allow repairing other players items
+
+  essentialsc.nick.others:
+    default: op
+    description: Allow setting others' nicknames
+
+  essentialsc.nick.reset:
+    default: op
+    description: Allow resetting/removing others' nicknames
+
+  essentialsc.playtime.others:
+    description: Allows checking other players playtime
+    default: op
+
+  essentialsc.shop.admin:
+    default: op
+    description: Allow reloading shop configuration
+
+  essentialsc.shop.bypass:
+    default: op
+    description: Bypass shop restrictions
+
+  essentialsc.hat:
+    description: Allows using /hat command
+    default: true
+
+  essentialsc.hat.blocks:
+    description: Allows wearing blocks as hats (when blocked in config)
+    default: op
+
+  essentialsc.hat.binding_bypass:
+    description: Allows replacing helmets with curse of binding
+    default: op
+
+  essentialsc.sudo:
+    description: Allows using /sudo
+    default: op
+
+  essentialsc.sudo.exempt:
+    description: Prevents being targeted by sudo
+    default: op
+
+  essentialsc.sudo.override:
+    description: Allows sudoing exempt players
+    default: false
+
+  essentialsc.kick:
+    description: Allows kicking players
+    default: op
+
+  essentialsc.kick.others:
+    description: Allows kicking other players (implied by base permission)
+    default: op
+
+  essentialsc.kick.exempt:
+    description: Prevents the player from being kicked
+    default: op
+
+  essentialsc.kick.exempt.bypass:
+    description: Allows kicking exempt players
+    default: false
+
+  essentialsc.kick.notify:
+    description: Receive broadcast notifications when players are kicked
+    default: op
+
+  essentialsc.ban:
+    description: Ban players
+    default: op
+
+  essentialsc.ban.exempt:
+    description: Cannot be banned
+    default: op
+
+  essentialsc.ban.exempt.bypass:
+    description: Can ban exempt players
+    default: false
+
+  essentialsc.ban.notify:
+    description: Receive ban notifications
+    default: op
+
+  essentialsc.unban:
+    description: Unban players
+    default: op
+
+  essentialsc.mute:
+    description: Mute players
+    default: op
+
+  essentialsc.mute.exempt:
+    description: Cannot be muted
+    default: op
+
+  essentialsc.mute.exempt.bypass:
+    description: Can mute exempt players
+    default: false
+
+  essentialsc.mute.notify:
+    description: Receive mute notifications
+    default: op
+
+  essentialsc.unmute:
+    description: Unmute players
+    default: op
+
+  essentialsc.checkpunish:
+    description: Check punishment status
+    default: op
+
+  essentialsc.checkpunish.others:
+    description: Check anyone's punishment status
+    default: op
+
+  essentialsc.ignore:
+    description: Ignore/unignore players
+    default: true
+
+  essentialsc.ignore.exempt:
+    description: Cannot be ignored
+    default: op
+
+  essentialsc.msg:
+    description: Send private messages
+    default: true
+
+  essentialsc.msg.spy:
+    description: See all private messages
+    default: op
+
+  essentialsc.reply:
+    description: Reply to messages
+    default: true
+
+  essentialsc.seen:
+    description: Check online players
+    default: true
+
+  essentialsc.seen.offline:
+    description: Check offline players
+    default: op
+
+  essentialsc.seen.ip:
+    description: See player IP addresses
+    default: op
+
+  essentialsc.seen.uuid:
+    description: See player UUID
+    default: op
+
+  essentialsc.seen.exempt:
+    description: IP/location hidden from seen
+    default: op
+
+  essentialsc.top:
+    description: Teleport to top block
+    default: true
+
+  essentialsc.ptime:
+    description: Set personal time
+    default: true
+
+  essentialsc.pweather:
+    description: Set personal weather
+    default: true
+
+  essentialsc.ah.use:
+    description: Allows access to the Auction House
+    default: true
+
+  essentialsc.ah.sell:
+    description: Allows selling items in the Auction House
+    default: true
+
+  essentialsc.ah.buy:
+    description: Allows buying items from the Auction House
+    default: true
+
+  essentialsc.ah.cancel:
+    description: Allows canceling own auctions
+    default: true
+
+  essentialsc.ah.admin:
+    description: Allows canceling any auction and full admin control
+    default: op
+
+  essentialsc.ah.bypass.limit:
+    description: Bypasses the max auctions per player limit
+    default: op
+
+  essentialsc.ah.bypass.price.min:
+    description: Bypasses the minimum price restriction
+    default: op
+
+  essentialsc.ah.bypass.price.max:
+    description: Bypasses the maximum price restriction
+    default: op
+
+  essentialsc.ah.reload:
+    description: Allows reloading Auction House configuration
+    default: op
+
+  essentialsc.ah.expired.others:
+    description: Allows claiming expired items from other players
+    default: op
+
+  essentialsc.warp:
+    description: Allow using warp command
+    default: true
+
+  essentialsc.warp.others:
+    description: Warp other players
+    default: op
+
+  essentialsc.warp.bypass:
+    description: Bypass warp-specific permissions
+    default: op
+
+  essentialsc.warp.bypass.cooldown:
+    description: Bypass warp cooldown
+    default: op
+
+  essentialsc.warp.bypass.warmup:
+    description: Bypass warp warmup
+    default: op
+
+  essentialsc.warp.free:
+    description: Free warps regardless of cost
+    default: op
+
+  essentialsc.setwarp:
+    description: Create warps
+    default: op
+
+  essentialsc.setwarp.overwrite:
+    description: Overwrite existing warps
+    default: op
+
+  essentialsc.setwarp.unlimited:
+    description: Bypass warp creation limits
+    default: op
+
+  essentialsc.delwarp:
+    description: Delete own warps
+    default: op
+
+  essentialsc.delwarp.own:
+    description: Delete warps starting with player name
+    default: op
+
+  essentialsc.delwarp.others:
+    description: Delete other players' warps
+    default: op
+
+  essentialsc.delwarp.all:
+    description: Delete any warp
+    default: op
+
+  essentialsc.warps:
+    description: List warps
+    default: true
+
+  essentialsc.warpadmin:
+    description: Admin warp management
+    default: op
+
+  essentialsc.afk.bypass.auto:
+    description: Prevents automatic AFK detection
+    default: op
+
+  essentialsc.afk.bypass.kick:
+    description: Prevents being kicked for AFK
+    default: op
+
+  essentialsc.afk.see.hidden:
+    description: See detailed AFK info in /afklist
+    default: op
+
+  essc.version.notify:
+    description: Notifies admins of updates on join
+    default: op
+
+  essentialsc.eco.give:
+    description: Allow giving money to players
+    default: op
+
+  essentialsc.eco.take:
+    description: Allow taking money from players
+    default: op
+
+  essentialsc.eco.set:
+    description: Allow setting player balances
+    default: op
+
+  essentialsc.eco.reset:
+    description: Allow resetting player balances
+    default: op
+
+  essentialsc.eco.everyone:
+    description: Allow using @everyone for mass operations
+    default: op
+
+
