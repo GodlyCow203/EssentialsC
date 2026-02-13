@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'io.github.goooler.shadow' version '8.1.7'
+}
+
+group = 'net.godlycow.org'
+version = '4.0.7'
+description = 'A lightweight yet powerful Minecraft plugin inspired by EssentialsX'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.thenextlvl.net/releases' }
+}
+
+dependencies {
+    // Paper API (provided - already in server)
+    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+
+    // Optional dependencies
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'com.github.placeholderapi:placeholderapi:2.11.6'
+
+    // Adventure API
+    implementation 'net.kyori:adventure-api:4.17.0'
+    implementation 'net.kyori:adventure-text-serializer-gson:4.17.0'
+    implementation files('libs/log4j-core-2.23.0.jar')
+    compileOnly 'net.kyori:adventure-text-serializer-legacy:4.17.0'
+
+    // Utilities
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.json:json:20251224'
+
+    // Metrics
+    implementation 'org.bstats:bstats-bukkit:3.1.0'
+    implementation 'dev.faststats.metrics:bukkit:0.14.0'
+}
+
+tasks.named('compileJava') {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+shadowJar {
+    // Shade only bstats, relocate it to avoid conflicts
+    relocate 'org.bstats', 'net.godlycow.org.essc.libs.bstats'
+
+    // Exclude module-info.class and problematic files
+    exclude 'module-info.class'
+    exclude 'META-INF/versions/**'
+
+    // Set the final JAR name
+    archiveFileName = "EssentialsC-${project.version}.jar"
+
+    // Disable minimization to avoid issues
+    minimize()
+}
+
+build {
+    dependsOn shadowJar
+}
+
+jar {
+    // Disable the default JAR task and use shadowJar instead
+    enabled = false
+}
+
