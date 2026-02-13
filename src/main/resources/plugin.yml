@@ -1,0 +1,4 @@
+name: EssCMaven
+version: '0.0.1'
+main: net.godlycow.org.essCMaven.EssCMaven
+api-version: '1.21'
