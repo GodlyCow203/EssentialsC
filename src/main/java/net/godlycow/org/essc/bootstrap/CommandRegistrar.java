@@ -19,6 +19,7 @@ import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.command.warp.*;
 import net.godlycow.org.essc.language.LanguageCommand;
+import net.godlycow.org.essc.migration.MigrationCommand;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import org.bukkit.command.PluginCommand;
@@ -110,6 +111,7 @@ public class CommandRegistrar {
         register("warpadmin", new WarpAdminCommand(plugin));
         register("afk", new AFKCommand(plugin));
         register("afklist", new AFKListCommand(plugin));
+        register("migration", new MigrationCommand(plugin));
     }
 
     private void register(String name, Command command) {

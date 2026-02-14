@@ -320,4 +320,16 @@ public class EconomyManager implements EconomyService, Listener {
     public void shutdown() {
         database.disconnect();
     }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public BigDecimal getStartingBalance() {
+        return startingBalance;
+    }
+
+    public EssentialsC getPlugin() {
+        return plugin;
+    }
 }

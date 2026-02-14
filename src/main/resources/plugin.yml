@@ -370,6 +370,11 @@ commands:
     usage: /afklist
     permission: essentialsc.afklist
 
+  migration:
+    description: Migrate EssX data to EssC
+    usage: /migration
+    permission: essentialsc.migration
+
 permissions:
   essentialsc.heal:
     description: Heal command

@@ -7,8 +7,15 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.ServicePriority;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class VaultHook {
     private final EconomyManager economyManager;
@@ -31,6 +38,88 @@ public class VaultHook {
 
     public boolean isHooked() {
         return hooked;
+    }
+    private BigDecimal getBalanceSync(UUID uuid) {
+        try (Connection conn = economyManager.getDatabase().getConnection()) {
+            if (conn == null) return BigDecimal.ZERO;
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT balance FROM economy WHERE uuid = ?"
+            )) {
+                ps.setString(1, uuid.toString());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return BigDecimal.valueOf(rs.getDouble("balance"));
+                }
+            }
+        } catch (SQLException e) {
+            economyManager.getPlugin().getLogger().severe("Vault sync balance error: " + e.getMessage());
+        }
+        return BigDecimal.ZERO;
+    }
+
+    private boolean hasAccountSync(UUID uuid) {
+        try (Connection conn = economyManager.getDatabase().getConnection()) {
+            if (conn == null) return false;
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT 1 FROM economy WHERE uuid = ?"
+            )) {
+                ps.setString(1, uuid.toString());
+                return ps.executeQuery().next();
+            }
+        } catch (SQLException e) {
+            economyManager.getPlugin().getLogger().severe("Vault sync hasAccount error: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean withdrawSync(UUID uuid, BigDecimal amount) {
+        try (Connection conn = economyManager.getDatabase().getConnection()) {
+            if (conn == null) return false;
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE economy SET balance = balance - ?, last_updated = strftime('%s', 'now') WHERE uuid = ? AND balance >= ?"
+            )) {
+                ps.setDouble(1, amount.doubleValue());
+                ps.setString(2, uuid.toString());
+                ps.setDouble(3, amount.doubleValue());
+                return ps.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+            economyManager.getPlugin().getLogger().severe("Vault sync withdraw error: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean depositSync(UUID uuid, BigDecimal amount) {
+        try (Connection conn = economyManager.getDatabase().getConnection()) {
+            if (conn == null) return false;
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE economy SET balance = balance + ?, last_updated = strftime('%s', 'now') WHERE uuid = ?"
+            )) {
+                ps.setDouble(1, amount.doubleValue());
+                ps.setString(2, uuid.toString());
+                if (ps.executeUpdate() > 0) {
+                    return true;
+                }
+            }
+
+            String name = Bukkit.getOfflinePlayer(uuid).getName();
+            if (name == null) return false;
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO economy (uuid, username, balance) VALUES (?, ?, ?)"
+            )) {
+                ps.setString(1, uuid.toString());
+                ps.setString(2, name);
+                ps.setDouble(3, amount.doubleValue());
+                return ps.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+            economyManager.getPlugin().getLogger().severe("Vault sync deposit error: " + e.getMessage());
+        }
+        return false;
     }
 
     private class VaultEconomy implements Economy {
@@ -77,11 +166,7 @@ public class VaultHook {
 
         @Override
         public boolean hasAccount(OfflinePlayer player) {
-            try {
-                return economyManager.hasAccount(player.getUniqueId()).get();
-            } catch (Exception e) {
-                return false;
-            }
+            return hasAccountSync(player.getUniqueId());
         }
 
         @Override
@@ -101,11 +186,7 @@ public class VaultHook {
 
         @Override
         public double getBalance(OfflinePlayer player) {
-            try {
-                return economyManager.getBalance(player.getUniqueId()).get().doubleValue();
-            } catch (Exception e) {
-                return 0;
-            }
+            return getBalanceSync(player.getUniqueId()).doubleValue();
         }
 
         @Override
@@ -125,11 +206,7 @@ public class VaultHook {
 
         @Override
         public boolean has(OfflinePlayer player, double amount) {
-            try {
-                return economyManager.has(player.getUniqueId(), BigDecimal.valueOf(amount)).get();
-            } catch (Exception e) {
-                return false;
-            }
+            return getBalanceSync(player.getUniqueId()).compareTo(BigDecimal.valueOf(amount)) >= 0;
         }
 
         @Override
@@ -149,14 +226,16 @@ public class VaultHook {
 
         @Override
         public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
-            try {
-                boolean success = economyManager.withdraw(player.getUniqueId(), BigDecimal.valueOf(amount)).get();
-                double newBal = success ? getBalance(player) : getBalance(player) + amount;
-                return new EconomyResponse(amount, newBal,
-                        success ? EconomyResponse.ResponseType.SUCCESS : EconomyResponse.ResponseType.FAILURE,
-                        success ? null : "Insufficient funds");
-            } catch (Exception e) {
-                return new EconomyResponse(0, getBalance(player), EconomyResponse.ResponseType.FAILURE, e.getMessage());
+            BigDecimal amt = BigDecimal.valueOf(amount);
+            double newBal = getBalanceSync(player.getUniqueId()).subtract(amt).doubleValue();
+
+            boolean success = withdrawSync(player.getUniqueId(), amt);
+
+            if (success) {
+                return new EconomyResponse(amount, newBal, EconomyResponse.ResponseType.SUCCESS, null);
+            } else {
+                double current = getBalanceSync(player.getUniqueId()).doubleValue();
+                return new EconomyResponse(0, current, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
             }
         }
 
@@ -177,12 +256,13 @@ public class VaultHook {
 
         @Override
         public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
-            try {
-                economyManager.deposit(player.getUniqueId(), BigDecimal.valueOf(amount)).get();
-                return new EconomyResponse(amount, getBalance(player), EconomyResponse.ResponseType.SUCCESS, null);
-            } catch (Exception e) {
-                return new EconomyResponse(0, getBalance(player), EconomyResponse.ResponseType.FAILURE, e.getMessage());
-            }
+            BigDecimal amt = BigDecimal.valueOf(amount);
+            boolean success = depositSync(player.getUniqueId(), amt);
+            double newBal = getBalanceSync(player.getUniqueId()).doubleValue();
+
+            return new EconomyResponse(amount, newBal,
+                    success ? EconomyResponse.ResponseType.SUCCESS : EconomyResponse.ResponseType.FAILURE,
+                    success ? null : "Deposit failed");
         }
 
         @Override
@@ -262,11 +342,10 @@ public class VaultHook {
 
         @Override
         public boolean createPlayerAccount(OfflinePlayer player) {
-            try {
-                return economyManager.createAccount(player.getUniqueId(), player.getName()).get();
-            } catch (Exception e) {
+            if (hasAccountSync(player.getUniqueId())) {
                 return false;
             }
+            return depositSync(player.getUniqueId(), economyManager.getStartingBalance());
         }
 
         @Override

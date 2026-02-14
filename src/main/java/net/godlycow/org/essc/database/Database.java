@@ -29,7 +29,6 @@ public class Database {
         if (connection != null && !connection.isClosed()) return;
 
         connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
-        plugin.debug("Connected to SQLite database: " + new File(dbPath).getName());
     }
 
     public void disconnect() {
