@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>আপনি অনেকক্ষণ AFK থাকার কারণে কিক করা হয়েছে!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> <color:#FFFFFF><duration></color> মিনিট AFK থাকার কারণে কিক করা হয়েছে</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>ব্যবহার: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>ব্যবহার: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>ব্যবহার: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>ব্যবহার: /migration <essentialsx|status|progress> [বিকল্প]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>অজানা উপ-কমান্ড। সাহায্যের জন্য /migration ব্যবহার করুন।</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX ফোল্ডার পাওয়া যায়নি:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== ড্রাই রান মোড - কোনো পরিবর্তন করা হবে না ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX মাইগ্রেশন শুরু হচ্ছে...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>আমদানি সেটিংস:</color> <color:#FFB300>ব্যবহারকারী=<users>, ওয়ার্প=<warps>, অর্থনীতি=<economy>, বাড়ি=<homes>, ডাকনাম=<nicks>, মিউট=<mutes>, ব্যান=<bans>, ড্রাইরান=<dryrun>, সংঘাত=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>মাইগ্রেশন সম্পন্ন!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>ফলাফল:</color> <color:#FFB300>ব্যবহারকারী <users>/<usersFailed>, ওয়ার্প <warps>/<warpsFailed>, বাড়ি <homes> (এড়ানো হয়েছে <homesSkipped>), অর্থনীতি <economy>, ডাকনাম <nicks>, মিউট <mutes>, ব্যান <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>মাইগ্রেশনের সময় সতর্কতা:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... এবং আরও <count>টি সতর্কতা</color>",
+  "migration.error": "<prefix> <color:#FF4444>মাইগ্রেশন ব্যর্থ:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>সম্পন্ন - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>পর্যায়:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>ব্যবহারকারী:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>ওয়ার্প:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>সম্পন্ন | অতিবাহিত:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>কোনো সক্রিয় মাইগ্রেশন চলছে না।</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== মাইগ্রেশন স্থিতি ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX ডেটা:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  ব্যবহারকারী ফাইল:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  ওয়ার্প ফাইল:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>ব্যান ফাইল (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>ম্যানেজার:</color> <color:#FFB300>অর্থনীতি=<economy>, বাড়ি=<homes>, ডাকনাম=<nicks>, ওয়ার্প=<warps>, শাস্তি=<punishments></color>"
 }

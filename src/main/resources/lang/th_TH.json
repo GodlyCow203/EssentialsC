@@ -549,5 +549,27 @@
   "afk.kick.message": "<color:#FF4444>คุณถูกเตะเพราะอยู่ในโหมด AFK นานเกินไป!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> ถูกเตะเพราะอยู่ในโหมด AFK เป็นเวลา <duration> นาที</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>วิธีใช้: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>วิธีใช้: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>วิธีใช้: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>วิธีใช้: /migration <essentialsx|status|progress> [ตัวเลือก]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>คำสั่งย่อยไม่รู้จัก ใช้ /migration เพื่อดูความช่วยเหลือ</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>ไม่พบโฟลเดอร์ EssentialsX ที่:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== โหมดทดสอบ - จะไม่มีการเปลี่ยนแปลงใดๆ ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>กำลังเริ่มการย้ายข้อมูล EssentialsX...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>การตั้งค่าการนำเข้า:</color> <color:#FFB300>ผู้เล่น=<users>, จุดวาร์ป=<warps>, เศรษฐกิจ=<economy>, บ้าน=<homes>, ชื่อเล่น=<nicks>, ปิดเสียง=<mutes>, แบน=<bans>, ทดสอบ=<dryrun>, ข้อขัดแย้ง=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>การย้ายข้อมูลเสร็จสมบูรณ์!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>ผลลัพธ์:</color> <color:#FFB300>ผู้เล่น <users>/<usersFailed>, จุดวาร์ป <warps>/<warpsFailed>, บ้าน <homes> (ข้าม <homesSkipped>), เศรษฐกิจ <economy>, ชื่อเล่น <nicks>, ปิดเสียง <mutes>, แบน <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>คำเตือนระหว่างการย้ายข้อมูล:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... และอีก <count> คำเตือน</color>",
+  "migration.error": "<prefix> <color:#FF4444>การย้ายข้อมูลล้มเหลว:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>เสร็จสมบูรณ์ - เวลาที่เหลือ:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>ขั้นตอน:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>ผู้เล่น:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>จุดวาร์ป:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>เสร็จสมบูรณ์ | ใช้เวลา:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| เวลาที่เหลือ:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>ไม่มีการย้ายข้อมูลที่กำลังดำเนินอยู่</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== สถานะการย้ายข้อมูล ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>ข้อมูล EssentialsX:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  ไฟล์ผู้เล่น:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  ไฟล์จุดวาร์ป:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>ไฟล์แบน (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>ตัวจัดการ:</color> <color:#FFB300>เศรษฐกิจ=<economy>, บ้าน=<homes>, ชื่อเล่น=<nicks>, จุดวาร์ป=<warps>, การลงโทษ=<punishments></color>"
 }

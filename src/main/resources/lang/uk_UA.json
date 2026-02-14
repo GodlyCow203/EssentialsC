@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>Вас вигнано за надто довге перебування в AFK!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> був вигнаний за перебування в AFK протягом <duration> хвилин</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>Використання: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>Використання: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>Використання: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>Використання: /migration <essentialsx|status|progress> [опції]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>Невідома підкоманда. Використовуйте /migration для довідки.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>Папку EssentialsX не знайдено за адресою:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== РЕЖИМ ПРОБНОГО ЗАПУСКУ - Зміни не будуть внесені ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>Початок міграції EssentialsX...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>Налаштування імпорту:</color> <color:#FFB300>Користувачі=<users>, Телепорти=<warps>, Економіка=<economy>, Домівки=<homes>, Ніки=<nicks>, Мути=<mutes>, Бани=<bans>, Пробний=<dryrun>, Конфлікт=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>Міграцію завершено!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>Результати:</color> <color:#FFB300>Користувачі <users>/<usersFailed>, Телепорти <warps>/<warpsFailed>, Домівки <homes> (пропущено <homesSkipped>), Економіка <economy>, Ніки <nicks>, Мути <mutes>, Бани <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>Попередження під час міграції:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... та ще <count> попереджень</color>",
+  "migration.error": "<prefix> <color:#FF4444>Міграцію не вдалося:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>завершено - ОЧЗ:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>Етап:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>Користувачі:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>Телепорти:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>завершено | Минуло:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ОЧЗ:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>Немає активної міграції.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== Статус міграції ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>Дані EssentialsX:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  Файли користувачів:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  Файли телепортів:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>Файл банів (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>Менеджери:</color> <color:#FFB300>Економіка=<economy>, Домівки=<homes>, Ніки=<nicks>, Телепорти=<warps>, Покарання=<punishments></color>"
 }

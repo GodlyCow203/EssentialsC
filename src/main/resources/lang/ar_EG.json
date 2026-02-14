@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>لقد تم طردك لأنك بعيد لفترة طويلة!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300>تم طرد <player> لأنه بعيد لمدة <duration> دقيقة</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>الاستخدام: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>الاستخدام: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>الاستخدام: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>الاستخدام: /migration <essentialsx|status|progress> [اختيارات]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>أمر فرعي مش معروف. استخدم /migration للمساعدة.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>مش لاقي مجلد EssentialsX في:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== وضع التشغيل الجاف - مش هيتم عمل أي تغييرات ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>بدء ترحيل EssentialsX...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>إعدادات الاستيراد:</color> <color:#FFB300>المستخدمين=<users>, الورب=<warps>, الاقتصاد=<economy>, البيوت=<homes>, الكنيات=<nicks>, الميوت=<mutes>, البان=<bans>, جاف=<dryrun>, التعارض=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>الترحيل خلص!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>النتايج:</color> <color:#FFB300>المستخدمين <users>/<usersFailed>, الورب <warps>/<warpsFailed>, البيوت <homes> (اتخطى <homesSkipped>), الاقتصاد <economy>, الكنيات <nicks>, الميوت <mutes>, البان <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>تحذيرات أثناء الترحيل:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... و <count> تحذيرات تانية</color>",
+  "migration.error": "<prefix> <color:#FF4444>الترحيل فشل:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>اكتمل - الوقت المتبقي:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>المرحلة:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>المستخدمين:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>الورب:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>اكتمل | الوقت اللي فات:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| الوقت المتبقي:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>مفيش ترحيل شغال دلوقتي.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== حالة الترحيل ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>بيانات EssentialsX:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  ملفات المستخدمين:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  ملفات الورب:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>ملف البان (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>المديرين:</color> <color:#FFB300>الاقتصاد=<economy>, البيوت=<homes>, الكنيات=<nicks>, الورب=<warps>, العقوبات=<punishments></color>"
 }

@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>너무 오랫동안 자리를 비워 추방되었습니다!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player>님이 <duration>분 동안 자리를 비워 추방되었습니다</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>사용법: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>사용법: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>사용법: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>사용법: /migration <essentialsx|status|progress> [옵션]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>알 수 없는 하위 명령어입니다. 도움말을 보려면 /migration을 사용하세요.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX 폴더를 찾을 수 없습니다:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== 드라이 런 모드 - 변경 사항이 적용되지 않습니다 ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX 마이그레이션 시작 중...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>가져오기 설정:</color> <color:#FFB300>사용자=<users>, 워프=<warps>, 경제=<economy>, 집=<homes>, 닉네임=<nicks>, 뮤트=<mutes>, 밴=<bans>, 드라이런=<dryrun>, 충돌=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>마이그레이션 완료!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>결과:</color> <color:#FFB300>사용자 <users>/<usersFailed>, 워프 <warps>/<warpsFailed>, 집 <homes> (건너뜀 <homesSkipped>), 경제 <economy>, 닉네임 <nicks>, 뮤트 <mutes>, 밴 <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>마이그레이션 중 경고:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... 및 <count>개의 추가 경고</color>",
+  "migration.error": "<prefix> <color:#FF4444>마이그레이션 실패:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>완료 - 남은 시간:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>단계:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>사용자:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>워프:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>완료 | 경과:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| 남은 시간:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>진행 중인 마이그레이션이 없습니다.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== 마이그레이션 상태 ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX 데이터:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  사용자 파일:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  워프 파일:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>밴 파일 (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>관리자:</color> <color:#FFB300>경제=<economy>, 집=<homes>, 닉네임=<nicks>, 워프=<warps>, 처벌=<punishments></color>"
 }

@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>Ikaw ay ni-kick dahil sa masyadong tagal na AFK!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300>Si <player> ay ni-kick dahil AFK sa loob ng <duration> minuto</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>Paggamit: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>Paggamit: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>Paggamit: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>Paggamit: /migration <essentialsx|status|progress> [mga opsyon]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>Hindi kilalang subcommand. Gamitin ang /migration para sa tulong.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>Hindi nahanap ang EssentialsX folder sa:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== DRY RUN MODE - Walang mga pagbabagong gagawin ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>Nagsisimula ang EssentialsX migration...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>Mga setting ng pag-import:</color> <color:#FFB300>Mga User=<users>, Warps=<warps>, Ekonomiya=<economy>, Mga Bahay=<homes>, Mga Palayaw=<nicks>, Mutes=<mutes>, Bans=<bans>, DryRun=<dryrun>, Conflict=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>Tapos na ang migration!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>Mga Resulta:</color> <color:#FFB300>Mga User <users>/<usersFailed>, Warps <warps>/<warpsFailed>, Mga Bahay <homes> (nilaktawan <homesSkipped>), Ekonomiya <economy>, Mga Palayaw <nicks>, Mutes <mutes>, Bans <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>Mga Babala sa panahon ng migration:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... at <count> pang mga babala</color>",
+  "migration.error": "<prefix> <color:#FF4444>Nabigo ang migration:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>kumpleto - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>Yugto:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>Mga User:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>Warps:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>kumpleto | Lumipas:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>Walang aktibong migration na nagaganap.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== Katayuan ng Migration ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX Data:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  Mga file ng user:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  Mga file ng warp:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>File ng bans (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>Mga Manager:</color> <color:#FFB300>Ekonomiya=<economy>, Mga Bahay=<homes>, Mga Palayaw=<nicks>, Warps=<warps>, Mga Parusa=<punishments></color>"
 }

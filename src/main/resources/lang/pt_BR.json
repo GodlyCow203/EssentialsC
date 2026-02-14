@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>Você foi expulso por ficar AFK por muito tempo!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> foi expulso por ficar AFK por <duration> minutos</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>Uso: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>Uso: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>Uso: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>Uso: /migration <essentialsx|status|progress> [opções]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>Subcomando desconhecido. Use /migration para ajuda.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>Pasta EssentialsX não encontrada em:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== MODO DE SIMULAÇÃO - Nenhuma alteração será feita ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>Iniciando migração EssentialsX...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>Configurações de importação:</color> <color:#FFB300>Usuários=<users>, Warps=<warps>, Economia=<economy>, Casas=<homes>, Apelidos=<nicks>, Mutes=<mutes>, Bans=<bans>, Simulação=<dryrun>, Conflito=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>Migração concluída!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>Resultados:</color> <color:#FFB300>Usuários <users>/<usersFailed>, Warps <warps>/<warpsFailed>, Casas <homes> (puladas <homesSkipped>), Economia <economy>, Apelidos <nicks>, Mutes <mutes>, Bans <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>Avisos durante a migração:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... e mais <count> avisos</color>",
+  "migration.error": "<prefix> <color:#FF4444>Migração falhou:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>concluído - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>Etapa:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>Usuários:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>Warps:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>concluído | Decorrido:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>Nenhuma migração ativa em andamento.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== Status da Migração ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>Dados EssentialsX:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  Arquivos de usuários:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  Arquivos de warps:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>Arquivo de bans (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>Gerenciadores:</color> <color:#FFB300>Economia=<economy>, Casas=<homes>, Apelidos=<nicks>, Warps=<warps>, Punições=<punishments></color>"
 }

@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>நீண்ட நேரம் AFK இருந்ததால் நீங்கள் வெளியேற்றப்பட்டீர்கள்!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> <duration> நிமிடங்கள் AFK இருந்ததால் வெளியேற்றப்பட்டார்</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>பயன்பாடு: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>பயன்பாடு: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>பயன்பாடு: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>பயன்பாடு: /migration <essentialsx|status|progress> [விருப்பங்கள்]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>தெரியாத துணைக் கட்டளை. உதவிக்கு /migration பயன்படுத்தவும்.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX கோப்புறை காணப்படவில்லை:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== உலர்ந்த ஓட்ட முறை - எந்த மாற்றங்களும் செய்யப்படாது ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX இடம்பெயர்வு தொடங்குகிறது...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>இறக்குமதி அமைப்புகள்:</color> <color:#FFB300>பயனர்கள்=<users>, வார்ப்=<warps>, பொருளாதாரம்=<economy>, வீடுகள்=<homes>, புனைப்பெயர்கள்=<nicks>, மௌனங்கள்=<mutes>, தடைகள்=<bans>, உலர்ந்த=<dryrun>, மோதல்=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>இடம்பெயர்வு முடிந்தது!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>முடிவுகள்:</color> <color:#FFB300>பயனர்கள் <users>/<usersFailed>, வார்ப் <warps>/<warpsFailed>, வீடுகள் <homes> (தவிர்க்கப்பட்டது <homesSkipped>), பொருளாதாரம் <economy>, புனைப்பெயர்கள் <nicks>, மௌனங்கள் <mutes>, தடைகள் <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>இடம்பெயர்வின் போது எச்சரிக்கைகள்:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... மேலும் <count> எச்சரிக்கைகள்</color>",
+  "migration.error": "<prefix> <color:#FF4444>இடம்பெயர்வு தோல்வியடைந்தது:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>முடிந்தது - எச்சரிக்கை:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>நிலை:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>பயனர்கள்:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>வார்ப்:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>முடிந்தது | கழிந்தது:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| எச்சரிக்கை:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>செயலில் இடம்பெயர்வு எதுவும் இல்லை.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== இடம்பெயர்வு நிலை ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX தரவு:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  பயனர் கோப்புகள்:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  வார்ப் கோப்புகள்:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>தடை கோப்பு (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>மேலாளர்கள்:</color> <color:#FFB300>பொருளாதாரம்=<economy>, வீடுகள்=<homes>, புனைப்பெயர்கள்=<nicks>, வார்ப்=<warps>, தண்டனைகள்=<punishments></color>"
 }

@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>آپ کو AFK ہونے کے لیے بہت دیر تک نکال دیا گیا!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> کو <duration> منٹ AFK ہونے پر نکال دیا گیا</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>استعمال: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>استعمال: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>استعمال: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>استعمال: /migration <essentialsx|status|progress> [اختیارات]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>نامعلوم ذیلی کمانڈ۔ مدد کے لیے /migration استعمال کریں۔</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX فولڈر نہیں ملا:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== ڈرائی رن موڈ - کوئی تبدیلیاں نہیں ہوں گی ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX منتقلی شروع ہو رہی ہے...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>درآمد کی ترتیبات:</color> <color:#FFB300>صارفین=<users>, وارپس=<warps>, معیشت=<economy>, گھر=<homes>, عرفیات=<nicks>, خاموشیاں=<mutes>, پابندیاں=<bans>, ڈرائی رن=<dryrun>, تنازعہ=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>منتقلی مکمل ہو گئی!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>نتائج:</color> <color:#FFB300>صارفین <users>/<usersFailed>, وارپس <warps>/<warpsFailed>, گھر <homes> (چھوڑے گئے <homesSkipped>), معیشت <economy>, عرفیات <nicks>, خاموشیاں <mutes>, پابندیاں <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>منتقلی کے دوران تنبیہات:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... اور <count> مزید تنبیہات</color>",
+  "migration.error": "<prefix> <color:#FF4444>منتقلی ناکام:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>مکمل - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>مرحلہ:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>صارفین:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>وارپس:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>مکمل | گزرا وقت:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>کوئی فعال منتقلی جاری نہیں ہے۔</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== منتقلی کی حیثیت ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX ڈیٹا:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  صارف فائلیں:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  وارپ فائلیں:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>پابندی فائل (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>منتظمین:</color> <color:#FFB300>معیشت=<economy>, گھر=<homes>, عرفیات=<nicks>, وارپس=<warps>, سزائیں=<punishments></color>"
 }

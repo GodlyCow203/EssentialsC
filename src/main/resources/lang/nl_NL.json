@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>Je bent gekickt omdat je te lang AFK was!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> is gekickt omdat hij/zij <duration> minuten AFK was</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>Gebruik: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>Gebruik: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>Gebruik: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>Gebruik: /migration <essentialsx|status|progress> [opties]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>Onbekend subcommando. Gebruik /migration voor hulp.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX map niet gevonden op:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== PROEFRUN MODUS - Er worden geen wijzigingen aangebracht ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX migratie starten...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>Importinstellingen:</color> <color:#FFB300>Gebruikers=<users>, Warps=<warps>, Economie=<economy>, Huizen=<homes>, Bijnamen=<nicks>, Dempingen=<mutes>, Bans=<bans>, Proef=<dryrun>, Conflict=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>Migratie voltooid!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>Resultaten:</color> <color:#FFB300>Gebruikers <users>/<usersFailed>, Warps <warps>/<warpsFailed>, Huizen <homes> (overgeslagen <homesSkipped>), Economie <economy>, Bijnamen <nicks>, Dempingen <mutes>, Bans <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>Waarschuwingen tijdens migratie:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... en <count> waarschuwingen meer</color>",
+  "migration.error": "<prefix> <color:#FF4444>Migratie mislukt:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>voltooid - Resterend:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>Fase:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>Gebruikers:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>Warps:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>voltooid | Verstreken:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| Resterend:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>Geen actieve migratie bezig.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== Migratiestatus ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX Gegevens:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  Gebruikersbestanden:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  Warp-bestanden:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>Ban-bestand (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>Managers:</color> <color:#FFB300>Economie=<economy>, Huizen=<homes>, Bijnamen=<nicks>, Warps=<warps>, Straffen=<punishments></color>"
 }

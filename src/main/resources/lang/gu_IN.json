@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>તમે ઘણા સમયથી AFK હોવાથી કિક કરવામાં આવ્યા!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> <duration> મિનિટથી AFK હોવાથી કિક કરવામાં આવ્યા</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>વપરાશ: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>વપરાશ: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>વપરાશ: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>વપરાશ: /migration <essentialsx|status|progress> [વિકલ્પો]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>અજ્ઞાત ઉપ-આદેશ. મદદ માટે /migration વાપરો.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX ફોલ્ડર મળ્યું નથી:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== ડ્રાય રન મોડ - કોઈ ફેરફારો કરવામાં આવશે નહીં ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX માઇગ્રેશન શરૂ થઈ રહ્યું છે...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>આયાત સેટિંગ્સ:</color> <color:#FFB300>વપરાશકર્તાઓ=<users>, વાર્પ=<warps>, અર્થતંત્ર=<economy>, ઘરો=<homes>, ઉપનામો=<nicks>, મ્યૂટ=<mutes>, બેન=<bans>, ડ્રાયરન=<dryrun>, અથડામણ=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>માઇગ્રેશન પૂર્ણ થયું!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>પરિણામો:</color> <color:#FFB300>વપરાશકર્તાઓ <users>/<usersFailed>, વાર્પ <warps>/<warpsFailed>, ઘરો <homes> (છોડી દેવામાં આવ્યા <homesSkipped>), અર્થતંત્ર <economy>, ઉપનામો <nicks>, મ્યૂટ <mutes>, બેન <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>માઇગ્રેશન દરમિયાન ચેતવણીઓ:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... અને વધુ <count> ચેતવણીઓ</color>",
+  "migration.error": "<prefix> <color:#FF4444>માઇગ્રેશન નિષ્ફળ:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>પૂર્ણ - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>ચરણ:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>વપરાશકર્તાઓ:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>વાર્પ:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>પૂર્ણ | વીતેલ:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>કોઈ સક્રિય માઇગ્રેશન ચાલુ નથી.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== માઇગ્રેશન સ્થિતિ ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX ડેટા:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  વપરાશકર્તા ફાઇલો:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  વાર્પ ફાઇલો:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>બેન ફાઇલ (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>મેનેજરો:</color> <color:#FFB300>અર્થતંત્ર=<economy>, ઘરો=<homes>, ઉપનામો=<nicks>, વાર્પ=<warps>, સજાઓ=<punishments></color>"
 }

@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>तुम्हाला खूप वेळ AFK असल्यामुळे किक केले!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> ला <duration> मिनिटे AFK असल्यामुळे किक केले</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>वापर: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>वापर: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>वापर: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>वापर: /migration <essentialsx|status|progress> [पर्याय]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>अज्ञात उप-आदेश. मदतीसाठी /migration वापरा.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>EssentialsX फोल्डर सापडले नाही:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== ड्राय रन मोड - कोणतेही बदल केले जाणार नाहीत ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>EssentialsX स्थलांतर सुरू करत आहे...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>आयात सेटिंग्ज:</color> <color:#FFB300>वापरकर्ते=<users>, वार्प=<warps>, अर्थव्यवस्था=<economy>, घरे=<homes>, टोपणनावे=<nicks>, म्यूट=<mutes>, बॅन=<bans>, ड्रायरन=<dryrun>, संघर्ष=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>स्थलांतर पूर्ण झाले!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>निकाल:</color> <color:#FFB300>वापरकर्ते <users>/<usersFailed>, वार्प <warps>/<warpsFailed>, घरे <homes> (वगळले <homesSkipped>), अर्थव्यवस्था <economy>, टोपणनावे <nicks>, म्यूट <mutes>, बॅन <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>स्थलांतरादरम्यान चेतावण्या:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... आणि आणखी <count> चेतावण्या</color>",
+  "migration.error": "<prefix> <color:#FF4444>स्थलांतर अयशस्वी:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>पूर्ण - ETA:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>टप्पा:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>वापरकर्ते:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>वार्प:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>पूर्ण | लोटलेला वेळ:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| ETA:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>कोणतेही सक्रिय स्थलांतर सुरू नाही.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== स्थलांतर स्थिती ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>EssentialsX डेटा:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  वापरकर्ता फाईल्स:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  वार्प फाईल्स:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>बॅन फाईल (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>व्यवस्थापक:</color> <color:#FFB300>अर्थव्यवस्था=<economy>, घरे=<homes>, टोपणनावे=<nicks>, वार्प=<warps>, शिक्षा=<punishments></color>"
 }

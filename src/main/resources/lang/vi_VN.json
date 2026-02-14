@@ -548,5 +548,27 @@
   "afk.kick.message": "<color:#FF4444>Bạn đã bị đuổi vì AFK quá lâu!</color>",
   "afk.kick.broadcast": "<prefix> <color:#FFB300><player> đã bị đuổi vì AFK trong <duration> phút</color>",
   "command.usage.afk": "<prefix> <color:#FF4444>Cách dùng: /afk</color>",
-  "command.usage.afklist": "<prefix> <color:#FF4444>Cách dùng: /afklist</color>"
+  "command.usage.afklist": "<prefix> <color:#FF4444>Cách dùng: /afklist</color>",
+
+  "migration.usage": "<prefix> <color:#FF4444>Cách dùng: /migration <essentialsx|status|progress> [tùy chọn]</color>",
+  "migration.unknown_subcommand": "<prefix> <color:#FF4444>Lệnh con không xác định. Dùng /migration để được trợ giúp.</color>",
+  "migration.essentialsx.not_found": "<prefix> <color:#FF4444>Không tìm thấy thư mục EssentialsX tại:</color> <color:#FFB300><path></color>",
+  "migration.essentialsx.dry_run": "<prefix> <color:#FFB300>=== CHẾ ĐỘ CHẠY THỬ - Không có thay đổi nào được thực hiện ===</color>",
+  "migration.essentialsx.starting": "<prefix> <color:#FFB300>Bắt đầu di chuyển EssentialsX...</color>",
+  "migration.essentialsx.importing": "<prefix> <color:#AAAAAA>Cài đặt nhập:</color> <color:#FFB300>Người chơi=<users>, Điểm dịch chuyển=<warps>, Kinh tế=<economy>, Nhà=<homes>, Biệt danh=<nicks>, Cấm chat=<mutes>, Cấm=<bans>, Chạy thử=<dryrun>, Xung đột=<conflict></color>",
+  "migration.essentialsx.complete": "<prefix> <color:#FFB300>Di chuyển hoàn tất!</color>",
+  "migration.stats": "<prefix> <color:#AAAAAA>Kết quả:</color> <color:#FFB300>Người chơi <users>/<usersFailed>, Điểm dịch chuyển <warps>/<warpsFailed>, Nhà <homes> (bỏ qua <homesSkipped>), Kinh tế <economy>, Biệt danh <nicks>, Cấm chat <mutes>, Cấm <bans>/<bansFailed></color>",
+  "migration.warnings_header": "<prefix> <color:#FFB300>Cảnh báo trong quá trình di chuyển:</color>",
+  "migration.warning_entry": "<color:#AAAAAA>- <msg></color>",
+  "migration.warnings_more": "<color:#AAAAAA>... và <count> cảnh báo khác</color>",
+  "migration.error": "<prefix> <color:#FF4444>Di chuyển thất bại:</color> <color:#FFB300><error></color>",
+  "migration.progress": "<prefix> <color:#AAAAAA>[<stage>]</color> <color:#FFB300><percent>%</color> <color:#AAAAAA>hoàn thành - Dự kiến:</color> <color:#FFB300><eta></color>",
+  "migration.progress_detail": "<prefix> <color:#AAAAAA>Giai đoạn:</color> <color:#FFB300><stage></color><newline><color:#AAAAAA>Người chơi:</color> <color:#FFB300><users></color><newline><color:#AAAAAA>Điểm dịch chuyển:</color> <color:#FFB300><warps></color><newline><color:#FFB300><percent>%</color> <color:#AAAAAA>hoàn thành | Đã dùng:</color> <color:#FFB300><elapsed></color> <color:#AAAAAA>| Dự kiến:</color> <color:#FFB300><eta></color>",
+  "migration.no_active": "<prefix> <color:#FF4444>Không có quá trình di chuyển nào đang diễn ra.</color>",
+  "migration.status.header": "<prefix> <color:#FFB300>=== Trạng thái Di chuyển ===</color>",
+  "migration.status.essentialsx": "<prefix> <color:#AAAAAA>Dữ liệu EssentialsX:</color> <color:#FFB300><status></color>",
+  "migration.status.users": "<prefix> <color:#AAAAAA>  Tệp người chơi:</color> <color:#FFB300><count></color>",
+  "migration.status.warps": "<prefix> <color:#AAAAAA>  Tệp điểm dịch chuyển:</color> <color:#FFB300><count></color>",
+  "migration.status.bans": "<prefix> <color:#AAAAAA>Tệp cấm (banned-players.json):</color> <color:#FFB300><status></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>Quản lý:</color> <color:#FFB300>Kinh tế=<economy>, Nhà=<homes>, Biệt danh=<nicks>, Điểm dịch chuyển=<warps>, Hình phạt=<punishments></color>"
 }
