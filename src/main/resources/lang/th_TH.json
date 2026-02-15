@@ -190,7 +190,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> พร้อมใน <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>ไม่มีชุดที่พร้อมใช้งานสำหรับคุณ</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>ชุดที่ใช้ได้:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>วิธีใช้: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>ดีบั๊ก: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>ชื่อ:</color> <color:#DDDDDD><name></color>",

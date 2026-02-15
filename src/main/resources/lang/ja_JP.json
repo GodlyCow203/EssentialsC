@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color>は<color:#FFFFFF><time></color>後に利用可能</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>利用可能なキットがありません。</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>利用可能なキット:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>使用方法: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>デバッグ: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>名前:</color> <color:#DDDDDD><name></color>",

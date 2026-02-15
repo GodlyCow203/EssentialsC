@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> 将在 <color:#FFFFFF><time></color> 后可用。</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>没有你可用的礼包。</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>可用礼包:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>用法: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>调试: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>名称:</color> <color:#DDDDDD><name></color>",
@@ -570,6 +570,6 @@
   "migration.status.users": "<prefix> <color:#AAAAAA>  用户文件:</color> <color:#FFB300><count></color>",
   "migration.status.warps": "<prefix> <color:#AAAAAA>  传送点文件:</color> <color:#FFB300><count></color>",
   "migration.status.bans": "<prefix> <color:#AAAAAA>封禁文件 (banned-players.json):</color> <color:#FFB300><status></color>",
-  "migration.status.managers": "<prefix> <color:#AAAAAA>管理器:</color> <color:#FFB300>经济=<economy>, 家=<homes>, 昵称=<nicks>, 传送点=<warps>, 惩罚=<punishments></color>",
+  "migration.status.managers": "<prefix> <color:#AAAAAA>管理器:</color> <color:#FFB300>经济=<economy>, 家=<homes>, 昵称=<nicks>, 传送点=<warps>, 惩罚=<punishments></color>"
 
 }

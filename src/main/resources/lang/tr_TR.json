@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> kiti <color:#FFFFFF><time></color> içinde kullanılabilir.</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>Size uygun kit yok.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Mevcut Kitler:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>Kullanım: /kit <claim|cooldown> <kitismi></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Hata Ayıklama: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>İsim:</color> <color:#DDDDDD><name></color>",

@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> disponível em <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>Nenhum kit disponível para você.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Kits Disponíveis:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>Uso: /kit <claim|cooldown> <nomekit></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Debug: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Nome:</color> <color:#DDDDDD><name></color>",

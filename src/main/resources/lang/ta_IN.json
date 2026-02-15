@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> <color:#FFFFFF><time></color> இல் கிடைக்கும்.</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>உங்களுக்கு கிடைக்கும் கிட்கள் இல்லை.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>கிடைக்கும் கிட்கள்:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>பயன்பாடு: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>பிழைத்திருத்தம்: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>பெயர்:</color> <color:#DDDDDD><name></color>",

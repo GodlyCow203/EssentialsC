@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> <color:#FFFFFF><time></color> में उपलब्ध।</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>आपके लिए कोई किट उपलब्ध नहीं।</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>उपलब्ध किट्स:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>उपयोग: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>डीबग: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>नाम:</color> <color:#DDDDDD><name></color>",

@@ -189,7 +189,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> có thể nhận sau <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF4444>Không có bộ đồ nào khả dụng cho bạn.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Các Bộ Đồ Khả Dụng:</color>",
-  "kit.list.entry": " <click:run_command:/kit claim <name>><color:#FFFFFF><kit></color></click> <color:#AAAAAA>(<name>)</color>",
+  "kit.list.entry": "<white><name></white>",
   "kit.usage": "<prefix> <color:#FF4444>Cách dùng: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Gỡ lỗi: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Tên:</color> <color:#DDDDDD><name></color>",
