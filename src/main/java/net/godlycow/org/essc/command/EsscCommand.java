@@ -120,6 +120,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Afk system reloaded");
                 }
 
+                if (plugin.getChatManager() != null) {
+                    plugin.getChatManager().reload();
+                    plugin.debug("Chat configuration reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

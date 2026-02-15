@@ -6,6 +6,7 @@ import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
+import net.godlycow.org.essc.chat.luckperms.ChatManager;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.ConfigManager;
@@ -66,6 +67,7 @@ public final class EssentialsC extends JavaPlugin {
     private AFKManager afkManager;
     private PlaceholderHook placeholderHook;
     private FastStatsManager fastStats;
+    private ChatManager chatManager;
 
 
 
@@ -93,6 +95,7 @@ public final class EssentialsC extends JavaPlugin {
         punishmentManager = new PunishmentManager(this);
         ignoreManager = new IgnoreManager(this);
         replyManager = new ReplyManager();
+        chatManager = new ChatManager(this);
 
         int pluginId = 29401;
         Metrics metrics = new Metrics(this, pluginId);
@@ -317,4 +320,6 @@ public final class EssentialsC extends JavaPlugin {
     public AFKManager getAfkManager() { return afkManager;}
 
     public PlaceholderHook getPlaceholderHook() { return placeholderHook;}
+
+    public ChatManager getChatManager() { return chatManager;}
 }

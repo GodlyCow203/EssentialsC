@@ -6,6 +6,9 @@ heal:
   feed-player: true
   clear-negative-effects: true
 
+chat:
+  luckperms-enabled: true
+
 economy:
   enabled: true
   starting-balance: "100.00"
