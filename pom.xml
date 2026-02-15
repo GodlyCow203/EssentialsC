@@ -6,7 +6,7 @@
 
     <groupId>net.godlycow.org</groupId>
     <artifactId>EssentialsC</artifactId>
-    <version>4.0.7</version>
+    <version>4.0.8</version>
     <name>EssentialsC</name>
     <description>A lightweight yet powerful Minecraft plugin inspired by EssentialsX</description>
     <packaging>jar</packaging>
