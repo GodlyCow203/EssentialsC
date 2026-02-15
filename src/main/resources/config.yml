@@ -190,8 +190,6 @@ afk:
   list-show-world: true
   list-sort-by: "time"  # Options: time, name, world
 
-migration:
-  enabled: true
 
 
 
