@@ -1,0 +1,4 @@
+name: test-api
+version: '0.0.1'
+main: net.godlycow.org.api.test.testApi.Main
+api-version: '1.21'

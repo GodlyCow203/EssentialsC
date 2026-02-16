@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitTask;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
