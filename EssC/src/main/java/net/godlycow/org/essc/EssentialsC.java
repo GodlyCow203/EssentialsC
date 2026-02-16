@@ -1,6 +1,7 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.afk.AFKManager;
+import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
@@ -68,6 +69,8 @@ public final class EssentialsC extends JavaPlugin {
     private PlaceholderHook placeholderHook;
     private FastStatsManager fastStats;
     private ChatManager chatManager;
+    private EssentialsCAPIImpl apiImpl;
+
 
 
 
@@ -149,6 +152,9 @@ public final class EssentialsC extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
 
+        apiImpl = new EssentialsCAPIImpl(this);
+        apiImpl.enable();
+
 
         getLogger().info("EssentialsC enabled");
     }
@@ -185,6 +191,9 @@ public final class EssentialsC extends JavaPlugin {
         }
         if (backManager != null) {
             backManager.shutdown();
+        }
+        if (apiImpl != null) {
+            apiImpl.disable();
         }
 
         getLogger().info("EssentialsC disabled");
