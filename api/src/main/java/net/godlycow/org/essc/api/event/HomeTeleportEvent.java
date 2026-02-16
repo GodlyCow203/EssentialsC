@@ -8,6 +8,10 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Fired when a player is about to teleport to a home.
+ * This fires BEFORE warmup starts.
+ */
 public class HomeTeleportEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled = false;
@@ -18,14 +22,14 @@ public class HomeTeleportEvent extends Event implements Cancellable {
     private String cancelReason;
 
     public enum TeleportCause {
-        COMMAND,
-        ADMIN_COMMAND,
-        API,
-        WARMUP_COMPLETE
+        COMMAND,        // Player used /home
+        ADMIN_COMMAND,  // op used /home player:home
+        API,            // Another plugin called the API
+        WARMUP_COMPLETE // Actually teleporting after warmup (this is rare to see)
     }
 
     public HomeTeleportEvent(@NotNull Player player, @NotNull Home home, @NotNull TeleportCause cause) {
-        super(true);
+        super(false);
         this.player = player;
         this.home = home;
         this.cause = cause;

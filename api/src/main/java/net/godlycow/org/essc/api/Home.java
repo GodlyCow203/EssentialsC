@@ -7,87 +7,56 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * Represents a player home with all its data.
- * This is immutable - to modify, delete and recreate.
+ * Represents a player home. This is immutable, so if you wanna change something
+ * you gotta delete and recreate it.
  */
 public interface Home {
 
-    /**
-     * Gets the owner's UUID.
-     * @return The owner's UUID
-     */
+    /** Who owns this home */
     @NotNull
     UUID getOwner();
 
-    /**
-     * Gets the home name (lowercase).
-     * @return The home name
-     */
+    /** Name of the home (always lowercase internally) */
     @NotNull
     String getName();
 
-    /**
-     * Gets the world name.
-     * @return The world name
-     */
+    /** World name where the home is */
     @NotNull
     String getWorld();
 
-    /**
-     * Gets the X coordinate.
-     * @return X coordinate
-     */
+    /** X coordinate */
     double getX();
 
-    /**
-     * Gets the Y coordinate.
-     * @return Y coordinate
-     */
+    /** Y coordinate */
     double getY();
 
-    /**
-     * Gets the Z coordinate.
-     * @return Z coordinate
-     */
+    /** Z coordinate */
     double getZ();
 
-    /**
-     * Gets the yaw rotation.
-     * @return Yaw
-     */
+    /** Yaw rotation (where youre looking left/right) */
     float getYaw();
 
-    /**
-     * Gets the pitch rotation.
-     * @return Pitch
-     */
+    /** Pitch rotation (where youre looking up/down) */
     float getPitch();
 
-    /**
-     * Gets the creation timestamp (Unix epoch seconds).
-     * @return Creation time
-     */
+    /** When the home was created (unix timestamp in seconds) */
     long getCreatedAt();
 
     /**
-     * Converts to Bukkit Location.
-     * @return Location, or null if world is not loaded
+     * Converts to Bukkit Location. Returns null if the world isnt loaded.
      */
     @Nullable
     Location toLocation();
 
     /**
-     * Creates a new Home instance with modified location.
-     * @param location New location
-     * @return New Home instance
+     * Creates a copy of this home with a different location.
+     * Useful if you wanna move a home without changing its name.
      */
     @NotNull
     Home withLocation(@NotNull Location location);
 
     /**
-     * Creates a new Home instance with modified name.
-     * @param name New name
-     * @return New Home instance
+     * Creates a copy of this home with a different name.
      */
     @NotNull
     Home withName(@NotNull String name);

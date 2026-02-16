@@ -1,6 +1,7 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.afk.AFKManager;
+import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
@@ -331,4 +332,6 @@ public final class EssentialsC extends JavaPlugin {
     public PlaceholderHook getPlaceholderHook() { return placeholderHook;}
 
     public ChatManager getChatManager() { return chatManager;}
+
+    public EssentialsCAPI getAPI() { return apiImpl;}
 }

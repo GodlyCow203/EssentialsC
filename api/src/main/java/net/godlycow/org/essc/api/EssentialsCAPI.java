@@ -4,12 +4,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-// Main API class
 public interface EssentialsCAPI {
 
     /**
-     * Gets the EssentialsC API instance.
-     * @return The API instance, or null if EssentialsC is not loaded
+     * Gets the API instance. Returns null if EssentialsC isnt loaded.
      */
     @Nullable
     static EssentialsCAPI getInstance() {
@@ -17,21 +15,18 @@ public interface EssentialsCAPI {
     }
 
     /**
-     * Gets the HomeManager for home-related operations.
-     * @return The HomeManager instance
+     * Gets the home manager for all home stuff.
      */
     @NotNull
     HomeManager getHomeManager();
 
     /**
-     * Checks if EssentialsC is fully loaded and ready.
-     * @return true if ready
+     * Checks if the API is ready to use.
      */
     boolean isReady();
 
     /**
-     * Gets the plugin instance (for advanced usage).
-     * @return The EssentialsC plugin instance
+     * Gets the actual plugin instance. Useful for checking version or whatever.
      */
     @NotNull
     JavaPlugin getPlugin();

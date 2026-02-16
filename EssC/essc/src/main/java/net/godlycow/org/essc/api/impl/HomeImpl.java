@@ -8,6 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Implementation of Home interface. Just a simple data holder.
+ */
 public class HomeImpl implements Home {
     private final UUID owner;
     private final String name;
@@ -35,6 +38,7 @@ public class HomeImpl implements Home {
                 location.getYaw(), location.getPitch(), createdAt);
     }
 
+    /** Converts from internal Home class to API Home */
     public static HomeImpl fromInternal(net.godlycow.org.essc.home.Home home) {
         return new HomeImpl(
                 home.getOwner(),

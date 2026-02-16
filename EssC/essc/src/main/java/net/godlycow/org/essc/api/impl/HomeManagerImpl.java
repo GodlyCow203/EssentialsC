@@ -15,24 +15,28 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of HomeManager. Wraps the internal HomeManager and adds
+ * event firing and API conversion.
+ */
 public class HomeManagerImpl implements HomeManager {
     private final EssentialsC plugin;
-    private final net.godlycow.org.essc.home.HomeManager internalManager;
+    private final net.godlycow.org.essc.home.HomeManager internal;
 
     public HomeManagerImpl(EssentialsC plugin) {
         this.plugin = plugin;
-        this.internalManager = plugin.getHomeManager();
+        this.internal = plugin.getHomeManager();
     }
 
     @Override
     public @NotNull CompletableFuture<Optional<Home>> getHome(@NotNull UUID player, @NotNull String name) {
-        return internalManager.getHome(player, name)
+        return internal.getHome(player, name)
                 .thenApply(h -> Optional.ofNullable(h).map(HomeImpl::fromInternal));
     }
 
     @Override
     public @NotNull CompletableFuture<List<Home>> getHomes(@NotNull UUID player) {
-        return internalManager.getHomes(player)
+        return internal.getHomes(player)
                 .thenApply(list -> list.stream()
                         .map(HomeImpl::fromInternal)
                         .collect(Collectors.toList()));
@@ -40,18 +44,17 @@ public class HomeManagerImpl implements HomeManager {
 
     @Override
     public @NotNull CompletableFuture<Integer> getHomeCount(@NotNull UUID player) {
-        return internalManager.getHomeCount(player);
+        return internal.getHomeCount(player);
     }
 
     @Override
     public @NotNull CompletableFuture<Boolean> hasHome(@NotNull UUID player, @NotNull String name) {
-        return internalManager.homeExists(player, name);
+        return internal.homeExists(player, name);
     }
 
     @Override
     public @NotNull CompletableFuture<Boolean> setHome(@NotNull Player player, @NotNull String name, @NotNull Location location) {
         HomeImpl home = new HomeImpl(player.getUniqueId(), name, location, System.currentTimeMillis() / 1000);
-
         HomeCreateEvent event = new HomeCreateEvent(player, home);
         Bukkit.getPluginManager().callEvent(event);
 
@@ -62,26 +65,37 @@ public class HomeManagerImpl implements HomeManager {
             return CompletableFuture.completedFuture(false);
         }
 
-        return internalManager.setHome(player, name, location);
+        // Actually set the home (internal handles async)
+        return internal.setHome(player, name, location);
     }
 
     @Override
     public @NotNull CompletableFuture<Boolean> deleteHome(@NotNull UUID player, @NotNull String name) {
+        // Need to get home first for the event
         return getHome(player, name).thenCompose(optHome -> {
-            if (optHome.isEmpty()) return CompletableFuture.completedFuture(false);
-
-            Player p = Bukkit.getPlayer(player);
-            HomeDeleteEvent event = new HomeDeleteEvent(p, optHome.get(), false);
-            Bukkit.getPluginManager().callEvent(event);
-
-            if (event.isCancelled()) {
-                if (p != null && event.getCancelReason() != null) {
-                    p.sendMessage(event.getCancelReason());
-                }
+            if (optHome.isEmpty()) {
                 return CompletableFuture.completedFuture(false);
             }
 
-            return internalManager.deleteHome(player, name);
+            CompletableFuture<Boolean> result = new CompletableFuture<>();
+
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                Player p = Bukkit.getPlayer(player);
+                HomeDeleteEvent event = new HomeDeleteEvent(p, optHome.get(), false);
+                Bukkit.getPluginManager().callEvent(event);
+
+                if (event.isCancelled()) {
+                    if (p != null && event.getCancelReason() != null) {
+                        p.sendMessage(event.getCancelReason());
+                    }
+                    result.complete(false);
+                } else {
+                    // Actually delete
+                    internal.deleteHome(player, name).thenAccept(result::complete);
+                }
+            });
+
+            return result;
         });
     }
 
@@ -109,7 +123,8 @@ public class HomeManagerImpl implements HomeManager {
             return CompletableFuture.completedFuture(false);
         }
 
-        internalManager.startTeleport(player, toInternal(home));
+        // Start teleport (handles warmup internally)
+        internal.startTeleport(player, toInternal(home));
         return CompletableFuture.completedFuture(true);
     }
 
@@ -126,7 +141,9 @@ public class HomeManagerImpl implements HomeManager {
     @Override
     public @NotNull CompletableFuture<Boolean> teleportInstantly(@NotNull Player player, @NotNull Home home) {
         Location loc = home.toLocation();
-        if (loc == null) return CompletableFuture.completedFuture(false);
+        if (loc == null) {
+            return CompletableFuture.completedFuture(false);
+        }
 
         Bukkit.getScheduler().runTask(plugin, () -> player.teleport(loc));
         return CompletableFuture.completedFuture(true);
@@ -134,8 +151,8 @@ public class HomeManagerImpl implements HomeManager {
 
     @Override
     public boolean cancelTeleport(@NotNull Player player) {
-        if (internalManager.hasPendingTeleport(player)) {
-            internalManager.cancelTeleport(player);
+        if (internal.hasPendingTeleport(player)) {
+            internal.cancelTeleport(player);
             return true;
         }
         return false;
@@ -143,12 +160,12 @@ public class HomeManagerImpl implements HomeManager {
 
     @Override
     public boolean hasPendingTeleport(@NotNull Player player) {
-        return internalManager.hasPendingTeleport(player);
+        return internal.hasPendingTeleport(player);
     }
 
     @Override
     public int getMaxHomes(@NotNull Player player) {
-        HomeLimitCheckEvent event = new HomeLimitCheckEvent(player, internalManager.getMaxHomes(player));
+        HomeLimitCheckEvent event = new HomeLimitCheckEvent(player, internal.getMaxHomes(player));
         Bukkit.getPluginManager().callEvent(event);
         return event.getMaxHomes();
     }
@@ -161,12 +178,12 @@ public class HomeManagerImpl implements HomeManager {
 
     @Override
     public boolean isOnCooldown(@NotNull Player player) {
-        return internalManager.isOnCooldown(player);
+        return internal.isOnCooldown(player);
     }
 
     @Override
     public long getRemainingCooldown(@NotNull Player player) {
-        return internalManager.getRemainingCooldown(player);
+        return internal.getRemainingCooldown(player);
     }
 
     @Override
@@ -181,14 +198,20 @@ public class HomeManagerImpl implements HomeManager {
 
     @Override
     public @NotNull CompletableFuture<Boolean> setHomeAdmin(@NotNull UUID owner, @NotNull String name, @NotNull Location location) {
-        return internalManager.setHome(Bukkit.getOfflinePlayer(owner).getPlayer(), name, location);
+        Player player = Bukkit.getPlayer(owner);
+        if (player != null) {
+            return setHome(player, name, location);
+        }
+        // Offline player - skip event
+        return internal.setHome(Bukkit.getOfflinePlayer(owner).getPlayer(), name, location);
     }
 
     @Override
     public @NotNull CompletableFuture<Boolean> deleteHomeAdmin(@NotNull UUID owner, @NotNull String name) {
-        return internalManager.deleteHome(owner, name);
+        return internal.deleteHome(owner, name);
     }
 
+    /** Converts API Home to internal Home */
     private net.godlycow.org.essc.home.Home toInternal(Home home) {
         Location loc = home.toLocation();
         if (loc == null) {

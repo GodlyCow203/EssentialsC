@@ -6,6 +6,10 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Fired AFTER a player successfully teleports to a home.
+ * This cant be cancelled - the teleport already happened.
+ **/
 public class HomeTeleportCompleteEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
 
@@ -30,7 +34,8 @@ public class HomeTeleportCompleteEvent extends Event {
         return home;
     }
 
-    public long getTeleportDuration() { // duration
+    /** How long the whole thing took including warmup (in ms) */
+    public long getTeleportDuration() {
         return teleportDuration;
     }
 

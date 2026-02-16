@@ -7,6 +7,10 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Fired when a pending teleport gets cancelled (during warmup).
+ *
+ */
 public class HomeTeleportCancelEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
 
@@ -16,18 +20,18 @@ public class HomeTeleportCancelEvent extends Event {
     private final String details;
 
     public enum CancelReason {
-        PLAYER_MOVE,
-        PLAYER_DAMAGE,
-        PLAYER_QUIT,
-        COMMAND,
-        ADMIN_CANCEL,
-        PLUGIN_CANCEL,
-        OTHER
+        PLAYER_MOVE,      // Player moved during warmup
+        PLAYER_DAMAGE,    // Player took damage
+        PLAYER_QUIT,      // Player disconnected
+        COMMAND,          // Player used another command
+        ADMIN_CANCEL,     // op cancelled it
+        PLUGIN_CANCEL,    // Another plugin cancelled
+        OTHER             // Something else
     }
 
     public HomeTeleportCancelEvent(@NotNull Player player, @Nullable Home home,
                                    @NotNull CancelReason reason, @Nullable String details) {
-        super(true);
+        super(false);
         this.player = player;
         this.home = home;
         this.reason = reason;
@@ -39,6 +43,9 @@ public class HomeTeleportCancelEvent extends Event {
         return player;
     }
 
+    /**
+     * The home youre going to. Can be null if cancelled super early.
+     */
     @Nullable
     public Home getHome() {
         return home;

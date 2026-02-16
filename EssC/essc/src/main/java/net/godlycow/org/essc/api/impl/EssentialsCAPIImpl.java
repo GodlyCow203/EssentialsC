@@ -7,6 +7,10 @@ import net.godlycow.org.essc.api.HomeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Implementation of EssentialsCAPI. Just holds the HomeManager and
+ * registers/unregisters the provider.
+ */
 public class EssentialsCAPIImpl implements EssentialsCAPI {
     private final EssentialsC plugin;
     private final HomeManager homeManager;
@@ -17,12 +21,14 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
         this.homeManager = new HomeManagerImpl(plugin);
     }
 
+    /** Call this in onEnable */
     public void enable() {
         APIProvider.setInstance(this);
         this.ready = true;
         plugin.getLogger().info("EssentialsC API enabled");
     }
 
+    /** Call this in onDisable */
     public void disable() {
         this.ready = false;
         APIProvider.clearInstance();

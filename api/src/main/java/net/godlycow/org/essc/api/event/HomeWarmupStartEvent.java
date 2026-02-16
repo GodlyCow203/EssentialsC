@@ -7,6 +7,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Fired when a home teleport warmup starts.
+ * Cancel this to make the teleport instant (skip warmup).
+ * You can also change the warmup duration.
+ **/
 public class HomeWarmupStartEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled = false;
@@ -16,7 +21,7 @@ public class HomeWarmupStartEvent extends Event implements Cancellable {
     private long warmupSeconds;
 
     public HomeWarmupStartEvent(@NotNull Player player, @NotNull Home home, long warmupSeconds) {
-        super(true);
+        super(false);
         this.player = player;
         this.home = home;
         this.warmupSeconds = warmupSeconds;
@@ -36,6 +41,7 @@ public class HomeWarmupStartEvent extends Event implements Cancellable {
         return warmupSeconds;
     }
 
+    /** Change how long the warmup lasts */
     public void setWarmupSeconds(long seconds) {
         this.warmupSeconds = seconds;
     }

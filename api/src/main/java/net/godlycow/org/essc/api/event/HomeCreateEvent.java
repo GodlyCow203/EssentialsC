@@ -8,6 +8,10 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Fired when a player tries to create or update a home.
+ * Cancel this to prevent the home from being saved.
+ */
 public class HomeCreateEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled = false;
@@ -17,21 +21,24 @@ public class HomeCreateEvent extends Event implements Cancellable {
     private String cancelReason;
 
     public HomeCreateEvent(@NotNull Player player, @NotNull Home home) {
-        super(true);
+        super(false);
         this.player = player;
         this.home = home;
     }
 
+    /** The player creating the home */
     @NotNull
     public Player getPlayer() {
         return player;
     }
 
+    /** The home being created (contains name, location, etc) */
     @NotNull
     public Home getHome() {
         return home;
     }
 
+    /** Why was this cancelled? Shown to player if set. */
     @Nullable
     public String getCancelReason() {
         return cancelReason;

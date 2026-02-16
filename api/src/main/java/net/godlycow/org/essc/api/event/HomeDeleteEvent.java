@@ -8,7 +8,11 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
+/**
+ * Fired when a home is being deleted.
+ * Cancel this to prevent deletion.
+ *
+ */
 public class HomeDeleteEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled = false;
@@ -19,22 +23,25 @@ public class HomeDeleteEvent extends Event implements Cancellable {
     private String cancelReason;
 
     public HomeDeleteEvent(@Nullable Player player, @NotNull Home home, boolean adminDelete) {
-        super(true);
+        super(false);
         this.player = player;
         this.home = home;
         this.adminDelete = adminDelete;
     }
 
+    /** Who deleted it? Null if console or system */
     @Nullable
     public Player getPlayer() {
         return player;
     }
 
+    /** The home being deleted */
     @NotNull
     public Home getHome() {
         return home;
     }
 
+    /** Was this an admin deletion? */
     public boolean isAdminDelete() {
         return adminDelete;
     }
