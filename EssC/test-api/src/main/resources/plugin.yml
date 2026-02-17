@@ -1,4 +1,9 @@
-name: test-api
-version: '0.0.1'
+name: TestApi
+version: 1.0.0
 main: net.godlycow.org.api.test.testApi.Main
-api-version: '1.21'
+api-version: 1.20
+depend: [EssentialsC]
+commands:
+  testapi:
+    description: Test EssentialsC API
+    usage: /testapi <create|delete|teleport|instant|cancel|limit|all>
