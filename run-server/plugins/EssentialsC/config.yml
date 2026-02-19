@@ -1,0 +1,196 @@
+debug: true
+
+default-language: en_US
+
+heal:
+  feed-player: true
+  clear-negative-effects: true
+
+chat:
+  luckperms-enabled: true
+
+economy:
+  enabled: true
+  starting-balance: "100.00"
+  currency:
+    singular: "Dollar"
+    plural: "Dollars"
+  minimum-transaction: "0.01"
+  max-balance: -1
+
+teleport:
+  tpa:
+    cooldown: 60
+    warmup: 3
+    timeout: 60
+    max-pending: 5
+    max-outgoing: 1
+    cost: 0.0
+    deny-movement: true
+    particles: true
+    sounds: true
+    blocked-worlds: []
+
+home:
+  max-homes: 3
+  default-name: "home"
+  cooldown: 5
+  warmup: 3
+  cancel-on-movement: true
+  particles: true
+  sounds: true
+  blocked-worlds:
+    - "world_nether"
+    - "world_the_end"
+
+spawn:
+  cooldown: 5
+  warmup: 3
+  teleport-on-first-join: true
+  particles: true
+  sounds: true
+  cancel-on-movement: true
+
+join-leave-messages:
+  enabled: true
+  join: "<white><player> <#FFCE00>joined the game"
+  leave: "<white><player> <#FF4000>left the game"
+
+back:
+  warmup: 3
+  cooldown: 5
+  particles: true
+  sounds: true
+  cancel-on-movement: true
+
+scoreboard:
+  enabled: true
+  update-interval: 20
+  title: "<#FF3000><b>MyServer"
+  lines:
+    - ""
+    - "<#FF3000>| <white>Player: <#FFAC96>%player_name%"
+    - "<#FF3000>| <white>Rank: <#FFAC96>%luckperms_prefix%"
+    - "<#FF3000>| <white>Balance: <#FFAC96>%vault_eco_balance_formatted%"
+    - "<#FF3000>| <white>Online: <#FFAC96>%server_online%<gray>/<#FFAC96>%server_max_players%"
+    - "<#FF3000>| <white>Kills: <#FFAC96>%statistic_player_kills%"
+    - ""
+    - "<#FFAC96>play.myserver.net"
+
+rename:
+  blacklist-enabled: true
+  blacklist-words:
+    - "badword"
+    - "hello"
+  max-length: 50
+  min-length: 1
+  normalize-enabled: true
+  strip-colors-for-check: true
+
+vanish:
+  hide-from-tab: true
+  give-night-vision: true
+  prevent-mob-target: true
+  disable-collisions: true
+
+nickname:
+  enabled: true
+  min-length: 3
+  max-length: 16
+  allow-colors: true
+  allow-formats: true
+  blacklist-enabled: true
+  blacklist-words: []
+  normalize-enabled: true
+  unique: true
+  update-tab: true
+
+shop:
+  enabled: true
+  main-menu-title: "<#F52727><b>Server Shop"
+  main-menu-size: 54
+  category-title: "<#F52727><category>"
+  category-menu-title: "<#F52727>Shop - <category>"
+  close-button-enabled: true
+  items-per-page: 28
+  fill-empty-slots: true
+  fill-material: "BLACK_STAINED_GLASS_PANE"
+  log-transactions: true
+  currency:
+    singular: "Dollar"
+    plural: "Dollars"
+
+hat:
+  blacklist-enabled: true
+  blacklist-items:
+    - bedrock
+    - barrier
+    - command_block
+    - structure_void
+    - jigsaw
+    - light
+  allow-blocks: false # "blocks" = blacklisted-items
+  require-lore: false
+  require-custom-name: false
+
+auction-house:
+  enabled: true
+  max-auctions-per-player: 5
+  duration-hours: 48
+  min-price: "1.00"
+  max-price: "-1"  # -1 for unlimited
+
+warp:
+  enabled: true
+  cooldown: 5
+  warmup: 3
+  cancel-on-movement: true
+  particles: true
+  sounds: true
+  blocked-worlds:
+    - world_nether
+    - world_the_end
+  group-by-category: true
+  max-name-length: 16
+  limit-per-player:
+    enabled: false
+    max: 5
+
+afk:
+  enabled: true
+
+  timeout-seconds: 300
+
+  kick-timeout-seconds: 1800
+
+  tab-placeholder-enabled: true
+  tab-placeholder: "<color:#FF6B6B>[AFK]</color> "
+
+  broadcast-enabled: true
+
+  title-enabled: true
+  title: "<color:#FF6B6B>You are now AFK</color>"
+  subtitle: "<color:#FFE66D>Move to return</color>"
+
+  prevent-damage: true
+  prevent-mob-target: true
+  prevent-pickup: true
+
+  freeze-player: true
+
+  blocked-commands:
+    - spawn
+    - home
+    - tpa
+    - tpahere
+    - warp
+    - shop
+
+  list-show-location: true
+  list-show-world: true
+  list-sort-by: "time"  # Options: time, name, world
+
+
+
+
+

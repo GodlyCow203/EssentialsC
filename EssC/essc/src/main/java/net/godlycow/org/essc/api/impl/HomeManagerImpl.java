@@ -1,9 +1,12 @@
 package net.godlycow.org.essc.api.impl;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.api.Home;
-import net.godlycow.org.essc.api.HomeManager;
-import net.godlycow.org.essc.api.event.*;
+import net.godlycow.org.essc.api.event.home.Home;
+import net.godlycow.org.essc.api.event.home.HomeManager;
+import net.godlycow.org.essc.api.event.home.check.HomeLimitCheckEvent;
+import net.godlycow.org.essc.api.event.home.create.HomeCreateEvent;
+import net.godlycow.org.essc.api.event.home.delete.HomeDeleteEvent;
+import net.godlycow.org.essc.api.event.home.teleport.HomeTeleportEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -15,10 +18,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-/**
- * Implementation of HomeManager. Wraps the internal HomeManager and adds
- * event firing and API conversion.
- */
 public class HomeManagerImpl implements HomeManager {
     private final EssentialsC plugin;
     private final net.godlycow.org.essc.home.HomeManager internal;
@@ -65,13 +64,11 @@ public class HomeManagerImpl implements HomeManager {
             return CompletableFuture.completedFuture(false);
         }
 
-        // Actually set the home (internal handles async)
         return internal.setHome(player, name, location);
     }
 
     @Override
     public @NotNull CompletableFuture<Boolean> deleteHome(@NotNull UUID player, @NotNull String name) {
-        // Need to get home first for the event
         return getHome(player, name).thenCompose(optHome -> {
             if (optHome.isEmpty()) {
                 return CompletableFuture.completedFuture(false);
@@ -90,7 +87,6 @@ public class HomeManagerImpl implements HomeManager {
                     }
                     result.complete(false);
                 } else {
-                    // Actually delete
                     internal.deleteHome(player, name).thenAccept(result::complete);
                 }
             });
@@ -123,7 +119,6 @@ public class HomeManagerImpl implements HomeManager {
             return CompletableFuture.completedFuture(false);
         }
 
-        // Start teleport (handles warmup internally)
         internal.startTeleport(player, toInternal(home));
         return CompletableFuture.completedFuture(true);
     }
@@ -202,7 +197,6 @@ public class HomeManagerImpl implements HomeManager {
         if (player != null) {
             return setHome(player, name, location);
         }
-        // Offline player - skip event
         return internal.setHome(Bukkit.getOfflinePlayer(owner).getPlayer(), name, location);
     }
 
@@ -211,7 +205,6 @@ public class HomeManagerImpl implements HomeManager {
         return internal.deleteHome(owner, name);
     }
 
-    /** Converts API Home to internal Home */
     private net.godlycow.org.essc.home.Home toInternal(Home home) {
         Location loc = home.toLocation();
         if (loc == null) {

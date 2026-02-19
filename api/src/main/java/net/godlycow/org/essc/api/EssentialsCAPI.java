@@ -1,33 +1,43 @@
 package net.godlycow.org.essc.api;
 
+import net.godlycow.org.essc.api.event.afk.AFKManager;
+import net.godlycow.org.essc.api.event.auction.AuctionManager;
+import net.godlycow.org.essc.api.event.home.HomeManager;
+import net.godlycow.org.essc.api.event.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/* * Note: These comments were written by AI to keep the code clear and easy to understand for everyone.
+ */
 public interface EssentialsCAPI {
 
-    /**
-     * Gets the API instance. Returns null if EssentialsC isnt loaded.
-     */
+    // Get the main instance of the API to start using its features
     @Nullable
     static EssentialsCAPI getInstance() {
         return APIProvider.getInstance();
     }
 
-    /**
-     * Gets the home manager for all home stuff.
-     */
+    // Get the manager that handles player homes and teleports
     @NotNull
     HomeManager getHomeManager();
 
-    /**
-     * Checks if the API is ready to use.
-     */
+    // Get the manager that handles the shop system and economy
+    @NotNull
+    ShopManager getShopManager();
+
+    // Get the manager that tracks if players are away from their keyboard
+    @NotNull
+    AFKManager getAFKManager();
+
+    // Get the manager for the auction house and player listings
+    @NotNull
+    AuctionManager getAuctionManager();
+
+    // Check if the API has finished loading and is ready for use
     boolean isReady();
 
-    /**
-     * Gets the actual plugin instance. Useful for checking version or whatever.
-     */
+    // Get the JavaPlugin instance of EssentialsC
     @NotNull
     JavaPlugin getPlugin();
 }

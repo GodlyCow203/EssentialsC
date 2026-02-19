@@ -1,0 +1,33 @@
+{
+  "stats": {
+    "minecraft:picked_up": {
+      "minecraft:dark_oak_leaves": 3,
+      "minecraft:leaf_litter": 1
+    },
+    "minecraft:dropped": {
+      "minecraft:short_grass": 1,
+      "minecraft:dark_oak_leaves": 8,
+      "minecraft:oak_leaves": 3,
+      "minecraft:grass_block": 3,
+      "minecraft:leaf_litter": 1
+    },
+    "minecraft:custom": {
+      "minecraft:sprint_one_cm": 15781,
+      "minecraft:time_since_rest": 44476,
+      "minecraft:fall_one_cm": 225,
+      "minecraft:walk_one_cm": 3757,
+      "minecraft:total_world_time": 44476,
+      "minecraft:leave_game": 7,
+      "minecraft:fly_one_cm": 20321,
+      "minecraft:play_time": 44476,
+      "minecraft:sneak_time": 7,
+      "minecraft:jump": 98,
+      "minecraft:time_since_death": 44476,
+      "minecraft:drop": 16
+    },
+    "minecraft:used": {
+      "minecraft:dark_oak_leaves": 46
+    }
+  },
+  "DataVersion": 4671
+}

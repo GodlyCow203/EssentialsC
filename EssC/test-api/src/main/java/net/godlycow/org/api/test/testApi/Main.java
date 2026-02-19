@@ -9,8 +9,14 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
+        getServer().getPluginManager().registerEvents(new ShopEventListener(this), this);
+
         getCommand("testapi").setExecutor(new TestCommand());
+        getCommand("testshop").setExecutor(new ShopTestCommand());
+        getCommand("testah").setExecutor(new AuctionTestCommand());
+
         getLogger().info("TestApi enabled - EssentialsC event tester ready");
+        getLogger().info("Commands: /testapi (home tests), /testshop (shop tests)");
     }
 
     @Override

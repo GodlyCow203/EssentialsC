@@ -1,0 +1,384 @@
+items:
+  coal_ore:
+    material: COAL_ORE
+    name: "<color:#2F2F2F>Coal Ore"
+    buy-price: 100
+    sell-price: 30
+    slot: 10
+    page: 1
+
+  deepslate_coal_ore:
+    material: DEEPSLATE_COAL_ORE
+    name: "<color:#2F2F2F>Deepslate Coal Ore"
+    buy-price: 120
+    sell-price: 40
+    slot: 11
+    page: 1
+
+  coal:
+    material: COAL
+    name: "<color:#2F2F2F>Coal"
+    buy-price: 30
+    sell-price: 10
+    slot: 12
+    page: 1
+
+  block_of_coal:
+    material: COAL_BLOCK
+    name: "<color:#2F2F2F>Block of Coal"
+    buy-price: 900
+    sell-price: 300
+    slot: 14
+    page: 1
+
+  iron_ore:
+    material: IRON_ORE
+    name: "<color:#D2691E>Iron Ore"
+    buy-price: 250
+    sell-price: 80
+    slot: 15
+    page: 1
+
+  deepslate_iron_ore:
+    material: DEEPSLATE_IRON_ORE
+    name: "<color:#D2691E>Deepslate Iron Ore"
+    buy-price: 280
+    sell-price: 90
+    slot: 16
+    page: 1
+
+  raw_iron:
+    material: RAW_IRON
+    name: "<color:#D2691E>Raw Iron"
+    buy-price: 200
+    sell-price: 65
+    slot: 19
+    page: 1
+
+  iron_ingot:
+    material: IRON_INGOT
+    name: "<color:#C0C0C0>Iron Ingot"
+    buy-price: 300
+    sell-price: 100
+    slot: 20
+    page: 1
+
+  block_of_iron:
+    material: IRON_BLOCK
+    name: "<color:#C0C0C0>Block of Iron"
+    buy-price: 2700
+    sell-price: 900
+    slot: 21
+    page: 1
+
+  block_of_raw_iron:
+    material: RAW_IRON_BLOCK
+    name: "<color:#D2691E>Block of Raw Iron"
+    buy-price: 1800
+    sell-price: 600
+    slot: 23
+    page: 1
+
+  copper_ore:
+    material: COPPER_ORE
+    name: "<color:#B87333>Copper Ore"
+    buy-price: 180
+    sell-price: 60
+    slot: 24
+    page: 1
+
+  deepslate_copper_ore:
+    material: DEEPSLATE_COPPER_ORE
+    name: "<color:#B87333>Deepslate Copper Ore"
+    buy-price: 200
+    sell-price: 65
+    slot: 25
+    page: 1
+
+  raw_copper:
+    material: RAW_COPPER
+    name: "<color:#B87333>Raw Copper"
+    buy-price: 150
+    sell-price: 50
+    slot: 28
+    page: 1
+
+  copper_ingot:
+    material: COPPER_INGOT
+    name: "<color:#B87333>Copper Ingot"
+    buy-price: 250
+    sell-price: 80
+    slot: 29
+    page: 1
+
+  block_of_copper:
+    material: COPPER_BLOCK
+    name: "<color:#B87333>Block of Copper"
+    buy-price: 2250
+    sell-price: 750
+    slot: 30
+    page: 1
+
+  block_of_raw_copper:
+    material: RAW_COPPER_BLOCK
+    name: "<color:#B87333>Block of Raw Copper"
+    buy-price: 1350
+    sell-price: 450
+    slot: 32
+    page: 1
+
+  gold_ore:
+    material: GOLD_ORE
+    name: "<color:#FFD700>Gold Ore"
+    buy-price: 600
+    sell-price: 200
+    slot: 33
+    page: 1
+
+  deepslate_gold_ore:
+    material: DEEPSLATE_GOLD_ORE
+    name: "<color:#FFD700>Deepslate Gold Ore"
+    buy-price: 650
+    sell-price: 220
+    slot: 34
+    page: 1
+
+  nether_gold_ore:
+    material: NETHER_GOLD_ORE
+    name: "<color:#FF4500>Nether Gold Ore"
+    buy-price: 400
+    sell-price: 130
+    slot: 37
+    page: 1
+
+  raw_gold:
+    material: RAW_GOLD
+    name: "<color:#FFD700>Raw Gold"
+    buy-price: 550
+    sell-price: 180
+    slot: 38
+    page: 1
+
+  gold_ingot:
+    material: GOLD_INGOT
+    name: "<color:#FFD700>Gold Ingot"
+    buy-price: 800
+    sell-price: 260
+    slot: 39
+    page: 1
+
+  gold_nugget:
+    material: GOLD_NUGGET
+    name: "<color:#FFD700>Gold Nugget"
+    buy-price: 90
+    sell-price: 30
+    slot: 41
+    page: 1
+
+  block_of_gold:
+    material: GOLD_BLOCK
+    name: "<color:#FFD700>Block of Gold"
+    buy-price: 7200
+    sell-price: 2400
+    slot: 42
+    page: 1
+
+  block_of_raw_gold:
+    material: RAW_GOLD_BLOCK
+    name: "<color:#FFD700>Block of Raw Gold"
+    buy-price: 4950
+    sell-price: 1650
+    slot: 43
+    page: 1
+
+  redstone_ore:
+    material: REDSTONE_ORE
+    name: "<color:#FF0000>Redstone Ore"
+    buy-price: 300
+    sell-price: 100
+    slot: 10
+    page: 2
+
+  deepslate_redstone_ore:
+    material: DEEPSLATE_REDSTONE_ORE
+    name: "<color:#FF0000>Deepslate Redstone Ore"
+    buy-price: 330
+    sell-price: 110
+    slot: 11
+    page: 2
+
+  redstone_dust:
+    material: REDSTONE
+    name: "<color:#FF0000>Redstone Dust"
+    buy-price: 40
+    sell-price: 12
+    slot: 12
+    page: 2
+
+  block_of_redstone:
+    material: REDSTONE_BLOCK
+    name: "<color:#FF0000>Block of Redstone"
+    buy-price: 360
+    sell-price: 120
+    slot: 14
+    page: 2
+
+  lapis_ore:
+    material: LAPIS_ORE
+    name: "<color:#0000FF>Lapis Lazuli Ore"
+    buy-price: 350
+    sell-price: 115
+    slot: 15
+    page: 2
+
+  deepslate_lapis_ore:
+    material: DEEPSLATE_LAPIS_ORE
+    name: "<color:#0000FF>Deepslate Lapis Ore"
+    buy-price: 380
+    sell-price: 125
+    slot: 16
+    page: 2
+
+  lapis_lazuli:
+    material: LAPIS_LAZULI
+    name: "<color:#0000FF>Lapis Lazuli"
+    buy-price: 80
+    sell-price: 25
+    slot: 19
+    page: 2
+
+  block_of_lapis:
+    material: LAPIS_BLOCK
+    name: "<color:#0000FF>Block of Lapis Lazuli"
+    buy-price: 720
+    sell-price: 240
+    slot: 20
+    page: 2
+
+  diamond_ore:
+    material: DIAMOND_ORE
+    name: "<color:#00CED1>Diamond Ore"
+    buy-price: 2500
+    sell-price: 800
+    slot: 21
+    page: 2
+
+  deepslate_diamond_ore:
+    material: DEEPSLATE_DIAMOND_ORE
+    name: "<color:#00CED1>Deepslate Diamond Ore"
+    buy-price: 2700
+    sell-price: 880
+    slot: 23
+    page: 2
+
+  diamond:
+    material: DIAMOND
+    name: "<color:#00CED1>Diamond"
+    buy-price: 3000
+    sell-price: 1000
+    slot: 24
+    page: 2
+
+  block_of_diamond:
+    material: DIAMOND_BLOCK
+    name: "<color:#00CED1>Block of Diamond"
+    buy-price: 27000
+    sell-price: 9000
+    slot: 25
+    page: 2
+
+  emerald_ore:
+    material: EMERALD_ORE
+    name: "<color:#50C878>Emerald Ore"
+    buy-price: 1800
+    sell-price: 600
+    slot: 28
+    page: 2
+
+  deepslate_emerald_ore:
+    material: DEEPSLATE_EMERALD_ORE
+    name: "<color:#50C878>Deepslate Emerald Ore"
+    buy-price: 2000
+    sell-price: 650
+    slot: 29
+    page: 2
+
+  emerald:
+    material: EMERALD
+    name: "<color:#50C878>Emerald"
+    buy-price: 2500
+    sell-price: 800
+    slot: 30
+    page: 2
+
+  block_of_emerald:
+    material: EMERALD_BLOCK
+    name: "<color:#50C878>Block of Emerald"
+    buy-price: 22500
+    sell-price: 7500
+    slot: 32
+    page: 2
+
+  ancient_debris:
+    material: ANCIENT_DEBRIS
+    name: "<color:#4B0082>Ancient Debris"
+    buy-price: 8000
+    sell-price: 2600
+    slot: 33
+    page: 2
+
+  netherite_scrap:
+    material: NETHERITE_SCRAP
+    name: "<color:#4B0082>Netherite Scrap"
+    buy-price: 9000
+    sell-price: 3000
+    slot: 34
+    page: 2
+
+  netherite_ingot:
+    material: NETHERITE_INGOT
+    name: "<color:#4B0082>Netherite Ingot"
+    buy-price: 18000
+    sell-price: 6000
+    slot: 37
+    page: 2
+
+  block_of_netherite:
+    material: NETHERITE_BLOCK
+    name: "<color:#4B0082>Block of Netherite"
+    buy-price: 162000
+    sell-price: 54000
+    slot: 38
+    page: 2
+
+  nether_quartz_ore:
+    material: NETHER_QUARTZ_ORE
+    name: "<color:#F5F5DC>Nether Quartz Ore"
+    buy-price: 150
+    sell-price: 50
+    slot: 39
+    page: 2
+
+  quartz:
+    material: QUARTZ
+    name: "<color:#F5F5DC>Nether Quartz"
+    buy-price: 120
+    sell-price: 40
+    slot: 41
+    page: 2
+
+  block_of_quartz:
+    material: QUARTZ_BLOCK
+    name: "<color:#F5F5DC>Block of Quartz"
+    buy-price: 480
+    sell-price: 160
+    slot: 42
+    page: 2
+
+  amethyst_shard:
+    material: AMETHYST_SHARD
+    name: "<color:#9966CC>Amethyst Shard"
+    buy-price: 150
+    sell-price: 50
+    slot: 43
+    page: 2

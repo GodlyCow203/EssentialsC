@@ -2,8 +2,16 @@ name: TestApi
 version: 1.0.0
 main: net.godlycow.org.api.test.testApi.Main
 api-version: 1.20
+author: _GodlyCow
 depend: [EssentialsC]
 commands:
   testapi:
-    description: Test EssentialsC API
+    description: Test EssentialsC Home API
     usage: /testapi <create|delete|teleport|instant|cancel|limit|all>
+  testshop:
+    description: Test EssentialsC Shop API
+    usage: /testshop <info|categories|find|purchase|sell|balance|open|reload|all>
+
+  testah:
+    description: Test Auction House API
+    usage: /testah <subcommand>

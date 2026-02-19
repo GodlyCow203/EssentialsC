@@ -233,7 +233,9 @@ public class AFKManager implements Listener {
         UUID uuid = player.getUniqueId();
         boolean currentlyAFK = afkStatus.getOrDefault(uuid, false);
         setAFK(player, !currentlyAFK, true);
-        updateActivity(player);
+        if (currentlyAFK) {
+            lastActivity.put(uuid, Instant.now());
+        }
     }
 
     public boolean isAFK(Player player) {
