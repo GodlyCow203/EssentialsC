@@ -1,8 +1,7 @@
 {
   "stats": {
-    "minecraft:picked_up": {
-      "minecraft:dark_oak_leaves": 3,
-      "minecraft:leaf_litter": 1
+    "minecraft:used": {
+      "minecraft:dark_oak_leaves": 46
     },
     "minecraft:dropped": {
       "minecraft:short_grass": 1,
@@ -12,21 +11,22 @@
       "minecraft:leaf_litter": 1
     },
     "minecraft:custom": {
-      "minecraft:sprint_one_cm": 15781,
-      "minecraft:time_since_rest": 44476,
+      "minecraft:sprint_one_cm": 16398,
+      "minecraft:time_since_rest": 49220,
       "minecraft:fall_one_cm": 225,
-      "minecraft:walk_one_cm": 3757,
-      "minecraft:total_world_time": 44476,
-      "minecraft:leave_game": 7,
-      "minecraft:fly_one_cm": 20321,
-      "minecraft:play_time": 44476,
+      "minecraft:walk_one_cm": 4912,
+      "minecraft:total_world_time": 49220,
+      "minecraft:leave_game": 9,
+      "minecraft:fly_one_cm": 21505,
+      "minecraft:play_time": 49220,
       "minecraft:sneak_time": 7,
-      "minecraft:jump": 98,
-      "minecraft:time_since_death": 44476,
+      "minecraft:jump": 110,
+      "minecraft:time_since_death": 49220,
       "minecraft:drop": 16
     },
-    "minecraft:used": {
-      "minecraft:dark_oak_leaves": 46
+    "minecraft:picked_up": {
+      "minecraft:dark_oak_leaves": 3,
+      "minecraft:leaf_litter": 1
     }
   },
   "DataVersion": 4671

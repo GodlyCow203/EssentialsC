@@ -5,6 +5,7 @@ import net.godlycow.org.essc.api.APIProvider;
 import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.event.afk.AFKManager;
 import net.godlycow.org.essc.api.event.auction.AuctionManager;
+import net.godlycow.org.essc.api.event.back.BackManager;
 import net.godlycow.org.essc.api.event.home.HomeManager;
 import net.godlycow.org.essc.api.event.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +17,7 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     private final ShopManager shopManager;
     private final AFKManager afkManager;
     private final AuctionManager auctionManager;
+    private final BackManager backManager;
     private boolean ready = false;
 
     public EssentialsCAPIImpl(EssentialsC plugin) {
@@ -24,6 +26,7 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
         this.shopManager = new ShopManagerImpl(plugin);
         this.afkManager = new AFKManagerImpl(plugin);
         this.auctionManager = new AuctionManagerImpl(plugin);
+        this.backManager = new BackManagerImpl(plugin);
     }
 
     public void enable() {
@@ -48,10 +51,19 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     }
 
     @Override
-    public @NotNull AFKManager getAFKManager() { return afkManager;}
+    public @NotNull AFKManager getAFKManager() {
+        return afkManager;
+    }
 
     @Override
-    public @NotNull AuctionManager getAuctionManager() { return auctionManager;}
+    public @NotNull AuctionManager getAuctionManager() {
+        return auctionManager;
+    }
+
+    @Override
+    public @NotNull BackManager getBackManager() {
+        return backManager;
+    }
 
     @Override
     public boolean isReady() {

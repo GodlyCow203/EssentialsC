@@ -14,6 +14,7 @@ public class Main extends JavaPlugin {
         getCommand("testapi").setExecutor(new TestCommand());
         getCommand("testshop").setExecutor(new ShopTestCommand());
         getCommand("testah").setExecutor(new AuctionTestCommand());
+        getCommand("testback").setExecutor(new BackTestCommand());
 
         getLogger().info("TestApi enabled - EssentialsC event tester ready");
         getLogger().info("Commands: /testapi (home tests), /testshop (shop tests)");

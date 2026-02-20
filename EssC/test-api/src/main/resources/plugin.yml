@@ -15,3 +15,8 @@ commands:
   testah:
     description: Test Auction House API
     usage: /testah <subcommand>
+
+  testback:
+    description: Test Back API features
+    usage: /testback <subcommand>
+

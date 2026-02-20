@@ -2,6 +2,7 @@ package net.godlycow.org.essc.api;
 
 import net.godlycow.org.essc.api.event.afk.AFKManager;
 import net.godlycow.org.essc.api.event.auction.AuctionManager;
+import net.godlycow.org.essc.api.event.back.BackManager;
 import net.godlycow.org.essc.api.event.home.HomeManager;
 import net.godlycow.org.essc.api.event.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,10 @@ public interface EssentialsCAPI {
     // Get the manager for the auction house and player listings
     @NotNull
     AuctionManager getAuctionManager();
+
+    // Get the manager that handles player back teleports
+    @NotNull
+    BackManager getBackManager();
 
     // Check if the API has finished loading and is ready for use
     boolean isReady();
