@@ -81,8 +81,8 @@ public class ChatManager implements Listener {
 
 
         String processedMessage = message;
-        boolean hasColor = player.hasPermission("lpc.colorcodes");
-        boolean hasRgb = player.hasPermission("lpc.rgbcodes");
+        boolean hasColor = player.hasPermission("essentialsc.chat.legacycodes");
+        boolean hasRgb = player.hasPermission("essentialsc.chat.rbgcodes");
 
         if (hasColor && hasRgb) {
             processedMessage = colorize(translateHexColorCodes(processedMessage));

@@ -483,7 +483,7 @@ public class ConfigManager {
         return config.getString("afk.list-sort-by", "time");
     }
 
-    public boolean isLuckPermsChatEnabled() { return config.getBoolean("chat.luckperms-enabled", true);}
+    public boolean isLuckPermsChatEnabled() { return config.getBoolean("luckperms.chat-formatting", true);}
 
     public boolean isDiscordSRVEnabled() {
         return config.getBoolean("discordsrv.enabled", true);

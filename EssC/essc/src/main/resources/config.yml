@@ -6,8 +6,8 @@ heal:
   feed-player: true
   clear-negative-effects: true
 
-chat:
-  luckperms-enabled: true
+luckperms:
+  chat-formatting: true
 
 # DiscordSRV Integration Settings
 discordsrv:

@@ -932,4 +932,12 @@ permissions:
     description: Bypass RTP movement check
     default: op
 
+  essentialsc.chat.legacycodes:
+    description: Allows you to use Legacy color in the chat
+    default: op
+
+  essentialsc.chat.rgbcodes:
+    description: Allows you to use RGB Colors in the chat ( &#<RRGGBB> )
+    default: op
+
 
