@@ -8,6 +8,7 @@ heal:
 
 luckperms:
   chat-formatting: true
+  tab-formatting: true
 
 # DiscordSRV Integration Settings
 discordsrv:

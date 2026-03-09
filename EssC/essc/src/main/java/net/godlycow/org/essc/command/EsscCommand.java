@@ -130,6 +130,12 @@ public class EsscCommand extends Command {
                     plugin.debug("RTP configuration reloaded");
                 }
 
+                if (plugin.getTabManager() != null) {
+                    plugin.getTabManager().reload();
+                    plugin.getTabManager().refreshAll();
+                    plugin.debug("Reloaded TAB");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

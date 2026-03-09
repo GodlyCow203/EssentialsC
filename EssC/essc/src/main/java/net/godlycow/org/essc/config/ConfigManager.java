@@ -485,6 +485,10 @@ public class ConfigManager {
 
     public boolean isLuckPermsChatEnabled() { return config.getBoolean("luckperms.chat-formatting", true);}
 
+    public boolean isLuckPermsTabEnabled() {
+        return config.getBoolean("luckperms.tab-formatting", true);
+    }
+
     public boolean isDiscordSRVEnabled() {
         return config.getBoolean("discordsrv.enabled", true);
     }

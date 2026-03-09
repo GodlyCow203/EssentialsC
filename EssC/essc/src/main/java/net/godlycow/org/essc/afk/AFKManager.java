@@ -300,16 +300,9 @@ public class AFKManager implements Listener {
     }
 
     public void updatePlayerListName(Player player) {
-        if (!config.isAfkTabPlaceholderEnabled()) return;
-
-        UUID uuid = player.getUniqueId();
-        boolean afk = afkStatus.getOrDefault(uuid, false);
-
-        String prefix = afk ? config.getAfkTabPlaceholder() : "";
-        String name = player.getName();
-
-        Component listName = miniMessage.deserialize(prefix + name);
-        player.playerListName(listName);
+        if (plugin.getTabManager() != null) {
+            plugin.getTabManager().updatePlayerTab(player);
+        }
     }
 
     public boolean isCommandBlocked(String command) {
@@ -449,7 +442,7 @@ public class AFKManager implements Listener {
             if (player.isOnline()) {
                 updatePlayerListName(player);
             }
-        }, 20L);
+        }, 10L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

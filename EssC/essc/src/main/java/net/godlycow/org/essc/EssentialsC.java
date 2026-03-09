@@ -36,6 +36,7 @@ import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
+import net.godlycow.org.essc.tab.TabManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.warp.WarpManager;
@@ -79,6 +80,7 @@ public final class EssentialsC extends JavaPlugin {
     private DiscordSRVHook discordSRVHook;
     private RTPManager rtpManager;
     private RTPGuiManager rtpGuiManager;
+    private TabManager tabManager;
 
 
 
@@ -125,6 +127,10 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isScoreboardEnabled()) {
             scoreboardManager = new ScoreboardManager(this);
+        }
+
+        if (getConfigManager().isLuckPermsTabEnabled()) {
+            this.tabManager = new TabManager(this);
         }
 
         if (configManager.isNickEnabled()) {
@@ -375,6 +381,8 @@ public final class EssentialsC extends JavaPlugin {
     public RTPManager getRtpManager() {return rtpManager;}
 
     public RTPGuiManager getRtpGuiManager() {return rtpGuiManager;}
+
+    public TabManager getTabManager() {return tabManager;}
 
 }
 
