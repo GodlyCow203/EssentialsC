@@ -18,12 +18,14 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
     private final VanishPlaceholders vanishPlaceholders;
     private final HomePlaceholders homePlaceholders;
     private final ShopPlaceholders shopPlaceholders;
+    private final RTPPlaceholders rtpPlaceholders;
 
     public PlaceholderHook(EssentialsC plugin) {
         this.plugin = plugin;
         this.vanishPlaceholders = new VanishPlaceholders(plugin);
         this.homePlaceholders = new HomePlaceholders(plugin);
         this.shopPlaceholders = new ShopPlaceholders(plugin);
+        this.rtpPlaceholders = new RTPPlaceholders(plugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -79,6 +81,11 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
             return shopResult;
         }
 
+        String rtpResult = rtpPlaceholders.onRequest(player, identifier);
+        if (rtpResult != null) {
+            return rtpResult;
+        }
+
         return null;
     }
 
@@ -94,6 +101,7 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         placeholders.addAll(VanishPlaceholders.getPlaceholderList());
         placeholders.addAll(HomePlaceholders.getPlaceholderList());
         placeholders.addAll(ShopPlaceholders.getPlaceholderList());
+        placeholders.addAll(RTPPlaceholders.getPlaceholderList());
 
         return placeholders;
     }

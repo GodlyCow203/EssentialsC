@@ -1,11 +1,13 @@
 package net.godlycow.org.essc.listener;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.auction.AhSession;
+import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.Auction;
-import net.godlycow.org.essc.auction.AuctionManager;
+import net.godlycow.org.essc.auction.gui.AhItemFactory;
+import net.godlycow.org.essc.command.auction.AhCommand;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.NamespacedKey;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,66 +16,49 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class AhListener implements Listener {
     private final EssentialsC plugin;
-    private final NamespacedKey auctionIdKey;
-    private final NamespacedKey ownAuctionKey;
-    private final NamespacedKey navPageKey;
-    private final NamespacedKey navExpiredKey;
-    private final NamespacedKey actionKey;
-    private final NamespacedKey closeKey;
-    private final NamespacedKey claimableKey;
+    private final AhCommand ahCommand;
+    private final AhSoundManager soundManager;
+    private final AhItemFactory itemFactory;
 
-    public AhListener(EssentialsC plugin) {
+    public AhListener(EssentialsC plugin, AhCommand ahCommand) {
         this.plugin = plugin;
-        this.auctionIdKey = new NamespacedKey(plugin, "ah_auction_id");
-        this.ownAuctionKey = new NamespacedKey(plugin, "ah_own_auction");
-        this.navPageKey = new NamespacedKey(plugin, "ah_nav_page");
-        this.navExpiredKey = new NamespacedKey(plugin, "ah_nav_expired");
-        this.actionKey = new NamespacedKey(plugin, "ah_action");
-        this.closeKey = new NamespacedKey(plugin, "ah_close");
-        this.claimableKey = new NamespacedKey(plugin, "ah_claimable");
-
+        this.ahCommand = ahCommand;
+        this.soundManager = ahCommand.getSoundManager();
+        this.itemFactory = ahCommand.getItemFactory();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (!plugin.getConfigManager().isAHEnabled()) {
-            return;
-        }
+    public void onClick(InventoryClickEvent event) {
+        if (!plugin.getConfigManager().isAHEnabled()) return;
+        if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        String title;
-        try {
-            title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
-        } catch (Exception e) {
-            title = event.getView().getTitle();
-        }
-
-        if (!title.contains("Auction House") && !title.contains("Expired Items")) {
+        String title = getTitle(event);
+        if (!title.contains("Auction House") &&
+                !title.contains("Expired Items") &&
+                !title.contains("Your Listings") &&
+                !title.contains("History") &&
+                !title.contains("Sell History") &&
+                !title.contains("Buy History")) {
             return;
         }
 
         event.setCancelled(true);
 
         ItemStack clicked = event.getCurrentItem();
-        if (clicked == null || clicked.getType().isAir()) {
-            return;
-        }
+        if (clicked == null || clicked.getType().isAir()) return;
 
-        Player player = (Player) event.getWhoClicked();
-
-        if (plugin.getAuctionManager() == null) {
-            player.closeInventory();
-            player.sendMessage(plugin.getLanguageManager().get(player, "ah.not_loaded"));
+        Material type = clicked.getType();
+        if (type.name().endsWith("_STAINED_GLASS_PANE") || type.name().endsWith("_GLASS_PANE")) {
+            soundManager.playError(player);
             return;
         }
 
@@ -82,147 +67,251 @@ public class AhListener implements Listener {
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
 
-        if (container.has(closeKey, PersistentDataType.BYTE)) {
+        if (container.has(itemFactory.getCloseKey(), PersistentDataType.BYTE)) {
+            soundManager.playClose(player);
             player.closeInventory();
             return;
         }
 
-        if (container.has(navPageKey, PersistentDataType.INTEGER)) {
-            int targetPage = container.get(navPageKey, PersistentDataType.INTEGER);
-            boolean isExpired = container.getOrDefault(navExpiredKey, PersistentDataType.BYTE, (byte) 0) == 1;
+        if (container.has(itemFactory.getPageKey(), PersistentDataType.INTEGER)) {
+            int page = container.get(itemFactory.getPageKey(), PersistentDataType.INTEGER);
+            String navType = container.getOrDefault(itemFactory.getNavKey(), PersistentDataType.STRING, "main");
 
+            soundManager.playPageTurn(player);
             player.closeInventory();
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                if (isExpired) {
-                    player.performCommand("ah expired");
-                } else {
-                    player.performCommand("ah " + targetPage);
+
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                switch (navType) {
+                    case "main" -> ahCommand.openMainGui(player, page);
+                    case "listings" -> ahCommand.openListingsGui(player, page);
+                    case "expired" -> ahCommand.openExpiredGui(player);
+                    case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
+                    case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
+                    case "history_type" -> ahCommand.openHistoryTypeGui(player);
                 }
             }, 1L);
             return;
         }
 
-        if (container.has(actionKey, PersistentDataType.STRING)) {
-            String action = container.get(actionKey, PersistentDataType.STRING);
-
-            if (action.equals("sell") && !player.hasPermission(AuctionManager.PERM_SELL)) {
-                player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
-                return;
-            }
-
-            player.closeInventory();
-
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                switch (action) {
-                    case "sell" -> player.performCommand("ah sell");
-                    case "expired" -> player.performCommand("ah expired");
-                    case "listings" -> player.performCommand("ah listings");
-                }
-            }, 1L);
+        if (container.has(itemFactory.getActionKey(), PersistentDataType.STRING)) {
+            String action = container.get(itemFactory.getActionKey(), PersistentDataType.STRING);
+            handleAction(player, action);
             return;
         }
 
-        if (container.has(claimableKey, PersistentDataType.BYTE)) {
-            boolean success = plugin.getAuctionManager().claimExpiredItems(player);
-            if (success) {
-                player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed_expired"));
-                plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                    player.performCommand("ah expired");
-                }, 1L);
-            }
+        if (container.has(itemFactory.getClaimKey(), PersistentDataType.BYTE)) {
+            handleClaim(player);
             return;
         }
 
-        if (container.has(auctionIdKey, PersistentDataType.INTEGER)) {
-            int auctionId = container.get(auctionIdKey, PersistentDataType.INTEGER);
-            boolean isOwnAuction = container.has(ownAuctionKey, PersistentDataType.BYTE);
-
-            Optional<Auction> auctionOpt = plugin.getAuctionManager().getAuction(auctionId);
-            if (auctionOpt.isEmpty()) {
-                player.sendMessage(plugin.getLanguageManager().get(player, "ah.auction_not_found"));
-                player.closeInventory();
-                return;
-            }
-
-            Auction auction = auctionOpt.get();
-
-            if (isOwnAuction) {
-                if (event.getClick() != ClickType.RIGHT) {
-                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.right_click_to_cancel"));
-                    return;
-                }
-
-                if (!player.hasPermission(AuctionManager.PERM_CANCEL)) {
-                    player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
-                    return;
-                }
-
-                plugin.getAuctionManager().cancelAuction(player, auctionId).thenAccept(success -> {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
-                        if (success) {
-                            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cancelled"));
-                        } else {
-                            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cancel_failed"));
-                        }
-                        player.closeInventory();
-                    });
-                });
-                return;
-            }
-
-
-            if (!player.hasPermission(AuctionManager.PERM_BUY)) {
-                player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
-                return;
-            }
-
-            handlePurchase(player, auction);
-            return;
-        }
-
-        if (title.contains("Expired Items") && event.getSlot() == 49) {
-            player.closeInventory();
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                player.performCommand("ah");
-            }, 1L);
-            return;
+        if (container.has(itemFactory.getAuctionKey(), PersistentDataType.INTEGER)) {
+            int id = container.get(itemFactory.getAuctionKey(), PersistentDataType.INTEGER);
+            boolean isOwn = container.has(itemFactory.getOwnKey(), PersistentDataType.BYTE);
+            handleAuctionClick(player, id, isOwn, event.getClick());
         }
     }
 
-    private void handlePurchase(Player player, Auction auction) {
-        if (auction.getSellerUuid().equals(player.getUniqueId())) {
-            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cannot_buy_own"));
+    private void handleAction(Player player, String action) {
+        switch (action) {
+            case "sell" -> {
+                if (!player.hasPermission("essentialsc.ah.sell")) {
+                    player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
+                    soundManager.playError(player);
+                    return;
+                }
+                soundManager.playClick(player);
+                player.closeInventory();
+                player.sendMessage(plugin.getLanguageManager().get(player, "ah.sell_prompt"));
+            }
+            case "expired" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openExpiredGui(player), 1L);
+            }
+            case "listings" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openListingsGui(player, 1), 1L);
+            }
+            case "claim_all" -> handleClaimAll(player);
+            case "refresh" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openMainGui(player, 1), 1L);
+            }
+            case "history" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openHistoryTypeGui(player), 1L);
+            }
+            case "sell_history" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openSellHistoryGui(player, 1), 1L);
+            }
+            case "buy_history" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openBuyHistoryGui(player, 1), 1L);
+            }
+            case "history_type" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(plugin,
+                        () -> ahCommand.openHistoryTypeGui(player), 1L);
+            }
+        }
+    }
+
+    private void handleClaimAll(Player player) {
+        var items = plugin.getAuctionManager().getExpiredItems(player.getUniqueId());
+        if (items.isEmpty()) {
+            soundManager.playError(player);
             return;
         }
 
+        boolean success = plugin.getAuctionManager().claimExpiredItems(player);
+        if (success) {
+            soundManager.playSuccess(player);
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed_all",
+                    Map.of("count", String.valueOf(items.size()))));
+            player.closeInventory();
+        } else {
+            soundManager.playError(player);
+        }
+    }
+
+    private void handleClaim(Player player) {
+        if (!plugin.getAuctionManager().claimExpiredItems(player)) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.claim_failed"));
+            soundManager.playError(player);
+            return;
+        }
+
+        soundManager.playSuccess(player);
+        player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed"));
+
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (!plugin.getAuctionManager().getExpiredItems(player.getUniqueId()).isEmpty()) {
+                ahCommand.openExpiredGui(player);
+            } else {
+                player.closeInventory();
+                player.sendMessage(plugin.getLanguageManager().get(player, "ah.all_claimed"));
+            }
+        }, 2L);
+    }
+
+    private void handleAuctionClick(Player player, int id, boolean isOwn, ClickType click) {
+        Optional<Auction> opt = plugin.getAuctionManager().getAuction(id);
+        if (opt.isEmpty()) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.not_found"));
+            soundManager.playError(player);
+            player.closeInventory();
+            return;
+        }
+
+        Auction auction = opt.get();
+
+        if (isOwn) {
+            handleCancel(player, auction, click);
+        } else {
+            handleBuy(player, auction);
+        }
+    }
+
+    private void handleCancel(Player player, Auction auction, ClickType click) {
+        if (click != ClickType.RIGHT) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.right_click_cancel"));
+            soundManager.playClick(player);
+            return;
+        }
+
+        if (!player.hasPermission("essentialsc.ah.cancel")) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
+            soundManager.playError(player);
+            return;
+        }
+
+        soundManager.playClick(player);
+        player.closeInventory();
+
+        plugin.getAuctionManager().cancelAuction(player, auction.getId()).thenAccept(success -> {
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                if (success) {
+                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.cancelled"));
+                    soundManager.playCancel(player);
+                } else {
+                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.cancel_failed"));
+                    soundManager.playError(player);
+                }
+            });
+        });
+    }
+
+    private void handleBuy(Player player, Auction auction) {
+        if (!player.hasPermission("essentialsc.ah.buy")) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
+            soundManager.playError(player);
+            return;
+        }
+
+        if (auction.getSellerUuid().equals(player.getUniqueId())) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cannot_buy_own"));
+            soundManager.playError(player);
+            return;
+        }
+
+        soundManager.playClick(player);
         player.closeInventory();
 
         plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            Bukkit.getScheduler().runTask(plugin, () -> {
                 if (success) {
-                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased",
-                            Map.of("item", auction.getItem().getType().toString(),
-                                    "price", plugin.getEconomyManager().format(auction.getPrice()))));
+                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
+                            "item", auction.getItem().getType().toString(),
+                            "price", plugin.getEconomyManager().format(auction.getPrice())
+                    )));
+                    soundManager.playPurchase(player);
                 } else {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchase_failed"));
+                    soundManager.playError(player);
                 }
             });
         });
     }
 
     @EventHandler
-    public void onInventoryClose(InventoryCloseEvent event) {
+    public void onClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
 
-        String title;
-        try {
-            title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
-        } catch (Exception e) {
-            title = event.getView().getTitle();
-        }
-
-        if (title.contains("Auction House") || title.contains("Expired Items")) {
+        String title = getTitle(event);
+        if (title.contains("Auction House") ||
+                title.contains("Expired Items") ||
+                title.contains("Your Listings") ||
+                title.contains("History")) {
             player.removeMetadata("ah_session", plugin);
+        }
+    }
+
+    private String getTitle(InventoryClickEvent event) {
+        try {
+            return PlainTextComponentSerializer.plainText().serialize(event.getView().title());
+        } catch (Exception e) {
+            return event.getView().getTitle();
+        }
+    }
+
+    private String getTitle(InventoryCloseEvent event) {
+        try {
+            return PlainTextComponentSerializer.plainText().serialize(event.getView().title());
+        } catch (Exception e) {
+            return event.getView().getTitle();
         }
     }
 }

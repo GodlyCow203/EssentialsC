@@ -159,7 +159,7 @@ public class AuctionManagerImpl implements AuctionManager {
 
         net.godlycow.org.essc.auction.Auction internalAuction = opt.get();
         boolean isOwner = internalAuction.getSellerUuid().equals(seller.getUniqueId());
-        boolean isAdmin = seller.hasPermission(PERM_ADMIN);
+        boolean isAdmin = seller.hasPermission("essentialsc.ah.admin");
 
         if (!isOwner && !isAdmin) {
             return CompletableFuture.completedFuture(false);
@@ -181,7 +181,7 @@ public class AuctionManagerImpl implements AuctionManager {
     @NotNull
     public List<ItemStack> getPlayerExpiredItems(@NotNull UUID playerUuid) {
         if (internal == null) return Collections.emptyList();
-        return new ArrayList<>(internal.getPlayerExpiredItems(playerUuid));
+        return new ArrayList<>(internal.getExpiredItems(playerUuid));
     }
 
     @Override
@@ -206,7 +206,7 @@ public class AuctionManagerImpl implements AuctionManager {
     @Override
     public boolean hasExpiredItems(@NotNull UUID playerUuid) {
         if (internal == null) return false;
-        return !internal.getPlayerExpiredItems(playerUuid).isEmpty();
+        return !internal.getExpiredItems(playerUuid).isEmpty();
     }
 
     @Override

@@ -8,7 +8,7 @@
     <parent>
         <groupId>net.godlycow.org</groupId>
         <artifactId>EssentialsC-parent</artifactId>
-        <version>4.0.8</version>
+        <version>4.0.9</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -16,6 +16,14 @@
     <name>EssentialsC Plugin</name>
     <description>A lightweight yet powerful Minecraft plugin inspired by EssentialsX</description>
     <packaging>jar</packaging>
+    <repositories>
+        <repository>
+            <id>scarsz-nexus</id>
+            <url>https://nexus.scarsz.me/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+
 
     <dependencies>
         <dependency>
@@ -80,6 +88,14 @@
             <version>5.5</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.discordsrv</groupId>
+            <artifactId>discordsrv</artifactId>
+            <version>1.26.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

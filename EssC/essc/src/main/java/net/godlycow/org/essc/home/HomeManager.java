@@ -140,6 +140,8 @@ public class HomeManager implements Listener {
                 plugin.getLogger().severe("Failed to set home in homes.db: " + e.getMessage());
                 throw new RuntimeException(e);
             }
+
+
         });
     }
 

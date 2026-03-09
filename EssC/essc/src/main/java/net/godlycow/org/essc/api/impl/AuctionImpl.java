@@ -16,10 +16,11 @@ public class AuctionImpl implements Auction {
     private final BigDecimal price;
     private final long listedTime;
     private final long duration;
+    private final boolean claimed;
 
     public AuctionImpl(int id, @NotNull UUID sellerUuid, @NotNull String sellerName,
                        @NotNull ItemStack item, @NotNull BigDecimal price,
-                       long listedTime, long duration) {
+                       long listedTime, long duration, boolean claimed) {
         this.id = id;
         this.sellerUuid = sellerUuid;
         this.sellerName = sellerName;
@@ -27,6 +28,7 @@ public class AuctionImpl implements Auction {
         this.price = price;
         this.listedTime = listedTime;
         this.duration = duration;
+        this.claimed = claimed;
     }
 
     public static AuctionImpl fromInternal(net.godlycow.org.essc.auction.Auction auction) {
@@ -37,7 +39,8 @@ public class AuctionImpl implements Auction {
                 auction.getItem(),
                 auction.getPrice(),
                 auction.getListedTime(),
-                auction.getDuration()
+                auction.getDuration(),
+                auction.isClaimed()
         );
     }
 
@@ -66,6 +69,8 @@ public class AuctionImpl implements Auction {
     @Override
     public long getDuration() { return duration; }
 
+    public boolean isClaimed() { return claimed; }
+
     @Override
     public long getExpiryTime() { return listedTime + duration; }
 
@@ -83,13 +88,13 @@ public class AuctionImpl implements Auction {
     @Override
     @NotNull
     public Auction withPrice(@NotNull BigDecimal price) {
-        return new AuctionImpl(id, sellerUuid, sellerName, item, price, listedTime, duration);
+        return new AuctionImpl(id, sellerUuid, sellerName, item, price, listedTime, duration, claimed);
     }
 
     @Override
     @NotNull
     public Auction withDuration(long duration) {
-        return new AuctionImpl(id, sellerUuid, sellerName, item, price, listedTime, duration);
+        return new AuctionImpl(id, sellerUuid, sellerName, item, price, listedTime, duration, claimed);
     }
 
     @Override
@@ -99,6 +104,7 @@ public class AuctionImpl implements Auction {
                 ", seller=" + sellerName +
                 ", price=" + price +
                 ", expired=" + isExpired() +
+                ", claimed=" + claimed +
                 '}';
     }
 }

@@ -484,4 +484,76 @@ public class ConfigManager {
     }
 
     public boolean isLuckPermsChatEnabled() { return config.getBoolean("chat.luckperms-enabled", true);}
+
+    public boolean isDiscordSRVEnabled() {
+        return config.getBoolean("discordsrv.enabled", true);
+    }
+
+    public String getDiscordSRVPunishmentsChannelName() {
+        return config.getString("discordsrv.channels.punishments.name", "punishments");
+    }
+
+    public boolean isDiscordBanEnabled() {
+        return config.getBoolean("discordsrv.events.ban.enabled", true);
+    }
+
+    public String getDiscordBanColor() {
+        return config.getString("discordsrv.events.ban.color", "#E74C3C");
+    }
+
+    public boolean isDiscordKickEnabled() {
+        return config.getBoolean("discordsrv.events.kick.enabled", true);
+    }
+
+    public String getDiscordKickColor() {
+        return config.getString("discordsrv.events.kick.color", "#F39C12");
+    }
+
+    public boolean isDiscordSRVShowAvatar() {
+        return config.getBoolean("discordsrv.show-avatar", true);
+    }
+
+    public String getDiscordSRVAvatarUrl() {
+        return config.getString("discordsrv.avatar-url", "https://crafthead.net/helm/{uuid}");
+    }
+
+    public boolean isDiscordMuteEnabled() {
+        return config.getBoolean("discordsrv.events.mute.enabled", true);
+    }
+
+    public String getDiscordMuteColor() {
+        return config.getString("discordsrv.events.mute.color", "#9B59B6");
+    }
+
+    public boolean isDiscordKitEnabled() {
+        return config.getBoolean("discordsrv.events.kit.enabled", true);
+    }
+
+    public String getDiscordKitColor() {
+        return config.getString("discordsrv.events.kit.color", "#3498DB");
+    }
+
+    public boolean isDiscordHomeEnabled() {
+        return config.getBoolean("discordsrv.events.home.enabled", true);
+    }
+
+    public String getDiscordHomeColor() {
+        return config.getString("discordsrv.events.home.color", "#2ECC71");
+    }
+
+    public boolean isDiscordHomeDeleteEnabled() {
+        return config.getBoolean("discordsrv.events.home_delete.enabled", true);
+    }
+
+    public String getDiscordHomeDeleteColor() {
+        return config.getString("discordsrv.events.home_delete.color", "#E74C3C");
+    }
+
+    public boolean isRTPEnabled() {
+        return config.getBoolean("rtp.enabled", true);
+    }
+
+    public boolean isRTPCommandRegistered() {
+        return config.getBoolean("rtp.register-command", true);
+    }
 }

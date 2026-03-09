@@ -24,15 +24,29 @@ public class DelHomeCommand extends Command {
 
         plugin.debug("Delete home request: " + player.getName() + " -> '" + homeName + "'");
 
-        plugin.getHomeManager().deleteHome(player.getUniqueId(), homeName).thenAccept(success -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                if (success) {
-                    player.sendMessage(lang.get(player, "home.delete.success", Map.of("name", homeName)));
-                    plugin.debug("Deleted home '" + homeName + "' for " + player.getName());
-                } else {
-                    player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", homeName)));
-                    plugin.debug("Failed to delete home '" + homeName + "' (not found)");
-                }
+        plugin.getHomeManager().getHomeCount(player.getUniqueId()).thenAccept(countBefore -> {
+            plugin.getHomeManager().deleteHome(player.getUniqueId(), homeName).thenAccept(success -> {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    if (success) {
+                        player.sendMessage(lang.get(player, "home.delete.success", Map.of("name", homeName)));
+                        plugin.debug("Deleted home '" + homeName + "' for " + player.getName());
+
+                        if (plugin.getDiscordSRVHook() != null) {
+                            int maxHomes = plugin.getHomeManager().getMaxHomes(player);
+                            int remaining = Math.max(0, countBefore - 1);
+                            plugin.getDiscordSRVHook().sendHomeDeleteEmbed(
+                                    player.getUniqueId(),
+                                    player.getName(),
+                                    homeName,
+                                    remaining,
+                                    maxHomes
+                            );
+                        }
+                    } else {
+                        player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", homeName)));
+                        plugin.debug("Failed to delete home '" + homeName + "' (not found)");
+                    }
+                });
             });
         });
 

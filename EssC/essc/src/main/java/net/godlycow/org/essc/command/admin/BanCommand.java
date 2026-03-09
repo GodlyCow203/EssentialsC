@@ -108,6 +108,16 @@ public class BanCommand extends Command {
         senderPlaceholders.put("duration", formatDuration(duration));
         sender.sendMessage(lang.get(sender, "ban.success", senderPlaceholders));
 
+        if (plugin.getDiscordSRVHook() != null) {
+            plugin.getDiscordSRVHook().sendBanEmbed(
+                    target.getUniqueId(),
+                    target.getName(),
+                    reason,
+                    sender.getName(),
+                    expires > 0 ? expires : -1
+            );
+        }
+
         return true;
     }
 

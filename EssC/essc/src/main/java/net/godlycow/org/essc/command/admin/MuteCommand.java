@@ -92,6 +92,16 @@ public class MuteCommand extends Command {
         senderPlaceholders.put("duration", formatDuration(duration));
         sender.sendMessage(lang.get(sender, "mute.success", senderPlaceholders));
 
+        if (plugin.getDiscordSRVHook() != null) {
+            plugin.getDiscordSRVHook().sendMuteEmbed(
+                    target.getUniqueId(),
+                    target.getName(),
+                    reason,
+                    sender.getName(),
+                    expires > 0 ? expires : -1
+            );
+        }
+
         return true;
     }
 

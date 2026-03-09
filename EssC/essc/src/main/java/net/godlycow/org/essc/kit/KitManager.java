@@ -372,12 +372,12 @@ public class KitManager implements Listener {
         long now = System.currentTimeMillis();
         database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("""
-                INSERT INTO kit_claims (uuid, kit_name, last_claimed, claim_count)
-                VALUES (?, ?, ?, 1)
-                ON CONFLICT(uuid, kit_name) DO UPDATE SET
-                    last_claimed = excluded.last_claimed,
-                    claim_count = claim_count + 1
-            """)) {
+            INSERT INTO kit_claims (uuid, kit_name, last_claimed, claim_count)
+            VALUES (?, ?, ?, 1)
+            ON CONFLICT(uuid, kit_name) DO UPDATE SET
+                last_claimed = excluded.last_claimed,
+                claim_count = claim_count + 1
+        """)) {
                 stmt.setString(1, player.getUniqueId().toString());
                 stmt.setString(2, kit.getName());
                 stmt.setLong(3, now);
@@ -393,9 +393,16 @@ public class KitManager implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "kit.claim.success",
                 Map.of("kit", kit.getDisplayName())));
 
+        if (plugin.getDiscordSRVHook() != null) {
+            plugin.getDiscordSRVHook().sendKitClaimEmbed(
+                    player.getUniqueId(),
+                    player.getName(),
+                    kit
+            );
+        }
+
         plugin.debug("Player " + player.getName() + " claimed kit " + kit.getName());
     }
-
     public void reload() {
         loadKits();
         playerCache.clear();

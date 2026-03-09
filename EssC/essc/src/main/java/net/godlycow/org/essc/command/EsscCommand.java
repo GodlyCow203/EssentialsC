@@ -125,6 +125,11 @@ public class EsscCommand extends Command {
                     plugin.debug("Chat configuration reloaded");
                 }
 
+                if (plugin.getRtpManager() != null) {
+                    plugin.getRtpManager().reload();
+                    plugin.debug("RTP configuration reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

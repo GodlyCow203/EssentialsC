@@ -74,6 +74,17 @@ public class SetHomeCommand extends Command {
                         plugin.getServer().getScheduler().runTask(plugin, () -> {
                             player.sendMessage(lang.get(player, "home.set.success", Map.of("name", homeName)));
                             plugin.debug("Created home '" + homeName + "' for " + player.getName());
+
+                            if (plugin.getDiscordSRVHook() != null) {
+                                plugin.getDiscordSRVHook().sendHomeSetEmbed(
+                                        player.getUniqueId(),
+                                        player.getName(),
+                                        homeName,
+                                        loc.getWorld().getName(),
+                                        count + 1,
+                                        maxHomes
+                                );
+                            }
                         });
                     });
                 });

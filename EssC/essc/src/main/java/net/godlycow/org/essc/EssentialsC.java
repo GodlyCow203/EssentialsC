@@ -9,9 +9,12 @@ import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
 import net.godlycow.org.essc.chat.luckperms.ChatManager;
+import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
+import net.godlycow.org.essc.command.player.RTPCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.ConfigManager;
+import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.faststats.FastStatsManager;
@@ -27,6 +30,8 @@ import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.punishment.PunishmentManager;
+import net.godlycow.org.essc.rtp.RTPGuiManager;
+import net.godlycow.org.essc.rtp.RTPManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
@@ -71,6 +76,10 @@ public final class EssentialsC extends JavaPlugin {
     private FastStatsManager fastStats;
     private ChatManager chatManager;
     private EssentialsCAPIImpl apiImpl;
+    private DiscordSRVHook discordSRVHook;
+    private RTPManager rtpManager;
+    private RTPGuiManager rtpGuiManager;
+
 
 
 
@@ -122,6 +131,18 @@ public final class EssentialsC extends JavaPlugin {
             nickManager = new NickManager(this);
         }
 
+        if (configManager.isRTPEnabled()) {
+            rtpManager = new RTPManager(this);
+            rtpGuiManager = new RTPGuiManager(this, rtpManager);
+
+            if (configManager.isRTPCommandRegistered()) {
+                getCommand("rtp").setExecutor(new RTPCommand(this));
+                getCommand("rtp").setTabCompleter(new RTPCommand(this));
+            } else {
+                RTPCommand.unregisterCommand();
+            }
+        }
+
         new ListenerRegistrar(this);
         new CommandRegistrar(this).registerAll();
 
@@ -138,8 +159,8 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isAHEnabled()) {
             auctionManager = new AuctionManager(this);
-            AhListener ahListener = new AhListener(this);
-            getServer().getPluginManager().registerEvents(ahListener, this);
+            AhCommand ahCommand = new AhCommand(this);
+            new AhListener(this, ahCommand);
         }
 
         if (configManager.isWarpEnabled()) {
@@ -149,6 +170,11 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isAfkEnabled()) {
             afkManager = new AFKManager(this);
+        }
+
+        if (configManager.isDiscordSRVEnabled()) {
+            discordSRVHook = new DiscordSRVHook(this);
+            discordSRVHook.init();
         }
 
         getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
@@ -195,6 +221,15 @@ public final class EssentialsC extends JavaPlugin {
         }
         if (apiImpl != null) {
             apiImpl.disable();
+        }
+        if (discordSRVHook != null) {
+            discordSRVHook.shutdown();
+        }
+        if (rtpManager != null) {
+            rtpManager.shutdown();
+        }
+        if (rtpGuiManager != null) {
+            rtpGuiManager.shutdown();
         }
 
         getLogger().info("EssentialsC disabled");
@@ -334,4 +369,12 @@ public final class EssentialsC extends JavaPlugin {
     public ChatManager getChatManager() { return chatManager;}
 
     public EssentialsCAPI getAPI() { return apiImpl;}
+
+    public DiscordSRVHook getDiscordSRVHook() { return discordSRVHook;}
+
+    public RTPManager getRtpManager() {return rtpManager;}
+
+    public RTPGuiManager getRtpGuiManager() {return rtpGuiManager;}
+
 }
+

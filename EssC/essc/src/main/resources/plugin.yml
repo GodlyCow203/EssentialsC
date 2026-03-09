@@ -1,5 +1,5 @@
 name: EssentialsC
-version: '4.0.8'
+version: '4.0.9'
 main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
 description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
@@ -8,6 +8,7 @@ softdepend:
   - Vault
   - PlaceholderAPI
   - LuckPerms
+  - DiscordSRV
 
 
 commands:
@@ -43,6 +44,11 @@ commands:
     usage: /baltop [page]
     aliases: [balancetop]
     permission: essentialsc.baltop
+
+  rtp:
+    description: Rtp to a random location
+    usage: /rtp
+    permission: essentialsc.rtp
 
   tpa:
     description: Request to teleport to a player
@@ -892,6 +898,38 @@ permissions:
 
   essentialsc.eco.everyone:
     description: Allow using @everyone for mass operations
+    default: op
+
+  essentialsc.rtp:
+    description: Allows use of /rtp
+    default: true
+
+  essentialsc.rtp.world.*:
+    description: Allows RTP to all worlds
+    default: op
+
+  essentialsc.rtp.world.overworld:
+    description: Allows RTP to overworld
+    default: true
+
+  essentialsc.rtp.world.nether:
+    description: Allows RTP to nether
+    default: true
+
+  essentialsc.rtp.world.end:
+    description: Allows RTP to end
+    default: true
+
+  essentialsc.rtp.bypass.cooldown:
+    description: Bypass RTP cooldown
+    default: op
+
+  essentialsc.rtp.bypass.warmup:
+    description: Bypass RTP warmup
+    default: op
+
+  essentialsc.rtp.bypass.movement:
+    description: Bypass RTP movement check
     default: op
 
 

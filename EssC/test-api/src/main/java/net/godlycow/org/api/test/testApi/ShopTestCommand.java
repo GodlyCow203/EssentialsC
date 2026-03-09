@@ -485,7 +485,6 @@ public class ShopTestCommand implements CommandExecutor {
         player.sendMessage(g + "[" + d + "INFO" + g + "] " + w + "Singular: " + a + singular);
         player.sendMessage(g + "[" + d + "INFO" + g + "] " + w + "Plural: " + a + plural);
 
-        // Test formatting
         String formatted = shopManager.formatBalance(new BigDecimal("1234.56"));
         player.sendMessage(g + "[" + d + "INFO" + g + "] " + w + "Format test: " + a + formatted);
 
