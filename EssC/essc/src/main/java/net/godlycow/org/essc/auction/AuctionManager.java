@@ -250,9 +250,13 @@ public class AuctionManager implements Listener {
     }
     public Optional<Auction> getAuction(int id) { return Optional.ofNullable(activeAuctions.get(id)); }
     public List<ItemStack> getExpiredItems(UUID uuid) { return expiredItems.getOrDefault(uuid, new ArrayList<>()); }
+
     public boolean hasExpiredItems(UUID uuid) {
-        return !getExpiredItems(uuid).isEmpty() ||
-                storage.loadExpiredItems(uuid).join().size() > 0;
+        List<ItemStack> cached = expiredItems.get(uuid);
+        if (cached != null && !cached.isEmpty()) {
+            return true;
+        }
+        return false;
     }
     public List<SellHistoryEntry> getSellHistory(UUID uuid) { return sellHistory.getOrDefault(uuid, new ArrayList<>()); }
     public List<BuyHistoryEntry> getBuyHistory(UUID uuid) { return buyHistory.getOrDefault(uuid, new ArrayList<>()); }
