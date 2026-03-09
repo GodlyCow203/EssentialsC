@@ -178,10 +178,10 @@ public class ScoreboardManager implements Listener {
 
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 try {
-                    String title = processor.processString(player, config.getTitleRaw());
+                    String title = translateColorCodes(processor.processString(player, config.getTitleRaw()));
                     List<String> lines = new ArrayList<>();
                     for (String line : config.getLines()) {
-                        lines.add(processor.processString(player, line));
+                        lines.add(translateColorCodes(processor.processString(player, line)));
                     }
 
                     placeholderCache.put(uuid, new ProcessedData(title, lines, System.currentTimeMillis()));
@@ -204,6 +204,38 @@ public class ScoreboardManager implements Listener {
         if (now % 20 == 0) {
             placeholderCache.entrySet().removeIf(e -> (now - e.getValue().timestamp) > CACHE_TTL_MS * 2);
         }
+    }
+
+    private String translateColorCodes(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        String result = text;
+
+        result = result.replace("&0", "<black>")
+                .replace("&1", "<dark_blue>")
+                .replace("&2", "<dark_green>")
+                .replace("&3", "<dark_aqua>")
+                .replace("&4", "<dark_red>")
+                .replace("&5", "<dark_purple>")
+                .replace("&6", "<gold>")
+                .replace("&7", "<gray>")
+                .replace("&8", "<dark_gray>")
+                .replace("&9", "<blue>")
+                .replace("&a", "<green>")
+                .replace("&b", "<aqua>")
+                .replace("&c", "<red>")
+                .replace("&d", "<light_purple>")
+                .replace("&e", "<yellow>")
+                .replace("&f", "<white>");
+
+        result = result.replace("&k", "<obfuscated>")
+                .replace("&l", "<bold>")
+                .replace("&m", "<strikethrough>")
+                .replace("&n", "<underlined>")
+                .replace("&o", "<italic>")
+                .replace("&r", "<reset>");
+
+        return result;
     }
 
     public void toggle(Player player) {
