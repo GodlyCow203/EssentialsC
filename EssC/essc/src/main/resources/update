@@ -1,0 +1,7 @@
+- added legacy color support for scoreboard
+- new discord srv messages (  mutes, sethome, delhome, kit claim )
+- new config.yml options ( luckperms.tab-formatting )
+- moved config.yml option "chat.luckperms-enabled" to "luckperms.chat-formatting"
+- added support for luckperms prefixed for TAB
+- added rtp system
+- updated all message files, new colors, better Prefix

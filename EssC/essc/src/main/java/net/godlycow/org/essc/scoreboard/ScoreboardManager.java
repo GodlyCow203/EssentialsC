@@ -14,15 +14,14 @@ import org.bukkit.scheduler.BukkitTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
 public class ScoreboardManager implements Listener {
     private final EssentialsC plugin;
     private final PlaceholderProcessor processor;
-    private final Map<UUID, PlayerScoreboard> boards = new ConcurrentHashMap<>();
-    private final Set<UUID> disabledPlayers = ConcurrentHashMap.newKeySet();
+    private final Map<UUID, PlayerScoreboard> boards = new HashMap<>();
+    private final Set<UUID> disabledPlayers = new HashSet<>();
 
     private ScoreboardConfig config;
     private BukkitTask updateTask;
@@ -31,10 +30,12 @@ public class ScoreboardManager implements Listener {
     private final AtomicBoolean reloading = new AtomicBoolean(false);
     private final Object lock = new Object();
 
-    private final Map<UUID, ProcessedData> placeholderCache = new ConcurrentHashMap<>();
-    private final long CACHE_TTL_MS = 1000;
+    private final Map<UUID, ProcessedData> placeholderCache = new HashMap<>();
+    private static final long CACHE_TTL_MS = 1000L;
 
-    private record ProcessedData(String title, List<String> lines, long timestamp) {}
+    private final List<Player> stalePlayers = new ArrayList<>(64);
+
+    private record ProcessedData(String title, String[] lines, long timestamp) {}
 
     public ScoreboardManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -114,14 +115,19 @@ public class ScoreboardManager implements Listener {
         if (!player.isOnline()) return;
 
         try {
-            PlayerScoreboard existing = boards.remove(player.getUniqueId());
+            PlayerScoreboard existing;
+            synchronized (boards) {
+                existing = boards.remove(player.getUniqueId());
+            }
             if (existing != null) {
                 existing.hide(player);
                 existing.destroy();
             }
 
             PlayerScoreboard board = new PlayerScoreboard(player, config);
-            boards.put(player.getUniqueId(), board);
+            synchronized (boards) {
+                boards.put(player.getUniqueId(), board);
+            }
             board.show(player);
         } catch (Exception e) {
             plugin.getLogger().log(Level.WARNING, "Failed to add scoreboard for " + player.getName(), e);
@@ -135,107 +141,157 @@ public class ScoreboardManager implements Listener {
                 updateTask = null;
             }
 
-            Iterator<Map.Entry<UUID, PlayerScoreboard>> it = boards.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<UUID, PlayerScoreboard> entry = it.next();
-                try {
-                    Player player = Bukkit.getPlayer(entry.getKey());
-                    if (player != null && player.isOnline()) {
-                        entry.getValue().hide(player);
-                        player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+            synchronized (boards) {
+                Iterator<Map.Entry<UUID, PlayerScoreboard>> it = boards.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<UUID, PlayerScoreboard> entry = it.next();
+                    try {
+                        Player player = Bukkit.getPlayer(entry.getKey());
+                        if (player != null && player.isOnline()) {
+                            entry.getValue().hide(player);
+                            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+                        }
+                        entry.getValue().destroy();
+                    } catch (Exception e) {
+                        plugin.getLogger().warning("Error stopping scoreboard: " + e.getMessage());
                     }
-                    entry.getValue().destroy();
-                } catch (Exception e) {
-                    plugin.getLogger().warning("Error stopping scoreboard: " + e.getMessage());
+                    it.remove();
                 }
-                it.remove();
             }
             placeholderCache.clear();
         }
     }
 
-
     private void updateAll() {
         if (!config.isEnabled() || reloading.get()) return;
 
-        long now = System.currentTimeMillis();
+        final long now = System.currentTimeMillis();
+        stalePlayers.clear();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            PlayerScoreboard board = boards.get(player.getUniqueId());
-            if (board == null || !board.isActive()) continue;
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 
-            UUID uuid = player.getUniqueId();
+        synchronized (boards) {
+            for (Player player : onlinePlayers) {
+                PlayerScoreboard board = boards.get(player.getUniqueId());
+                if (board == null || !board.isActive()) continue;
 
-            ProcessedData cached = placeholderCache.get(uuid);
-            if (cached != null && (now - cached.timestamp) < CACHE_TTL_MS) {
-                try {
-                    board.updateProcessed(player, cached.title, cached.lines);
-                } catch (Exception e) {
-                    plugin.getLogger().warning("Error updating scoreboard from cache for " + player.getName());
+                UUID uuid = player.getUniqueId();
+                ProcessedData cached = placeholderCache.get(uuid);
+
+                if (cached != null && (now - cached.timestamp) < CACHE_TTL_MS) {
+                    try {
+                        board.updateProcessed(player, cached.title, Arrays.asList(cached.lines));
+                    } catch (Exception e) {
+                        plugin.getLogger().warning("Error updating scoreboard from cache for " + player.getName());
+                    }
+                } else {
+                    stalePlayers.add(player);
                 }
-                continue;
             }
+        }
+
+        if (!stalePlayers.isEmpty()) {
+            final List<Player> toProcess = new ArrayList<>(stalePlayers);
 
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                try {
-                    String title = translateColorCodes(processor.processString(player, config.getTitleRaw()));
-                    List<String> lines = new ArrayList<>();
-                    for (String line : config.getLines()) {
-                        lines.add(translateColorCodes(processor.processString(player, line)));
+                List<ProcessedResult> results = new ArrayList<>(toProcess.size());
+
+                for (Player player : toProcess) {
+                    try {
+                        String title = translateColorCodes(processor.processString(player, config.getTitleRaw()));
+                        List<String> lineList = config.getLines();
+                        String[] lines = new String[lineList.size()];
+
+                        for (int i = 0; i < lineList.size(); i++) {
+                            lines[i] = translateColorCodes(processor.processString(player, lineList.get(i)));
+                        }
+
+                        results.add(new ProcessedResult(player.getUniqueId(), title, lines));
+                    } catch (Exception e) {
+                        plugin.getLogger().log(Level.WARNING, "Error processing placeholders for " + player.getName(), e);
                     }
+                }
 
-                    placeholderCache.put(uuid, new ProcessedData(title, lines, System.currentTimeMillis()));
-
+                if (!results.isEmpty()) {
                     Bukkit.getScheduler().runTask(plugin, () -> {
-                        if (player.isOnline() && board.isActive()) {
+                        final long applyTime = System.currentTimeMillis();
+
+                        for (ProcessedResult result : results) {
+                            Player player = Bukkit.getPlayer(result.uuid);
+                            if (player == null || !player.isOnline()) continue;
+
+                            PlayerScoreboard board;
+                            synchronized (boards) {
+                                board = boards.get(result.uuid);
+                            }
+                            if (board == null || !board.isActive()) continue;
+
+                            placeholderCache.put(result.uuid,
+                                    new ProcessedData(result.title, result.lines, applyTime));
+
                             try {
-                                board.updateProcessed(player, title, lines);
+                                board.updateProcessed(player, result.title, Arrays.asList(result.lines));
                             } catch (Exception e) {
                                 plugin.getLogger().warning("Error updating scoreboard for " + player.getName() + ": " + e.getMessage());
                             }
                         }
                     });
-                } catch (Exception e) {
-                    plugin.getLogger().log(Level.WARNING, "Error processing placeholders for " + player.getName(), e);
                 }
             });
         }
 
-        if (now % 20 == 0) {
+        if ((now & 0x1F) == 0) {
             placeholderCache.entrySet().removeIf(e -> (now - e.getValue().timestamp) > CACHE_TTL_MS * 2);
         }
     }
 
+    private record ProcessedResult(UUID uuid, String title, String[] lines) {}
+
     private String translateColorCodes(String text) {
         if (text == null || text.isEmpty()) return text;
 
-        String result = text;
+        StringBuilder sb = new StringBuilder(text.length() + 16);
 
-        result = result.replace("&0", "<black>")
-                .replace("&1", "<dark_blue>")
-                .replace("&2", "<dark_green>")
-                .replace("&3", "<dark_aqua>")
-                .replace("&4", "<dark_red>")
-                .replace("&5", "<dark_purple>")
-                .replace("&6", "<gold>")
-                .replace("&7", "<gray>")
-                .replace("&8", "<dark_gray>")
-                .replace("&9", "<blue>")
-                .replace("&a", "<green>")
-                .replace("&b", "<aqua>")
-                .replace("&c", "<red>")
-                .replace("&d", "<light_purple>")
-                .replace("&e", "<yellow>")
-                .replace("&f", "<white>");
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '&' && i + 1 < text.length()) {
+                char code = text.charAt(i + 1);
+                String replacement = switch (code) {
+                    case '0' -> "<black>";
+                    case '1' -> "<dark_blue>";
+                    case '2' -> "<dark_green>";
+                    case '3' -> "<dark_aqua>";
+                    case '4' -> "<dark_red>";
+                    case '5' -> "<dark_purple>";
+                    case '6' -> "<gold>";
+                    case '7' -> "<gray>";
+                    case '8' -> "<dark_gray>";
+                    case '9' -> "<blue>";
+                    case 'a' -> "<green>";
+                    case 'b' -> "<aqua>";
+                    case 'c' -> "<red>";
+                    case 'd' -> "<light_purple>";
+                    case 'e' -> "<yellow>";
+                    case 'f' -> "<white>";
+                    case 'k' -> "<obfuscated>";
+                    case 'l' -> "<bold>";
+                    case 'm' -> "<strikethrough>";
+                    case 'n' -> "<underlined>";
+                    case 'o' -> "<italic>";
+                    case 'r' -> "<reset>";
+                    default -> null;
+                };
 
-        result = result.replace("&k", "<obfuscated>")
-                .replace("&l", "<bold>")
-                .replace("&m", "<strikethrough>")
-                .replace("&n", "<underlined>")
-                .replace("&o", "<italic>")
-                .replace("&r", "<reset>");
+                if (replacement != null) {
+                    sb.append(replacement);
+                    i++;
+                    continue;
+                }
+            }
+            sb.append(c);
+        }
 
-        return result;
+        return sb.toString();
     }
 
     public void toggle(Player player) {
@@ -271,7 +327,10 @@ public class ScoreboardManager implements Listener {
     }
 
     private void removePlayer(Player player) {
-        PlayerScoreboard board = boards.remove(player.getUniqueId());
+        PlayerScoreboard board;
+        synchronized (boards) {
+            board = boards.remove(player.getUniqueId());
+        }
         if (board != null) {
             try {
                 board.hide(player);

@@ -2,6 +2,7 @@ package net.godlycow.org.essc.tab;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -22,32 +23,25 @@ public class TabManager implements Listener {
     private boolean luckPermsEnabled;
     private boolean useLuckPermsTab;
 
+    private final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.legacyAmpersand();
+    private final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.legacySection();
+
     public TabManager(EssentialsC plugin) {
         this.plugin = plugin;
         reload();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-
         startRefreshTask();
     }
 
     public void reload() {
         this.useLuckPermsTab = plugin.getConfigManager().isLuckPermsTabEnabled();
-
         if (useLuckPermsTab && plugin.getServer().getPluginManager().isPluginEnabled("LuckPerms")) {
-            var provider = plugin.getServer().getServicesManager().getRegistration(LuckPerms.class);
-            if (provider != null) {
-                this.luckPerms = provider.getProvider();
+            try {
+                this.luckPerms = LuckPermsProvider.get();
                 this.luckPermsEnabled = true;
-            } else {
-                try {
-                    this.luckPerms = LuckPermsProvider.get();
-                    this.luckPermsEnabled = true;
-                } catch (IllegalStateException e) {
-                    this.luckPermsEnabled = false;
-                }
+            } catch (IllegalStateException e) {
+                this.luckPermsEnabled = false;
             }
-        } else {
-            this.luckPermsEnabled = false;
         }
     }
 
@@ -68,40 +62,47 @@ public class TabManager implements Listener {
     public void updatePlayerTab(Player player) {
         if (player == null || !player.isOnline()) return;
 
-        String prefix = "";
-        String suffix = "";
+        TextComponent.Builder builder = Component.text();
 
+        if (plugin.getAfkManager() != null && plugin.getAfkManager().isAFK(player)) {
+            String afkTag = plugin.getConfigManager().getAfkTabPlaceholder();
+            if (afkTag != null && !afkTag.isEmpty()) {
+                builder.append(plugin.getMiniMessage().deserialize(afkTag));
+            }
+        }
+
+        String lpPrefix = "";
+        String lpSuffix = "";
         if (luckPermsEnabled && useLuckPermsTab) {
             CachedMetaData metaData = luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
-            if (metaData.getPrefix() != null) prefix = metaData.getPrefix();
-            if (metaData.getSuffix() != null) suffix = metaData.getSuffix();
+            lpPrefix = metaData.getPrefix() != null ? metaData.getPrefix() : "";
+            lpSuffix = metaData.getSuffix() != null ? metaData.getSuffix() : "";
+
+            if (!lpPrefix.isEmpty()) {
+                builder.append(legacySerializer.deserialize(lpPrefix));
+            }
+        }
+        builder.append(Component.text(player.getName()));
+
+        if (!lpSuffix.isEmpty()) {
+            builder.append(legacySerializer.deserialize(lpSuffix));
         }
 
-        String afkTag = "";
-        if (plugin.getAfkManager() != null && plugin.getAfkManager().isAFK(player)) {
-            afkTag = plugin.getConfigManager().getAfkTabPlaceholder();
-        }
-
-        String rawFullName = (afkTag + prefix + player.getName() + suffix).replace('&', '§');
-        Component finalComponent = plugin.getMiniMessage().deserialize(rawFullName);
-
+        Component finalComponent = builder.build();
         player.playerListName(finalComponent);
 
-        updateScoreboardTeam(player, afkTag + prefix, suffix);
+        updateScoreboardTeam(player, finalComponent);
     }
 
-    private void updateScoreboardTeam(Player player, String prefix, String suffix) {
+    private void updateScoreboardTeam(Player player, Component fullDisplayName) {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         String teamName = "lp_" + (player.getName().length() > 13 ? player.getName().substring(0, 13) : player.getName());
 
         Team team = scoreboard.getTeam(teamName);
         if (team == null) team = scoreboard.registerNewTeam(teamName);
 
-        Component prefComp = plugin.getMiniMessage().deserialize(prefix.replace('&', '§'));
-        Component suffComp = plugin.getMiniMessage().deserialize(suffix.replace('&', '§'));
-
-        team.setPrefix(LegacyComponentSerializer.legacySection().serialize(prefComp));
-        team.setSuffix(LegacyComponentSerializer.legacySection().serialize(suffComp));
+        String legacyFormatted = sectionSerializer.serialize(fullDisplayName);
+        team.setPrefix(legacyFormatted.replace(player.getName(), ""));
 
         if (!team.hasEntry(player.getName())) {
             team.addEntry(player.getName());
@@ -109,7 +110,9 @@ public class TabManager implements Listener {
     }
 
     public void refreshAll() {
-        Bukkit.getOnlinePlayers().forEach(this::updatePlayerTab);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            updatePlayerTab(player);
+        }
     }
 
     public boolean isEnabled() {
