@@ -229,6 +229,7 @@ public class RTPManager {
             }
 
             Location finalLoc = location.clone();
+            finalLoc.getChunk().load();
             finalLoc.setYaw(random.nextFloat() * 360);
             finalLoc.setPitch(0);
 
@@ -253,12 +254,17 @@ public class RTPManager {
     }
 
     private CompletableFuture<Location> findSafeLocation(World world) {
+
         return CompletableFuture.supplyAsync(() -> {
+
             WorldRTPSettings settings = getWorldSettings(world.getName());
             Location spawn = world.getSpawnLocation();
 
-            for (int i = 0; i < maxAttempts; i++) {
-                double angle = random.nextDouble() * 2 * Math.PI;
+            int attempts = world.getEnvironment() == World.Environment.THE_END ? maxAttempts * 3 : maxAttempts;
+
+            for (int i = 0; i < attempts; i++) {
+
+                double angle = random.nextDouble() * Math.PI * 2;
                 int distance = settings.minRadius() + random.nextInt(settings.maxRadius() - settings.minRadius());
 
                 int x = spawn.getBlockX() + (int) (Math.cos(angle) * distance);
@@ -268,12 +274,17 @@ public class RTPManager {
                     WorldBorder border = world.getWorldBorder();
                     Location center = border.getCenter();
                     double radius = border.getSize() / 2;
+
                     if (Math.abs(x - center.getBlockX()) > radius || Math.abs(z - center.getBlockZ()) > radius) {
                         continue;
                     }
                 }
 
                 int y = world.getHighestBlockYAt(x, z);
+
+                if (world.getEnvironment() == World.Environment.THE_END && y <= 0) {
+                    continue;
+                }
 
                 if (y < minY) y = minY;
                 if (y > maxY) y = maxY;
@@ -289,26 +300,33 @@ public class RTPManager {
                     return loc;
                 }
             }
+
             return null;
         });
     }
 
     private boolean isSafeLocation(Location location) {
+
         World world = location.getWorld();
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();
 
-        Material stand = world.getBlockAt(x, y, z).getType();
-        Material head = world.getBlockAt(x, y + 1, z).getType();
         Material ground = world.getBlockAt(x, y - 1, z).getType();
+        Material feet = world.getBlockAt(x, y, z).getType();
+        Material head = world.getBlockAt(x, y + 1, z).getType();
 
-        return (stand.isAir() || !stand.isSolid()) &&
-                (head.isAir() || !head.isSolid()) &&
-                ground.isSolid() &&
-                !ground.name().contains("LAVA") &&
-                !ground.name().contains("FIRE") &&
-                !ground.name().contains("CACTUS");
+        if (!ground.isSolid()) return false;
+
+        if (ground == Material.LAVA ||
+                ground == Material.CACTUS ||
+                ground == Material.FIRE ||
+                ground == Material.MAGMA_BLOCK) {
+            return false;
+        }
+
+        return (feet.isAir() || !feet.isSolid()) &&
+                (head.isAir() || !head.isSolid());
     }
 
     private void spawnTeleportParticles(Location loc) {
