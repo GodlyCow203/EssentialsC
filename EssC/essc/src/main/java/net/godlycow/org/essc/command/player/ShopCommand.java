@@ -2,11 +2,15 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ShopCommand extends Command {
 
@@ -14,14 +18,42 @@ public class ShopCommand extends Command {
         super(plugin, "shop", "essentialsc.shop", true, 0, "command.usage.shop");
     }
 
+    public static void unregisterCommand() {
+        try {
+            CommandMap commandMap = Bukkit.getServer().getCommandMap();
+
+            Field knownCommandsField = null;
+            Class<?> clazz = commandMap.getClass();
+            while (clazz != null && knownCommandsField == null) {
+                try {
+                    knownCommandsField = clazz.getDeclaredField("knownCommands");
+                } catch (NoSuchFieldException ignored) {
+                    clazz = clazz.getSuperclass();
+                }
+            }
+
+            if (knownCommandsField == null) {
+                Bukkit.getLogger().warning("[EssentialsC] Could not locate knownCommands field to unregister /shop");
+                return;
+            }
+
+            knownCommandsField.setAccessible(true);
+
+            @SuppressWarnings("unchecked")
+            Map<String, org.bukkit.command.Command> knownCommands =
+                    (Map<String, org.bukkit.command.Command>) knownCommandsField.get(commandMap);
+
+            knownCommands.remove("shop");
+            knownCommands.remove("essentialsc:shop");
+
+        } catch (IllegalAccessException e) {
+            Bukkit.getLogger().warning("[EssentialsC] Failed to unregister /shop command: " + e.getMessage());
+        }
+    }
+
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-
-        if (!plugin.getConfigManager().isShopEnabled()) {
-            player.sendMessage(lang.get(player, "shop.disabled"));
-            return true;
-        }
 
         if (args.length == 0) {
             plugin.getShopManager().openMainShop(player);
@@ -59,7 +91,9 @@ public class ShopCommand extends Command {
         if (args.length == 1) {
             List<String> completions = new java.util.ArrayList<>();
             completions.add("reload");
-            completions.addAll(plugin.getShopManager().getCategories().keySet());
+            if (plugin.getShopManager() != null) {
+                completions.addAll(plugin.getShopManager().getCategories().keySet());
+            }
             return completions.stream()
                     .filter(s -> s.toLowerCase().startsWith(args[0].toLowerCase()))
                     .toList();

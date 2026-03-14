@@ -141,12 +141,6 @@ public final class EssentialsC extends JavaPlugin {
             rtpManager = new RTPManager(this);
             rtpGuiManager = new RTPGuiManager(this, rtpManager);
 
-            if (configManager.isRTPCommandRegistered()) {
-                getCommand("rtp").setExecutor(new RTPCommand(this));
-                getCommand("rtp").setTabCompleter(new RTPCommand(this));
-            } else {
-                RTPCommand.unregisterCommand();
-            }
         }
 
         new ListenerRegistrar(this);

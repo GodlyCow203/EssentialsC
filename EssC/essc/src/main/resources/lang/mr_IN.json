@@ -608,4 +608,3 @@
   "rtp.error.no_safe_location": "<prefix> <color:#FF0000>सुरक्षित स्थान सापडले नाही! कृपया पुन्हा प्रयत्न करा.</color>",
   "command.usage.rtp": "<prefix> <color:#FF0000>वापर: /rtp</color>"
 }
-}

@@ -43,12 +43,12 @@ public class BackManager implements Listener {
     }
 
     private void loadConfig() {
-        var config = plugin.getConfig();
-        this.warmup = config.getLong("back.warmup", 0);
-        this.cooldown = config.getLong("back.cooldown", 0);
-        this.particles = config.getBoolean("back.particles", true);
-        this.sounds = config.getBoolean("back.sounds", true);
-        this.cancelOnMovement = config.getBoolean("back.cancel-on-movement", true);
+        var cfg = plugin.getConfigManager();
+        this.warmup = cfg.getBackWarmup();
+        this.cooldown = cfg.getBackCooldown();
+        this.particles = cfg.isBackParticles();
+        this.sounds = cfg.isBackSounds();
+        this.cancelOnMovement = cfg.isBackCancelOnMovement();
     }
 
     public void setBackLocation(Player player, Location location) {

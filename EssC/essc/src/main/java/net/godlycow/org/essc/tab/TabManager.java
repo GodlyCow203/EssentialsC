@@ -23,8 +23,10 @@ public class TabManager implements Listener {
     private boolean luckPermsEnabled;
     private boolean useLuckPermsTab;
 
-    private final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.legacyAmpersand();
+    private final LegacyComponentSerializer legacySerializer  = LegacyComponentSerializer.legacyAmpersand();
     private final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.legacySection();
+
+    private static final int TEAM_FIELD_MAX = 64;
 
     public TabManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -82,31 +84,61 @@ public class TabManager implements Listener {
                 builder.append(legacySerializer.deserialize(lpPrefix));
             }
         }
-        builder.append(Component.text(player.getName()));
+
+
+        boolean nickInTab = plugin.getNickManager() != null
+                && plugin.getConfigManager().isNickTabEnabled();
+
+        if (nickInTab) {
+            String cachedNick = plugin.getNickManager().getCachedNickname(player.getUniqueId());
+            if (cachedNick != null && !cachedNick.isEmpty()) {
+                builder.append(plugin.getMiniMessage().deserialize(cachedNick));
+            } else {
+                builder.append(Component.text(player.getName()));
+            }
+        } else {
+            builder.append(Component.text(player.getName()));
+        }
 
         if (!lpSuffix.isEmpty()) {
             builder.append(legacySerializer.deserialize(lpSuffix));
         }
 
-        Component finalComponent = builder.build();
-        player.playerListName(finalComponent);
+        player.playerListName(builder.build());
 
-        updateScoreboardTeam(player, finalComponent);
+        updateScoreboardTeam(player, lpPrefix, lpSuffix);
     }
-
-    private void updateScoreboardTeam(Player player, Component fullDisplayName) {
+    private void updateScoreboardTeam(Player player, String lpPrefix, String lpSuffix) {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-        String teamName = "lp_" + (player.getName().length() > 13 ? player.getName().substring(0, 13) : player.getName());
+
+        String rawName = player.getName();
+        String teamName = "lp_" + (rawName.length() > 13 ? rawName.substring(0, 13) : rawName);
 
         Team team = scoreboard.getTeam(teamName);
-        if (team == null) team = scoreboard.registerNewTeam(teamName);
-
-        String legacyFormatted = sectionSerializer.serialize(fullDisplayName);
-        team.setPrefix(legacyFormatted.replace(player.getName(), ""));
-
-        if (!team.hasEntry(player.getName())) {
-            team.addEntry(player.getName());
+        if (team == null) {
+            team = scoreboard.registerNewTeam(teamName);
         }
+        if (!lpPrefix.isEmpty()) {
+            String sectionPrefix = sectionSerializer.serialize(legacySerializer.deserialize(lpPrefix));
+            team.setPrefix(truncate(sectionPrefix, TEAM_FIELD_MAX));
+        } else {
+            team.setPrefix("");
+        }
+
+        if (!lpSuffix.isEmpty()) {
+            String sectionSuffix = sectionSerializer.serialize(legacySerializer.deserialize(lpSuffix));
+            team.setSuffix(truncate(sectionSuffix, TEAM_FIELD_MAX));
+        } else {
+            team.setSuffix("");
+        }
+
+        if (!team.hasEntry(rawName)) {
+            team.addEntry(rawName);
+        }
+    }
+
+    private static String truncate(String s, int max) {
+        return s.length() <= max ? s : s.substring(0, max);
     }
 
     public void refreshAll() {

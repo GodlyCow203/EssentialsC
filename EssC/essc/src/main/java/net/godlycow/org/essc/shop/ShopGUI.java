@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class ShopGUI {
@@ -21,6 +20,12 @@ public class ShopGUI {
     private final Player player;
     private final MiniMessage mm;
     private double cachedBalance;
+    private static final int SLOT_PREV_PAGE       = 45;
+    private static final int SLOT_BACK_OR_CLOSE   = 48;
+    private static final int SLOT_PAGE_INDICATOR  = 52;
+    private static final int SLOT_NEXT_PAGE       = 53;
+    private static final int SLOT_BALANCE_MAIN     = 50;
+    private static final int SLOT_BALANCE_CATEGORY = 47;
 
     public ShopGUI(EssentialsC plugin, ShopManager shopManager, Player player) {
         this.plugin = plugin;
@@ -55,9 +60,8 @@ public class ShopGUI {
             ItemStack icon = createCategoryIcon(category);
             inv.setItem(category.getSlot(), icon);
         }
-
-        addBalanceHead(inv);
-        addCloseButton(inv, size);
+        addBalanceHead(inv, false);
+        addCloseButton(inv);
 
         player.openInventory(inv);
     }
@@ -87,7 +91,7 @@ public class ShopGUI {
         }
 
         addNavigation(inv, category, page);
-        addBalanceHead(inv);
+        addBalanceHead(inv, true);
         addBackButton(inv);
 
         player.openInventory(inv);
@@ -111,9 +115,8 @@ public class ShopGUI {
         return item;
     }
 
-    private void addBalanceHead(Inventory inv) {
-        int slot = findBalanceSlot();
-        if (slot < 0) return;
+    private void addBalanceHead(Inventory inv, boolean isCategory) {
+        int slot = isCategory ? SLOT_BALANCE_CATEGORY : SLOT_BALANCE_MAIN;
 
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
@@ -138,17 +141,18 @@ public class ShopGUI {
         head.setItemMeta(meta);
         inv.setItem(slot, head);
     }
+
     private void addNavigation(Inventory inv, ShopCategory category, int currentPage) {
         int maxPage = category.getMaxPage();
 
         if (currentPage > 1) {
-            inv.setItem(45, createNavigationButton("<color:#06FFA5>Previous Page", Material.ARROW));
+            inv.setItem(SLOT_PREV_PAGE, createNavigationButton("<color:#06FFA5>Previous Page", Material.ARROW));
         }
 
-        inv.setItem(52, createPageIndicator(currentPage, maxPage));
+        inv.setItem(SLOT_PAGE_INDICATOR, createPageIndicator(currentPage, maxPage));
 
         if (currentPage < maxPage) {
-            inv.setItem(53, createNavigationButton("<color:#06FFA5>Next Page", Material.ARROW));
+            inv.setItem(SLOT_NEXT_PAGE, createNavigationButton("<color:#06FFA5>Next Page", Material.ARROW));
         }
     }
 
@@ -173,16 +177,16 @@ public class ShopGUI {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(mm.deserialize("<color:#FF6B6B>Back to Categories"));
         item.setItemMeta(meta);
-        inv.setItem(49, item);
+        inv.setItem(SLOT_BACK_OR_CLOSE, item);
     }
 
-    private void addCloseButton(Inventory inv, int size) {
+    private void addCloseButton(Inventory inv) {
         if (plugin.getConfigManager().isShopCloseButtonEnabled()) {
             ItemStack item = new ItemStack(Material.BARRIER);
             ItemMeta meta = item.getItemMeta();
             meta.displayName(mm.deserialize("<color:#FF6B6B>Close"));
             item.setItemMeta(meta);
-            inv.setItem(size - 5, item);
+            inv.setItem(SLOT_BACK_OR_CLOSE, item);
         }
     }
 
@@ -214,10 +218,6 @@ public class ShopGUI {
                 inv.setItem(i, filler);
             }
         }
-    }
-
-    private int findBalanceSlot() {
-        return 49;
     }
 
     public void setCachedBalance(double balance) {

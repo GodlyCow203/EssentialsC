@@ -158,6 +158,9 @@ scoreboard:
     - "<#279FF5><b>|<reset> <#9CD6FF>ᴛᴘꜱ: <white>%server_tps_1%"
     - "<#279FF5><b>|<reset> <#9CD6FF>ᴠᴇʀꜱɪᴏɴ: <white>%server_version%"
 
+# Use this link for the custom "font"
+# https://www.piliapp.com/cool-text/small-caps/
+
 
 
 rename:

@@ -42,11 +42,14 @@ public class LanguageManager {
                 "th_TH","sv_SE","fil_PH","vi_VN","id_ID","uk_UA","pl_PL","nl_NL",
                 "it_IT","te_IN","ta_IN","gu_IN","bn_BD","mr_IN","hi_IN","de_DE",
                 "ur_PK","tr_TR","ar_SA","ar_EG","ko_KR","ru_RU","ja_JP","fr_FR",
-                "zh_CN","pt_BR","de_CH","es_ES","en_GB","en_US"
+                "zh_CN","pt_BR","de_CH","es_ES","en_GB","en_US", "LB_lb"
         };
 
         for (String lang : languages) {
-            plugin.saveResource("lang/" + lang + ".json", false);
+            File file = new File(langFolder, lang + ".json");
+            if (!file.exists()) {
+                plugin.saveResource("lang/" + lang + ".json", false);
+            }
         }
         loadIntoCache(defaultLanguage);
         for (String lang : languages) {

@@ -29,8 +29,6 @@ public class CommandRegistrar {
     private final EssentialsC plugin;
     private final PunishmentManager punishmentManager;
 
-
-
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
         this.punishmentManager = plugin.getPunishmentManager();
@@ -83,7 +81,22 @@ public class CommandRegistrar {
         register("realname", new RealNameCommand(plugin));
         register("playtime", new PlaytimeCommand(plugin));
         register("uptime", new UptimeCommand(plugin));
-        register("shop", new ShopCommand(plugin));
+
+        if (plugin.getConfigManager().isShopEnabled()) {
+            register("shop", new ShopCommand(plugin));
+        } else {
+            ShopCommand.unregisterCommand();
+            plugin.debug("Shop command unregistered (shop.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isRTPCommandRegistered()) {
+            register("rtp" ,new RTPCommand(plugin));
+        } else {
+            RTPCommand.unregisterCommand();
+            plugin.debug("Rtp command unregistered (rtp.enabled is false)");
+
+        }
+
         register("broadcast", new BroadcastCommand(plugin));
         register("enchant", new EnchantCommand(plugin));
         register("unenchant", new UnenchantCommand(plugin));

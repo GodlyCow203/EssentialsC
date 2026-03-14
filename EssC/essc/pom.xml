@@ -8,7 +8,7 @@
     <parent>
         <groupId>net.godlycow.org</groupId>
         <artifactId>EssentialsC-parent</artifactId>
-        <version>4.0.9</version>
+        <version>4.1.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -100,6 +100,31 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>deploy-essc</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="Cleaning old EssentialsC files and deploying new jar..."/>
+                                <delete file="${project.basedir}/../../run-server/plugins/EssentialsC-${project.version}.jar"/>
+                                <delete dir="${project.basedir}/../../run-server/plugins/EssentialsC"/>
+
+                                <copy file="${project.build.directory}/EssentialsC-${project.version}.jar"
+                                      todir="${project.basedir}/../../run-server/plugins"
+                                      overwrite="true"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

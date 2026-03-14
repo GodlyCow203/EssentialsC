@@ -12,11 +12,9 @@ public class ShopPlaceholders {
 
     private final EssentialsC plugin;
 
-
     private final Map<UUID, BigDecimal> balanceCache = new HashMap<>();
     private final Map<UUID, Long> balanceCacheTimestamps = new HashMap<>();
     private static final long CACHE_DURATION_MS = 5000;
-
 
     public ShopPlaceholders(EssentialsC plugin) {
         this.plugin = plugin;
@@ -35,13 +33,10 @@ public class ShopPlaceholders {
             case "shop_categories" -> getCategoryCount();
             case "shop_enabled" -> isShopEnabled();
             default -> {
-
-
                 if (identifier.toLowerCase().startsWith("shop_category_") && identifier.toLowerCase().endsWith("_items")) {
                     String categoryId = identifier.substring("shop_category_".length(), identifier.length() - "_items".length());
                     yield getCategoryItemCount(categoryId);
                 }
-
                 if (identifier.toLowerCase().startsWith("shop_item_") && identifier.toLowerCase().endsWith("_buyprice")) {
                     String itemId = identifier.substring("shop_item_".length(), identifier.length() - "_buyprice".length());
                     yield getItemBuyPrice(itemId);
@@ -88,18 +83,11 @@ public class ShopPlaceholders {
             }
         }
     }
-
     private String getCurrencySingular() {
-        if (plugin.getEconomyManager() != null) {
-            return plugin.getEconomyManager().currencyNameSingular();
-        }
         return plugin.getConfigManager().getShopCurrencySingular();
     }
 
     private String getCurrencyPlural() {
-        if (plugin.getEconomyManager() != null) {
-            return plugin.getEconomyManager().currencyNamePlural();
-        }
         return plugin.getConfigManager().getShopCurrencyPlural();
     }
 
@@ -164,17 +152,15 @@ public class ShopPlaceholders {
 
     public static List<String> getPlaceholderList() {
         List<String> list = new ArrayList<>();
-
         list.add("%essc_shop_balance% - Returns player's raw balance");
         list.add("%essc_shop_balance_formatted% - Returns player's formatted balance with currency");
-        list.add("%essc_shop_currency_singular% - Returns the singular currency name");
-        list.add("%essc_shop_currency_plural% - Returns the plural currency name");
+        list.add("%essc_shop_currency_singular% - Returns the singular currency name (from shop.currency.singular)");
+        list.add("%essc_shop_currency_plural% - Returns the plural currency name (from shop.currency.plural)");
         list.add("%essc_shop_categories% - Returns the number of shop categories");
         list.add("%essc_shop_enabled% - Returns 'true' if shop is enabled, 'false' otherwise");
         list.add("%essc_shop_category_<id>_items% - Returns item count in specified category");
         list.add("%essc_shop_item_<id>_buyprice% - Returns buy price of specified item");
         list.add("%essc_shop_item_<id>_sellprice% - Returns sell price of specified item");
-
         return list;
     }
 }

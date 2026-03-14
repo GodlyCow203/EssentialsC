@@ -2,6 +2,7 @@ package net.godlycow.org.essc.nick;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.database.Database;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -76,6 +77,10 @@ public class NickManager implements Listener {
                 return Optional.<String>empty();
             }
         });
+    }
+
+    public String getCachedNickname(UUID uuid) {
+        return nickCache.get(uuid);
     }
 
     public CompletableFuture<Boolean> setNickname(UUID uuid, String nickname) {
@@ -153,21 +158,27 @@ public class NickManager implements Listener {
 
         getNickname(player.getUniqueId()).thenAccept(opt -> {
             plugin.getServer().getScheduler().runTask(plugin, () -> {
-                opt.ifPresent(nick -> {
+                if (opt.isPresent()) {
+                    String nick = opt.get();
                     player.displayName(plugin.getMiniMessage().deserialize(nick));
-                    if (plugin.getConfigManager().isNickTabEnabled()) {
-                        player.playerListName(plugin.getMiniMessage().deserialize(nick));
-                    }
-                    plugin.debug("Applied nickname to " + player.getName() + ": " + nick);
-                });
+                    plugin.debug("Applied nickname display name to " + player.getName() + ": " + nick);
+                }
+                if (plugin.getTabManager() != null) {
+                    plugin.getTabManager().updatePlayerTab(player);
+                }
             });
         });
     }
 
     public void clearNickname(Player player) {
-        player.displayName(plugin.getMiniMessage().deserialize(player.getName()));
-        player.playerListName(plugin.getMiniMessage().deserialize(player.getName()));
+        player.displayName(Component.text(player.getName()));
         nickCache.remove(player.getUniqueId());
+
+        if (plugin.getTabManager() != null) {
+            plugin.getTabManager().updatePlayerTab(player);
+        }
+
+        plugin.debug("Cleared nickname for " + player.getName());
     }
 
     @EventHandler

@@ -298,10 +298,6 @@ public class ConfigManager {
         return config.getInt("shop.main-menu-size", 54);
     }
 
-    public String getShopCategoryTitle() {
-        return config.getString("shop.category-title", "<category>");
-    }
-
     public String getShopCategoryMenuTitle() {
         return config.getString("shop.category-menu-title", "Shop - <category>");
     }

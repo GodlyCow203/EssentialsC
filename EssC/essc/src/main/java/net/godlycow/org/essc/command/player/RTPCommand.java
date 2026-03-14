@@ -47,28 +47,36 @@ public class RTPCommand extends Command {
 
     public static void unregisterCommand() {
         try {
-            Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
-            commandMapField.setAccessible(true);
-            CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+            CommandMap commandMap = Bukkit.getServer().getCommandMap();
 
-            org.bukkit.command.Command cmd = commandMap.getCommand("rtp");
-            if (cmd != null) {
-                cmd.unregister(commandMap);
-
-                Field knownCommandsField = commandMap.getClass().getDeclaredField("knownCommands");
-                knownCommandsField.setAccessible(true);
-
-                Map<String, org.bukkit.command.Command> knownCommands =
-                        (Map<String, org.bukkit.command.Command>) knownCommandsField.get(commandMap);
-
-                knownCommands.remove("rtp");
-                knownCommands.remove("essentialsc:rtp");
+            Field knownCommandsField = null;
+            Class<?> clazz = commandMap.getClass();
+            while (clazz != null && knownCommandsField == null) {
+                try {
+                    knownCommandsField = clazz.getDeclaredField("knownCommands");
+                } catch (NoSuchFieldException ignored) {
+                    clazz = clazz.getSuperclass();
+                }
             }
 
-            EssentialsC.getInstance().getLogger().info("Successfully unregistered /rtp command");
-        } catch (Exception e) {
-            EssentialsC.getInstance().getLogger().warning("Failed to unregister /rtp command: " + e.getMessage());
-            e.printStackTrace();
+            if (knownCommandsField == null) {
+                Bukkit.getLogger().warning("[EssentialsC] Could not locate knownCommands field to unregister /rtp");
+                return;
+            }
+
+            knownCommandsField.setAccessible(true);
+
+            @SuppressWarnings("unchecked")
+            Map<String, org.bukkit.command.Command> knownCommands =
+                    (Map<String, org.bukkit.command.Command>) knownCommandsField.get(commandMap);
+
+            knownCommands.remove("rtp");
+            knownCommands.remove("essentialsc:rtp");
+
+            EssentialsC.getInstance().getLogger().info("[EssentialsC] Successfully unregistered /rtp command.");
+
+        } catch (IllegalAccessException e) {
+            Bukkit.getLogger().warning("[EssentialsC] Failed to unregister /rtp command: " + e.getMessage());
         }
     }
 }

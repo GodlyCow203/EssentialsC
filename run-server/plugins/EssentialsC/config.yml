@@ -6,8 +6,44 @@ heal:
   feed-player: true
   clear-negative-effects: true
 
-chat:
-  luckperms-enabled: true
+luckperms:
+  chat-formatting: true
+  tab-formatting: true
+
+# DiscordSRV Integration Settings
+discordsrv:
+  enabled: true
+
+  # Channel configuration
+  # The 'name' field references a channel name defined in DiscordSRV's config.yml
+  channels:
+    punishments:
+      name: "punishments"  # Must match a key in DiscordSRV's Channels section
+
+  # Event-specific settings
+  events:
+    ban:
+      enabled: true
+      color: "#E74C3C"
+    kick:
+      enabled: true
+      color: "#F39C12"
+    mute:
+      enabled: true
+      color: "#9B59B6"
+    kit:
+      enabled: true
+      color: "#3498DB"
+    home:
+      enabled: true
+      color: "#2ECC71"
+    home_delete:
+      enabled: true
+      color: "#E74C3C"
+
+  # Avatar settings
+  show-avatar: true
+  avatar-url: "https://crafthead.net/helm/{uuid}"
 
 economy:
   enabled: true
@@ -17,6 +53,48 @@ economy:
     plural: "Dollars"
   minimum-transaction: "0.01"
   max-balance: -1
+
+rtp:
+  # Completely disable the /rtp command (will unregister from command map)
+  register-command: true
+  enabled: true
+
+  # Teleport settings
+  cooldown: 60 # seconds
+  warmup: 5 # seconds, 0 to disable
+  cancel-on-movement: true
+  particles: true
+  max-attempts: 10
+  min-y: 64
+  max-y: 128
+  use-world-border: true
+
+  # Global defaults (used if per-world not specified)
+  global:
+    min-radius: 1000
+    max-radius: 10000
+    blocked-biomes:
+      - ocean
+      - deep_ocean
+      - river
+
+  # Per-world settings
+  worlds:
+    world:
+      enabled: true
+      min-radius: 1000
+      max-radius: 10000
+      blocked-biomes: []
+    world_nether:
+      enabled: true
+      min-radius: 500
+      max-radius: 5000
+      blocked-biomes: []
+    world_the_end:
+      enabled: true
+      min-radius: 1000
+      max-radius: 8000
+      blocked-biomes: []
 
 teleport:
   tpa:
@@ -66,16 +144,24 @@ back:
 scoreboard:
   enabled: true
   update-interval: 20
-  title: "<#FF3000><b>MyServer"
+  title: "<#279FF5><b>ꜱᴇʀᴠᴇʀɴᴀᴍᴇ"
   lines:
     - ""
-    - "<#FF3000>| <white>Player: <#FFAC96>%player_name%"
-    - "<#FF3000>| <white>Rank: <#FFAC96>%luckperms_prefix%"
-    - "<#FF3000>| <white>Balance: <#FFAC96>%vault_eco_balance_formatted%"
-    - "<#FF3000>| <white>Online: <#FFAC96>%server_online%<gray>/<#FFAC96>%server_max_players%"
-    - "<#FF3000>| <white>Kills: <#FFAC96>%statistic_player_kills%"
+    - "<#279FF5><b>%player_name%:<reset>"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ʀᴀɴᴋ: <white>%luckperms_prefix%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ʙᴀʟᴀɴᴄᴇ: <white>%vault_eco_balance_formatted%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ᴋɪʟʟѕ: <white>%statistic_player_kills%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ᴅᴇᴀᴛʜѕ: <white>%statistic_deaths%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ʟᴀᴛᴇɴᴄʏ: <white>%player_ping%<#9CD6FF>ᴍꜱ"
     - ""
-    - "<#FFAC96>play.myserver.net"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ᴏɴʟɪɴᴇ: <white>%server_online%<gray>/<white>%server_max_players%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ᴛᴘꜱ: <white>%server_tps_1%"
+    - "<#279FF5><b>|<reset> <#9CD6FF>ᴠᴇʀꜱɪᴏɴ: <white>%server_version%"
+
+# Use this link for the custom "font"
+# https://www.piliapp.com/cool-text/small-caps/
+
+
 
 rename:
   blacklist-enabled: true
@@ -106,7 +192,7 @@ nickname:
   update-tab: true
 
 shop:
-  enabled: true
+  enabled: false
   main-menu-title: "<#F52727><b>Server Shop"
   main-menu-size: 54
   category-title: "<#F52727><category>"
@@ -189,8 +275,3 @@ afk:
   list-show-location: true
   list-show-world: true
   list-sort-by: "time"  # Options: time, name, world
-
-
-
-
-

@@ -135,6 +135,9 @@ public class ShopManager {
         ConfigurationSection itemsSection = config.getConfigurationSection("items");
         if (itemsSection == null) return;
 
+        List<ShopItem> collected = new ArrayList<>();
+        boolean hasExplicitLayout = false;
+
         for (String itemId : itemsSection.getKeys(false)) {
             ConfigurationSection itemSec = itemsSection.getConfigurationSection(itemId);
             if (itemSec == null) continue;
@@ -145,8 +148,6 @@ public class ShopManager {
             item.setAmount(itemSec.getInt("amount", 1));
             item.setDisplayName(itemSec.getString("name"));
             item.setLore(itemSec.getStringList("lore"));
-            item.setSlot(itemSec.getInt("slot", 0));
-            item.setPage(itemSec.getInt("page", 1));
             item.setBuyPrice(itemSec.getDouble("buy-price", 0));
             item.setSellPrice(itemSec.getDouble("sell-price", 0));
             item.setBuyable(itemSec.getBoolean("buyable", true));
@@ -189,8 +190,44 @@ public class ShopManager {
             }
 
             item.setCommands(itemSec.getStringList("commands"));
+
+            int rawSlot = itemSec.getInt("slot", 0);
+            int rawPage = itemSec.getInt("page", 1);
+            item.setSlot(rawSlot);
+            item.setPage(rawPage);
+            if (rawSlot != 0 || rawPage != 1) {
+                hasExplicitLayout = true;
+            }
+
+            collected.add(item);
+        }
+
+        if (!hasExplicitLayout && !collected.isEmpty()) {
+            int itemsPerPage = plugin.getConfigManager().getShopItemsPerPage();
+            int[] availableSlots = buildAutoSlots(itemsPerPage);
+            plugin.debug("Auto-assigning slots for category '" + category.getId()
+                    + "' (" + collected.size() + " items, " + itemsPerPage + " per page)");
+
+            for (int i = 0; i < collected.size(); i++) {
+                int page      = i / itemsPerPage + 1;
+                int slotIndex = i % itemsPerPage;
+                int slot      = slotIndex < availableSlots.length ? availableSlots[slotIndex] : slotIndex;
+                collected.get(i).setPage(page);
+                collected.get(i).setSlot(slot);
+            }
+        }
+
+        for (ShopItem item : collected) {
             category.addItem(item);
         }
+    }
+    private int[] buildAutoSlots(int itemsPerPage) {
+        int capacity = Math.min(itemsPerPage, 45);
+        int[] slots = new int[capacity];
+        for (int i = 0; i < capacity; i++) {
+            slots[i] = i;
+        }
+        return slots;
     }
     private void createDefaultFiles() {
         File mainFile = new File(shopFolder, "main.yml");
@@ -338,6 +375,14 @@ public class ShopManager {
         double totalPrice = item.getBuyPrice() * amount;
 
         ItemStack giveItem = item.createItemStack();
+        ItemMeta meta = giveItem.getItemMeta();
+
+        if (meta != null) {
+            meta.displayName(null);
+            meta.lore(null);
+            giveItem.setItemMeta(meta);
+        }
+
         giveItem.setAmount(amount);
 
         if (!canFitInInventory(player, giveItem)) {
