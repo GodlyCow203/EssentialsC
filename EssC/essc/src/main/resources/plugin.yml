@@ -555,6 +555,7 @@ permissions:
 
   essentialsc.fly.disable-on-join:
     description: Auto disable /fly on join
+    default: false
 
   essentialsc.god.others:
     description: Enable / Disable god mode for others
