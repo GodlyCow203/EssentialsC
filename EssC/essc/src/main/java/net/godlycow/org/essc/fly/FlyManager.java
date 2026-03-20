@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -57,6 +58,38 @@ public class FlyManager implements Listener {
             }
         }, 2L);
     }
+
+
+    public boolean isFlying(Player player) {
+        return player.getAllowFlight() && player.isFlying();
+    }
+
+    public void setFlying(Player player, boolean flying) {
+        player.setAllowFlight(flying);
+        player.setFlying(flying);
+    }
+
+    public void toggleFlying(Player player) {
+        setFlying(player, !isFlying(player));
+    }
+
+    public boolean hasPersistentFly(UUID uuid) {
+        return flyingPlayers.contains(uuid);
+    }
+
+    public void setPersistentFly(UUID uuid, boolean persistent) {
+        if (persistent) {
+            flyingPlayers.add(uuid);
+        } else {
+            flyingPlayers.remove(uuid);
+        }
+        saveData();
+    }
+
+    public Set<UUID> getPersistentFlyPlayers() {
+        return Collections.unmodifiableSet(new HashSet<>(flyingPlayers));
+    }
+
 
     private Set<UUID> loadData() {
         Set<UUID> data = new HashSet<>();

@@ -71,14 +71,12 @@ public class ChatManager implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
 
-
         if (!luckPermsEnabled || !useLuckPermsFormatting) {
             return;
         }
 
         Player player = event.getPlayer();
         String message = event.getMessage();
-
 
         String processedMessage = message;
         boolean hasColor = player.hasPermission("essentialsc.chat.legacycodes");
@@ -93,7 +91,6 @@ public class ChatManager implements Listener {
         }
 
         Component messageComponent = legacySerializer.deserialize(processedMessage);
-
 
         Component formatted = formatWithLuckPerms(player, messageComponent);
         event.setCancelled(true);
@@ -122,18 +119,50 @@ public class ChatManager implements Listener {
                 .replace("<name>", player.getName())
                 .replace("{name}", player.getName());
 
-
         return legacySerializer.deserialize(colorize(translateHexColorCodes(formatString)))
                 .replaceText(builder -> builder.matchLiteral("<message>").replacement(messageComponent))
                 .replaceText(builder -> builder.matchLiteral("{message}").replacement(messageComponent));
     }
 
-    /*
-    private Component formatDefault(Player player, Component messageComponent) {
-        return miniMessage.deserialize("<yellow><name><gray>: ")
-                .append(messageComponent);
+
+    public boolean isLuckPermsChatEnabled() {
+        return useLuckPermsFormatting;
     }
-     */
+
+    public boolean isLuckPermsAvailable() {
+        return luckPermsEnabled;
+    }
+
+    public boolean canUseColorCodes(Player player) {
+        return player.hasPermission("essentialsc.chat.legacycodes");
+    }
+
+    public boolean canUseRgbCodes(Player player) {
+        return player.hasPermission("essentialsc.chat.rbgcodes");
+    }
+
+    public Component formatMessage(Player player, String message) {
+        String processed = message;
+        boolean hasColor = canUseColorCodes(player);
+        boolean hasRgb = canUseRgbCodes(player);
+
+        if (hasColor && hasRgb) {
+            processed = colorize(translateHexColorCodes(processed));
+        } else if (hasColor) {
+            processed = colorize(processed);
+        } else if (hasRgb) {
+            processed = translateHexColorCodes(processed);
+        }
+
+        Component messageComponent = legacySerializer.deserialize(processed);
+
+        if (!luckPermsEnabled || !useLuckPermsFormatting) {
+            return messageComponent;
+        }
+
+        return formatWithLuckPerms(player, messageComponent);
+    }
+
 
     private String colorize(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);

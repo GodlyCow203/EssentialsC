@@ -51,6 +51,7 @@ public class BackManager implements Listener {
         this.cancelOnMovement = cfg.isBackCancelOnMovement();
     }
 
+
     public void setBackLocation(Player player, Location location) {
         if (location == null || location.getWorld() == null) return;
         backLocations.put(player.getUniqueId(), location.clone());
@@ -138,7 +139,7 @@ public class BackManager implements Listener {
 
         task.cancel();
 
-        String msgKey = switch(reason) {
+        String msgKey = switch (reason) {
             case "move" -> "back.cancelled.move";
             default -> "back.cancelled";
         };
@@ -161,6 +162,45 @@ public class BackManager implements Listener {
         long last = cooldowns.getOrDefault(player.getUniqueId(), 0L);
         return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
     }
+
+    public boolean hasBackLocation(UUID uuid) {
+        return backLocations.containsKey(uuid);
+    }
+
+    public Optional<Location> getBackLocation(UUID uuid) {
+        Location loc = backLocations.get(uuid);
+        return Optional.ofNullable(loc != null ? loc.clone() : null);
+    }
+    public boolean hasPendingTeleport(UUID uuid) {
+        return warmupTasks.containsKey(uuid);
+    }
+
+    public boolean isOnCooldown(UUID uuid) {
+        Player player = plugin.getServer().getPlayer(uuid);
+        if (player != null && player.hasPermission("essentialsc.back.admin")) return false;
+        if (cooldown <= 0) return false;
+        Long last = cooldowns.get(uuid);
+        if (last == null) return false;
+        return System.currentTimeMillis() - last < (cooldown * 1000);
+    }
+
+    public long getRemainingCooldown(UUID uuid) {
+        Player player = plugin.getServer().getPlayer(uuid);
+        if (player != null && player.hasPermission("essentialsc.back.admin")) return 0;
+        if (cooldown <= 0) return 0;
+        long last = cooldowns.getOrDefault(uuid, 0L);
+        return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
+    }
+
+
+    public long getWarmupSeconds() { return warmup; }
+    public long getCooldownSeconds() { return cooldown; }
+
+    public boolean isParticlesEnabled() { return particles; }
+    public boolean isSoundsEnabled() { return sounds; }
+
+    public boolean isCancelOnMovementEnabled() { return cancelOnMovement; }
+
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {

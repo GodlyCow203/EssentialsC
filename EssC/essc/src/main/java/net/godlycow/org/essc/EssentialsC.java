@@ -76,11 +76,12 @@ public final class EssentialsC extends JavaPlugin {
     private PlaceholderHook placeholderHook;
     private FastStatsManager fastStats;
     private ChatManager chatManager;
-    private EssentialsCAPIImpl apiImpl;
+    private net.godlycow.org.essc.api.impl.EssentialsCAPIImpl apiImpl;
     private DiscordSRVHook discordSRVHook;
     private RTPManager rtpManager;
     private RTPGuiManager rtpGuiManager;
     private TabManager tabManager;
+    private FlyManager flyManager;
 
 
 
@@ -213,15 +214,16 @@ public final class EssentialsC extends JavaPlugin {
         if (scoreboardManager != null) {
             scoreboardManager.shutdown();
         }
+        if (apiImpl != null) {
+            apiImpl.disable();
+        }
         if (economyManager != null) {
             economyManager.shutdown();
         }
         if (backManager != null) {
             backManager.shutdown();
         }
-        if (apiImpl != null) {
-            apiImpl.disable();
-        }
+
         if (discordSRVHook != null) {
             discordSRVHook.shutdown();
         }
@@ -377,6 +379,9 @@ public final class EssentialsC extends JavaPlugin {
     public RTPGuiManager getRtpGuiManager() {return rtpGuiManager;}
 
     public TabManager getTabManager() {return tabManager;}
+
+    public FlyManager getFlyManager(){return flyManager;}
+
 
 }
 

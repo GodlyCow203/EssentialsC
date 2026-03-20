@@ -1,48 +1,97 @@
 package net.godlycow.org.essc.api;
 
-import net.godlycow.org.essc.api.event.afk.AFKManager;
-import net.godlycow.org.essc.api.event.auction.AuctionManager;
-import net.godlycow.org.essc.api.event.back.BackManager;
-import net.godlycow.org.essc.api.event.home.HomeManager;
-import net.godlycow.org.essc.api.event.shop.ShopManager;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-/* * Note: These comments were written by AI to keep the code clear and easy to understand for everyone.
+/**
+ * Root API interface for EssentialsC.
+ *
+ * <p>Provides access to each sub-system API. Retrieve the live instance via
+ * {@link APIProvider#getAPI()}.</p>
+ *
+ * <pre>{@code
+ * EssentialsCAPI api = APIProvider.getAPI();
+ * if (api != null) {
+ *     boolean afk = api.getAFKApi().isAFK(player);
+ * }
+ * }</pre>
+ *
+ * @see APIProvider
  */
 public interface EssentialsCAPI {
 
-    // Get the main instance of the API to start using its features
-    @Nullable
-    static EssentialsCAPI getInstance() {
-        return APIProvider.getInstance();
-    }
+    /**
+     * Returns the AFK sub-system API.
+     *
+     * @return the {@link AFKApi} instance; never {@code null}
+     */
+    AFKApi getAFKApi();
 
-    // Get the manager that handles player homes and teleports
-    @NotNull
-    HomeManager getHomeManager();
+    /**
+     * Returns the Auction House sub-system API.
+     *
+     * @return the {@link AuctionApi} instance; never {@code null}
+     */
+    AuctionApi getAuctionApi();
 
-    // Get the manager that handles the shop system and economy
-    @NotNull
-    ShopManager getShopManager();
+    /**
+     * Returns the Back teleport sub-system API.
+     *
+     * @return the {@link BackApi} instance; never {@code null}
+     */
+    BackApi getBackApi();
 
-    // Get the manager that tracks if players are away from their keyboard
-    @NotNull
-    AFKManager getAFKManager();
+    /**
+     * Returns the chat formatting sub-system API.
+     *
+     * @return the {@link ChatApi} instance; never {@code null}
+     */
+    ChatApi getChatApi();
 
-    // Get the manager for the auction house and player listings
-    @NotNull
-    AuctionManager getAuctionManager();
+    /**
+     * Returns the DiscordSRV integration API.
+     *
+     * @return the {@link DiscordApi} instance; never {@code null}
+     */
+    DiscordApi getDiscordApi();
 
-    // Get the manager that handles player back teleports
-    @NotNull
-    BackManager getBackManager();
+    /**
+     * Returns the economy sub-system API.
+     *
+     * @return the {@link EconomyApi} instance; never {@code null}
+     */
+    EconomyApi getEconomyApi();
 
-    // Check if the API has finished loading and is ready for use
-    boolean isReady();
+    /**
+     * Returns the kit sub-system API.
+     *
+     * @return the {@link KitApi} instance; never {@code null}
+     */
+    KitApi getKitApi();
 
-    // Get the JavaPlugin instance of EssentialsC
-    @NotNull
-    JavaPlugin getPlugin();
+    /**
+     * Returns the fly sub-system API.
+     *
+     * @return the {@link FlyApi} instance; never {@code null}
+     */
+    FlyApi getFlyApi();
+
+    /**
+     * Returns the home sub-system API.
+     *
+     * @return the {@link HomeApi} instance; never {@code null}
+     */
+    HomeApi getHomeApi();
+
+    /**
+     * Returns the language sub-system API.
+     *
+     * @return the {@link LanguageApi} instance; never {@code null}
+     */
+    LanguageApi getLanguageApi();
+
+    /**
+     * Returns the private message reply sub-system API.
+     *
+     * @return the {@link ReplyApi} instance; never {@code null}
+     */
+    ReplyApi getReplyApi();
+
 }

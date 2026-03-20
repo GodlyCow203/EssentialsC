@@ -1,32 +1,59 @@
 package net.godlycow.org.essc.api;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-/* * Note: These comments were written by AI to keep the code clear and easy to understand for everyone.
+/**
+ * Static holder for the {@link EssentialsCAPI} instance.
+ *
+ * <p>EssentialsC registers its implementation during {@code onEnable}. You should
+ * always null-check the result of {@link #getAPI()} in case EssentialsC is not
+ * installed or failed to load.</p>
+ *
+ * <pre>{@code
+ * EssentialsCAPI api = APIProvider.getAPI();
+ * if (api == null) {
+ *     getLogger().warning("EssentialsC not found — AFK integration disabled.");
+ *     return;
+ * }
+ * boolean afk = api.getAFKApi().isAFK(player);
+ * }</pre>
  */
 public final class APIProvider {
+
     private static EssentialsCAPI instance;
 
-    // This constructor is private so the class cannot be created as an object
     private APIProvider() {}
 
-    // Set the API instance when the plugin starts (can only be done once)
-    public static void setInstance(@NotNull EssentialsCAPI api) {
+    /**
+     * Returns the registered {@link EssentialsCAPI} implementation, or {@code null}
+     * if EssentialsC has not yet registered one.
+     *
+     * @return the API instance, or {@code null}
+     */
+    public static EssentialsCAPI getAPI() {
+        return instance;
+    }
+
+    /**
+     * Registers the API implementation.
+     *
+     * <p><strong>Internal use only.</strong> This is called by EssentialsC during
+     * {@code onEnable}. Plugins consuming the API should use {@link #getAPI()} instead.</p>
+     *
+     * @param api the implementation to register; must not be {@code null}
+     * @throws IllegalStateException if an implementation is already registered
+     */
+    public static void register(EssentialsCAPI api) {
         if (instance != null) {
-            throw new IllegalStateException("API already set!");
+            throw new IllegalStateException("EssentialsCAPI is already registered.");
         }
         instance = api;
     }
 
-    // Retrieve the active API instance
-    @Nullable
-    public static EssentialsCAPI getInstance() {
-        return instance;
-    }
-
-    // Remove the API instance when the plugin is disabled
-    public static void clearInstance() {
+    /**
+     * Unregisters the current API implementation.
+     *
+     * <p><strong>Internal use only.</strong> Called by EssentialsC during {@code onDisable}.</p>
+     */
+    public static void unregister() {
         instance = null;
     }
 }

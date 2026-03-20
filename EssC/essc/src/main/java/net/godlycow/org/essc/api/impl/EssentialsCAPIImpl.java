@@ -1,77 +1,59 @@
 package net.godlycow.org.essc.api.impl;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.api.APIProvider;
-import net.godlycow.org.essc.api.EssentialsCAPI;
-import net.godlycow.org.essc.api.event.afk.AFKManager;
-import net.godlycow.org.essc.api.event.auction.AuctionManager;
-import net.godlycow.org.essc.api.event.back.BackManager;
-import net.godlycow.org.essc.api.event.home.HomeManager;
-import net.godlycow.org.essc.api.event.shop.ShopManager;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.godlycow.org.essc.api.*;
+import net.godlycow.org.essc.api.impl.*;
 import org.jetbrains.annotations.NotNull;
 
 public class EssentialsCAPIImpl implements EssentialsCAPI {
+
     private final EssentialsC plugin;
-    private final HomeManager homeManager;
-    private final ShopManager shopManager;
-    private final AFKManager afkManager;
-    private final AuctionManager auctionManager;
-    private final BackManager backManager;
-    private boolean ready = false;
+
+    private final AFKApi afkApi;
+    private final AuctionApi auctionApi;
+    private final BackApi backApi;
+    private final ChatApi chatApi;
+    private final DiscordApi discordApi;
+    private final EconomyApi economyApi;
+    private final FlyApi flyApi;
+    private final HomeApi homeApi;
+    private final KitApi kitApi;
+    private final LanguageApi languageApi;
+    private final ReplyApi replyApi;
 
     public EssentialsCAPIImpl(EssentialsC plugin) {
         this.plugin = plugin;
-        this.homeManager = new HomeManagerImpl(plugin);
-        this.shopManager = new ShopManagerImpl(plugin);
-        this.afkManager = new AFKManagerImpl(plugin);
-        this.auctionManager = new AuctionManagerImpl(plugin);
-        this.backManager = new BackManagerImpl(plugin);
+        this.afkApi      = new AFKApiImpl(plugin.getAfkManager());
+        this.auctionApi  = new AuctionApiImpl(plugin.getAuctionManager());
+        this.backApi     = new BackApiImpl(plugin.getBackManager());
+        this.chatApi     = new ChatApiImpl(plugin.getChatManager());
+        this.discordApi  = new DiscordApiImpl(plugin.getDiscordSRVHook());
+        this.economyApi  = new EconomyApiImpl(plugin.getEconomyManager(), plugin.getVaultHook());
+        this.flyApi      = new FlyApiImpl(plugin.getFlyManager());
+        this.homeApi     = new HomeApiImpl(plugin.getHomeManager());
+        this.kitApi      = new KitApiImpl(plugin.getKitManager());
+        this.languageApi = new LanguageApiImpl(plugin.getLanguageManager());
+        this.replyApi    = new ReplyApiImpl(plugin.getReplyManager());
     }
 
     public void enable() {
-        APIProvider.setInstance(this);
-        this.ready = true;
+        APIProvider.register(this);
         plugin.getLogger().info("EssentialsC API enabled");
     }
 
     public void disable() {
-        this.ready = false;
-        APIProvider.clearInstance();
+        APIProvider.unregister();
     }
 
-    @Override
-    public @NotNull HomeManager getHomeManager() {
-        return homeManager;
-    }
-
-    @Override
-    public @NotNull ShopManager getShopManager() {
-        return shopManager;
-    }
-
-    @Override
-    public @NotNull AFKManager getAFKManager() {
-        return afkManager;
-    }
-
-    @Override
-    public @NotNull AuctionManager getAuctionManager() {
-        return auctionManager;
-    }
-
-    @Override
-    public @NotNull BackManager getBackManager() {
-        return backManager;
-    }
-
-    @Override
-    public boolean isReady() {
-        return ready;
-    }
-
-    @Override
-    public @NotNull JavaPlugin getPlugin() {
-        return plugin;
-    }
+    @Override public @NotNull AFKApi getAFKApi()           { return afkApi; }
+    @Override public @NotNull AuctionApi getAuctionApi()   { return auctionApi; }
+    @Override public @NotNull BackApi getBackApi()         { return backApi; }
+    @Override public @NotNull ChatApi getChatApi()         { return chatApi; }
+    @Override public @NotNull DiscordApi getDiscordApi()   { return discordApi; }
+    @Override public @NotNull EconomyApi getEconomyApi()   { return economyApi; }
+    @Override public @NotNull FlyApi getFlyApi()           { return flyApi; }
+    @Override public @NotNull HomeApi getHomeApi()         { return homeApi; }
+    @Override public @NotNull KitApi getKitApi()           { return kitApi; }
+    @Override public @NotNull LanguageApi getLanguageApi() { return languageApi; }
+    @Override public @NotNull ReplyApi getReplyApi()       { return replyApi; }
 }

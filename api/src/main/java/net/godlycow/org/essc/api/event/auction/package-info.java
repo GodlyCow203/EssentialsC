@@ -1,1 +1,0 @@
-package net.godlycow.org.essc.api.event.auction;
