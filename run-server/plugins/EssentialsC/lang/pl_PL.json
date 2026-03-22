@@ -583,9 +583,6 @@
   "migration.status.managers": "<prefix> <color:#AAAAAA>Menedżerowie:</color> <color:#FFF200>Ekonomia=<economy>, Domy=<homes>, Nicki=<nicks>, Warp=<warps>, Kary=<punishments></color>",
 
   "rtp.gui.title": "<color:#FFF200>Losowa Teleportacja</color>",
-  "rtp.gui.overworld.name": "<color:#70D900><b>Świat</b></color>",
-  "rtp.gui.nether.name": "<color:#BA0000><b>Nether</b></color>",
-  "rtp.gui.end.name": "<color:#FFEA59><b>End</b></color>",
   "rtp.gui.status.enabled": "<color:gray>Status: <color:#A9FF3B>✔ <white>Włączony</color>",
   "rtp.gui.status.disabled": "<color:gray>Status: <color:#FF3E00>✖ <white>Wyłączony</color>",
   "rtp.gui.status.no_permission": "<color:gray>Status: <color:#FF0000>✖ Zablokowany</color></color>",
@@ -607,5 +604,11 @@
   "rtp.error.world_disabled": "<prefix> <color:#FF0000>Losowa teleportacja jest wyłączona w tym świecie.</color>",
   "rtp.error.world_not_found": "<prefix> <color:#FF0000>Świat nie znaleziony!</color>",
   "rtp.error.no_safe_location": "<prefix> <color:#FF0000>Nie znaleziono bezpiecznej lokalizacji! Spróbuj ponownie.</color>",
-  "command.usage.rtp": "<prefix> <color:#FF0000>Użycie: /rtp</color>"
+  "command.usage.rtp": "<prefix> <color:#FF0000>Użycie: /rtp</color>",
+  "rtp.gui.nav.prev": "<color:gray>« Poprzednia</color>",
+  "rtp.gui.nav.next": "<color:gray>Następna »</color>",
+  "rtp.gui.nav.page": "<color:gray>Strona <color:#FFFFFF><page></color> z <color:#FFFFFF><total></color></color>",
+
+  "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Pseudonimy nie są obsługiwane dla graczy Bedrock.</color>",
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> jest graczem Bedrock i nie może mieć ustawionego pseudonimu.</color>"
 }

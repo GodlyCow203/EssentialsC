@@ -20,4 +20,38 @@
         <module>essc</module>
         <module>test-api</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>start-server</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="--- Starting server ---"/>
+                                <exec executable="java"
+                                      dir="${project.basedir}/../run-server"
+                                      failonerror="true">
+                                    <arg value="-Xms1G"/>
+                                    <arg value="-Xmx1G"/>
+                                    <arg value="-jar"/>
+                                    <arg value="purpur-1.21.11-2559.jar"/>
+                                    <arg value="nogui"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

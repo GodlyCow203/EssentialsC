@@ -1,0 +1,77 @@
+title: <gradient:#00E5FF:#FFC857><bold>Server Shop</bold></gradient>
+size: 54
+fill-empty: true
+fill-material: BLACK_STAINED_GLASS_PANE
+
+categories:
+  farming:
+    name: <bold><color:#6DFF9E>Farming</color></bold>
+    material: WHEAT
+    slot: 12
+    file: farming.yml
+    lore:
+      - <color:#A0A0A0>Crops, food, and farming drops
+
+  mining:
+    name: <bold><color:#FFD46B>Mining</color></bold>
+    material: DIAMOND_PICKAXE
+    slot: 14
+    file: mining.yml
+    lore:
+      - <color:#A0A0A0>Ores, gems, and minerals
+
+  combat:
+    name: <bold><color:#FF6B6B>Combat</color></bold>
+    material: IRON_SWORD
+    slot: 22
+    file: combat.yml
+    lore:
+      - <color:#A0A0A0>Weapons, armor, and PvP gear
+
+  spawners:
+    name: <bold><color:#FF9F5A>Spawners</color></bold>
+    material: SPAWNER
+    slot: 23
+    file: spawners.yml
+    lore:
+      - <color:#A0A0A0>Mob spawners and eggs
+
+  enchanted_books:
+    name: <bold><color:#8B8DFF>Enchanted Books</color></bold>
+    material: ENCHANTED_BOOK
+    slot: 21
+    file: enchanted_books.yml
+    lore:
+      - <color:#A0A0A0>High-tier enchantments
+
+  tools:
+    name: <bold><color:#48B8B1>Tools</color></bold>
+    material: NETHERITE_PICKAXE
+    slot: 20
+    file: tools.yml
+    lore:
+      - <color:#A0A0A0>Utility and special tools
+
+  blocks:
+    name: <bold><color:#CFCFCF>Blocks</color></bold>
+    material: STONE
+    slot: 32
+    file: blocks.yml
+    lore:
+      - <color:#A0A0A0>Building and decoration blocks
+
+  redstone:
+    name: <bold><color:#FF4C4C>Redstone</color></bold>
+    material: REDSTONE
+    slot: 30
+    file: redstone.yml
+    lore:
+      - <color:#A0A0A0>Components and mechanisms
+
+  misc:
+    name: <bold><color:#C58CFF>Misc</color></bold>
+    material: CHEST
+    slot: 24
+    file: misc.yml
+    lore:
+      - <color:#A0A0A0>Rare and miscellaneous items

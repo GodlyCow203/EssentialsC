@@ -582,9 +582,6 @@
   "migration.status.managers": "<prefix> <color:#AAAAAA>మేనేజర్లు:</color> <color:#FFF200>ఆర్థిక=<economy>, ఇళ్ళు=<homes>, ముఖ్యనామాలు=<nicks>, వార్ప్‌లు=<warps>, శిక్షలు=<punishments></color>",
 
   "rtp.gui.title": "<color:#FFF200>యాదృచ్ఛిక టెలిపోర్ట్</color>",
-  "rtp.gui.overworld.name": "<color:#70D900><b>ఓవర్‌వరల్డ్</b></color>",
-  "rtp.gui.nether.name": "<color:#BA0000><b>నెదర్</b></color>",
-  "rtp.gui.end.name": "<color:#FFEA59><b>ది ఎండ్</b></color>",
   "rtp.gui.status.enabled": "<color:gray>స్థితి: <color:#A9FF3B>✔ <white>సక్రియం</color>",
   "rtp.gui.status.disabled": "<color:gray>స్థితి: <color:#FF3E00>✖ <white>నిష్క్రియం</color>",
   "rtp.gui.status.no_permission": "<color:gray>స్థితి: <color:#FF0000>✖ లాక్ చేయబడింది</color></color>",
@@ -606,5 +603,11 @@
   "rtp.error.world_disabled": "<prefix> <color:#FF0000>ఈ ప్రపంచంలో యాదృచ్ఛిక టెలిపోర్ట్ నిష్క్రియం.</color>",
   "rtp.error.world_not_found": "<prefix> <color:#FF0000>ప్రపంచం కనుగొనబడలేదు!</color>",
   "rtp.error.no_safe_location": "<prefix> <color:#FF0000>సురక్షిత స్థానం కనుగొనబడలేదు! దయచేసి మళ్లీ ప్రయత్నించండి.</color>",
-  "command.usage.rtp": "<prefix> <color:#FF0000>ఉపయోగం: /rtp</color>"
+  "command.usage.rtp": "<prefix> <color:#FF0000>ఉపయోగం: /rtp</color>",
+  "rtp.gui.nav.prev": "<color:gray>« మునుపటి</color>",
+  "rtp.gui.nav.next": "<color:gray>తదుపరి »</color>",
+  "rtp.gui.nav.page": "<color:gray>పేజీ <color:#FFFFFF><page></color> / <color:#FFFFFF><total></color></color>",
+
+  "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock ఆటగాళ్ళకు మారుపేర్లు మద్దతు లేవు.</color>",
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> Bedrock ఆటగాడు మరియు మారుపేరు సెట్ చేయలేరు.</color>"
 }

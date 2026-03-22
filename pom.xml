@@ -96,51 +96,20 @@
 
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <inherited>false</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.3.2</version>
                 <executions>
                     <execution>
-                        <id>run-server</id>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>exec</goal>
+                            <goal>clean</goal>
                         </goals>
-                        <configuration>
-                            <workingDirectory>${server.dir}</workingDirectory>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xms1G</argument>
-                                <argument>-Xmx1G</argument>
-                                <argument>-jar</argument>
-                                <argument>purpur-1.21.11-2559.jar</argument>
-                                <argument>nogui</argument>
-                            </arguments>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>run-server</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <executions>
-                            <execution>
-                                <id>run-server</id>
-                                <phase>install</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

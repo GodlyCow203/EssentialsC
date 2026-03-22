@@ -1,0 +1,296 @@
+items:
+  wooden_pickaxe:
+    material: WOODEN_PICKAXE
+    name: "<color:#8B4513>Wooden Pickaxe"
+    buy-price: 150
+    sell-price: 50
+    slot: 10
+    page: 1
+
+  stone_pickaxe:
+    material: STONE_PICKAXE
+    name: "<color:#808080>Stone Pickaxe"
+    buy-price: 300
+    sell-price: 100
+    slot: 11
+    page: 1
+
+  iron_pickaxe:
+    material: IRON_PICKAXE
+    name: "<color:#C0C0C0>Iron Pickaxe"
+    buy-price: 1200
+    sell-price: 400
+    slot: 12
+    page: 1
+
+  golden_pickaxe:
+    material: GOLDEN_PICKAXE
+    name: "<color:#FFD700>Golden Pickaxe"
+    buy-price: 2500
+    sell-price: 800
+    slot: 14
+    page: 1
+
+  diamond_pickaxe:
+    material: DIAMOND_PICKAXE
+    name: "<color:#00CED1>Diamond Pickaxe"
+    buy-price: 6000
+    sell-price: 2000
+    slot: 15
+    page: 1
+
+  netherite_pickaxe:
+    material: NETHERITE_PICKAXE
+    name: "<color:#4B0082>Netherite Pickaxe"
+    buy-price: 15000
+    sell-price: 5000
+    slot: 16
+    page: 1
+
+  wooden_axe:
+    material: WOODEN_AXE
+    name: "<color:#8B4513>Wooden Axe"
+    buy-price: 150
+    sell-price: 50
+    slot: 19
+    page: 1
+
+  stone_axe:
+    material: STONE_AXE
+    name: "<color:#808080>Stone Axe"
+    buy-price: 300
+    sell-price: 100
+    slot: 20
+    page: 1
+
+  iron_axe:
+    material: IRON_AXE
+    name: "<color:#C0C0C0>Iron Axe"
+    buy-price: 1200
+    sell-price: 400
+    slot: 21
+    page: 1
+
+  golden_axe:
+    material: GOLDEN_AXE
+    name: "<color:#FFD700>Golden Axe"
+    buy-price: 2500
+    sell-price: 800
+    slot: 23
+    page: 1
+
+  diamond_axe:
+    material: DIAMOND_AXE
+    name: "<color:#00CED1>Diamond Axe"
+    buy-price: 6000
+    sell-price: 2000
+    slot: 24
+    page: 1
+
+  netherite_axe:
+    material: NETHERITE_AXE
+    name: "<color:#4B0082>Netherite Axe"
+    buy-price: 15000
+    sell-price: 5000
+    slot: 25
+    page: 1
+
+  wooden_shovel:
+    material: WOODEN_SHOVEL
+    name: "<color:#8B4513>Wooden Shovel"
+    buy-price: 100
+    sell-price: 35
+    slot: 28
+    page: 1
+
+  stone_shovel:
+    material: STONE_SHOVEL
+    name: "<color:#808080>Stone Shovel"
+    buy-price: 220
+    sell-price: 75
+    slot: 29
+    page: 1
+
+  iron_shovel:
+    material: IRON_SHOVEL
+    name: "<color:#C0C0C0>Iron Shovel"
+    buy-price: 800
+    sell-price: 280
+    slot: 30
+    page: 1
+
+  golden_shovel:
+    material: GOLDEN_SHOVEL
+    name: "<color:#FFD700>Golden Shovel"
+    buy-price: 1800
+    sell-price: 600
+    slot: 32
+    page: 1
+
+  diamond_shovel:
+    material: DIAMOND_SHOVEL
+    name: "<color:#00CED1>Diamond Shovel"
+    buy-price: 4500
+    sell-price: 1500
+    slot: 33
+    page: 1
+
+  netherite_shovel:
+    material: NETHERITE_SHOVEL
+    name: "<color:#4B0082>Netherite Shovel"
+    buy-price: 12000
+    sell-price: 4000
+    slot: 34
+    page: 1
+
+  wooden_hoe:
+    material: WOODEN_HOE
+    name: "<color:#8B4513>Wooden Hoe"
+    buy-price: 100
+    sell-price: 35
+    slot: 37
+    page: 1
+
+  stone_hoe:
+    material: STONE_HOE
+    name: "<color:#808080>Stone Hoe"
+    buy-price: 220
+    sell-price: 75
+    slot: 38
+    page: 1
+
+  iron_hoe:
+    material: IRON_HOE
+    name: "<color:#C0C0C0>Iron Hoe"
+    buy-price: 800
+    sell-price: 280
+    slot: 39
+    page: 1
+
+  golden_hoe:
+    material: GOLDEN_HOE
+    name: "<color:#FFD700>Golden Hoe"
+    buy-price: 1800
+    sell-price: 600
+    slot: 41
+    page: 1
+
+  diamond_hoe:
+    material: DIAMOND_HOE
+    name: "<color:#00CED1>Diamond Hoe"
+    buy-price: 4500
+    sell-price: 1500
+    slot: 42
+    page: 1
+
+  netherite_hoe:
+    material: NETHERITE_HOE
+    name: "<color:#4B0082>Netherite Hoe"
+    buy-price: 12000
+    sell-price: 4000
+    slot: 43
+    page: 1
+
+  trident:
+    material: TRIDENT
+    name: "<color:#00CED1>Trident"
+    buy-price: 8000
+    sell-price: 2500
+    slot: 10
+    page: 2
+
+  mace:
+    material: MACE
+    name: "<color:#4B0082>Mace"
+    buy-price: 18000
+    sell-price: 6000
+    slot: 11
+    page: 2
+
+  bow:
+    material: BOW
+    name: "<color:#8B4513>Bow"
+    buy-price: 1200
+    sell-price: 400
+    slot: 12
+    page: 2
+
+  crossbow:
+    material: CROSSBOW
+    name: "<color:#696969>Crossbow"
+    buy-price: 2500
+    sell-price: 800
+    slot: 14
+    page: 2
+
+  shield:
+    material: SHIELD
+    name: "<color:#8B4513>Shield"
+    buy-price: 1500
+    sell-price: 500
+    slot: 15
+    page: 2
+
+  elytra:
+    material: ELYTRA
+    name: "<color:#9932CC>Elytra"
+    buy-price: 25000
+    sell-price: 8000
+    slot: 16
+    page: 2
+
+  shears:
+    material: SHEARS
+    name: "<color:#C0C0C0>Shears"
+    buy-price: 600
+    sell-price: 200
+    slot: 19
+    page: 2
+
+  flint_and_steel:
+    material: FLINT_AND_STEEL
+    name: "<color:#FF4500>Flint and Steel"
+    buy-price: 450
+    sell-price: 150
+    slot: 20
+    page: 2
+
+  fishing_rod:
+    material: FISHING_ROD
+    name: "<color:#8B4513>Fishing Rod"
+    buy-price: 900
+    sell-price: 300
+    slot: 21
+    page: 2
+
+  brush:
+    material: BRUSH
+    name: "<color:#D2B48C>Brush"
+    buy-price: 2000
+    sell-price: 650
+    slot: 23
+    page: 2
+
+  spyglass:
+    material: SPYGLASS
+    name: "<color:#708090>Spyglass"
+    buy-price: 1800
+    sell-price: 600
+    slot: 24
+    page: 2
+
+  carrot_on_a_stick:
+    material: CARROT_ON_A_STICK
+    name: "<color:#FF8C00>Carrot on a Stick"
+    buy-price: 1200
+    sell-price: 400
+    slot: 25
+    page: 2
+
+  warped_fungus_on_a_stick:
+    material: WARPED_FUNGUS_ON_A_STICK
+    name: "<color:#00CED1>Warped Fungus on a Stick"
+    buy-price: 1500
+    sell-price: 500
+    slot: 28
+    page: 2
