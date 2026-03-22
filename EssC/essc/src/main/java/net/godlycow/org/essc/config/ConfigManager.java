@@ -278,6 +278,10 @@ public class ConfigManager {
         return config.getBoolean("nickname.update-tab", true);
     }
 
+    public String getNickIndicator() {
+        return config.getString("nickname.indicator", "~");
+    }
+
     public boolean isShopEnabled() {
         return config.getBoolean("shop.enabled", true);
     }
@@ -555,5 +559,9 @@ public class ConfigManager {
 
     public boolean isRTPCommandRegistered() {
         return config.getBoolean("rtp.register-command", true);
+    }
+
+    public String getChatSeparator() {
+        return config.getString("luckperms.chat-separator", ">> ");
     }
 }

@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+import java.util.stream.Collectors;
+
 public class RTPManager {
     private final EssentialsC plugin;
     private final Random random = new Random();
@@ -54,22 +56,33 @@ public class RTPManager {
         List<String> globalBlockedBiomes = config.getStringList("rtp.global.blocked-biomes");
 
         worldSettings.clear();
-        for (World world : Bukkit.getWorlds()) {
-            String worldName = world.getName();
-            String path = "rtp.worlds." + worldName;
-
-            if (config.contains(path)) {
+        var worldsSection = config.getConfigurationSection("rtp.worlds");
+        if (worldsSection != null) {
+            for (String worldName : worldsSection.getKeys(false)) {
+                String path = "rtp.worlds." + worldName;
                 int minRadius = config.getInt(path + ".min-radius", globalMinRadius);
                 int maxRadius = config.getInt(path + ".max-radius", globalMaxRadius);
                 List<String> blockedBiomes = config.getStringList(path + ".blocked-biomes");
                 if (blockedBiomes.isEmpty()) blockedBiomes = globalBlockedBiomes;
                 boolean worldEnabled = config.getBoolean(path + ".enabled", true);
+                String displayName = config.getString(path + ".display-name", defaultDisplayName(worldName));
 
-                worldSettings.put(worldName, new WorldRTPSettings(minRadius, maxRadius, blockedBiomes, worldEnabled));
-            } else {
-                worldSettings.put(worldName, new WorldRTPSettings(globalMinRadius, globalMaxRadius, globalBlockedBiomes, true));
+                worldSettings.put(worldName, new WorldRTPSettings(minRadius, maxRadius, blockedBiomes, worldEnabled, displayName));
             }
         }
+    }
+
+    private String defaultDisplayName(String worldName) {
+        return Arrays.stream(worldName.replace("_", " ").split(" "))
+                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
+    }
+
+    public List<String> getConfiguredWorldNames() {
+        return worldSettings.keySet().stream()
+                .filter(name -> Bukkit.getWorld(name) != null)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public void reload() {
@@ -345,5 +358,12 @@ public class RTPManager {
         return world != null ? world.getPlayers().size() : 0;
     }
 
-    public record WorldRTPSettings(int minRadius, int maxRadius, List<String> blockedBiomes, boolean enabled) {}
+
+    public record WorldRTPSettings(
+            int minRadius,
+            int maxRadius,
+            List<String> blockedBiomes,
+            boolean enabled,
+            String displayName
+    ) {}
 }

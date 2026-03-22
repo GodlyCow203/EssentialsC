@@ -105,7 +105,9 @@ public class UserDataMapper {
     private String convertLegacyColors(String legacy) {
         if (legacy == null) return null;
 
-        String result = legacy
+        String normalised = legacy.toLowerCase();
+
+        return normalised
                 .replace("&0", "<black>")
                 .replace("&1", "<dark_blue>")
                 .replace("&2", "<dark_green>")
@@ -128,8 +130,6 @@ public class UserDataMapper {
                 .replace("&m", "<strikethrough>")
                 .replace("&k", "<obfuscated>")
                 .replace("&r", "<reset>");
-
-        return result;
     }
 
     public record EconomyTransfer(UUID uuid, String username, BigDecimal balance) {}

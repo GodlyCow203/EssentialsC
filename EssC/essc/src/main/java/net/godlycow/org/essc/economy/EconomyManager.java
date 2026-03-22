@@ -42,7 +42,6 @@ public class EconomyManager implements EconomyService, Listener {
         try {
             database.connect();
             createTables();
-            plugin.getServer().getPluginManager().registerEvents(this, plugin);
             plugin.debug("EconomyManager initialized");
         } catch (Exception e) {
             plugin.getLogger().severe("Failed to initialize economy database: " + e.getMessage());

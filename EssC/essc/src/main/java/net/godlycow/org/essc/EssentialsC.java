@@ -5,6 +5,8 @@ import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
+import net.godlycow.org.essc.bedrock.BedrockUtil;
+import net.godlycow.org.essc.bedrock.FloodgateHook;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
@@ -36,6 +38,7 @@ import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
+import net.godlycow.org.essc.tab.TABHook;
 import net.godlycow.org.essc.tab.TabManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.vanish.VanishManager;
@@ -76,29 +79,43 @@ public final class EssentialsC extends JavaPlugin {
     private PlaceholderHook placeholderHook;
     private FastStatsManager fastStats;
     private ChatManager chatManager;
-    private net.godlycow.org.essc.api.impl.EssentialsCAPIImpl apiImpl;
+    private EssentialsCAPIImpl apiImpl;
     private DiscordSRVHook discordSRVHook;
     private RTPManager rtpManager;
     private RTPGuiManager rtpGuiManager;
     private TabManager tabManager;
     private FlyManager flyManager;
-
-
-
-
-
+    private FloodgateHook floodgateHook;
+    private BedrockUtil bedrockUtil;
+    private TABHook tabHook;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         instance = this;
-
         saveDefaultConfig();
+        configManager = new ConfigManager(this);
+
+        if (configManager.isEconomyEnabled()) {
+            debug("Economy is enabled, initializing EconomyManager...");
+            economyManager = new EconomyManager(this);
+            vaultHook = new VaultHook(economyManager);
+            if (vaultHook.hook()) {
+                getLogger().info("Successfully hooked into Vault!");
+            } else {
+                getLogger().warning("Vault not found, skipping Vault economy registration.");
+            }
+        } else {
+            debug("Economy is disabled, skipping initialization.");
+        }
+    }
+
+    @Override
+    public void onEnable() {
         saveResource("lang/en_US.json", false);
         saveResource("lang/de_DE.json", false);
 
-        configManager = new ConfigManager(this);
         languageManager = new LanguageManager(this);
         languageManager.load(configManager.getDefaultLanguage());
 
@@ -122,6 +139,10 @@ public final class EssentialsC extends JavaPlugin {
         fastStats = new FastStatsManager();
         fastStats.init(this);
 
+        floodgateHook = new FloodgateHook(this);
+        bedrockUtil = new BedrockUtil(this, floodgateHook);
+
+        tabHook = new TABHook(this);
 
 
         new FlyManager(this);
@@ -141,14 +162,19 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isRTPEnabled()) {
             rtpManager = new RTPManager(this);
             rtpGuiManager = new RTPGuiManager(this, rtpManager);
-
         }
 
         new ListenerRegistrar(this);
         new CommandRegistrar(this).registerAll();
 
         if (configManager.isEconomyEnabled()) {
+            debug("economyManager was null in onEnable, running EconomyRegistrar fallback.");
             new EconomyRegistrar(this).enable();
+        }
+
+        if (economyManager != null) {
+            getServer().getPluginManager().registerEvents(economyManager, this);
+            debug("EconomyManager event listener registered.");
         }
 
         if (configManager.isShopEnabled()) {
@@ -183,13 +209,11 @@ public final class EssentialsC extends JavaPlugin {
         apiImpl = new EssentialsCAPIImpl(this);
         apiImpl.enable();
 
-
         getLogger().info("EssentialsC enabled");
     }
 
     @Override
     public void onDisable() {
-
         if (economyManager != null) {
             economyManager.shutdown();
         }
@@ -217,13 +241,9 @@ public final class EssentialsC extends JavaPlugin {
         if (apiImpl != null) {
             apiImpl.disable();
         }
-        if (economyManager != null) {
-            economyManager.shutdown();
-        }
         if (backManager != null) {
             backManager.shutdown();
         }
-
         if (discordSRVHook != null) {
             discordSRVHook.shutdown();
         }
@@ -326,11 +346,11 @@ public final class EssentialsC extends JavaPlugin {
         return economyRegistrar;
     }
 
-    public JoinLeaveListener getJoinLeaveListener(){
+    public JoinLeaveListener getJoinLeaveListener() {
         return joinLeaveListener;
     }
 
-    public RenameCommand getRenameCommand(){
+    public RenameCommand getRenameCommand() {
         return renameCommand;
     }
 
@@ -362,26 +382,47 @@ public final class EssentialsC extends JavaPlugin {
         return auctionManager;
     }
 
-    public WarpManager getWarpManager() { return warpManager;}
+    public WarpManager getWarpManager() {
+        return warpManager;
+    }
 
-    public AFKManager getAfkManager() { return afkManager;}
+    public AFKManager getAfkManager() {
+        return afkManager;
+    }
 
-    public PlaceholderHook getPlaceholderHook() { return placeholderHook;}
+    public PlaceholderHook getPlaceholderHook() {
+        return placeholderHook;
+    }
 
-    public ChatManager getChatManager() { return chatManager;}
+    public ChatManager getChatManager() {
+        return chatManager;
+    }
 
-    public EssentialsCAPI getAPI() { return apiImpl;}
+    public EssentialsCAPI getAPI() {
+        return apiImpl;
+    }
 
-    public DiscordSRVHook getDiscordSRVHook() { return discordSRVHook;}
+    public DiscordSRVHook getDiscordSRVHook() {
+        return discordSRVHook;
+    }
 
-    public RTPManager getRtpManager() {return rtpManager;}
+    public RTPManager getRtpManager() {
+        return rtpManager;
+    }
 
-    public RTPGuiManager getRtpGuiManager() {return rtpGuiManager;}
+    public RTPGuiManager getRtpGuiManager() {
+        return rtpGuiManager;
+    }
 
-    public TabManager getTabManager() {return tabManager;}
+    public TabManager getTabManager() {
+        return tabManager;
+    }
 
-    public FlyManager getFlyManager(){return flyManager;}
+    public FlyManager getFlyManager() {
+        return flyManager;
+    }
 
-
+    public BedrockUtil getBedrockUtil() {
+        return bedrockUtil;
+    }
 }
-

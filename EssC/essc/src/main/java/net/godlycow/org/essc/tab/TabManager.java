@@ -1,6 +1,8 @@
 package net.godlycow.org.essc.tab;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.bedrock.TeamNameUtil;
+import net.godlycow.org.essc.tab.TABHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -22,6 +24,7 @@ public class TabManager implements Listener {
     private LuckPerms luckPerms;
     private boolean luckPermsEnabled;
     private boolean useLuckPermsTab;
+    private TABHook tabHook;
 
     private final LegacyComponentSerializer legacySerializer  = LegacyComponentSerializer.legacyAmpersand();
     private final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.legacySection();
@@ -45,6 +48,14 @@ public class TabManager implements Listener {
                 this.luckPermsEnabled = false;
             }
         }
+
+        if (plugin.getServer().getPluginManager().isPluginEnabled("TAB")) {
+            this.tabHook = new TABHook(plugin);
+            plugin.debug("TabManager: TAB plugin detected, delegating nick display to TABHook");
+        } else {
+            this.tabHook = null;
+            plugin.debug("TabManager: TAB plugin not found, using built-in tab handling");
+        }
     }
 
     private void startRefreshTask() {
@@ -63,6 +74,14 @@ public class TabManager implements Listener {
 
     public void updatePlayerTab(Player player) {
         if (player == null || !player.isOnline()) return;
+
+        if (tabHook != null) {
+            String cachedNick = plugin.getNickManager() != null
+                    ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
+                    : null;
+            tabHook.updateNick(player, cachedNick);
+            return;
+        }
 
         TextComponent.Builder builder = Component.text();
 
@@ -85,13 +104,16 @@ public class TabManager implements Listener {
             }
         }
 
-
         boolean nickInTab = plugin.getNickManager() != null
                 && plugin.getConfigManager().isNickTabEnabled();
 
         if (nickInTab) {
             String cachedNick = plugin.getNickManager().getCachedNickname(player.getUniqueId());
             if (cachedNick != null && !cachedNick.isEmpty()) {
+                String indicator = plugin.getConfigManager().getNickIndicator();
+                if (!indicator.isEmpty()) {
+                    builder.append(Component.text(indicator));
+                }
                 builder.append(plugin.getMiniMessage().deserialize(cachedNick));
             } else {
                 builder.append(Component.text(player.getName()));
@@ -108,16 +130,17 @@ public class TabManager implements Listener {
 
         updateScoreboardTeam(player, lpPrefix, lpSuffix);
     }
+
     private void updateScoreboardTeam(Player player, String lpPrefix, String lpSuffix) {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        String rawName = player.getName();
-        String teamName = "lp_" + (rawName.length() > 13 ? rawName.substring(0, 13) : rawName);
+        String teamName = TeamNameUtil.fromUUID(player.getUniqueId());
 
         Team team = scoreboard.getTeam(teamName);
         if (team == null) {
             team = scoreboard.registerNewTeam(teamName);
         }
+
         if (!lpPrefix.isEmpty()) {
             String sectionPrefix = sectionSerializer.serialize(legacySerializer.deserialize(lpPrefix));
             team.setPrefix(truncate(sectionPrefix, TEAM_FIELD_MAX));
@@ -132,8 +155,8 @@ public class TabManager implements Listener {
             team.setSuffix("");
         }
 
-        if (!team.hasEntry(rawName)) {
-            team.addEntry(rawName);
+        if (!team.hasEntry(player.getName())) {
+            team.addEntry(player.getName());
         }
     }
 
@@ -149,5 +172,9 @@ public class TabManager implements Listener {
 
     public boolean isEnabled() {
         return luckPermsEnabled && useLuckPermsTab;
+    }
+
+    public boolean isUsingTABPlugin() {
+        return tabHook != null;
     }
 }

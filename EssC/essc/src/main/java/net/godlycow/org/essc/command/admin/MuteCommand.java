@@ -20,7 +20,7 @@ public class MuteCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        Player target = plugin.getServer().getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().resolvePlayer(args[0]);
 
         if (target == null) {
             Map<String, String> placeholders = new HashMap<>();

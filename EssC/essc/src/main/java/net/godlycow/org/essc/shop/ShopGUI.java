@@ -20,12 +20,15 @@ public class ShopGUI {
     private final Player player;
     private final MiniMessage mm;
     private double cachedBalance;
-    private static final int SLOT_PREV_PAGE       = 45;
-    private static final int SLOT_BACK_OR_CLOSE   = 48;
-    private static final int SLOT_PAGE_INDICATOR  = 52;
-    private static final int SLOT_NEXT_PAGE       = 53;
-    private static final int SLOT_BALANCE_MAIN     = 50;
-    private static final int SLOT_BALANCE_CATEGORY = 47;
+
+    private static final int SLOT_PREV_PAGE        = 45;
+    private static final int SLOT_BALANCE_CATEGORY  = 47;
+    private static final int SLOT_BACK_BUTTON       = 48;
+    private static final int SLOT_PAGE_INDICATOR    = 49;
+    private static final int SLOT_NEXT_PAGE         = 53;
+
+    private static final int SLOT_BALANCE_MAIN      = 50;
+    private static final int SLOT_CLOSE_BUTTON      = 48;
 
     public ShopGUI(EssentialsC plugin, ShopManager shopManager, Player player) {
         this.plugin = plugin;
@@ -47,7 +50,8 @@ public class ShopGUI {
         String title = plugin.getConfigManager().getShopMainMenuTitle();
         int size = plugin.getConfigManager().getShopMainMenuSize();
 
-        Inventory inv = Bukkit.createInventory(null, size, mm.deserialize(title));
+        ShopHolder holder = new ShopHolder(ShopHolder.Type.MAIN);
+        Inventory inv = Bukkit.createInventory(holder, size, mm.deserialize(title));
 
         if (plugin.getConfigManager().isShopFillEmptySlots()) {
             fillEmptySlots(inv);
@@ -56,10 +60,9 @@ public class ShopGUI {
         for (ShopCategory category : shopManager.getCategories().values()) {
             if (!category.isEnabled()) continue;
             if (category.getPermission() != null && !player.hasPermission(category.getPermission())) continue;
-
-            ItemStack icon = createCategoryIcon(category);
-            inv.setItem(category.getSlot(), icon);
+            inv.setItem(category.getSlot(), createCategoryIcon(category));
         }
+
         addBalanceHead(inv, false);
         addCloseButton(inv);
 
@@ -69,25 +72,21 @@ public class ShopGUI {
     public void openCategory(ShopCategory category, int page) {
         String title = plugin.getConfigManager().getShopCategoryMenuTitle()
                 .replace("<category>", category.getDisplayName());
-        int size = 54;
 
-        Inventory inv = Bukkit.createInventory(null, size, mm.deserialize(title));
+        ShopHolder holder = new ShopHolder(ShopHolder.Type.CATEGORY, category.getId(), page);
+        Inventory inv = Bukkit.createInventory(holder, 54, mm.deserialize(title));
 
         if (plugin.getConfigManager().isShopFillEmptySlots()) {
             fillEmptySlots(inv);
         }
 
         String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
-        String currencyPlural = plugin.getConfigManager().getShopCurrencyPlural();
+        String currencyPlural   = plugin.getConfigManager().getShopCurrencyPlural();
 
-        Map<Integer, ShopItem> pageItems = category.getPageItems(page);
-
-        for (Map.Entry<Integer, ShopItem> entry : pageItems.entrySet()) {
+        for (Map.Entry<Integer, ShopItem> entry : category.getPageItems(page).entrySet()) {
             ShopItem item = entry.getValue();
             if (item.getPermission() != null && !player.hasPermission(item.getPermission())) continue;
-
-            ItemStack display = item.createDisplayItem(cachedBalance, currencySingular, currencyPlural);
-            inv.setItem(entry.getKey(), display);
+            inv.setItem(entry.getKey(), item.createDisplayItem(cachedBalance, currencySingular, currencyPlural));
         }
 
         addNavigation(inv, category, page);
@@ -124,11 +123,10 @@ public class ShopGUI {
         PlayerProfile profile = Bukkit.createPlayerProfile(player.getUniqueId());
         meta.setOwnerProfile(profile);
 
-        String formattedBalance = String.format("%.2f", cachedBalance);
-
-        String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
-        String currencyPlural = plugin.getConfigManager().getShopCurrencyPlural();
-        String currency = cachedBalance == 1.0 ? currencySingular : currencyPlural;
+        String formattedBalance  = String.format("%.2f", cachedBalance);
+        String currencySingular  = plugin.getConfigManager().getShopCurrencySingular();
+        String currencyPlural    = plugin.getConfigManager().getShopCurrencyPlural();
+        String currency          = cachedBalance == 1.0 ? currencySingular : currencyPlural;
 
         meta.displayName(mm.deserialize("<color:#06FFA5>Your Balance"));
 
@@ -177,7 +175,7 @@ public class ShopGUI {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(mm.deserialize("<color:#FF6B6B>Back to Categories"));
         item.setItemMeta(meta);
-        inv.setItem(SLOT_BACK_OR_CLOSE, item);
+        inv.setItem(SLOT_BACK_BUTTON, item);
     }
 
     private void addCloseButton(Inventory inv) {
@@ -186,7 +184,7 @@ public class ShopGUI {
             ItemMeta meta = item.getItemMeta();
             meta.displayName(mm.deserialize("<color:#FF6B6B>Close"));
             item.setItemMeta(meta);
-            inv.setItem(SLOT_BACK_OR_CLOSE, item);
+            inv.setItem(SLOT_CLOSE_BUTTON, item);
         }
     }
 
@@ -197,12 +195,12 @@ public class ShopGUI {
         try {
             fillMaterial = Material.valueOf(materialName.toUpperCase());
         } catch (IllegalArgumentException | NullPointerException e) {
-            plugin.getLogger().warning("Invalid shop fill-material: " + materialName + ". Using default BLACK_STAINED_GLASS_PANE.");
+            plugin.getLogger().warning("Invalid shop fill-material: " + materialName + ". Falling back to BLACK_STAINED_GLASS_PANE.");
             fillMaterial = Material.BLACK_STAINED_GLASS_PANE;
         }
 
         if (!fillMaterial.isItem()) {
-            plugin.getLogger().warning("Shop fill-material " + fillMaterial.name() + " is not a valid item. Using default BLACK_STAINED_GLASS_PANE.");
+            plugin.getLogger().warning("Shop fill-material " + fillMaterial.name() + " is not a valid item. Falling back to BLACK_STAINED_GLASS_PANE.");
             fillMaterial = Material.BLACK_STAINED_GLASS_PANE;
         }
 

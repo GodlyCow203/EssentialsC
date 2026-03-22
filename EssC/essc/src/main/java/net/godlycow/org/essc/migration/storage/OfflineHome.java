@@ -15,12 +15,7 @@ public class OfflineHome {
 
     public OfflineHome(EssentialsC plugin) {
         this.plugin = plugin;
-        this.database = new Database(plugin, "homes.db");
-        try {
-            database.connect();
-        } catch (SQLException e) {
-            plugin.getLogger().severe("Failed to connect to homes database: " + e.getMessage());
-        }
+        this.database = plugin.getHomeManager().getDatabase();
     }
 
     public CompletableFuture<Boolean> setHomeOffline(UUID owner, String name, Location location, String ownerName) {
@@ -57,14 +52,9 @@ public class OfflineHome {
     }
 
     public boolean isAvailable() {
-        try {
-            return database.getConnection() != null && !database.getConnection().isClosed();
-        } catch (SQLException e) {
-            return false;
-        }
+        return plugin.getHomeManager() != null;
     }
 
     public void shutdown() {
-        database.disconnect();
     }
 }

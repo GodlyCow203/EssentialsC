@@ -192,7 +192,12 @@ public class EssMigrator {
                 stats.usersMigrated.incrementAndGet();
 
             } catch (Exception e) {
-                plugin.getLogger().warning("Failed to migrate user " + file.getName() + ": " + e.getMessage());
+                Throwable cause = e.getCause() != null ? e.getCause() : e;
+                plugin.getLogger().warning("Failed to migrate user " + file.getName() + ": " + cause);
+                plugin.debug("Stack trace for " + file.getName() + ":");
+                for (StackTraceElement frame : cause.getStackTrace()) {
+                    plugin.debug("  at " + frame);
+                }
                 stats.usersFailed.incrementAndGet();
             }
         }
@@ -281,7 +286,9 @@ public class EssMigrator {
         }
 
         try (FileReader reader = new FileReader(bannedPlayersFile)) {
-            JsonElement element = JsonParser.parseReader(reader);
+
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(reader);
             if (!element.isJsonArray()) {
                 plugin.getLogger().warning("Invalid banned-players.json format");
                 return;

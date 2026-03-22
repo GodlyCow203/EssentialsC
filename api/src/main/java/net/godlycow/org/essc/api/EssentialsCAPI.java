@@ -94,4 +94,18 @@ public interface EssentialsCAPI {
      */
     ReplyApi getReplyApi();
 
+    /**
+     * Returns the nickname sub-system API.
+     *
+     * @return the {@link NickApi} instance; never {@code null}
+     */
+    NickApi getNickApi();
+
+    /**
+     * Returns the punishment sub-system API.
+     *
+     * @return the {@link PunishmentApi} instance; never {@code null}
+     */
+    PunishmentApi getPunishmentApi();
+
 }

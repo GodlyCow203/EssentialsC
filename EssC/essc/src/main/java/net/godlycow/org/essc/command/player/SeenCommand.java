@@ -19,7 +19,7 @@ public class SeenCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         String targetName = args[0];
 
-        Player onlineTarget = plugin.getServer().getPlayerExact(targetName);
+        Player onlineTarget = plugin.getBedrockUtil().resolvePlayer(targetName);
         if (onlineTarget != null) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("player", onlineTarget.getName());
@@ -46,19 +46,9 @@ public class SeenCommand extends Command {
             return true;
         }
 
-        OfflinePlayer offlineTarget = Arrays.stream(plugin.getServer().getOfflinePlayers())
-                .filter(p -> p.getName() != null && p.getName().equalsIgnoreCase(targetName))
-                .findFirst()
-                .orElse(null);
+        OfflinePlayer offlineTarget = plugin.getBedrockUtil().resolveOfflinePlayer(targetName);
 
-        if (offlineTarget == null) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", targetName);
-            sender.sendMessage(lang.get(sender, "error.player_not_found", placeholders));
-            return true;
-        }
-
-        if (!offlineTarget.hasPlayedBefore()) {
+        if (offlineTarget == null || !offlineTarget.hasPlayedBefore()) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("player", targetName);
             sender.sendMessage(lang.get(sender, "error.player_not_found", placeholders));
@@ -73,7 +63,6 @@ public class SeenCommand extends Command {
         placeholders.put("last_seen", formatTimeAgo(lastSeen));
         placeholders.put("first_join", formatDate(firstPlayed));
         placeholders.put("playtime", formatPlayTime(offlineTarget.getStatistic(org.bukkit.Statistic.PLAY_ONE_MINUTE) * 50L));
-
 
         sender.sendMessage(lang.get(sender, "seen.offline", placeholders));
 

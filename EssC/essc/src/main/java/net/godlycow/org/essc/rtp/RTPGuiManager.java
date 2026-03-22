@@ -2,6 +2,7 @@ package net.godlycow.org.essc.rtp;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,15 +29,14 @@ public class RTPGuiManager implements Listener {
 
     private final Map<UUID, Inventory> openInventories = new HashMap<>();
     private final Map<UUID, BukkitTask> updateTasks = new HashMap<>();
+    private final Map<UUID, Integer> playerPages = new HashMap<>();
+    private static final int[] WORLD_SLOTS = {11, 13, 15};
 
-    private final int[] WORLD_SLOTS = {11, 13, 15};
-    private final String[] WORLD_NAMES = {"world", "world_nether", "world_the_end"};
-    private final Material[] WORLD_MATERIALS = {
-            Material.GRASS_BLOCK,
-            Material.NETHERRACK,
-            Material.END_STONE
-    };
-    private final String[] WORLD_KEYS = {"overworld", "nether", "end"};
+    private static final int SLOT_PREV = 18;
+    private static final int SLOT_PAGE = 22;
+    private static final int SLOT_NEXT = 26;
+
+    private static final int WORLDS_PER_PAGE = 3;
 
     public RTPGuiManager(EssentialsC plugin, RTPManager rtpManager) {
         this.plugin = plugin;
@@ -52,28 +52,56 @@ public class RTPGuiManager implements Listener {
             return;
         }
 
-        Component title = plugin.getLanguageManager().get(player, "rtp.gui.title");
+        playerPages.put(player.getUniqueId(), 0);
 
+        Component title = plugin.getLanguageManager().get(player, "rtp.gui.title");
         Inventory inv = Bukkit.createInventory(null, 27, title);
+        openInventories.put(player.getUniqueId(), inv);
+
+        refreshInventory(player);
+
+        player.openInventory(inv);
+        player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1f, 1f);
+
+        startUpdateTask(player);
+    }
+
+    private void refreshInventory(Player player) {
+
+        Inventory inv = openInventories.get(player.getUniqueId());
+        if (inv == null) return;
+
+        List<String> worlds = rtpManager.getConfiguredWorldNames();
+        int page = playerPages.getOrDefault(player.getUniqueId(), 0);
+        int totalPages = Math.max(1, (int) Math.ceil((double) worlds.size() / WORLDS_PER_PAGE));
+
+        if (page >= totalPages) {
+            page = totalPages - 1;
+            playerPages.put(player.getUniqueId(), page);
+        }
 
         ItemStack filler = createFiller();
 
         for (int i = 0; i < 27; i++) {
-            if (!isWorldSlot(i)) {
-                inv.setItem(i, filler);
+            inv.setItem(i, filler);
+        }
+
+        int pageStart = page * WORLDS_PER_PAGE;
+        for (int i = 0; i < WORLDS_PER_PAGE; i++) {
+            int worldIndex = pageStart + i;
+            if (worldIndex < worlds.size()) {
+                inv.setItem(WORLD_SLOTS[i], buildWorldItem(worlds.get(worldIndex), player));
             }
         }
 
-        for (int i = 0; i < 3; i++) {
-            updateWorldItem(inv, i, player);
+        if (page > 0) {
+            inv.setItem(SLOT_PREV, buildNavButton(false, player));
+        }
+        if (page < totalPages - 1) {
+            inv.setItem(SLOT_NEXT, buildNavButton(true, player));
         }
 
-        player.openInventory(inv);
-        openInventories.put(player.getUniqueId(), inv);
-
-        player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1f, 1f);
-
-        startUpdateTask(player);
+        inv.setItem(SLOT_PAGE, buildPageIndicator(page + 1, totalPages, player));
     }
 
     private ItemStack createFiller() {
@@ -84,72 +112,113 @@ public class RTPGuiManager implements Listener {
         return item;
     }
 
-    private boolean isWorldSlot(int slot) {
-        for (int s : WORLD_SLOTS) {
-            if (s == slot) return true;
-        }
-        return false;
-    }
+    private ItemStack buildWorldItem(String worldName, Player viewer) {
 
-    private void updateWorldItem(Inventory inv, int index, Player viewer) {
-
-        String worldName = WORLD_NAMES[index];
         World world = Bukkit.getWorld(worldName);
+        if (world == null) return createFiller();
 
-        if (world == null) return;
-
-        Material material = WORLD_MATERIALS[index];
-        String worldKey = WORLD_KEYS[index];
-
+        RTPManager.WorldRTPSettings settings = rtpManager.getWorldSettings(worldName);
         boolean enabled = rtpManager.isWorldEnabled(worldName);
-        int playerCount = rtpManager.getPlayerCountInWorld(worldName);
         boolean hasPermission = rtpManager.hasWorldPermission(viewer, worldName);
+        int playerCount = rtpManager.getPlayerCountInWorld(worldName);
 
-        ItemStack item = new ItemStack(enabled && hasPermission ? material : Material.BARRIER);
+        Material material = enabled && hasPermission
+                ? materialForEnvironment(world.getEnvironment())
+                : Material.BARRIER;
+
+        ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
-        Component displayName = plugin.getLanguageManager()
-                .get(viewer, "rtp.gui." + worldKey + ".name");
-
+        Component displayName = miniMessage.deserialize(settings.displayName())
+                .decoration(TextDecoration.ITALIC, false);
         meta.displayName(displayName);
 
         List<Component> lore = new ArrayList<>();
 
         if (!hasPermission) {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.status.no_permission"));
+            lore.add(lang(viewer, "rtp.gui.status.no_permission"));
         } else if (enabled) {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.status.enabled"));
+            lore.add(lang(viewer, "rtp.gui.status.enabled"));
         } else {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.status.disabled"));
+            lore.add(lang(viewer, "rtp.gui.status.disabled"));
         }
 
-        Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("count", String.valueOf(playerCount));
-        placeholders.put("world", worldName);
-
-        lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.players", placeholders));
+        lore.add(lang(viewer, "rtp.gui.players", map("count", String.valueOf(playerCount), "world", worldName)));
 
         if (!hasPermission) {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.locked"));
+            lore.add(lang(viewer, "rtp.gui.locked"));
         } else if (enabled) {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.click_to_teleport"));
+            lore.add(lang(viewer, "rtp.gui.click_to_teleport"));
         } else {
-            lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.world_disabled_lore"));
+            lore.add(lang(viewer, "rtp.gui.world_disabled_lore"));
         }
 
-        RTPManager.WorldRTPSettings settings = rtpManager.getWorldSettings(worldName);
-
-        Map<String, String> radius = new HashMap<>();
-        radius.put("min", String.valueOf(settings.minRadius()));
-        radius.put("max", String.valueOf(settings.maxRadius()));
-
-        lore.add(plugin.getLanguageManager().get(viewer, "rtp.gui.radius", radius));
+        lore.add(lang(viewer, "rtp.gui.radius",
+                map("min", String.valueOf(settings.minRadius()), "max", String.valueOf(settings.maxRadius()))));
 
         meta.lore(lore);
         item.setItemMeta(meta);
-
-        inv.setItem(WORLD_SLOTS[index], item);
+        return item;
     }
+
+    private ItemStack buildNavButton(boolean forward, Player viewer) {
+
+        ItemStack item = new ItemStack(forward ? Material.ARROW : Material.ARROW);
+        ItemMeta meta = item.getItemMeta();
+
+        Component name = forward
+                ? lang(viewer, "rtp.gui.nav.next")
+                : lang(viewer, "rtp.gui.nav.prev");
+
+        meta.displayName(name.decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of());
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private ItemStack buildPageIndicator(int current, int total, Player viewer) {
+
+        ItemStack item = new ItemStack(Material.BOOK);
+        ItemMeta meta = item.getItemMeta();
+
+        Component name = lang(viewer, "rtp.gui.nav.page",
+                map("page", String.valueOf(current), "total", String.valueOf(total)));
+
+        meta.displayName(name.decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of());
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    private Material materialForEnvironment(World.Environment env) {
+        return switch (env) {
+            case NETHER -> Material.NETHERRACK;
+            case THE_END -> Material.END_STONE;
+            default -> Material.GRASS_BLOCK;
+        };
+    }
+
+    private Component lang(Player player, String key) {
+        return plugin.getLanguageManager().get(player, key)
+                .decoration(TextDecoration.ITALIC, false);
+    }
+
+    private Component lang(Player player, String key, Map<String, String> placeholders) {
+        return plugin.getLanguageManager().get(player, key, placeholders)
+                .decoration(TextDecoration.ITALIC, false);
+    }
+
+    private Map<String, String> map(String k1, String v1, String k2, String v2) {
+        Map<String, String> m = new HashMap<>();
+        m.put(k1, v1);
+        m.put(k2, v2);
+        return m;
+    }
+
+    private Map<String, String> map(String k1, String v1) {
+        return Map.of(k1, v1);
+    }
+
 
     private void startUpdateTask(Player player) {
 
@@ -159,26 +228,19 @@ public class RTPGuiManager implements Listener {
         if (old != null) old.cancel();
 
         BukkitTask task = new BukkitRunnable() {
-
             @Override
             public void run() {
-
                 if (!player.isOnline() || !openInventories.containsKey(uuid)) {
                     cancel();
                     return;
                 }
-
-                Inventory inv = openInventories.get(uuid);
-
-                for (int i = 0; i < 3; i++) {
-                    updateWorldItem(inv, i, player);
-                }
+                refreshInventory(player);
             }
-
         }.runTaskTimer(plugin, 20L, 20L);
 
         updateTasks.put(uuid, task);
     }
+
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -191,18 +253,22 @@ public class RTPGuiManager implements Listener {
         event.setCancelled(true);
 
         int slot = event.getSlot();
-        int worldIndex = -1;
 
-        for (int i = 0; i < WORLD_SLOTS.length; i++) {
-            if (WORLD_SLOTS[i] == slot) {
-                worldIndex = i;
-                break;
-            }
+        if (slot == SLOT_PREV || slot == SLOT_NEXT) {
+            handlePageTurn(player, slot == SLOT_NEXT);
+            return;
         }
 
-        if (worldIndex == -1) return;
+        int slotIndex = worldSlotIndex(slot);
+        if (slotIndex == -1) return;
 
-        String worldName = WORLD_NAMES[worldIndex];
+        List<String> worlds = rtpManager.getConfiguredWorldNames();
+        int page = playerPages.getOrDefault(player.getUniqueId(), 0);
+        int worldIndex = page * WORLDS_PER_PAGE + slotIndex;
+
+        if (worldIndex >= worlds.size()) return;
+
+        String worldName = worlds.get(worldIndex);
         World world = Bukkit.getWorld(worldName);
 
         if (world == null) {
@@ -210,17 +276,13 @@ public class RTPGuiManager implements Listener {
             return;
         }
 
-        if (!rtpManager.hasWorldPermission(player, worldName)
-                || !rtpManager.isWorldEnabled(worldName)) {
-
+        if (!rtpManager.hasWorldPermission(player, worldName) || !rtpManager.isWorldEnabled(worldName)) {
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             return;
         }
 
         player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
-
         player.closeInventory();
-
         rtpManager.startRTP(player, world);
     }
 
@@ -230,10 +292,10 @@ public class RTPGuiManager implements Listener {
         if (!(event.getPlayer() instanceof Player player)) return;
 
         UUID uuid = player.getUniqueId();
-
         if (!openInventories.containsKey(uuid)) return;
 
         openInventories.remove(uuid);
+        playerPages.remove(uuid);
 
         BukkitTask task = updateTasks.remove(uuid);
         if (task != null) task.cancel();
@@ -241,10 +303,32 @@ public class RTPGuiManager implements Listener {
         player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1f, 1f);
     }
 
-    public void shutdown() {
+    private void handlePageTurn(Player player, boolean forward) {
 
+        List<String> worlds = rtpManager.getConfiguredWorldNames();
+        int totalPages = Math.max(1, (int) Math.ceil((double) worlds.size() / WORLDS_PER_PAGE));
+
+        int current = playerPages.getOrDefault(player.getUniqueId(), 0);
+        int next = forward ? current + 1 : current - 1;
+
+        if (next < 0 || next >= totalPages) return;
+
+        playerPages.put(player.getUniqueId(), next);
+        refreshInventory(player);
+
+        player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1f, forward ? 1.2f : 0.8f);
+    }
+    public void shutdown() {
         updateTasks.values().forEach(BukkitTask::cancel);
         updateTasks.clear();
         openInventories.clear();
+        playerPages.clear();
+    }
+
+    private int worldSlotIndex(int slot) {
+        for (int i = 0; i < WORLD_SLOTS.length; i++) {
+            if (WORLD_SLOTS[i] == slot) return i;
+        }
+        return -1;
     }
 }

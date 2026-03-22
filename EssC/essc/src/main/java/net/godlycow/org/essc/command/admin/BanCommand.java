@@ -3,8 +3,6 @@ package net.godlycow.org.essc.command.admin;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,7 +22,13 @@ public class BanCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         String targetName = args[0];
-        OfflinePlayer target = plugin.getServer().getOfflinePlayer(targetName);
+        OfflinePlayer target;
+        Player onlineResolved = plugin.getBedrockUtil().resolvePlayer(targetName);
+        if (onlineResolved != null) {
+            target = onlineResolved;
+        } else {
+            target = plugin.getServer().getOfflinePlayer(targetName);
+        }
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {
             Map<String, String> placeholders = new HashMap<>();

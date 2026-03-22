@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.chat.luckperms;
 
+import github.scarsz.discordsrv.DiscordSRV;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
@@ -25,6 +26,7 @@ public class ChatManager implements Listener {
     private final ConfigManager configManager;
 
     private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
+    private static final Pattern HEX_PATTERN_MM = Pattern.compile("<#([A-Fa-f0-9]{6})>");
 
     private final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
             .character(ChatColor.COLOR_CHAR)
@@ -39,7 +41,6 @@ public class ChatManager implements Listener {
     public ChatManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-        MiniMessage miniMessage = plugin.getMiniMessage();
 
         reload();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -48,13 +49,11 @@ public class ChatManager implements Listener {
     public void reload() {
         this.useLuckPermsFormatting = configManager.isLuckPermsChatEnabled();
         if (useLuckPermsFormatting && plugin.getServer().getPluginManager().isPluginEnabled("LuckPerms")) {
-
             var provider = plugin.getServer().getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
                 this.luckPerms = provider.getProvider();
                 this.luckPermsEnabled = true;
             } else {
-
                 try {
                     this.luckPerms = LuckPermsProvider.get();
                     this.luckPermsEnabled = true;
@@ -70,7 +69,6 @@ public class ChatManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-
         if (!luckPermsEnabled || !useLuckPermsFormatting) {
             return;
         }
@@ -78,52 +76,90 @@ public class ChatManager implements Listener {
         Player player = event.getPlayer();
         String message = event.getMessage();
 
-        String processedMessage = message;
-        boolean hasColor = player.hasPermission("essentialsc.chat.legacycodes");
-        boolean hasRgb = player.hasPermission("essentialsc.chat.rbgcodes");
-
-        if (hasColor && hasRgb) {
-            processedMessage = colorize(translateHexColorCodes(processedMessage));
-        } else if (hasColor) {
-            processedMessage = colorize(processedMessage);
-        } else if (hasRgb) {
-            processedMessage = translateHexColorCodes(processedMessage);
+        if (player.hasPermission("essentialsc.chat.legacycodes") && player.hasPermission("essentialsc.chat.rbgcodes")) {
+            message = colorize(translateHexColorCodes(message));
+        } else if (player.hasPermission("essentialsc.chat.legacycodes")) {
+            message = colorize(message);
+        } else if (player.hasPermission("essentialsc.chat.rbgcodes")) {
+            message = translateHexColorCodes(message);
         }
 
-        Component messageComponent = legacySerializer.deserialize(processedMessage);
-
+        Component messageComponent = legacySerializer.deserialize(message);
         Component formatted = formatWithLuckPerms(player, messageComponent);
+
         event.setCancelled(true);
         plugin.getServer().broadcast(formatted);
-        plugin.getServer().getConsoleSender().sendMessage(formatted);
+
+        if (plugin.getConfigManager().isDiscordSRVEnabled()
+                && plugin.getServer().getPluginManager().isPluginEnabled("DiscordSRV")) {
+            try {
+                String cachedNick = plugin.getNickManager() != null
+                        ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
+                        : null;
+                Component originalDisplayName = player.displayName();
+                if (cachedNick != null && !cachedNick.isEmpty()) {
+                    String plain = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText()
+                            .serialize(plugin.getMiniMessage().deserialize(cachedNick));
+                    player.displayName(Component.text(plain + "(" + player.getName() + ")"));
+                }
+                String channel = DiscordSRV.getPlugin().getOptionalChannel(player.getWorld().getName());
+                DiscordSRV.getPlugin().processChatMessage(player, event.getMessage(), channel, false);
+                player.displayName(originalDisplayName);
+            } catch (Exception e) {
+                plugin.debug("Failed to relay chat message to DiscordSRV: " + e.getMessage());
+            }
+        }
     }
 
     private Component formatWithLuckPerms(Player player, Component messageComponent) {
         CachedMetaData metaData = luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
-        String group = metaData.getPrimaryGroup();
+        String primaryGroup = metaData.getPrimaryGroup();
 
-        String formatString = plugin.getConfig().getString("group-formats." + group);
-        if (formatString == null) {
-            formatString = plugin.getConfig().getString("chat-format", "<prefix><name><suffix>: <message>");
+        String format = plugin.getConfig().getString("luckperms.group-formats." + primaryGroup);
+        if (format == null) {
+            format = plugin.getConfig().getString("luckperms.chat-format", "<DISPLAYNAME> &7\u00bb &f<MESSAGE>");
         }
 
         if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            formatString = PlaceholderAPI.setPlaceholders(player, formatString);
+            format = PlaceholderAPI.setPlaceholders(player, format);
         }
 
-        formatString = formatString
-                .replace("<prefix>", metaData.getPrefix() != null ? metaData.getPrefix() : "")
-                .replace("{prefix}", metaData.getPrefix() != null ? metaData.getPrefix() : "")
-                .replace("<suffix>", metaData.getSuffix() != null ? metaData.getSuffix() : "")
-                .replace("{suffix}", metaData.getSuffix() != null ? metaData.getSuffix() : "")
-                .replace("<name>", player.getName())
-                .replace("{name}", player.getName());
+        String prefix = metaData.getPrefix() != null ? metaData.getPrefix() : "";
+        String suffix = metaData.getSuffix() != null ? metaData.getSuffix() : "";
 
-        return legacySerializer.deserialize(colorize(translateHexColorCodes(formatString)))
-                .replaceText(builder -> builder.matchLiteral("<message>").replacement(messageComponent))
-                .replaceText(builder -> builder.matchLiteral("{message}").replacement(messageComponent));
+        Component displayNameComponent;
+        String cachedNick = plugin.getNickManager() != null
+                ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
+                : null;
+
+        if (cachedNick != null && !cachedNick.isEmpty()) {
+            String indicator = plugin.getConfigManager().getNickIndicator();
+            String nickLegacy = colorize(translateHexColorCodes(
+                    legacySerializer.serialize(plugin.getMiniMessage().deserialize(cachedNick))
+            ));
+            Component nickComponent = indicator.isEmpty()
+                    ? legacySerializer.deserialize(nickLegacy)
+                    : Component.text(indicator).append(legacySerializer.deserialize(nickLegacy));
+            Component prefixComponent = prefix.isEmpty() ? Component.empty() : legacySerializer.deserialize(colorize(translateHexColorCodes(prefix)));
+            Component suffixComponent = suffix.isEmpty() ? Component.empty() : legacySerializer.deserialize(colorize(translateHexColorCodes(suffix)));
+            displayNameComponent = prefixComponent.append(nickComponent).append(suffixComponent);
+        } else {
+            String rawDisplayName = colorize(translateHexColorCodes(prefix + player.getName() + suffix));
+            displayNameComponent = legacySerializer.deserialize(rawDisplayName);
+        }
+
+        format = format
+                .replace("<PREFIX>", prefix)
+                .replace("<SUFFIX>", suffix)
+                .replace("<USERNAME>", player.getName())
+                .replace("<GROUP>", primaryGroup);
+
+        String colorized = colorize(translateHexColorCodes(format));
+
+        return legacySerializer.deserialize(colorized)
+                .replaceText(b -> b.matchLiteral("<DISPLAYNAME>").replacement(displayNameComponent))
+                .replaceText(b -> b.matchLiteral("<MESSAGE>").replacement(messageComponent));
     }
-
 
     public boolean isLuckPermsChatEnabled() {
         return useLuckPermsFormatting;
@@ -142,19 +178,15 @@ public class ChatManager implements Listener {
     }
 
     public Component formatMessage(Player player, String message) {
-        String processed = message;
-        boolean hasColor = canUseColorCodes(player);
-        boolean hasRgb = canUseRgbCodes(player);
-
-        if (hasColor && hasRgb) {
-            processed = colorize(translateHexColorCodes(processed));
-        } else if (hasColor) {
-            processed = colorize(processed);
-        } else if (hasRgb) {
-            processed = translateHexColorCodes(processed);
+        if (player.hasPermission("essentialsc.chat.legacycodes") && player.hasPermission("essentialsc.chat.rbgcodes")) {
+            message = colorize(translateHexColorCodes(message));
+        } else if (player.hasPermission("essentialsc.chat.legacycodes")) {
+            message = colorize(message);
+        } else if (player.hasPermission("essentialsc.chat.rbgcodes")) {
+            message = translateHexColorCodes(message);
         }
 
-        Component messageComponent = legacySerializer.deserialize(processed);
+        Component messageComponent = legacySerializer.deserialize(message);
 
         if (!luckPermsEnabled || !useLuckPermsFormatting) {
             return messageComponent;
@@ -163,16 +195,15 @@ public class ChatManager implements Listener {
         return formatWithLuckPerms(player, messageComponent);
     }
 
-
     private String colorize(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
     private String translateHexColorCodes(String message) {
         final char colorChar = ChatColor.COLOR_CHAR;
+
         Matcher matcher = HEX_PATTERN.matcher(message);
         StringBuffer buffer = new StringBuffer(message.length() + 32);
-
         while (matcher.find()) {
             String group = matcher.group(1);
             matcher.appendReplacement(buffer, colorChar + "x"
@@ -180,6 +211,17 @@ public class ChatManager implements Listener {
                     + colorChar + group.charAt(2) + colorChar + group.charAt(3)
                     + colorChar + group.charAt(4) + colorChar + group.charAt(5));
         }
-        return matcher.appendTail(buffer).toString();
+        String result = matcher.appendTail(buffer).toString();
+
+        Matcher mmMatcher = HEX_PATTERN_MM.matcher(result);
+        StringBuffer mmBuffer = new StringBuffer(result.length() + 32);
+        while (mmMatcher.find()) {
+            String group = mmMatcher.group(1);
+            mmMatcher.appendReplacement(mmBuffer, colorChar + "x"
+                    + colorChar + group.charAt(0) + colorChar + group.charAt(1)
+                    + colorChar + group.charAt(2) + colorChar + group.charAt(3)
+                    + colorChar + group.charAt(4) + colorChar + group.charAt(5));
+        }
+        return mmMatcher.appendTail(mmBuffer).toString();
     }
 }

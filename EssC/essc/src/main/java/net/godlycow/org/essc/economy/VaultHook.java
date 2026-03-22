@@ -14,35 +14,48 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class VaultHook {
     private final EconomyManager economyManager;
+    private final VaultEconomy vaultEconomy;
     private boolean hooked = false;
 
     public VaultHook(EconomyManager economyManager) {
         this.economyManager = economyManager;
+        this.vaultEconomy = new VaultEconomy();
     }
 
     public boolean hook() {
-        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+        economyManager.getPlugin().debug("Attempting Vault economy registration...");
+        try {
+            Class.forName("net.milkbowl.vault.economy.Economy");
+        } catch (ClassNotFoundException ignored) {
+            economyManager.getPlugin().debug("Vault class not found, skipping registration.");
             return false;
         }
 
-        Bukkit.getServicesManager().register(Economy.class, new VaultEconomy(),
-                net.godlycow.org.essc.EssentialsC.getInstance(), ServicePriority.High);
+        Bukkit.getServicesManager().register(
+                Economy.class,
+                vaultEconomy,
+                net.godlycow.org.essc.EssentialsC.getInstance(),
+                ServicePriority.High
+        );
         hooked = true;
+        economyManager.getPlugin().debug("Vault economy registered with ServicePriority.High.");
         return true;
     }
 
     public boolean isHooked() {
         return hooked;
     }
-    private BigDecimal getBalanceSync(UUID uuid) {
-        try (Connection conn = economyManager.getDatabase().getConnection()) {
-            if (conn == null) return BigDecimal.ZERO;
 
+    public VaultEconomy getVaultEconomy() {
+        return vaultEconomy;
+    }
+    
+
+    private BigDecimal getBalanceSync(UUID uuid) {
+        try (Connection conn = economyManager.getDatabase().openFreshConnection()) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT balance FROM economy WHERE uuid = ?"
             )) {
@@ -59,9 +72,7 @@ public class VaultHook {
     }
 
     private boolean hasAccountSync(UUID uuid) {
-        try (Connection conn = economyManager.getDatabase().getConnection()) {
-            if (conn == null) return false;
-
+        try (Connection conn = economyManager.getDatabase().openFreshConnection()) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT 1 FROM economy WHERE uuid = ?"
             )) {
@@ -75,9 +86,8 @@ public class VaultHook {
     }
 
     private boolean withdrawSync(UUID uuid, BigDecimal amount) {
-        try (Connection conn = economyManager.getDatabase().getConnection()) {
-            if (conn == null) return false;
-
+        economyManager.getPlugin().debug("Vault: withdrawSync " + amount + " from " + uuid);
+        try (Connection conn = economyManager.getDatabase().openFreshConnection()) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "UPDATE economy SET balance = balance - ?, last_updated = strftime('%s', 'now') WHERE uuid = ? AND balance >= ?"
             )) {
@@ -93,8 +103,8 @@ public class VaultHook {
     }
 
     private boolean depositSync(UUID uuid, BigDecimal amount) {
-        try (Connection conn = economyManager.getDatabase().getConnection()) {
-            if (conn == null) return false;
+        economyManager.getPlugin().debug("Vault: depositSync " + amount + " to " + uuid);
+        try (Connection conn = economyManager.getDatabase().openFreshConnection()) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "UPDATE economy SET balance = balance + ?, last_updated = strftime('%s', 'now') WHERE uuid = ?"
             )) {
@@ -122,7 +132,7 @@ public class VaultHook {
         return false;
     }
 
-    private class VaultEconomy implements Economy {
+    public class VaultEconomy implements Economy {
 
         @Override
         public boolean isEnabled() {
@@ -227,15 +237,13 @@ public class VaultHook {
         @Override
         public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
             BigDecimal amt = BigDecimal.valueOf(amount);
-            double newBal = getBalanceSync(player.getUniqueId()).subtract(amt).doubleValue();
-
             boolean success = withdrawSync(player.getUniqueId(), amt);
+            double newBal = getBalanceSync(player.getUniqueId()).doubleValue();
 
             if (success) {
                 return new EconomyResponse(amount, newBal, EconomyResponse.ResponseType.SUCCESS, null);
             } else {
-                double current = getBalanceSync(player.getUniqueId()).doubleValue();
-                return new EconomyResponse(0, current, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
+                return new EconomyResponse(0, newBal, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
             }
         }
 

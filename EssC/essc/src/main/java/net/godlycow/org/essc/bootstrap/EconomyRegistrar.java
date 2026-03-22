@@ -21,16 +21,18 @@ public class EconomyRegistrar {
     }
 
     public void enable() {
-        EconomyManager economyManager = new EconomyManager(plugin);
-        plugin.setEconomyManager(economyManager);
+        if (plugin.getEconomyManager() == null) {
+            EconomyManager economyManager = new EconomyManager(plugin);
+            plugin.setEconomyManager(economyManager);
 
-        VaultHook vaultHook = new VaultHook(economyManager);
-        plugin.setVaultHook(vaultHook);
+            VaultHook vaultHook = new VaultHook(economyManager);
+            plugin.setVaultHook(vaultHook);
 
-        if (vaultHook.hook()) {
-            plugin.getLogger().info("Successfully hooked into Vault!");
-        } else {
-            plugin.getLogger().info("Using built-in economy system");
+            if (vaultHook.hook()) {
+                plugin.getLogger().info("Successfully hooked into Vault!");
+            } else {
+                plugin.getLogger().info("Using built-in economy system");
+            }
         }
 
         register("balance", new BalanceCommand(plugin));

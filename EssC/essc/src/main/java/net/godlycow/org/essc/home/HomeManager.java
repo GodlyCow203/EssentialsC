@@ -327,6 +327,11 @@ public class HomeManager implements Listener {
         cancelTeleport(event.getPlayer());
     }
 
+
+    public Database getDatabase() {
+        return database;
+    }
+
     public void shutdown() {
         pendingTeleports.values().forEach(BukkitTask::cancel);
         pendingTeleports.clear();
@@ -337,4 +342,5 @@ public class HomeManager implements Listener {
     public void reload() {
         plugin.debug("Reloading HomeManager configuration");
     }
+
 }

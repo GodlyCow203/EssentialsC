@@ -8,7 +8,9 @@ heal:
 
 luckperms:
   chat-formatting: true
-  tab-formatting: true
+  chat-format: '<DISPLAYNAME> &7» &f<MESSAGE>'
+  group-formats:
+    # owner: '&c[Owner] <USERNAME> &7» &f<MESSAGE>'  ( Example only )
 
 # DiscordSRV Integration Settings
 discordsrv:
@@ -78,23 +80,43 @@ rtp:
       - deep_ocean
       - river
 
-  # Per-world settings
+  # Per-world overrides. Any world not listed here still gets RTP
+  # using the global defaults above. Add any world name as a key.
   worlds:
     world:
       enabled: true
+      display-name: "<#00E05D><b>Overworld"
       min-radius: 1000
       max-radius: 10000
-      blocked-biomes: []
+      blocked-biomes:
+        - ocean
+        - deep_ocean
+        - river
+
     world_nether:
-      enabled: true
+      enabled: false
+      display-name: "<#FF7A52><b>Nether"
       min-radius: 500
       max-radius: 5000
       blocked-biomes: []
+
     world_the_end:
       enabled: true
-      min-radius: 1000
-      max-radius: 8000
+      display-name: "<#FFE152><b>The End"
+      min-radius: 500
+      max-radius: 3000
       blocked-biomes: []
+
+    # Example custom world — duplicate this block for any additional worlds
+    # my_custom_world:
+    #   enabled: true
+    #   display-name: "<gold><bold>Custom World</bold></gold>"
+    #   min-radius: 500
+    #   max-radius: 8000
+    #   blocked-biomes:
+    #     - ocean
+
+
 
 teleport:
   tpa:
@@ -190,6 +212,7 @@ nickname:
   normalize-enabled: true
   unique: true
   update-tab: true
+  indicator: "~"
 
 shop:
   enabled: true

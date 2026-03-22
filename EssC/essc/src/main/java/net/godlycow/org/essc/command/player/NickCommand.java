@@ -22,6 +22,12 @@ public class NickCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
+        if (plugin.getBedrockUtil().isBedrockPlayer(player)) {
+            player.sendMessage(lang.get(player, "nick.error.bedrock_not_supported"));
+            plugin.debug("Denied nick for Bedrock player: " + player.getName());
+            return true;
+        }
+
         if (args.length == 0) {
             sendUsage(sender);
             return true;
@@ -44,11 +50,19 @@ public class NickCommand extends Command {
                 return true;
             }
 
-            Player target = plugin.getServer().getPlayer(args[0]);
+            Player target = plugin.getBedrockUtil().resolvePlayer(args[0]);
             if (target == null) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", args[0]);
                 player.sendMessage(lang.get(player, "error.player_not_found", placeholders));
+                return true;
+            }
+
+            if (plugin.getBedrockUtil().isBedrockPlayer(target)) {
+                Map<String, String> placeholders = new HashMap<>();
+                placeholders.put("player", target.getName());
+                player.sendMessage(lang.get(player, "nick.error.bedrock_not_supported_other", placeholders));
+                plugin.debug("Denied nick-other for Bedrock player: " + target.getName());
                 return true;
             }
 

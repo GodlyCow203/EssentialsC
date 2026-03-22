@@ -4,16 +4,13 @@ import net.godlycow.org.essc.EssentialsC;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
-
 
 public class Database {
     private final EssentialsC plugin;
     private final String dbPath;
+    private final String jdbcUrl;
     private Connection connection;
 
     public Database(EssentialsC plugin) {
@@ -23,12 +20,12 @@ public class Database {
     public Database(EssentialsC plugin, String filename) {
         this.plugin = plugin;
         this.dbPath = new File(plugin.getDataFolder(), filename).getAbsolutePath();
+        this.jdbcUrl = "jdbc:sqlite:" + dbPath;
     }
 
     public void connect() throws SQLException {
         if (connection != null && !connection.isClosed()) return;
-
-        connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+        connection = DriverManager.getConnection(jdbcUrl);
     }
 
     public void disconnect() {
@@ -42,6 +39,7 @@ public class Database {
         }
     }
 
+
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -54,10 +52,18 @@ public class Database {
         }
     }
 
+    public Connection openFreshConnection() throws SQLException {
+        Connection conn = DriverManager.getConnection(jdbcUrl);
+        try (Statement st = conn.createStatement()) {
+            st.execute("PRAGMA journal_mode=WAL");
+            st.execute("PRAGMA busy_timeout=5000");
+        }
+        return conn;
+    }
+
     public <T> CompletableFuture<T> async(AsyncQuery<T> query) {
         return CompletableFuture.supplyAsync(() -> {
-            try (Connection conn = getConnection()) {
-                if (conn == null) throw new SQLException("No connection available");
+            try (Connection conn = openFreshConnection()) {
                 return query.execute(conn);
             } catch (SQLException e) {
                 plugin.getLogger().log(Level.SEVERE, "Database error", e);

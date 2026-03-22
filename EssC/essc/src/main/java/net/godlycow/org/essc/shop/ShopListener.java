@@ -1,13 +1,13 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -18,7 +18,14 @@ public class ShopListener implements Listener {
     private final EssentialsC plugin;
     private final ShopManager shopManager;
     private final Map<UUID, ShopSession> sessions = new HashMap<>();
-    private final PlainTextComponentSerializer plainSerializer = PlainTextComponentSerializer.plainText();
+
+    private static final int SLOT_PREV_PAGE       = 45;
+    private static final int SLOT_BALANCE_CATEGORY = 47;
+    private static final int SLOT_BACK_BUTTON      = 48;
+    private static final int SLOT_CLOSE_BUTTON     = 48;
+    private static final int SLOT_PAGE_INDICATOR   = 49;
+    private static final int SLOT_BALANCE_MAIN     = 50;
+    private static final int SLOT_NEXT_PAGE        = 53;
 
     public ShopListener(EssentialsC plugin, ShopManager shopManager) {
         this.plugin = plugin;
@@ -29,30 +36,34 @@ public class ShopListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        String title = plainSerializer.serialize(event.getView().title());
-        String mainTitle = plainSerializer.serialize(
-                plugin.getMiniMessage().deserialize(plugin.getConfigManager().getShopMainMenuTitle())
-        );
-
-        boolean isMainShop = title.equals(mainTitle);
-        boolean isCategoryShop = !isMainShop && title.contains("Shop");
-
-        if (!isMainShop && !isCategoryShop) return;
+        InventoryHolder holder = event.getInventory().getHolder();
+        if (!(holder instanceof ShopHolder shopHolder)) return;
 
         event.setCancelled(true);
 
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null || clicked.getType().isAir()) return;
 
-        if (isMainShop) {
-            handleMainMenuClick(player, clicked, event.getSlot());
+        if (shopHolder.isMain()) {
+            handleMainMenuClick(player, event.getSlot());
         } else {
-            handleCategoryClick(player, clicked, event.getSlot(),
+            handleCategoryClick(player, shopHolder, event.getSlot(),
                     event.isShiftClick(), event.isLeftClick(), event.isRightClick());
         }
     }
 
-    private void handleMainMenuClick(Player player, ItemStack clicked, int slot) {
+    private void handleMainMenuClick(Player player, int slot) {
+        if (slot == SLOT_BALANCE_MAIN) {
+            shopManager.openMainShop(player);
+            return;
+        }
+
+        if (slot == SLOT_CLOSE_BUTTON) {
+            player.closeInventory();
+            removeSession(player);
+            return;
+        }
+
         for (ShopCategory category : shopManager.getCategories().values()) {
             if (!category.isEnabled()) continue;
             if (category.getPermission() != null && !player.hasPermission(category.getPermission())) continue;
@@ -63,64 +74,52 @@ public class ShopListener implements Listener {
                 return;
             }
         }
-
-        if (clicked.getType() == Material.PLAYER_HEAD) {
-            shopManager.openMainShop(player);
-            return;
-        }
-
-        if (clicked.getType() == Material.BARRIER) {
-            player.closeInventory();
-            removeSession(player);
-        }
     }
 
-    private void handleCategoryClick(Player player, ItemStack clicked, int slot,
+    private void handleCategoryClick(Player player, ShopHolder holder, int slot,
                                      boolean shift, boolean left, boolean right) {
-        ShopSession session = getSession(player);
-        if (session == null) {
-            shopManager.openMainShop(player);
-            return;
-        }
+        String categoryId = holder.getCategoryId();
+        int page          = holder.getPage();
 
-        ShopCategory category = shopManager.getCategory(session.getCategoryId());
+        ShopCategory category = shopManager.getCategory(categoryId);
         if (category == null) {
             removeSession(player);
             shopManager.openMainShop(player);
             return;
         }
 
-        if (slot == 45 && left) {
-            if (session.getPage() > 1) {
-                int newPage = session.getPage() - 1;
-                setSession(player, new ShopSession(session.getCategoryId(), newPage));
-                shopManager.openCategory(player, session.getCategoryId(), newPage);
+        if (slot == SLOT_PREV_PAGE && left) {
+            if (page > 1) {
+                int newPage = page - 1;
+                setSession(player, new ShopSession(categoryId, newPage));
+                shopManager.openCategory(player, categoryId, newPage);
             }
             return;
         }
 
-        if (slot == 53 && left) {
-            int maxPage = category.getMaxPage();
-            if (session.getPage() < maxPage) {
-                int newPage = session.getPage() + 1;
-                setSession(player, new ShopSession(session.getCategoryId(), newPage));
-                shopManager.openCategory(player, session.getCategoryId(), newPage);
+        if (slot == SLOT_NEXT_PAGE && left) {
+            if (page < category.getMaxPage()) {
+                int newPage = page + 1;
+                setSession(player, new ShopSession(categoryId, newPage));
+                shopManager.openCategory(player, categoryId, newPage);
             }
             return;
         }
 
-        if (slot == 49 && clicked.getType() == Material.BARRIER) {
+        if (slot == SLOT_PAGE_INDICATOR) return;
+
+        if (slot == SLOT_BALANCE_CATEGORY) {
+            shopManager.openCategory(player, categoryId, page);
+            return;
+        }
+
+        if (slot == SLOT_BACK_BUTTON) {
             removeSession(player);
             shopManager.openMainShop(player);
             return;
         }
 
-        if (clicked.getType() == Material.PLAYER_HEAD) {
-            shopManager.openCategory(player, session.getCategoryId(), session.getPage());
-            return;
-        }
-
-        ShopItem item = findItemBySlot(category, session.getPage(), slot);
+        ShopItem item = category.getPageItems(page).get(slot);
         if (item == null) return;
 
         if (item.getPermission() != null && !player.hasPermission(item.getPermission())) {
@@ -137,15 +136,19 @@ public class ShopListener implements Listener {
         }
     }
 
-    private ShopItem findItemBySlot(ShopCategory category, int page, int slot) {
-        Map<Integer, ShopItem> pageItems = category.getPageItems(page);
-        return pageItems.get(slot);
-    }
-
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
-        removeSession(player);
+
+        Inventory inv = event.getInventory();
+        if (!(inv.getHolder() instanceof ShopHolder)) return;
+
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            Inventory current = player.getOpenInventory().getTopInventory();
+            if (!(current.getHolder() instanceof ShopHolder)) {
+                removeSession(player);
+            }
+        });
     }
 
     public ShopSession getSession(Player player) {

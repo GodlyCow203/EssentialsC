@@ -17,17 +17,14 @@ public class ol implements Listener {
         this.plugin = plugin;
     }
 
-    /*
     public void setPendingBackLocation(UUID uuid, org.bukkit.Location location) {
         pendingBackLocations.put(uuid, location);
     }
-     */
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         var player = event.getPlayer();
         var uuid = player.getUniqueId();
-
 
         var backLoc = pendingBackLocations.remove(uuid);
         if (backLoc != null && plugin.getBackManager() != null) {
