@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>الصفحة <color:#FFFFFF><page></color> من <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>الأسماء المستعارة غير مدعومة للاعبي Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> لاعب Bedrock ولا يمكن تعيين اسم مستعار له.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> لاعب Bedrock ولا يمكن تعيين اسم مستعار له.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>الاستخدام: /tphere <اللاعب></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>لا يمكنك نقل نفسك إلى نفسك!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>اللاعب <player> غير متصل!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>لقد نقلت <target> إلى موقعك!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>تم نقلك إلى موقع <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000>لا يمكن نقل <player>!</color>"
 }

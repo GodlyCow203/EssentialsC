@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Pagina <color:#FFFFFF><page></color> van <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bijnamen worden niet ondersteund voor Bedrock-spelers.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> is een Bedrock-speler en kan geen bijnaam hebben.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> is een Bedrock-speler en kan geen bijnaam hebben.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Gebruik: /tphere <speler></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Je kunt jezelf niet naar jezelf teleporteren!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Speler <player> is niet online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Je hebt <target> naar jouw locatie geteleporteerd!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Je bent geteleporteerd naar de locatie van <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kan niet worden geteleporteerd!</color>"
 }

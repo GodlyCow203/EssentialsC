@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Seite <color:#FFFFFF><page></color> von <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Spitznamen werden für Bedrock-Spieler nicht unterstützt.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ist ein Bedrock-Spieler und kann keinen Spitznamen haben.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ist ein Bedrock-Spieler und kann keinen Spitznamen haben.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Verwendig: /tphere <spieler></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Du chasch dich nöd zue dir sälbst teleportiere!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Spieler <player> isch nöd online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Du hesch <target> zue dim Standort teleportiert!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Du bisch zum Standort vo <player> teleportiert worde!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> cha nöd teleportiert werde!</color>"
 }

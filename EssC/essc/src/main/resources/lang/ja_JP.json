@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray><color:#FFFFFF><page></color> / <color:#FFFFFF><total></color> ページ</color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrockプレイヤーにはニックネームが使用できません。</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player>はBedrockプレイヤーのため、ニックネームを設定できません。</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player>はBedrockプレイヤーのため、ニックネームを設定できません。</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>使い方: /tphere <プレイヤー></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>自分自身を自分の元にテレポートすることはできません！</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>プレイヤー <player> はオンラインではありません！</color>",
+  "tphere.success": "<prefix> <color:#00FF00><target> をあなたの場所にテレポートしました！</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00><player> の場所にテレポートされました！</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> はテレポートできません！</color>"
 }

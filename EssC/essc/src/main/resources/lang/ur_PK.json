@@ -736,6 +736,13 @@
   "rtp.gui.nav.page": "<color:gray>صفحہ <color:#FFFFFF><page></color> از <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock کھلاڑیوں کے لیے عرفی نام تعاون یافتہ نہیں ہیں۔</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ایک Bedrock کھلاڑی ہے اور اس کا عرفی نام نہیں رکھا جا سکتا۔</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ایک Bedrock کھلاڑی ہے اور اس کا عرفی نام نہیں رکھا جا سکتا۔</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>استعمال: /tphere <کھلاڑی></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>آپ اپنے آپ کو اپنے پاس نہیں بھیج سکتے!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>کھلاڑی <player> آن لائن نہیں ہے!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>آپ نے <target> کو اپنی جگہ پر بھیج دیا!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>آپ کو <player> کی جگہ پر بھیج دیا گیا!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> کو نہیں بھیجا جا سکتا!</color>"
 }
 

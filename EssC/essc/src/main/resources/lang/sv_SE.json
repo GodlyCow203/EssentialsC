@@ -735,5 +735,13 @@
   "rtp.gui.nav.page": "<color:gray>Sida <color:#FFFFFF><page></color> av <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Smeknamn stöds inte för Bedrock-spelare.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> är en Bedrock-spelare och kan inte ha ett smeknamn.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> är en Bedrock-spelare och kan inte ha ett smeknamn.</color>",
+
+  "command.usage.tphere": "<color:#FF0000>Användning: /tphere <spelare></color>",
+  "command.usage.tphere": "<prefix> <color:#FF0000>Användning: /tphere <spelare></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Du kan inte teleportera dig själv till dig själv!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Spelaren <player> är inte online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Du teleporterade <target> till din plats!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Du blev teleporterad till <player>s plats!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kan inte teleporteras!</color>"
 }

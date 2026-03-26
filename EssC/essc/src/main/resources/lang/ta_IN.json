@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>பக்கம் <color:#FFFFFF><page></color> / <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock வீரர்களுக்கு புனைப்பெயர்கள் ஆதரிக்கப்படவில்லை.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ஒரு Bedrock வீரர், புனைப்பெயர் அமைக்க முடியாது.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ஒரு Bedrock வீரர், புனைப்பெயர் அமைக்க முடியாது.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>பயன்பாடு: /tphere <வீரர்></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>நீங்கள் உங்களை உங்களிடமே டெலிப்போர்ட் செய்ய முடியாது!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>வீரர் <player> ஆன்லைனில் இல்லை!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>நீங்கள் <target> ஐ உங்கள் இடத்திற்கு டெலிப்போர்ட் செய்தீர்கள்!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>நீங்கள் <player> இடத்திற்கு டெலிப்போர்ட் செய்யப்பட்டீர்கள்!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ஐ டெலிப்போர்ட் செய்ய முடியாது!</color>"
 }

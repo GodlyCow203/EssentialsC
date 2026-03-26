@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Página <color:#FFFFFF><page></color> de <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Apelidos não são suportados para jogadores Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> é um jogador Bedrock e não pode ter um apelido definido.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> é um jogador Bedrock e não pode ter um apelido definido.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Uso: /tphere <jogador></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Você não pode se teletransportar para si mesmo!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Jogador <player> não está online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Você teletransportou <target> para sua localização!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Você foi teletransportado para a localização de <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> não pode ser teletransportado!</color>"
 }

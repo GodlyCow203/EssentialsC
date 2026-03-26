@@ -13,7 +13,7 @@ import java.util.Map;
 public class TPHereCommand extends Command {
 
     public TPHereCommand(EssentialsC plugin) {
-        super(plugin, "tphere", "essc.tphere", true, 1, "command.usage.tphere");
+        super(plugin, "tphere", "essentialsc.tphere", true, 1, "command.usage.tphere");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TPHereCommand extends Command {
             return true;
         }
 
-        if (target.hasPermission("essc.tphere.bypass") && !player.hasPermission("essc.tphere.bypass.override")) {
+        if (target.hasPermission("essentialsc.tphere.bypass") && !player.hasPermission("essentialsc.tphere.bypass.override")) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("player", target.getName());
             player.sendMessage(lang.get(player, "tphere.bypass", placeholders));

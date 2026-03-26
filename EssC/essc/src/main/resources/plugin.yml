@@ -387,6 +387,11 @@ commands:
     usage: /migration
     permission: essentialsc.migration
 
+  tphere:
+    description: Teleport a player to your location
+    usage: /tphere <player>
+    permission: essentialsc.tphere
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -969,5 +974,17 @@ permissions:
   essentialsc.admin.eco.take:
     description: Permission to take money from a player
     default: false
+
+  essentialsc.tphere:
+    description: Allows using /tphere command
+    default: op
+
+  essentialsc.tphere.bypass:
+    description: Prevents being teleported by others via /tphere
+    default: op
+
+  essentialsc.tphere.bypass.override:
+    description: Allows teleporting players who have essentialsc.tphere.bypass
+    default: op
 
 

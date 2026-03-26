@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Страница <color:#FFFFFF><page></color> из <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Псевдонимы не поддерживаются для игроков Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> является игроком Bedrock и не может иметь псевдоним.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> является игроком Bedrock и не может иметь псевдоним.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Использование: /tphere <игрок></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Вы не можете телепортировать себя к себе!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Игрок <player> не в сети!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Вы телепортировали <target> к себе!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Вас телепортировали к игроку <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> нельзя телепортировать!</color>"
 }

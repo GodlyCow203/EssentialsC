@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Pahina <color:#FFFFFF><page></color> ng <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Hindi sinusuportahan ang mga palayaw para sa mga manlalaro ng Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000>Ang <player> ay isang manlalaro ng Bedrock at hindi maaaring magkaroon ng palayaw.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000>Ang <player> ay isang manlalaro ng Bedrock at hindi maaaring magkaroon ng palayaw.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Paggamit: /tphere <manlalaro></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Hindi mo maaaring i-teleport ang iyong sarili sa iyong sarili!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Ang manlalarong <player> ay hindi online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Na-teleport mo si <target> sa iyong lokasyon!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Na-teleport ka sa lokasyon ni <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000>Si <player> ay hindi maaaring i-teleport!</color>"
 }

@@ -735,5 +735,12 @@
   "rtp.gui.nav.page": "<color:gray>Page <color:#FFFFFF><page></color> sur <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Les surnoms ne sont pas pris en charge pour les joueurs Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> est un joueur Bedrock et ne peut pas avoir de surnom.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> est un joueur Bedrock et ne peut pas avoir de surnom.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Utilisation: /tphere <joueur></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Vous ne pouvez pas vous téléporter à vous-même!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Le joueur <player> n'est pas en ligne!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Vous avez téléporté <target> à votre position!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Vous avez été téléporté à la position de <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ne peut pas être téléporté!</color>"
 }

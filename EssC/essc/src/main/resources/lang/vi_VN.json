@@ -736,5 +736,12 @@
   "rtp.gui.nav.page": "<color:gray>Trang <color:#FFFFFF><page></color> / <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Biệt danh không được hỗ trợ cho người chơi Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> là người chơi Bedrock và không thể đặt biệt danh.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> là người chơi Bedrock và không thể đặt biệt danh.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Cách dùng: /tphere <người chơi></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Bạn không thể tự dịch chuyển chính mình!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Người chơi <player> không trực tuyến!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Bạn đã dịch chuyển <target> đến vị trí của bạn!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Bạn đã được dịch chuyển đến vị trí của <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> không thể bị dịch chuyển!</color>"
 }

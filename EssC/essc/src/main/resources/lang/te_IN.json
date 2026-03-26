@@ -734,5 +734,12 @@
   "rtp.gui.nav.page": "<color:gray>పేజీ <color:#FFFFFF><page></color> / <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock ఆటగాళ్ళకు మారుపేర్లు మద్దతు లేవు.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> Bedrock ఆటగాడు మరియు మారుపేరు సెట్ చేయలేరు.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> Bedrock ఆటగాడు మరియు మారుపేరు సెట్ చేయలేరు.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>వినియోగం: /tphere <ప్లేయర్></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>మీరు మిమ్మల్ని మీరే టెలిపోర్ట్ చేసుకోలేరు!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>ప్లేయర్ <player> ఆన్‌లైన్‌లో లేరు!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>మీరు <target> ని మీ స్థానానికి టెలిపోర్ట్ చేసారు!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>మీరు <player> స్థానానికి టెలిపోర్ట్ చేయబడ్డారు!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ని టెలిపోర్ట్ చేయలేము!</color>"
 }
