@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Halaman <color:#FFFFFF><page></color> dari <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Nama samaran tidak didukung untuk pemain Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> adalah pemain Bedrock dan tidak dapat memiliki nama samaran.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> adalah pemain Bedrock dan tidak dapat memiliki nama samaran.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Penggunaan: /tphere <pemain></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Kamu tidak bisa men teleport diri sendiri ke diri sendiri!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Pemain <player> tidak online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Kamu men teleport <target> ke lokasimu!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Kamu diteleport ke lokasi <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> tidak bisa diteleport!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Penggunaan: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Kamu tidak memegang item apapun!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Informasi Item ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Jumlah:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Nama Tampilan:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Deskripsi:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Data Model Kustom:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Enchant:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Durabilitas:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>પૃષ્ઠ <color:#FFFFFF><page></color> / <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock ખેલાડીઓ માટે ઉપનામ સમર્થિત નથી.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> Bedrock ખેલાડી છે અને ઉપનામ સેટ કરી શકાતું નથી.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> Bedrock ખેલાડી છે અને ઉપનામ સેટ કરી શકાતું નથી.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>વપરાશ: /tphere <ખેલાડી></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>તમે તમારી જાતને તમારી પાસે ટેલિપોર્ટ કરી શકતા નથી!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>ખેલાડી <player> ઓનલાઈન નથી!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>તમે <target> ને તમારી જગ્યાએ ટેલિપોર્ટ કર્યા!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>તમને <player> ની જગ્યાએ ટેલિપોર્ટ કરવામાં આવ્યા!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ને ટેલિપોર્ટ કરી શકાતા નથી!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>વપરાશ: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>તમારા હાથમાં કોઈ વસ્તુ નથી!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== વસ્તુ માહિતી ===</bold></color>\n<color:#AAAAAA>સામગ્રી:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>જથ્થો:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>પ્રદર્શન નામ:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>વર્ણન:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>કસ્ટમ મોડેલ ડેટા:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>ઇન્ચાન્ટમેન્ટ્સ:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>ટકાઉપણું:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

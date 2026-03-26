@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Página <color:#FFFFFF><page></color> de <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Los apodos no son compatibles con los jugadores de Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> es un jugador de Bedrock y no puede tener un apodo.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> es un jugador de Bedrock y no puede tener un apodo.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Uso: /tphere <jugador></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>¡No puedes teletransportarte a ti mismo!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>¡El jugador <player> no está en línea!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>¡Has teletransportado a <target> a tu ubicación!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>¡Has sido teletransportado a la ubicación de <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000>¡<player> no puede ser teletransportado!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Uso: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>¡No estás sosteniendo ningún objeto!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Información del Objeto ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Cantidad:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Nombre para Mostrar:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Descripción:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Datos de Modelo Personalizado:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Encantamientos:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Durabilidad:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

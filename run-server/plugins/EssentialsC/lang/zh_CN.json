@@ -735,6 +735,23 @@
   "rtp.gui.nav.page": "<color:gray>第 <color:#FFFFFF><page></color> 页，共 <color:#FFFFFF><total></color> 页</color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrock 玩家不支持昵称。</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> 是 Bedrock 玩家，无法设置昵称。</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> 是 Bedrock 玩家，无法设置昵称。</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>用法: /tphere <玩家></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>你不能将自己传送到自己身边！</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>玩家 <player> 不在线！</color>",
+  "tphere.success": "<prefix> <color:#00FF00>你将 <target> 传送到你的位置！</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>你被传送到 <player> 的位置！</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> 无法被传送！</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>用法: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>你手中没有拿着任何物品！</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== 物品信息 ===</bold></color>\n<color:#AAAAAA>材料:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>数量:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>显示名称:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>描述:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>自定义模型数据:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>附魔:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>耐久度:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 
 }

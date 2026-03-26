@@ -8,7 +8,7 @@
     <parent>
         <groupId>net.godlycow.org</groupId>
         <artifactId>EssentialsC-parent</artifactId>
-        <version>4.1.1</version>
+        <version>4.1.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -37,6 +37,18 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+
+        <repository>
+            <id>opencollab-snapshot</id>
+            <url>https://repo.opencollab.dev/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
     </repositories>
 
 

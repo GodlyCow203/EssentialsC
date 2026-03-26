@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.economy;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.bstats.EconomyCharts;
 import net.godlycow.org.essc.database.Database;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -180,7 +181,10 @@ public class EconomyManager implements EconomyService, Listener {
                 ps.setString(2, uuid.toString());
                 ps.setDouble(3, amount.doubleValue());
                 boolean success = ps.executeUpdate() > 0;
-                if (success) cache.remove(uuid);
+                if (success) {
+                    cache.remove(uuid);
+                    EconomyCharts.trackWithdraw();
+                }
                 return success;
             }
         });
@@ -215,6 +219,7 @@ public class EconomyManager implements EconomyService, Listener {
 
                 if (updated > 0) {
                     cache.remove(uuid);
+                    EconomyCharts.trackDeposit();
                     return true;
                 }
             }
@@ -232,6 +237,7 @@ public class EconomyManager implements EconomyService, Listener {
                 ps.setString(2, name);
                 ps.setDouble(3, amount.doubleValue());
                 cache.remove(uuid);
+                EconomyCharts.trackDeposit();
                 return ps.executeUpdate() > 0;
             }
         });

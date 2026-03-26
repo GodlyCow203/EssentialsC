@@ -743,5 +743,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>Spelaren <player> är inte online!</color>",
   "tphere.success": "<prefix> <color:#00FF00>Du teleporterade <target> till din plats!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>Du blev teleporterad till <player>s plats!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> kan inte teleporteras!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kan inte teleporteras!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Användning: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Du håller inget föremål!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Föremålsinformation ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Mängd:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Visningsnamn:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Beskrivning:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Anpassad modelldata:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Förtrollningar:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Hållbarhet:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

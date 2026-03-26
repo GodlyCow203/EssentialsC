@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>Spieler <player> isch nöd online!</color>",
   "tphere.success": "<prefix> <color:#00FF00>Du hesch <target> zue dim Standort teleportiert!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>Du bisch zum Standort vo <player> teleportiert worde!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> cha nöd teleportiert werde!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> cha nöd teleportiert werde!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Verwendig: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Du hesch kei Gägestand!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Gägestands Informatione ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Aazahl:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Aazeigename:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Beschriibig:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Benutzerdefinierti Modelldate:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Verzauberige:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Haltbarkeit:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

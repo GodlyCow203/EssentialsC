@@ -743,5 +743,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>Người chơi <player> không trực tuyến!</color>",
   "tphere.success": "<prefix> <color:#00FF00>Bạn đã dịch chuyển <target> đến vị trí của bạn!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>Bạn đã được dịch chuyển đến vị trí của <player>!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> không thể bị dịch chuyển!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> không thể bị dịch chuyển!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Cách dùng: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Bạn không cầm vật phẩm nào!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Thông tin Vật phẩm ===</bold></color>\n<color:#AAAAAA>Vật liệu:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Số lượng:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Tên hiển thị:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Mô tả:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Dữ liệu mô hình tùy chỉnh:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Phù phép:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Độ bền:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

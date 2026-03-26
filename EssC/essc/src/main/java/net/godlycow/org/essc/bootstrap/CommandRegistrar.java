@@ -10,6 +10,7 @@ import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
+import net.godlycow.org.essc.command.item.ItemIdCommand;
 import net.godlycow.org.essc.command.item.UnenchantCommand;
 import net.godlycow.org.essc.command.kit.*;
 import net.godlycow.org.essc.command.player.*;
@@ -59,6 +60,7 @@ public class CommandRegistrar {
         register("tpatoggle", new TPAToggleCommand(plugin));
         register("tpaqueue", new TPAQueueCommand(plugin));
         register("sethome", new SetHomeCommand(plugin));
+        register("itemid", new ItemIdCommand(plugin));
         register("home", new HomeCommand(plugin));
         register("delhome", new DelHomeCommand(plugin));
         register("homes", new HomesCommand(plugin));

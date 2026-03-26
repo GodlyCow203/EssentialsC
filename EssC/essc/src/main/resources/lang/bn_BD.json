@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>খেলোয়াড় <player> অনলাইনে নেই!</color>",
   "tphere.success": "<prefix> <color:#00FF00>আপনি <target> কে আপনার অবস্থানে টেলিপোর্ট করেছেন!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>আপনাকে <player> এর অবস্থানে টেলিপোর্ট করা হয়েছে!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> কে টেলিপোর্ট করা যাবে না!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> কে টেলিপোর্ট করা যাবে না!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>ব্যবহার: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>আপনার হাতে কোনো আইটেম নেই!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== আইটেম তথ্য ===</bold></color>\n<color:#AAAAAA>উপাদান:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>পরিমাণ:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>প্রদর্শন নাম:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>বিবরণ:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>কাস্টম মডেল ডেটা:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>মন্ত্র:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>স্থায়িত্ব:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

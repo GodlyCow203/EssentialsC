@@ -735,5 +735,23 @@
   "rtp.gui.nav.page": "<color:gray>Sida <color:#FFFFFF><page></color> av <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Smeknamn stöds inte för Bedrock-spelare.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> är en Bedrock-spelare och kan inte ha ett smeknamn.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> är en Bedrock-spelare och kan inte ha ett smeknamn.</color>",
+
+  "command.usage.tphere": "<color:#FF0000>Användning: /tphere <spelare></color>",
+  "command.usage.tphere": "<prefix> <color:#FF0000>Användning: /tphere <spelare></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Du kan inte teleportera dig själv till dig själv!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Spelaren <player> är inte online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Du teleporterade <target> till din plats!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Du blev teleporterad till <player>s plats!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kan inte teleporteras!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Användning: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Du håller inget föremål!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Föremålsinformation ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Mängd:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Visningsnamn:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Beskrivning:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Anpassad modelldata:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Förtrollningar:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Hållbarhet:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

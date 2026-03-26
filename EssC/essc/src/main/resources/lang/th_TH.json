@@ -743,5 +743,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>ผู้เล่น <player> ไม่ออนไลน์!</color>",
   "tphere.success": "<prefix> <color:#00FF00>คุณเทเลพอร์ต <target> มาที่ตำแหน่งของคุณ!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>คุณถูกเทเลพอร์ตไปที่ตำแหน่งของ <player>!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> ไม่สามารถเทเลพอร์ตได้!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ไม่สามารถเทเลพอร์ตได้!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>วิธีใช้: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>คุณไม่ถือไอเทมใดๆ!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== ข้อมูลไอเทม ===</bold></color>\n<color:#AAAAAA>วัสดุ:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>จำนวน:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>ชื่อที่แสดง:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>คำอธิบาย:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>ข้อมูลโมเดลที่กำหนดเอง:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>การร่ายมนต์:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>ความทนทาน:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

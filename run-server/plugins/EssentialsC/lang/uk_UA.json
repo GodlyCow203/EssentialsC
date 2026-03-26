@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Сторінка <color:#FFFFFF><page></color> з <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Псевдоніми не підтримуються для гравців Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> є гравцем Bedrock і не може мати встановлений псевдонім.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> є гравцем Bedrock і не може мати встановлений псевдонім.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Використання: /tphere <гравець></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Ви не можете телепортувати себе до себе!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Гравець <player> не в мережі!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Ви телепортували <target> до свого місцезнаходження!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Вас телепортували до місцезнаходження <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> не можна телепортувати!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Використання: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>У вас немає предмета в руці!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Інформація про предмет ===</bold></color>\n<color:#AAAAAA>Матеріал:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Кількість:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Відображуване ім'я:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Опис:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Дані користувацької моделі:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Зачарування:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Міцність:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

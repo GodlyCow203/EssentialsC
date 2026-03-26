@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Страница <color:#FFFFFF><page></color> из <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Псевдонимы не поддерживаются для игроков Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> является игроком Bedrock и не может иметь псевдоним.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> является игроком Bedrock и не может иметь псевдоним.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Использование: /tphere <игрок></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Вы не можете телепортировать себя к себе!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Игрок <player> не в сети!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Вы телепортировали <target> к себе!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Вас телепортировали к игроку <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> нельзя телепортировать!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Использование: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>У вас нет предмета в руке!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Информация о предмете ===</bold></color>\n<color:#AAAAAA>Материал:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Количество:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Отображаемое имя:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Описание:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Пользовательские данные модели:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Зачарования:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Прочность:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

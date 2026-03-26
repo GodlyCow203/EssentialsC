@@ -736,5 +736,22 @@
   "rtp.gui.nav.page": "<color:gray>หน้า <color:#FFFFFF><page></color> จาก <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>ไม่รองรับชื่อเล่นสำหรับผู้เล่น Bedrock</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> เป็นผู้เล่น Bedrock และไม่สามารถตั้งชื่อเล่นได้</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> เป็นผู้เล่น Bedrock และไม่สามารถตั้งชื่อเล่นได้</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>วิธีใช้: /tphere <ผู้เล่น></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>คุณไม่สามารถเทเลพอร์ตตัวเองไปหาตัวเองได้!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>ผู้เล่น <player> ไม่ออนไลน์!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>คุณเทเลพอร์ต <target> มาที่ตำแหน่งของคุณ!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>คุณถูกเทเลพอร์ตไปที่ตำแหน่งของ <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ไม่สามารถเทเลพอร์ตได้!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>วิธีใช้: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>คุณไม่ถือไอเทมใดๆ!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== ข้อมูลไอเทม ===</bold></color>\n<color:#AAAAAA>วัสดุ:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>จำนวน:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>ชื่อที่แสดง:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>คำอธิบาย:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>ข้อมูลโมเดลที่กำหนดเอง:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>การร่ายมนต์:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>ความทนทาน:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

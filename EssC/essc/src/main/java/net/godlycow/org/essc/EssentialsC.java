@@ -10,6 +10,7 @@ import net.godlycow.org.essc.bedrock.FloodgateHook;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
+import net.godlycow.org.essc.bstats.EconomyCharts;
 import net.godlycow.org.essc.chat.luckperms.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
@@ -135,6 +136,11 @@ public final class EssentialsC extends JavaPlugin {
 
         int pluginId = 29401;
         Metrics metrics = new Metrics(this, pluginId);
+        getLogger().info("bStats Metrics initialized successfully!");
+
+        if (configManager.isEconomyEnabled()) {
+            EconomyCharts.register(this, metrics);
+        }
         getLogger().info("bStats Metrics initialized successfully!");
 
         registerPlaceholderAPI();

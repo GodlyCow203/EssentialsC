@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>الصفحة <color:#FFFFFF><page></color> من <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>الأسماء المستعارة غير مدعومة للاعبي Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> لاعب Bedrock ولا يمكن تعيين اسم مستعار له.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> لاعب Bedrock ولا يمكن تعيين اسم مستعار له.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>الاستخدام: /tphere <اللاعب></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>مينفعش تنقل نفسك لنفسك!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>اللاعب <player> مش متصل!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>نقلت <target> لمكانك!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>اتنقلت لمكان <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000>مينفعش ينقل <player>!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>الاستخدام: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>مفيش حاجة في إيدك!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== معلومات العنصر ===</bold></color>\n<color:#AAAAAA>المادة:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>الكود:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>الكمية:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>الاسم الظاهر:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>الوصف:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>بيانات الموديل المخصص:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>الإنشانتات:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>الصلابة:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

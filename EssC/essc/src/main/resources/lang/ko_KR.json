@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>플레이어 <player> 가 온라인이 아닙니다!</color>",
   "tphere.success": "<prefix> <color:#00FF00><target> 님을 당신의 위치로 텔레포트했습니다!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00><player> 님의 위치로 텔레포트되었습니다!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> 님은 텔레포트할 수 없습니다!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> 님은 텔레포트할 수 없습니다!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>사용법: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>아이템을 들고 있지 않습니다!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== 아이템 정보 ===</bold></color>\n<color:#AAAAAA>재료:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>수량:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>표시 이름:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>설명:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>커스텀 모델 데이터:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>인챈트:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>내구도:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

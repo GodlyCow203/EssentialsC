@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>Ang manlalarong <player> ay hindi online!</color>",
   "tphere.success": "<prefix> <color:#00FF00>Na-teleport mo si <target> sa iyong lokasyon!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>Na-teleport ka sa lokasyon ni <player>!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000>Si <player> ay hindi maaaring i-teleport!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000>Si <player> ay hindi maaaring i-teleport!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Paggamit: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Wala kang hawak na item!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Impormasyon ng Item ===</bold></color>\n<color:#AAAAAA>Materyal:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Dami:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Ipinapakitang Pangalan:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Deskripsyon:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Custom Model Data:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Enchantments:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Tibay:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

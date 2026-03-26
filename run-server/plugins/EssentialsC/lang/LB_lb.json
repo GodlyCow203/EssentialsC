@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Säit <color:#FFFFFF><page></color> vun <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Spëtznimm ginn net fir Bedrock-Spiller ënnerstëtzt.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ass e Bedrock-Spiller a kann kee Spëtznumm kréien.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> ass e Bedrock-Spiller a kann kee Spëtznumm kréien.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Benotzung: /tphere <spiller></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Du kanns dech net selwer zu dir selwer teleportéieren!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>De Spiller <player> ass net online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Du hues <target> op deng Plaz teleportéiert!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Du goufs op d'Plaz vum <player> teleportéiert!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kann net teleportéiert ginn!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Benotzung: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Du hues näischt an der Hand!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Géigestands Informatiounen ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Quantitéit:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Weergewun Numm:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Beschreiwung:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Benotzerdefinéiert Modell Datën:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Verzauberungen:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Haltbarkeet:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

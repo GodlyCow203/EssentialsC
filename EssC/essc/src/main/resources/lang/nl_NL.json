@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>Speler <player> is niet online!</color>",
   "tphere.success": "<prefix> <color:#00FF00>Je hebt <target> naar jouw locatie geteleporteerd!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>Je bent geteleporteerd naar de locatie van <player>!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> kan niet worden geteleporteerd!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> kan niet worden geteleporteerd!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Gebruik: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Je houdt geen voorwerp vast!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Voorwerpinformatie ===</bold></color>\n<color:#AAAAAA>Materiaal:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Hoeveelheid:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Weergavenaam:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Beschrijving:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Aangepaste modelgegevens:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Betoveringen:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Duurzaamheid:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

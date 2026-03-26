@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000><player> çevrimdışı!</color>",
   "tphere.success": "<prefix> <color:#00FF00><target> konumuna ışınlandın!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00><player> seni konumuna ışınladı!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> ışınlanamaz!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ışınlanamaz!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Kullanım: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Elinde hiçbir eşya yok!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Eşya Bilgisi ===</bold></color>\n<color:#AAAAAA>Materyal:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Miktar:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Görünen Ad:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Açıklama:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Özel Model Verisi:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Büyüler:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Dayanıklılık:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

@@ -42,8 +42,10 @@ public class VanishManager implements Listener {
         player.setMetadata("vanished", new FixedMetadataValue(plugin, true));
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
-            if (!online.equals(player) && !online.hasPermission("essentialsc.vanish.see")) {
-                online.hidePlayer(plugin, player);
+            if (!online.equals(player)) {
+                if (!online.hasPermission("essentialsc.vanish.see")) {
+                    online.hidePlayer(plugin, player);
+                }
             }
         }
 
@@ -56,7 +58,9 @@ public class VanishManager implements Listener {
         if (disableCollisions) player.setCollidable(false);
 
         if (plugin.getTabManager() != null) {
-            plugin.getTabManager().updatePlayerTab(player);
+            for (Player online : plugin.getServer().getOnlinePlayers()) {
+                plugin.getTabManager().updatePlayerTab(online);
+            }
         }
 
         plugin.debug(player.getName() + " is now vanished");
@@ -78,7 +82,9 @@ public class VanishManager implements Listener {
         if (disableCollisions) player.setCollidable(true);
 
         if (plugin.getTabManager() != null) {
-            plugin.getTabManager().updatePlayerTab(player);
+            for (Player online : plugin.getServer().getOnlinePlayers()) {
+                plugin.getTabManager().updatePlayerTab(online);
+            }
         }
 
         plugin.debug(player.getName() + " is no longer vanished");

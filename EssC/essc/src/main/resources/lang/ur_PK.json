@@ -743,6 +743,16 @@
   "error.player_not_online": "<prefix> <color:#FF0000>کھلاڑی <player> آن لائن نہیں ہے!</color>",
   "tphere.success": "<prefix> <color:#00FF00>آپ نے <target> کو اپنی جگہ پر بھیج دیا!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>آپ کو <player> کی جگہ پر بھیج دیا گیا!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> کو نہیں بھیجا جا سکتا!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> کو نہیں بھیجا جا سکتا!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>استعمال: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>آپ کے ہاتھ میں کوئی چیز نہیں ہے!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== اشیاء کی معلومات ===</bold></color>\n<color:#AAAAAA>مواد:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>مقدار:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>ظاہری نام:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>تاریخ:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>کسٹم ماڈل ڈیٹا:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>جادو:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>پائیداری:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }
 

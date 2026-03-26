@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>プレイヤー <player> はオンラインではありません！</color>",
   "tphere.success": "<prefix> <color:#00FF00><target> をあなたの場所にテレポートしました！</color>",
   "tphere.teleported": "<prefix> <color:#00FF00><player> の場所にテレポートされました！</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> はテレポートできません！</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> はテレポートできません！</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>使い方: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>何も持っていません！</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== アイテム情報 ===</bold></color>\n<color:#AAAAAA>素材:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>数量:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>表示名:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>説明:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>カスタムモデルデータ:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>エンチャント:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>耐久値:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

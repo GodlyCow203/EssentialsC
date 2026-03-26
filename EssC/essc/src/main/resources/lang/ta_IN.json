@@ -742,5 +742,15 @@
   "error.player_not_online": "<prefix> <color:#FF0000>வீரர் <player> ஆன்லைனில் இல்லை!</color>",
   "tphere.success": "<prefix> <color:#00FF00>நீங்கள் <target> ஐ உங்கள் இடத்திற்கு டெலிப்போர்ட் செய்தீர்கள்!</color>",
   "tphere.teleported": "<prefix> <color:#00FF00>நீங்கள் <player> இடத்திற்கு டெலிப்போர்ட் செய்யப்பட்டீர்கள்!</color>",
-  "tphere.bypass": "<prefix> <color:#FF0000><player> ஐ டெலிப்போர்ட் செய்ய முடியாது!</color>"
+  "tphere.bypass": "<prefix> <color:#FF0000><player> ஐ டெலிப்போர்ட் செய்ய முடியாது!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>பயன்பாடு: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>நீங்கள் எந்த பொருளையும் பிடித்திருக்கவில்லை!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== பொருள் தகவல் ===</bold></color>\n<color:#AAAAAA>பொருள்:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>அளவு:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>காட்சி பெயர்:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>விளக்கம்:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>தனிப்பயன் மாதிரி தரவு:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>மந்திரங்கள்:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>உறுதித்தன்மை:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

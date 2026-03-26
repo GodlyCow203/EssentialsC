@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Strona <color:#FFFFFF><page></color> z <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Pseudonimy nie są obsługiwane dla graczy Bedrock.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> jest graczem Bedrock i nie może mieć ustawionego pseudonimu.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> jest graczem Bedrock i nie może mieć ustawionego pseudonimu.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Użycie: /tphere <gracz></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>Nie możesz teleportować się do siebie!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Gracz <player> nie jest online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>Teleportowałeś <target> na swoją pozycję!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>Zostałeś teleportowany do pozycji gracza <player>!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> nie może być teleportowany!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Użycie: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>Nie trzymasz żadnego przedmiotu!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Informacje o przedmiocie ===</bold></color>\n<color:#AAAAAA>Materiał:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Ilość:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Nazwa wyświetlana:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Opis:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Niestandardowe dane modelu:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Zaklęcia:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Wytrzymałość:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

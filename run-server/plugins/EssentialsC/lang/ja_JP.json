@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray><color:#FFFFFF><page></color> / <color:#FFFFFF><total></color> ページ</color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Bedrockプレイヤーにはニックネームが使用できません。</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player>はBedrockプレイヤーのため、ニックネームを設定できません。</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player>はBedrockプレイヤーのため、ニックネームを設定できません。</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>使い方: /tphere <プレイヤー></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>自分自身を自分の元にテレポートすることはできません！</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>プレイヤー <player> はオンラインではありません！</color>",
+  "tphere.success": "<prefix> <color:#00FF00><target> をあなたの場所にテレポートしました！</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00><player> の場所にテレポートされました！</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> はテレポートできません！</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>使い方: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>何も持っていません！</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== アイテム情報 ===</bold></color>\n<color:#AAAAAA>素材:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>数量:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>表示名:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>説明:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>カスタムモデルデータ:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>エンチャント:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>耐久値:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }

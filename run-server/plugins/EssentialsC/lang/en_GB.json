@@ -735,5 +735,22 @@
   "rtp.gui.nav.page": "<color:gray>Page <color:#FFFFFF><page></color> of <color:#FFFFFF><total></color></color>",
 
   "nick.error.bedrock_not_supported": "<prefix> <color:#FF0000>Nicknames are not supported for Bedrock players.</color>",
-  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> is a Bedrock player and cannot have a nickname set.</color>"
+  "nick.error.bedrock_not_supported_other": "<prefix> <color:#FF0000><player> is a Bedrock player and cannot have a nickname set.</color>",
+
+  "command.usage.tphere": "<prefix> <color:#FF0000>Usage: /tphere <player></color>",
+  "error.cannot_teleport_self": "<prefix> <color:#FF0000>You cannot teleport yourself to yourself!</color>",
+  "error.player_not_online": "<prefix> <color:#FF0000>Player <player> is not online!</color>",
+  "tphere.success": "<prefix> <color:#00FF00>You teleported <target> to your location!</color>",
+  "tphere.teleported": "<prefix> <color:#00FF00>You were teleported to <player>'s location!</color>",
+  "tphere.bypass": "<prefix> <color:#FF0000><player> cannot be teleported!</color>",
+
+  "command.usage.itemid": "<prefix> <color:#FF0000>Usage: /itemid</color>",
+  "itemid.empty_hand": "<prefix> <color:#FF0000>You are not holding any item!</color>",
+  "itemid.header": "<prefix> <color:#FFF200><bold>=== Item Information ===</bold></color>\n<color:#AAAAAA>Material:</color> <color:#FFFFFF><material></color>\n<color:#AAAAAA>ID:</color> <color:#FFFFFF><id></color>\n<color:#AAAAAA>Amount:</color> <color:#FFFFFF><amount>/<max_stack></color>",
+  "itemid.display_name": "<color:#AAAAAA>Display Name:</color> <color:#FFFFFF><name></color>",
+  "itemid.lore": "<color:#AAAAAA>Lore:</color> <color:#FFFFFF><lore></color>",
+  "itemid.custom_model_data": "<color:#AAAAAA>Custom Model Data:</color> <color:#FFFFFF><cmd></color>",
+  "itemid.enchantments": "<color:#AAAAAA>Enchantments:</color> <color:#FFFFFF><enchantments></color>",
+  "itemid.durability_info": "<color:#AAAAAA>Durability:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
 }
