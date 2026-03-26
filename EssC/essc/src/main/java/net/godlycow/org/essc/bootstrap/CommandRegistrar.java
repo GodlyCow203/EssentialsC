@@ -81,6 +81,7 @@ public class CommandRegistrar {
         register("realname", new RealNameCommand(plugin));
         register("playtime", new PlaytimeCommand(plugin));
         register("uptime", new UptimeCommand(plugin));
+        register("tphere", new TPHereCommand(plugin));
 
         if (plugin.getConfigManager().isShopEnabled()) {
             register("shop", new ShopCommand(plugin));

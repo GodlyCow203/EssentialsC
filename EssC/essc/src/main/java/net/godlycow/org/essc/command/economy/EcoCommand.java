@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command.economy;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -49,8 +50,8 @@ public class EcoCommand extends Command {
             if (isEveryone) {
                 handleResetEveryone(sender);
             } else {
-                Player target = Bukkit.getPlayer(targetName);
-                if (target == null) {
+                OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+                if (!target.hasPlayedBefore() && !target.isOnline()) {
                     sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
                     return true;
                 }
@@ -84,8 +85,8 @@ public class EcoCommand extends Command {
                 default -> sendUsage(sender);
             }
         } else {
-            Player target = Bukkit.getPlayer(targetName);
-            if (target == null) {
+            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            if (!target.hasPlayedBefore() && !target.isOnline()) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
                 return true;
             }
@@ -110,47 +111,75 @@ public class EcoCommand extends Command {
         };
     }
 
-    private void handleGive(CommandSender sender, Player target, BigDecimal amount) {
-        plugin.getEconomyManager().deposit(target.getUniqueId(), amount).thenAccept(success -> {
-            String formatted = plugin.getEconomyManager().format(amount);
-            sender.sendMessage(lang.get(sender, "eco.give",
-                    Map.of("amount", formatted, "player", target.getName())));
-            target.sendMessage(lang.get(target, "eco.give.notify", Map.of("amount", formatted)));
-            plugin.debug(sender.getName() + " gave " + formatted + " to " + target.getName());
-        });
+    private void handleGive(CommandSender sender, OfflinePlayer target, BigDecimal amount) {
+        plugin.getEconomyManager().hasAccount(target.getUniqueId()).thenCompose(hasAccount -> {
+                    if (!hasAccount) {
+                        return plugin.getEconomyManager().createAccount(target.getUniqueId(), target.getName());
+                    }
+                    return CompletableFuture.completedFuture(true);
+                }).thenCompose(created -> plugin.getEconomyManager().deposit(target.getUniqueId(), amount))
+                .thenAccept(success -> {
+                    String formatted = plugin.getEconomyManager().format(amount);
+                    String targetName = target.getName() != null ? target.getName() : target.getUniqueId().toString();
+
+                    sender.sendMessage(lang.get(sender, "eco.give",
+                            Map.of("amount", formatted, "player", targetName)));
+
+                    if (target.isOnline() && target.getPlayer() != null) {
+                        target.getPlayer().sendMessage(lang.get(target.getPlayer(), "eco.give.notify", Map.of("amount", formatted)));
+                    }
+
+                    plugin.debug(sender.getName() + " gave " + formatted + " to " + targetName);
+                });
     }
 
-    private void handleTake(CommandSender sender, Player target, BigDecimal amount) {
+    private void handleTake(CommandSender sender, OfflinePlayer target, BigDecimal amount) {
         plugin.getEconomyManager().withdraw(target.getUniqueId(), amount).thenAccept(success -> {
             String formatted = plugin.getEconomyManager().format(amount);
+            String targetName = target.getName() != null ? target.getName() : target.getUniqueId().toString();
+
             if (success) {
                 sender.sendMessage(lang.get(sender, "eco.take",
-                        Map.of("amount", formatted, "player", target.getName())));
-                target.sendMessage(lang.get(target, "eco.take.notify", Map.of("amount", formatted)));
+                        Map.of("amount", formatted, "player", targetName)));
+
+                if (target.isOnline() && target.getPlayer() != null) {
+                    target.getPlayer().sendMessage(lang.get(target.getPlayer(), "eco.take.notify", Map.of("amount", formatted)));
+                }
             } else {
                 sender.sendMessage(lang.get(sender, "eco.take.failed",
-                        Map.of("player", target.getName())));
+                        Map.of("player", targetName)));
             }
         });
     }
 
-    private void handleSet(CommandSender sender, Player target, BigDecimal amount) {
+    private void handleSet(CommandSender sender, OfflinePlayer target, BigDecimal amount) {
         plugin.getEconomyManager().setBalance(target.getUniqueId(), amount).thenAccept(success -> {
             String formatted = plugin.getEconomyManager().format(amount);
+            String targetName = target.getName() != null ? target.getName() : target.getUniqueId().toString();
+
             sender.sendMessage(lang.get(sender, "eco.set",
-                    Map.of("amount", formatted, "player", target.getName())));
-            target.sendMessage(lang.get(target, "eco.set.notify", Map.of("amount", formatted)));
-            plugin.debug(sender.getName() + " set " + target.getName() + "'s balance to " + formatted);
+                    Map.of("amount", formatted, "player", targetName)));
+
+            if (target.isOnline() && target.getPlayer() != null) {
+                target.getPlayer().sendMessage(lang.get(target.getPlayer(), "eco.set.notify", Map.of("amount", formatted)));
+            }
+
+            plugin.debug(sender.getName() + " set " + targetName + "'s balance to " + formatted);
         });
     }
 
-    private void handleReset(CommandSender sender, Player target) {
+    private void handleReset(CommandSender sender, OfflinePlayer target) {
         BigDecimal starting = new BigDecimal(plugin.getConfig().getString("economy.starting-balance", "100.00"));
         plugin.getEconomyManager().setBalance(target.getUniqueId(), starting).thenAccept(success -> {
             String formatted = plugin.getEconomyManager().format(starting);
+            String targetName = target.getName() != null ? target.getName() : target.getUniqueId().toString();
+
             sender.sendMessage(lang.get(sender, "eco.reset",
-                    Map.of("player", target.getName(), "balance", formatted)));
-            target.sendMessage(lang.get(target, "eco.reset.notify", Map.of("balance", formatted)));
+                    Map.of("player", targetName, "balance", formatted)));
+
+            if (target.isOnline() && target.getPlayer() != null) {
+                target.getPlayer().sendMessage(lang.get(target.getPlayer(), "eco.reset.notify", Map.of("balance", formatted)));
+            }
         });
     }
 
@@ -261,10 +290,15 @@ public class EcoCommand extends Command {
             if (sender.hasPermission(PERM_RESET) || sender.hasPermission(PERM_BASE + ".admin")) actions.add("reset");
             return actions;
         } else if (args.length == 2) {
+            List<String> completions = new ArrayList<>();
             if (sender.hasPermission(PERM_EVERYONE) || sender.hasPermission(PERM_BASE + ".admin")) {
-                return List.of("@everyone", "*");
+                completions.add("@everyone");
+                completions.add("*");
             }
-            return null;
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                completions.add(player.getName());
+            }
+            return completions;
         } else if (args.length == 3 && !args[0].equalsIgnoreCase("reset")) {
             return List.of("100", "500", "1000");
         }

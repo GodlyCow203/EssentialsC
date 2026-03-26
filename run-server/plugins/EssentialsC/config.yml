@@ -132,16 +132,43 @@ teleport:
     blocked-worlds: []
 
 home:
+  # "command" — players use /home <name> directly.
+  # "gui"     — all interactions go through the inventory GUI.
+  mode: gui
+
+  # Default home name used when no argument is given in command mode,
+  # and for the "quick create" button in GUI mode.
+  default-name: home
+
+  # Global fallback limit. Overridden per-player by:
+  #   essentialsc.sethome.<number>   (e.g. essentialsc.sethome.10)
+  #   essentialsc.sethome.unlimited
+  #   essentialsc.sethome.admin
   max-homes: 3
-  default-name: "home"
+
+  # Seconds a player must wait between home teleports.
+  # 0 disables the cooldown entirely.
+  # Bypassed by: essentialsc.home.admin
   cooldown: 5
+
+  # Seconds the player must stand still before being teleported.
+  # 0 teleports instantly.
+  # Bypassed by: essentialsc.home.admin
   warmup: 3
+
+  # Whether moving during the warmup cancels the teleport.
   cancel-on-movement: true
+
+  # Play the enderman-teleport particle burst on arrival.
   particles: true
+
+  # Play sounds for teleport, GUI interactions, and events.
   sounds: true
+
+  # Worlds in which /home and /sethome are blocked.
+  # Use the exact world folder name.
   blocked-worlds:
-    - "world_nether"
-    - "world_the_end"
+    - world_example_blocked
 
 spawn:
   cooldown: 5

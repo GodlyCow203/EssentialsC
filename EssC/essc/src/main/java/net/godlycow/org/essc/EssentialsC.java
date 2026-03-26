@@ -13,7 +13,6 @@ import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
 import net.godlycow.org.essc.chat.luckperms.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
-import net.godlycow.org.essc.command.player.RTPCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
@@ -22,6 +21,7 @@ import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.faststats.FastStatsManager;
 import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
+import net.godlycow.org.essc.home.gui.GuiManager;
 import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.LanguageManager;
@@ -35,6 +35,7 @@ import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.rtp.RTPGuiManager;
 import net.godlycow.org.essc.rtp.RTPManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
+import net.godlycow.org.essc.setup.FirstRunHandler;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
@@ -59,6 +60,7 @@ public final class EssentialsC extends JavaPlugin {
 
     private TPAManager tpaManager;
     private HomeManager homeManager;
+    private GuiManager homeGuiManager;
     private SpawnManager spawnManager;
     private BackManager backManager;
     private KitManager kitManager;
@@ -121,6 +123,7 @@ public final class EssentialsC extends JavaPlugin {
 
         tpaManager = new TPAManager(this);
         homeManager = new HomeManager(this);
+        homeGuiManager = new GuiManager(this);
         spawnManager = new SpawnManager(this);
         backManager = new BackManager(this);
         kitManager = new KitManager(this);
@@ -143,6 +146,7 @@ public final class EssentialsC extends JavaPlugin {
         bedrockUtil = new BedrockUtil(this, floodgateHook);
 
         tabHook = new TABHook(this);
+        new FirstRunHandler(this);
 
 
         new FlyManager(this);
@@ -320,6 +324,10 @@ public final class EssentialsC extends JavaPlugin {
 
     public HomeManager getHomeManager() {
         return homeManager;
+    }
+
+    public GuiManager getHomeGuiManager() {
+        return homeGuiManager;
     }
 
     public SpawnManager getSpawnManager() {

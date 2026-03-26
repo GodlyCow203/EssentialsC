@@ -2,7 +2,6 @@ package net.godlycow.org.essc.tab;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.bedrock.TeamNameUtil;
-import net.godlycow.org.essc.tab.TABHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -75,6 +74,13 @@ public class TabManager implements Listener {
     public void updatePlayerTab(Player player) {
         if (player == null || !player.isOnline()) return;
 
+        if (plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(player)) {
+            if (plugin.getConfigManager().isVanishHideFromTab()) {
+                player.playerListName(null);
+                return;
+            }
+        }
+
         if (tabHook != null) {
             String cachedNick = plugin.getNickManager() != null
                     ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
@@ -133,7 +139,6 @@ public class TabManager implements Listener {
 
     private void updateScoreboardTeam(Player player, String lpPrefix, String lpSuffix) {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-
         String teamName = TeamNameUtil.fromUUID(player.getUniqueId());
 
         Team team = scoreboard.getTeam(teamName);

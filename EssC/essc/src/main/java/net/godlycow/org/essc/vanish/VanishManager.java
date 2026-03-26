@@ -1,12 +1,11 @@
 package net.godlycow.org.essc.vanish;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -36,34 +35,28 @@ public class VanishManager implements Listener {
         this.giveNightVision = plugin.getConfigManager().isVanishNightVision();
         this.preventMobTarget = plugin.getConfigManager().isVanishPreventMobTarget();
         this.disableCollisions = plugin.getConfigManager().isVanishDisableCollisions();
-        plugin.debug("Vanish config loaded - hideFromTab: " + hideFromTab + ", nightVision: " + giveNightVision);
     }
 
     public void vanish(Player player) {
         vanishedPlayers.add(player.getUniqueId());
+        player.setMetadata("vanished", new FixedMetadataValue(plugin, true));
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
-            if (!online.equals(player)) {
+            if (!online.equals(player) && !online.hasPermission("essentialsc.vanish.see")) {
                 online.hidePlayer(plugin, player);
             }
         }
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
-
         if (giveNightVision) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
         }
 
-        if (hideFromTab) {
-            player.playerListName(null);
-        }
+        if (preventMobTarget) player.setAffectsSpawning(false);
+        if (disableCollisions) player.setCollidable(false);
 
-        if (preventMobTarget) {
-            player.setAffectsSpawning(false);
-        }
-
-        if (disableCollisions) {
-            player.setCollidable(false);
+        if (plugin.getTabManager() != null) {
+            plugin.getTabManager().updatePlayerTab(player);
         }
 
         plugin.debug(player.getName() + " is now vanished");
@@ -71,6 +64,7 @@ public class VanishManager implements Listener {
 
     public void unvanish(Player player) {
         vanishedPlayers.remove(player.getUniqueId());
+        player.removeMetadata("vanished", plugin);
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
             if (!online.equals(player)) {
@@ -79,20 +73,12 @@ public class VanishManager implements Listener {
         }
 
         player.removePotionEffect(PotionEffectType.INVISIBILITY);
-        if (giveNightVision) {
-            player.removePotionEffect(PotionEffectType.NIGHT_VISION);
-        }
+        if (giveNightVision) player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+        if (preventMobTarget) player.setAffectsSpawning(true);
+        if (disableCollisions) player.setCollidable(true);
 
-        if (hideFromTab) {
-            player.playerListName(Component.text(player.getName()));
-        }
-
-        if (preventMobTarget) {
-            player.setAffectsSpawning(true);
-        }
-
-        if (disableCollisions) {
-            player.setCollidable(true);
+        if (plugin.getTabManager() != null) {
+            plugin.getTabManager().updatePlayerTab(player);
         }
 
         plugin.debug(player.getName() + " is no longer vanished");
@@ -109,42 +95,22 @@ public class VanishManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player joining = event.getPlayer();
+        if (joining.hasPermission("essentialsc.vanish.onjoin")) {
+            vanishedPlayers.add(joining.getUniqueId());
+        }
 
         if (vanishedPlayers.contains(joining.getUniqueId())) {
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-                if (!joining.isOnline()) return;
-
-                for (Player online : plugin.getServer().getOnlinePlayers()) {
-                    if (!online.equals(joining)) {
-                        online.hidePlayer(plugin, joining);
-                    }
-                }
-
-                joining.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
-                if (giveNightVision) {
-                    joining.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
-                }
-                if (hideFromTab) {
-                    joining.playerListName(null);
-                }
-                if (preventMobTarget) {
-                    joining.setAffectsSpawning(false);
-                }
-                if (disableCollisions) {
-                    joining.setCollidable(false);
-                }
-            }, 2L);
+            joining.setMetadata("vanished", new FixedMetadataValue(plugin, true));
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> vanish(joining), 2L);
         }
 
         for (UUID vanishedId : vanishedPlayers) {
             Player vanished = plugin.getServer().getPlayer(vanishedId);
             if (vanished != null && !vanished.equals(joining)) {
-                joining.hidePlayer(plugin, vanished);
+                if (!joining.hasPermission("essentialsc.vanish.see")) {
+                    joining.hidePlayer(plugin, vanished);
+                }
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
     }
 }

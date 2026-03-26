@@ -78,7 +78,7 @@ public interface EssentialsCAPI {
      *
      * @return the {@link HomeApi} instance; never {@code null}
      */
-    HomeApi getHomeApi();
+    // HomeApi getHomeApi();
 
     /**
      * Returns the language sub-system API.

@@ -14,6 +14,7 @@ public class ListenerRegistrar {
         if (plugin.getConfigManager().isWarpEnabled()) {
             plugin.getServer().getPluginManager().registerEvents(new WarpListener(plugin), plugin);
         }
+
         plugin.getServer().getPluginManager().registerEvents(new VersionChecker(plugin), plugin);
     }
 

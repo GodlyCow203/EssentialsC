@@ -3,7 +3,7 @@ version: '4.1.1'
 main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
 description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
-author: _GodlyCow ( test )( work pleze )
+author: _GodlyCow
 softdepend:
   - Vault
   - PlaceholderAPI
@@ -945,5 +945,29 @@ permissions:
   essentialsc.chat.rgbcodes:
     description: Allows you to use RGB Colors in the chat ( &#<RRGGBB> )
     default: op
+
+  essentialsc.vanish.see:
+    description: Allows the player to see other vanished players.
+    default: op
+
+  essentialsc.vanish.onjoin:
+    description: Automatically toggles vanish on when the player joins the server.
+    default: false
+
+  essentialsc.admin.eco.give:
+    description: Permission to give a Player Money
+    default: false
+
+  essentialsc.admin.eco.reset:
+    description: Permission to reset a players balance
+    default: false
+
+  essentialsc.admin.eco.set:
+    description: Permission to set a players balance to a specific amount
+    default: false
+
+  essentialsc.admin.eco.take:
+    description: Permission to take money from a player
+    default: false
 
 

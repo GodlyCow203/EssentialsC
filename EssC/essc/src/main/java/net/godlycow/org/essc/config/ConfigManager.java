@@ -135,6 +135,14 @@ public class ConfigManager {
         return config.getString("home.default-name", "home");
     }
 
+    public String getHomeMode() {
+        return config.getString("home.mode", "command").toLowerCase();
+    }
+
+    public boolean isHomeGuiMode() {
+        return getHomeMode().equals("gui");
+    }
+
     public long getSpawnCooldown() {
         return config.getLong("spawn.cooldown", 5);
     }
@@ -564,4 +572,5 @@ public class ConfigManager {
     public String getChatSeparator() {
         return config.getString("luckperms.chat-separator", ">> ");
     }
+
 }

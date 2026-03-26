@@ -2,11 +2,10 @@ package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,86 +18,66 @@ public class SetHomeCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
+        boolean guiMode = plugin.getConfigManager().getHomeMode().equals("gui");
 
-        String homeName = args.length > 0 ? args[0].toLowerCase() :
-                plugin.getConfig().getString("home.default-name", "home");
+        if (args.length == 0) {
+            if (guiMode) {
+                plugin.getHomeGuiManager().openCreateGui(player);
+            } else {
+                setHome(player, plugin.getConfigManager().getDefaultHomeName());
+            }
+            return true;
+        }
 
-        plugin.debug("SetHome command: " + player.getName() + " attempting to set '" + homeName + "'");
+        setHome(player, args[0]);
+        return true;
+    }
 
-        if (!homeName.matches("^[a-zA-Z0-9_-]+$")) {
+    private void setHome(Player player, String name) {
+        if (!name.matches("^[a-zA-Z0-9_-]+$")) {
             player.sendMessage(lang.get(player, "home.set.invalid_name"));
-            return true;
+            return;
         }
 
-        if (homeName.length() > 16) {
+        if (name.length() > 16) {
             player.sendMessage(lang.get(player, "home.set.name_too_long"));
-            return true;
+            return;
         }
 
-        List<String> blockedWorlds = plugin.getConfig().getStringList("home.blocked-worlds");
-        World world = player.getWorld();
-        if (blockedWorlds.contains(world.getName())) {
-            player.sendMessage(lang.get(player, "home.set.blocked_world"));
-            return true;
+        String worldName = player.getWorld().getName();
+        if (plugin.getConfigManager().getHomeBlockedWorlds().contains(worldName)) {
+            player.sendMessage(lang.get(player, "home.set.blocked_world",
+                    Map.of("world", worldName)));
+            return;
         }
 
-        plugin.getHomeManager().getHomeCount(player.getUniqueId()).thenAccept(count -> {
-            plugin.getHomeManager().homeExists(player.getUniqueId(), homeName).thenAccept(exists -> {
-                if (exists) {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
-                        Location loc = player.getLocation();
-                        plugin.getHomeManager().setHome(player, homeName, loc).thenAccept(success -> {
-                            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                                player.sendMessage(lang.get(player, "home.set.updated", Map.of("name", homeName)));
-                                plugin.debug("Updated home '" + homeName + "' for " + player.getName());
-                            });
-                        });
-                    });
+        plugin.getHomeManager().homeExists(player.getUniqueId(), name).whenComplete((alreadyExists, err1) -> {
+            plugin.getHomeManager().getHomeCount(player.getUniqueId()).whenComplete((count, err2) -> {
+                int max = plugin.getHomeManager().getMaxHomes(player);
+
+                if (!alreadyExists && count >= max) {
+                    plugin.getServer().getScheduler().runTask(plugin, () ->
+                            player.sendMessage(lang.get(player, "home.set.limit_reached",
+                                    Map.of("limit", String.valueOf(max)))));
                     return;
                 }
 
-                int maxHomes = plugin.getHomeManager().getMaxHomes(player);
-
-                if (count >= maxHomes) {
+                plugin.getHomeManager().setHome(player, name, player.getLocation()).whenComplete((success, err3) -> {
                     plugin.getServer().getScheduler().runTask(plugin, () -> {
-                        player.sendMessage(lang.get(player, "home.set.limit_reached",
-                                Map.of("limit", String.valueOf(maxHomes))));
-                        plugin.debug("Denied home creation: " + player.getName() + " has " + count + "/" + maxHomes);
-                    });
-                    return;
-                }
-
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
-                    Location loc = player.getLocation();
-                    plugin.getHomeManager().setHome(player, homeName, loc).thenAccept(success -> {
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
-                            player.sendMessage(lang.get(player, "home.set.success", Map.of("name", homeName)));
-                            plugin.debug("Created home '" + homeName + "' for " + player.getName());
-
-                            if (plugin.getDiscordSRVHook() != null) {
-                                plugin.getDiscordSRVHook().sendHomeSetEmbed(
-                                        player.getUniqueId(),
-                                        player.getName(),
-                                        homeName,
-                                        loc.getWorld().getName(),
-                                        count + 1,
-                                        maxHomes
-                                );
-                            }
-                        });
+                        if (success) {
+                            String key = alreadyExists ? "home.set.updated" : "home.set.success";
+                            player.sendMessage(lang.get(player, key, Map.of("name", name)));
+                        } else {
+                            player.sendMessage(lang.get(player, "home.set.failed", Map.of("name", name)));
+                        }
                     });
                 });
             });
         });
-
-        return true;
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
-        if (args.length == 1) {
-            return List.of("home", "base", "shop", "farm");
-        }
-        return super.tabComplete(sender, args);
+        return Collections.emptyList();
     }
 }

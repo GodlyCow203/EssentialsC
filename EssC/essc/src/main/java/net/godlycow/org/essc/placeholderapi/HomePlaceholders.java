@@ -5,38 +5,37 @@ import net.godlycow.org.essc.home.Home;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HomePlaceholders {
 
+    private static final long CACHE_DURATION_MS = 5_000L;
+
     private final EssentialsC plugin;
 
-
-    private final Map<UUID, List<Home>> homeCache = new HashMap<>();
-    private final Map<UUID, Long> cacheTimestamps = new HashMap<>();
-    private static final long CACHE_DURATION_MS = 5000;
-
+    private final Map<UUID, List<Home>> homeCache      = new ConcurrentHashMap<>();
+    private final Map<UUID, Long>       cacheTimestamps = new ConcurrentHashMap<>();
+    private final Set<UUID> fetching = ConcurrentHashMap.newKeySet();
 
     public HomePlaceholders(EssentialsC plugin) {
         this.plugin = plugin;
     }
 
     public String onRequest(Player player, String identifier) {
-        if (!identifier.startsWith("home_")) {
-            return null;
-        }
-
+        if (!identifier.startsWith("home_")) return null;
 
         refreshCacheIfNeeded(player);
 
         List<Home> homes = homeCache.getOrDefault(player.getUniqueId(), Collections.emptyList());
 
         return switch (identifier.toLowerCase()) {
-            case "home_count" -> String.valueOf(homes.size());
-            case "home_max" -> String.valueOf(plugin.getHomeManager().getMaxHomes(player));
+            case "home_count"     -> String.valueOf(homes.size());
+            case "home_max"       -> formatMax(plugin.getHomeManager().getMaxHomes(player));
             case "home_remaining" -> getRemainingHomes(player, homes.size());
-            case "home_list" -> homes.isEmpty() ? "None" : String.join(", ", homes.stream().map(Home::getName).toList());
+            case "home_list"      -> homes.isEmpty()
+                    ? "None"
+                    : String.join(", ", homes.stream().map(Home::getName).toList());
             default -> {
-
                 if (identifier.toLowerCase().startsWith("home_name_")) {
                     yield getHomeNameAtIndex(homes, identifier.substring("home_name_".length()));
                 }
@@ -48,33 +47,34 @@ public class HomePlaceholders {
     private void refreshCacheIfNeeded(Player player) {
         UUID uuid = player.getUniqueId();
         long now = System.currentTimeMillis();
-        Long lastUpdate = cacheTimestamps.get(uuid);
+        Long last = cacheTimestamps.get(uuid);
 
-        if (lastUpdate == null || (now - lastUpdate) > CACHE_DURATION_MS) {
+        if (last != null && (now - last) < CACHE_DURATION_MS) return;
+        if (!fetching.add(uuid)) return; // add() returns false if already present
 
-            cacheTimestamps.put(uuid, now);
-            plugin.getHomeManager().getHomes(uuid).thenAccept(homes -> {
-                homeCache.put(uuid, homes);
-                cacheTimestamps.put(uuid, System.currentTimeMillis());
-            });
-        }
+        plugin.getHomeManager().getHomes(uuid).thenAccept(homes -> {
+            homeCache.put(uuid, homes);
+            cacheTimestamps.put(uuid, System.currentTimeMillis());
+            fetching.remove(uuid);
+        }).exceptionally(err -> {
+            fetching.remove(uuid);
+            return null;
+        });
     }
 
     private String getRemainingHomes(Player player, int currentCount) {
         int max = plugin.getHomeManager().getMaxHomes(player);
-        if (max == Integer.MAX_VALUE) {
-            return "∞";
-        }
-        return String.valueOf(Math.max(0, max - currentCount));
+        return max == Integer.MAX_VALUE ? "∞" : String.valueOf(Math.max(0, max - currentCount));
+    }
+
+    private String formatMax(int max) {
+        return max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
     }
 
     private String getHomeNameAtIndex(List<Home> homes, String indexStr) {
         try {
             int index = Integer.parseInt(indexStr);
-            if (index >= 0 && index < homes.size()) {
-                return homes.get(index).getName();
-            }
-            return "";
+            return (index >= 0 && index < homes.size()) ? homes.get(index).getName() : "";
         } catch (NumberFormatException e) {
             return "";
         }
@@ -83,17 +83,16 @@ public class HomePlaceholders {
     public void clearCache(UUID uuid) {
         homeCache.remove(uuid);
         cacheTimestamps.remove(uuid);
+        fetching.remove(uuid);
     }
 
     public static List<String> getPlaceholderList() {
-        List<String> list = new ArrayList<>();
-
-        list.add("%essc_home_count% - Returns the number of homes the player has set");
-        list.add("%essc_home_max% - Returns the maximum number of homes the player can set");
-        list.add("%essc_home_remaining% - Returns the remaining number of homes the player can set");
-        list.add("%essc_home_list% - Returns a comma-separated list of home names");
-        list.add("%essc_home_name_<index>% - Returns the home name at the specified index (0-based)");
-
-        return list;
+        return List.of(
+                "%essc_home_count%      — number of homes set",
+                "%essc_home_max%        — maximum homes allowed",
+                "%essc_home_remaining%  — remaining home slots",
+                "%essc_home_list%       — comma-separated list of home names",
+                "%essc_home_name_<n>%   — name of home at index n (0-based)"
+        );
     }
 }

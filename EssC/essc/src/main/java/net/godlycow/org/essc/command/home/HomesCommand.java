@@ -21,6 +21,11 @@ public class HomesCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
+        if (plugin.getConfigManager().isHomeGuiMode()) {
+            plugin.getHomeGuiManager().openHomeList(player);
+            return true;
+        }
+
         if (args.length > 0 && player.hasPermission("essentialsc.home.admin")) {
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
