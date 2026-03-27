@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>بيانات الموديل المخصص:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>الإنشانتات:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>الصلابة:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>الاستخدام: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>مفيش قواعد متكونفجر!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>القواعد اتعملها ريلود بنجاح!</color>"
 }

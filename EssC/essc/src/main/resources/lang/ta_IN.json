@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>தனிப்பயன் மாதிரி தரவு:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>மந்திரங்கள்:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>உறுதித்தன்மை:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>பயன்பாடு: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>விதிகள் எதுவும் கட்டமைக்கப்படவில்லை!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>விதிகள் வெற்றிகரமாக மீண்டும் ஏற்றப்பட்டன!</color>"
 }

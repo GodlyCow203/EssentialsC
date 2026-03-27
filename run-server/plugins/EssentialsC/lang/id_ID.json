@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>Data Model Kustom:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>Enchant:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>Durabilitas:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>Penggunaan: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>Tidak ada aturan yang dikonfigurasi!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>Aturan berhasil dimuat ulang!</color>"
 }

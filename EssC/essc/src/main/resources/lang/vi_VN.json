@@ -753,5 +753,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>Dữ liệu mô hình tùy chỉnh:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>Phù phép:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>Độ bền:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>Cách dùng: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>Chưa có quy tắc nào được cấu hình!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>Đã tải lại quy tắc thành công!</color>"
 }

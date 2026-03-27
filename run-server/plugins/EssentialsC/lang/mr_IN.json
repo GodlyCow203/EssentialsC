@@ -751,5 +751,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>सानुकूल मॉडेल डेटा:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>जादू:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>टिकाउपणा:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>वापर: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>कोणतेही नियम कॉन्फिगर केलेले नाहीत!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>नियम यशस्वीरित्या रीलोड झाले!</color>"
 }

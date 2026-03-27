@@ -61,6 +61,7 @@ public class CommandRegistrar {
         register("tpaqueue", new TPAQueueCommand(plugin));
         register("sethome", new SetHomeCommand(plugin));
         register("itemid", new ItemIdCommand(plugin));
+        register("rules", new RulesCommand(plugin));
         register("home", new HomeCommand(plugin));
         register("delhome", new DelHomeCommand(plugin));
         register("homes", new HomesCommand(plugin));

@@ -753,5 +753,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>ข้อมูลโมเดลที่กำหนดเอง:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>การร่ายมนต์:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>ความทนทาน:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>วิธีใช้: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>ยังไม่มีการตั้งค่ากฎ!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>โหลดกฎใหม่สำเร็จ!</color>"
 }

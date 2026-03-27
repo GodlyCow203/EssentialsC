@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>કસ્ટમ મોડેલ ડેટા:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>ઇન્ચાન્ટમેન્ટ્સ:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>ટકાઉપણું:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>વપરાશ: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>કોઈ નિયમો કોન્ફિગર કરેલા નથી!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>નિયમો સફળતાપૂર્વક રીલોડ થયા!</color>"
 }

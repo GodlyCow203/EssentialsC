@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>কাস্টম মডেল ডেটা:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>মন্ত্র:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>স্থায়িত্ব:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>ব্যবহার: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>কোনো নিয়ম কনফিগার করা হয়নি!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>নিয়ম সফলভাবে পুনরায় লোড হয়েছে!</color>"
 }

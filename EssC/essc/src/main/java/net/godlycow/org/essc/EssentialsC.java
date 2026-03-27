@@ -35,6 +35,7 @@ import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.rtp.RTPGuiManager;
 import net.godlycow.org.essc.rtp.RTPManager;
+import net.godlycow.org.essc.rules.RulesManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.setup.FirstRunHandler;
 import net.godlycow.org.essc.shop.ShopListener;
@@ -91,6 +92,8 @@ public final class EssentialsC extends JavaPlugin {
     private FloodgateHook floodgateHook;
     private BedrockUtil bedrockUtil;
     private TABHook tabHook;
+    private RulesManager rulesManager;
+
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -153,6 +156,9 @@ public final class EssentialsC extends JavaPlugin {
 
         tabHook = new TABHook(this);
         new FirstRunHandler(this);
+
+        rulesManager = new RulesManager(this);
+        rulesManager.load();
 
 
         new FlyManager(this);
@@ -439,4 +445,6 @@ public final class EssentialsC extends JavaPlugin {
     public BedrockUtil getBedrockUtil() {
         return bedrockUtil;
     }
+
+    public RulesManager getRulesManager() {return rulesManager;}
 }

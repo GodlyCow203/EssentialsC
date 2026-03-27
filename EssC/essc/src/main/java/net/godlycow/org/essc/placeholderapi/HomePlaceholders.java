@@ -50,7 +50,7 @@ public class HomePlaceholders {
         Long last = cacheTimestamps.get(uuid);
 
         if (last != null && (now - last) < CACHE_DURATION_MS) return;
-        if (!fetching.add(uuid)) return; // add() returns false if already present
+        if (!fetching.add(uuid)) return;
 
         plugin.getHomeManager().getHomes(uuid).thenAccept(homes -> {
             homeCache.put(uuid, homes);

@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>Dati Modello Personalizzato:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>Incantamenti:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>Durabilità:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>Utilizzo: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>Nessuna regola è stata configurata!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>Regole ricaricate con successo!</color>"
 }

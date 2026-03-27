@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>Дані користувацької моделі:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>Зачарування:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>Міцність:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>Використання: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>Правила не налаштовані!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>Правила успішно перезавантажено!</color>"
 }

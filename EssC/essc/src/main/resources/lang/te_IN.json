@@ -751,5 +751,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>అనుకూల మోడల్ డేటా:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>మంత్రాలు:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>నిర్మాణం:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>వినియోగం: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>ఏ నియమాలు కాన్ఫిగర్ చేయబడలేదు!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>నియమాలు విజయవంతంగా రీలోడ్ చేయబడ్డాయి!</color>"
 }

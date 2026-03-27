@@ -752,6 +752,10 @@
   "itemid.custom_model_data": "<color:#AAAAAA>自定义模型数据:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>附魔:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>耐久度:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>用法: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>尚未配置任何规则！</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>规则重载成功！</color>"
 
 }

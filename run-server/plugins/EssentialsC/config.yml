@@ -68,7 +68,7 @@ rtp:
   particles: true
   max-attempts: 10
   min-y: 64
-  max-y: 128
+  max-y: 100
   use-world-border: true
 
   # Global defaults (used if per-world not specified)

@@ -397,6 +397,11 @@ commands:
     usage: /itemid
     permission: essentialsc.itemid
 
+  rules:
+    description: Display server rules
+    usage: /rules <reload>
+    permission: essentialsc.rules
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -990,6 +995,10 @@ permissions:
 
   essentialsc.tphere.bypass.override:
     description: Allows teleporting players who have essentialsc.tphere.bypass
+    default: op
+
+  essentialsc.rules.reload:
+    description: Allows reloading the rules.txt file
     default: op
 
 

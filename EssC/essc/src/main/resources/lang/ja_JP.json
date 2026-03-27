@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>カスタムモデルデータ:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>エンチャント:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>耐久値:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>使い方: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>ルールが設定されていません！</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>ルールを正常に再読み込みしました！</color>"
 }

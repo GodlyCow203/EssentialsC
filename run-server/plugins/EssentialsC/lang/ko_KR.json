@@ -752,5 +752,9 @@
   "itemid.custom_model_data": "<color:#AAAAAA>커스텀 모델 데이터:</color> <color:#FFFFFF><cmd></color>",
   "itemid.enchantments": "<color:#AAAAAA>인챈트:</color> <color:#FFFFFF><enchantments></color>",
   "itemid.durability_info": "<color:#AAAAAA>내구도:</color> <color:#FFFFFF><remaining> (<percent>%)</color>",
-  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>"
+  "itemid.footer": "<prefix> <color:#FFF200><bold>=====================</bold></color>",
+
+  "command.usage.rules": "<prefix> <color:#FF0000>사용법: /rules [reload]</color>",
+  "rules.empty": "<prefix> <color:#FF0000>설정된 규칙이 없습니다!</color>",
+  "rules.reloaded": "<prefix> <color:#00FF00>규칙을 성공적으로 다시 로드했습니다!</color>"
 }
