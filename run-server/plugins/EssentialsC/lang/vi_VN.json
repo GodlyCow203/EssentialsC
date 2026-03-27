@@ -754,5 +754,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Cách dùng: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Chưa có quy tắc nào được cấu hình!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Đã tải lại quy tắc thành công!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Đã tải lại quy tắc thành công!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Cách dùng: /spawnentity <thực thể> [số lượng]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Loại thực thể không hợp lệ: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> không thể spawn!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Bạn không có quyền spawn <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Số lượng phải là số dương!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Số lượng giới hạn tối đa là <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Đã spawn <amount>x <entity></color>"
 }

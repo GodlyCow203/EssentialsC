@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Использование: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Правила не настроены!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Правила успешно перезагружены!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Правила успешно перезагружены!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Использование: /spawnentity <сущность> [количество]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Неверный тип сущности: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> нельзя заспавнить!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>У вас нет разрешения на спавн <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Количество должно быть положительным числом!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Количество ограничено максимумом <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Заспавнено <amount>x <entity></color>"
 }

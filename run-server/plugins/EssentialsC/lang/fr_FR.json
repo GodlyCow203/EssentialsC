@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Utilisation: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Aucune règle n'a été configurée!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Règles rechargées avec succès!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Règles rechargées avec succès!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Utilisation: /spawnentity <entité> [quantité]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Type d'entité invalide: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> ne peut pas être spawn!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Vous n'avez pas la permission de spawner <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>La quantité doit être un nombre positif!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Quantité limitée à un maximum de <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Spawné <amount>x <entity></color>"
 }

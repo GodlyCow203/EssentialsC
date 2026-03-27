@@ -754,5 +754,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>วิธีใช้: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>ยังไม่มีการตั้งค่ากฎ!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>โหลดกฎใหม่สำเร็จ!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>โหลดกฎใหม่สำเร็จ!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>วิธีใช้: /spawnentity <เอนทิตี> [จำนวน]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>ประเภทเอนทิตีไม่ถูกต้อง: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> ไม่สามารถสปอว์นได้!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>คุณไม่มีสิทธิ์สปอว์น <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>จำนวนต้องเป็นตัวเลขบวก!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>จำนวนจำกัดสูงสุดที่ <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>สปอว์น <amount>x <entity> แล้ว</color>"
 }

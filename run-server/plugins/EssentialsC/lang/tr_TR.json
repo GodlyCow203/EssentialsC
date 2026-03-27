@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Kullanım: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Hiçbir kural yapılandırılmamış!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Kurallar başarıyla yenilendi!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Kurallar başarıyla yenilendi!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Kullanım: /spawnentity <varlık> [miktar]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Geçersiz varlık türü: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> spawn edilemez!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> spawn etme izniniz yok!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Miktar pozitif bir sayı olmalı!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Miktar maksimum <max> ile sınırlandı</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> spawn edildi</color>"
 }

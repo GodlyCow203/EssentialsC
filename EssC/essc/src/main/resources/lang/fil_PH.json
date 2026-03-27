@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Paggamit: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Walang mga tuntuning na-configure!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Matagumpay na na-reload ang mga tuntunin!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Matagumpay na na-reload ang mga tuntunin!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Paggamit: /spawnentity <entidad> [dami]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Di-wastong uri ng entidad: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000>Ang <entity> ay hindi maari i-spawn!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Wala kang pahintulot na i-spawn ang <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Ang dami ay dapat na positibong numero!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Dami na naka-cap sa maximum na <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Nag-spawn ng <amount>x <entity></color>"
 }

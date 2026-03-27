@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Usage: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>No rules have been configured!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Rules reloaded successfully!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Rules reloaded successfully!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Usage: /spawnentity <entity> [amount]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Invalid entity type: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> cannot be spawned!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>You don't have permission to spawn <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Amount must be a positive number!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Amount capped to maximum of <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Spawned <amount>x <entity></color>"
 }

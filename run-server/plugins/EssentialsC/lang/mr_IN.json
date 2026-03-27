@@ -752,5 +752,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>वापर: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>कोणतेही नियम कॉन्फिगर केलेले नाहीत!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>नियम यशस्वीरित्या रीलोड झाले!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>नियम यशस्वीरित्या रीलोड झाले!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>वापर: /spawnentity <एन्टिटी> [प्रमाण]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>अवैध एन्टिटी प्रकार: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> स्पॉन करता येत नाही!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> स्पॉन करण्याची तुमची परवानगी नाही!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>प्रमाण सकारात्मक संख्या असावी!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>प्रमाण कमाल <max> पर्यंत मर्यादित</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन केले</color>"
 }

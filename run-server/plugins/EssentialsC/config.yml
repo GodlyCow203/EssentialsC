@@ -222,6 +222,9 @@ rename:
   normalize-enabled: true
   strip-colors-for-check: true
 
+spawnentity:
+  max-amount: 10
+
 vanish:
   hide-from-tab: true
   give-night-vision: true

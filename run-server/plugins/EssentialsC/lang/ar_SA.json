@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>الاستخدام: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>لم يتم تكوين أي قواعد!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>تم إعادة تحميل القواعد بنجاح!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>تم إعادة تحميل القواعد بنجاح!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>الاستخدام: /spawnentity <كيان> [كمية]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>نوع كيان غير صالح: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000>لا يمكن إنشاء <entity>!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>ليس لديك إذن لإنشاء <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>يجب أن تكون الكمية رقمًا موجبًا!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>تم تقييد الكمية إلى الحد الأقصى <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>تم إنشاء <amount>x <entity></color>"
 }

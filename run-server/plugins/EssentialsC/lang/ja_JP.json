@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>使い方: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>ルールが設定されていません！</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>ルールを正常に再読み込みしました！</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>ルールを正常に再読み込みしました！</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>使い方: /spawnentity <エンティティ> [数量]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>無効なエンティティタイプ: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> はスポーンできません！</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> をスポーンする権限がありません！</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>数量は正の数である必要があります！</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>数量が最大 <max> に制限されました</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>体の <entity> をスポーンしました</color>"
 }

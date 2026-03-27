@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>વપરાશ: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>કોઈ નિયમો કોન્ફિગર કરેલા નથી!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>નિયમો સફળતાપૂર્વક રીલોડ થયા!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>નિયમો સફળતાપૂર્વક રીલોડ થયા!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>વપરાશ: /spawnentity <એન્ટિટી> [જથ્થો]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>અમાન્ય એન્ટિટી પ્રકાર: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> સ્પોન કરી શકાતું નથી!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> સ્પોન કરવાની તમારી પરવાનગી નથી!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>જથ્થો સકારાત્મક સંખ્યા હોવી જોઈએ!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>જથ્થો મહત્તમ <max> સુધી મર્યાદિત</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> સ્પોન થયું</color>"
 }

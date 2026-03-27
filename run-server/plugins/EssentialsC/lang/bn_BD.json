@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>ব্যবহার: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>কোনো নিয়ম কনফিগার করা হয়নি!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>নিয়ম সফলভাবে পুনরায় লোড হয়েছে!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>নিয়ম সফলভাবে পুনরায় লোড হয়েছে!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>ব্যবহার: /spawnentity <এন্টিটি> [পরিমাণ]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>অবৈধ এন্টিটি ধরন: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> স্পawn করা যাবে না!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>আপনার <entity> স্পawn করার অনুমতি নেই!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>পরিমাণ অবশ্যই ধনাত্মক সংখ্যা হতে হবে!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>পরিমাণ সর্বোচ্চ <max> এ সীমাবদ্ধ</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> স্পawn করা হয়েছে</color>"
 }

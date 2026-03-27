@@ -752,5 +752,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>వినియోగం: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>ఏ నియమాలు కాన్ఫిగర్ చేయబడలేదు!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>నియమాలు విజయవంతంగా రీలోడ్ చేయబడ్డాయి!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>నియమాలు విజయవంతంగా రీలోడ్ చేయబడ్డాయి!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>వినియోగం: /spawnentity <ఎంటిటీ> [మొత్తం]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>చెల్లని ఎంటిటీ రకం: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> స్పాన్ చేయలేము!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> స్పాన్ చేయడానికి మీకు అనుమతి లేదు!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>మొత్తం పాజిటివ్ సంఖ్య అయి ఉండాలి!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>మొత్తం గరిష్ట <max> కు పరిమితం</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> స్పాన్ చేయబడింది</color>"
 }

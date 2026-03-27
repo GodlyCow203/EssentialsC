@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>사용법: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>설정된 규칙이 없습니다!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>규칙을 성공적으로 다시 로드했습니다!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>규칙을 성공적으로 다시 로드했습니다!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>사용법: /spawnentity <엔티티> [수량]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>잘못된 엔티티 유형: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> 는 스폰할 수 없습니다!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> 스폰 권한이 없습니다!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>수량은 양수여야 합니다!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>수량이 최대 <max> 로 제한됨</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity> 스폰됨</color>"
 }

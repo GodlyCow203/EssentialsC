@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Gebruik: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Er zijn geen regels geconfigureerd!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Regels succesvol herladen!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Regels succesvol herladen!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Gebruik: /spawnentity <wezen> [aantal]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Ongeldig wezentype: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> kan niet spawnen!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Je hebt geen toestemming om <entity> te spawnen!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Aantal moet een positief getal zijn!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Aantal beperkt tot maximum van <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Gespawnd <amount>x <entity></color>"
 }

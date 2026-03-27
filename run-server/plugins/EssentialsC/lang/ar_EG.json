@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>الاستخدام: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>مفيش قواعد متكونفجر!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>القواعد اتعملها ريلود بنجاح!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>القواعد اتعملها ريلود بنجاح!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>الاستخدام: /spawnentity <كيان> [كمية]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>نوع كيان غلط: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000>مينفعش تعمل spawn لـ <entity>!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>مش معاك صلاحية تعمل spawn لـ <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>الكمية لازم تكون رقم موجب!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>الكمية اتقفلت على الـ max <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>اتعمل spawn لـ <amount>x <entity></color>"
 }

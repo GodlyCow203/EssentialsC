@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>பயன்பாடு: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>விதிகள் எதுவும் கட்டமைக்கப்படவில்லை!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>விதிகள் வெற்றிகரமாக மீண்டும் ஏற்றப்பட்டன!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>விதிகள் வெற்றிகரமாக மீண்டும் ஏற்றப்பட்டன!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>பயன்பாடு: /spawnentity <உயிரினம்> [அளவு]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>தவறான உயிரின வகை: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> ஸ்பான் செய்ய முடியாது!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> ஸ்பான் செய்ய உங்களுக்கு அனுமதி இல்லை!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>அளவு நேர்மறை எண்ணாக இருக்க வேண்டும்!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>அளவு அதிகபட்ச <max> வரை வரம்பிடப்பட்டது</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> ஸ்பான் செய்யப்பட்டது</color>"
 }

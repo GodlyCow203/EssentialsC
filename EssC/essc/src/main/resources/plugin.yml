@@ -402,6 +402,11 @@ commands:
     usage: /rules <reload>
     permission: essentialsc.rules
 
+  spawnentity:
+    description: Spawn entities at your location
+    usage: /spawnentity <entity> [amount]
+    permission: essentialsc.spawnentity
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1000,5 +1005,14 @@ permissions:
   essentialsc.rules.reload:
     description: Allows reloading the rules.txt file
     default: op
+
+  essentialsc.spawnentity.*:
+    description: Allows spawning all entity types
+    default: false
+
+  essentialsc.spawnentity.bypasslimit:
+    description: Allows bypassing the spawn amount limit
+    default: op
+
 
 

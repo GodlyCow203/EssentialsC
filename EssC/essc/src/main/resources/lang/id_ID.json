@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Penggunaan: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Tidak ada aturan yang dikonfigurasi!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Aturan berhasil dimuat ulang!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Aturan berhasil dimuat ulang!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Penggunaan: /spawnentity <entitas> [jumlah]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Tipe entitas tidak valid: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> tidak bisa di-spawn!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Kamu tidak punya izin untuk spawn <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Jumlah harus angka positif!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Jumlah dibatasi maksimal <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Berhasil spawn <amount>x <entity></color>"
 }

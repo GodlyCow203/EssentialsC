@@ -573,4 +573,6 @@ public class ConfigManager {
         return config.getString("luckperms.chat-separator", ">> ");
     }
 
+    public int getSpawnEntityMaxAmount() { return config.getInt("spawnentity.max-amount", 10);}
+
 }

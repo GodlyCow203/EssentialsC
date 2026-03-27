@@ -752,6 +752,14 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Verwendung: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Keine Regeln konfiguriert!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Regeln erfolgreich neu geladen!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Regeln erfolgreich neu geladen!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Verwendung: /spawnentity <kreatur> [anzahl]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Ungültiger Kreaturtyp: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> kann nicht gespawnt werden!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Du hast keine Berechtigung <entity> zu spawnen!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Anzahl muss eine positive Zahl sein!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Anzahl auf Maximum von <max> begrenzt</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>"
 
 }

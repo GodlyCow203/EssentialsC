@@ -753,5 +753,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>उपयोग: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>कोई नियम कॉन्फ़िगर नहीं किए गए हैं!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>नियम सफलतापूर्वक पुनः लोड हुए!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>नियम सफलतापूर्वक पुनः लोड हुए!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>उपयोग: /spawnentity <एंटिटी> [मात्रा]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>अमान्य एंटिटी प्रकार: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> स्पॉन नहीं किया जा सकता!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> स्पॉन करने की आपकी अनुमति नहीं है!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>मात्रा धनात्मक संख्या होनी चाहिए!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>मात्रा अधिकतम <max> तक सीमित</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन किया गया</color>"
 }

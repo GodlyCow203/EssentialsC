@@ -6,6 +6,7 @@ import net.godlycow.org.essc.command.admin.*;
 import net.godlycow.org.essc.command.afk.AFKCommand;
 import net.godlycow.org.essc.command.afk.AFKListCommand;
 import net.godlycow.org.essc.command.auction.AhCommand;
+import net.godlycow.org.essc.command.entity.SpawnEntityCommand;
 import net.godlycow.org.essc.command.home.*;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
@@ -62,6 +63,7 @@ public class CommandRegistrar {
         register("sethome", new SetHomeCommand(plugin));
         register("itemid", new ItemIdCommand(plugin));
         register("rules", new RulesCommand(plugin));
+        register("spawnentity",new SpawnEntityCommand(plugin));
         register("home", new HomeCommand(plugin));
         register("delhome", new DelHomeCommand(plugin));
         register("homes", new HomesCommand(plugin));

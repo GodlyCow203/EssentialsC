@@ -754,6 +754,14 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>استعمال: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>کوئی قواعد ترتیب نہیں دیے گئے!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>قواعد کامیابی سے دوبارہ لوڈ ہو گئے!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>قواعد کامیابی سے دوبارہ لوڈ ہو گئے!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>استعمال: /spawnentity <ہستی> [مقدار]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>غلط ہستی کی قسم: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> کو پیدا نہیں کیا جا سکتا!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>آپ کو <entity> پیدا کرنے کی اجازت نہیں ہے!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>مقدار مثبت عدد ہونی چاہیے!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>مقدار <max> کی زیادہ سے زیادہ حد تک محدود</color>",
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> پیدا کیا گیا</color>"
 }
 

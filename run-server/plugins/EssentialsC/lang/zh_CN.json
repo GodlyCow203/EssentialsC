@@ -753,6 +753,14 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>用法: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>尚未配置任何规则！</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>规则重载成功！</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>规则重载成功！</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>用法: /spawnentity <实体> [数量]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>无效的实体类型: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> 无法生成！</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>你没有权限生成 <entity>！</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>数量必须是正数！</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>数量已限制为最大值 <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>个 <entity></color>"
 
 }

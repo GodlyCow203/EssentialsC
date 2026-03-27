@@ -754,5 +754,13 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Användning: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>Inga regler har konfigurerats!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Reglerna har laddats om!</color>"
+  "rules.reloaded": "<prefix> <color:#00FF00>Reglerna har laddats om!</color>",
+
+  "command.usage.spawnentity": "<prefix> <color:#FF0000>Användning: /spawnentity <varelse> [antal]</color>",
+  "spawnentity.invalid": "<prefix> <color:#FF0000>Ogiltig varelsetyp: <entity></color>",
+  "spawnentity.not_spawnable": "<prefix> <color:#FF0000><entity> kan inte spawna!</color>",
+  "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Du har inte tillåtelse att spawna <entity>!</color>",
+  "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Antalet måste vara ett positivt tal!</color>",
+  "spawnentity.amount_capped": "<prefix> <color:#FFF200>Antalet begränsat till maximum <max></color>",
+  "spawnentity.success": "<prefix> <color:#FFF200>Spawna <amount>x <entity></color>"
 }
