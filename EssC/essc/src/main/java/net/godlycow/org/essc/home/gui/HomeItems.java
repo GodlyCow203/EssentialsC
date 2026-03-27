@@ -306,8 +306,7 @@ public class HomeItems {
         Component name = lang(player, key + ".name", Map.of("name", home.getName()));
         List<Component> lore = List.of(
                 Component.empty(),
-                lang(player, key + ".lore1", Map.of("name", home.getName())),
-                lang(player, key + ".lore2")
+                lang(player, key + ".lore1", Map.of("name", home.getName()))
         );
         return create(player, mat, name, lore);
     }
