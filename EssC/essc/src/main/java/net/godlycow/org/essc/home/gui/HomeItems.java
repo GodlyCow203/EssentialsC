@@ -261,7 +261,6 @@ public class HomeItems {
         List<Component> lore = List.of(
                 Component.empty(),
                 lang(player, "home.gui.items.delete.lore1", Map.of("name", homeName)),
-                lang(player, "home.gui.items.delete.lore2"),
                 Component.empty(),
                 lang(player, "home.gui.items.delete.warning")
         );

@@ -267,16 +267,13 @@ public class RTPManager {
     }
 
     private CompletableFuture<Location> findSafeLocation(World world) {
-
         return CompletableFuture.supplyAsync(() -> {
-
             WorldRTPSettings settings = getWorldSettings(world.getName());
             Location spawn = world.getSpawnLocation();
 
             int attempts = world.getEnvironment() == World.Environment.THE_END ? maxAttempts * 3 : maxAttempts;
 
             for (int i = 0; i < attempts; i++) {
-
                 double angle = random.nextDouble() * Math.PI * 2;
                 int distance = settings.minRadius() + random.nextInt(settings.maxRadius() - settings.minRadius());
 
@@ -293,10 +290,15 @@ public class RTPManager {
                     }
                 }
 
-                int y = world.getHighestBlockYAt(x, z);
-
-                if (world.getEnvironment() == World.Environment.THE_END && y <= 0) {
-                    continue;
+                int y;
+                if (world.getEnvironment() == World.Environment.NETHER) {
+                    y = findSafeNetherY(world, x, z);
+                    if (y <= 0) continue;
+                } else if (world.getEnvironment() == World.Environment.THE_END) {
+                    y = world.getHighestBlockYAt(x, z);
+                    if (y <= 0) continue;
+                } else {
+                    y = world.getHighestBlockYAt(x, z);
                 }
 
                 if (y < minY) y = minY;
@@ -316,6 +318,31 @@ public class RTPManager {
 
             return null;
         });
+    }
+
+    private int findSafeNetherY(World world, int x, int z) {
+        int searchStart = Math.min(126, maxY);
+        int searchEnd = Math.max(1, minY);
+
+        for (int y = searchStart; y >= searchEnd; y--) {
+            Material ground = world.getBlockAt(x, y - 1, z).getType();
+            Material feet = world.getBlockAt(x, y, z).getType();
+            Material head = world.getBlockAt(x, y + 1, z).getType();
+
+            if (ground == Material.BEDROCK && y <= 5) continue;
+
+            if (ground.isSolid() &&
+                    ground != Material.LAVA &&
+                    ground != Material.CACTUS &&
+                    ground != Material.FIRE &&
+                    ground != Material.MAGMA_BLOCK &&
+                    (feet.isAir() || !feet.isSolid()) &&
+                    (head.isAir() || !head.isSolid())) {
+                return y;
+            }
+        }
+
+        return -1;
     }
 
     private boolean isSafeLocation(Location location) {
