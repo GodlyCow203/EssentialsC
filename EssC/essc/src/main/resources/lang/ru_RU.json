@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Вы не можете просмотреть свой инвентарь</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Использование: /invsee <игрок></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>У вас нет прав на изменение этого инвентаря</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Вы просматриваете инвентарь игрока <color:#66AAFF><target></color> (офлайн).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Ваш инвентарь очищен</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Очищен инвентарь <color:#FFFFFF><target></color></color>",

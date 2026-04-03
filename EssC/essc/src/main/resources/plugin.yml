@@ -1010,5 +1010,9 @@ permissions:
     description: Allows bypassing the spawn amount limit
     default: op
 
+  essentialsc.invsee.offline:
+    description: Allows you to see offline players inventories
+    default: op
+
 
 

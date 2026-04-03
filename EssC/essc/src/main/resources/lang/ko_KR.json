@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>자신의 인벤토리는 볼 수 없습니다</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>사용법: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>이 인벤토리를 수정할 권한이 없습니다</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA><color:#66AAFF><target></color>의 인벤토리를 보고 있습니다 (오프라인).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>인벤토리가 비워졌습니다</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color>님의 인벤토리를 비웠습니다</color>",

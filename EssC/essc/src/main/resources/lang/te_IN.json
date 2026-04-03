@@ -371,11 +371,13 @@
   "invsee.self": "<prefix> <color:#FF0000>మీరు మీ స్వంత ఇన్వెంటరీని చూడలేరు</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>ఉపయోగం: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>ఈ ఇన్వెంటరీని మార్చడానికి మీకు అనుమతి లేదు</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>మీరు <color:#66AAFF><target></color> యొక్క ఇన్వెంటరీని చూస్తున్నారు (ఆఫ్‌లైన్)।</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>మీ ఇన్వెంటరీ క్లియర్ చేయబడింది</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> యొక్క ఇన్వెంటరీ క్లియర్ చేయబడింది</color>",
   "clearinventory.success.by": "<prefix> <color:#FF0000>మీ ఇన్వెంటరీ <color:#FFFFFF><player></color> ద్వారా క్లియర్ చేయబడింది</color>",
   "command.usage.clearinventory": "<prefix> <color:#FF0000>ఉపయోగం: /clearinventory [player]</color>",
+
 
   "enderchest.opened": "<prefix> <color:#FFF200>ఎండర్ చెస్ట్ తెరుస్తోంది...</color>",
   "enderchest.opened.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> యొక్క ఎండర్ చెస్ట్ తెరుస్తోంది</color>",

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>自分自身のインベントリは表示できません</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>使用方法: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>このインベントリを変更する権限がありません</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA><color:#66AAFF><target></color>のインベントリを閲覧中です（オフライン）。</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>インベントリをクリアしました</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color>のインベントリをクリアしました</color>",

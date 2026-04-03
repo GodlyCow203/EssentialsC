@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>आप अपना खुद का इन्वेंटरी नहीं देख सकते</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>उपयोग: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>आपके पास इस इन्वेंटरी को संशोधित करने की अनुमति नहीं है</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>आप <color:#66AAFF><target></color> का इन्वेंटरी देख रहे हैं (ऑफलाइन)।</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>आपका इन्वेंटरी साफ कर दिया गया है</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> का इन्वेंटरी साफ किया गया</color>",

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Kendi envanterinizi görüntüleyemezsiniz</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Kullanım: /invsee <oyuncu></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Bu envanteri değiştirme izniniz yok</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA><color:#66AAFF><target></color> adlı oyuncunun envanterini görüntülüyorsunuz (çevrimdışı).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Envanteriniz temizlendi</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> adlı oyuncunun envanteri temizlendi</color>",

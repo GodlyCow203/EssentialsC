@@ -20,6 +20,7 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
+
         if (!(event.getInventory().getHolder() instanceof Player target)) return;
 
         if (event.getInventory().getType() == InventoryType.ENDER_CHEST) return;
@@ -38,6 +39,7 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
+
         if (!(event.getInventory().getHolder() instanceof Player target)) return;
 
         if (event.getInventory().getType() == InventoryType.ENDER_CHEST) return;

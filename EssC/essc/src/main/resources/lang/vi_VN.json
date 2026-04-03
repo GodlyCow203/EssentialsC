@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#F00000>Bạn không thể xem túi đồ của chính mình</color>",
   "command.usage.invsee": "<prefix> <color:#F00000>Cách dùng: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#F00000>Bạn không có quyền sửa đổi túi đồ này</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Bạn đang xem túi đồ của <color:#66AAFF><target></color> (ngoại tuyến).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Túi đồ của bạn đã được xóa sạch</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Đã xóa túi đồ của <color:#FFFFFF><target></color></color>",

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Du kanns net däin eegent Inventaire kucken</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Gebrauch: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Du hues keng Erlaabnis dëst Inventaire ze änneren</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Du kucks den Inventaire vun <color:#66AAFF><target></color> un (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Däin Inventaire gouf geläscht</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Inventaire vun <color:#FFFFFF><target></color> gouf geläscht</color>",

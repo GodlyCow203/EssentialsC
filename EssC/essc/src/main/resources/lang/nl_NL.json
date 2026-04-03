@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Je kunt je eigen inventaris niet bekijken</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Gebruik: /invsee <speler></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Je hebt geen toestemming om deze inventaris te wijzigen</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Je bekijkt de inventaris van <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Je inventaris is geleegd</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Inventaris van <color:#FFFFFF><target></color> geleegd</color>",

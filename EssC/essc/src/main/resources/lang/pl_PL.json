@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Nie możesz przeglądać własnego ekwipunku</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Użycie: /invsee <gracz></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Nie masz uprawnień do modyfikacji tego ekwipunku</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Przeglądasz ekwipunek gracza <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Twój ekwipunek został wyczyszczony</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Wyczyszczono ekwipunek <color:#FFFFFF><target></color></color>",

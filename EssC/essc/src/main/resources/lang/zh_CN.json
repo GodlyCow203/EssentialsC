@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>你不能查看自己的背包</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>用法: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>你没有权限修改此背包</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>你正在查看 <color:#66AAFF><target></color> 的背包（离线）。</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>你的背包已被清空</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>已清空 <color:#FFFFFF><target></color> 的背包</color>",

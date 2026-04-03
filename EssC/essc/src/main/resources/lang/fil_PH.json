@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Hindi mo maaaring tingnan ang iyong sariling inventory</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Paggamit: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Wala kang pahintulot na baguhin ang inventory na ito</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Tinitingnan mo ang imbentaryo ni <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Na-clear ang iyong inventory</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Na-clear ang inventory ni <color:#FFFFFF><target></color></color>",

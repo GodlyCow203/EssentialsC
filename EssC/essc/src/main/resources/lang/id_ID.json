@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Anda tidak dapat melihat inventori sendiri</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Penggunaan: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Anda tidak memiliki izin untuk mengubah inventori ini</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Anda sedang melihat inventori <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Inventori Anda telah dikosongkan</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Mengosongkan inventori <color:#FFFFFF><target></color></color>",

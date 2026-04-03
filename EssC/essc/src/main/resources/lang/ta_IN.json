@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>நீங்கள் உங்கள் சொந்த பொருட் பட்டியலை காண முடியாது</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>பயன்பாடு: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>இந்த பொருட் பட்டியலை மாற்ற உங்களுக்கு அனுமதி இல்லை</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>நீங்கள் <color:#66AAFF><target></color> இன் பொருட் பட்டியலைப் பார்க்கிறீர்கள் (ஆஃப்லைன்).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>உங்கள் பொருட் பட்டியல் அழிக்கப்பட்டது</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> இன் பொருட் பட்டியல் அழிக்கப்பட்டது</color>",

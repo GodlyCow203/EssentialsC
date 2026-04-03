@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>لا يمكنك عرض مخزونك الخاص</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>الاستخدام: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>ليس لديك صلاحية لتعديل هذا المخزون</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>أنت تعرض مخزون <color:#66AAFF><target></color> (غير متصل).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>تم مسح مخزونك</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>تم مسح مخزون <color:#FFFFFF><target></color></color>",

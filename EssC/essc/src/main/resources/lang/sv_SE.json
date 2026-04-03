@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Du kan inte se din egen inventering</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Användning: /invsee <spelare></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Du har inte behörighet att ändra denna inventering</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Du tittar på <color:#66AAFF><target></color>s inventory (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Din inventering har rensats</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Rensade <color:#FFFFFF><target></color>s inventering</color>",

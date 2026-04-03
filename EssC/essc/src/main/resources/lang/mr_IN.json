@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>तुम्ही स्वतःची वस्तूसूची पाहू शकत नाही</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>वापर: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>तुमच्याकडे ही वस्तूसूची बदलण्याची परवानगी नाही</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>तुम्ही <color:#66AAFF><target></color> चा इन्व्हेंटरी पाहत आहात (ऑफलाइन).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>तुमची वस्तूसूची साफ केली</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> ची वस्तूसूची साफ केली</color>",

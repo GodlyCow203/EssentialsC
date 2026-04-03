@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Non puoi visualizzare il tuo stesso inventario</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Uso: /invsee <giocatore></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Non hai il permesso di modificare questo inventario</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Stai visualizzando l'inventario di <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Il tuo inventario è stato svuotato</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Inventario di <color:#FFFFFF><target></color> svuotato</color>",
