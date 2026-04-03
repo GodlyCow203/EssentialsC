@@ -102,6 +102,7 @@ public final class EssentialsC extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         configManager = new ConfigManager(this);
+        configManager.migrate();
 
         if (configManager.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");

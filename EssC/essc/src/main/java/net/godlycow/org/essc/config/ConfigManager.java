@@ -18,6 +18,7 @@ public class ConfigManager {
     public void reload() {
         plugin.reloadConfig();
         config = plugin.getConfig();
+        migrate();
         plugin.debug("Configuration file reloaded");
     }
 
@@ -32,6 +33,24 @@ public class ConfigManager {
     public void setDebug(boolean debug) {
         config.set("debug", debug);
         plugin.saveConfig();
+    }
+
+    public void migrate() {
+        FileConfiguration config = plugin.getConfig();
+        org.bukkit.configuration.Configuration defaults = config.getDefaults();
+
+        if (defaults == null) return;
+
+        boolean dirty = false;
+        for (String key : defaults.getKeys(true)) {
+            if (!config.contains(key)) {
+                config.set(key, defaults.get(key));
+                plugin.getLogger().info("[EssentialsC] Migrated missing config key: " + key);
+                dirty = true;
+            }
+        }
+
+        if (dirty) plugin.saveConfig();
     }
 
     public boolean isEconomyEnabled() {

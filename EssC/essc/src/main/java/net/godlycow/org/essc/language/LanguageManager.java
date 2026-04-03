@@ -50,6 +50,7 @@ public class LanguageManager {
             if (!file.exists()) {
                 plugin.saveResource("lang/" + lang + ".json", false);
             }
+            migrateLangFile(lang);
         }
         loadIntoCache(defaultLanguage);
         for (String lang : languages) {
@@ -168,5 +169,42 @@ public class LanguageManager {
     public void reload() {
         plugin.debug("Reloading language manager...");
         load(defaultLang);
+    }
+
+    private void migrateLangFile(String code) {
+        File file = new File(plugin.getDataFolder(), "lang/" + code + ".json");
+        if (!file.exists()) return;
+
+        var resource = plugin.getResource("lang/" + code + ".json");
+        if (resource == null) return;
+
+        try (var reader = new InputStreamReader(resource, StandardCharsets.UTF_8)) {
+            JsonObject defaults = gson.fromJson(reader, JsonObject.class);
+            if (defaults == null) return;
+
+            JsonObject existing;
+            try (var fr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
+                existing = gson.fromJson(fr, JsonObject.class);
+                if (existing == null) existing = new JsonObject();
+            }
+
+            boolean dirty = false;
+            for (var entry : defaults.entrySet()) {
+                if (!existing.has(entry.getKey())) {
+                    existing.add(entry.getKey(), entry.getValue());
+                    dirty = true;
+                    plugin.debug("Migrated missing lang key '" + entry.getKey() + "' in " + code);
+                }
+            }
+
+            if (dirty) {
+                try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
+                    new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(existing, writer);
+                }
+                plugin.getLogger().info("[EssentialsC] Migrated missing keys in lang/" + code + ".json");
+            }
+        } catch (Exception e) {
+            plugin.getLogger().warning("Failed to migrate lang file " + code + ": " + e.getMessage());
+        }
     }
 }
