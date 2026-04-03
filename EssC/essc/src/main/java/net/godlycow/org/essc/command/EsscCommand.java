@@ -136,6 +136,12 @@ public class EsscCommand extends Command {
                     plugin.debug("Reloaded TAB");
                 }
 
+                if (plugin.getRulesManager() != null) {
+                    plugin.getRulesManager().reload();
+                    plugin.getRulesManager().reload();
+                    plugin.debug("Reloaded Rules");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

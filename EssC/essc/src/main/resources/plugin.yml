@@ -399,7 +399,7 @@ commands:
 
   rules:
     description: Display server rules
-    usage: /rules <reload>
+    usage: /rules
     permission: essentialsc.rules
 
   spawnentity:
@@ -1000,10 +1000,6 @@ permissions:
 
   essentialsc.tphere.bypass.override:
     description: Allows teleporting players who have essentialsc.tphere.bypass
-    default: op
-
-  essentialsc.rules.reload:
-    description: Allows reloading the rules.txt file
     default: op
 
   essentialsc.spawnentity.*:
