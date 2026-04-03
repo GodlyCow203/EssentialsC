@@ -1,7 +1,9 @@
 {
   "stats": {
-    "minecraft:killed_by": {
-      "minecraft:zombie": 1
+    "minecraft:killed": {
+      "minecraft:creeper": 1,
+      "minecraft:pig": 1,
+      "minecraft:ender_dragon": 1
     },
     "minecraft:mined": {
       "minecraft:short_grass": 11,
@@ -9,29 +11,6 @@
       "minecraft:wildflowers": 1,
       "minecraft:leaf_litter": 83,
       "minecraft:spruce_leaves": 1
-    },
-    "minecraft:picked_up": {
-      "minecraft:porkchop": 3,
-      "minecraft:armor_stand": 4,
-      "minecraft:dirt": 1,
-      "minecraft:totem_of_undying": 1,
-      "minecraft:oak_planks": 1,
-      "minecraft:stone": 1,
-      "minecraft:command_block": 1,
-      "minecraft:sugar_cane": 2,
-      "minecraft:arrow": 2,
-      "minecraft:redstone": 4,
-      "minecraft:repeater": 1,
-      "minecraft:rotten_flesh": 1,
-      "minecraft:dark_oak_leaves": 4,
-      "minecraft:leaf_litter": 188,
-      "minecraft:firefly_bush": 2,
-      "minecraft:repeating_command_block": 1,
-      "minecraft:grass_block": 2,
-      "minecraft:wheat_seeds": 1,
-      "minecraft:copper_sword": 1,
-      "minecraft:oak_leaves": 1,
-      "minecraft:spruce_trapdoor": 64
     },
     "minecraft:used": {
       "minecraft:grass_block": 168,
@@ -62,6 +41,31 @@
       "minecraft:birch_leaves": 24,
       "minecraft:polished_granite_stairs": 2
     },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 73805,
+      "minecraft:walk_one_cm": 88572,
+      "minecraft:leave_game": 42,
+      "minecraft:walk_under_water_one_cm": 1307,
+      "minecraft:damage_taken": 36869,
+      "minecraft:mob_kills": 3,
+      "minecraft:play_time": 529257,
+      "minecraft:damage_dealt": 519,
+      "minecraft:damage_absorbed": 297,
+      "minecraft:jump": 2731,
+      "minecraft:time_since_death": 73785,
+      "minecraft:aviate_one_cm": 1298011,
+      "minecraft:drop": 129,
+      "minecraft:sprint_one_cm": 298513,
+      "minecraft:open_chest": 1,
+      "minecraft:fall_one_cm": 357775,
+      "minecraft:total_world_time": 529257,
+      "minecraft:swim_one_cm": 1982,
+      "minecraft:fly_one_cm": 677605,
+      "minecraft:walk_on_water_one_cm": 3895,
+      "minecraft:crouch_one_cm": 1237,
+      "minecraft:sneak_time": 1264,
+      "minecraft:deaths": 7
+    },
     "minecraft:dropped": {
       "minecraft:totem_of_undying": 1,
       "minecraft:stripped_oak_wood": 1,
@@ -90,35 +94,31 @@
       "minecraft:dark_oak_log": 1,
       "minecraft:spruce_leaves": 1
     },
-    "minecraft:custom": {
-      "minecraft:time_since_rest": 43809,
-      "minecraft:walk_one_cm": 88091,
-      "minecraft:leave_game": 42,
-      "minecraft:walk_under_water_one_cm": 1307,
-      "minecraft:damage_taken": 36869,
-      "minecraft:mob_kills": 3,
-      "minecraft:play_time": 499261,
-      "minecraft:damage_dealt": 519,
-      "minecraft:damage_absorbed": 297,
-      "minecraft:jump": 2689,
-      "minecraft:time_since_death": 43789,
-      "minecraft:aviate_one_cm": 1298011,
-      "minecraft:drop": 129,
-      "minecraft:sprint_one_cm": 294929,
-      "minecraft:open_chest": 1,
-      "minecraft:fall_one_cm": 357775,
-      "minecraft:total_world_time": 499261,
-      "minecraft:swim_one_cm": 1982,
-      "minecraft:fly_one_cm": 665578,
-      "minecraft:walk_on_water_one_cm": 3895,
-      "minecraft:crouch_one_cm": 1237,
-      "minecraft:sneak_time": 1264,
-      "minecraft:deaths": 7
+    "minecraft:killed_by": {
+      "minecraft:zombie": 1
     },
-    "minecraft:killed": {
-      "minecraft:creeper": 1,
-      "minecraft:pig": 1,
-      "minecraft:ender_dragon": 1
+    "minecraft:picked_up": {
+      "minecraft:porkchop": 3,
+      "minecraft:armor_stand": 4,
+      "minecraft:dirt": 1,
+      "minecraft:totem_of_undying": 1,
+      "minecraft:oak_planks": 1,
+      "minecraft:stone": 1,
+      "minecraft:command_block": 1,
+      "minecraft:sugar_cane": 2,
+      "minecraft:arrow": 2,
+      "minecraft:redstone": 4,
+      "minecraft:repeater": 1,
+      "minecraft:rotten_flesh": 1,
+      "minecraft:dark_oak_leaves": 4,
+      "minecraft:leaf_litter": 188,
+      "minecraft:firefly_bush": 2,
+      "minecraft:repeating_command_block": 1,
+      "minecraft:grass_block": 2,
+      "minecraft:wheat_seeds": 1,
+      "minecraft:copper_sword": 1,
+      "minecraft:oak_leaves": 1,
+      "minecraft:spruce_trapdoor": 64
     }
   },
   "DataVersion": 4671

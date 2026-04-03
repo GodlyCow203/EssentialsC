@@ -4,8 +4,25 @@
       "minecraft:short_grass": 2,
       "minecraft:leaf_litter": 5
     },
-    "minecraft:picked_up": {
-      "minecraft:leaf_litter": 6
+    "minecraft:used": {
+      "minecraft:dark_oak_leaves": 2
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 67525,
+      "minecraft:walk_one_cm": 3798,
+      "minecraft:leave_game": 5,
+      "minecraft:damage_taken": 185,
+      "minecraft:boat_one_cm": 477281,
+      "minecraft:play_time": 67525,
+      "minecraft:jump": 172,
+      "minecraft:time_since_death": 67525,
+      "minecraft:drop": 11,
+      "minecraft:sprint_one_cm": 17071,
+      "minecraft:fall_one_cm": 4040,
+      "minecraft:total_world_time": 67525,
+      "minecraft:fly_one_cm": 33534,
+      "minecraft:crouch_one_cm": 1,
+      "minecraft:sneak_time": 2
     },
     "minecraft:dropped": {
       "minecraft:sugar_cane": 16,
@@ -20,21 +37,8 @@
       "minecraft:stone_pickaxe": 1,
       "minecraft:golden_apple": 1
     },
-    "minecraft:custom": {
-      "minecraft:time_since_rest": 37549,
-      "minecraft:walk_one_cm": 3367,
-      "minecraft:leave_game": 5,
-      "minecraft:damage_taken": 185,
-      "minecraft:boat_one_cm": 477281,
-      "minecraft:play_time": 37549,
-      "minecraft:jump": 110,
-      "minecraft:time_since_death": 37549,
-      "minecraft:drop": 11,
-      "minecraft:sprint_one_cm": 11271,
-      "minecraft:fall_one_cm": 4040,
-      "minecraft:total_world_time": 37549,
-      "minecraft:fly_one_cm": 20756,
-      "minecraft:sneak_time": 1
+    "minecraft:picked_up": {
+      "minecraft:leaf_litter": 6
     }
   },
   "DataVersion": 4671

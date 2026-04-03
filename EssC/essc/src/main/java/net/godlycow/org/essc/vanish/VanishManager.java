@@ -43,13 +43,16 @@ public class VanishManager implements Listener {
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
             if (!online.equals(player)) {
-                if (!online.hasPermission("essentialsc.vanish.see")) {
+                if (online.hasPermission("essentialsc.vanish.see")) {
+                    online.showPlayer(plugin, player);
+                } else {
                     online.hidePlayer(plugin, player);
                 }
             }
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
+        player.removePotionEffect(PotionEffectType.INVISIBILITY);
+
         if (giveNightVision) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
         }
@@ -57,11 +60,7 @@ public class VanishManager implements Listener {
         if (preventMobTarget) player.setAffectsSpawning(false);
         if (disableCollisions) player.setCollidable(false);
 
-        if (plugin.getTabManager() != null) {
-            for (Player online : plugin.getServer().getOnlinePlayers()) {
-                plugin.getTabManager().updatePlayerTab(online);
-            }
-        }
+        updateTabForAll();
 
         plugin.debug(player.getName() + " is now vanished");
     }
@@ -81,13 +80,17 @@ public class VanishManager implements Listener {
         if (preventMobTarget) player.setAffectsSpawning(true);
         if (disableCollisions) player.setCollidable(true);
 
+        updateTabForAll();
+
+        plugin.debug(player.getName() + " is no longer vanished");
+    }
+
+    private void updateTabForAll() {
         if (plugin.getTabManager() != null) {
             for (Player online : plugin.getServer().getOnlinePlayers()) {
                 plugin.getTabManager().updatePlayerTab(online);
             }
         }
-
-        plugin.debug(player.getName() + " is no longer vanished");
     }
 
     public boolean isVanished(Player player) {
@@ -101,6 +104,7 @@ public class VanishManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player joining = event.getPlayer();
+
         if (joining.hasPermission("essentialsc.vanish.onjoin")) {
             vanishedPlayers.add(joining.getUniqueId());
         }
@@ -113,7 +117,9 @@ public class VanishManager implements Listener {
         for (UUID vanishedId : vanishedPlayers) {
             Player vanished = plugin.getServer().getPlayer(vanishedId);
             if (vanished != null && !vanished.equals(joining)) {
-                if (!joining.hasPermission("essentialsc.vanish.see")) {
+                if (joining.hasPermission("essentialsc.vanish.see")) {
+                    joining.showPlayer(plugin, vanished);
+                } else {
                     joining.hidePlayer(plugin, vanished);
                 }
             }
