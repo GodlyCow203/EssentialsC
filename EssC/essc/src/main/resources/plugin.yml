@@ -1,9 +1,10 @@
 name: EssentialsC
-version: '4.1.2'
+version: '4.1.3'
 main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
 description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
 author: _GodlyCow
+website: https://wiki.godlycow.org/essc/landingpage
 softdepend:
   - Vault
   - PlaceholderAPI
