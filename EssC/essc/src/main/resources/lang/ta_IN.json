@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>பயன்பாடு: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== ஆன்லைன் வீரர்கள் (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ஆன்லைனில் வீரர்கள் இல்லை</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>பயன்பாடு: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00><count> விளையாட்டாளர்கள் உங்களிடம் அனுப்பப்பட்டனர். (<skipped> தவிர்க்கப்பட்டன)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>நீங்கள் <player> இடம் அனுப்பப்பட்டுள்ளீர்கள்</color>"
 }

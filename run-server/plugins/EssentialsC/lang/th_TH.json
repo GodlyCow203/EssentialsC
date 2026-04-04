@@ -768,5 +768,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>วิธีใช้: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== ผู้เล่นออนไลน์ (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ไม่มีผู้เล่นออนไลน์</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>วิธีใช้: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>เทเลพอร์ตผู้เล่น <count> คนมาหาคุณ (<skipped> ข้ามไป)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>คุณถูกเทเลพอร์ตไปหา <player></color>"
 }

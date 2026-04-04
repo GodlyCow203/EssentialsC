@@ -767,6 +767,10 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>استعمال: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== آن لائن کھلاڑی (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>کوئی کھلاڑی آن لائن نہیں ہے</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>استعمال: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00><count> کھلاڑیوں کو آپ کے پاس ٹیلی پورٹ کیا گیا۔ (<skipped> چھوڑ دیا)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>آپ کو <player> کے پاس ٹیلی پورٹ کر دیا گیا ہے</color>"
 }
 

@@ -767,6 +767,10 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== 在线玩家 (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>没有玩家在线</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>用法: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>已传送 <count> 名玩家到你身边。(<skipped> 已跳过)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>你已被传送到 <player></color>"
 
 }

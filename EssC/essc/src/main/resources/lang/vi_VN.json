@@ -768,5 +768,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>Cách dùng: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== Người chơi Trực tuyến (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>Không có người chơi nào trực tuyến</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>Cách dùng: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>Đã dịch chuyển <count> người chơi đến bạn. (<skipped> đã bỏ qua)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>Bạn đã được dịch chuyển đến <player></color>"
 }

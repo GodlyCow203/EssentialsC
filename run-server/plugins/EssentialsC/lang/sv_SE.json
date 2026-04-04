@@ -768,5 +768,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>Användning: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== Spelare Online (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>Inga spelare online</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>Användning: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>Teleporterade <count> spelare till dig. (<skipped> hoppade över)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>Du har teleporterats till <player></color>"
 }

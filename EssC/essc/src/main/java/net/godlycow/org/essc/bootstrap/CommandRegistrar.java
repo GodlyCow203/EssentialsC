@@ -78,6 +78,7 @@ public class CommandRegistrar {
         register("anvil", new AnvilCommand(plugin));
         register("craftingtable", new CraftingTableCommand(plugin));
         register("back", new BackCommand(plugin));
+        register("tphereall", new TPHereAllCommand(plugin));
         register("kit", new KitCommand(plugin));
         register("kits", new KitsCommand(plugin));
         if (plugin.getConfigManager().isNickEnabled()) {

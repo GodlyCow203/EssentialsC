@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>వినియోగం: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== ఆన్‌లైన్ ప్లేయర్లు (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ఆన్‌లైన్‌లో ప్లేయర్లు లేరు</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>వాడకం: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00><count> మంది ఆటగాళ్లను మీ వద్దకు టెలిపోర్ట్ చేసారు. (<skipped> విస్మరించబడ్డారు)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>మీరు <player> వద్దకు టెలిపోర్ట్ చేయబడ్డారు</color>"
 }

@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== اللاعبون المتصلون (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>لا يوجد لاعبون متصلون</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>الاستخدام: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>تم نقل <count> لاعبين إليك. (<skipped> تم تخطيهم)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>تم نقلك إلى <player></color>"
 }

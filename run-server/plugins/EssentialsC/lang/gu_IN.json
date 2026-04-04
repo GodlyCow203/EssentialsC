@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>વપરાશ: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== ઓનલાઈન ખેલાડી (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>કોઈ ખેલાડી ઓનલાઈન નથી</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>વપરાશ: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00><count> રમતવીરોને તમારી પાસે ટેલિપોર્ટ કર્યા. (<skipped> છોડી દીધા)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>તમને <player> પાસે ટેલિપોર્ટ કરવામાં આવ્યા છે</color>"
 }

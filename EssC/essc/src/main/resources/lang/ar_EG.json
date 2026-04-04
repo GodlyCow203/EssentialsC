@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== اللاعبين الاونلاين (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>مفيش لاعبين اونلاين</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>الاستخدام: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00>اتنقل <count> لاعبين لعندك. (<skipped> اتخطوا)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200>اتنقلت لعند <player></color>"
 }

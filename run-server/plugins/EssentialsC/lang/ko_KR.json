@@ -767,5 +767,9 @@
   "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist</color>",
   "playerlist.header": "<prefix> <color:#FFF200><bold>=== 온라인 플레이어 (<online>/<max>) ===</bold></color>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>온라인 플레이어 없음</color>",
-  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>",
+
+  "command.usage.tphereall": "<prefix> <color:#FF0000>사용법: /tphereall</color>",
+  "tphereall.success": "<prefix> <color:#00AA00><count>명의 플레이어를 당신에게 텔레포트했습니다. (<skipped>명 건너뜀)</color>",
+  "tphereall.teleported": "<prefix> <color:#FFF200><player>에게 텔레포트되었습니다</color>"
 }
