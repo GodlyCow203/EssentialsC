@@ -372,6 +372,7 @@
   "invsee.self": "<prefix> <color:#FF0000>คุณไม่สามารถดูกระเป๋าตัวเองได้</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>วิธีใช้: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>คุณไม่มีสิทธิ์แก้ไขกระเป๋านี้</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>คุณกำลังดูช่องเก็บของของ <color:#66AAFF><target></color> (ออฟไลน์)</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>ล้างกระเป๋าของคุณแล้ว</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>ล้างกระเป๋าของ <color:#FFFFFF><target></color> แล้ว</color>",
@@ -762,5 +763,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>คุณไม่มีสิทธิ์สปอว์น <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>จำนวนต้องเป็นตัวเลขบวก!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>จำนวนจำกัดสูงสุดที่ <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>สปอว์น <amount>x <entity> แล้ว</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>สปอว์น <amount>x <entity> แล้ว</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>วิธีใช้: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== ผู้เล่นออนไลน์ (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>ไม่มีผู้เล่นออนไลน์</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

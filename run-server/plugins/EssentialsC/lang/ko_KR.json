@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>자신의 인벤토리는 볼 수 없습니다</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>사용법: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>이 인벤토리를 수정할 권한이 없습니다</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA><color:#66AAFF><target></color>의 인벤토리를 보고 있습니다 (오프라인).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>인벤토리가 비워졌습니다</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color>님의 인벤토리를 비웠습니다</color>",
@@ -761,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> 스폰 권한이 없습니다!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>수량은 양수여야 합니다!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>수량이 최대 <max> 로 제한됨</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity> 스폰됨</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity> 스폰됨</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== 온라인 플레이어 (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>온라인 플레이어 없음</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

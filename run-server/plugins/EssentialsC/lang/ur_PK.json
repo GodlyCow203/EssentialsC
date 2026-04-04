@@ -762,6 +762,11 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>آپ کو <entity> پیدا کرنے کی اجازت نہیں ہے!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>مقدار مثبت عدد ہونی چاہیے!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>مقدار <max> کی زیادہ سے زیادہ حد تک محدود</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> پیدا کیا گیا</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> پیدا کیا گیا</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>استعمال: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== آن لائن کھلاڑی (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>کوئی کھلاڑی آن لائن نہیں ہے</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }
 

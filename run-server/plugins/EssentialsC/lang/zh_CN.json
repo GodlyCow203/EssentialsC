@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>你不能查看自己的背包</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>用法: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>你没有权限修改此背包</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>你正在查看 <color:#66AAFF><target></color> 的背包（离线）。</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>你的背包已被清空</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>已清空 <color:#FFFFFF><target></color> 的背包</color>",
@@ -761,6 +762,11 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>你没有权限生成 <entity>！</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>数量必须是正数！</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>数量已限制为最大值 <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>个 <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>个 <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== 在线玩家 (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>没有玩家在线</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 
 }

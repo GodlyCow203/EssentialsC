@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Du kannst dein eigenes Inventar nicht ansehen</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Verwendung: /invsee <spieler></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Du hast keine Berechtigung, dieses Inventar zu modifizieren</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Du siehst dir das Inventar von <color:#66AAFF><target></color> an (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Dein Inventar wurde geleert</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Inventar von <color:#FFFFFF><target></color> geleert</color>",
@@ -760,6 +761,11 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Du hast keine Berechtigung <entity> zu spawnen!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Anzahl muss eine positive Zahl sein!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Anzahl auf Maximum von <max> begrenzt</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Verwendung: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Spieler Online (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Keine Spieler online</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 
 }

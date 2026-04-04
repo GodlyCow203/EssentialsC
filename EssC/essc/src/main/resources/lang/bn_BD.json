@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>আপনার <entity> স্পawn করার অনুমতি নেই!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>পরিমাণ অবশ্যই ধনাত্মক সংখ্যা হতে হবে!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>পরিমাণ সর্বোচ্চ <max> এ সীমাবদ্ধ</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> স্পawn করা হয়েছে</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> স্পawn করা হয়েছে</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>ব্যবহার: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== অনলাইন খেলোয়াড় (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>কোনো খেলোয়াড় অনলাইনে নেই</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

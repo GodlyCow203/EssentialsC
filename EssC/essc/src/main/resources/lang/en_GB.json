@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>You don't have permission to spawn <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Amount must be a positive number!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Amount capped to maximum of <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Spawned <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Spawned <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Online Players (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

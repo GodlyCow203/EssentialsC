@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> સ્પોન કરવાની તમારી પરવાનગી નથી!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>જથ્થો સકારાત્મક સંખ્યા હોવી જોઈએ!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>જથ્થો મહત્તમ <max> સુધી મર્યાદિત</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> સ્પોન થયું</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> સ્પોન થયું</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>વપરાશ: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== ઓનલાઈન ખેલાડી (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>કોઈ ખેલાડી ઓનલાઈન નથી</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

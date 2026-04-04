@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>لا يمكنك عرض مخزونك الخاص</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>الاستخدام: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>ليس لديك صلاحية لتعديل هذا المخزون</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>أنت بتشوف مخزون <color:#66AAFF><target></color> (مش متصل).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>تم مسح مخزونك</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>تم مسح مخزون <color:#FFFFFF><target></color></color>",
@@ -761,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>مش معاك صلاحية تعمل spawn لـ <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>الكمية لازم تكون رقم موجب!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>الكمية اتقفلت على الـ max <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>اتعمل spawn لـ <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>اتعمل spawn لـ <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== اللاعبين الاونلاين (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>مفيش لاعبين اونلاين</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

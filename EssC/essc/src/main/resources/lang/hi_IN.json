@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> स्पॉन करने की आपकी अनुमति नहीं है!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>मात्रा धनात्मक संख्या होनी चाहिए!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>मात्रा अधिकतम <max> तक सीमित</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन किया गया</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन किया गया</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>उपयोग: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== ऑनलाइन खिलाड़ी (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>कोई खिलाड़ी ऑनलाइन नहीं है</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

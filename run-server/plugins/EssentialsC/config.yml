@@ -56,6 +56,10 @@ economy:
   minimum-transaction: "0.01"
   max-balance: -1
 
+playerlist:
+  show-luckperms-prefix: true
+  players-per-line: 10
+
 rtp:
   # Completely disable the /rtp command (will unregister from command map)
   register-command: true

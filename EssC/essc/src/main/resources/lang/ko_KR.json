@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> 스폰 권한이 없습니다!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>수량은 양수여야 합니다!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>수량이 최대 <max> 로 제한됨</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity> 스폰됨</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity> 스폰됨</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== 온라인 플레이어 (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>온라인 플레이어 없음</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

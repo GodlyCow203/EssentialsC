@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>У вас немає дозволу на спавн <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Кількість має бути позитивним числом!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Кількість обмежена максимумом <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Заспавнено <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Заспавнено <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Використання: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Гравців онлайн (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Немає гравців онлайн</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

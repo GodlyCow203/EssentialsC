@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> をスポーンする権限がありません！</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>数量は正の数である必要があります！</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>数量が最大 <max> に制限されました</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>体の <entity> をスポーンしました</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>体の <entity> をスポーンしました</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>使い方: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== オンラインプレイヤー (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>オンラインのプレイヤーはいません</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>तुम्ही स्वतःची वस्तूसूची पाहू शकत नाही</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>वापर: /invsee <player></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>तुमच्याकडे ही वस्तूसूची बदलण्याची परवानगी नाही</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>तुम्ही <color:#66AAFF><target></color> चा इन्व्हेंटरी पाहत आहात (ऑफलाइन).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>तुमची वस्तूसूची साफ केली</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> ची वस्तूसूची साफ केली</color>",
@@ -760,5 +761,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> स्पॉन करण्याची तुमची परवानगी नाही!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>प्रमाण सकारात्मक संख्या असावी!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>प्रमाण कमाल <max> पर्यंत मर्यादित</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन केले</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन केले</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>वापर: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== ऑनलाइन खेळाड (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>ऑनलाइन कोणतेही खेळाडू नाहीत</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

@@ -55,6 +55,7 @@ public class CommandRegistrar {
         register("tpa", new TPACommand(plugin));
         register("tpahere", new TPAHereCommand(plugin));
         register("tpaccept", new TPAcceptCommand(plugin));
+        register("playerlist", new PlayerListCommand(plugin));
         register("tpdeny", new TPADenyCommand(plugin));
         register("tpcancel", new TPACancelCommand(plugin));
         register("tpaignore", new TPAIgnoreCommand(plugin));

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Nie możesz przeglądać własnego ekwipunku</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Użycie: /invsee <gracz></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Nie masz uprawnień do modyfikacji tego ekwipunku</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Przeglądasz ekwipunek gracza <color:#66AAFF><target></color> (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Twój ekwipunek został wyczyszczony</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Wyczyszczono ekwipunek <color:#FFFFFF><target></color></color>",
@@ -761,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Nie masz uprawnień do spawnu <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Ilość musi być liczbą dodatnią!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Ilość ograniczona do maksimum <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Zespawnowano <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Zespawnowano <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Użycie: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Graczy Online (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Brak graczy online</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

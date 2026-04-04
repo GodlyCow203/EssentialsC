@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Du hues keng Erlaabnis fir <entity> ze spawnen!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Quantitéit muss eng positiv Zuel sinn!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Quantitéit op Maximum vu <max> limitéiert</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Benotzung: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Spiller Online (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Keng Spiller online</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

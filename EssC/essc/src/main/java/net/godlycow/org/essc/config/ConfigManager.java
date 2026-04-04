@@ -594,4 +594,12 @@ public class ConfigManager {
 
     public int getSpawnEntityMaxAmount() { return config.getInt("spawnentity.max-amount", 10);}
 
+    public boolean isPlayerListLuckPermsEnabled() {
+        return config.getBoolean("playerlist.show-luckperms-prefix", true);
+    }
+
+    public int getPlayerListPerLine() {
+        return config.getInt("playerlist.players-per-line", 10);
+    }
+
 }

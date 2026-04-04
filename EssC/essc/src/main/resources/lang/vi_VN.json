@@ -763,5 +763,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Bạn không có quyền spawn <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Số lượng phải là số dương!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Số lượng giới hạn tối đa là <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Đã spawn <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Đã spawn <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Cách dùng: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Người chơi Trực tuyến (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Không có người chơi nào trực tuyến</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

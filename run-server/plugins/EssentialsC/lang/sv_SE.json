@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Du kan inte se din egen inventering</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Användning: /invsee <spelare></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>Du har inte behörighet att ändra denna inventering</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Du tittar på <color:#66AAFF><target></color>s inventory (offline).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Din inventering har rensats</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Rensade <color:#FFFFFF><target></color>s inventering</color>",
@@ -762,5 +763,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>Du har inte tillåtelse att spawna <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Antalet måste vara ett positivt tal!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Antalet begränsat till maximum <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Spawna <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Spawna <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Användning: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Spelare Online (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Inga spelare online</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

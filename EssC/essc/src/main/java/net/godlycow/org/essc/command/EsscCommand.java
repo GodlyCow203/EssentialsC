@@ -142,6 +142,7 @@ public class EsscCommand extends Command {
                     plugin.debug("Reloaded Rules");
                 }
 
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }

@@ -762,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000><entity> ஸ்பான் செய்ய உங்களுக்கு அனுமதி இல்லை!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>அளவு நேர்மறை எண்ணாக இருக்க வேண்டும்!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>அளவு அதிகபட்ச <max> வரை வரம்பிடப்பட்டது</color>",
-  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> ஸ்பான் செய்யப்பட்டது</color>"
+  "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> ஸ்பான் செய்யப்பட்டது</color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>பயன்பாடு: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== ஆன்லைன் வீரர்கள் (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>ஆன்லைனில் வீரர்கள் இல்லை</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

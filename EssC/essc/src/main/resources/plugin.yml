@@ -23,6 +23,11 @@ commands:
     permission: essentialsc.admin
     aliases: [essentialsc]
 
+  playerlist:
+    description: Display a list of online players
+    usage: /playerlist
+    permission: essentialsc.playerlist
+
   heal:
     description: Heal yourself
     usage: /heal
@@ -1012,6 +1017,10 @@ permissions:
 
   essentialsc.invsee.offline:
     description: Allows you to see offline players inventories
+    default: op
+
+  essentialsc.playerlist:
+    description: Allows viewing the player list
     default: op
 
 

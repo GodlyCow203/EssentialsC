@@ -14,6 +14,7 @@ import net.godlycow.org.essc.bstats.EconomyCharts;
 import net.godlycow.org.essc.chat.luckperms.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
+import net.godlycow.org.essc.command.player.PlayerListCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
@@ -448,4 +449,5 @@ public final class EssentialsC extends JavaPlugin {
     }
 
     public RulesManager getRulesManager() {return rulesManager;}
+
 }

@@ -371,6 +371,7 @@
   "invsee.self": "<prefix> <color:#FF0000>Вы не можете просмотреть свой инвентарь</color>",
   "command.usage.invsee": "<prefix> <color:#FF0000>Использование: /invsee <игрок></color>",
   "invsee.no_modify": "<prefix> <color:#FF0000>У вас нет прав на изменение этого инвентаря</color>",
+  "invsee.opened_offline": "<prefix> <color:#AAAAAA>Вы просматриваете инвентарь игрока <color:#66AAFF><target></color> (офлайн).</color>",
 
   "clearinventory.success": "<prefix> <color:#FFF200>Ваш инвентарь очищен</color>",
   "clearinventory.success.other": "<prefix> <color:#FFF200>Очищен инвентарь <color:#FFFFFF><target></color></color>",
@@ -761,5 +762,10 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>У вас нет разрешения на спавн <entity>!</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>Количество должно быть положительным числом!</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>Количество ограничено максимумом <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>Заспавнено <amount>x <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>Заспавнено <amount>x <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>Использование: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== Игроков онлайн (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>Нет игроков онлайн</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 }

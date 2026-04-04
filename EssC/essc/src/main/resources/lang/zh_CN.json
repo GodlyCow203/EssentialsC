@@ -762,6 +762,11 @@
   "spawnentity.no_permission_entity": "<prefix> <color:#FF0000>你没有权限生成 <entity>！</color>",
   "spawnentity.invalid_amount": "<prefix> <color:#FF0000>数量必须是正数！</color>",
   "spawnentity.amount_capped": "<prefix> <color:#FFF200>数量已限制为最大值 <max></color>",
-  "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>个 <entity></color>"
+  "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>个 <entity></color>",
+
+  "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist</color>",
+  "playerlist.header": "<prefix> <color:#FFF200><bold>=== 在线玩家 (<online>/<max>) ===</bold></color>",
+  "playerlist.empty": "<prefix> <color:#AAAAAA>没有玩家在线</color>",
+  "playerlist.footer": "<prefix> <color:#FFF200><bold>=================================</bold></color>"
 
 }
