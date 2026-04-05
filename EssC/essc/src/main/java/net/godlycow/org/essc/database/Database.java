@@ -19,7 +19,13 @@ public class Database {
 
     public Database(EssentialsC plugin, String filename) {
         this.plugin = plugin;
-        this.dbPath = new File(plugin.getDataFolder(), filename).getAbsolutePath();
+
+        File databasesDir = new File(plugin.getDataFolder(), "databases");
+        if (!databasesDir.exists()) {
+            databasesDir.mkdirs();
+        }
+
+        this.dbPath = new File(databasesDir, filename).getAbsolutePath();
         this.jdbcUrl = "jdbc:sqlite:" + dbPath;
     }
 
@@ -38,7 +44,6 @@ public class Database {
             }
         }
     }
-
 
     public Connection getConnection() {
         try {
