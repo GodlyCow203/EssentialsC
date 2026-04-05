@@ -308,6 +308,11 @@ hat:
   priority: normal
   aliases: []
 
+schedules:
+  enabled: true
+  priority: normal
+  aliases: []
+
 itemid:
   enabled: true
   priority: normal

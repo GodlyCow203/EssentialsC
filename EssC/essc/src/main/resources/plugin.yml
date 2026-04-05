@@ -406,6 +406,11 @@ commands:
     usage: /spawnentity <entity> [amount]
     permission: essentialsc.spawnentity
 
+  schedules:
+    description: Manage schedules
+    usage: /schedules <list|info|run|pause|resume> [name]
+    permission: essentialsc.schedules
+
 permissions:
   essentialsc.heal:
     description: Heal command

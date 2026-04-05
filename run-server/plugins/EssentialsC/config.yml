@@ -16,6 +16,9 @@ luckperms:
 discordsrv:
   enabled: true
 
+motd:
+  enabled: true
+
   # Channel configuration
   # The 'name' field references a channel name defined in DiscordSRV's config.yml
   channels:

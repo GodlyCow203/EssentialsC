@@ -31,6 +31,7 @@ import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.AhListener;
 import net.godlycow.org.essc.listener.BanListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
+import net.godlycow.org.essc.motd.MOTDManager;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
@@ -38,6 +39,7 @@ import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.rtp.RTPGuiManager;
 import net.godlycow.org.essc.rtp.RTPManager;
 import net.godlycow.org.essc.rules.RulesManager;
+import net.godlycow.org.essc.schedule.ScheduleManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.setup.FirstRunHandler;
 import net.godlycow.org.essc.shop.ShopListener;
@@ -96,6 +98,9 @@ public final class EssentialsC extends JavaPlugin {
     private TABHook tabHook;
     private RulesManager rulesManager;
     private CommandsConfig commandsConfig;
+    private ScheduleManager scheduleManager;
+    private MOTDManager motdManager;
+
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -130,7 +135,11 @@ public final class EssentialsC extends JavaPlugin {
 
         languageManager = new LanguageManager(this);
         languageManager.load(configManager.getDefaultLanguage());
-
+        scheduleManager = new ScheduleManager(this);
+        scheduleManager.load();
+        if (configManager.isMotdEnabled()) {
+            motdManager = new MOTDManager(this);
+        }
         tpaManager = new TPAManager(this);
         homeManager = new HomeManager(this);
         homeGuiManager = new GuiManager(this);
@@ -274,6 +283,10 @@ public final class EssentialsC extends JavaPlugin {
         }
         if (rtpGuiManager != null) {
             rtpGuiManager.shutdown();
+        }
+
+        if (scheduleManager != null) {
+            scheduleManager.shutdown();
         }
 
         getLogger().info("EssentialsC disabled");
@@ -456,6 +469,14 @@ public final class EssentialsC extends JavaPlugin {
 
     public CommandsConfig getCommandsConfig() {
         return commandsConfig;
+    }
+
+    public ScheduleManager getScheduleManager() {
+        return scheduleManager;
+    }
+
+    public MOTDManager getMotdManager(){
+        return motdManager;
     }
 
 }

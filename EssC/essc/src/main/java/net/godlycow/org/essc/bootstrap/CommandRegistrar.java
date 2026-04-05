@@ -24,6 +24,7 @@ import net.godlycow.org.essc.config.CommandsConfig;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.migration.MigrationCommand;
 import net.godlycow.org.essc.punishment.PunishmentManager;
+import net.godlycow.org.essc.schedule.SchedulesCommand;
 import net.godlycow.org.essc.util.CommandRegistrationUtil;
 import org.bukkit.command.PluginCommand;
 
@@ -77,6 +78,7 @@ public class CommandRegistrar {
         register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
         register("clearinventory", new ClearInventoryCommand(plugin));
+        register("schedules",      new SchedulesCommand(plugin));
         register("enderchest",     new EnderChestCommand(plugin));
         register("endersee",       new EnderSeeCommand(plugin));
         register("speed",          new SpeedCommand(plugin));

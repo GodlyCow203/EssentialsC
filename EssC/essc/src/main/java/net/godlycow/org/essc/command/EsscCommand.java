@@ -142,6 +142,17 @@ public class EsscCommand extends Command {
                     plugin.debug("Reloaded Rules");
                 }
 
+                if (plugin.getScheduleManager() != null) {
+                    plugin.getScheduleManager().reload();
+                    plugin.getRulesManager().reload();
+                    plugin.debug("Reloaded Schedzles");
+                }
+
+                if (plugin.getMotdManager() != null) {
+                    plugin.getMotdManager().reload();
+                    plugin.debug("MOTD reloaded");
+                }
+
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");

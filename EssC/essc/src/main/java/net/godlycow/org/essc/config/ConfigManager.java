@@ -602,4 +602,16 @@ public class ConfigManager {
         return config.getInt("playerlist.players-per-line", 10);
     }
 
+    public boolean isMotdEnabled() {
+        return config.getBoolean("motd.enabled", true);
+    }
+
+    public int getMotdMaxLineWidth() {
+        return config.getInt("motd.max-line-width", 50);
+    }
+
+    public String getMotdFileName() {
+        return config.getString("motd.file", "motd.txt");
+    }
+
 }

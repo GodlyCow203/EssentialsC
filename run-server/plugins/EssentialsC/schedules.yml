@@ -1,0 +1,130 @@
+# EssentialsC — schedules.yml
+#
+# Define automated schedules that run actions at a fixed interval or at a
+# specific time every day. Each top-level key is the schedule's name and is
+# used with the /schedules command.
+#
+#
+# Schedule properties
+#
+#   enabled       Set to false to disable this schedule without deleting it.
+#
+#   interval      How often to run, in seconds. Mutually exclusive with 'time'.
+#
+#   time          A fixed time of day (HH:mm, 24-hour) at which to run once
+#                 per day. Mutually exclusive with 'interval'.
+#
+#   worlds        Optional list of world names. When set, actions that target
+#                 players (title, actionbar, bossbar, sound) will only affect
+#                 players in these worlds. Broadcast and console commands are
+#                 unaffected. Omit or leave empty for all worlds.
+#
+#   permission    Optional permission node. When set, player-targeted actions
+#                 will only affect players who have this permission.
+#                 Omit or leave empty to target everyone.
+#
+#   actions       List of actions to run in order. See action types below.
+#
+#
+# Action types
+#
+#   broadcast     Sends a MiniMessage formatted message to all players.
+#     message       The message to send.
+#
+#   title         Sends a title screen to targeted players.
+#     title         The large title text (MiniMessage).
+#     subtitle      The smaller subtitle text (MiniMessage).
+#     fade-in       Fade-in duration in ticks (default: 10).
+#     stay          Display duration in ticks (default: 70).
+#     fade-out      Fade-out duration in ticks (default: 20).
+#
+#   actionbar     Sends an action bar message to targeted players.
+#     message       The message to send (MiniMessage).
+#
+#   bossbar       Shows a boss bar to targeted players for a set duration.
+#     message       The boss bar label (MiniMessage).
+#     color         Bar color: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE.
+#     style         Bar style: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20.
+#     duration      How long to show the bar, in seconds.
+#
+#   sound         Plays a sound for targeted players.
+#     sound         Bukkit sound name (e.g. ENTITY_PLAYER_LEVELUP).
+#     volume        Volume multiplier (default: 1.0).
+#     pitch         Pitch multiplier (default: 1.0).
+#
+#   command       Runs a command.
+#     run-as        Who runs the command: 'console' or 'player'.
+#                   When 'player', the command runs once per targeted player.
+#     command       The command to run, without the leading slash.
+#                   Supports {player} and {world} placeholders when run-as is 'player'.
+#
+#
+# Available placeholders in messages
+#
+#   {player}      The player's display name (player-targeted actions only).
+#   {world}       The player's current world (player-targeted actions only).
+#   {online}      Number of players currently online.
+#   {tps}         Current server TPS (1-minute average).
+#   {time}        Current server time in HH:mm format.
+#
+#
+# Examples below — remove the leading # to enable them.
+
+schedules:
+
+  server-tip:
+    enabled: true
+    interval: 600
+    actions:
+      - type: broadcast
+        message: "<dark_gray>[<gold>Tip<dark_gray>] <white>Use <yellow>/rtp <white>to teleport to a random location!"
+
+  welcome-back:
+    enabled: true
+    interval: 180
+    actions:
+      - type: title
+        title: "<gold><b>Thanks for playing!"
+        subtitle: "<gray>{online} players currently online"
+        fade-in: 10
+        stay: 70
+        fade-out: 20
+      - type: sound
+        sound: ENTITY_PLAYER_LEVELUP
+        volume: 1.0
+        pitch: 1.0
+
+  store-reminder:
+    enabled: false
+    interval: 3600
+    actions:
+      - type: actionbar
+        message: "<yellow>Support the server at <gold><u>store.example.com"
+
+  daily-restart-warning:
+    enabled: false
+    time: "23:50"
+    actions:
+      - type: broadcast
+        message: "<red><b>The server will restart in 10 minutes. Please find a safe spot!"
+      - type: title
+        title: "<red><b>Restart Soon"
+        subtitle: "<gray>10 minutes remaining"
+        fade-in: 10
+        stay: 100
+        fade-out: 20
+      - type: sound
+        sound: BLOCK_NOTE_BLOCK_PLING
+        volume: 1.0
+        pitch: 0.5
+
+  vip-reward:
+    enabled: false
+    interval: 3600
+    permission: essentialsc.vip
+    actions:
+      - type: command
+        run-as: console
+        command: "eco give {player} 100"
+      - type: actionbar
+        message: "<gold>You received your hourly VIP reward of $100!"
