@@ -614,4 +614,16 @@ public class ConfigManager {
         return config.getString("motd.file", "motd.txt");
     }
 
+    public boolean isBackupEnabled() {
+        return config.getBoolean("backup.enabled", true);
+    }
+
+    public int getBackupKeepLast() {
+        return config.getInt("backup.keep-last", 10);
+    }
+
+    public boolean isBackupOnShutdown() {
+        return config.getBoolean("backup.on-shutdown", true);
+    }
+
 }

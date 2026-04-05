@@ -1,13 +1,22 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import org.bukkit.command.CommandSender;
 
+import java.io.File;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 public class EsscCommand extends Command {
+
+    private static final DateTimeFormatter DISPLAY_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public EsscCommand(EssentialsC plugin) {
         super(plugin, "essc", "essentialsc.admin", false);
@@ -72,7 +81,7 @@ public class EsscCommand extends Command {
 
                 if (plugin.getKitManager() != null) {
                     plugin.getKitManager().reload();
-                    plugin.debug("Back Manager reloaded");
+                    plugin.debug("Kit Manager reloaded");
                 }
 
                 if (plugin.getScoreboardManager() != null) {
@@ -117,7 +126,7 @@ public class EsscCommand extends Command {
 
                 if (plugin.getAfkManager() != null) {
                     plugin.getAfkManager().reload();
-                    plugin.debug("Afk system reloaded");
+                    plugin.debug("AFK system reloaded");
                 }
 
                 if (plugin.getChatManager() != null) {
@@ -133,19 +142,17 @@ public class EsscCommand extends Command {
                 if (plugin.getTabManager() != null) {
                     plugin.getTabManager().reload();
                     plugin.getTabManager().refreshAll();
-                    plugin.debug("Reloaded TAB");
+                    plugin.debug("TAB reloaded");
                 }
 
                 if (plugin.getRulesManager() != null) {
                     plugin.getRulesManager().reload();
-                    plugin.getRulesManager().reload();
-                    plugin.debug("Reloaded Rules");
+                    plugin.debug("Rules reloaded");
                 }
 
                 if (plugin.getScheduleManager() != null) {
                     plugin.getScheduleManager().reload();
-                    plugin.getRulesManager().reload();
-                    plugin.debug("Reloaded Schedzles");
+                    plugin.debug("Schedules reloaded");
                 }
 
                 if (plugin.getMotdManager() != null) {
@@ -153,10 +160,11 @@ public class EsscCommand extends Command {
                     plugin.debug("MOTD reloaded");
                 }
 
-
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 plugin.debug("Reload completed");
             }
+
+            case "backup" -> executeBackup(sender, args);
 
             case "version" -> {
                 String version = plugin.getDescription().getVersion();
@@ -198,9 +206,70 @@ public class EsscCommand extends Command {
         return true;
     }
 
+    private void executeBackup(CommandSender sender, String[] args) {
+
+        String sub = args.length >= 2 ? args[1].toLowerCase() : "create";
+
+        switch (sub) {
+            case "list" -> {
+                var backups = plugin.getBackupManager().listBackups();
+
+                if (backups.isEmpty()) {
+                    sender.sendMessage(lang.get(sender, "essc.backup.list.empty"));
+                    return;
+                }
+
+                sender.sendMessage(lang.get(sender, "essc.backup.list.header",
+                        Map.of("count", String.valueOf(backups.size()))));
+
+                for (File backup : backups) {
+                    String size = BackupManager.formatSize(backup.length());
+                    String date = LocalDateTime.ofInstant(
+                            Instant.ofEpochMilli(backup.lastModified()),
+                            ZoneId.systemDefault()
+                    ).format(DISPLAY_FORMAT);
+
+                    sender.sendMessage(lang.get(sender, "essc.backup.list.entry", Map.of(
+                            "name", backup.getName(),
+                            "size", size,
+                            "date", date
+                    )));
+                }
+            }
+
+            case "delete" -> {
+                if (args.length < 3) {
+                    sender.sendMessage(lang.get(sender, "essc.backup.delete.usage"));
+                    return;
+                }
+
+                String fileName = args[2];
+                if (plugin.getBackupManager().delete(fileName)) {
+                    sender.sendMessage(lang.get(sender, "essc.backup.delete.success",
+                            Map.of("name", fileName)));
+                } else {
+                    sender.sendMessage(lang.get(sender, "essc.backup.delete.not_found",
+                            Map.of("name", fileName)));
+                }
+            }
+
+            default -> {
+                sender.sendMessage(lang.get(sender, "essc.backup.create.starting"));
+
+                plugin.getBackupManager().createAsync(
+                        fileName -> sender.sendMessage(lang.get(sender, "essc.backup.create.success",
+                                Map.of("name", fileName))),
+                        error -> sender.sendMessage(lang.get(sender, "essc.backup.create.failed",
+                                Map.of("error", error)))
+                );
+            }
+        }
+    }
+
     private void showHelp(CommandSender sender) {
         sender.sendMessage(lang.get(sender, "essc.help.header"));
         sender.sendMessage(lang.get(sender, "essc.help.reload"));
+        sender.sendMessage(lang.get(sender, "essc.help.backup"));
         sender.sendMessage(lang.get(sender, "essc.help.version"));
         sender.sendMessage(lang.get(sender, "essc.help.debug"));
         sender.sendMessage(lang.get(sender, "essc.help.placeholders"));
@@ -209,8 +278,23 @@ public class EsscCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return List.of("reload", "version", "debug", "help", "placeholders");
+            return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders"), args[0]);
         }
-        return super.tabComplete(sender, args);
+        if (args.length == 2 && args[0].equalsIgnoreCase("backup")) {
+            return filter(List.of("list", "delete"), args[1]);
+        }
+        if (args.length == 3 && args[0].equalsIgnoreCase("backup") && args[1].equalsIgnoreCase("delete")) {
+            return plugin.getBackupManager().listBackups().stream()
+                    .map(File::getName)
+                    .filter(n -> n.toLowerCase().startsWith(args[2].toLowerCase()))
+                    .toList();
+        }
+        return List.of();
+    }
+
+    private List<String> filter(List<String> options, String input) {
+        return options.stream()
+                .filter(o -> o.toLowerCase().startsWith(input.toLowerCase()))
+                .toList();
     }
 }

@@ -5,6 +5,7 @@ import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.back.BackManager;
+import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.bedrock.BedrockUtil;
 import net.godlycow.org.essc.bedrock.FloodgateHook;
 import net.godlycow.org.essc.bootstrap.CommandRegistrar;
@@ -100,9 +101,7 @@ public final class EssentialsC extends JavaPlugin {
     private CommandsConfig commandsConfig;
     private ScheduleManager scheduleManager;
     private MOTDManager motdManager;
-
-
-
+    private BackupManager backupManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
@@ -137,6 +136,7 @@ public final class EssentialsC extends JavaPlugin {
         languageManager.load(configManager.getDefaultLanguage());
         scheduleManager = new ScheduleManager(this);
         scheduleManager.load();
+        backupManager = new BackupManager(this);
         if (configManager.isMotdEnabled()) {
             motdManager = new MOTDManager(this);
         }
@@ -287,6 +287,19 @@ public final class EssentialsC extends JavaPlugin {
 
         if (scheduleManager != null) {
             scheduleManager.shutdown();
+        }
+
+
+        if (configManager.isBackupOnShutdown()) {
+            getLogger().info("[Backup] Creating shutdown backup...");
+            try {
+                backupManager.createAsync(
+                        name -> getLogger().info("[Backup] Shutdown backup created: " + name),
+                        err  -> getLogger().warning("[Backup] Shutdown backup failed: " + err)
+                );
+            } catch (Exception e) {
+                getLogger().warning("[Backup] Shutdown backup error: " + e.getMessage());
+            }
         }
 
         getLogger().info("EssentialsC disabled");
@@ -465,7 +478,9 @@ public final class EssentialsC extends JavaPlugin {
         return bedrockUtil;
     }
 
-    public RulesManager getRulesManager() {return rulesManager;}
+    public RulesManager getRulesManager() {
+        return rulesManager;
+    }
 
     public CommandsConfig getCommandsConfig() {
         return commandsConfig;
@@ -477,6 +492,10 @@ public final class EssentialsC extends JavaPlugin {
 
     public MOTDManager getMotdManager(){
         return motdManager;
+    }
+
+    public BackupManager getBackupManager() {
+        return backupManager;
     }
 
 }

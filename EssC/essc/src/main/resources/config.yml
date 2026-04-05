@@ -12,6 +12,18 @@ luckperms:
   group-formats:
     # owner: '&c[Owner] <USERNAME> &7» &f<MESSAGE>'  ( Example only )
 
+backup:
+  # Set to false to disable the backup system entirely.
+  enabled: true
+
+  # How many backups to keep. Once this limit is exceeded, the oldest
+  # backup is automatically deleted after each new one is created.
+  # Set to -1 to keep all backups forever.
+  keep-last: 10
+
+  # Automatically create a backup when the server shuts down.
+  on-shutdown: true
+
 # DiscordSRV Integration Settings
 discordsrv:
   enabled: true

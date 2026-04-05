@@ -741,8 +741,8 @@
   "command.usage.tphere": "<prefix> <color:#FF0000>Usage: /tphere <player></color>",
   "error.cannot_teleport_self": "<prefix> <color:#FF0000>You cannot teleport yourself to yourself!</color>",
   "error.player_not_online": "<prefix> <color:#FF0000>Player <player> is not online!</color>",
-  "tphere.success": "<prefix> <color:#00FF00>You teleported <target> to your location!</color>",
-  "tphere.teleported": "<prefix> <color:#00FF00>You were teleported to <player>'s location!</color>",
+  "tphere.success": "<prefix> <color:#FFF200>You teleported <target> to your location!</color>",
+  "tphere.teleported": "<prefix> <color:#FFF200>You were teleported to <player>'s location!</color>",
   "tphere.bypass": "<prefix> <color:#FF0000><player> cannot be teleported!</color>",
 
   "command.usage.itemid": "<prefix> <color:#FF0000>Usage: /itemid</color>",
@@ -757,7 +757,7 @@
 
   "command.usage.rules": "<prefix> <color:#FF0000>Usage: /rules [reload]</color>",
   "rules.empty": "<prefix> <color:#FF0000>No rules have been configured!</color>",
-  "rules.reloaded": "<prefix> <color:#00FF00>Rules reloaded successfully!</color>",
+  "rules.reloaded": "<prefix> <color:#FFF200>Rules reloaded successfully!</color>",
 
   "command.usage.spawnentity": "<prefix> <color:#FF0000>Usage: /spawnentity <entity> [amount]</color>",
   "spawnentity.invalid": "<prefix> <color:#FF0000>Invalid entity type: <entity></color>",
@@ -778,7 +778,7 @@
 
   "schedules.state.disabled": "<color:#FF0000>Disabled</color>",
   "schedules.state.paused": "<color:#FFF200>Paused</color>",
-  "schedules.state.running": "<color:#00FF00>Running</color>",
+  "schedules.state.running": "<color:#FFF200>Running</color>",
   "schedules.trigger.interval": "<color:gray>every <color:#FFFFFF><value></color>s</color>",
   "schedules.trigger.interval.full": "<color:gray>Every <color:#FFFFFF><value></color> seconds</color>",
   "schedules.trigger.time": "<color:gray>daily at <color:#FFFFFF><value></color></color>",
@@ -786,9 +786,9 @@
   "schedules.summary.format": "<color:#FFFFFF><name></color> <color:gray>— <trigger> [</color><state><color:gray>] (</color><color:#FFFFFF><actions></color><color:gray> action(s))</color>",
   "schedules.load.no_schedules": "<prefix> <color:gray>[Schedules] No schedules defined in schedules.yml</color>",
   "schedules.load.loaded": "<prefix> <color:gray>[Schedules] Loaded schedule: <color:#FFFFFF><name></color></color>",
-  "schedules.load.complete": "<prefix> <color:#00FF00>[Schedules] Loaded <color:#FFFFFF><count></color> schedule(s).</color>",
+  "schedules.load.complete": "<prefix> <color:#FFF200>[Schedules] Loaded <color:#FFFFFF><count></color> schedule(s).</color>",
   "schedules.run.executing": "<prefix> <color:gray>[Schedules] Running schedule '<color:#FFFFFF><name></color>' for <color:#FFFFFF><count></color> player(s).</color>",
-  "schedules.run.success": "<prefix> <color:#00FF00>Schedule '<color:#FFFFFF><name></color>' executed successfully.</color>",
+  "schedules.run.success": "<prefix> <color:#FFF200>Schedule '<color:#FFFFFF><name></color>' executed successfully.</color>",
   "schedules.error.unknown_action_type": "<prefix> <color:#FF0000>[Schedules] Unknown action type: '<color:#FFFFFF><type></color>'</color>",
   "schedules.error.unknown_sound": "<prefix> <color:#FF0000>[Schedules] Unknown sound: '<color:#FFFFFF><sound></color>'</color>",
   "schedules.error.save_failed": "<prefix> <color:#FF0000>[Schedules] Could not save schedules.yml: <color:#FFFFFF><error></color></color>",
@@ -802,7 +802,7 @@
   "schedules.info.state": "<prefix> <color:gray>  State:     </color><state>",
   "schedules.info.actions": "<prefix> <color:gray>  Actions:   </color><color:#FFFFFF><count></color><color:gray> defined</color>",
   "schedules.pause.success": "<prefix> <color:#FFF200>Schedule '<color:#FFFFFF><name></color>' has been paused.</color>",
-  "schedules.resume.success": "<prefix> <color:#00FF00>Schedule '<color:#FFFFFF><name></color>' has been resumed.</color>",
+  "schedules.resume.success": "<prefix> <color:#FFF200>Schedule '<color:#FFFFFF><name></color>' has been resumed.</color>",
   "schedules.not_found": "<prefix> <color:#FF0000>Schedule not found.</color>",
   "schedules.already_paused": "<prefix> <color:#FF0000>Schedule '<color:#FFFFFF><name></color>' is already paused.</color>",
   "schedules.not_paused": "<prefix> <color:#FF0000>Schedule '<color:#FFFFFF><name></color>' is not paused.</color>",
@@ -810,7 +810,18 @@
   "schedules.master.on": "<prefix> <color:#FFF200>All schedules have been enabled.</color>",
   "schedules.master.off": "<prefix> <color:#FF0000>All schedules have been disabled.</color>",
   "schedules.master.already_on": "<prefix> <color:#FFF200>Schedules are already enabled.</color>",
-  "schedules.master.already_off": "<prefix> <color:#FFF200>Schedules are already disabled.</color>"
+  "schedules.master.already_off": "<prefix> <color:#FFF200>Schedules are already disabled.</color>",
+
+  "essc.backup.create.starting": "<prefix> <color:#FFF200>Creating backup, please wait...</color>",
+  "essc.backup.create.success": "<prefix> <color:#FFF200>Backup created successfully: <color:#FFFFFF><name></color></color>",
+  "essc.backup.create.failed": "<prefix> <color:#FF0000>Backup failed: <color:#FFFFFF><error></color></color>",
+  "essc.backup.list.header": "<prefix> <color:#FFF200><bold>Backups</bold></color> <color:gray>(<count> found):</color>",
+  "essc.backup.list.empty": "<prefix> <color:#FF0000>No backups found.</color>",
+  "essc.backup.list.entry": "<prefix> <color:gray>  » </color><color:#FFFFFF><name></color> <color:gray>— <size> — <date></color>",
+  "essc.backup.delete.usage": "<prefix> <color:#FF0000>Usage: /essc backup delete <filename></color>",
+  "essc.backup.delete.success": "<prefix> <color:#FFF200>Backup <color:#FFFFFF><name></color> deleted.</color>",
+  "essc.backup.delete.not_found": "<prefix> <color:#FF0000>Backup <color:#FFFFFF><name></color> not found.</color>",
+  "essc.help.backup": "<prefix> <color:#FFF200>/essc backup <color:#FFFFFF>[list|delete]</color> — Manage plugin data backups.</color>"
 
 
 }
