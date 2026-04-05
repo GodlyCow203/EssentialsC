@@ -66,65 +66,52 @@
 #   {online}      Number of players currently online.
 #   {tps}         Current server TPS (1-minute average).
 #   {time}        Current server time in HH:mm format.
-#
-#
-# Examples below — remove the leading # to enable them.
 
 schedules:
 
+  # Rotating server tip broadcast every 10 minutes.
+  # Reminds players of useful commands they might not know about.
+  # Swap out the message for whatever fits your server.
   server-tip:
-    enabled: true
+    enabled: false
     interval: 600
     actions:
       - type: broadcast
-        message: "<dark_gray>[<gold>Tip<dark_gray>] <white>Use <yellow>/rtp <white>to teleport to a random location!"
-
-  welcome-back:
-    enabled: true
-    interval: 180
-    actions:
-      - type: title
-        title: "<gold><b>Thanks for playing!"
-        subtitle: "<gray>{online} players currently online"
-        fade-in: 10
-        stay: 70
-        fade-out: 20
+        message: "<#444444>[ <#FFD700><b>Tip<reset><#444444> ]<reset> <#CCCCCC>Did you know you can use <#FFD700>/rtp<#CCCCCC> to teleport to a random location in the wild?"
       - type: sound
-        sound: ENTITY_PLAYER_LEVELUP
-        volume: 1.0
-        pitch: 1.0
+        sound: BLOCK_NOTE_BLOCK_PLING
+        volume: 0.6
+        pitch: 1.8
 
-  store-reminder:
-    enabled: false
-    interval: 3600
-    actions:
-      - type: actionbar
-        message: "<yellow>Support the server at <gold><u>store.example.com"
-
-  daily-restart-warning:
+  # Nightly restart warning at 23:50 — gives players 10 minutes to wrap up.
+  # Combines a loud broadcast, a title, an action bar reminder and a warning sound
+  # so nobody misses it regardless of what they are looking at.
+  restart-warning:
     enabled: false
     time: "23:50"
     actions:
       - type: broadcast
-        message: "<red><b>The server will restart in 10 minutes. Please find a safe spot!"
+        message: "<#FF4444><b>⚠ <reset><#FFCCCC>The server will restart in <#FF4444><b>10 minutes<reset><#FFCCCC>. Please find a safe spot and log off!"
       - type: title
-        title: "<red><b>Restart Soon"
-        subtitle: "<gray>10 minutes remaining"
+        title: "<#FF4444><b>Restart in 10 min"
+        subtitle: "<#AAAAAA>Find a safe spot and log off"
         fade-in: 10
-        stay: 100
+        stay: 120
         fade-out: 20
+      - type: actionbar
+        message: "<#FF4444>⚠ <#FFCCCC>Server restarting in <#FF4444>10 minutes"
       - type: sound
-        sound: BLOCK_NOTE_BLOCK_PLING
+        sound: BLOCK_NOTE_BLOCK_BASS
         volume: 1.0
         pitch: 0.5
 
-  vip-reward:
+  # Hourly automatic backup triggered through the schedule system.
+  # Keeps your data safe without any manual intervention.
+  # Pairs with the backup.keep-last setting in config.yml.
+  auto-backup:
     enabled: false
     interval: 3600
-    permission: essentialsc.vip
     actions:
       - type: command
         run-as: console
-        command: "eco give {player} 100"
-      - type: actionbar
-        message: "<gold>You received your hourly VIP reward of $100!"
+        command: "essc backup"
