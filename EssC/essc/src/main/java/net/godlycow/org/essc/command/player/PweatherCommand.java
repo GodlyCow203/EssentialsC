@@ -15,7 +15,6 @@ public class PweatherCommand extends Command {
 
     public PweatherCommand(EssentialsC plugin) {
         super(plugin, "pweather", "essentialsc.pweather", true, 0, "command.usage.pweather");
-        this.aliases = new String[]{"playerweather"};
     }
 
     @Override

@@ -13,7 +13,6 @@ public class BaltopCommand extends Command {
 
     public BaltopCommand(EssentialsC plugin) {
         super(plugin, "baltop", "essentialsc.baltop", false, 0, "command.usage.baltop");
-        this.aliases = new String[]{"balancetop"};
     }
 
     @Override

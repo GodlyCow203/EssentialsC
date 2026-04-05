@@ -11,7 +11,6 @@ public class ReplyCommand extends Command {
 
     public ReplyCommand(EssentialsC plugin) {
         super(plugin, "reply", "essentialsc.reply", false, 1, "command.usage.reply");
-        this.aliases = new String[]{"r"};
     }
 
     @Override

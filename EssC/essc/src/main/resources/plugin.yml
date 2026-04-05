@@ -22,7 +22,6 @@ commands:
     description: Main plugin command
     usage: /essc <reload|version|debug|help>
     permission: essentialsc.admin
-    aliases: [essentialsc]
 
   playerlist:
     description: Display a list of online players
@@ -37,7 +36,6 @@ commands:
   balance:
     description: Check your balance
     usage: /balance [player]
-    aliases: [bal, money]
     permission: essentialsc.balance
 
   pay:
@@ -53,7 +51,6 @@ commands:
   baltop:
     description: View top balances
     usage: /baltop [page]
-    aliases: [balancetop]
     permission: essentialsc.baltop
 
   rtp:
@@ -64,31 +61,26 @@ commands:
   tpa:
     description: Request to teleport to a player
     usage: /tpa <player>
-    aliases: [ tpask, call ]
     permission: essentialsc.tpa
 
   tpahere:
     description: Request a player to teleport to you
     usage: /tpahere <player>
-    aliases: [ tphere, s ]
     permission: essentialsc.tpahere
 
   tpaccept:
     description: Accept a teleport request
     usage: /tpaccept [player]
-    aliases: [ tpyes, tpallow ]
     permission: essentialsc.tpaccept
 
   tpdeny:
     description: Deny a teleport request
     usage: /tpdeny [player]
-    aliases: [ tpno, tpreject ]
     permission: essentialsc.tpdeny
 
   tpcancel:
     description: Cancel your outgoing teleport request
     usage: /tpcancel [player]
-    aliases: [ tpc ]
     permission: essentialsc.tpcancel
 
   tpaignore:
@@ -104,13 +96,11 @@ commands:
   tpaqueue:
     description: View pending TPA requests
     usage: /tpaqueue
-    aliases: [ tpalist, tpalist ]
     permission: essentialsc.tpaqueue
 
   sethome:
     description: Set a home at your current location
     usage: /sethome [name]
-    aliases: [ createhome ]
     permission: essentialsc.sethome
 
   home:
@@ -121,7 +111,6 @@ commands:
   delhome:
     description: Delete one of your homes
     usage: /delhome <name>
-    aliases: [ deletehome ]
     permission: essentialsc.delhome
 
   homes:
@@ -231,7 +220,6 @@ commands:
   nick:
     description: Set your nickname
     usage: /nick <nickname|off>
-    aliases: [nickname]
     permission: essentialsc.nick
 
   realname:

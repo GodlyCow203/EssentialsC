@@ -49,6 +49,18 @@ public class CommandRegistrationUtil {
         commands.forEach(CommandRegistrationUtil::unregisterCommand);
     }
 
+    public static boolean isRegistered(String name) {
+        initReflection();
+        if (knownCommands == null) return false;
+        return knownCommands.containsKey(name.toLowerCase());
+    }
+
+    public static void registerAlias(String alias, Command command) {
+        initReflection();
+        if (knownCommands == null) return;
+        knownCommands.put(alias.toLowerCase(), command);
+    }
+
     public static void syncCommands() {
         Bukkit.getScheduler().runTaskLater(JavaPlugin.getProvidingPlugin(CommandRegistrationUtil.class), () -> {
             try {

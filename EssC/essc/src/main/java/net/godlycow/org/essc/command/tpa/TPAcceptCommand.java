@@ -14,7 +14,6 @@ public class TPAcceptCommand extends Command {
 
     public TPAcceptCommand(EssentialsC plugin) {
         super(plugin, "tpaccept", "essentialsc.tpaccept", true, 0, "command.usage.tpaccept");
-        this.aliases = new String[]{"tpyes", "tpallow"};
     }
 
     @Override

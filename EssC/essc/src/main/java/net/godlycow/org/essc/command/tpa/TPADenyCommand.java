@@ -14,7 +14,6 @@ public class TPADenyCommand extends Command {
 
     public TPADenyCommand(EssentialsC plugin) {
         super(plugin, "tpdeny", "essentialsc.tpdeny", true, 0, "command.usage.tpdeny");
-        this.aliases = new String[]{"tpno", "tpreject"};
     }
 
     @Override

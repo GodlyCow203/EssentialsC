@@ -14,7 +14,6 @@ public class EnderChestCommand extends Command {
 
     public EnderChestCommand(EssentialsC plugin) {
         super(plugin, "enderchest", "essentialsc.enderchest", true, 0, "command.usage.enderchest");
-        this.aliases = new String[]{"ec", "echest"};
     }
 
     @Override

@@ -12,7 +12,6 @@ public class AFKCommand extends Command {
 
     public AFKCommand(EssentialsC plugin) {
         super(plugin, "afk", "essentialsc.afk", true, 0, "command.usage.afk");
-        this.aliases = new String[]{"away"};
     }
 
     @Override

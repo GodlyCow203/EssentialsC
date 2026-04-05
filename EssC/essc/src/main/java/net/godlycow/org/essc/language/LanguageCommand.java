@@ -18,7 +18,6 @@ public class LanguageCommand extends Command {
 
     public LanguageCommand(EssentialsC plugin) {
         super(plugin, "language", null, true);
-        this.aliases = new String[]{"lang"};
     }
 
     @Override

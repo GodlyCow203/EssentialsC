@@ -13,7 +13,6 @@ public class CraftingTableCommand extends Command {
 
     public CraftingTableCommand(EssentialsC plugin) {
         super(plugin, "craftingtable", "essentialsc.craftingtable", true, 0, "command.usage.craftingtable");
-        this.aliases = new String[]{"craft", "ct", "wb", "workbench"};
     }
 
     @Override

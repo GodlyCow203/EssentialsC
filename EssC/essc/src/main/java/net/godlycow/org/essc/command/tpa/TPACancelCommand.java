@@ -14,7 +14,6 @@ public class TPACancelCommand extends Command {
 
     public TPACancelCommand(EssentialsC plugin) {
         super(plugin, "tpcancel", "essentialsc.tpcancel", true, 0, "command.usage.tpcancel");
-        this.aliases = new String[]{"tpc"};
     }
 
     @Override

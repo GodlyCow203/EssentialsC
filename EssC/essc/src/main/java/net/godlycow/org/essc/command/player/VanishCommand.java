@@ -12,7 +12,6 @@ public class VanishCommand extends Command {
 
     public VanishCommand(EssentialsC plugin) {
         super(plugin, "vanish", "essentialsc.vanish", true, 0, "command.usage.vanish");
-        this.aliases = new String[]{"v"};
     }
 
     @Override

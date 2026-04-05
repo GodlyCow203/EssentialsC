@@ -15,7 +15,6 @@ public class KitCommand extends Command {
 
     public KitCommand(EssentialsC plugin) {
         super(plugin, "kit", null, true, 0);
-        this.aliases = new String[]{"kits"};
     }
 
     @Override

@@ -15,7 +15,6 @@ public class TPACommand extends Command {
 
     public TPACommand(EssentialsC plugin) {
         super(plugin, "tpa", "essentialsc.tpa", true, 1, "command.usage.tpa");
-        this.aliases = new String[]{"tpask", "call"};
     }
 
     @Override

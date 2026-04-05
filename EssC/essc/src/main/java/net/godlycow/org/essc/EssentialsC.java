@@ -16,6 +16,7 @@ import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.PlayerListCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
+import net.godlycow.org.essc.config.CommandsConfig;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
@@ -94,6 +95,7 @@ public final class EssentialsC extends JavaPlugin {
     private BedrockUtil bedrockUtil;
     private TABHook tabHook;
     private RulesManager rulesManager;
+    private CommandsConfig commandsConfig;
 
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -103,6 +105,8 @@ public final class EssentialsC extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         configManager = new ConfigManager(this);
+        commandsConfig = new CommandsConfig(this);
+        commandsConfig.load();
         configManager.migrate();
 
         if (configManager.isEconomyEnabled()) {
@@ -449,5 +453,9 @@ public final class EssentialsC extends JavaPlugin {
     }
 
     public RulesManager getRulesManager() {return rulesManager;}
+
+    public CommandsConfig getCommandsConfig() {
+        return commandsConfig;
+    }
 
 }

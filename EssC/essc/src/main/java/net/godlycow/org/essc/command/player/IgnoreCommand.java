@@ -11,7 +11,6 @@ public class IgnoreCommand extends Command {
 
     public IgnoreCommand(EssentialsC plugin) {
         super(plugin, "ignore", "essentialsc.ignore", true, 0, "command.usage.ignore");
-        this.aliases = new String[]{"unignore"};
     }
 
     @Override

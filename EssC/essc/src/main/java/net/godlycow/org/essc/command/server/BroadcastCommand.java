@@ -17,7 +17,6 @@ public class BroadcastCommand extends Command {
 
     public BroadcastCommand(EssentialsC plugin) {
         super(plugin, "broadcast", "essentialsc.broadcast", false, 1, "command.usage.broadcast");
-        this.aliases = new String[]{"bc"};
     }
 
     @Override

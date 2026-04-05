@@ -19,7 +19,6 @@ public class AhCommand extends Command {
 
     public AhCommand(EssentialsC plugin) {
         super(plugin, "ah", "essentialsc.ah.use", true, 0, "command.usage.ah");
-        this.aliases = new String[]{"auction", "auctionhouse"};
         this.soundManager = new AhSoundManager(plugin);
         this.guiManager = new AhGuiManager(plugin, soundManager);
     }

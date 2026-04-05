@@ -15,7 +15,6 @@ public class TPAQueueCommand extends Command {
 
     public TPAQueueCommand(EssentialsC plugin) {
         super(plugin, "tpaqueue", "essentialsc.tpaqueue", true, 0);
-        this.aliases = new String[]{"tpalist", "tpalist"};
     }
 
     @Override

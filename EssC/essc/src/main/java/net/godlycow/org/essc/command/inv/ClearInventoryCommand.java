@@ -14,7 +14,6 @@ public class ClearInventoryCommand extends Command {
 
     public ClearInventoryCommand(EssentialsC plugin) {
         super(plugin, "clearinventory", "essentialsc.clearinventory", true, 0, "command.usage.clearinventory");
-        this.aliases = new String[]{"clear", "ci"};
     }
 
     @Override

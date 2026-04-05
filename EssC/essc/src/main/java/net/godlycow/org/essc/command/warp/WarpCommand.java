@@ -19,7 +19,6 @@ public class WarpCommand extends Command {
 
     public WarpCommand(EssentialsC plugin) {
         super(plugin, "warp", "essentialsc.warp", true, 0, "command.usage.warp");
-        this.aliases = new String[]{"w"};
     }
 
     @Override

@@ -19,7 +19,6 @@ public class AFKListCommand extends Command {
 
     public AFKListCommand(EssentialsC plugin) {
         super(plugin, "afklist", "essentialsc.afklist", false, 0, "command.usage.afklist");
-        this.aliases = new String[]{"afks", "whoisafk"};
         this.miniMessage = plugin.getMiniMessage();
     }
 

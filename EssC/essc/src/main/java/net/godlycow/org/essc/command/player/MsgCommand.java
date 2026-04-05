@@ -11,7 +11,6 @@ public class MsgCommand extends Command {
 
     public MsgCommand(EssentialsC plugin) {
         super(plugin, "msg", "essentialsc.msg", false, 2, "command.usage.msg");
-        this.aliases = new String[]{"tell", "whisper", "w", "pm"};
     }
 
     @Override

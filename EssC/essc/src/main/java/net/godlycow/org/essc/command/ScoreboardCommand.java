@@ -10,7 +10,6 @@ public class ScoreboardCommand extends Command {
 
     public ScoreboardCommand(EssentialsC plugin) {
         super(plugin, "scoreboard", "Toggle or reload the scoreboard", false, 0);
-        this.aliases = new String[]{"sb"};
     }
 
     @Override

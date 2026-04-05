@@ -14,7 +14,6 @@ public class PtimeCommand extends Command {
 
     public PtimeCommand(EssentialsC plugin) {
         super(plugin, "ptime", "essentialsc.ptime", true, 0, "command.usage.ptime");
-        this.aliases = new String[]{"playertime"};
     }
 
     @Override

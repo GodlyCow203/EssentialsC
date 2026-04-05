@@ -15,7 +15,6 @@ public class TPAHereCommand extends Command {
 
     public TPAHereCommand(EssentialsC plugin) {
         super(plugin, "tpahere", "essentialsc.tpahere", true, 1, "command.usage.tpahere");
-        this.aliases = new String[]{"tphere", "s"};
     }
 
     @Override

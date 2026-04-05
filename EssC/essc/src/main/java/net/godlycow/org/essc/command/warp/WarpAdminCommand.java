@@ -14,7 +14,6 @@ public class WarpAdminCommand extends Command {
 
     public WarpAdminCommand(EssentialsC plugin) {
         super(plugin, "warpadmin", "essentialsc.warpadmin", true, 1, "command.usage.warpadmin");
-        this.aliases = new String[]{"wadmin", "warpmgmt"};
     }
 
     @Override
