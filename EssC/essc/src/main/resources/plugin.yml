@@ -420,6 +420,10 @@ permissions:
     description: Check own balance
     default: true
 
+  essentialsc.shop:
+    description: Use the shop
+    default: true
+
   essentialsc.balance.others:
     description: Check others' balance
     default: op
