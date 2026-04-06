@@ -25,15 +25,12 @@ jobs:
         id: get_version
         run: |
           VERSION=$(grep -E '^version:' src/main/resources/plugin.yml | head -n1 | cut -d' ' -f2 | tr -d '"')
-          echo "plugin_version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected plugin version: $VERSION"
 
       - name: Rename jar
         run: |
           COMMIT_ID=${GITHUB_SHA::7} # first 7 chars of commit hash
           VERSION=${{ steps.get_version.outputs.plugin_version }}
           mkdir -p release
-          # pick main plugin jar, ignore sources/javadoc
           MAIN_JAR=$(ls target/original-*.jar | head -n1)
           cp "$MAIN_JAR" release/v${VERSION}-${COMMIT_ID}.jar
           echo "Jar renamed to v${VERSION}-${COMMIT_ID}.jar"
