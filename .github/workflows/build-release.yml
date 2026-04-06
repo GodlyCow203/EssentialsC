@@ -18,12 +18,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build EssentialsC-api
-        run: |
-          mvn -B install -DskipTests
-
-      - name: Build EssentialsC Plugin
-        run: mvn -B package -DskipTests --file EssC/essc/pom.xml
+      - name: Build full project from root
+        run: mvn -B package -DskipTests
 
       - name: Get plugin version
         id: get_version
@@ -31,6 +27,7 @@ jobs:
           VERSION=$(grep -E '^version:' EssC/essc/src/main/resources/plugin.yml \
                    | head -n1 | cut -d' ' -f2 | tr -d '"')
           echo "plugin_version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected plugin version: $VERSION"
 
       - name: Rename jar
         run: |
@@ -46,3 +43,21 @@ jobs:
         with:
           name: EssentialsC
           path: release/*.jar
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.get_version.outputs.plugin_version }}
+          name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}
+          body: "Automatic release of EssentialsC v${{ steps.get_version.outputs.plugin_version }}"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload JAR to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
