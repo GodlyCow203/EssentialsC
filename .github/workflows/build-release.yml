@@ -4,6 +4,10 @@ on:
   push:
     branches: ["maven"]
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build-release:
     runs-on: ubuntu-latest
@@ -44,20 +48,15 @@ jobs:
           name: EssentialsC
           path: release/*.jar
 
-      - name: Create GitHub Release
+      - name: Create GitHub Release and Upload JAR
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.get_version.outputs.plugin_version }}
           name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}
           body: "Automatic release of EssentialsC v${{ steps.get_version.outputs.plugin_version }}"
+          files: release/*.jar
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload JAR to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: release/*.jar
+          allow_updates: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
