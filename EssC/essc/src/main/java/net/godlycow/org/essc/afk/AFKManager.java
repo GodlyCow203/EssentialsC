@@ -456,3 +456,5 @@ public class AFKManager implements Listener {
         afkLocations.remove(uuid);
     }
 }
+
+# .
