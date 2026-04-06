@@ -34,6 +34,7 @@ jobs:
           echo "Detected plugin version: $VERSION"
 
       - name: Rename jar
+        id: rename_jar
         run: |
           COMMIT_ID=${GITHUB_SHA::7}
           VERSION=${{ steps.get_version.outputs.plugin_version }}
@@ -41,6 +42,7 @@ jobs:
           MAIN_JAR=$(ls EssC/essc/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
           echo "Found JAR: $MAIN_JAR"
           cp "$MAIN_JAR" release/v${VERSION}-${COMMIT_ID}.jar
+          echo "commit_id=$COMMIT_ID" >> $GITHUB_OUTPUT
 
       - name: Upload Plugin Jar
         uses: actions/upload-artifact@v4
@@ -51,12 +53,11 @@ jobs:
       - name: Create GitHub Release and Upload JAR
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ steps.get_version.outputs.plugin_version }}
-          name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}
-          body: "Automatic release of EssentialsC v${{ steps.get_version.outputs.plugin_version }}"
+          tag_name: v${{ steps.get_version.outputs.plugin_version }}-${{ steps.rename_jar.outputs.commit_id }}
+          name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}-${{ steps.rename_jar.outputs.commit_id }}
+          body: "Automatic release of EssentialsC v${{ steps.get_version.outputs.plugin_version }} commit ${{ steps.rename_jar.outputs.commit_id }}"
           files: release/*.jar
           draft: false
           prerelease: false
-          allow_updates: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
