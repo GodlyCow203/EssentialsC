@@ -2,7 +2,7 @@ name: Build & Release Plugin
 
 on:
   push:
-    branches: ["maven"] 
+    branches: ["maven"]
 
 jobs:
   build-release:
@@ -18,8 +18,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        run: mvn -B package --file EssC/essc/pom.xml
+      - name: Build EssentialsC-api
+        run: |
+          mvn -B install -DskipTests
+
+      - name: Build EssentialsC Plugin
+        run: mvn -B package -DskipTests --file EssC/essc/pom.xml
 
       - name: Get plugin version
         id: get_version
@@ -27,24 +31,15 @@ jobs:
           VERSION=$(grep -E '^version:' EssC/essc/src/main/resources/plugin.yml \
                    | head -n1 | cut -d' ' -f2 | tr -d '"')
           echo "plugin_version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected plugin version: $VERSION"
 
       - name: Rename jar
         run: |
           COMMIT_ID=${GITHUB_SHA::7}
           VERSION=${{ steps.get_version.outputs.plugin_version }}
           mkdir -p release
-
           MAIN_JAR=$(ls EssC/essc/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
-
-          if [ -z "$MAIN_JAR" ]; then
-            echo "ERROR: No JAR file found in target/!"
-            exit 1
-          fi
-
           echo "Found JAR: $MAIN_JAR"
           cp "$MAIN_JAR" release/v${VERSION}-${COMMIT_ID}.jar
-          echo "Jar renamed to: release/v${VERSION}-${COMMIT_ID}.jar"
 
       - name: Upload Plugin Jar
         uses: actions/upload-artifact@v4
