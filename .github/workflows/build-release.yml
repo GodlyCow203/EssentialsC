@@ -34,6 +34,7 @@ jobs:
           echo "Detected plugin version: $VERSION"
 
       - name: Rename jar
+        id: rename_jar   
         run: |
           COMMIT_ID=${GITHUB_SHA::7}
           VERSION=${{ steps.get_version.outputs.plugin_version }}
