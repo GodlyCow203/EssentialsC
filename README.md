@@ -17,6 +17,12 @@
 
 ---
 
+## Documentation
+
+You can visit the whole [EssentialsCAPI documentation](https://api.godlycow.org/essc/index.html) at https://api.godlycow.org/essc/index.html
+
+---
+
 ## Repository Setup
 
 ### Maven
