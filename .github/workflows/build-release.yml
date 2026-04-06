@@ -2,7 +2,7 @@ name: Build & Release Plugin
 
 on:
   push:
-    branches: ["maven"]
+    branches: ["maven"] 
 
 jobs:
   build-release:
@@ -24,16 +24,18 @@ jobs:
       - name: Get plugin version
         id: get_version
         run: |
-          VERSION=$(grep -E '^version:' src/main/resources/plugin.yml | head -n1 | cut -d' ' -f2 | tr -d '"')
+          VERSION=$(grep -E '^version:' src/main/resources/plugin.yml \
+                   | head -n1 | cut -d' ' -f2 | tr -d '"')
+          echo "plugin_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Rename jar
         run: |
-          COMMIT_ID=${GITHUB_SHA::7} # first 7 chars of commit hash
+          COMMIT_ID=${GITHUB_SHA::7}
           VERSION=${{ steps.get_version.outputs.plugin_version }}
           mkdir -p release
           MAIN_JAR=$(ls target/original-*.jar | head -n1)
+          echo "Found JAR: $MAIN_JAR"
           cp "$MAIN_JAR" release/v${VERSION}-${COMMIT_ID}.jar
-          echo "Jar renamed to v${VERSION}-${COMMIT_ID}.jar"
 
       - name: Upload Plugin Jar
         uses: actions/upload-artifact@v4
