@@ -108,4 +108,81 @@ public interface EssentialsCAPI {
      */
     PunishmentApi getPunishmentApi();
 
+    /**
+     * Returns the rtp sub-system API.
+     *
+     * @return the {@link RtpApi} instance; never {@code null}
+     */
+    RtpApi getRtpApi();
+
+    /**
+     * Returns the rules sub-system API.
+     *
+     * @return the {@link RulesApi} instance; never {@code null}
+     */
+    RulesApi getRulesApi();
+
+    /**
+     * Returns the schedules sub-system API.
+     *
+     * @return the {@link SchedulesApi} instance; never {@code null}
+     */
+    SchedulesApi getSchedulesApi();
+
+    /**
+     * Returns the scoreboard sub-system API.
+     *
+     * @return the {@link ScoreboardApi} instance; never {@code null}
+     */
+    ScoreboardApi getScoreboardApi();
+
+    /**
+     * Returns the shop sub-system API.
+     *
+     * @return the {@link ShopApi} instance; never {@code null}
+     */
+    ShopApi getShopApi();
+
+    /**
+     * Returns the spawn sub-system API.
+     *
+     * @return the {@link SpawnApi} instance; never {@code null}
+     */
+    SpawnApi getSpawnApi();
+
+    /**
+     * Returns the tab list sub-system API.
+     *
+     * @return the {@link TabApi} instance; never {@code null}
+     */
+    TabApi getTabApi();
+
+    /**
+     * Returns the TPA sub-system API.
+     *
+     * @return the {@link TpaApi} instance; never {@code null}
+     */
+    TpaApi getTpaApi();
+
+    /**
+     * Returns the vanish sub-system API.
+     *
+     * @return the {@link VanishApi} instance; never {@code null}
+     */
+    VanishApi getVanishApi();
+
+    /**
+     * Returns the warp sub-system API.
+     *
+     * @return the {@link WarpApi} instance; never {@code null}
+     */
+    WarpApi getWarpApi();
+
+    /**
+     * Returns the home sub-system API.
+     *
+     * @return the {@link HomeApi} instance; never {@code null}
+     */
+    HomeApi getHomeApi();
+
 }

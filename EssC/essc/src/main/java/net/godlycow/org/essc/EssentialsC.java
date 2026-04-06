@@ -498,4 +498,7 @@ public final class EssentialsC extends JavaPlugin {
         return backupManager;
     }
 
+    public TPAManager getTpaManager() {
+        return tpaManager;
+    }
 }
