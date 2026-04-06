@@ -9,15 +9,11 @@
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.20%2B-brightgreen)
 ![Paper](https://img.shields.io/badge/Paper-Supported-75B9FF)
 ![Spigot](https://img.shields.io/badge/Spigot-Supported-FFDF75)
-![Spigot](https://img.shields.io/badge/Purpur-Supported-E64FFF)
+![Purpur](https://img.shields.io/badge/Purpur-Supported-E64FFF)
 
 
 
-
-
-
-
-A public API for integrating with the EssentialsC Minecraft plugin.
+## A public API for integrating with the EssentialsC Minecraft plugin.
 
 ---
 
