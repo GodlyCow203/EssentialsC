@@ -19,6 +19,7 @@ import net.godlycow.org.essc.command.player.PlayerListCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.CommandsConfig;
 import net.godlycow.org.essc.config.ConfigManager;
+import net.godlycow.org.essc.data.LogoutDataManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
@@ -103,6 +104,8 @@ public final class EssentialsC extends JavaPlugin {
     private MOTDManager motdManager;
     private BackupManager backupManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private LogoutDataManager logoutDataManager;
+
 
     @Override
     public void onLoad() {
@@ -151,6 +154,8 @@ public final class EssentialsC extends JavaPlugin {
         ignoreManager = new IgnoreManager(this);
         replyManager = new ReplyManager();
         chatManager = new ChatManager(this);
+        logoutDataManager = new LogoutDataManager(this);
+
 
         int pluginId = 29401;
         Metrics metrics = new Metrics(this, pluginId);
@@ -500,5 +505,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public TPAManager getTpaManager() {
         return tpaManager;
+    }
+
+    public LogoutDataManager getLogoutDataManager() {
+        return logoutDataManager;
     }
 }

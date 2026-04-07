@@ -413,13 +413,18 @@ commands:
 
   ban-ip:
     description: Ban an IP address or player's IP from the server
-    usage: /<command> <player|ip> [-t:duration] [reason]
+    usage: /ban-ip <player|ip> [-t:duration] [reason]
     permission: essentialsc.banip
 
   banlist:
     description: List all active bans (players and IPs)
-    usage: /<command> [players|ips|all|history] [page]
+    usage: /banlist [players|ips|all|history] [page]
     permission: essentialsc.banlist
+
+  tpoffline:
+    description: Teleport to an offline player's last logout location
+    usage: /tpoffline <player>
+    permission: essentialsc.tpoffline
 
 permissions:
   essentialsc.heal:
