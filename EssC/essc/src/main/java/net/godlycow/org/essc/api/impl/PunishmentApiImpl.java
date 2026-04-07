@@ -2,6 +2,7 @@ package net.godlycow.org.essc.api.impl;
 
 import net.godlycow.org.essc.api.PunishmentApi;
 import net.godlycow.org.essc.api.punishment.BanEntry;
+import net.godlycow.org.essc.api.punishment.IpBanEntry;
 import net.godlycow.org.essc.api.punishment.MuteEntry;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 
@@ -40,9 +41,52 @@ public class PunishmentApiImpl implements PunishmentApi {
     }
 
     @Override
+    public List<BanEntry> getActiveBans() {
+        return manager.getActiveBans().stream()
+                .map(e -> new BanEntry(e.uuid(), e.name(), e.reason(), e.banner(), e.time(), e.expires()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BanEntry> getAllBans() {
         return manager.getAllBans().stream()
                 .map(e -> new BanEntry(e.uuid(), e.name(), e.reason(), e.banner(), e.time(), e.expires()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void banIp(String ip, String reason, String banner, long expires) {
+        manager.banIp(ip, reason, banner, expires);
+    }
+
+    @Override
+    public void unbanIp(String ip) {
+        manager.unbanIp(ip);
+    }
+
+    @Override
+    public boolean isIpBanned(String ip) {
+        return manager.isIpBanned(ip);
+    }
+
+    @Override
+    public IpBanEntry getIpBanEntry(String ip) {
+        PunishmentManager.IpBanEntry e = manager.getIpBanEntry(ip);
+        if (e == null) return null;
+        return new IpBanEntry(e.ip(), e.reason(), e.banner(), e.time(), e.expires());
+    }
+
+    @Override
+    public List<IpBanEntry> getActiveIpBans() {
+        return manager.getActiveIpBans().stream()
+                .map(e -> new IpBanEntry(e.ip(), e.reason(), e.banner(), e.time(), e.expires()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<IpBanEntry> getAllIpBans() {
+        return manager.getAllIpBans().stream()
+                .map(e -> new IpBanEntry(e.ip(), e.reason(), e.banner(), e.time(), e.expires()))
                 .collect(Collectors.toList());
     }
 

@@ -74,13 +74,6 @@ public interface EssentialsCAPI {
     FlyApi getFlyApi();
 
     /**
-     * Returns the home sub-system API.
-     *
-     * @return the {@link HomeApi} instance; never {@code null}
-     */
-    // HomeApi getHomeApi();
-
-    /**
      * Returns the language sub-system API.
      *
      * @return the {@link LanguageApi} instance; never {@code null}
