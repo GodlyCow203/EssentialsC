@@ -1,0 +1,23 @@
+# EssentialsC-MySQLExpansion config.yml
+
+# Unique identifier for this server — must be different on each server in the network.
+# Example: "survival-1", "creative", "skyblock"
+server-id: "server-2"
+
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "essentialsc"
+  username: "root"
+  password: ""
+  # HikariCP pool size
+  pool-size: 5
+
+sync:
+  # How often (in ticks, 20 ticks = 1 second) to poll MySQL for remote changes.
+  # Lower = faster sync, higher = less DB load. Recommended: 100-400.
+  poll-interval-ticks: 200
+
+  # How long (in ms) to wait after a balance change before pushing to MySQL.
+  # Coalesces rapid changes (e.g. shop purchases) into a single write.
+  push-debounce-ms: 500
