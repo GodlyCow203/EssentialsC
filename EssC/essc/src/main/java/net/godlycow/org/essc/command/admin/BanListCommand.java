@@ -19,7 +19,6 @@ public class BanListCommand extends Command {
     public BanListCommand(EssentialsC plugin, PunishmentManager punishmentManager) {
         super(plugin, "banlist", "essentialsc.banlist", false, 0, "command.usage.banlist");
         this.punishmentManager = punishmentManager;
-        this.aliases = new String[]{"bans"};
     }
 
     @Override

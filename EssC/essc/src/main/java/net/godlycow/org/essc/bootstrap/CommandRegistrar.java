@@ -21,6 +21,7 @@ import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.command.warp.*;
 import net.godlycow.org.essc.config.CommandsConfig;
+import net.godlycow.org.essc.data.LogoutDataManager;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.migration.MigrationCommand;
 import net.godlycow.org.essc.punishment.PunishmentManager;
@@ -35,11 +36,13 @@ public class CommandRegistrar {
     private final EssentialsC plugin;
     private final PunishmentManager punishmentManager;
     private final CommandsConfig commandsConfig;
+    private final LogoutDataManager logoutDataManager;
 
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
         this.punishmentManager = plugin.getPunishmentManager();
         this.commandsConfig = plugin.getCommandsConfig();
+        this.logoutDataManager = plugin.getLogoutDataManager();
     }
 
     public void registerAll() {
@@ -77,8 +80,9 @@ public class CommandRegistrar {
         register("spawn",          new SpawnCommand(plugin));
         register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
-        register("ban-ip",       new BanIpCommand(plugin, punishmentManager));
-        register("banlist",      new BanListCommand(plugin, punishmentManager));
+        register("ban-ip",         new BanIpCommand(plugin, punishmentManager));
+        register("tpoffline",      new TpOfflineCommand(plugin,logoutDataManager));
+        register("banlist",        new BanListCommand(plugin, punishmentManager));
         register("clearinventory", new ClearInventoryCommand(plugin));
         register("schedules",      new SchedulesCommand(plugin));
         register("enderchest",     new EnderChestCommand(plugin));

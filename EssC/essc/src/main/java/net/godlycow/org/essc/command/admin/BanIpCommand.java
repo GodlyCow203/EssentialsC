@@ -20,7 +20,6 @@ public class BanIpCommand extends Command {
     public BanIpCommand(EssentialsC plugin, PunishmentManager punishmentManager) {
         super(plugin, "ban-ip", "essentialsc.banip", false, 1, "command.usage.banip");
         this.punishmentManager = punishmentManager;
-        this.aliases = new String[]{"banip", "ipban"};
     }
 
     @Override
