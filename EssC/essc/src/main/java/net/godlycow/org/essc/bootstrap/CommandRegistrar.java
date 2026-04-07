@@ -77,6 +77,8 @@ public class CommandRegistrar {
         register("spawn",          new SpawnCommand(plugin));
         register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
+        register("ban-ip",       new BanIpCommand(plugin, punishmentManager));
+        register("banlist",      new BanListCommand(plugin, punishmentManager));
         register("clearinventory", new ClearInventoryCommand(plugin));
         register("schedules",      new SchedulesCommand(plugin));
         register("enderchest",     new EnderChestCommand(plugin));
