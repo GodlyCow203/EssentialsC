@@ -13,8 +13,6 @@ public class SyncConfig {
     private String username;
     private String password;
     private String serverId;
-    private int pollIntervalTicks;
-    private int pushDebounceMs;
     private int maxPoolSize;
 
     public SyncConfig(MySQLDatabaseExpansion plugin) {
@@ -30,11 +28,11 @@ public class SyncConfig {
         database     = cfg.getString("mysql.database", "essc_sync");
         username     = cfg.getString("mysql.username", "root");
         password     = cfg.getString("mysql.password", "");
-        maxPoolSize  = cfg.getInt("mysql.pool-size", 5);
 
-        serverId         = cfg.getString("server-id", "server-1");
-        pollIntervalTicks = cfg.getInt("sync.poll-interval-ticks", 200);
-        pushDebounceMs   = cfg.getInt("sync.push-debounce-ms", 500);
+        maxPoolSize  = cfg.getInt("mysql.pool-size", 10);
+
+        serverId     = cfg.getString("server-id", "server-1");
+
     }
 
     public String getJdbcUrl() {
@@ -45,7 +43,12 @@ public class SyncConfig {
     public String getUsername()         { return username; }
     public String getPassword()         { return password; }
     public String getServerId()         { return serverId; }
-    public int getPollIntervalTicks()   { return pollIntervalTicks; }
-    public int getPushDebounceMs()      { return pushDebounceMs; }
     public int getMaxPoolSize()         { return maxPoolSize; }
+
+
+    public int getPollIntervalTicks()   { return 20; }
+
+    public int getPushDebounceMs()      { return 0; }
+
+    public int getLocalPushIntervalTicks() { return 20; }
 }

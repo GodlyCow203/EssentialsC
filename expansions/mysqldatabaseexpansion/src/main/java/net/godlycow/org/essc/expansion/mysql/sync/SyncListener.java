@@ -7,67 +7,47 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class SyncListener implements Listener {
 
     private final MySQLDatabaseExpansion plugin;
     private final BalanceSyncManager syncManager;
-    private final ConcurrentMap<UUID, java.math.BigDecimal> lastKnownBalance = new ConcurrentHashMap<>();
-    private static final long SNAPSHOT_INTERVAL_TICKS = 40L;
 
-    private BukkitTask snapshotTask;
+    private final ConcurrentHashMap<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
 
     public SyncListener(MySQLDatabaseExpansion plugin, BalanceSyncManager syncManager) {
-        this.plugin      = plugin;
+        this.plugin = plugin;
         this.syncManager = syncManager;
-        startSnapshotTask();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+        String name = player.getName();
+
+        onlinePlayers.put(uuid, name);
         syncManager.onPlayerJoin(player);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent event) {
-        UUID uuid = event.getPlayer().getUniqueId();
-        lastKnownBalance.remove(uuid);
-        syncManager.pushNow(uuid);
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        onlinePlayers.remove(uuid);
+        syncManager.onPlayerQuit(player);
     }
 
-    private void startSnapshotTask() {
-        snapshotTask = new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : org.bukkit.Bukkit.getOnlinePlayers()) {
-                    UUID uuid = player.getUniqueId();
-                    plugin.getEssentialsC().getEconomyManager()
-                            .getBalance(uuid)
-                            .thenAccept(current -> {
-                                java.math.BigDecimal last = lastKnownBalance.get(uuid);
-                                if (last == null) {
-                                    lastKnownBalance.put(uuid, current);
-                                    return;
-                                }
-                                if (current.compareTo(last) != 0) {
-                                    lastKnownBalance.put(uuid, current);
-                                    syncManager.schedulePush(uuid);
-                                }
-                            });
-                }
-            }
-        }.runTaskTimerAsynchronously(plugin, SNAPSHOT_INTERVAL_TICKS, SNAPSHOT_INTERVAL_TICKS);
+
+    public java.util.Set<UUID> getOnlinePlayers() {
+        return java.util.Collections.unmodifiableSet(onlinePlayers.keySet());
     }
 
     public void shutdown() {
-        if (snapshotTask != null) snapshotTask.cancel();
-        lastKnownBalance.clear();
+        onlinePlayers.clear();
     }
 }
