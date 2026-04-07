@@ -626,4 +626,12 @@ public class ConfigManager {
         return config.getBoolean("backup.on-shutdown", true);
     }
 
+    public boolean isDiscordBanIpEnabled() {
+        return config.getBoolean("discordsrv.events.banip.enabled", true);
+    }
+
+    public String getDiscordBanIpColor() {
+        return config.getString("discordsrv.events.banip.color", "#E74C3C");
+    }
+
 }

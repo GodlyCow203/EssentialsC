@@ -411,6 +411,16 @@ commands:
     usage: /schedules <list|info|run|pause|resume> [name]
     permission: essentialsc.schedules
 
+  ban-ip:
+    description: Ban an IP address or player's IP from the server
+    usage: /<command> <player|ip> [-t:duration] [reason]
+    permission: essentialsc.banip
+
+  banlist:
+    description: List all active bans (players and IPs)
+    usage: /<command> [players|ips|all|history] [page]
+    permission: essentialsc.banlist
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1028,6 +1038,18 @@ permissions:
 
   essentialsc.tphereall.bypass:
     description: Allows teleporting players who have TPA disabled
+    default: op
+
+  essentialsc.banip:
+    description: Allows banning IP addresses
+    default: op
+
+  essentialsc.banip.notify:
+    description: Receive notifications when an IP is banned
+    default: op
+
+  essentialsc.banlist:
+    description: Allows viewing the ban list
     default: op
 
 

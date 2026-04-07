@@ -24,6 +24,8 @@ public class DiscordSRVHook {
     private final KitNotifier kitNotifier;
     private final HomeNotifier homeNotifier;
     private final HomeDeleteNotifier homeDeleteNotifier;
+    private final BanIpNotifier banIpNotifier;
+
 
     public DiscordSRVHook(EssentialsC plugin) {
         this.plugin = plugin;
@@ -33,6 +35,7 @@ public class DiscordSRVHook {
         this.kitNotifier = new KitNotifier(plugin, this);
         this.homeNotifier = new HomeNotifier(plugin, this);
         this.homeDeleteNotifier = new HomeDeleteNotifier(plugin, this);
+        this.banIpNotifier = new BanIpNotifier(plugin, this);
     }
 
     public void init() {
@@ -128,6 +131,12 @@ public class DiscordSRVHook {
     public void sendHomeDeleteEmbed(UUID playerUUID, String playerName, String homeName, int remainingHomes, int maxHomes) {
         if (isHooked()) {
             homeDeleteNotifier.notifyHomeDelete(playerUUID, playerName, homeName, remainingHomes, maxHomes);
+        }
+    }
+
+    public void sendBanIpEmbed(String ip, String targetName, String reason, String banner, long expires) {
+        if (isHooked()) {
+            banIpNotifier.notifyBanIp(ip, targetName, reason, banner, expires);
         }
     }
 }

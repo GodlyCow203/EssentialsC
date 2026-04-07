@@ -424,3 +424,16 @@ migration:
   enabled: true
   priority: normal
   aliases: []
+
+ban-ip:
+  enabled: true
+  priority: normal
+  aliases:
+    - banip
+    - ipban
+
+banlist:
+  enabled: true
+  priority: normal
+  aliases:
+    - bans

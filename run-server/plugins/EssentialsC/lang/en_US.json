@@ -821,8 +821,32 @@
   "essc.backup.delete.usage": "<prefix> <color:#FF0000>Usage: /essc backup delete <filename></color>",
   "essc.backup.delete.success": "<prefix> <color:#FFF200>Backup <color:#FFFFFF><name></color> deleted.</color>",
   "essc.backup.delete.not_found": "<prefix> <color:#FF0000>Backup <color:#FFFFFF><name></color> not found.</color>",
-  "essc.help.backup": "<prefix> <color:#FFF200>/essc backup <color:#FFFFFF>[list|delete]</color> — Manage plugin data backups.</color>"
+  "essc.help.backup": "<prefix> <color:#FFF200>/essc backup <color:#FFFFFF>[list|delete]</color> — Manage plugin data backups.</color>",
 
+  "command.usage.banip": "<prefix> <color:#FF0000>Usage: /ban-ip <player|ip> [-t:duration] [reason]</color>",
+  "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> has been banned. <count> player(s) kicked</color>",
+  "banip.broadcast": "<prefix> <color:#FF0000><banner> has IP-banned <color:#FFFFFF><target></color> <ip> for: <reason></color>",
+  "banip.broadcast_temp": "<prefix> <color:#FF0000><banner> has temporarily IP-banned <color:#FFFFFF><target></color> <ip> for <duration>: <reason></color>",
+  "banip.screen_message": "<prefix> <color:#FF0000>You have been IP-banned!\n<color:#AAAAAA>Reason: <color:#FFFFFF><reason>\n<color:#AAAAAA>By: <color:#FFFFFF><banner>\n<color:#AAAAAA>Duration: <color:#FFFFFF><duration>",
+  "banip.exempt": "<prefix> <color:#FF0000>That player cannot be IP-banned.</color>",
+  "banip.cannot_ban_self": "<prefix> <color:#FF0000>You cannot ban your own IP.</color>",
+  "banip.player_offline_no_ip": "<prefix> <color:#FF0000>Cannot find IP for offline player <color:#FFFFFF><player></color>. Use direct IP.</color>",
+  "banip.invalid_duration": "<prefix> <color:#FF0000>Invalid duration format. Use: 1h, 1d, 7d, etc.</color>",
+  "banip.default_reason": "Breaking server rules",
 
+  "command.usage.banlist": "<prefix> <color:#FF0000>Usage: /banlist [players|ips|all|history] [page]</color>",
+  "banlist.no_bans": "<prefix> <color:#FFF200>There are no active bans.</color>",
+  "banlist.no_player_bans": "<prefix> <color:#FFF200>There are no active player bans.</color>",
+  "banlist.no_ip_bans": "<prefix> <color:#FFF200>There are no active IP bans.</color>",
+  "banlist.all.header": "<prefix> <color:#FFF200>=== All Bans <players> players, <ips> IPs Page <page>/<total> ===</color>",
+  "banlist.player.header": "<prefix> <color:#FFF200>=== Player Bans <count> Page <page>/<total> ===</color>",
+  "banlist.ip.header": "<prefix> <color:#FFF200>=== IP Bans <count> Page <page>/<total> ===</color>",
+  "banlist.footer": "<prefix> <color:#AAAAAA>Page <current>/<total> | Use /banlist <prev|next></color>",
+  "banlist.filter_hint": "<prefix> <color:#AAAAAA>Use /banlist players, /banlist ips, or /banlist history</color>",
+  "banlist.entry.player.perm": "<prefix> <color:#FF0000><index>. <player> - <color:#AAAAAA><reason> <time></color>",
+  "banlist.entry.player.temp": "<prefix> <color:#FFF200><index>. <player> - <color:#AAAAAA><reason> Expires: <expires></color>",
+  "banlist.entry.ip.perm": "<prefix> <color:#FF0000><index>. <ip> - <color:#AAAAAA><reason> <time></color>",
+  "banlist.entry.ip.temp": "<prefix> <color:#FFF200><index>. <ip> - <color:#AAAAAA><reason> Expires: <expires></color>"
 }
+
 

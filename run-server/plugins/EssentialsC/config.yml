@@ -125,6 +125,9 @@ discordsrv:
     home_delete:
       enabled: true
       color: "#E74C3C"
+    banip:
+      enabled: true
+      color: "#E74C3C"
 
   # Show a player's avatar next to their name in Discord embeds.
   show-avatar: true
