@@ -22,8 +22,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build full project from root
-        run: mvn -B package -DskipTests
+      - name: Build main plugin
+        run: mvn -B package -DskipTests -f EssC/essc/pom.xml
+
+      - name: Build MySQL expansion
+        run: mvn -B package -DskipTests -f expansions/mysqldatabaseexpansion/pom.xml
 
       - name: Get plugin version
         id: get_version
@@ -33,29 +36,44 @@ jobs:
           echo "plugin_version=$VERSION" >> $GITHUB_OUTPUT
           echo "Detected plugin version: $VERSION"
 
-      - name: Rename jar
-        id: rename_jar
+      - name: Collect JARs
+        id: collect_jars
         run: |
           COMMIT_ID=${GITHUB_SHA::7}
           VERSION=${{ steps.get_version.outputs.plugin_version }}
+
           mkdir -p release
+
           MAIN_JAR=$(ls EssC/essc/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
-          echo "Found JAR: $MAIN_JAR"
-          cp "$MAIN_JAR" release/v${VERSION}-${COMMIT_ID}.jar
+          echo "Main JAR: $MAIN_JAR"
+          cp "$MAIN_JAR" release/EssentialsC-v${VERSION}-${COMMIT_ID}.jar
+
+          EXPANSION_JAR=$(ls expansions/mysqldatabaseexpansion/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
+          echo "Expansion JAR: $EXPANSION_JAR"
+          cp "$EXPANSION_JAR" release/EssentialsC-MySQL-Expansion-v${VERSION}-${COMMIT_ID}.jar
+
           echo "commit_id=$COMMIT_ID" >> $GITHUB_OUTPUT
 
-      - name: Upload Plugin Jar
+      - name: Upload Plugin Jars
         uses: actions/upload-artifact@v4
         with:
           name: EssentialsC
           path: release/*.jar
 
-      - name: Create GitHub Release and Upload JAR
+      - name: Create GitHub Release and Upload JARs
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ steps.get_version.outputs.plugin_version }}-${{ steps.rename_jar.outputs.commit_id }}
-          name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}-${{ steps.rename_jar.outputs.commit_id }}
-          body: "Automatic release of EssentialsC v${{ steps.get_version.outputs.plugin_version }} commit ${{ steps.rename_jar.outputs.commit_id }}"
+          tag_name: v${{ steps.get_version.outputs.plugin_version }}-${{ steps.collect_jars.outputs.commit_id }}
+          name: EssentialsC v${{ steps.get_version.outputs.plugin_version }}-${{ steps.collect_jars.outputs.commit_id }}
+          body: |
+            Automatic release of EssentialsC
+
+            Version: v${{ steps.get_version.outputs.plugin_version }}
+            Commit: ${{ steps.collect_jars.outputs.commit_id }}
+
+            Includes:
+            - Main plugin
+            - MySQL expansion
           files: release/*.jar
           draft: false
           prerelease: false
