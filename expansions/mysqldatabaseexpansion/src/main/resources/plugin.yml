@@ -1,4 +1,23 @@
-name: mysqldatabaseexpansion
-version: '0.0.1'
-main: net.godlycow.org.Mysqldatabaseexpansion
-api-version: '1.21'
+name: EssentialsC-MySQLExpansion
+version: 1.0.0
+main: net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion
+api-version: "1.21"
+authors: [_GodlyCow]
+description: Cross-server economy sync expansion for EssentialsC using MySQL.
+website: https://wiki.godlycow.org/essc/expansions/landingpage
+
+depend:
+  - EssentialsC
+
+softdepend: []
+
+commands:
+  mysqlsync:
+    description: MySQL sync admin commands
+    usage: /mysqlsync <status|forcepush|forcepull|reload>
+    permission: esscmysql.admin
+
+permissions:
+  esscmysql.admin:
+    description: Access to /mysqlsync commands
+    default: op
