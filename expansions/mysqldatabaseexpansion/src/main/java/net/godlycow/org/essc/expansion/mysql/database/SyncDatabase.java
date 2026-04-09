@@ -54,12 +54,12 @@ public class SyncDatabase {
         }
     }
 
-    private Connection getConnection() throws SQLException {
+    public Connection getRawConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
     private void createTables() throws SQLException {
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
+        try (Connection conn = getRawConnection(); Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS `%s` (
                     `uuid`         VARCHAR(36)    NOT NULL,
@@ -92,7 +92,7 @@ public class SyncDatabase {
     public CompletableFuture<Map<UUID, BigDecimal>> fetchUpdatedSince(long sinceEpochMs, String excludeServerId) {
         return async(() -> {
             Map<UUID, BigDecimal> result = new LinkedHashMap<>();
-            try (Connection conn = getConnection();
+            try (Connection conn = getRawConnection();
                  PreparedStatement ps = conn.prepareStatement(
                          "SELECT uuid, balance FROM `" + TABLE + "` WHERE last_updated > ? AND updated_by != ?")) {
                 ps.setLong(1, sinceEpochMs);
@@ -109,14 +109,12 @@ public class SyncDatabase {
 
     public CompletableFuture<Optional<BigDecimal>> fetchBalance(UUID uuid) {
         return async(() -> {
-            try (Connection conn = getConnection();
+            try (Connection conn = getRawConnection();
                  PreparedStatement ps = conn.prepareStatement(
                          "SELECT balance FROM `" + TABLE + "` WHERE uuid = ?")) {
                 ps.setString(1, uuid.toString());
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return Optional.of(rs.getBigDecimal("balance"));
-                }
+                if (rs.next()) return Optional.of(rs.getBigDecimal("balance"));
                 return Optional.empty();
             }
         });
@@ -124,7 +122,7 @@ public class SyncDatabase {
 
     public CompletableFuture<Void> pushBalance(UUID uuid, String username, BigDecimal balance, String serverId) {
         return async(() -> {
-            try (Connection conn = getConnection();
+            try (Connection conn = getRawConnection();
                  PreparedStatement ps = conn.prepareStatement("""
                     INSERT INTO `%s` (uuid, username, balance, last_updated, updated_by)
                     VALUES (?, ?, ?, ?, ?)
@@ -147,7 +145,7 @@ public class SyncDatabase {
 
     public CompletableFuture<Void> ensureAccount(UUID uuid, String username, BigDecimal fallbackBalance, String serverId) {
         return async(() -> {
-            try (Connection conn = getConnection();
+            try (Connection conn = getRawConnection();
                  PreparedStatement ps = conn.prepareStatement("""
                     INSERT IGNORE INTO `%s` (uuid, username, balance, last_updated, updated_by)
                     VALUES (?, ?, ?, ?, ?)
@@ -166,7 +164,7 @@ public class SyncDatabase {
     public CompletableFuture<Map<UUID, BigDecimal>> fetchTopBalances(int limit) {
         return async(() -> {
             Map<UUID, BigDecimal> result = new LinkedHashMap<>();
-            try (Connection conn = getConnection();
+            try (Connection conn = getRawConnection();
                  PreparedStatement ps = conn.prepareStatement(
                          "SELECT uuid, balance FROM `" + TABLE + "` ORDER BY balance DESC LIMIT ?")) {
                 ps.setInt(1, limit);
