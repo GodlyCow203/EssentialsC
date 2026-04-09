@@ -1,7 +1,10 @@
 package net.godlycow.org.essc.expansion.mysql;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.expansion.mysql.command.SyncCommand;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
+import net.godlycow.org.essc.expansion.mysql.punishment.NetworkPunishmentListener;
+import net.godlycow.org.essc.expansion.mysql.punishment.NetworkPunishmentSyncManager;
 import net.godlycow.org.essc.expansion.mysql.sync.BalanceSyncManager;
 import net.godlycow.org.essc.expansion.mysql.sync.SyncListener;
 import org.bukkit.Bukkit;
@@ -16,6 +19,7 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
     private EssentialsC essentialsC;
     private SyncConfig syncConfig;
     private BalanceSyncManager syncManager;
+    private NetworkPunishmentSyncManager punishmentSyncManager;
 
     @Override
     public void onEnable() {
@@ -42,16 +46,31 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
             this.syncManager = new BalanceSyncManager(this, essentialsC, syncConfig);
             syncManager.init();
         } catch (Exception e) {
-            getLogger().log(Level.SEVERE, "Failed to initialize MySQL sync manager — disabling.", e);
+            getLogger().log(Level.SEVERE, "Failed to initialize economy sync manager — disabling.", e);
             Bukkit.getPluginManager().disablePlugin(this);
             return;
+        }
+
+        try {
+            this.punishmentSyncManager = new NetworkPunishmentSyncManager(
+                    this, essentialsC, syncConfig, syncManager.getDatabase());
+            punishmentSyncManager.start();
+
+            essentialsC.getPunishmentManager().setNetworkHook(punishmentSyncManager);
+
+            Bukkit.getPluginManager().registerEvents(
+                    new NetworkPunishmentListener(this, punishmentSyncManager), this);
+
+            getLogger().info("[NetworkPunishments] Network punishment sync enabled.");
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "Failed to initialize network punishment sync.", e);
         }
 
         Bukkit.getPluginManager().registerEvents(new SyncListener(this, syncManager), this);
 
         var cmd = getCommand("mysqlsync");
         if (cmd != null) {
-            var executor = new net.godlycow.org.essc.expansion.mysql.command.SyncCommand(this, syncManager);
+            var executor = new SyncCommand(this, syncManager);
             cmd.setExecutor(executor);
             cmd.setTabCompleter(executor);
         }
@@ -61,25 +80,18 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (punishmentSyncManager != null) {
+            punishmentSyncManager.shutdown();
+        }
         if (syncManager != null) {
             syncManager.shutdown();
         }
         getLogger().info("EssentialsC-MySQLExpansion disabled.");
     }
 
-    public static MySQLDatabaseExpansion getInstance() {
-        return instance;
-    }
-
-    public EssentialsC getEssentialsC() {
-        return essentialsC;
-    }
-
-    public SyncConfig getSyncConfig() {
-        return syncConfig;
-    }
-
-    public BalanceSyncManager getSyncManager() {
-        return syncManager;
-    }
+    public static MySQLDatabaseExpansion getInstance() { return instance; }
+    public EssentialsC getEssentialsC()                { return essentialsC; }
+    public SyncConfig getSyncConfig()                  { return syncConfig; }
+    public BalanceSyncManager getSyncManager()         { return syncManager; }
+    public NetworkPunishmentSyncManager getPunishmentSyncManager() { return punishmentSyncManager; }
 }

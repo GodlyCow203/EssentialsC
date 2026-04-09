@@ -4,15 +4,15 @@
 
 # Unique identifier for this server instance
 # IMPORTANT: Each server in your network must have a different server-id
-server-id: "server-1"
+server-id: "server-2"
 
 
 mysql:
   host: "localhost"
   port: 3306
-  database: "essc_sync"
+  database: "essc_test"
   username: "root"
-  password: ""
+  password: "minecraft"
   # Connection pool size
   # For aggressive 1-second sync mode, use 10-20 for best performance
   # Minimum recommended: 10

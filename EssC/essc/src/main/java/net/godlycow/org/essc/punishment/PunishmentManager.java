@@ -15,6 +15,7 @@ public class PunishmentManager {
     private final File muteFile;
     private FileConfiguration banConfig;
     private FileConfiguration muteConfig;
+    private NetworkPunishmentHook networkHook = null;
 
     public PunishmentManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -23,60 +24,62 @@ public class PunishmentManager {
         loadFiles();
     }
 
+    public void setNetworkHook(NetworkPunishmentHook hook) {
+        this.networkHook = hook;
+        plugin.getLogger().info("[PunishmentManager] Network punishment hook registered.");
+    }
+
+    public void clearNetworkHook() {
+        this.networkHook = null;
+    }
+
     private void loadFiles() {
         if (!banFile.exists()) {
-            try {
-                banFile.createNewFile();
-            } catch (IOException e) {
-                plugin.getLogger().severe("Failed to create bans.yml");
-            }
+            try { banFile.createNewFile(); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to create bans.yml"); }
         }
         if (!muteFile.exists()) {
-            try {
-                muteFile.createNewFile();
-            } catch (IOException e) {
-                plugin.getLogger().severe("Failed to create mutes.yml");
-            }
+            try { muteFile.createNewFile(); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to create mutes.yml"); }
         }
-        banConfig = YamlConfiguration.loadConfiguration(banFile);
+        banConfig  = YamlConfiguration.loadConfiguration(banFile);
         muteConfig = YamlConfiguration.loadConfiguration(muteFile);
     }
 
     public void saveBans() {
-        try {
-            banConfig.save(banFile);
-        } catch (IOException e) {
-            plugin.getLogger().severe("Failed to save bans.yml");
-        }
+        try { banConfig.save(banFile); }
+        catch (IOException e) { plugin.getLogger().severe("Failed to save bans.yml"); }
     }
 
     public void saveMutes() {
-        try {
-            muteConfig.save(muteFile);
-        } catch (IOException e) {
-            plugin.getLogger().severe("Failed to save mutes.yml");
-        }
+        try { muteConfig.save(muteFile); }
+        catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
     }
 
+
     public void banPlayer(UUID uuid, String name, String reason, String banner, long expires) {
-        String path = "players." + uuid.toString();
-        banConfig.set(path + ".name", name);
-        banConfig.set(path + ".reason", reason);
-        banConfig.set(path + ".banner", banner);
-        banConfig.set(path + ".time", System.currentTimeMillis());
+        String path = "players." + uuid;
+        banConfig.set(path + ".name",    name);
+        banConfig.set(path + ".reason",  reason);
+        banConfig.set(path + ".banner",  banner);
+        banConfig.set(path + ".time",    System.currentTimeMillis());
         banConfig.set(path + ".expires", expires);
         saveBans();
         plugin.debug("Banned " + name + " (" + uuid + ") by " + banner + " until " + expires);
+
+        if (networkHook != null) networkHook.onBan(uuid, name, reason, banner, expires);
     }
 
     public void unbanPlayer(UUID uuid) {
-        banConfig.set("players." + uuid.toString(), null);
+        banConfig.set("players." + uuid, null);
         saveBans();
         plugin.debug("Unbanned " + uuid);
+
+        if (networkHook != null) networkHook.onUnban(uuid);
     }
 
     public boolean isBanned(UUID uuid) {
-        String path = "players." + uuid.toString();
+        String path = "players." + uuid;
         if (!banConfig.contains(path)) return false;
         long expires = banConfig.getLong(path + ".expires");
         if (expires > 0 && expires < System.currentTimeMillis()) {
@@ -88,7 +91,7 @@ public class PunishmentManager {
 
     public BanEntry getBanEntry(UUID uuid) {
         if (!isBanned(uuid)) return null;
-        String path = "players." + uuid.toString();
+        String path = "players." + uuid;
         return new BanEntry(
                 uuid,
                 banConfig.getString(path + ".name"),
@@ -100,63 +103,57 @@ public class PunishmentManager {
     }
 
     public List<BanEntry> getActiveBans() {
-        return getAllBans().stream()
-                .filter(this::isBanActive)
-                .collect(Collectors.toList());
+        return getAllBans().stream().filter(this::isBanActive).collect(Collectors.toList());
     }
 
     public List<BanEntry> getAllBans() {
         List<BanEntry> bans = new ArrayList<>();
         if (!banConfig.contains("players")) return bans;
-
         for (String key : banConfig.getConfigurationSection("players").getKeys(false)) {
             try {
                 UUID uuid = UUID.fromString(key);
                 String path = "players." + key;
-                bans.add(new BanEntry(
-                        uuid,
+                bans.add(new BanEntry(uuid,
                         banConfig.getString(path + ".name"),
                         banConfig.getString(path + ".reason"),
                         banConfig.getString(path + ".banner"),
                         banConfig.getLong(path + ".time"),
-                        banConfig.getLong(path + ".expires")
-                ));
+                        banConfig.getLong(path + ".expires")));
             } catch (IllegalArgumentException ignored) {}
         }
         return bans;
     }
 
-    private boolean isBanActive(BanEntry entry) {
-        if (entry.expires() <= 0) return true;
-        return entry.expires() > System.currentTimeMillis();
+    private boolean isBanActive(BanEntry e) {
+        return e.expires() <= 0 || e.expires() > System.currentTimeMillis();
     }
 
 
     public void banIp(String ip, String reason, String banner, long expires) {
         String safeIp = ip.replace('.', '_');
-        String path = "ips." + safeIp;
-
-        banConfig.set(path + ".ip", ip);
-        banConfig.set(path + ".reason", reason);
-        banConfig.set(path + ".banner", banner);
-        banConfig.set(path + ".time", System.currentTimeMillis());
+        String path   = "ips." + safeIp;
+        banConfig.set(path + ".ip",      ip);
+        banConfig.set(path + ".reason",  reason);
+        banConfig.set(path + ".banner",  banner);
+        banConfig.set(path + ".time",    System.currentTimeMillis());
         banConfig.set(path + ".expires", expires);
         saveBans();
         plugin.debug("IP Banned " + ip + " by " + banner + " until " + expires);
+
+        if (networkHook != null) networkHook.onIpBan(ip, reason, banner, expires);
     }
 
     public void unbanIp(String ip) {
-        String safeIp = ip.replace('.', '_');
-        banConfig.set("ips." + safeIp, null);
+        banConfig.set("ips." + ip.replace('.', '_'), null);
         saveBans();
         plugin.debug("Unbanned IP " + ip);
+
+        if (networkHook != null) networkHook.onIpUnban(ip);
     }
 
     public boolean isIpBanned(String ip) {
-        String safeIp = ip.replace('.', '_');
-        String path = "ips." + safeIp;
+        String path = "ips." + ip.replace('.', '_');
         if (!banConfig.contains(path)) return false;
-
         long expires = banConfig.getLong(path + ".expires");
         if (expires > 0 && expires < System.currentTimeMillis()) {
             unbanIp(ip);
@@ -167,68 +164,62 @@ public class PunishmentManager {
 
     public IpBanEntry getIpBanEntry(String ip) {
         if (!isIpBanned(ip)) return null;
-        String safeIp = ip.replace('.', '_');
-        String path = "ips." + safeIp;
-
-        return new IpBanEntry(
-                ip,
+        String path = "ips." + ip.replace('.', '_');
+        return new IpBanEntry(ip,
                 banConfig.getString(path + ".reason"),
                 banConfig.getString(path + ".banner"),
                 banConfig.getLong(path + ".time"),
-                banConfig.getLong(path + ".expires")
-        );
+                banConfig.getLong(path + ".expires"));
     }
 
     public List<IpBanEntry> getActiveIpBans() {
-        return getAllIpBans().stream()
-                .filter(this::isIpBanActive)
-                .collect(Collectors.toList());
+        return getAllIpBans().stream().filter(this::isIpBanActive).collect(Collectors.toList());
     }
 
     public List<IpBanEntry> getAllIpBans() {
         List<IpBanEntry> bans = new ArrayList<>();
         if (!banConfig.contains("ips")) return bans;
-
         for (String key : banConfig.getConfigurationSection("ips").getKeys(false)) {
             String path = "ips." + key;
             String originalIp = banConfig.getString(path + ".ip", key.replace('_', '.'));
-            bans.add(new IpBanEntry(
-                    originalIp,
+            bans.add(new IpBanEntry(originalIp,
                     banConfig.getString(path + ".reason"),
                     banConfig.getString(path + ".banner"),
                     banConfig.getLong(path + ".time"),
-                    banConfig.getLong(path + ".expires")
-            ));
+                    banConfig.getLong(path + ".expires")));
         }
         return bans;
     }
 
-    private boolean isIpBanActive(IpBanEntry entry) {
-        if (entry.expires() <= 0) return true;
-        return entry.expires() > System.currentTimeMillis();
+    private boolean isIpBanActive(IpBanEntry e) {
+        return e.expires() <= 0 || e.expires() > System.currentTimeMillis();
     }
 
 
     public void mutePlayer(UUID uuid, String name, String reason, String muter, long expires) {
         String path = uuid.toString();
-        muteConfig.set(path + ".name", name);
-        muteConfig.set(path + ".reason", reason);
-        muteConfig.set(path + ".muter", muter);
-        muteConfig.set(path + ".time", System.currentTimeMillis());
+        muteConfig.set(path + ".name",    name);
+        muteConfig.set(path + ".reason",  reason);
+        muteConfig.set(path + ".muter",   muter);
+        muteConfig.set(path + ".time",    System.currentTimeMillis());
         muteConfig.set(path + ".expires", expires);
         saveMutes();
         plugin.debug("Muted " + name + " by " + muter + " until " + expires);
+
+        if (networkHook != null) networkHook.onMute(uuid, name, reason, muter, expires);
     }
 
     public void unmutePlayer(UUID uuid) {
         muteConfig.set(uuid.toString(), null);
         saveMutes();
         plugin.debug("Unmuted " + uuid);
+
+        if (networkHook != null) networkHook.onUnmute(uuid);
     }
 
     public boolean isMuted(UUID uuid) {
         if (!muteConfig.contains(uuid.toString())) return false;
-        long expires = muteConfig.getLong(uuid.toString() + ".expires");
+        long expires = muteConfig.getLong(uuid + ".expires");
         if (expires > 0 && expires < System.currentTimeMillis()) {
             unmutePlayer(uuid);
             return false;
@@ -239,14 +230,12 @@ public class PunishmentManager {
     public MuteEntry getMuteEntry(UUID uuid) {
         if (!isMuted(uuid)) return null;
         String path = uuid.toString();
-        return new MuteEntry(
-                uuid,
+        return new MuteEntry(uuid,
                 muteConfig.getString(path + ".name"),
                 muteConfig.getString(path + ".reason"),
                 muteConfig.getString(path + ".muter"),
                 muteConfig.getLong(path + ".time"),
-                muteConfig.getLong(path + ".expires")
-        );
+                muteConfig.getLong(path + ".expires"));
     }
 
     public List<MuteEntry> getAllMutes() {
