@@ -1,6 +1,5 @@
 package net.godlycow.org.essc.expansion.mysql.punishment;
 
-import com.zaxxer.hikari.HikariDataSource;
 import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
 
 import java.sql.*;
@@ -10,7 +9,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class NetworkPunishmentDatabase {
 
@@ -56,9 +54,9 @@ public class NetworkPunishmentDatabase {
                         `expires`     BIGINT        NOT NULL DEFAULT -1,
                         `active`      TINYINT(1)    NOT NULL DEFAULT 1,
                         PRIMARY KEY (`id`),
-                        INDEX `idx_target`       (`target`),
-                        INDEX `idx_type_active`  (`type`, `active`),
-                        INDEX `idx_time`         (`time`)
+                        INDEX `idx_target`      (`target`),
+                        INDEX `idx_type_active` (`type`, `active`),
+                        INDEX `idx_time`        (`time`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
                 """.formatted(TABLE));
             }
@@ -66,14 +64,16 @@ public class NetworkPunishmentDatabase {
         }).join();
     }
 
-    public CompletableFuture<Void> insertPunishment(PunishType type, String target, String targetName,
+
+    public CompletableFuture<Long> insertPunishment(PunishType type, String target, String targetName,
                                                     String reason, String punisher,
                                                     String serverId, long expires) {
         return syncDb.async(() -> {
             try (Connection conn = syncDb.getRawConnection();
                  PreparedStatement ps = conn.prepareStatement(
                          "INSERT INTO `" + TABLE + "` (type, target, target_name, reason, punisher, server_id, time, expires, active) " +
-                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)")) {
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)",
+                         Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, type.name());
                 ps.setString(2, target);
                 ps.setString(3, targetName);
@@ -83,8 +83,9 @@ public class NetworkPunishmentDatabase {
                 ps.setLong(7, System.currentTimeMillis());
                 ps.setLong(8, expires);
                 ps.executeUpdate();
+                ResultSet keys = ps.getGeneratedKeys();
+                return keys.next() ? keys.getLong(1) : null;
             }
-            return null;
         });
     }
 

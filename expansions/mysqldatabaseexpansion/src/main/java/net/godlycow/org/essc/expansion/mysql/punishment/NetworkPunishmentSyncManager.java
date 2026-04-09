@@ -13,10 +13,11 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-
 
 public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
 
@@ -27,6 +28,8 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
 
     private BukkitTask pollTask;
     private long lastPollTime = 0;
+
+    private final Set<Long> appliedIds = ConcurrentHashMap.newKeySet();
 
     public NetworkPunishmentSyncManager(MySQLDatabaseExpansion plugin,
                                         EssentialsC essc,
@@ -55,7 +58,8 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
     public void onBan(UUID uuid, String name, String reason, String banner, long expires) {
         db.insertPunishment(NetworkPunishmentDatabase.PunishType.BAN,
                         uuid.toString(), name, reason, banner, config.getServerId(), expires)
-                .exceptionally(ex -> { log("Failed to push ban for " + name, ex); return null; });
+                .exceptionally(ex -> { log("Failed to push ban for " + name, ex); return null; })
+                .thenAccept(id -> { if (id != null) appliedIds.add(id); });
     }
 
     @Override
@@ -68,7 +72,8 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
     public void onIpBan(String ip, String reason, String banner, long expires) {
         db.insertPunishment(NetworkPunishmentDatabase.PunishType.IP_BAN,
                         ip, null, reason, banner, config.getServerId(), expires)
-                .exceptionally(ex -> { log("Failed to push IP ban for " + ip, ex); return null; });
+                .exceptionally(ex -> { log("Failed to push IP ban for " + ip, ex); return null; })
+                .thenAccept(id -> { if (id != null) appliedIds.add(id); });
     }
 
     @Override
@@ -81,7 +86,8 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
     public void onMute(UUID uuid, String name, String reason, String muter, long expires) {
         db.insertPunishment(NetworkPunishmentDatabase.PunishType.MUTE,
                         uuid.toString(), name, reason, muter, config.getServerId(), expires)
-                .exceptionally(ex -> { log("Failed to push mute for " + name, ex); return null; });
+                .exceptionally(ex -> { log("Failed to push mute for " + name, ex); return null; })
+                .thenAccept(id -> { if (id != null) appliedIds.add(id); });
     }
 
     @Override
@@ -99,11 +105,10 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
             List<NetworkPunishmentDatabase.NetworkPunishment> updates =
                     db.fetchUpdatedSince(since, config.getServerId()).join();
 
-            if (updates.isEmpty()) return;
-
-            plugin.getLogger().fine("[NetworkPunishments] " + updates.size() + " remote punishment update(s)");
-
             for (var p : updates) {
+                if (appliedIds.contains(p.id())) continue;
+                appliedIds.add(p.id());
+
                 switch (p.type()) {
                     case "BAN"    -> handleRemoteBan(p);
                     case "IP_BAN" -> handleRemoteIpBan(p);
@@ -126,9 +131,10 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
 
         Player online = Bukkit.getPlayer(uuid);
         if (online != null) {
-            Component msg = buildKickMessage("ban", p.reason(), p.punisher(), p.expires());
+            Component msg = buildBanKick(p.reason(), p.punisher(), p.expires());
             Bukkit.getScheduler().runTask(plugin, () -> online.kick(msg));
-            plugin.getLogger().info("[NetworkPunishments] Kicked " + online.getName() + " (network ban from " + p.serverId() + ")");
+            plugin.getLogger().info("[NetworkPunishments] Kicked " + online.getName()
+                    + " (network ban from " + p.serverId() + ")");
         }
     }
 
@@ -139,10 +145,12 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
         essc.getPunishmentManager().banIp(ip, p.reason(), p.punisher(), p.expires());
 
         for (Player pl : Bukkit.getOnlinePlayers()) {
-            if (pl.getAddress() != null && pl.getAddress().getAddress().getHostAddress().equals(ip)) {
-                Component msg = buildKickMessage("banip", p.reason(), p.punisher(), p.expires());
+            if (pl.getAddress() != null
+                    && pl.getAddress().getAddress().getHostAddress().equals(ip)) {
+                Component msg = buildBanKick(p.reason(), p.punisher(), p.expires());
                 Bukkit.getScheduler().runTask(plugin, () -> pl.kick(msg));
-                plugin.getLogger().info("[NetworkPunishments] Kicked " + pl.getName() + " (network IP ban from " + p.serverId() + ")");
+                plugin.getLogger().info("[NetworkPunishments] Kicked " + pl.getName()
+                        + " (network IP ban from " + p.serverId() + ")");
             }
         }
     }
@@ -153,17 +161,22 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
         catch (IllegalArgumentException e) { return; }
 
         if (p.active()) {
-            essc.getPunishmentManager().mutePlayer(uuid, p.targetName(), p.reason(), p.punisher(), p.expires());
+            essc.getPunishmentManager().mutePlayer(
+                    uuid, p.targetName(), p.reason(), p.punisher(), p.expires());
 
             Player online = Bukkit.getPlayer(uuid);
             if (online != null) {
-                online.sendMessage(Component.text("§cYou have been muted network-wide by " + p.punisher() + ": " + p.reason()));
-                plugin.getLogger().info("[NetworkPunishments] Applied mute to online player " + online.getName() + " from " + p.serverId());
+                online.sendMessage(Component.text(
+                        "§cYou have been muted network-wide by " + p.punisher() + ": " + p.reason()));
             }
+            plugin.getLogger().info("[NetworkPunishments] Applied network mute for "
+                    + p.targetName() + " (from " + p.serverId() + ")");
         } else {
             essc.getPunishmentManager().unmutePlayer(uuid);
+            plugin.getLogger().info("[NetworkPunishments] Removed network mute for " + p.targetName());
         }
     }
+
 
     public NetworkPunishmentDatabase.NetworkPunishment checkBan(UUID uuid) {
         try { return db.getActiveBan(uuid).get(3, TimeUnit.SECONDS); }
@@ -180,18 +193,18 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
         catch (Exception e) { log("Mute lookup failed for " + uuid, e); return null; }
     }
 
-    private Component buildKickMessage(String type, String reason, String punisher, long expires) {
+    private Component buildBanKick(String reason, String punisher, long expires) {
         String duration = expires <= 0 ? "Permanent" : formatRemaining(expires);
         return MiniMessage.miniMessage().deserialize(
-                "<red><bold>You are network banned</bold></red>\n" +
-                        "<gray>Reason: <white>" + reason + "</white>\n" +
-                        "<gray>By: <white>" + punisher + "</white>\n" +
-                        "<gray>Duration: <white>" + duration + "</white>"
+                "<red><bold>You are banned from this network.</bold></red>\n\n" +
+                        "<gray>Reason: <white>" + reason + "\n" +
+                        "<gray>By: <white>" + punisher + "\n" +
+                        "<gray>Duration: <white>" + duration
         );
     }
 
     private String formatRemaining(long expires) {
-        long diff = expires - System.currentTimeMillis();
+        long diff  = expires - System.currentTimeMillis();
         if (diff <= 0) return "Expired";
         long days  = TimeUnit.MILLISECONDS.toDays(diff);
         long hours = TimeUnit.MILLISECONDS.toHours(diff) % 24;
