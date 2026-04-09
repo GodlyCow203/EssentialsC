@@ -54,7 +54,7 @@ Add the Dependency to your `pom.xml`:
     <dependency>
         <groupId>com.github.GodlyCow203</groupId>
         <artifactId>EssentialsC</artifactId>
-        <version>v0.0.5</version>
+        <version>v0.0.6</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -73,7 +73,7 @@ Add the Dependency to your `build.gradle`:
 
 ```gradle
 dependencies {
-    compileOnly 'com.github.GodlyCow203:EssentialsC:v0.0.5'
+    compileOnly 'com.github.GodlyCow203:EssentialsC:v0.0.6'
 }
 ```
 
@@ -90,7 +90,7 @@ Add the Dependency to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    compileOnly("com.github.GodlyCow203:EssentialsC:v0.0.5")
+    compileOnly("com.github.GodlyCow203:EssentialsC:v0.0.6")
 }
 ```
 
