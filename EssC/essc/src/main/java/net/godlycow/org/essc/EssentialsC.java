@@ -111,12 +111,13 @@ public final class EssentialsC extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
-        EssLog.init(getLogger(), configManager.isDebug());
         saveDefaultConfig();
         configManager = new ConfigManager(this);
         commandsConfig = new CommandsConfig(this);
         commandsConfig.load();
         configManager.migrate();
+        EssLog.init(getLogger(), configManager.isDebug());
+
 
         if (configManager.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");
