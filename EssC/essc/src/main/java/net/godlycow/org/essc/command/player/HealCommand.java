@@ -69,8 +69,8 @@ public class HealCommand extends Command {
             player.sendMessage(lang.get(player, "heal.success"));
         } else {
             Map<String, String> senderPlaceholders = new HashMap<>();
-            senderPlaceholders.put("target", target.getName());
-            player.sendMessage(lang.get(player, "heal.success.other", senderPlaceholders));
+            senderPlaceholders.put("player", target.getName());
+            player.sendMessage(lang.get(player, "heal.success.others", senderPlaceholders));
 
             Map<String, String> targetPlaceholders = new HashMap<>();
             targetPlaceholders.put("healer", player.getName());
