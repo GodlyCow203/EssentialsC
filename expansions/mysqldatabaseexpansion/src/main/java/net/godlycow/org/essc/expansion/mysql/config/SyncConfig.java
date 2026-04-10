@@ -14,6 +14,7 @@ public class SyncConfig {
     private String password;
     private String serverId;
     private int maxPoolSize;
+    private boolean networkKitsEnabled;
 
     public SyncConfig(MySQLDatabaseExpansion plugin) {
         this.plugin = plugin;
@@ -23,16 +24,17 @@ public class SyncConfig {
     public void load() {
         FileConfiguration cfg = plugin.getConfig();
 
-        host         = cfg.getString("mysql.host", "localhost");
-        port         = cfg.getInt("mysql.port", 3306);
-        database     = cfg.getString("mysql.database", "essc_sync");
-        username     = cfg.getString("mysql.username", "root");
-        password     = cfg.getString("mysql.password", "");
+        host = cfg.getString("mysql.host", "localhost");
+        port= cfg.getInt("mysql.port", 3306);
+        database = cfg.getString("mysql.database", "essc_sync");
+        username = cfg.getString("mysql.username", "root");
+        password = cfg.getString("mysql.password", "");
 
-        maxPoolSize  = cfg.getInt("mysql.pool-size", 10);
+        maxPoolSize = cfg.getInt("mysql.pool-size", 10);
 
-        serverId     = cfg.getString("server-id", "server-1");
+        serverId = cfg.getString("server-id", "server-1");
 
+        networkKitsEnabled = cfg.getBoolean("network-kits.enabled", true);
     }
 
     public String getJdbcUrl() {
@@ -40,15 +42,29 @@ public class SyncConfig {
                 + "?useSSL=false&autoReconnect=true&characterEncoding=utf8";
     }
 
-    public String getUsername()         { return username; }
-    public String getPassword()         { return password; }
-    public String getServerId()         { return serverId; }
-    public int getMaxPoolSize()         { return maxPoolSize; }
+    public String getUsername(){
+        return username;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public String getServerId(){
+        return serverId;
+    }
+    public int getMaxPoolSize(){
+        return maxPoolSize;
+    }
+    public boolean isNetworkKitsEnabled(){
+        return networkKitsEnabled;
+    }
 
-
-    public int getPollIntervalTicks()   { return 20; }
-
-    public int getPushDebounceMs()      { return 0; }
-
-    public int getLocalPushIntervalTicks() { return 20; }
+    public int getPollIntervalTicks() {
+        return 20;
+    }
+    public int getPushDebounceMs(){
+        return 0;
+    }
+    public int getLocalPushIntervalTicks(){
+        return 20;
+    }
 }

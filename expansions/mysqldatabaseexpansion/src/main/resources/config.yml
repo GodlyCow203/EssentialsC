@@ -18,3 +18,6 @@ mysql:
   # Minimum recommended: 10
   pool-size: 10
 
+network-kits:
+  enabled: true
+

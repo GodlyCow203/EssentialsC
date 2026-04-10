@@ -80,12 +80,9 @@ public class KitCommand extends Command {
             return;
         }
 
-        if (kit.isOneTime()) {
-            boolean claimed = plugin.getKitManager().hasClaimed(player, kit);
-            if (claimed) {
-                player.sendMessage(lang.get(player, "kit.one_time_used", Map.of("kit", kit.getDisplayName())));
-                return;
-            }
+        if (kit.isOneTime() && plugin.getKitManager().hasClaimed(player, kit)) {
+            player.sendMessage(lang.get(player, "kit.one_time_used", Map.of("kit", kit.getDisplayName())));
+            return;
         }
 
         if (kit.getMaxClaims() > 0) {
@@ -97,14 +94,16 @@ public class KitCommand extends Command {
             }
         }
 
-        long cooldown = plugin.getKitManager().getCooldownRemaining(player, kit);
-        if (cooldown > 0) {
-            player.sendMessage(lang.get(player, "kit.cooldown_active",
-                    Map.of("kit", kit.getDisplayName(), "time", formatTime(cooldown))));
-            return;
-        }
+        plugin.getKitManager().getCooldownRemainingAsync(player, kit).thenAccept(cooldown -> {
+            if (cooldown > 0) {
+                player.sendMessage(lang.get(player, "kit.cooldown_active",
+                        Map.of("kit", kit.getDisplayName(), "time", formatTime(cooldown))));
+                return;
+            }
 
-        plugin.getKitManager().giveKit(player, kit);
+            plugin.getServer().getScheduler().runTask(plugin, () ->
+                    plugin.getKitManager().giveKit(player, kit));
+        });
     }
 
     private void handleCooldown(Player player, String kitName) {
@@ -120,13 +119,14 @@ public class KitCommand extends Command {
             return;
         }
 
-        long remaining = plugin.getKitManager().getCooldownRemaining(player, kit);
-        if (remaining == 0) {
-            player.sendMessage(lang.get(player, "kit.cooldown.ready", Map.of("kit", kit.getDisplayName())));
-        } else {
-            player.sendMessage(lang.get(player, "kit.cooldown.status",
-                    Map.of("kit", kit.getDisplayName(), "time", formatTime(remaining))));
-        }
+        plugin.getKitManager().getCooldownRemainingAsync(player, kit).thenAccept(remaining -> {
+            if (remaining == 0) {
+                player.sendMessage(lang.get(player, "kit.cooldown.ready", Map.of("kit", kit.getDisplayName())));
+            } else {
+                player.sendMessage(lang.get(player, "kit.cooldown.status",
+                        Map.of("kit", kit.getDisplayName(), "time", formatTime(remaining))));
+            }
+        });
     }
 
     private void handleDebug(Player player, String kitName) {
@@ -144,6 +144,7 @@ public class KitCommand extends Command {
         player.sendMessage(lang.get(player, "kit.debug.cooldown", Map.of("secs", String.valueOf(kit.getCooldown()))));
         player.sendMessage(lang.get(player, "kit.debug.onetime", Map.of("val", String.valueOf(kit.isOneTime()))));
         player.sendMessage(lang.get(player, "kit.debug.firstjoin", Map.of("val", String.valueOf(kit.isFirstJoin()))));
+        player.sendMessage(lang.get(player, "kit.debug.networksync", Map.of("val", String.valueOf(kit.isNetworkSync()))));
 
         if (kit.getMaxClaims() > 0) {
             player.sendMessage(lang.get(player, "kit.debug.maxclaims", Map.of("max", String.valueOf(kit.getMaxClaims()))));
