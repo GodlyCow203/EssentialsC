@@ -5,16 +5,16 @@ import net.godlycow.org.essc.database.Database;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HomeManager {
 
     private final EssentialsC plugin;
     private final HomeDatabase repository;
     private final TeleportHandler teleportHandler;
+    private final Map<UUID, Set<String>> homeNameCache = new ConcurrentHashMap<>();
 
     public HomeManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -47,15 +47,28 @@ public class HomeManager {
     }
 
     public CompletableFuture<Boolean> setHome(Player player, String name, Location location) {
-        return repository.save(player.getUniqueId(), name, location);
+        return repository.save(player.getUniqueId(), name, location).whenComplete((result, err) -> {
+            if (result != null && result) {
+                homeNameCache.computeIfAbsent(player.getUniqueId(), k -> ConcurrentHashMap.newKeySet()).add(name.toLowerCase());
+            }
+        });
     }
 
     public CompletableFuture<Boolean> setHome(UUID uuid, String name, Location location) {
-        return repository.save(uuid, name, location);
+        return repository.save(uuid, name, location).whenComplete((result, err) -> {
+            if (result != null && result) {
+                homeNameCache.computeIfAbsent(uuid, k -> ConcurrentHashMap.newKeySet()).add(name.toLowerCase());
+            }
+        });
     }
 
     public CompletableFuture<Boolean> deleteHome(UUID uuid, String name) {
-        return repository.delete(uuid, name);
+        return repository.delete(uuid, name).whenComplete((result, err) -> {
+            Set<String> cached = homeNameCache.get(uuid);
+            if (cached != null) {
+                cached.remove(name.toLowerCase());
+            }
+        });
     }
 
     public CompletableFuture<Home> getHome(UUID uuid, String name) {
@@ -63,7 +76,23 @@ public class HomeManager {
     }
 
     public CompletableFuture<List<Home>> getHomes(UUID uuid) {
-        return repository.findAll(uuid);
+        return repository.findAll(uuid).whenComplete((homes, err) -> {
+            if (homes != null) {
+                Set<String> names = ConcurrentHashMap.newKeySet();
+                for (Home home : homes) {
+                    names.add(home.getName().toLowerCase());
+                }
+                homeNameCache.put(uuid, names);
+            }
+        });
+    }
+
+    public Set<String> getCachedHomeNames(UUID uuid) {
+        return homeNameCache.getOrDefault(uuid, Collections.emptySet());
+    }
+
+    public void clearCache(UUID uuid) {
+        homeNameCache.remove(uuid);
     }
 
     public CompletableFuture<Set<UUID>> getAllHomeOwners() {
@@ -95,12 +124,14 @@ public class HomeManager {
     }
 
     public void reload() {
+        homeNameCache.clear();
         plugin.debug("HomeManager configuration reloaded.");
     }
 
     public void shutdown() {
         teleportHandler.shutdown();
         repository.shutdown();
+        homeNameCache.clear();
         plugin.debug("HomeManager shutdown complete.");
     }
 }

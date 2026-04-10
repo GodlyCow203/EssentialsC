@@ -7,9 +7,11 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class HomeCommand extends Command {
@@ -85,7 +87,7 @@ public class HomeCommand extends Command {
                 String maxStr = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
 
                 player.sendMessage(lang.get(player, "home.list.header",
-                        Map.of("count", String.valueOf(homes.size()), "max", maxStr)));
+                        Map.of("used", String.valueOf(homes.size()), "limit", maxStr)));
 
                 for (Home home : homes) {
                     player.sendMessage(lang.get(player, "home.list.entry",
@@ -101,6 +103,49 @@ public class HomeCommand extends Command {
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            return Collections.emptyList();
+        }
+        Player player = (Player) sender;
+
+        if (args.length == 1) {
+            String partial = args[0].toLowerCase();
+            List<String> completions = new ArrayList<>();
+
+            Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(player.getUniqueId());
+            for (String name : homeNames) {
+                if (name.startsWith(partial)) {
+                    completions.add(name);
+                }
+            }
+
+            if (player.hasPermission("essentialsc.home.admin")) {
+                for (Player online : plugin.getServer().getOnlinePlayers()) {
+                    if (online.getName().toLowerCase().startsWith(partial)) {
+                        completions.add(online.getName());
+                    }
+                }
+            }
+
+            return completions;
+        }
+        else if (args.length == 2 && player.hasPermission("essentialsc.home.admin")) {
+            String targetName = args[0];
+            String partial = args[1].toLowerCase();
+            Player target = plugin.getServer().getPlayer(targetName);
+
+            if (target != null) {
+                Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(target.getUniqueId());
+                List<String> completions = new ArrayList<>();
+                for (String name : homeNames) {
+                    if (name.startsWith(partial)) {
+                        completions.add(name);
+                    }
+                }
+                return completions;
+            }
+        }
+
         return Collections.emptyList();
     }
 }

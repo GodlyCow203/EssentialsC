@@ -55,6 +55,10 @@ import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EssentialsC extends JavaPlugin {
@@ -326,6 +330,17 @@ public final class EssentialsC extends JavaPlugin {
         } else {
             getLogger().warning("Failed to register PlaceholderAPI hook!");
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        getHomeManager().getHomes(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        getHomeManager().clearCache(event.getPlayer().getUniqueId());
     }
 
     public void debug(String message) {
