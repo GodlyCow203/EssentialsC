@@ -50,6 +50,7 @@ import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.tab.TABHook;
 import net.godlycow.org.essc.tab.TabManager;
 import net.godlycow.org.essc.teleport.TPAManager;
+import net.godlycow.org.essc.util.EssLog;
 import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -110,6 +111,7 @@ public final class EssentialsC extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        EssLog.init(getLogger(), configManager.isDebug());
         saveDefaultConfig();
         configManager = new ConfigManager(this);
         commandsConfig = new CommandsConfig(this);

@@ -24,10 +24,11 @@ public class Kit {
     private final int maxClaims;
     private final List<ItemStack> items;
     private final String description;
+    private final boolean networkSync;
 
     public Kit(String name, String displayName, String permission, long cooldown,
                boolean oneTime, boolean firstJoin, int maxClaims,
-               List<ItemStack> items, String description) {
+               List<ItemStack> items, String description, boolean networkSync) {
         this.name = name;
         this.displayName = displayName;
         this.permission = permission;
@@ -37,6 +38,7 @@ public class Kit {
         this.maxClaims = maxClaims;
         this.items = items;
         this.description = description;
+        this.networkSync = networkSync;
     }
 
     /**
@@ -107,4 +109,15 @@ public class Kit {
      * @return the description string; never {@code null}, may be empty
      */
     public String getDescription() { return description; }
+
+    /**
+     * Returns whether this kit's cooldown is synchronized across the network.
+     *
+     * <p>When {@code true}, cooldowns are checked against network-wide claim data
+     * via the {@link net.godlycow.org.essc.kit.KitSyncHook} if registered.</p>
+     *
+     * @return {@code true} if network synchronization is enabled for this kit
+     * @see net.godlycow.org.essc.kit.KitSyncHook
+     */
+    public boolean isNetworkSync() { return networkSync; }
 }

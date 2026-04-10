@@ -42,6 +42,8 @@ public class KitManager implements Listener {
 
     private final Map<UUID, Map<String, PlayerKitData>> playerCache = new ConcurrentHashMap<>();
 
+    private KitSyncHook networkHook = null;
+
     public KitManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.database = new Database(plugin, "kits.db");
@@ -59,6 +61,21 @@ public class KitManager implements Listener {
         plugin.debug("KitManager initialized");
     }
 
+
+    public void setNetworkHook(KitSyncHook hook) {
+        this.networkHook = hook;
+        plugin.getLogger().info("[KitManager] Network kit sync hook registered.");
+    }
+
+    public void clearNetworkHook() {
+        this.networkHook = null;
+        plugin.getLogger().info("[KitManager] Network kit sync hook cleared.");
+    }
+
+    public KitSyncHook getNetworkHook() {
+        return networkHook;
+    }
+
     private void createTables() throws SQLException {
         try (Connection conn = database.getConnection();
              PreparedStatement stmt = conn.prepareStatement("""
@@ -73,6 +90,8 @@ public class KitManager implements Listener {
             stmt.execute();
         }
     }
+
+
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -90,10 +109,12 @@ public class KitManager implements Listener {
             }
         }
     }
+
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         playerCache.remove(event.getPlayer().getUniqueId());
     }
+
 
     public void loadKits() {
         kits.clear();
@@ -122,6 +143,7 @@ public class KitManager implements Listener {
                 boolean firstJoin = kitSection.getBoolean("first-join", false);
                 int maxClaims = kitSection.getInt("max-claims", 0);
                 String description = kitSection.getString("description", "");
+                boolean networkSync = kitSection.getBoolean("network-sync", false);
 
                 List<ItemStack> items = new ArrayList<>();
                 List<Map<?, ?>> itemsList = kitSection.getMapList("items");
@@ -134,12 +156,13 @@ public class KitManager implements Listener {
                 }
 
                 Kit kit = new Kit(kitName.toLowerCase(), displayName, permission, cooldown,
-                        oneTime, firstJoin, maxClaims, items, description);
+                        oneTime, firstJoin, maxClaims, items, description, networkSync);
                 kits.put(kitName.toLowerCase(), kit);
 
                 registerPermission(permission);
 
-                plugin.debug("Loaded kit: " + kitName + " (" + items.size() + " items)");
+                plugin.debug("Loaded kit: " + kitName + " (" + items.size() + " items)"
+                        + (networkSync ? " [network-sync]" : ""));
 
             } catch (Exception e) {
                 plugin.getLogger().severe("Failed to load kit '" + kitName + "': " + e.getMessage());
@@ -290,6 +313,7 @@ public class KitManager implements Listener {
         });
     }
 
+
     public Kit getKit(String name) {
         return kits.get(name.toLowerCase());
     }
@@ -309,27 +333,47 @@ public class KitManager implements Listener {
         PlayerKitData claimData = data.get(kit.getName());
 
         if (kit.isOneTime()) {
-            if (claimData != null && claimData.claimCount > 0) {
-                return false;
-            }
+            if (claimData != null && claimData.claimCount > 0) return false;
         }
 
         if (kit.getMaxClaims() > 0) {
-            if (claimData != null && claimData.claimCount >= kit.getMaxClaims()) {
-                return false;
-            }
+            if (claimData != null && claimData.claimCount >= kit.getMaxClaims()) return false;
         }
 
         if (kit.getCooldown() > 0 && !player.hasPermission("essentialsc.kits.admin")) {
             if (claimData != null) {
-                long cooldownEnd = claimData.lastClaimed + (kit.getCooldown() * 1000);
-                if (System.currentTimeMillis() < cooldownEnd) {
-                    return false;
-                }
+                long cooldownEnd = claimData.lastClaimed + (kit.getCooldown() * 1000L);
+                if (System.currentTimeMillis() < cooldownEnd) return false;
             }
         }
 
         return true;
+    }
+
+    public CompletableFuture<Long> getCooldownRemainingAsync(Player player, Kit kit) {
+        long localRemaining = getCooldownRemaining(player, kit);
+
+        if (!kit.isNetworkSync()
+                || networkHook == null
+                || player.hasPermission("essentialsc.kits.networksync.bypass")) {
+            return CompletableFuture.completedFuture(localRemaining);
+        }
+
+        return networkHook.getNetworkLastClaimed(player.getUniqueId(), kit.getName())
+                .thenApply(networkLastClaimed -> {
+                    if (networkLastClaimed == 0) return localRemaining;
+
+                    long networkCooldownEnd = networkLastClaimed + (kit.getCooldown() * 1000L);
+                    long networkRemaining = Math.max(0,
+                            (networkCooldownEnd - System.currentTimeMillis()) / 1000L);
+
+                    return Math.max(localRemaining, networkRemaining);
+                })
+                .exceptionally(ex -> {
+                    plugin.getLogger().warning("[KitManager] Network cooldown check failed for "
+                            + player.getName() + "/" + kit.getName() + ": " + ex.getMessage());
+                    return localRemaining;
+                });
     }
 
     public long getCooldownRemaining(Player player, Kit kit) {
@@ -339,9 +383,9 @@ public class KitManager implements Listener {
         PlayerKitData claimData = data.get(kit.getName());
         if (claimData == null || claimData.lastClaimed == 0) return 0;
 
-        long cooldownEnd = claimData.lastClaimed + (kit.getCooldown() * 1000);
+        long cooldownEnd = claimData.lastClaimed + (kit.getCooldown() * 1000L);
         long remaining = cooldownEnd - System.currentTimeMillis();
-        return Math.max(0, remaining / 1000);
+        return Math.max(0, remaining / 1000L);
     }
 
     public boolean hasClaimed(Player player, Kit kit) {
@@ -370,14 +414,15 @@ public class KitManager implements Listener {
         }
 
         long now = System.currentTimeMillis();
+
         database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("""
-            INSERT INTO kit_claims (uuid, kit_name, last_claimed, claim_count)
-            VALUES (?, ?, ?, 1)
-            ON CONFLICT(uuid, kit_name) DO UPDATE SET
-                last_claimed = excluded.last_claimed,
-                claim_count = claim_count + 1
-        """)) {
+                INSERT INTO kit_claims (uuid, kit_name, last_claimed, claim_count)
+                VALUES (?, ?, ?, 1)
+                ON CONFLICT(uuid, kit_name) DO UPDATE SET
+                    last_claimed = excluded.last_claimed,
+                    claim_count = claim_count + 1
+            """)) {
                 stmt.setString(1, player.getUniqueId().toString());
                 stmt.setString(2, kit.getName());
                 stmt.setLong(3, now);
@@ -388,6 +433,15 @@ public class KitManager implements Listener {
             playerCache.computeIfAbsent(player.getUniqueId(), k -> new HashMap<>())
                     .merge(kit.getName(), new PlayerKitData(now, 1),
                             (old, newData) -> new PlayerKitData(now, old.claimCount + 1));
+
+            if (kit.isNetworkSync() && networkHook != null) {
+                networkHook.onKitClaimed(
+                        player.getUniqueId(),
+                        kit.getName(),
+                        now,
+                        plugin.getServer().getMotd()
+                );
+            }
         });
 
         player.sendMessage(plugin.getLanguageManager().get(player, "kit.claim.success",
@@ -403,6 +457,7 @@ public class KitManager implements Listener {
 
         plugin.debug("Player " + player.getName() + " claimed kit " + kit.getName());
     }
+
     public void reload() {
         loadKits();
         playerCache.clear();

@@ -3,6 +3,7 @@ package net.godlycow.org.essc.expansion.mysql;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.command.SyncCommand;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
+import net.godlycow.org.essc.expansion.mysql.kit.NetworkKitSyncManager;
 import net.godlycow.org.essc.expansion.mysql.punishment.NetworkPunishmentListener;
 import net.godlycow.org.essc.expansion.mysql.punishment.NetworkPunishmentSyncManager;
 import net.godlycow.org.essc.expansion.mysql.sync.BalanceSyncManager;
@@ -20,6 +21,7 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
     private SyncConfig syncConfig;
     private BalanceSyncManager syncManager;
     private NetworkPunishmentSyncManager punishmentSyncManager;
+    private NetworkKitSyncManager networkKitSyncManager;
 
     @Override
     public void onEnable() {
@@ -66,6 +68,17 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
             getLogger().log(Level.SEVERE, "Failed to initialize network punishment sync.", e);
         }
 
+        if (essentialsC.getKitManager() != null && syncConfig.isNetworkKitsEnabled()) {
+            try {
+                this.networkKitSyncManager = new NetworkKitSyncManager(
+                        this, essentialsC, syncConfig, syncManager.getDatabase());
+                essentialsC.getKitManager().setNetworkHook(networkKitSyncManager);
+                getLogger().info("[NetworkKits] Network kit cooldown sync enabled.");
+            } catch (Exception e) {
+                getLogger().log(Level.SEVERE, "Failed to initialize network kit sync.", e);
+            }
+        }
+
         Bukkit.getPluginManager().registerEvents(new SyncListener(this, syncManager), this);
 
         var cmd = getCommand("mysqlsync");
@@ -80,6 +93,9 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (networkKitSyncManager != null) {
+            networkKitSyncManager.shutdown();
+        }
         if (punishmentSyncManager != null) {
             punishmentSyncManager.shutdown();
         }
@@ -89,9 +105,22 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
         getLogger().info("EssentialsC-MySQLExpansion disabled.");
     }
 
-    public static MySQLDatabaseExpansion getInstance() { return instance; }
-    public EssentialsC getEssentialsC()                { return essentialsC; }
-    public SyncConfig getSyncConfig()                  { return syncConfig; }
-    public BalanceSyncManager getSyncManager()         { return syncManager; }
-    public NetworkPunishmentSyncManager getPunishmentSyncManager() { return punishmentSyncManager; }
+    public static MySQLDatabaseExpansion getInstance() {
+        return instance;
+    }
+    public EssentialsC getEssentialsC(){
+        return essentialsC;
+    }
+    public SyncConfig getSyncConfig() {
+        return syncConfig;
+    }
+    public BalanceSyncManager getSyncManager(){
+        return syncManager;
+    }
+    public NetworkPunishmentSyncManager getPunishmentSyncManager() {
+        return punishmentSyncManager;
+    }
+    public NetworkKitSyncManager getKitSyncManager() {
+        return networkKitSyncManager;
+    }
 }
