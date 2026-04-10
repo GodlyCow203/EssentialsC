@@ -437,3 +437,8 @@ banlist:
   priority: normal
   aliases:
     - bans
+
+tpoffline:
+  enabled: true
+  priority: normal
+  aliases: []

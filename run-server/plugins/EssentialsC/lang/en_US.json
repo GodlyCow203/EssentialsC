@@ -846,7 +846,12 @@
   "banlist.entry.player.perm": "<prefix> <color:#FF0000><index>. <player> - <color:#AAAAAA><reason> <time></color>",
   "banlist.entry.player.temp": "<prefix> <color:#FFF200><index>. <player> - <color:#AAAAAA><reason> Expires: <expires></color>",
   "banlist.entry.ip.perm": "<prefix> <color:#FF0000><index>. <ip> - <color:#AAAAAA><reason> <time></color>",
-  "banlist.entry.ip.temp": "<prefix> <color:#FFF200><index>. <ip> - <color:#AAAAAA><reason> Expires: <expires></color>"
+  "banlist.entry.ip.temp": "<prefix> <color:#FFF200><index>. <ip> - <color:#AAAAAA><reason> Expires: <expires></color>",
+
+  "command.usage.tpoffline": "<prefix> <color:#FF0000>Usage: /tpoffline <player></color>",
+  "tpoffline.success": "<prefix> <color:#FFF200>Teleported to <color:#FFFFFF><player></color>'s logout location: <color:#AAAAAA><world> <x>, <y>, <z></color>",
+  "tpoffline.no_location": "<prefix> <color:#FF0000>No logout location found for <player>.</color>",
+  "tpoffline.no_data": "<prefix> <color:#FF0000>No data available for <player>.</color>"
 }
 
 
