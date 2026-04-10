@@ -429,7 +429,7 @@ commands:
 permissions:
   essentialsc.heal:
     description: Heal command
-    default: false
+    default: op
 
   essentialsc.balance:
     description: Check own balance
