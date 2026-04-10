@@ -4,12 +4,14 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DelHomeCommand extends Command {
+
+    private final Map<UUID, String> pendingDeletions = new HashMap<>();
+    private final Map<UUID, BukkitTask> pendingTasks = new HashMap<>();
 
     public DelHomeCommand(EssentialsC plugin) {
         super(plugin, "delhome", "essentialsc.delhome", true, 0, "command.usage.delhome");
@@ -42,14 +44,42 @@ public class DelHomeCommand extends Command {
                 });
             });
         } else {
-            if (args.length > 1 && args[1].equalsIgnoreCase("confirm")) {
+            String pending = pendingDeletions.get(player.getUniqueId());
+
+            if (pending != null && pending.equals(name)) {
+                cancelPending(player.getUniqueId());
                 deleteHome(player, name);
             } else {
-                player.sendMessage(lang.get(player, "home.delete.confirm"));
+                setPendingDeletion(player.getUniqueId(), name);
+                player.sendMessage(lang.get(player, "home.delete.confirm", Map.of("name", name)));
             }
         }
 
         return true;
+    }
+
+    private void setPendingDeletion(UUID uuid, String name) {
+        cancelPending(uuid);
+
+        pendingDeletions.put(uuid, name);
+
+        BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            if (pendingDeletions.remove(uuid) != null) {
+                Player player = plugin.getServer().getPlayer(uuid);
+                if (player != null) {
+                }
+            }
+        }, 15 * 20L);
+
+        pendingTasks.put(uuid, task);
+    }
+
+    private void cancelPending(UUID uuid) {
+        BukkitTask task = pendingTasks.remove(uuid);
+        if (task != null) {
+            task.cancel();
+        }
+        pendingDeletions.remove(uuid);
     }
 
     private void deleteHome(Player player, String name) {
@@ -66,6 +96,24 @@ public class DelHomeCommand extends Command {
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            return Collections.emptyList();
+        }
+        Player player = (Player) sender;
+
+        if (args.length == 1) {
+            String partial = args[0].toLowerCase();
+            List<String> completions = new ArrayList<>();
+
+            Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(player.getUniqueId());
+            for (String homeName : homeNames) {
+                if (homeName.startsWith(partial)) {
+                    completions.add(homeName);
+                }
+            }
+            return completions;
+        }
+
         return Collections.emptyList();
     }
 }

@@ -91,9 +91,9 @@ public class TeleportHandler implements Listener {
             pendingDestination.put(player.getUniqueId(), home);
 
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.pending",
-                    Map.of("seconds", String.valueOf(warmup))));
+                    Map.of("seconds", String.valueOf(warmup), "name", home.getName())));
 
-            plugin.debug("Starting warmup for " + player.getName() + " (" + warmup + "s)");
+            plugin.debug("Starting warmup for " + player.getName() + " to home '" + home.getName() + "' (" + warmup + "s)");
 
             BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () ->
                     completeTeleport(player, home), warmup * 20L);
