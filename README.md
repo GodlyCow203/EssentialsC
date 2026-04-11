@@ -10,6 +10,9 @@
 ![Paper](https://img.shields.io/badge/Paper-Supported-75B9FF)
 ![Spigot](https://img.shields.io/badge/Spigot-Supported-FFDF75)
 ![Purpur](https://img.shields.io/badge/Purpur-Supported-E64FFF)
+[![Online servers](https://img.shields.io/endpoint?url=https%3A%2F%2Ffaststats.dev%2Fapi%2Fshields%2Fessentialsc%3Fmetric%3Donline_servers&style=flat)](https://faststats.dev/project/essentialsc)
+[![Online players](https://img.shields.io/endpoint?url=https%3A%2F%2Ffaststats.dev%2Fapi%2Fshields%2Fessentialsc%3Fmetric%3Donline_players&style=flat)](https://faststats.dev/project/essentialsc)
+[![Events (30d)](https://img.shields.io/endpoint?url=https%3A%2F%2Ffaststats.dev%2Fapi%2Fshields%2Fessentialsc%3Fmetric%3Devents_30d&style=flat)](https://faststats.dev/project/essentialsc)
 
 ## Description
 
