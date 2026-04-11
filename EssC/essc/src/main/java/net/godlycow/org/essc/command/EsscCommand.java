@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
+import net.godlycow.org.essc.util.EssLog;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -37,6 +38,8 @@ public class EsscCommand extends Command {
 
                 plugin.getConfigManager().reload();
                 plugin.getLanguageManager().reload();
+
+                EssLog.setDebug(plugin.getConfigManager().isDebug());
 
                 boolean isEconomyEnabled = plugin.getConfigManager().isEconomyEnabled();
 
@@ -161,7 +164,7 @@ public class EsscCommand extends Command {
                 }
 
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
-                plugin.debug("Reload completed");
+                EssLog.info("Reload completed by " + sender.getName());
             }
 
             case "backup" -> executeBackup(sender, args);
@@ -169,15 +172,19 @@ public class EsscCommand extends Command {
             case "version" -> {
                 String version = plugin.getDescription().getVersion();
                 sender.sendMessage(lang.get(sender, "essc.version", Map.of("version", version)));
-                plugin.debug("Version checked by " + sender.getName());
+                EssLog.debug("Version checked by " + sender.getName());
             }
 
             case "debug" -> {
                 boolean current = plugin.getConfigManager().isDebug();
-                plugin.getConfigManager().setDebug(!current);
-                String state = !current ? "enabled" : "disabled";
+                boolean newState = !current;
+
+                plugin.getConfigManager().setDebug(newState);
+                EssLog.setDebug(newState);
+
+                String state = newState ? "enabled" : "disabled";
                 sender.sendMessage(lang.get(sender, "essc.debug.toggled", Map.of("state", state)));
-                plugin.getLogger().info("Debug mode " + state + " by " + sender.getName());
+                EssLog.info("Debug mode " + state + " by " + sender.getName());
             }
 
             case "placeholders" -> {
@@ -192,14 +199,14 @@ public class EsscCommand extends Command {
                 sender.sendMessage("");
                 sender.sendMessage(lang.get(sender, "essc.placeholders.footer",
                         Map.of("count", String.valueOf(placeholders.size()))));
-                plugin.debug("Placeholders listed by " + sender.getName());
+                EssLog.debug("Placeholders listed by " + sender.getName());
             }
 
             case "help" -> showHelp(sender);
 
             default -> {
                 sender.sendMessage(lang.get(sender, "essc.error.unknown_arg"));
-                plugin.debug("Unknown subcommand: " + args[0]);
+                EssLog.warn("Unknown subcommand: " + args[0] + " by " + sender.getName());
             }
         }
 
@@ -247,6 +254,7 @@ public class EsscCommand extends Command {
                 if (plugin.getBackupManager().delete(fileName)) {
                     sender.sendMessage(lang.get(sender, "essc.backup.delete.success",
                             Map.of("name", fileName)));
+                    EssLog.info("Backup deleted: " + fileName + " by " + sender.getName());
                 } else {
                     sender.sendMessage(lang.get(sender, "essc.backup.delete.not_found",
                             Map.of("name", fileName)));

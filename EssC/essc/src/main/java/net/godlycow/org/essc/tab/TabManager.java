@@ -2,6 +2,7 @@ package net.godlycow.org.essc.tab;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.bedrock.TeamNameUtil;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -25,8 +26,7 @@ public class TabManager implements Listener {
     private boolean useLuckPermsTab;
     private TABHook tabHook;
 
-    private final LegacyComponentSerializer legacySerializer  = LegacyComponentSerializer.legacyAmpersand();
-    private final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.legacySection();
+    private final LegacyComponentSerializer legacyAmpersand = LegacyComponentSerializer.legacyAmpersand();
 
     private static final int TEAM_FIELD_MAX = 64;
 
@@ -59,10 +59,7 @@ public class TabManager implements Listener {
 
     private void startRefreshTask() {
         new BukkitRunnable() {
-            @Override
-            public void run() {
-                refreshAll();
-            }
+            @Override public void run() { refreshAll(); }
         }.runTaskTimer(plugin, 20L, 20L);
     }
 
@@ -106,7 +103,7 @@ public class TabManager implements Listener {
             lpSuffix = metaData.getSuffix() != null ? metaData.getSuffix() : "";
 
             if (!lpPrefix.isEmpty()) {
-                builder.append(legacySerializer.deserialize(lpPrefix));
+                builder.append(legacyAmpersand.deserialize(lpPrefix));
             }
         }
 
@@ -117,9 +114,7 @@ public class TabManager implements Listener {
             String cachedNick = plugin.getNickManager().getCachedNickname(player.getUniqueId());
             if (cachedNick != null && !cachedNick.isEmpty()) {
                 String indicator = plugin.getConfigManager().getNickIndicator();
-                if (!indicator.isEmpty()) {
-                    builder.append(Component.text(indicator));
-                }
+                if (!indicator.isEmpty()) builder.append(Component.text(indicator));
                 builder.append(plugin.getMiniMessage().deserialize(cachedNick));
             } else {
                 builder.append(Component.text(player.getName()));
@@ -129,11 +124,10 @@ public class TabManager implements Listener {
         }
 
         if (!lpSuffix.isEmpty()) {
-            builder.append(legacySerializer.deserialize(lpSuffix));
+            builder.append(legacyAmpersand.deserialize(lpSuffix));
         }
 
         player.playerListName(builder.build());
-
         updateScoreboardTeam(player, lpPrefix, lpSuffix);
     }
 
@@ -142,27 +136,23 @@ public class TabManager implements Listener {
         String teamName = TeamNameUtil.fromUUID(player.getUniqueId());
 
         Team team = scoreboard.getTeam(teamName);
-        if (team == null) {
-            team = scoreboard.registerNewTeam(teamName);
-        }
+        if (team == null) team = scoreboard.registerNewTeam(teamName);
 
         if (!lpPrefix.isEmpty()) {
-            String sectionPrefix = sectionSerializer.serialize(legacySerializer.deserialize(lpPrefix));
+            String sectionPrefix = LegacyColorConverter.toLegacySection(legacyAmpersand.deserialize(lpPrefix));
             team.setPrefix(truncate(sectionPrefix, TEAM_FIELD_MAX));
         } else {
             team.setPrefix("");
         }
 
         if (!lpSuffix.isEmpty()) {
-            String sectionSuffix = sectionSerializer.serialize(legacySerializer.deserialize(lpSuffix));
+            String sectionSuffix = LegacyColorConverter.toLegacySection(legacyAmpersand.deserialize(lpSuffix));
             team.setSuffix(truncate(sectionSuffix, TEAM_FIELD_MAX));
         } else {
             team.setSuffix("");
         }
 
-        if (!team.hasEntry(player.getName())) {
-            team.addEntry(player.getName());
-        }
+        if (!team.hasEntry(player.getName())) team.addEntry(player.getName());
     }
 
     private static String truncate(String s, int max) {
@@ -170,16 +160,9 @@ public class TabManager implements Listener {
     }
 
     public void refreshAll() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            updatePlayerTab(player);
-        }
+        for (Player player : Bukkit.getOnlinePlayers()) updatePlayerTab(player);
     }
 
-    public boolean isEnabled() {
-        return luckPermsEnabled && useLuckPermsTab;
-    }
-
-    public boolean isUsingTABPlugin() {
-        return tabHook != null;
-    }
+    public boolean isEnabled()        { return luckPermsEnabled && useLuckPermsTab; }
+    public boolean isUsingTABPlugin() { return tabHook != null; }
 }

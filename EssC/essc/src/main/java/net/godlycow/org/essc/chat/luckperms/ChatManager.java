@@ -4,8 +4,8 @@ import github.scarsz.discordsrv.DiscordSRV;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -17,16 +17,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class ChatManager implements Listener {
 
     private final EssentialsC plugin;
     private final ConfigManager configManager;
-
-    private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
-    private static final Pattern HEX_PATTERN_MM = Pattern.compile("<#([A-Fa-f0-9]{6})>");
 
     private final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
             .character(ChatColor.COLOR_CHAR)
@@ -41,7 +35,6 @@ public class ChatManager implements Listener {
     public ChatManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
-
         reload();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -69,22 +62,11 @@ public class ChatManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        if (!luckPermsEnabled || !useLuckPermsFormatting) {
-            return;
-        }
+        if (!luckPermsEnabled || !useLuckPermsFormatting) return;
 
         Player player = event.getPlayer();
-        String message = event.getMessage();
+        Component messageComponent = applyMessageColors(player, event.getMessage());
 
-        if (player.hasPermission("essentialsc.chat.legacycodes") && player.hasPermission("essentialsc.chat.rbgcodes")) {
-            message = colorize(translateHexColorCodes(message));
-        } else if (player.hasPermission("essentialsc.chat.legacycodes")) {
-            message = colorize(message);
-        } else if (player.hasPermission("essentialsc.chat.rbgcodes")) {
-            message = translateHexColorCodes(message);
-        }
-
-        Component messageComponent = legacySerializer.deserialize(message);
         Component formatted = formatWithLuckPerms(player, messageComponent);
 
         event.setCancelled(true);
@@ -117,7 +99,7 @@ public class ChatManager implements Listener {
 
         String format = plugin.getConfig().getString("luckperms.group-formats." + primaryGroup);
         if (format == null) {
-            format = plugin.getConfig().getString("luckperms.chat-format", "<DISPLAYNAME> &7\u00bb &f<MESSAGE>");
+            format = plugin.getConfig().getString("luckperms.chat-format", "<DISPLAYNAME> &7» &f<MESSAGE>");
         }
 
         if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -134,18 +116,21 @@ public class ChatManager implements Listener {
 
         if (cachedNick != null && !cachedNick.isEmpty()) {
             String indicator = plugin.getConfigManager().getNickIndicator();
-            String nickLegacy = colorize(translateHexColorCodes(
-                    legacySerializer.serialize(plugin.getMiniMessage().deserialize(cachedNick))
-            ));
+            String nickLegacy = LegacyColorConverter.convertHexAmpersandToLegacy(cachedNick);
+            nickLegacy = applyLegacyColors(nickLegacy);
             Component nickComponent = indicator.isEmpty()
                     ? legacySerializer.deserialize(nickLegacy)
                     : Component.text(indicator).append(legacySerializer.deserialize(nickLegacy));
-            Component prefixComponent = prefix.isEmpty() ? Component.empty() : legacySerializer.deserialize(colorize(translateHexColorCodes(prefix)));
-            Component suffixComponent = suffix.isEmpty() ? Component.empty() : legacySerializer.deserialize(colorize(translateHexColorCodes(suffix)));
+            Component prefixComponent = prefix.isEmpty() ? Component.empty()
+                    : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(prefix)));
+            Component suffixComponent = suffix.isEmpty() ? Component.empty()
+                    : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(suffix)));
             displayNameComponent = prefixComponent.append(nickComponent).append(suffixComponent);
         } else {
-            String rawDisplayName = colorize(translateHexColorCodes(prefix + player.getName() + suffix));
-            displayNameComponent = legacySerializer.deserialize(rawDisplayName);
+            String nameFormat = LegacyColorConverter.convertHexAmpersandToLegacy(prefix)
+                    + player.getName()
+                    + LegacyColorConverter.convertHexAmpersandToLegacy(suffix);
+            displayNameComponent = legacySerializer.deserialize(applyLegacyColors(nameFormat));
         }
 
         format = format
@@ -154,74 +139,39 @@ public class ChatManager implements Listener {
                 .replace("<USERNAME>", player.getName())
                 .replace("<GROUP>", primaryGroup);
 
-        String colorized = colorize(translateHexColorCodes(format));
+        format = LegacyColorConverter.convertHexAmpersandToLegacy(format);
 
-        return legacySerializer.deserialize(colorized)
+        return legacySerializer.deserialize(applyLegacyColors(format))
                 .replaceText(b -> b.matchLiteral("<DISPLAYNAME>").replacement(displayNameComponent))
                 .replaceText(b -> b.matchLiteral("<MESSAGE>").replacement(messageComponent));
     }
 
-    public boolean isLuckPermsChatEnabled() {
-        return useLuckPermsFormatting;
-    }
+    private Component applyMessageColors(Player player, String message) {
+        boolean legacy = player.hasPermission("essentialsc.chat.legacycodes");
+        boolean rgb = player.hasPermission("essentialsc.chat.rbgcodes");
 
-    public boolean isLuckPermsAvailable() {
-        return luckPermsEnabled;
-    }
-
-    public boolean canUseColorCodes(Player player) {
-        return player.hasPermission("essentialsc.chat.legacycodes");
-    }
-
-    public boolean canUseRgbCodes(Player player) {
-        return player.hasPermission("essentialsc.chat.rbgcodes");
-    }
-
-    public Component formatMessage(Player player, String message) {
-        if (player.hasPermission("essentialsc.chat.legacycodes") && player.hasPermission("essentialsc.chat.rbgcodes")) {
-            message = colorize(translateHexColorCodes(message));
-        } else if (player.hasPermission("essentialsc.chat.legacycodes")) {
-            message = colorize(message);
-        } else if (player.hasPermission("essentialsc.chat.rbgcodes")) {
-            message = translateHexColorCodes(message);
+        if (rgb) {
+            String converted = LegacyColorConverter.convertHexAmpersandToLegacy(message);
+            return legacySerializer.deserialize(applyLegacyColors(converted));
         }
-
-        Component messageComponent = legacySerializer.deserialize(message);
-
-        if (!luckPermsEnabled || !useLuckPermsFormatting) {
-            return messageComponent;
+        if (legacy) {
+            return legacySerializer.deserialize(applyLegacyColors(message));
         }
-
-        return formatWithLuckPerms(player, messageComponent);
+        return Component.text(message);
     }
 
-    private String colorize(String message) {
+    private String applyLegacyColors(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    private String translateHexColorCodes(String message) {
-        final char colorChar = ChatColor.COLOR_CHAR;
+    public boolean isLuckPermsChatEnabled() { return useLuckPermsFormatting; }
+    public boolean isLuckPermsAvailable() { return luckPermsEnabled; }
+    public boolean canUseColorCodes(Player p) { return p.hasPermission("essentialsc.chat.legacycodes"); }
+    public boolean canUseRgbCodes(Player p) { return p.hasPermission("essentialsc.chat.rbgcodes"); }
 
-        Matcher matcher = HEX_PATTERN.matcher(message);
-        StringBuffer buffer = new StringBuffer(message.length() + 32);
-        while (matcher.find()) {
-            String group = matcher.group(1);
-            matcher.appendReplacement(buffer, colorChar + "x"
-                    + colorChar + group.charAt(0) + colorChar + group.charAt(1)
-                    + colorChar + group.charAt(2) + colorChar + group.charAt(3)
-                    + colorChar + group.charAt(4) + colorChar + group.charAt(5));
-        }
-        String result = matcher.appendTail(buffer).toString();
-
-        Matcher mmMatcher = HEX_PATTERN_MM.matcher(result);
-        StringBuffer mmBuffer = new StringBuffer(result.length() + 32);
-        while (mmMatcher.find()) {
-            String group = mmMatcher.group(1);
-            mmMatcher.appendReplacement(mmBuffer, colorChar + "x"
-                    + colorChar + group.charAt(0) + colorChar + group.charAt(1)
-                    + colorChar + group.charAt(2) + colorChar + group.charAt(3)
-                    + colorChar + group.charAt(4) + colorChar + group.charAt(5));
-        }
-        return mmMatcher.appendTail(mmBuffer).toString();
+    public Component formatMessage(Player player, String message) {
+        Component messageComponent = applyMessageColors(player, message);
+        if (!luckPermsEnabled || !useLuckPermsFormatting) return messageComponent;
+        return formatWithLuckPerms(player, messageComponent);
     }
 }

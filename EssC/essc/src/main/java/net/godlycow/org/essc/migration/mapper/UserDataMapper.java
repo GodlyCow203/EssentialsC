@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.migration.model.EssHome;
 import net.godlycow.org.essc.migration.model.EssLocation;
 import net.godlycow.org.essc.migration.model.EssUserData;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import org.bukkit.Location;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserDataMapper {
+
     private final EssentialsC plugin;
 
     public UserDataMapper(EssentialsC plugin) {
@@ -51,14 +53,10 @@ public class UserDataMapper {
     }
 
     public NicknameTransfer transformNickname(EssUserData data) {
-        if (data.nickname() == null || data.nickname().isEmpty()) {
-            return null;
-        }
+        if (data.nickname() == null || data.nickname().isEmpty()) return null;
 
-        String miniMessageNick = convertLegacyColors(data.nickname());
-        if (miniMessageNick == null || miniMessageNick.isEmpty()) {
-            return null;
-        }
+        String miniMessageNick = LegacyColorConverter.toMiniMessage(data.nickname());
+        if (miniMessageNick == null || miniMessageNick.isEmpty()) return null;
 
         return new NicknameTransfer(data.uuid(), miniMessageNick);
     }
@@ -83,9 +81,7 @@ public class UserDataMapper {
         if (!data.muted()) return null;
 
         String reason = data.muteReason();
-        if (reason == null || reason.isEmpty()) {
-            reason = "Migrated from EssentialsX";
-        }
+        if (reason == null || reason.isEmpty()) reason = "Migrated from EssentialsX";
 
         long expires = data.muteTimeout();
         if (expires > 0 && expires < System.currentTimeMillis()) {
@@ -100,36 +96,6 @@ public class UserDataMapper {
                 "EssentialsX",
                 expires
         );
-    }
-
-    private String convertLegacyColors(String legacy) {
-        if (legacy == null) return null;
-
-        String normalised = legacy.toLowerCase();
-
-        return normalised
-                .replace("&0", "<black>")
-                .replace("&1", "<dark_blue>")
-                .replace("&2", "<dark_green>")
-                .replace("&3", "<dark_aqua>")
-                .replace("&4", "<dark_red>")
-                .replace("&5", "<dark_purple>")
-                .replace("&6", "<gold>")
-                .replace("&7", "<gray>")
-                .replace("&8", "<dark_gray>")
-                .replace("&9", "<blue>")
-                .replace("&a", "<green>")
-                .replace("&b", "<aqua>")
-                .replace("&c", "<red>")
-                .replace("&d", "<light_purple>")
-                .replace("&e", "<yellow>")
-                .replace("&f", "<white>")
-                .replace("&l", "<bold>")
-                .replace("&o", "<italic>")
-                .replace("&n", "<underlined>")
-                .replace("&m", "<strikethrough>")
-                .replace("&k", "<obfuscated>")
-                .replace("&r", "<reset>");
     }
 
     public record EconomyTransfer(UUID uuid, String username, BigDecimal balance) {}
