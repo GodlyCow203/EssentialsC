@@ -5,12 +5,12 @@ import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.punishment.PunishmentManager.BanEntry;
 import net.godlycow.org.essc.punishment.PunishmentManager.IpBanEntry;
+import net.godlycow.org.essc.util.DurationParser;
 import net.godlycow.org.essc.util.PaginatedList;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class BanListCommand extends Command {
@@ -178,8 +178,8 @@ public class BanListCommand extends Command {
                 "player",  entry.name(),
                 "reason",  entry.reason(),
                 "banner",  entry.banner(),
-                "time",    formatTimeAgo(entry.time()),
-                "expires", isTemp ? formatTimeRemaining(entry.expires()) : "Never"
+                "time",    DurationParser.formatAgo(entry.time()),
+                "expires", isTemp ? DurationParser.formatRemaining(entry.expires()) : "Never"
         ));
     }
 
@@ -190,32 +190,11 @@ public class BanListCommand extends Command {
                 "ip",      entry.ip(),
                 "reason",  entry.reason(),
                 "banner",  entry.banner(),
-                "time",    formatTimeAgo(entry.time()),
-                "expires", isTemp ? formatTimeRemaining(entry.expires()) : "Never"
+                "time",    DurationParser.formatAgo(entry.time()),
+                "expires", isTemp ? DurationParser.formatRemaining(entry.expires()) : "Never"
         ));
     }
 
-    private String formatTimeAgo(long timestamp) {
-        long diff    = System.currentTimeMillis() - timestamp;
-        long days    = TimeUnit.MILLISECONDS.toDays(diff);
-        long hours   = TimeUnit.MILLISECONDS.toHours(diff) % 24;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
-        if (days    > 0) return days + "d ago";
-        if (hours   > 0) return hours + "h ago";
-        if (minutes > 0) return minutes + "m ago";
-        return "Just now";
-    }
-
-    private String formatTimeRemaining(long timestamp) {
-        long diff    = timestamp - System.currentTimeMillis();
-        if (diff <= 0) return "Expired";
-        long days    = TimeUnit.MILLISECONDS.toDays(diff);
-        long hours   = TimeUnit.MILLISECONDS.toHours(diff) % 24;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
-        if (days    > 0) return days + "d " + hours + "h";
-        if (hours   > 0) return hours + "h " + minutes + "m";
-        return minutes + "m";
-    }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {

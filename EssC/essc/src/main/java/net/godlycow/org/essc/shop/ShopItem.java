@@ -15,6 +15,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
+import net.kyori.adventure.text.format.TextDecoration;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -85,13 +86,17 @@ public class ShopItem {
         ItemMeta meta = item.getItemMeta();
 
         if (displayName != null) {
-            meta.displayName(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(displayName));
+            meta.displayName(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                    .deserialize(displayName)
+                    .decoration(TextDecoration.ITALIC, false));
         }
 
         if (!lore.isEmpty()) {
             List<net.kyori.adventure.text.Component> loreComponents = new ArrayList<>();
             for (String line : lore) {
-                loreComponents.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(line));
+                loreComponents.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                        .deserialize(line)
+                        .decoration(TextDecoration.ITALIC, false));
             }
             meta.lore(loreComponents);
         }
@@ -139,6 +144,7 @@ public class ShopItem {
                     }
                 }
             }
+            meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         }
 
         if (itemMaterial == Material.PLAYER_HEAD && (textureUrl != null || base64Texture != null || skullOwner != null)) {
@@ -230,19 +236,25 @@ public class ShopItem {
 
         if (buyable) {
             String currency = buyPrice == 1.0 ? currencySingular : currencyPlural;
-            String buyText = "<color:#06FFA5>Buy: <color:#FFE66D>" + buyPrice + " " + currency;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(buyText));
+            String buyText = "<color:#57F527>➤ Buy: <color:#F5C827>" + buyPrice + " " + currency;
+            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                    .deserialize(buyText)
+                    .decoration(TextDecoration.ITALIC, false));
         }
 
         if (sellable) {
             String currency = sellPrice == 1.0 ? currencySingular : currencyPlural;
-            String sellText = "<color:#FF6B6B>Sell: <color:#FFE66D>" + sellPrice + " " + currency;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(sellText));
+            String sellText = "<color:#F52727>➤ Sell: <color:#F5C827>" + sellPrice + " " + currency;
+            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                    .deserialize(sellText)
+                    .decoration(TextDecoration.ITALIC, false));
         }
 
         if (stock != -1) {
-            String stockText = "<color:#AAAAAA>Stock: <color:#FFFFFF>" + stock;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(stockText));
+            String stockText = "<color:#AAAAAA>➤ Stock: <color:#FFFFFF>" + stock;
+            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                    .deserialize(stockText)
+                    .decoration(TextDecoration.ITALIC, false));
         }
 
         newLore.add(net.kyori.adventure.text.Component.empty());
@@ -252,11 +264,14 @@ public class ShopItem {
         }
 
         newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<color:#AAAAAA>Left-Click to buy"));
+                .deserialize("<#474747>Left-Click <gray>to buy")
+                .decoration(TextDecoration.ITALIC, false));
         newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<color:#AAAAAA>Right-Click to sell"));
+                .deserialize("<#474747>Right-Click <gray>to sell")
+                .decoration(TextDecoration.ITALIC, false));
         newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<color:#AAAAAA>Shift-Click for stack"));
+                .deserialize("<#474747>Shift-Click <gray>for stack")
+                .decoration(TextDecoration.ITALIC, false));
 
         meta.lore(newLore);
         item.setItemMeta(meta);

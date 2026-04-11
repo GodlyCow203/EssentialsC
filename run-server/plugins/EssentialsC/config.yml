@@ -565,6 +565,34 @@ shop:
     singular: "Dollar"
     plural: "Dollars"
 
+# Sell
+#
+# Settings for the sell system, including the /sell GUI, /worth command,
+# and /quicksell command. All sell prices are read from your shop configuration files.
+
+sell:
+  # Enable or disable the entire sell system.
+  # When false, /sell, /worth, and /quicksell commands will be disabled.
+  enabled: true
+
+  # GUI Settings for the /sell command.
+  gui:
+    # The title displayed at the top of the sell GUI.
+    # Supports MiniMessage formatting (gradients, colors, etc.)
+    title: "<#27C8F5>Sell Items</#27C8F5>"
+
+    # The size of the sell GUI inventory.
+    # Must be a multiple of 9 (9, 18, 27, 36, 45, or 54).
+    # 54 provides 21 input slots with borders and a sell button.
+    size: 54
+
+    # The material used for the GUI border.
+    # Must be a valid Bukkit Material name.
+    border-material: "GRAY_STAINED_GLASS_PANE"
+
+    # Play sounds when opening, selling, or cancelling in the GUI.
+    sounds: true
+
 
 # Hat
 #

@@ -634,4 +634,32 @@ public class ConfigManager {
         return config.getString("discordsrv.events.banip.color", "#E74C3C");
     }
 
+    public boolean isSellEnabled() {
+        return config.getBoolean("sell.enabled", true);
+    }
+
+    public String getSellGUITitle() {
+        return config.getString("sell.gui.title", "<gradient:#06FFA5:#FFE66D>Sell Items</gradient>");
+    }
+
+    public int getSellGUISize() {
+        return config.getInt("sell.gui.size", 54);
+    }
+
+    public boolean isSellGUIFillEmpty() {
+        return config.getBoolean("sell.gui.fill-empty", true);
+    }
+
+    public String getSellGUIFillMaterial() {
+        return config.getString("sell.gui.fill-material", "BLACK_STAINED_GLASS_PANE");
+    }
+
+    public String getSellGUIBorderMaterial() {
+        return config.getString("sell.gui.border-material", "GRAY_STAINED_GLASS_PANE");
+    }
+
+    public boolean isSellGUISounds() {
+        return config.getBoolean("sell.gui.sounds", true);
+    }
+
 }

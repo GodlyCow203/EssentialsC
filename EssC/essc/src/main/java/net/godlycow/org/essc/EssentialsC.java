@@ -46,6 +46,8 @@ import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.setup.FirstRunHandler;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
+import net.godlycow.org.essc.shop.sell.SellListener;
+import net.godlycow.org.essc.shop.sell.SellManager;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.tab.TABHook;
 import net.godlycow.org.essc.tab.TabManager;
@@ -110,6 +112,10 @@ public final class EssentialsC extends JavaPlugin {
     private BackupManager backupManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
     private LogoutDataManager logoutDataManager;
+    private SellManager sellManager;
+    private SellListener sellListener;
+
+
 
 
     @Override
@@ -247,6 +253,12 @@ public final class EssentialsC extends JavaPlugin {
             discordSRVHook.init();
         }
 
+        if (configManager.isSellEnabled()) {
+            sellListener = new SellListener(this);
+            sellManager = new SellManager(this, sellListener);
+            sellListener.setSellManager(sellManager);
+            getServer().getPluginManager().registerEvents(sellListener, this);
+        }
         getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
 
         apiImpl = new EssentialsCAPIImpl(this);
@@ -300,7 +312,6 @@ public final class EssentialsC extends JavaPlugin {
         if (scheduleManager != null) {
             scheduleManager.shutdown();
         }
-
 
         if (configManager.isBackupOnShutdown()) {
             getLogger().info("[Backup] Creating shutdown backup...");
@@ -527,5 +538,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public LogoutDataManager getLogoutDataManager() {
         return logoutDataManager;
+    }
+
+    public SellManager getSellManager() {
+        return sellManager;
     }
 }

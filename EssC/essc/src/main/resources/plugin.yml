@@ -426,6 +426,21 @@ commands:
     usage: /tpoffline <player>
     permission: essentialsc.tpoffline
 
+  sell:
+    description: Open the sell GUI to sell items
+    usage: /sell
+    permission: essentialsc.sell
+
+  worth:
+    description: Check the sell worth of items in your hand or inventory
+    usage: /worth [inventory]
+    permission: essentialsc.worth.hand
+
+  quicksell:
+    description: Quickly sell items in your hand or inventory without opening a GUI
+    usage: /quicksell [hand|inventory]
+    permission: essentialsc.quicksell.hand
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1056,6 +1071,26 @@ permissions:
   essentialsc.banlist:
     description: Allows viewing the ban list
     default: op
+
+  essentialsc.sell:
+    description: Allows access to the /sell command
+    default: true
+
+  essentialsc.worth.hand:
+    description: Allows checking worth of item in hand
+    default: true
+
+  essentialsc.worth.inventory:
+    description: Allows checking worth of entire inventory
+    default: true
+
+  essentialsc.quicksell.hand:
+    description: Allows quick selling of item in hand
+    default: true
+
+  essentialsc.quicksell.inventory:
+    description: Allows quick selling of entire inventory
+    default: true
 
 
 

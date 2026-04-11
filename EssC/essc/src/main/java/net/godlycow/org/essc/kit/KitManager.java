@@ -3,7 +3,7 @@ package net.godlycow.org.essc.kit;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.database.Database;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration; // ADD THIS IMPORT
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
