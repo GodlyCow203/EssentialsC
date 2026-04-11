@@ -12,22 +12,31 @@ public final class EssLog {
 
     private static Logger logger;
     private static boolean debug = false;
+    private static boolean initialized = false;
 
     private EssLog() {}
 
     public static void init(Logger pluginLogger, boolean debugEnabled) {
         logger = pluginLogger;
         debug  = debugEnabled;
+        initialized = true;
+        info("Logger initialized (debug: " + debug + ")");
     }
 
     public static void setDebug(boolean enabled) {
         debug = enabled;
+        if (initialized) {
+            info("Debug mode " + (enabled ? "enabled" : "disabled"));
+        }
     }
 
     public static boolean isDebug() {
         return debug;
     }
 
+    public static boolean isInitialized() {
+        return initialized;
+    }
 
     public static void info(String message) {
         log(Level.INFO, PREFIX + message);
@@ -47,7 +56,6 @@ public final class EssLog {
         debug(String.format(format, args));
     }
 
-
     public static void warn(String message) {
         log(Level.WARNING, W_PREFIX + message);
     }
@@ -55,7 +63,6 @@ public final class EssLog {
     public static void warn(String format, Object... args) {
         warn(String.format(format, args));
     }
-
 
     public static void error(String message) {
         log(Level.SEVERE, E_PREFIX + message);
@@ -72,7 +79,7 @@ public final class EssLog {
 
     private static void log(Level level, String message) {
         if (logger == null) {
-            System.out.println(message);
+            System.err.println("[EssLog NOT INITIALIZED] " + message);
             return;
         }
         logger.log(level, message);

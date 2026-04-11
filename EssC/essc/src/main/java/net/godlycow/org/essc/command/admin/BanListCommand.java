@@ -5,6 +5,7 @@ import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.punishment.PunishmentManager.BanEntry;
 import net.godlycow.org.essc.punishment.PunishmentManager.IpBanEntry;
+import net.godlycow.org.essc.util.PaginatedList;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class BanListCommand extends Command {
 
     private final PunishmentManager punishmentManager;
-    private static final int BANS_PER_PAGE = 10;
+    private static final int PER_PAGE = 10;
 
     public BanListCommand(EssentialsC plugin, PunishmentManager punishmentManager) {
         super(plugin, "banlist", "essentialsc.banlist", false, 0, "command.usage.banlist");
@@ -30,8 +31,7 @@ public class BanListCommand extends Command {
         for (String arg : args) {
             if (arg.matches("\\d+")) {
                 try {
-                    page = Integer.parseInt(arg);
-                    if (page < 1) page = 1;
+                    page = Math.max(1, Integer.parseInt(arg));
                 } catch (NumberFormatException ignored) {}
             } else {
                 subCommand = arg.toLowerCase();
@@ -40,7 +40,7 @@ public class BanListCommand extends Command {
 
         switch (subCommand) {
             case "players", "player", "p" -> showPlayerBans(sender, page);
-            case "ips", "ip", "i"         -> showIpBans(sender, page);
+            case "ips",     "ip",     "i" -> showIpBans(sender, page);
             case "history", "h"           -> showRecentBans(sender, page);
             default                       -> showAllBans(sender, page);
         }
@@ -51,83 +51,79 @@ public class BanListCommand extends Command {
 
     private void showPlayerBans(CommandSender sender, int page) {
         List<BanEntry> bans = punishmentManager.getActiveBans();
+        PaginatedList<BanEntry> paged = new PaginatedList<>(bans, PER_PAGE);
 
-        if (bans.isEmpty()) {
+        if (paged.isEmpty()) {
             sender.sendMessage(lang.get(sender, "banlist.no_player_bans"));
             return;
         }
 
-        int totalPages = totalPages(bans.size());
-        showBanListHeader(sender, "player", bans.size(), page, totalPages);
+        page = paged.clamp(page);
+        showHeader(sender, "player", bans.size(), page, paged.getTotalPages());
 
-        int start = (page - 1) * BANS_PER_PAGE;
-        int end   = Math.min(start + BANS_PER_PAGE, bans.size());
-        for (int i = start; i < end; i++) {
-            sender.sendMessage(playerBanEntry(sender, bans.get(i), i + 1));
+        int index = paged.startIndex(page);
+        for (BanEntry entry : paged.getPage(page)) {
+            sender.sendMessage(playerBanEntry(sender, entry, index++));
         }
 
-        showBanListFooter(sender, page, totalPages);
+        showFooter(sender, page, paged.getTotalPages());
     }
 
     private void showIpBans(CommandSender sender, int page) {
         List<IpBanEntry> bans = punishmentManager.getActiveIpBans();
+        PaginatedList<IpBanEntry> paged = new PaginatedList<>(bans, PER_PAGE);
 
-        if (bans.isEmpty()) {
+        if (paged.isEmpty()) {
             sender.sendMessage(lang.get(sender, "banlist.no_ip_bans"));
             return;
         }
 
-        int totalPages = totalPages(bans.size());
-        showBanListHeader(sender, "ip", bans.size(), page, totalPages);
+        page = paged.clamp(page);
+        showHeader(sender, "ip", bans.size(), page, paged.getTotalPages());
 
-        int start = (page - 1) * BANS_PER_PAGE;
-        int end   = Math.min(start + BANS_PER_PAGE, bans.size());
-        for (int i = start; i < end; i++) {
-            sender.sendMessage(ipBanEntry(sender, bans.get(i), i + 1));
+        int index = paged.startIndex(page);
+        for (IpBanEntry entry : paged.getPage(page)) {
+            sender.sendMessage(ipBanEntry(sender, entry, index++));
         }
 
-        showBanListFooter(sender, page, totalPages);
+        showFooter(sender, page, paged.getTotalPages());
     }
 
     private void showAllBans(CommandSender sender, int page) {
-        List<BanEntry>   playerBans = punishmentManager.getActiveBans();
-        List<IpBanEntry> ipBans     = punishmentManager.getActiveIpBans();
-        int total = playerBans.size() + ipBans.size();
+        List<Object> all = new ArrayList<>();
+        all.addAll(punishmentManager.getActiveBans());
+        all.addAll(punishmentManager.getActiveIpBans());
 
-        if (total == 0) {
+        if (all.isEmpty()) {
             sender.sendMessage(lang.get(sender, "banlist.no_bans"));
             return;
         }
 
-        List<Object> all = new ArrayList<>();
-        all.addAll(playerBans);
-        all.addAll(ipBans);
         all.sort((a, b) -> {
             long ta = (a instanceof BanEntry be)     ? be.time() : ((IpBanEntry) a).time();
             long tb = (b instanceof BanEntry be)     ? be.time() : ((IpBanEntry) b).time();
             return Long.compare(tb, ta);
         });
 
-        int totalPages = totalPages(all.size());
-        if (page > totalPages) page = totalPages;
+        PaginatedList<Object> paged = new PaginatedList<>(all, PER_PAGE);
+        page = paged.clamp(page);
 
         sender.sendMessage(lang.get(sender, "banlist.all.header", Map.of(
                 "page",    String.valueOf(page),
-                "total",   String.valueOf(totalPages),
-                "count",   String.valueOf(total),
-                "players", String.valueOf(playerBans.size()),
-                "ips",     String.valueOf(ipBans.size())
+                "total",   String.valueOf(paged.getTotalPages()),
+                "count",   String.valueOf(all.size()),
+                "players", String.valueOf(punishmentManager.getActiveBans().size()),
+                "ips",     String.valueOf(punishmentManager.getActiveIpBans().size())
         )));
 
-        int start = (page - 1) * BANS_PER_PAGE;
-        int end   = Math.min(start + BANS_PER_PAGE, all.size());
-        for (int i = start; i < end; i++) {
-            Object entry = all.get(i);
-            if (entry instanceof BanEntry be)        sender.sendMessage(playerBanEntry(sender, be, i + 1));
-            else if (entry instanceof IpBanEntry ie) sender.sendMessage(ipBanEntry(sender, ie, i + 1));
+        int index = paged.startIndex(page);
+        for (Object entry : paged.getPage(page)) {
+            if (entry instanceof BanEntry be)        sender.sendMessage(playerBanEntry(sender, be, index));
+            else if (entry instanceof IpBanEntry ie) sender.sendMessage(ipBanEntry(sender, ie, index));
+            index++;
         }
 
-        showBanListFooter(sender, page, totalPages);
+        showFooter(sender, page, paged.getTotalPages());
         sender.sendMessage(lang.get(sender, "banlist.filter_hint"));
     }
 
@@ -141,19 +137,22 @@ public class BanListCommand extends Command {
             return Long.compare(tb, ta);
         });
 
+        PaginatedList<Object> paged = new PaginatedList<>(all, PER_PAGE);
+        page = paged.clamp(page);
+
         sender.sendMessage(lang.get(sender, "banlist.history.header"));
 
-        int count = 0;
-        for (Object entry : all) {
-            if (count >= 10) break;
-            count++;
-            if (entry instanceof BanEntry be)        sender.sendMessage(playerBanEntry(sender, be, count));
-            else if (entry instanceof IpBanEntry ie) sender.sendMessage(ipBanEntry(sender, ie, count));
+        int index = paged.startIndex(page);
+        for (Object entry : paged.getPage(page)) {
+            if (entry instanceof BanEntry be)        sender.sendMessage(playerBanEntry(sender, be, index));
+            else if (entry instanceof IpBanEntry ie) sender.sendMessage(ipBanEntry(sender, ie, index));
+            index++;
         }
+
+        showFooter(sender, page, paged.getTotalPages());
     }
 
-
-    private void showBanListHeader(CommandSender sender, String type, int count, int page, int totalPages) {
+    private void showHeader(CommandSender sender, String type, int count, int page, int totalPages) {
         sender.sendMessage(lang.get(sender, "banlist." + type + ".header", Map.of(
                 "type",  type,
                 "count", String.valueOf(count),
@@ -162,7 +161,7 @@ public class BanListCommand extends Command {
         )));
     }
 
-    private void showBanListFooter(CommandSender sender, int page, int totalPages) {
+    private void showFooter(CommandSender sender, int page, int totalPages) {
         if (totalPages <= 1) return;
         sender.sendMessage(lang.get(sender, "banlist.footer", Map.of(
                 "current", String.valueOf(page),
@@ -196,10 +195,6 @@ public class BanListCommand extends Command {
         ));
     }
 
-    private int totalPages(int size) {
-        return Math.max(1, (int) Math.ceil(size / (double) BANS_PER_PAGE));
-    }
-
     private String formatTimeAgo(long timestamp) {
         long diff    = System.currentTimeMillis() - timestamp;
         long days    = TimeUnit.MILLISECONDS.toDays(diff);
@@ -225,11 +220,11 @@ public class BanListCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return List.of("players", "ips", "all", "history", "help").stream()
+            return List.of("players", "ips", "all", "history").stream()
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());
         }
-        if (args.length == 2 && args[0].matches("players|ips|all")) {
+        if (args.length == 2 && args[0].matches("players|ips|all|history")) {
             return List.of("1", "2", "3");
         }
         return Collections.emptyList();
