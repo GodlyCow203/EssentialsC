@@ -20,6 +20,7 @@
     <groupId>net.godlycow.org</groupId>
     <artifactId>EssentialsC-parent</artifactId>
     <version>4.1.4</version>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
 
