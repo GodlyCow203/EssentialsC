@@ -3,6 +3,7 @@ package net.godlycow.org.essc.kit;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.database.Database;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration; // ADD THIS IMPORT
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -212,7 +213,7 @@ public class KitManager implements Listener {
 
             Object nameObj = map.get("name");
             if (nameObj instanceof String name) {
-                meta.displayName(mm.deserialize(name));
+                meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));
             }
 
             Object loreObj = map.get("lore");
@@ -220,7 +221,7 @@ public class KitManager implements Listener {
                 List<Component> loreComponents = new ArrayList<>();
                 for (Object line : loreList) {
                     if (line instanceof String s) {
-                        loreComponents.add(mm.deserialize(s));
+                        loreComponents.add(mm.deserialize(s).decoration(TextDecoration.ITALIC, false));
                     }
                 }
                 meta.lore(loreComponents);
