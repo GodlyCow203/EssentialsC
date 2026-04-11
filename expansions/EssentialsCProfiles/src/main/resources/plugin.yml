@@ -1,0 +1,4 @@
+name: EssentialsCProfiles
+version: '0.0.1'
+main: net.godlycow.org.expansions.EssentialsCProfiles
+api-version: '1.21'

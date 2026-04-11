@@ -16,6 +16,7 @@
         <module>api</module>
         <module>EssC</module>
         <module>expansions/mysqldatabaseexpansion</module>
+        <module>expansions/EssentialsCProfiles</module>
     </modules>
 
     <properties>
