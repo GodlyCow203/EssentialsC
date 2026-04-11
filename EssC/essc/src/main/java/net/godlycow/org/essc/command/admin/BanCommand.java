@@ -3,12 +3,12 @@ package net.godlycow.org.essc.command.admin;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
+import net.godlycow.org.essc.util.DurationParser;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class BanCommand extends Command {
 
@@ -31,9 +31,7 @@ public class BanCommand extends Command {
         }
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", targetName);
-            sender.sendMessage(lang.get(sender, "error.player_not_found", placeholders));
+            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
             return true;
         }
 
@@ -57,31 +55,18 @@ public class BanCommand extends Command {
         int reasonStart = 1;
 
         if (args.length > 1 && args[1].startsWith("-t:")) {
-            String timeStr = args[1].substring(3);
-            duration = parseDuration(timeStr);
-            if (duration == -1) {
+            duration = DurationParser.parse(args[1].substring(3));
+            if (duration == DurationParser.INVALID) {
                 sender.sendMessage(lang.get(sender, "ban.invalid_duration"));
                 return true;
             }
+            if (duration == DurationParser.PERMANENT) duration = 0;
             reasonStart = 2;
         }
 
-        String reason;
-        if (args.length > reasonStart) {
-            StringBuilder reasonBuilder = new StringBuilder();
-            for (int i = reasonStart; i < args.length; i++) {
-                reasonBuilder.append(args[i]).append(" ");
-            }
-            reason = reasonBuilder.toString().trim();
-        } else {
-            reason = lang.get(sender, "ban.default_reason").toString();
-            if (reason.startsWith("<")) {
-                reason = "Breaking server rules";
-            }
-        }
+        String reason = buildReason(args, reasonStart, "Breaking server rules");
 
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
-
         plugin.debug("Banning " + target.getName() + " by " + sender.getName() + " for: " + reason + " expires: " + expires);
 
         punishmentManager.banPlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
@@ -89,69 +74,45 @@ public class BanCommand extends Command {
         if (target.isOnline()) {
             Player onlineTarget = target.getPlayer();
             if (onlineTarget != null) {
-                Map<String, String> kickPlaceholders = new HashMap<>();
-                kickPlaceholders.put("reason", reason);
-                kickPlaceholders.put("banner", sender.getName());
-                kickPlaceholders.put("duration", formatDuration(duration));
-
-                onlineTarget.kick(lang.get(onlineTarget, "ban.screen_message", kickPlaceholders));
+                onlineTarget.kick(lang.get(onlineTarget, "ban.screen_message", Map.of(
+                        "reason",   reason,
+                        "banner",   sender.getName(),
+                        "duration", DurationParser.format(duration)
+                )));
             }
         }
 
-        Map<String, String> broadcastPlaceholders = new HashMap<>();
-        broadcastPlaceholders.put("target", target.getName());
-        broadcastPlaceholders.put("banner", sender.getName());
-        broadcastPlaceholders.put("reason", reason);
-        broadcastPlaceholders.put("duration", formatDuration(duration));
+        String durationStr = DurationParser.format(duration);
+        plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "ban.broadcast_temp" : "ban.broadcast", Map.of(
+                "target",   target.getName(),
+                "banner",   sender.getName(),
+                "reason",   reason,
+                "duration", durationStr
+        )), "essentialsc.ban.notify");
 
-        String broadcastKey = duration > 0 ? "ban.broadcast_temp" : "ban.broadcast";
-        plugin.getServer().broadcast(lang.get(sender, broadcastKey, broadcastPlaceholders), "essentialsc.ban.notify");
-
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("target", target.getName());
-        senderPlaceholders.put("duration", formatDuration(duration));
-        sender.sendMessage(lang.get(sender, "ban.success", senderPlaceholders));
+        sender.sendMessage(lang.get(sender, "ban.success", Map.of(
+                "target",   target.getName(),
+                "duration", durationStr
+        )));
 
         if (plugin.getDiscordSRVHook() != null) {
             plugin.getDiscordSRVHook().sendBanEmbed(
-                    target.getUniqueId(),
-                    target.getName(),
-                    reason,
-                    sender.getName(),
-                    expires > 0 ? expires : -1
-            );
+                    target.getUniqueId(), target.getName(), reason, sender.getName(),
+                    expires > 0 ? expires : -1);
         }
 
         return true;
     }
 
-    private long parseDuration(String input) {
-        if (input.isEmpty()) return 0;
-
-        try {
-            if (input.endsWith("s")) return TimeUnit.SECONDS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("m")) return TimeUnit.MINUTES.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("h")) return TimeUnit.HOURS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("d")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("w")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)) * 7);
-            if (input.endsWith("mo")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 2)) * 30);
-            if (input.endsWith("y")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)) * 365);
-            return Long.parseLong(input) * 1000;
-        } catch (NumberFormatException e) {
-            return -1;
+    private String buildReason(String[] args, int start, String defaultReason) {
+        if (args.length <= start) return defaultReason;
+        StringBuilder sb = new StringBuilder();
+        for (int i = start; i < args.length; i++) {
+            if (i > start) sb.append(" ");
+            sb.append(args[i]);
         }
-    }
-
-    private String formatDuration(long millis) {
-        if (millis <= 0) return "Permanent";
-
-        long days = TimeUnit.MILLISECONDS.toDays(millis);
-        long hours = TimeUnit.MILLISECONDS.toHours(millis) % 24;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis) % 60;
-
-        if (days > 0) return days + "d " + hours + "h";
-        if (hours > 0) return hours + "h " + minutes + "m";
-        return minutes + "m";
+        String reason = sb.toString().trim();
+        return reason.isEmpty() ? defaultReason : reason;
     }
 
     @Override

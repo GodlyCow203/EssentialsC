@@ -3,6 +3,7 @@ package net.godlycow.org.essc.shop;
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -100,14 +101,14 @@ public class ShopGUI {
         ItemStack item = new ItemStack(category.getIcon());
         ItemMeta meta = item.getItemMeta();
 
-        meta.displayName(mm.deserialize(category.getDisplayName()));
+        meta.displayName(mm.deserialize(category.getDisplayName()).decoration(TextDecoration.ITALIC, false));
 
         List<Component> lore = new ArrayList<>();
         for (String line : category.getLore()) {
-            lore.add(mm.deserialize(line));
+            lore.add(mm.deserialize(line).decoration(TextDecoration.ITALIC, false));
         }
-        lore.add(mm.deserialize(""));
-        lore.add(mm.deserialize("<color:#FFE66D>Click to browse!"));
+        lore.add(mm.deserialize("").decoration(TextDecoration.ITALIC, false));
+        lore.add(mm.deserialize("<color:#F5C827>Click to browse!").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -120,7 +121,7 @@ public class ShopGUI {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
 
-        PlayerProfile profile = Bukkit.createPlayerProfile(player.getUniqueId());
+        PlayerProfile profile = Bukkit.createPlayerProfile(player.getUniqueId(), "");
         meta.setOwnerProfile(profile);
 
         String formattedBalance  = String.format("%.2f", cachedBalance);
@@ -128,12 +129,12 @@ public class ShopGUI {
         String currencyPlural    = plugin.getConfigManager().getShopCurrencyPlural();
         String currency          = cachedBalance == 1.0 ? currencySingular : currencyPlural;
 
-        meta.displayName(mm.deserialize("<color:#06FFA5>Your Balance"));
+        meta.displayName(mm.deserialize("<color:#F5C827>Your Balance").decoration(TextDecoration.ITALIC, false));
 
         List<Component> lore = new ArrayList<>();
-        lore.add(mm.deserialize("<color:#FFE66D>" + formattedBalance + " " + currency));
-        lore.add(mm.deserialize(""));
-        lore.add(mm.deserialize("<color:#AAAAAA>Click to refresh"));
+        lore.add(mm.deserialize("<color:#57F527>" + formattedBalance + " " + currency).decoration(TextDecoration.ITALIC, false));
+        lore.add(mm.deserialize("").decoration(TextDecoration.ITALIC, false));
+        lore.add(mm.deserialize("<color:#474747>Click <gray>to refresh").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
         head.setItemMeta(meta);
@@ -144,20 +145,20 @@ public class ShopGUI {
         int maxPage = category.getMaxPage();
 
         if (currentPage > 1) {
-            inv.setItem(SLOT_PREV_PAGE, createNavigationButton("<color:#06FFA5>Previous Page", Material.ARROW));
+            inv.setItem(SLOT_PREV_PAGE, createNavigationButton("<color:#474747>Previous Page", Material.ARROW));
         }
 
         inv.setItem(SLOT_PAGE_INDICATOR, createPageIndicator(currentPage, maxPage));
 
         if (currentPage < maxPage) {
-            inv.setItem(SLOT_NEXT_PAGE, createNavigationButton("<color:#06FFA5>Next Page", Material.ARROW));
+            inv.setItem(SLOT_NEXT_PAGE, createNavigationButton("<color:#474747>Next Page", Material.ARROW));
         }
     }
 
     private ItemStack createNavigationButton(String name, Material material) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize(name));
+        meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));
         item.setItemMeta(meta);
         return item;
     }
@@ -165,7 +166,7 @@ public class ShopGUI {
     private ItemStack createPageIndicator(int current, int max) {
         ItemStack item = new ItemStack(Material.PAPER);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<color:#FFE66D>Page " + current + "/" + max));
+        meta.displayName(mm.deserialize("<color:#F5C827>Page " + current + "/" + max).decoration(TextDecoration.ITALIC, false));
         item.setItemMeta(meta);
         return item;
     }
@@ -173,7 +174,7 @@ public class ShopGUI {
     private void addBackButton(Inventory inv) {
         ItemStack item = new ItemStack(Material.BARRIER);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<color:#FF6B6B>Back to Categories"));
+        meta.displayName(mm.deserialize("<color:#F52727>Back to Categories").decoration(TextDecoration.ITALIC, false));
         item.setItemMeta(meta);
         inv.setItem(SLOT_BACK_BUTTON, item);
     }
@@ -182,7 +183,7 @@ public class ShopGUI {
         if (plugin.getConfigManager().isShopCloseButtonEnabled()) {
             ItemStack item = new ItemStack(Material.BARRIER);
             ItemMeta meta = item.getItemMeta();
-            meta.displayName(mm.deserialize("<color:#FF6B6B>Close"));
+            meta.displayName(mm.deserialize("<color:#F52727>Close").decoration(TextDecoration.ITALIC, false));
             item.setItemMeta(meta);
             inv.setItem(SLOT_CLOSE_BUTTON, item);
         }

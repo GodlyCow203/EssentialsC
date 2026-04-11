@@ -442,3 +442,18 @@ tpoffline:
   enabled: true
   priority: normal
   aliases: []
+
+sell:
+  enabled: true
+  priority: normal
+  aliases: []
+
+worth:
+  enabled: true
+  priority: normal
+  aliases: []
+
+quicksell:
+  enabled: true
+  priority: normal
+  aliases: []

@@ -3,11 +3,11 @@ package net.godlycow.org.essc.command.admin;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
+import net.godlycow.org.essc.util.DurationParser;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class MuteCommand extends Command {
 
@@ -23,9 +23,7 @@ public class MuteCommand extends Command {
         Player target = plugin.getBedrockUtil().resolvePlayer(args[0]);
 
         if (target == null) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", args[0]);
-            sender.sendMessage(lang.get(sender, "error.player_not_found", placeholders));
+            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
             return true;
         }
 
@@ -46,92 +44,59 @@ public class MuteCommand extends Command {
         int reasonStart = 1;
 
         if (args.length > 1 && args[1].startsWith("-t:")) {
-            String timeStr = args[1].substring(3);
-            duration = parseDuration(timeStr);
-            if (duration == -1) {
+            duration = DurationParser.parse(args[1].substring(3));
+            if (duration == DurationParser.INVALID) {
                 sender.sendMessage(lang.get(sender, "mute.invalid_duration"));
                 return true;
             }
+            if (duration == DurationParser.PERMANENT) duration = 0;
             reasonStart = 2;
         }
 
-        String reason;
-        if (args.length > reasonStart) {
-            StringBuilder reasonBuilder = new StringBuilder();
-            for (int i = reasonStart; i < args.length; i++) {
-                reasonBuilder.append(args[i]).append(" ");
-            }
-            reason = reasonBuilder.toString().trim();
-        } else {
-            reason = "Breaking chat rules";
-        }
-
+        String reason = buildReason(args, reasonStart, "Breaking chat rules");
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
 
         plugin.debug("Muting " + target.getName() + " by " + sender.getName() + " for: " + reason);
-
         punishmentManager.mutePlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
 
-        Map<String, String> targetPlaceholders = new HashMap<>();
-        targetPlaceholders.put("reason", reason);
-        targetPlaceholders.put("muter", sender.getName());
-        targetPlaceholders.put("duration", formatDuration(duration));
-        target.sendMessage(lang.get(target, "mute.target_message", targetPlaceholders));
+        String durationStr = DurationParser.format(duration);
 
-        Map<String, String> broadcastPlaceholders = new HashMap<>();
-        broadcastPlaceholders.put("target", target.getName());
-        broadcastPlaceholders.put("muter", sender.getName());
-        broadcastPlaceholders.put("reason", reason);
-        broadcastPlaceholders.put("duration", formatDuration(duration));
+        target.sendMessage(lang.get(target, "mute.target_message", Map.of(
+                "reason",   reason,
+                "muter",    sender.getName(),
+                "duration", durationStr
+        )));
 
-        String broadcastKey = duration > 0 ? "mute.broadcast_temp" : "mute.broadcast";
-        plugin.getServer().broadcast(lang.get(sender, broadcastKey, broadcastPlaceholders), "essentialsc.mute.notify");
+        plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "mute.broadcast_temp" : "mute.broadcast", Map.of(
+                "target",   target.getName(),
+                "muter",    sender.getName(),
+                "reason",   reason,
+                "duration", durationStr
+        )), "essentialsc.mute.notify");
 
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("target", target.getName());
-        senderPlaceholders.put("duration", formatDuration(duration));
-        sender.sendMessage(lang.get(sender, "mute.success", senderPlaceholders));
+        sender.sendMessage(lang.get(sender, "mute.success", Map.of(
+                "target",   target.getName(),
+                "duration", durationStr
+        )));
 
         if (plugin.getDiscordSRVHook() != null) {
             plugin.getDiscordSRVHook().sendMuteEmbed(
-                    target.getUniqueId(),
-                    target.getName(),
-                    reason,
-                    sender.getName(),
-                    expires > 0 ? expires : -1
-            );
+                    target.getUniqueId(), target.getName(), reason, sender.getName(),
+                    expires > 0 ? expires : -1);
         }
 
         return true;
     }
 
-    private long parseDuration(String input) {
-        if (input.isEmpty()) return 0;
-
-        try {
-            if (input.endsWith("s")) return TimeUnit.SECONDS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("m")) return TimeUnit.MINUTES.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("h")) return TimeUnit.HOURS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("d")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)));
-            if (input.endsWith("w")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)) * 7);
-            if (input.endsWith("mo")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 2)) * 30);
-            if (input.endsWith("y")) return TimeUnit.DAYS.toMillis(Long.parseLong(input.substring(0, input.length() - 1)) * 365);
-            return Long.parseLong(input) * 1000;
-        } catch (NumberFormatException e) {
-            return -1;
+    private String buildReason(String[] args, int start, String defaultReason) {
+        if (args.length <= start) return defaultReason;
+        StringBuilder sb = new StringBuilder();
+        for (int i = start; i < args.length; i++) {
+            if (i > start) sb.append(" ");
+            sb.append(args[i]);
         }
-    }
-
-    private String formatDuration(long millis) {
-        if (millis <= 0) return "Permanent";
-
-        long days = TimeUnit.MILLISECONDS.toDays(millis);
-        long hours = TimeUnit.MILLISECONDS.toHours(millis) % 24;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis) % 60;
-
-        if (days > 0) return days + "d " + hours + "h";
-        if (hours > 0) return hours + "h " + minutes + "m";
-        return minutes + "m";
+        String reason = sb.toString().trim();
+        return reason.isEmpty() ? defaultReason : reason;
     }
 
     @Override

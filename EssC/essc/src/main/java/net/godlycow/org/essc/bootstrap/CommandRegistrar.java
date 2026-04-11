@@ -119,6 +119,17 @@ public class CommandRegistrar {
             plugin.debug("RTP command unregistered (rtp.register-command is false)");
         }
 
+        if (plugin.getConfigManager().isSellEnabled()) {
+            register("sell", new SellCommand(plugin));
+            register("worth", new WorthCommand(plugin));
+            register("quicksell", new QuickSellCommand(plugin));
+        } else {
+            CommandRegistrationUtil.unregisterCommand("sell");
+            CommandRegistrationUtil.unregisterCommand("worth");
+            CommandRegistrationUtil.unregisterCommand("quicksell");
+            plugin.debug("Sell commands unregistered (sell.enabled is false)");
+        }
+
         register("broadcast",    new BroadcastCommand(plugin));
         register("enchant",      new EnchantCommand(plugin));
         register("unenchant",    new UnenchantCommand(plugin));
