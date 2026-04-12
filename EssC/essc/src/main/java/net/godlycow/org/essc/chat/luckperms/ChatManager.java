@@ -77,31 +77,6 @@ public class ChatManager implements Listener {
             }
         });
 
-        if (plugin.getConfigManager().isDiscordSRVEnabled()
-                && plugin.getServer().getPluginManager().isPluginEnabled("DiscordSRV")) {
-            try {
-                String plainMessage = PlainTextComponentSerializer.plainText().serialize(event.message());
-
-                String cachedNick = plugin.getNickManager() != null
-                        ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
-                        : null;
-
-                Component originalDisplayName = player.displayName();
-
-                if (cachedNick != null && !cachedNick.isEmpty()) {
-                    String plain = PlainTextComponentSerializer.plainText()
-                            .serialize(plugin.getMiniMessage().deserialize(cachedNick));
-                    player.displayName(Component.text(plain + "(" + player.getName() + ")"));
-                }
-
-                String channel = DiscordSRV.getPlugin().getOptionalChannel(player.getWorld().getName());
-                DiscordSRV.getPlugin().processChatMessage(player, plainMessage, channel, false);
-
-                player.displayName(originalDisplayName);
-            } catch (Exception e) {
-                plugin.debug("Failed to relay chat message to DiscordSRV: " + e.getMessage());
-            }
-        }
     }
 
     private Component formatWithLuckPerms(Player player, Component messageComponent) {
