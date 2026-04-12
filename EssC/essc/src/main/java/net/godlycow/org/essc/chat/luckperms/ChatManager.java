@@ -166,7 +166,7 @@ public class ChatManager implements Listener {
         String plain = PlainTextComponentSerializer.plainText().serialize(message);
 
         boolean legacy = player.hasPermission("essentialsc.chat.legacycodes");
-        boolean rgb = player.hasPermission("essentialsc.chat.rbgcodes");
+        boolean rgb = player.hasPermission("essentialsc.chat.rgbcodes");
 
         if (rgb) {
             String converted = LegacyColorConverter.convertHexAmpersandToLegacy(plain);

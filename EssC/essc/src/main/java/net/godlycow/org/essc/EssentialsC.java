@@ -104,7 +104,6 @@ public final class EssentialsC extends JavaPlugin {
     private FlyManager flyManager;
     private FloodgateHook floodgateHook;
     private BedrockUtil bedrockUtil;
-    private TABHook tabHook;
     private RulesManager rulesManager;
     private CommandsConfig commandsConfig;
     private ScheduleManager scheduleManager;
@@ -187,7 +186,6 @@ public final class EssentialsC extends JavaPlugin {
         floodgateHook = new FloodgateHook(this);
         bedrockUtil = new BedrockUtil(this, floodgateHook);
 
-        tabHook = new TABHook(this);
         new FirstRunHandler(this);
 
         rulesManager = new RulesManager(this);

@@ -24,10 +24,7 @@ public class TABHook {
         }
 
         String display = buildDisplay(player, nickname);
-
         setTablistName(tabPlayer, display);
-        setNametag(tabPlayer, display);
-
     }
 
     public void resetNick(Player player) {
