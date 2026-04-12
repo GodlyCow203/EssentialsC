@@ -1,4 +1,30 @@
 name: EssentialsCProfiles
-version: '0.0.1'
-main: net.godlycow.org.expansions.EssentialsCProfiles
+version: 2.0.0
+main: net.godlycow.org.expansions.profiles.EssentialsCProfiles
 api-version: '1.21'
+author: _GodlyCow
+description: Player profile expansion for EssentialsC
+website: https://modrinth.com/plugin/essentialsc
+depend:
+  - EssentialsC
+
+commands:
+  profile:
+    description: View a player's profile
+    usage: /profile [player|reload]
+    permission: essentialscprofiles.profile
+    aliases: [ playerprofile, pprofile ]
+
+permissions:
+  essentialscprofiles.profile:
+    description: View your own profile
+    default: true
+  essentialscprofiles.profile.others:
+    description: View other players' profiles
+    default: op
+  essentialscprofiles.chat.hover:
+    description: See profile hover card in chat
+    default: true
+  essentialscprofiles.reload:
+    description: Reload EssentialsCProfiles messages
+    default: op
