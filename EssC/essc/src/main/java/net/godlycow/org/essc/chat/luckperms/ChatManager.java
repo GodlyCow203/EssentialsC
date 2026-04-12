@@ -5,8 +5,10 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.util.LegacyColorConverter;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
@@ -15,7 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import io.papermc.paper.chat.ChatRenderer;
 
 public class ChatManager implements Listener {
 
@@ -60,32 +63,40 @@ public class ChatManager implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onPlayerChat(AsyncChatEvent event) {
         if (!luckPermsEnabled || !useLuckPermsFormatting) return;
 
         Player player = event.getPlayer();
-        Component messageComponent = applyMessageColors(player, event.getMessage());
 
-        Component formatted = formatWithLuckPerms(player, messageComponent);
-
-        event.setCancelled(true);
-        plugin.getServer().broadcast(formatted);
+        event.renderer(new ChatRenderer() {
+            @Override
+            public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
+                Component coloredMessage = applyMessageColorsToComponent(source, message);
+                return formatWithLuckPerms(source, coloredMessage);
+            }
+        });
 
         if (plugin.getConfigManager().isDiscordSRVEnabled()
                 && plugin.getServer().getPluginManager().isPluginEnabled("DiscordSRV")) {
             try {
+                String plainMessage = PlainTextComponentSerializer.plainText().serialize(event.message());
+
                 String cachedNick = plugin.getNickManager() != null
                         ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
                         : null;
+
                 Component originalDisplayName = player.displayName();
+
                 if (cachedNick != null && !cachedNick.isEmpty()) {
-                    String plain = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText()
+                    String plain = PlainTextComponentSerializer.plainText()
                             .serialize(plugin.getMiniMessage().deserialize(cachedNick));
                     player.displayName(Component.text(plain + "(" + player.getName() + ")"));
                 }
+
                 String channel = DiscordSRV.getPlugin().getOptionalChannel(player.getWorld().getName());
-                DiscordSRV.getPlugin().processChatMessage(player, event.getMessage(), channel, false);
+                DiscordSRV.getPlugin().processChatMessage(player, plainMessage, channel, false);
+
                 player.displayName(originalDisplayName);
             } catch (Exception e) {
                 plugin.debug("Failed to relay chat message to DiscordSRV: " + e.getMessage());
@@ -118,18 +129,23 @@ public class ChatManager implements Listener {
             String indicator = plugin.getConfigManager().getNickIndicator();
             String nickLegacy = LegacyColorConverter.convertHexAmpersandToLegacy(cachedNick);
             nickLegacy = applyLegacyColors(nickLegacy);
+
             Component nickComponent = indicator.isEmpty()
                     ? legacySerializer.deserialize(nickLegacy)
                     : Component.text(indicator).append(legacySerializer.deserialize(nickLegacy));
+
             Component prefixComponent = prefix.isEmpty() ? Component.empty()
                     : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(prefix)));
+
             Component suffixComponent = suffix.isEmpty() ? Component.empty()
                     : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(suffix)));
+
             displayNameComponent = prefixComponent.append(nickComponent).append(suffixComponent);
         } else {
             String nameFormat = LegacyColorConverter.convertHexAmpersandToLegacy(prefix)
                     + player.getName()
                     + LegacyColorConverter.convertHexAmpersandToLegacy(suffix);
+
             displayNameComponent = legacySerializer.deserialize(applyLegacyColors(nameFormat));
         }
 
@@ -146,18 +162,22 @@ public class ChatManager implements Listener {
                 .replaceText(b -> b.matchLiteral("<MESSAGE>").replacement(messageComponent));
     }
 
-    private Component applyMessageColors(Player player, String message) {
+    private Component applyMessageColorsToComponent(Player player, Component message) {
+        String plain = PlainTextComponentSerializer.plainText().serialize(message);
+
         boolean legacy = player.hasPermission("essentialsc.chat.legacycodes");
         boolean rgb = player.hasPermission("essentialsc.chat.rbgcodes");
 
         if (rgb) {
-            String converted = LegacyColorConverter.convertHexAmpersandToLegacy(message);
+            String converted = LegacyColorConverter.convertHexAmpersandToLegacy(plain);
             return legacySerializer.deserialize(applyLegacyColors(converted));
         }
+
         if (legacy) {
-            return legacySerializer.deserialize(applyLegacyColors(message));
+            return legacySerializer.deserialize(applyLegacyColors(plain));
         }
-        return Component.text(message);
+
+        return Component.text(plain);
     }
 
     private String applyLegacyColors(String message) {
@@ -170,7 +190,7 @@ public class ChatManager implements Listener {
     public boolean canUseRgbCodes(Player p) { return p.hasPermission("essentialsc.chat.rbgcodes"); }
 
     public Component formatMessage(Player player, String message) {
-        Component messageComponent = applyMessageColors(player, message);
+        Component messageComponent = applyMessageColorsToComponent(player, Component.text(message));
         if (!luckPermsEnabled || !useLuckPermsFormatting) return messageComponent;
         return formatWithLuckPerms(player, messageComponent);
     }
