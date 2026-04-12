@@ -31,6 +31,9 @@ jobs:
       - name: Build MySQL expansion
         run: mvn -B package -DskipTests -f expansions/mysqldatabaseexpansion/pom.xml
 
+      - name: Build Profile expansion
+        run: mvn -B package -DskipTests -f expansions/EssentialsCProfiles/pom.xml
+
       - name: Get plugin version
         id: get_version
         run: |
@@ -55,6 +58,10 @@ jobs:
           echo "Expansion JAR: $EXPANSION_JAR"
           cp "$EXPANSION_JAR" release/EssentialsC-MySQL-Expansion-v${VERSION}-${COMMIT_ID}.jar
 
+          PROFILE_JAR=$(ls expansions/EssentialsCProfiles/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
+          echo "Profile JAR: $PROFILE_JAR"
+          cp "$EXPANSION_JAR" release/EssentialsC-Profile-Expansion-v${VERSION}-${COMMIT_ID}.jar
+
           echo "commit_id=$COMMIT_ID" >> $GITHUB_OUTPUT
 
       - name: Upload Plugin Jars
@@ -77,6 +84,7 @@ jobs:
             Includes:
             - Main plugin
             - MySQL expansion
+            - EssentialsC Profiles Expansion
           files: release/*.jar
           draft: false
           prerelease: false
