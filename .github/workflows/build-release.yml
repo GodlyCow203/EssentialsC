@@ -60,7 +60,7 @@ jobs:
 
           PROFILE_JAR=$(ls expansions/EssentialsCProfiles/target/*.jar | grep -vE "(sources|javadoc)" | head -n1)
           echo "Profile JAR: $PROFILE_JAR"
-          cp "$EXPANSION_JAR" release/EssentialsC-Profile-Expansion-v${VERSION}-${COMMIT_ID}.jar
+          cp "$PROFILE_JAR" release/EssentialsC-Profile-Expansion-v${VERSION}-${COMMIT_ID}.jar
 
           echo "commit_id=$COMMIT_ID" >> $GITHUB_OUTPUT
 
