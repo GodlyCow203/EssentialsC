@@ -193,11 +193,11 @@ placeholder-output-replacements:
 
 # https://github.com/NEZNAMY/TAB/wiki/Feature-guide:-Conditional-placeholders
 conditions:
-  nick: # use it with %condition:nick%
+  nick:
     conditions:
-      - "%player%=%essentials_nickname%"
+      - "%essc_nick_has_nick%=false"
     true: "%player%"
-    false: "~%essentials_nickname%"
+    false: "~%essc_nick_formatted%"
 
 placeholder-refresh-intervals:
   default-refresh-interval: 500

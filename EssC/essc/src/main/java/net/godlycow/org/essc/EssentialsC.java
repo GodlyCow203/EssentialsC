@@ -198,7 +198,7 @@ public final class EssentialsC extends JavaPlugin {
             scoreboardManager = new ScoreboardManager(this);
         }
 
-        if (getConfigManager().isLuckPermsTabEnabled()) {
+        if (getConfigManager().isLuckPermsTabEnabled() || configManager.isNickEnabled()) {
             this.tabManager = new TabManager(this);
         }
 

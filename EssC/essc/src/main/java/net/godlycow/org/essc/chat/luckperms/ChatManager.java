@@ -102,12 +102,13 @@ public class ChatManager implements Listener {
 
         if (cachedNick != null && !cachedNick.isEmpty()) {
             String indicator = plugin.getConfigManager().getNickIndicator();
-            String nickLegacy = LegacyColorConverter.convertHexAmpersandToLegacy(cachedNick);
-            nickLegacy = applyLegacyColors(nickLegacy);
 
-            Component nickComponent = indicator.isEmpty()
-                    ? legacySerializer.deserialize(nickLegacy)
-                    : Component.text(indicator).append(legacySerializer.deserialize(nickLegacy));
+            String nickForParsing = LegacyColorConverter.convertHexAmpersandToLegacy(
+                    applyLegacyColors(cachedNick));
+            Component nickComponent = plugin.getMiniMessage().deserialize(nickForParsing);
+            if (!indicator.isEmpty()) {
+                nickComponent = Component.text(indicator).append(nickComponent);
+            }
 
             Component prefixComponent = prefix.isEmpty() ? Component.empty()
                     : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(prefix)));
@@ -159,10 +160,21 @@ public class ChatManager implements Listener {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    public boolean isLuckPermsChatEnabled() { return useLuckPermsFormatting; }
-    public boolean isLuckPermsAvailable() { return luckPermsEnabled; }
-    public boolean canUseColorCodes(Player p) { return p.hasPermission("essentialsc.chat.legacycodes"); }
-    public boolean canUseRgbCodes(Player p) { return p.hasPermission("essentialsc.chat.rbgcodes"); }
+    public boolean isLuckPermsChatEnabled() {
+        return useLuckPermsFormatting;
+    }
+
+    public boolean isLuckPermsAvailable() {
+        return luckPermsEnabled;
+    }
+
+    public boolean canUseColorCodes(Player p) {
+        return p.hasPermission("essentialsc.chat.legacycodes");
+    }
+
+    public boolean canUseRgbCodes(Player p) {
+        return p.hasPermission("essentialsc.chat.rbgcodes");
+    }
 
     public Component formatMessage(Player player, String message) {
         Component messageComponent = applyMessageColorsToComponent(player, Component.text(message));
