@@ -87,43 +87,31 @@ public class ConfigManager {
     }
 
     public long getTPACooldown() {
-        return config.getLong("teleport.tpa.cooldown", 60);
+        return config.getLong("tpa.cooldown", 60);
     }
-
     public long getTPAWarmup() {
-        return config.getLong("teleport.tpa.warmup", 3);
+        return config.getLong("tpa.warmup", 3);
     }
-
     public long getTPATimeout() {
-        return config.getLong("teleport.tpa.timeout", 60);
+        return config.getLong("tpa.timeout", 60);
     }
-
     public int getTPAMaxPending() {
-        return config.getInt("teleport.tpa.max-pending", 5);
+        return config.getInt("tpa.max-pending", 5);
     }
-
     public int getTPAMaxOutgoing() {
-        return config.getInt("teleport.tpa.max-outgoing", 1);
+        return config.getInt("tpa.max-outgoing", 1);
     }
-
-    public double getTPACost() {
-        return config.getDouble("teleport.tpa.cost", 0.0);
-    }
-
     public boolean isTPADenyMovement() {
-        return config.getBoolean("teleport.tpa.deny-movement", true);
+        return config.getBoolean("tpa.deny-movement", true);
     }
-
     public boolean isTPAParticles() {
-        return config.getBoolean("teleport.tpa.particles", true);
+        return config.getBoolean("tpa.particles", true);
     }
-
     public boolean isTPASounds() {
-        return config.getBoolean("teleport.tpa.sounds", true);
+        return config.getBoolean("tpa.sounds", true);
     }
-
     public List<String> getTPABlockedWorlds() {
-        return config.getStringList("teleport.tpa.blocked-worlds");
+        return config.getStringList("tpa.blocked-worlds");
     }
 
     public int getMaxHomes() {

@@ -55,19 +55,16 @@ public class TPAManager implements Listener {
     }
 
     private void loadConfig() {
-        var config = plugin.getConfig();
-        String path = "teleport.tpa.";
-
-        this.cooldownDuration = config.getLong(path + "cooldown", 60) * 1000;
-        this.warmupDuration = config.getLong(path + "warmup", 3) * 20;
-        this.timeoutDuration = config.getLong(path + "timeout", 60) * 1000;
-        this.maxPending = config.getInt(path + "max-pending", 5);
-        this.maxOutgoing = config.getInt(path + "max-outgoing", 1);
-        this.cost = config.getDouble(path + "cost", 0.0);
-        this.denyMovement = config.getBoolean(path + "deny-movement", true);
-        this.useParticles = config.getBoolean(path + "particles", true);
-        this.useSounds = config.getBoolean(path + "sounds", true);
-        this.blockedWorlds = config.getStringList(path + "blocked-worlds");
+        var cm = plugin.getConfigManager();
+        this.cooldownDuration = cm.getTPACooldown() * 1000;
+        this.warmupDuration = cm.getTPAWarmup() * 20;
+        this.timeoutDuration = cm.getTPATimeout() * 1000;
+        this.maxPending = cm.getTPAMaxPending();
+        this.maxOutgoing = cm.getTPAMaxOutgoing();
+        this.denyMovement = cm.isTPADenyMovement();
+        this.useParticles = cm.isTPAParticles();
+        this.useSounds = cm.isTPASounds();
+        this.blockedWorlds = cm.getTPABlockedWorlds();
     }
 
     public boolean requestTeleport(Player requester, Player target, TPARequest.Type type) {
