@@ -82,21 +82,16 @@ public class EconomyManager implements EconomyService, Listener {
     }
 
     private void loadConfig() {
-        var config = plugin.getConfig();
-        this.currencySingular = config.getString("economy.currency.singular", "Dollar");
-        this.currencyPlural = config.getString("economy.currency.plural", "Dollars");
-        this.startingBalance = new BigDecimal(config.getString("economy.starting-balance", "100.00"));
-        this.formatPattern = config.getString("economy.format", "#,##0.00");
-        this.minTransaction = new BigDecimal(config.getString("economy.minimum-transaction", "0.01"));
-
-        String maxStr = config.getString("economy.max-balance", "-1");
-        this.maxBalance = maxStr.equals("-1") ? null : new BigDecimal(maxStr);
+        var cm = plugin.getConfigManager();
+        this.currencySingular = cm.getCurrencySingular();
+        this.currencyPlural = cm.getCurrencyPlural();
+        this.startingBalance = cm.getStartingBalance();
+        this.formatPattern = cm.getEconomyFormat();
+        this.minTransaction = cm.getMinTransaction();
+        this.maxBalance = cm.getMaxBalance();
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
         this.decimalFormat = new DecimalFormat(formatPattern, symbols);
-
-        plugin.debug("Economy config loaded: format=" + formatPattern + ", min=" + minTransaction +
-                ", max=" + (maxBalance != null ? maxBalance : "unlimited"));
     }
 
     @EventHandler
