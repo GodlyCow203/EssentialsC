@@ -151,10 +151,15 @@ public final class EssentialsC extends JavaPlugin {
         languageManager.load(configManager.getDefaultLanguage());
         scheduleManager = new ScheduleManager(this);
         scheduleManager.load();
-        backupManager = new BackupManager(this);
+
+        if (configManager.isBackupEnabled()) {
+            backupManager = new BackupManager(this);
+        }
+
         if (configManager.isMotdEnabled()) {
             motdManager = new MOTDManager(this);
         }
+
         tpaManager = new TPAManager(this);
         homeManager = new HomeManager(this);
         homeGuiManager = new GuiManager(this);
