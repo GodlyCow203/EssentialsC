@@ -37,14 +37,17 @@ public class ConfigManager {
     }
 
     public void migrate() {
-        FileConfiguration config = plugin.getConfig();
-        org.bukkit.configuration.Configuration defaults = config.getDefaults();
+        java.io.InputStream defStream = plugin.getResource("config.yml");
+        if (defStream == null) return;
 
-        if (defaults == null) return;
+        org.bukkit.configuration.file.YamlConfiguration defaults =
+                org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(
+                        new java.io.InputStreamReader(defStream, java.nio.charset.StandardCharsets.UTF_8)
+                );
 
         boolean dirty = false;
         for (String key : defaults.getKeys(true)) {
-            if (!config.contains(key)) {
+            if (!defaults.isConfigurationSection(key) && !config.isSet(key)) {
                 config.set(key, defaults.get(key));
                 plugin.getLogger().info("[EssentialsC] Migrated missing config key: " + key);
                 dirty = true;
