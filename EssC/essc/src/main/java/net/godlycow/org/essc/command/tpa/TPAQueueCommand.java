@@ -35,7 +35,7 @@ public class TPAQueueCommand extends Command {
             for (TPARequest req : incoming) {
                 String name = Bukkit.getOfflinePlayer(req.getRequester()).getName();
                 String type = req.getType() == TPARequest.Type.TPA ? "→" : "←";
-                long remaining = (req.getTimestamp() + (plugin.getConfig().getLong("teleport.tpa.timeout", 60) * 1000) - System.currentTimeMillis()) / 1000;
+                long remaining = (req.getTimestamp() + (plugin.getConfigManager().getTPATimeout() * 1000) - System.currentTimeMillis()) / 1000;
 
                 sender.sendMessage(lang.get(sender, "tpa.queue.entry",
                         Map.of(
@@ -51,7 +51,7 @@ public class TPAQueueCommand extends Command {
             for (TPARequest req : outgoing) {
                 String name = Bukkit.getOfflinePlayer(req.getTarget()).getName();
                 String type = req.getType() == TPARequest.Type.TPA ? "→" : "←";
-                long remaining = (req.getTimestamp() + (plugin.getConfig().getLong("teleport.tpa.timeout", 60) * 1000) - System.currentTimeMillis()) / 1000;
+                long remaining = (req.getTimestamp() + (plugin.getConfigManager().getTPATimeout() * 1000) - System.currentTimeMillis()) / 1000;
 
                 sender.sendMessage(lang.get(sender, "tpa.queue.entry",
                         Map.of(

@@ -260,37 +260,34 @@ rtp:
 
 # Teleport Requests (TPA)
 
-teleport:
-  tpa:
-    # Seconds a player must wait between sending /tpa requests.
-    cooldown: 60
+tpa:
+  # Seconds a player must wait between sending /tpa requests.
+  cooldown: 60
 
-    # Seconds the player must stand still before being teleported.
-    warmup: 3
+  # Seconds the player must stand still before being teleported.
+  warmup: 3
 
-    # Seconds before an unanswered request automatically expires.
-    timeout: 60
+  # Seconds before an unanswered request automatically expires.
+  timeout: 60
 
-    # Maximum number of incoming TPA requests a player can have at once.
-    max-pending: 5
+  # Maximum number of incoming TPA requests a player can have at once.
+  max-pending: 5
 
-    # Maximum number of outgoing TPA requests a player can send at once.
-    max-outgoing: 1
+  # Maximum number of outgoing TPA requests a player can send at once.
+  max-outgoing: 1
 
-    # Economy cost charged per /tpa request. Set to 0.0 to disable.
-    cost: 0.0
+  # Cancel the teleport if the sender moves during the warmup.
+  deny-movement: true
 
-    # Cancel the teleport if the sender moves during the warmup.
-    deny-movement: true
+  # Play particles during the warmup.
+  particles: true
 
-    # Play particles during the warmup.
-    particles: true
+  # Play sounds during TPA events.
+  sounds: true
 
-    # Play sounds during TPA events.
-    sounds: true
+  # Worlds where /tpa and /tpahere are blocked.
+  blocked-worlds: []
 
-    # Worlds where /tpa and /tpahere are blocked.
-    blocked-worlds: []
 
 
 # Homes
