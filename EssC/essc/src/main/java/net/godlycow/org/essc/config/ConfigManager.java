@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.config;
 
 import net.godlycow.org.essc.EssentialsC;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.math.BigDecimal;
@@ -660,6 +661,28 @@ public class ConfigManager {
 
     public boolean isSellGUISounds() {
         return config.getBoolean("sell.gui.sounds", true);
+    }
+
+    public Material getAHGuiMaterial(String path, Material defaultMat) {
+        String matName = config.getString("auction-house.gui.items." + path + ".material", defaultMat.name());
+        try {
+            return Material.valueOf(matName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning("Invalid material in config: " + matName + " for path " + path);
+            return defaultMat;
+        }
+    }
+
+    public boolean getAHGuiGlow(String path, boolean defaultGlow) {
+        return config.getBoolean("auction-house.gui.items." + path + ".glow", defaultGlow);
+    }
+
+    public List<String> getAHGuiLore(String path, List<String> defaultLore) {
+        return config.getStringList("auction-house.gui.items." + path + ".lore");
+    }
+
+    public String getAHGuiName(String path, String defaultName) {
+        return config.getString("auction-house.gui.items." + path + ".name", defaultName);
     }
 
 }

@@ -861,7 +861,109 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Inventory Worth:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Sold <color:#66AAFF><amount></color>x items for <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sold inventory for <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sold inventory for <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>",
+
+  "ah.gui.title.main": "<color:#9CA3AF>Auction House <color:#6B7280>| <color:#9CA3AF>Page <page>/<total>",
+  "ah.gui.title.expired": "<color:#9CA3AF>Expired Items <color:#6B7280>| <color:#9CA3AF>Click to Claim",
+  "ah.gui.title.listings": "<color:#9CA3AF>Your Listings <color:#6B7280>| <color:#9CA3AF>Page <page>/<total>",
+  "ah.gui.title.history.select": "<color:#9CA3AF>History <color:#6B7280>| <color:#9CA3AF>Select Type",
+  "ah.gui.title.history.sell": "<color:#9CA3AF>Sell History <color:#6B7280>| <color:#9CA3AF>Page <page>/<total>",
+  "ah.gui.title.history.buy": "<color:#9CA3AF>Buy History <color:#6B7280>| <color:#9CA3AF>Page <page>/<total>",
+
+  "ah.gui.item.nav.prev.name": "<color:#9CA3AF>← Previous Page",
+  "ah.gui.item.nav.next.name": "<color:#9CA3AF>Next Page →",
+  "ah.gui.item.back.name": "<color:#9CA3AF>← Back to Auction House",
+  "ah.gui.item.back_main.name": "<color:#EF4444>Back to Main",
+  "ah.gui.item.back_history.name": "<color:#8B5CF6>Back to History",
+
+  "ah.gui.item.info.name": "<color:#9CA3AF>Your Auction Stats",
+  "ah.gui.item.info.lore.active": "<color:#9CA3AF>Active Listings: <color><count>/<max></color>",
+  "ah.gui.item.info.lore.expired": "<color:#F59E0B>⚠ Expired items waiting!",
+  "ah.gui.item.info.lore.help_sell": "<color:#6B7280>/ah sell <price> <color:#4B5563>- Sell item",
+  "ah.gui.item.info.lore.help_cancel": "<color:#6B7280>/ah cancel <id> <color:#4B5563>- Cancel auction",
+  "ah.gui.item.info.lore.help_expired": "<color:#6B7280>/ah expired <color:#4B5563>- Claim items",
+  "ah.gui.item.info.lore.help_listings": "<color:#6B7280>/ah listings <color:#4B5563>- View your auctions",
+
+  "ah.gui.item.listings.name": "<color:#10B981>Your Listings",
+  "ah.gui.item.listings.lore1": "<color:#6B7280>View your active auctions",
+  "ah.gui.item.listings.lore2": "<color:#6B7280>Click to manage",
+
+  "ah.gui.item.expired.name": "<color:#F59E0B>Expired Items",
+  "ah.gui.item.expired.lore1": "<color:#6B7280>Claim returned items",
+  "ah.gui.item.expired.lore_waiting": "<color:#EF4444>⚠ You have items waiting!",
+  "ah.gui.item.expired.lore_empty": "<color:#6B7280>No items waiting",
+
+  "ah.gui.item.refresh.name": "<color:#3B82F6>Refresh",
+  "ah.gui.item.refresh.lore1": "<color:#6B7280>Click to refresh",
+  "ah.gui.item.refresh.lore2": "<color:#6B7280>the auction house",
+
+  "ah.gui.item.history.name": "<color:#8B5CF6>History",
+  "ah.gui.item.history.lore1": "<color:#6B7280>View your buy/sell",
+  "ah.gui.item.history.lore2": "<color:#6B7280>transaction history",
+
+  "ah.gui.item.claim_all.name": "<color:#10B981>Claim All",
+  "ah.gui.item.claim_all.lore1": "<color:#6B7280>Click to claim all items at once",
+
+  "ah.gui.item.close.name": "<color:#EF4444>✕ Close",
+
+  "ah.gui.item.listings_info.name": "<color:#9CA3AF>Your Listings Info",
+  "ah.gui.item.listings_info.lore.total": "<color:#9CA3AF>Total Active: <color:#FFFFFF><count>",
+  "ah.gui.item.listings_info.lore.cancel_tip": "<color:#6B7280>Right-click any item to cancel",
+
+  "ah.gui.item.stats.name": "<color:#9CA3AF>Expired Items Info",
+  "ah.gui.item.stats.lore.items_waiting": "<color:#9CA3AF>Items waiting: <color:#FFFFFF><count>",
+  "ah.gui.item.stats.lore.click_individual": "<color:#6B7280>Click items individually",
+  "ah.gui.item.stats.lore.claim_all": "<color:#6B7280>or use 'Claim All'",
+
+  "ah.gui.item.sell_stats.name": "<color:#9CA3AF>Sell Statistics",
+  "ah.gui.item.sell_stats.lore.total_sales": "<color:#9CA3AF>Total Sales: <color:#FFFFFF><count>",
+  "ah.gui.item.sell_stats.lore.total_earnings": "<color:#9CA3AF>Total Earnings: <color:#10B981><amount>",
+
+  "ah.gui.item.buy_stats.name": "<color:#9CA3AF>Buy Statistics",
+  "ah.gui.item.buy_stats.lore.total_purchases": "<color:#9CA3AF>Total Purchases: <color:#FFFFFF><count>",
+  "ah.gui.item.buy_stats.lore.total_spent": "<color:#9CA3AF>Total Spent: <color:#EF4444><amount>",
+
+  "ah.gui.item.empty.auction.name": "<color:#9CA3AF>No Auctions Available",
+  "ah.gui.item.empty.auction.lore1": "<color:#6B7280>No active auctions found",
+  "ah.gui.item.empty.auction.lore2": "<color:#6B7280>Be the first to sell!",
+  "ah.gui.item.empty.auction.help": "<color:#6B7280>Use <color:#9CA3AF>/ah sell <price>",
+
+  "ah.gui.item.empty_history.sell.name": "<color:#9CA3AF>No sell history yet",
+  "ah.gui.item.empty_history.sell.lore1": "<color:#6B7280>No transactions found",
+  "ah.gui.item.empty_history.sell.lore2": "<color:#6B7280>Start trading!",
+
+  "ah.gui.item.empty_history.buy.name": "<color:#9CA3AF>No buy history yet",
+  "ah.gui.item.empty_history.buy.lore1": "<color:#6B7280>No purchases found",
+  "ah.gui.item.empty_history.buy.lore2": "<color:#6B7280>Start shopping!",
+
+  "ah.gui.history.select.sell.name": "<color:#10B981>Sell History",
+  "ah.gui.history.select.sell.lore1": "<color:#6B7280>View all your sold",
+  "ah.gui.history.select.sell.lore2": "<color:#6B7280>auctions and earnings",
+
+  "ah.gui.history.select.buy.name": "<color:#3B82F6>Buy History",
+  "ah.gui.history.select.buy.lore1": "<color:#6B7280>View all your purchases",
+  "ah.gui.history.select.buy.lore2": "<color:#6B7280>and spending",
+
+  "ah.gui.lore.price": "<color:#9CA3AF>Price: <color:#10B981><price>",
+  "ah.gui.lore.seller": "<color:#9CA3AF>Seller: <color:#D1D5DB><seller>",
+  "ah.gui.lore.time_left": "<color:#9CA3AF>Time Left: <time>",
+  "ah.gui.lore.your_auction": "<color:#F59E0B>✦ Your auction",
+  "ah.gui.lore.click_purchase": "<color:#10B981>✦ Click to purchase",
+  "ah.gui.lore.right_click_cancel": "<color:#6B7280>Right-click to cancel",
+  "ah.gui.lore.id": "<color:#6B7280>ID: #<id>",
+  "ah.gui.lore.sold_for": "<color:#9CA3AF>Sold for: <color:#10B981><price>",
+  "ah.gui.lore.buyer": "<color:#9CA3AF>Buyer: <color:#D1D5DB><buyer>",
+  "ah.gui.lore.when": "<color:#9CA3AF>When: <color:#6B7280><time>",
+  "ah.gui.lore.bought_for": "<color:#9CA3AF>Bought for: <color:#EF4444><price>",
+  "ah.gui.lore.seller_name": "<color:#9CA3AF>Seller: <color:#D1D5DB><seller>",
+  "ah.gui.lore.click_claim": "<color:#10B981>✦ Click to claim this item",
+  "ah.gui.lore.slot": "<color:#6B7280>Slot #<slot>",
+
+  "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
+  "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
+  "ah.gui.filler.name": " "
+
+
 
 }
 
