@@ -1,19 +1,21 @@
 package net.godlycow.org.essc.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.auction.AhSession;
 import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.Auction;
 import net.godlycow.org.essc.auction.gui.AhItemFactory;
 import net.godlycow.org.essc.command.auction.AhCommand;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -36,22 +38,27 @@ public class AhListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onClick(InventoryClickEvent event) {
         if (!plugin.getConfigManager().isAHEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        String title = getTitle(event);
-        if (!title.contains("Auction House") &&
-                !title.contains("Expired Items") &&
-                !title.contains("Your Listings") &&
-                !title.contains("History") &&
-                !title.contains("Sell History") &&
-                !title.contains("Buy History")) {
+        if (!player.hasMetadata("ah_session")) return;
+
+        AhSession session = (AhSession) player.getMetadata("ah_session").get(0).value();
+        if (session == null || session.isStale()) {
+            player.removeMetadata("ah_session", plugin);
             return;
         }
 
         event.setCancelled(true);
+
+        if (event.getClickedInventory() != event.getInventory()) {
+            if (event.isShiftClick()) {
+                event.setCancelled(true);
+            }
+            return;
+        }
 
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null || clicked.getType().isAir()) return;
@@ -108,6 +115,24 @@ public class AhListener implements Listener {
             int id = container.get(itemFactory.getAuctionKey(), PersistentDataType.INTEGER);
             boolean isOwn = container.has(itemFactory.getOwnKey(), PersistentDataType.BYTE);
             handleAuctionClick(player, id, isOwn, event.getClick());
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+
+        if (player.hasMetadata("ah_session")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        if (!(event.getPlayer() instanceof Player player)) return;
+
+        if (player.hasMetadata("ah_session")) {
+            player.removeMetadata("ah_session", plugin);
         }
     }
 
@@ -284,34 +309,5 @@ public class AhListener implements Listener {
                 }
             });
         });
-    }
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent event) {
-        if (!(event.getPlayer() instanceof Player player)) return;
-
-        String title = getTitle(event);
-        if (title.contains("Auction House") ||
-                title.contains("Expired Items") ||
-                title.contains("Your Listings") ||
-                title.contains("History")) {
-            player.removeMetadata("ah_session", plugin);
-        }
-    }
-
-    private String getTitle(InventoryClickEvent event) {
-        try {
-            return PlainTextComponentSerializer.plainText().serialize(event.getView().title());
-        } catch (Exception e) {
-            return event.getView().getTitle();
-        }
-    }
-
-    private String getTitle(InventoryCloseEvent event) {
-        try {
-            return PlainTextComponentSerializer.plainText().serialize(event.getView().title());
-        } catch (Exception e) {
-            return event.getView().getTitle();
-        }
     }
 }
