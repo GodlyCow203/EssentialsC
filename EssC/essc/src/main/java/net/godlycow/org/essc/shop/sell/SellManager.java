@@ -9,10 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SellManager {
     private final EssentialsC plugin;
     private final SellListener sellListener;
+    private final Map<Player, SellGUI> activeGUIs = new HashMap<>();
 
     public SellManager(EssentialsC plugin, SellListener sellListener) {
         this.plugin = plugin;
@@ -26,8 +29,38 @@ public class SellManager {
         }
 
         SellGUI gui = new SellGUI(plugin, this, player);
+        activeGUIs.put(player, gui);
         sellListener.registerGUI(player, gui);
         gui.open();
+    }
+
+
+    public SellGUI getActiveGUI(Player player) {
+        return activeGUIs.get(player);
+    }
+
+
+    public void reload() {
+        for (Map.Entry<Player, SellGUI> entry : new HashMap<>(activeGUIs).entrySet()) {
+            Player player = entry.getKey();
+            SellGUI gui = entry.getValue();
+
+            gui.onClose();
+
+            if (player.getOpenInventory().getTopInventory().getHolder() instanceof SellHolder) {
+                player.closeInventory();
+            }
+
+            player.sendMessage(plugin.getLanguageManager().get(player, "sell.reload-closed"));
+        }
+
+        activeGUIs.clear();
+
+        plugin.debug("SellManager reloaded - closed all open sell GUIs");
+    }
+
+    public void unregisterGUI(Player player) {
+        activeGUIs.remove(player);
     }
 
     public double getItemWorth(ItemStack item) {
@@ -161,8 +194,16 @@ public class SellManager {
             this.success = success;
         }
 
-        public int getAmount() { return amount; }
-        public double getPrice() { return price; }
-        public boolean isSuccess() { return success; }
+        public int getAmount() {
+            return amount;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
     }
 }

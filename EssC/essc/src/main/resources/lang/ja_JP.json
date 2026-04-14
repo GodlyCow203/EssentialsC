@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>使い方: /tpoffline <プレイヤー></color>",
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color>のログアウト位置にテレポートしました: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player>のログアウト位置が見つかりません。</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player>のデータがありません。</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player>のデータがありません。</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>設定のリロードにより販売GUIが閉じられました。再度開いてください。",
+  "sell.disabled": "<prefix> <#FF0000>販売は現在無効です。",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>販売可能なアイテムが見つかりません。",
+  "sell.success.gui": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>個のアイテムを<color:#66AAFF><worth> <currency></color>で販売しました。</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>アイテムを持っていません。",
+  "worth.hand.header": "<prefix> <color:#55FF55>あなたの<color:#FFFFFF><item></color> x<color:#66AAFF><amount></color>の価値は<color:#66AAFF><worth> <currency></color>です</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>インベントリ価値:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>合計: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>個のアイテムを<color:#66AAFF><worth> <currency></color>で販売しました</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>インベントリを<color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>個のアイテム)で販売しました</color>"
+
 }

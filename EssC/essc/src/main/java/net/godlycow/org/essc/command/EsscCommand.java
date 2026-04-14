@@ -163,6 +163,11 @@ public class EsscCommand extends Command {
                     plugin.debug("MOTD reloaded");
                 }
 
+                if (plugin.getSellManager() != null) {
+                    plugin.getSellManager().reload();
+                    plugin.debug("SellGUI reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success"));
                 EssLog.info("Reload completed by " + sender.getName());
             }

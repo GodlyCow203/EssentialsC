@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>વપરાશ: /tpoffline <રમતા></color>",
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> ના લોગઆઉટ સ્થાન પર ટેલિપોર્ટ થયું: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> માટે કોઈ લોગઆઉટ સ્થાન મળ્યું નથી.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> માટે કોઈ ડેટા ઉપલબ્ધ નથી.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> માટે કોઈ ડેટા ઉપલબ્ધ નથી.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>કોન્ફિગરેશન રિલોડને કારણે વેચાણ GUI બંધ કરવામાં આવ્યું. કૃપા કરીને ફરી ખોલો.",
+  "sell.disabled": "<prefix> <#FF0000>વેચાણ અત્યારે અક્ષમ છે.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>વેચાણ યોગ્ય વસ્તુઓ મળી નથી.",
+  "sell.success.gui": "<prefix> <color:#55FF55>તમે <color:#66AAFF><amount></color> વસ્તુઓ <color:#66AAFF><worth> <currency></color> માં વેચી.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>તમે કોઈ વસ્તુ પકડી નથી.",
+  "worth.hand.header": "<prefix> <color:#55FF55>તમારી <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> કિંમત <color:#66AAFF><worth> <currency></color> છે</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>ઇન્વેન્ટરી કિંમત:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>કુલ: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x વસ્તુઓ <color:#66AAFF><worth> <currency></color> માં વેચી</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ઇન્વેન્ટરી <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> વસ્તુઓ) માં વેચી</color>"
+
 }
