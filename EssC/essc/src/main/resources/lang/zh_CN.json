@@ -693,8 +693,7 @@
   "ah.gui.lore.slot": "<color:#6B7280>槽位 #<slot>",
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
-  "ah.gui.filler.name": " "
-
+  "ah.gui.filler.name": " ",
 
   "warp.success": "<prefix> <color:#FFF200>已传送到 <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>未找到传送点 '<color:#FFFFFF><warp></color>'。</color>",
