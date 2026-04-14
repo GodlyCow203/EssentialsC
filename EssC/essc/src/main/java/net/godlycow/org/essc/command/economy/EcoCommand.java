@@ -169,7 +169,7 @@ public class EcoCommand extends Command {
     }
 
     private void handleReset(CommandSender sender, OfflinePlayer target) {
-        BigDecimal starting = new BigDecimal(plugin.getConfig().getString("economy.starting-balance", "100.00"));
+        BigDecimal starting = plugin.getEconomyManager().getStartingBalance();
         plugin.getEconomyManager().setBalance(target.getUniqueId(), starting).thenAccept(success -> {
             String formatted = plugin.getEconomyManager().format(starting);
             String targetName = target.getName() != null ? target.getName() : target.getUniqueId().toString();
@@ -264,7 +264,7 @@ public class EcoCommand extends Command {
             return;
         }
 
-        BigDecimal starting = new BigDecimal(plugin.getConfig().getString("economy.starting-balance", "100.00"));
+        BigDecimal starting = plugin.getEconomyManager().getStartingBalance();
         String formatted = plugin.getEconomyManager().format(starting);
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
 
