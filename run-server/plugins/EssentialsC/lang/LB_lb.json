@@ -929,6 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Benotzung: /tpoffline <spiller></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Teleportéiert zum Logout-Plaz vun <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Keng Logout-Plaz fonnt fir <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Keng Donnéeën disponibel fir <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Keng Donnéeën disponibel fir <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>D Verkafs-GUI gouf wéinst engem Konfiguratiouns-Reload zougemaacht. W.e.g. nees opmaachen.",
+  "sell.disabled": "<prefix> <#FF0000>Verkaf ass zur Zäit ausgeschalt.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Kei verkaafbar Artikele fonnt.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Du hues <color:#66AAFF><amount></color> Artikele fir <color:#66AAFF><worth> <currency></color> verkaaft.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Du hues keen Artikel an der Hand.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Deng <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> ass <color:#66AAFF><worth> <currency></color> wäert</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Inventarwäert:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x Artikele fir <color:#66AAFF><worth> <currency></color> verkaaft</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventar fir <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> Artikele) verkaaft</color>"
 
 }

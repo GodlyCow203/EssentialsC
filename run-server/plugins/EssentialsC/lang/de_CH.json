@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Bruch: /tpoffline <spieler></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Zum Logout-Ort vo <color:#FFFFFF><player></color> teleportiert: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Kei Logout-Ort für <player> gfunde.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Kei Date für <player> verfüegbar.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Kei Date für <player> verfüegbar.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>D Verkaufs-GUI isch wäge eme Konfigurations-Neilade zuegmacht worde. Bitte nomol ufmache.",
+  "sell.disabled": "<prefix> <#FF0000>Verchaufe isch zurzyt deaktiviert.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Kei verchoufbari Gständ gfunde.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Du hesch <color:#66AAFF><amount></color> Gständ für <color:#66AAFF><worth> <currency></color> verchouft.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Du hesch kei Gstand in dr Hand.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Din <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> isch <color:#66AAFF><worth> <currency></color> wärt</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Inventarwärt:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x Gständ für <color:#66AAFF><worth> <currency></color> verchouft</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventar für <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> Gständ) verchouft</color>"
+
 }

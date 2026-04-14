@@ -929,6 +929,17 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> యొక్క లాగౌట్ స్థానానికి టెలిపోర్ట్ చేయబడింది: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> కోసం లాగౌట్ స్థానం కనుగొనబడలేదు.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> కోసం డేటా అందుబాటులో లేదు.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> కోసం డేటా అందుబాటులో లేదు.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>కాన్ఫిగరేషన్ రీలోడ్ కారణంగా అమ్మక GUI మూసివేయబడింది. దయచేసి తిరిగి తెరవండి.",
+  "sell.disabled": "<prefix> <#FF0000>అమ్మకం ప్రస్తుతం నిలిపివేయబడింది.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>అమ్మదగిన వస్తువులు కనుగొనబడలేదు.",
+  "sell.success.gui": "<prefix> <color:#55FF55>మీరు <color:#66AAFF><amount></color> వస్తువులను <color:#66AAFF><worth> <currency></color> కు అమ్మారు.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>మీరు ఏ వస్తువును పట్టుకోలేదు.",
+  "worth.hand.header": "<prefix> <color:#55FF55>మీ <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> విలువ <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>ఇన్వెంటరీ విలువ:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>మొత్తం: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x వస్తువులను <color:#66AAFF><worth> <currency></color> కు అమ్మారు</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ఇన్వెంటరీని <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> వస్తువులు) కు అమ్మారు</color>"
 
 }

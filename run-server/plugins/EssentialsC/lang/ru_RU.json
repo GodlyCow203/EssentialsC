@@ -929,5 +929,17 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200>Телепортировано к месту выхода <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Место выхода для <player> не найдено.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Нет данных для <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Нет данных для <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>GUI продажи закрыт из-за перезагрузки конфигурации. Пожалуйста, откройте снова.",
+  "sell.disabled": "<prefix> <#FF0000>Продажа в настоящее время отключена.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Предметы для продажи не найдены.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Вы продали <color:#66AAFF><amount></color> предметов за <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Вы не держите никакой предмет.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Ваш <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> стоит <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Стоимость инвентаря:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Итого: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>Продано <color:#66AAFF><amount></color>x предметов за <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Продан инвентарь за <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> предметов)</color>"
+
 }

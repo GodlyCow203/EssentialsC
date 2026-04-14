@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Penggunaan: /tpoffline <pemain></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Teleportasi ke lokasi logout <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Tidak ada lokasi logout ditemukan untuk <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Tidak ada data tersedia untuk <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Tidak ada data tersedia untuk <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>GUI penjualan ditutup karena pengaturan dimuat ulang. Silakan buka kembali.",
+  "sell.disabled": "<prefix> <#FF0000>Penjualan saat ini dinonaktifkan.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Tidak ditemukan item yang dapat dijual.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Anda menjual <color:#66AAFF><amount></color> item seharga <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Anda tidak memegang item apa pun.",
+  "worth.hand.header": "<prefix> <color:#55FF55><color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> Anda bernilai <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Nilai Inventori:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>Menjual <color:#66AAFF><amount></color>x item seharga <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Menjual inventori seharga <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> item)</color>"
+
 }

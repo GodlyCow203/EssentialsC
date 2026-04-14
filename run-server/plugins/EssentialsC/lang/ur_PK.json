@@ -929,7 +929,20 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> کے لاگ آؤٹ مقام پر منتقل ہو گئے: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> کے لیے کوئی لاگ آؤٹ مقام نہیں ملا۔</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> کے لیے کوئی ڈیٹا دستیاب نہیں۔</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> کے لیے کوئی ڈیٹا دستیاب نہیں۔</color>",
+
+
+  "sell.reload-closed": "<prefix> <#FF0000>ترتیب دوبارہ لوڈ ہونے کی وجہ سے فروخت GUI بند کر دیا گیا۔ براہ کرم دوبارہ کھولیں۔",
+  "sell.disabled": "<prefix> <#FF0000>فروخت فی الحال غیر فعال ہے۔",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>کوئی قابل فروخت اشیاء نہیں ملیں۔",
+  "sell.success.gui": "<prefix> <color:#55FF55>آپ نے <color:#66AAFF><amount></color> اشیاء <color:#66AAFF><worth> <currency></color> میں فروخت کیں۔</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>آپ کے ہاتھ میں کوئی شے نہیں ہے۔",
+  "worth.hand.header": "<prefix> <color:#55FF55>آپ کا <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> قیمت <color:#66AAFF><worth> <currency></color> ہے</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>انوینٹری کی قیمت:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>کل: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x اشیاء <color:#66AAFF><worth> <currency></color> میں فروخت کیں</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>انوینٹری <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> اشیاء) میں فروخت کی</color>"
+
 
 }
 

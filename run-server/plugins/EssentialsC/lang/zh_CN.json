@@ -693,8 +693,7 @@
   "ah.gui.lore.slot": "<color:#6B7280>槽位 #<slot>",
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
-  "ah.gui.filler.name": " "
-
+  "ah.gui.filler.name": " ",
 
   "warp.success": "<prefix> <color:#FFF200>已传送到 <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>未找到传送点 '<color:#FFFFFF><warp></color>'。</color>",
@@ -926,5 +925,18 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>用法: /tpoffline <玩家></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>已传送至 <color:#FFFFFF><player></color> 的退出位置: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>未找到 <player> 的退出位置。</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>没有 <player> 的可用数据。</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>没有 <player> 的可用数据。</color>",
+
+
+  "sell.reload-closed": "<prefix> <#FF0000>由于配置重新加载，出售界面已关闭。请重新打开。",
+  "sell.disabled": "<prefix> <#FF0000>出售功能当前已禁用。",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>未找到可出售的物品。",
+  "sell.success.gui": "<prefix> <color:#55FF55>你出售了 <color:#66AAFF><amount></color> 个物品，获得 <color:#66AAFF><worth> <currency></color>。</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>你手中没有持有任何物品。",
+  "worth.hand.header": "<prefix> <color:#55FF55>你的 <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> 价值 <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>背包价值：</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>总计：<worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>出售了 <color:#66AAFF><amount></color>x 个物品，获得 <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>出售背包获得 <color:#66AAFF><worth> <currency></color>（<color:#66AAFF><amount></color> 个物品）</color>"
+
 }

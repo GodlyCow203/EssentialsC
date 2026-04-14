@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Użycie: /tpoffline <gracz></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Teleportowano do miejsca wylogowania <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Nie znaleziono miejsca wylogowania dla <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Brak danych dla <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Brak danych dla <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>GUI sprzedaży zostało zamknięte z powodu przeładowania konfiguracji. Proszę otworzyć ponownie.",
+  "sell.disabled": "<prefix> <#FF0000>Sprzedaż jest obecnie wyłączona.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Nie znaleziono przedmiotów do sprzedaży.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Sprzedałeś <color:#66AAFF><amount></color> przedmiotów za <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Nie trzymasz żadnego przedmiotu.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Twój <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> jest wart <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Wartość ekwipunku:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Razem: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>Sprzedano <color:#66AAFF><amount></color>x przedmiotów za <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sprzedano ekwipunek za <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> przedmiotów)</color>"
+
 }

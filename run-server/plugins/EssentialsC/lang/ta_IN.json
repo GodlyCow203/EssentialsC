@@ -929,6 +929,18 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> இன் வெளியேற்ற இடத்திற்கு டெலிப்போர்ட் செய்யப்பட்டது: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> க்கு வெளியேற்ற இடம் கிடைக்கவில்லை.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> க்கு தரவு இல்லை.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> க்கு தரவு இல்லை.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>கட்டமைப்பு மீள் ஏற்றம் காரணமாக விற்பனை GUI மூடப்பட்டது. தயவுசெய்து மீண்டும் திறக்கவும்.",
+  "sell.disabled": "<prefix> <#FF0000>விற்பனை தற்போது முடக்கப்பட்டுள்ளது.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>விற்கக்கூடிய பொருட்கள் எதுவும் கிடைக்கவில்லை.",
+  "sell.success.gui": "<prefix> <color:#55FF55>நீங்கள் <color:#66AAFF><amount></color> பொருட்களை <color:#66AAFF><worth> <currency></color> க்கு விற்றீர்கள்.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>நீங்கள் எந்த பொருளையும் பிடித்திருக்கவில்லை.",
+  "worth.hand.header": "<prefix> <color:#55FF55>உங்கள் <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> மதிப்பு <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>சரக்கு மதிப்பு:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>மொத்தம்: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x பொருட்களை <color:#66AAFF><worth> <currency></color> க்கு விற்றீர்கள்</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>சரக்கை <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> பொருட்கள்) க்கு விற்றீர்கள்</color>"
+
 
 }
