@@ -685,4 +685,7 @@ public class ConfigManager {
         return config.getString("auction-house.gui.items." + path + ".name", defaultName);
     }
 
+    public String getFallbackLanguage() {
+        return config.getString("fallback-language", "en_US");
+    }
 }
