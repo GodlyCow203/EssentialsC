@@ -853,6 +853,7 @@
   "tpoffline.no_location": "<prefix> <color:#FF0000>No logout location found for <player>.</color>",
   "tpoffline.no_data": "<prefix> <color:#FF0000>No data available for <player>.</color>",
 
+  "sell.reload-closed": "<prefix> <#FF0000>The sell GUI was closed due to a configuration reload. Please reopen it.",
   "sell.disabled": "<prefix> <color:#FF0000>Selling is currently disabled.</color>",
   "sell.error.no-sellable-items": "<prefix> <color:#FF0000>No sellable items found.</color>",
   "sell.success.gui": "<prefix> <color:#55FF55>You sold <color:#66AAFF><amount></color> items for <color:#66AAFF><worth> <currency></color>.</color>",

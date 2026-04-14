@@ -930,5 +930,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Gebruik: /tpoffline <speler></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Geteleporteerd naar uitloglocatie van <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Geen uitloglocatie gevonden voor <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Geen gegevens beschikbaar voor <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Geen gegevens beschikbaar voor <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>Het verkoop-GUI is gesloten vanwege een configuratieherlaad. Gelieve opnieuw te openen.",
+  "sell.disabled": "<prefix> <#FF0000>Verkopen is momenteel uitgeschakeld.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Geen verkoopbare items gevonden.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Je hebt <color:#66AAFF><amount></color> items verkocht voor <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Je houdt geen item vast.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Jouw <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> is <color:#66AAFF><worth> <currency></color> waard</color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Inventaris Waarde:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Totaal: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x items verkocht voor <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaris verkocht voor <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>"
+
 }

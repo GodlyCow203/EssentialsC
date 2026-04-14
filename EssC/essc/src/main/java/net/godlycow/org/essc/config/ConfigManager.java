@@ -592,10 +592,6 @@ public class ConfigManager {
         return config.getBoolean("rtp.register-command", true);
     }
 
-    public String getChatSeparator() {
-        return config.getString("luckperms.chat-separator", ">> ");
-    }
-
     public int getSpawnEntityMaxAmount() { return config.getInt("spawnentity.max-amount", 10);}
 
     public boolean isPlayerListLuckPermsEnabled() {

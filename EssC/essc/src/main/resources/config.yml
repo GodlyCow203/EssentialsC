@@ -79,9 +79,6 @@ luckperms:
   # Available placeholders: <DISPLAYNAME>, <USERNAME>, <MESSAGE>
   chat-format: '<DISPLAYNAME> &7» &f<MESSAGE>'
 
-  # The string inserted between the player name and the message.
-  chat-separator: '>> '
-
   # Per-group chat format overrides. The key must match the LuckPerms group name exactly.
   # Players in a listed group will use that format instead of chat-format above.
   # Uncomment and add as many groups as needed.

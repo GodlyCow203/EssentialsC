@@ -929,6 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>Paggamit: /tpoffline <manlalaro></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>Na-teleport sa lokasyon ng logout ni <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Walang nahanap na lokasyon ng logout para kay <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Walang available na data para kay <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Walang available na data para kay <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>Ang sell GUI ay isinara dahil sa configuration reload. Pakibuksan muli.",
+  "sell.disabled": "<prefix> <#FF0000>Ang pagbebenta ay kasalukuyang hindi pinapagana.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Walang mabebentang item na nahanap.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Ibinenta mo ang <color:#66AAFF><amount></color> items para sa <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Wala kang hawak na item.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Ang iyong <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> ay nagkakahalaga ng <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Halaga ng Inventory:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Kabuuang: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>Ibinenta ang <color:#66AAFF><amount></color>x items para sa <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Ibinenta ang inventory para sa <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>"
 
 }
