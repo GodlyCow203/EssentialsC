@@ -103,17 +103,47 @@ public class LanguageManager {
             loadIntoCache(locale);
         }
 
-        Map<String, String> messages = cache.getOrDefault(locale, cache.get(defaultLang));
+        String fallbackLang = plugin.getConfigManager().getFallbackLanguage();
 
+        Map<String, String> messages = cache.get(locale);
         if (messages == null) {
-            plugin.debug("No messages loaded for locale: " + locale + " or default");
+            plugin.getLogger().warning("[EssentialsC] Language '" + locale + "' not loaded, falling back to '" + fallbackLang + "'");
+            if (!cache.containsKey(fallbackLang)) loadIntoCache(fallbackLang);
+            messages = cache.get(fallbackLang);
+        }
+        if (messages == null) {
+            plugin.getLogger().warning("[EssentialsC] Fallback language '" + fallbackLang + "' not loaded, falling back to default '" + defaultLang + "'");
+            messages = cache.get(defaultLang);
+        }
+        if (messages == null) {
+            plugin.getLogger().severe("[EssentialsC] No language files loaded at all — cannot resolve key '" + key + "'");
             return miniMessage.deserialize("<red>Missing lang files</red>");
         }
 
         String raw = messages.get(key);
 
+        if (raw == null && !locale.equals(fallbackLang)) {
+            Map<String, String> fallbackMessages = cache.get(fallbackLang);
+            if (fallbackMessages != null) {
+                raw = fallbackMessages.get(key);
+                if (raw != null) {
+                    plugin.getLogger().warning("[EssentialsC] Missing key '" + key + "' in '" + locale + "', using fallback '" + fallbackLang + "'");
+                }
+            }
+        }
+
+        if (raw == null && !locale.equals(defaultLang) && !fallbackLang.equals(defaultLang)) {
+            Map<String, String> defaultMessages = cache.get(defaultLang);
+            if (defaultMessages != null) {
+                raw = defaultMessages.get(key);
+                if (raw != null) {
+                    plugin.getLogger().warning("[EssentialsC] Missing key '" + key + "' in '" + locale + "' and '" + fallbackLang + "', using default '" + defaultLang + "'");
+                }
+            }
+        }
+
         if (raw == null) {
-            plugin.debug("Missing key '" + key + "' in locale '" + locale + "'");
+            plugin.getLogger().warning("[EssentialsC] Missing key '" + key + "' in all languages (locale='" + locale + "', fallback='" + fallbackLang + "', default='" + defaultLang + "')");
             raw = messages.getOrDefault("error.missing_key", "<red>Missing key: <key></red>");
             raw = raw.replace("<key>", key);
         }
@@ -125,12 +155,9 @@ public class LanguageManager {
         }
 
         String prefix = messages.get("prefix");
-        if (prefix == null && cache.containsKey(defaultLang)) {
-            prefix = cache.get(defaultLang).get("prefix");
-        }
-        if (prefix != null) {
-            raw = raw.replace("<prefix>", prefix);
-        }
+        if (prefix == null && cache.containsKey(fallbackLang)) prefix = cache.get(fallbackLang).get("prefix");
+        if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
+        if (prefix != null) raw = raw.replace("<prefix>", prefix);
 
         return miniMessage.deserialize(raw);
     }
