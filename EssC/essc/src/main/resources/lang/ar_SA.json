@@ -929,5 +929,17 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>الاستخدام: /tpoffline <لاعب></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>تم النقل إلى موقع تسجيل خروج <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>لم يتم العثور على موقع تسجيل خروج لـ <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>لا توجد بيانات متاحة لـ <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>لا توجد بيانات متاحة لـ <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>تم إغلاق واجهة البيع بسبب إعادة تحميل التكوين. يرجى إعادة فتحها.",
+  "sell.disabled": "<prefix> <#FF0000>البيع معطل حالياً.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>لم يتم العثور على عناصر قابلة للبيع.",
+  "sell.success.gui": "<prefix> <color:#55FF55>لقد بعت <color:#66AAFF><amount></color> عناصر مقابل <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>أنت لا تحمل أي عنصر.",
+  "worth.hand.header": "<prefix> <color:#55FF55><color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> الخاص بك يساوي <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>قيمة المخزون:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>الإجمالي: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>تم بيع <color:#66AAFF><amount></color>x عناصر مقابل <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>تم بيع المخزون مقابل <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> عناصر)</color>"
+
 }

@@ -931,6 +931,18 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200>เทเลพอร์ตไปยังตำแหน่งออกจากระบบของ <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>ไม่พบตำแหน่งออกจากระบบสำหรับ <player></color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>ไม่มีข้อมูลสำหรับ <player></color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>ไม่มีข้อมูลสำหรับ <player></color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>GUI การขายถูกปิดเนื่องจากโหลดการตั้งค่าใหม่ กรุณาเปิดใหม่",
+  "sell.disabled": "<prefix> <#FF0000>การขายถูกปิดใช้งานในขณะนี้",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>ไม่พบไอเทมที่สามารถขายได้",
+  "sell.success.gui": "<prefix> <color:#55FF55>คุณขายไอเทม <color:#66AAFF><amount></color> ชิ้น ได้ <color:#66AAFF><worth> <currency></color></color>",
+  "worth.hand.empty": "<prefix> <#FF0000>คุณไม่ถือไอเทมใดๆ",
+  "worth.hand.header": "<prefix> <color:#55FF55><color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> ของคุณมีมูลค่า <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>มูลค่าช่องเก็บของ:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>รวม: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>ขายไอเทม <color:#66AAFF><amount></color>x ชิ้น ได้ <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ขายช่องเก็บของได้ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> ไอเทม)</color>"
+
 
 }

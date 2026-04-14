@@ -929,6 +929,19 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200>Teleporterad till <color:#FFFFFF><player></color>s utloggningsplats: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>Ingen utloggningsplats hittades för <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>Ingen data tillgänglig för <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>Ingen data tillgänglig för <player>.</color>",
+
+
+  "sell.reload-closed": "<prefix> <#FF0000>Sälj-GUI stängdes på grund av konfigurationsomladdning. Vänligen öppna igen.",
+  "sell.disabled": "<prefix> <#FF0000>Försäljning är för närvarande inaktiverad.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Inga säljbara föremål hittades.",
+  "sell.success.gui": "<prefix> <color:#55FF55>Du sålde <color:#66AAFF><amount></color> föremål för <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Du håller inget föremål.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Din <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> är värd <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Inventariets värde:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Totalt: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>Sålde <color:#66AAFF><amount></color>x föremål för <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sålde inventariet för <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> föremål)</color>"
+
 
 }

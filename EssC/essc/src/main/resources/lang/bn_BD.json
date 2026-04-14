@@ -929,6 +929,18 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>ব্যবহার: /tpoffline <খেলোয়াড়></color>",
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> এর লগআউট অবস্থানে টেলিপোর্ট করা হয়েছে: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> এর জন্য কোনো লগআউট অবস্থান পাওয়া যায়নি।</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> এর জন্য কোনো ডেটা উপলব্ধ নেই।</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> এর জন্য কোনো ডেটা উপলব্ধ নেই।</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>কনফিগারেশন রিলোডের কারণে বিক্রয় GUI বন্ধ করা হয়েছে। অনুগ্রহ করে আবার খুলুন।",
+  "sell.disabled": "<prefix> <#FF0000>বিক্রয় বর্তমানে নিষ্ক্রিয়।",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>বিক্রয়যোগ্য আইটেম পাওয়া যায়নি।",
+  "sell.success.gui": "<prefix> <color:#55FF55>আপনি <color:#66AAFF><amount></color> আইটেম <color:#66AAFF><worth> <currency></color> এ বিক্রি করেছেন।</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>আপনি কোনো আইটেম ধরে নেই।",
+  "worth.hand.header": "<prefix> <color:#55FF55>আপনার <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> এর মূল্য <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>ইনভেন্টরি মূল্য:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>মোট: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x আইটেম <color:#66AAFF><worth> <currency></color> এ বিক্রি করা হয়েছে</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ইনভেন্টরি <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> আইটেম) এ বিক্রি করা হয়েছে</color>"
+
 
 }

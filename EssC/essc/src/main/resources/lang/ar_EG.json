@@ -929,6 +929,18 @@
   "command.usage.tpoffline": "<prefix> <color:#FF0000>الاستخدام: /tpoffline <لاعب></color>",
   "tpoffline.success": "<prefix> <color:#FFF200>اتنقلت لمكان logout بتاع <color:#FFFFFF><player></color>: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000>مفيش مكان logout لـ <player>.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000>مفيش بيانات لـ <player>.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000>مفيش بيانات لـ <player>.</color>",
+
+  "sell.reload-closed": "<prefix> <#FF0000>واجهة البيع اتقفلت عشان إعادة تحميل الإعدادات. من فضلك افتحها تاني.",
+  "sell.disabled": "<prefix> <#FF0000>البيع مقفول دلوقتي.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>مفيش حاجات تتباع.",
+  "sell.success.gui": "<prefix> <color:#55FF55>انت بعت <color:#66AAFF><amount></color> حاجات بـ <color:#66AAFF><worth> <currency></color>.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>ايدك فاضية.",
+  "worth.hand.header": "<prefix> <color:#55FF55><color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> بتاعك بـ <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>قيمة الشنطة:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>المجموع: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55>اتباع <color:#66AAFF><amount></color>x حاجات بـ <color:#66AAFF><worth> <currency></color></color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>الشنطة اتباعت بـ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> حاجات)</color>"
+
 
 }

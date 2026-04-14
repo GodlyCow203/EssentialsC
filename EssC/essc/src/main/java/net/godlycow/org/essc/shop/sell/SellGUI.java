@@ -55,6 +55,7 @@ public class SellGUI {
         inv = Bukkit.createInventory(new SellHolder(), size, mm.deserialize(title));
 
         fillBorders();
+        fillEmptySlots();
         updateButtons();
 
         player.openInventory(inv);
@@ -81,6 +82,32 @@ public class SellGUI {
 
         for (int slot : BORDER_SLOTS) {
             inv.setItem(slot, border);
+        }
+    }
+
+    private void fillEmptySlots() {
+        if (!plugin.getConfigManager().isSellGUIFillEmpty()) {
+            return;
+        }
+
+        Material fillMaterial;
+        try {
+            fillMaterial = Material.valueOf(plugin.getConfigManager().getSellGUIFillMaterial().toUpperCase());
+        } catch (Exception e) {
+            fillMaterial = Material.BLACK_STAINED_GLASS_PANE;
+        }
+
+        ItemStack filler = new ItemStack(fillMaterial);
+        ItemMeta meta = filler.getItemMeta();
+        if (meta != null) {
+            meta.displayName(Component.empty());
+            filler.setItemMeta(meta);
+        }
+
+        for (int i = 0; i < inv.getSize(); i++) {
+            if (inv.getItem(i) == null && !isInputSlot(i) && !isConfirmSlot(i) && !isCancelSlot(i)) {
+                inv.setItem(i, filler);
+            }
         }
     }
 
@@ -215,7 +242,6 @@ public class SellGUI {
 
         returnItems();
     }
-
     private void returnItems() {
         for (int slot : INPUT_SLOTS) {
             ItemStack item = inv.getItem(slot);

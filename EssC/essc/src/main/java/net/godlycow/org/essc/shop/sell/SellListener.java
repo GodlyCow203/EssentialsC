@@ -10,13 +10,9 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SellListener implements Listener {
     private final EssentialsC plugin;
     private SellManager sellManager;
-    private final Map<Player, SellGUI> activeGUIs = new HashMap<>();
 
     public SellListener(EssentialsC plugin) {
         this.plugin = plugin;
@@ -27,7 +23,6 @@ public class SellListener implements Listener {
     }
 
     public void registerGUI(Player player, SellGUI gui) {
-        activeGUIs.put(player, gui);
     }
 
     @EventHandler
@@ -40,7 +35,7 @@ public class SellListener implements Listener {
         InventoryHolder holder = topInv.getHolder();
         if (!(holder instanceof SellHolder)) return;
 
-        SellGUI gui = activeGUIs.get(player);
+        SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
         if (gui == null) return;
 
         Inventory clickedInv = event.getClickedInventory();
@@ -50,14 +45,12 @@ public class SellListener implements Listener {
             if (gui.isConfirmSlot(slot)) {
                 event.setCancelled(true);
                 gui.processSale();
-                activeGUIs.remove(player);
                 return;
             }
 
             if (gui.isCancelSlot(slot)) {
                 event.setCancelled(true);
                 gui.cancel();
-                activeGUIs.remove(player);
                 return;
             }
 
@@ -73,7 +66,7 @@ public class SellListener implements Listener {
         }
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            SellGUI currentGUI = activeGUIs.get(player);
+            SellGUI currentGUI = sellManager != null ? sellManager.getActiveGUI(player) : null;
             if (currentGUI != null) {
                 currentGUI.updateButtons();
             }
@@ -90,7 +83,7 @@ public class SellListener implements Listener {
         InventoryHolder holder = topInv.getHolder();
         if (!(holder instanceof SellHolder)) return;
 
-        SellGUI gui = activeGUIs.get(player);
+        SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
         if (gui == null) return;
 
         for (int slot : event.getRawSlots()) {
@@ -112,9 +105,12 @@ public class SellListener implements Listener {
         InventoryHolder holder = event.getInventory().getHolder();
         if (!(holder instanceof SellHolder)) return;
 
-        SellGUI gui = activeGUIs.remove(player);
-        if (gui != null) {
+        SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
+        if (gui != null && !gui.isProcessed()) {
             gui.onClose();
+        }
+        if (sellManager != null) {
+            sellManager.unregisterGUI(player);
         }
     }
 }

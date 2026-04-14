@@ -930,6 +930,19 @@
 
   "tpoffline.success": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> oyuncusunun çıkış konumuna ışınlandınız: <color:#AAAAAA><world> <x>, <y>, <z></color>",
   "tpoffline.no_location": "<prefix> <color:#FF0000><player> için çıkış konumu bulunamadı.</color>",
-  "tpoffline.no_data": "<prefix> <color:#FF0000><player> için veri mevcut değil.</color>"
+  "tpoffline.no_data": "<prefix> <color:#FF0000><player> için veri mevcut değil.</color>",
+
+
+  "sell.reload-closed": "<prefix> <#FF0000>Yapılandırma yeniden yüklenmesi nedeniyle satış GUI'si kapatıldı. Lütfen yeniden açın.",
+  "sell.disabled": "<prefix> <#FF0000>Satış şu anda devre dışı.",
+  "sell.error.no-sellable-items": "<prefix> <#FF0000>Satılabilir eşya bulunamadı.",
+  "sell.success.gui": "<prefix> <color:#55FF55><color:#66AAFF><amount></color> eşyayı <color:#66AAFF><worth> <currency></color> karşılığında sattınız.</color>",
+  "worth.hand.empty": "<prefix> <#FF0000>Elinizde hiç eşya yok.",
+  "worth.hand.header": "<prefix> <color:#55FF55>Elinizdeki <color:#FFFFFF><item></color> x<color:#66AAFF><amount></color> değeri <color:#66AAFF><worth> <currency></color></color>",
+  "worth.inventory.header": "<prefix> <color:#55FF55>Envanter Değeri:</color>",
+  "worth.inventory.total": "<prefix> <color:#66AAFF>Toplam: <worth> <currency></color>",
+  "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x eşya <color:#66AAFF><worth> <currency></color> karşılığında satıldı</color>",
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Envanter <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> eşya) karşılığında satıldı</color>"
+
 
 }
