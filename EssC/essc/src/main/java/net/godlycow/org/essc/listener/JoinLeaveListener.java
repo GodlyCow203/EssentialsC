@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -25,7 +26,16 @@ public class JoinLeaveListener implements Listener {
             return;
         }
 
-        String message = plugin.getConfigManager().getJoinMessage();
+        boolean hideVanished = plugin.getConfigManager().isJoinLeaveHideVanished();
+        boolean isFirstJoin = !event.getPlayer().hasPlayedBefore();
+        String message;
+
+        if (isFirstJoin) {
+            message = plugin.getConfigManager().getFirstJoinMessage();
+        } else {
+            message = plugin.getConfigManager().getJoinMessage();
+        }
+
         if (message == null || message.isEmpty()) {
             return;
         }
@@ -33,7 +43,13 @@ public class JoinLeaveListener implements Listener {
         Component componentMessage = formatMessage(message, event.getPlayer().getName());
 
         event.setJoinMessage(null);
-        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(componentMessage));
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (hideVanished && plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(event.getPlayer()) && !player.hasPermission("essentialsc.vanish.see")) {
+                continue;
+            }
+            player.sendMessage(componentMessage);
+        }
 
         plugin.debug("Custom join message sent for " + event.getPlayer().getName());
     }
@@ -44,7 +60,9 @@ public class JoinLeaveListener implements Listener {
             return;
         }
 
+        boolean hideVanished = plugin.getConfigManager().isJoinLeaveHideVanished();
         String message = plugin.getConfigManager().getLeaveMessage();
+
         if (message == null || message.isEmpty()) {
             return;
         }
@@ -52,11 +70,16 @@ public class JoinLeaveListener implements Listener {
         Component componentMessage = formatMessage(message, event.getPlayer().getName());
 
         event.setQuitMessage(null);
-        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(componentMessage));
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (hideVanished && plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(event.getPlayer()) && !player.hasPermission("essentialsc.vanish.see")) {
+                continue;
+            }
+            player.sendMessage(componentMessage);
+        }
 
         plugin.debug("Custom leave message sent for " + event.getPlayer().getName());
     }
-
 
     private Component formatMessage(String message, String playerName) {
         return miniMessage.deserialize(message, Placeholder.unparsed("player", playerName));
