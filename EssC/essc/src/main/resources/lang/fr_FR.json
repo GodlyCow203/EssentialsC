@@ -940,7 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Valeur de l'Inventaire:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Vendu <color:#66AAFF><amount></color>x objets pour <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaire vendu pour <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> objets)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaire vendu pour <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> objets)</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>Veuillez attendre <seconds> secondes avant d'envoyer un autre message.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Le mode lent est actif. Vous pourrez discuter à nouveau dans <time>."
 
 }

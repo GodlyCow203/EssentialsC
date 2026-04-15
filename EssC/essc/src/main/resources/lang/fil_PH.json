@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Halaga ng Inventory:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Kabuuang: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Ibinenta ang <color:#66AAFF><amount></color>x items para sa <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Ibinenta ang inventory para sa <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Ibinenta ang inventory para sa <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>Mangyaring maghintay ng <seconds> segundo bago magpadala ng isa pang mensahe.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Ang slow mode ay aktibo. Maaari kang makapag-usap muli sa <time>."
 
 }

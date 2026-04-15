@@ -185,6 +185,24 @@ economy:
   format: "#,##0.00"
 
 
+# Chat
+
+chat:
+  slow-mode:
+    # Whether chat slow mode is enabled.
+    enabled: false
+
+    # Delay (in seconds) players must wait between sending messages.
+    delay-seconds: 3
+
+  # Caps lock prevention - converts messages with too many uppercase letters to lowercase.
+  # Threshold is the ratio of uppercase letters (0.0 to 1.0, e.g. 0.7 = 70%).
+  capslock-threshold: 0.7
+
+  # Whether to strip MiniMessage color formatting from console output.
+  strip-colors-from-console: true
+
+
 # Player List
 #
 # Settings for the /playerlist (or /list) command.
@@ -195,7 +213,6 @@ playerlist:
 
   # How many player names to show per line.
   players-per-line: 10
-
 
 # Random Teleport (RTP)
 

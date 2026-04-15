@@ -941,6 +941,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Inventaris Waarde:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Totaal: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x items verkocht voor <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaris verkocht voor <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaris verkocht voor <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>Wacht alstublieft <seconds> seconden voordat u een volgend bericht verstuurt.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langzame modus is actief. U kunt weer chatten over <time>."
 
 }

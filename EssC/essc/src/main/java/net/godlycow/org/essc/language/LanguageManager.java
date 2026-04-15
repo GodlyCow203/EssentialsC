@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -158,6 +159,12 @@ public class LanguageManager {
         if (prefix == null && cache.containsKey(fallbackLang)) prefix = cache.get(fallbackLang).get("prefix");
         if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
         if (prefix != null) raw = raw.replace("<prefix>", prefix);
+
+        if (!(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
+            Component component = miniMessage.deserialize(raw);
+            String plain = PlainTextComponentSerializer.plainText().serialize(component);
+            return Component.text(plain);
+        }
 
         return miniMessage.deserialize(raw);
     }

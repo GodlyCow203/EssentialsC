@@ -1,6 +1,5 @@
 package net.godlycow.org.essc.chat.luckperms;
 
-import github.scarsz.discordsrv.DiscordSRV;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
@@ -20,6 +19,10 @@ import org.bukkit.event.Listener;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.chat.ChatRenderer;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class ChatManager implements Listener {
 
     private final EssentialsC plugin;
@@ -34,6 +37,8 @@ public class ChatManager implements Listener {
     private LuckPerms luckPerms;
     private boolean luckPermsEnabled;
     private boolean useLuckPermsFormatting;
+
+    private final Map<UUID, Long> lastMessageTime = new ConcurrentHashMap<>();
 
     public ChatManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -65,9 +70,49 @@ public class ChatManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerChat(AsyncChatEvent event) {
-        if (!luckPermsEnabled || !useLuckPermsFormatting) return;
-
         Player player = event.getPlayer();
+
+        if (configManager.isChatSlowModeEnabled() && !player.hasPermission("essentialsc.chat.slowmode.bypass")) {
+            long lastMsg = lastMessageTime.getOrDefault(player.getUniqueId(), 0L);
+            long delayMs = configManager.getChatSlowModeDelay() * 1000L;
+            long remaining = (lastMsg + delayMs) - System.currentTimeMillis();
+
+            if (remaining > 0) {
+                player.sendMessage(plugin.getLanguageManager().get(player, "chat.slowmode.wait",
+                        Map.of("seconds", String.valueOf((remaining / 1000) + 1))));
+                event.setCancelled(true);
+                return;
+            }
+        }
+
+        double capsThreshold = configManager.getChatCapslockThreshold();
+        if (capsThreshold > 0 && capsThreshold <= 1.0 && !player.hasPermission("essentialsc.chat.caps.bypass")) {
+            String plain = PlainTextComponentSerializer.plainText().serialize(event.message());
+            if (plain.length() >= 3) {
+                int upperCount = 0;
+                int letterCount = 0;
+                for (char c : plain.toCharArray()) {
+                    if (Character.isLetter(c)) {
+                        letterCount++;
+                        if (Character.isUpperCase(c)) {
+                            upperCount++;
+                        }
+                    }
+                }
+                if (letterCount > 0) {
+                    double ratio = (double) upperCount / letterCount;
+                    if (ratio >= capsThreshold) {
+                        String lower = plain.toLowerCase();
+                        event.message(Component.text(lower));
+                    }
+                }
+            }
+        }
+
+        if (!luckPermsEnabled || !useLuckPermsFormatting) {
+            lastMessageTime.put(player.getUniqueId(), System.currentTimeMillis());
+            return;
+        }
 
         event.renderer(new ChatRenderer() {
             @Override
@@ -77,6 +122,7 @@ public class ChatManager implements Listener {
             }
         });
 
+        lastMessageTime.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
     private Component formatWithLuckPerms(Player player, Component messageComponent) {

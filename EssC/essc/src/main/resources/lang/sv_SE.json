@@ -941,7 +941,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Inventariets värde:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Totalt: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Sålde <color:#66AAFF><amount></color>x föremål för <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sålde inventariet för <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> föremål)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Sålde inventariet för <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> föremål)</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>Vänligen vänta <seconds> sekunder innan du skickar nästa meddelande.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Långsamt läge är aktivt. Du kan chatta igen om <time>."
 
 }
