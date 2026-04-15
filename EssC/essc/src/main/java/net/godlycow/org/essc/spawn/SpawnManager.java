@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
@@ -192,6 +193,26 @@ public class SpawnManager implements Listener {
         if (!player.hasPlayedBefore() && isSpawnSet()) {
             plugin.debug("First join teleport for " + player.getName());
             player.teleport(getSpawn());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (!plugin.getConfigManager().isSpawnTeleportOnRespawn()) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        Location bedSpawn = event.getPlayer().getBedSpawnLocation();
+
+        if (bedSpawn != null && plugin.getConfigManager().isSpawnAllowBedsToOverride()) {
+            plugin.debug("Player " + player.getName() + " respawning at bed (override enabled)");
+            return;
+        }
+
+        if (isSpawnSet()) {
+            event.setRespawnLocation(getSpawn());
+            plugin.debug("Teleported " + player.getName() + " to spawn on respawn");
         }
     }
 

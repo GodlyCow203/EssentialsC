@@ -376,6 +376,14 @@ spawn:
   # Cancel the teleport if the player moves during the warmup.
   cancel-on-movement: true
 
+  # Whether players should be teleported to the configured spawn on respawn.
+  teleport-on-respawn: true
+
+  # Whether beds can override the spawn location.
+  # If false, players will always respawn at the configured spawn.
+  allow-beds-to-override: true
+
+
 
 # Join and Leave Messages
 
