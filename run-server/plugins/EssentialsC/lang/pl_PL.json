@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Konfiguracja sklepu przeładowana!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>Użycie: /shop [kategoria] [strona]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Wiadomość wysłana!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>Rozgłaszanie do świata <color:#FFFFFF><world></color>...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>Użycie: /broadcast [świat] <wiadomość></color>",

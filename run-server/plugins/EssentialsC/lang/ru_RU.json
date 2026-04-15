@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Конфигурация магазина перезагружена!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>Использование: /shop [категория] [страница]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Сообщение отправлено!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>Рассылка в мир <color:#FFFFFF><world></color>...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>Использование: /broadcast [мир] <сообщение></color>",

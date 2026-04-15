@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Đã tải lại cấu hình cửa hàng!</color>",
   "command.usage.shop": "<prefix> <color:#F00000>Cách dùng: /shop [category] [page]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Đã gửi thông báo!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>Đang phát thông báo đến thế giới <color:#FFFFFF><world></color>...</color>",
   "command.usage.broadcast": "<prefix> <color:#F00000>Cách dùng: /broadcast [world] <message></color>",

@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Konfigurasi toko dimuat ulang!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>Penggunaan: /shop [category] [page]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Siaran terkirim!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>Menyiarkan ke dunia <color:#FFFFFF><world></color>...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>Penggunaan: /broadcast [world] <message></color>",
