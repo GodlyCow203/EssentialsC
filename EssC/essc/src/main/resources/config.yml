@@ -57,8 +57,7 @@ fly:
 
 broadcast:
   # Prefix prepended to all broadcast messages. Supports MiniMessage.
-  prefix: "<red><bold>[!]</bold></red> "
-
+  prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
 
 # Heal
 #
