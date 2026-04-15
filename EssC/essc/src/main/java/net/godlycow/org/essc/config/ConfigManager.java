@@ -707,4 +707,20 @@ public class ConfigManager {
     public boolean isSpawnAllowBedsToOverride() {
         return config.getBoolean("spawn.allow-beds-to-override", true);
     }
+
+    public boolean isChatSlowModeEnabled() {
+        return config.getBoolean("chat.slow-mode.enabled", false);
+    }
+
+    public int getChatSlowModeDelay() {
+        return config.getInt("chat.slow-mode.delay-seconds", 3);
+    }
+
+    public double getChatCapslockThreshold() {
+        return config.getDouble("chat.capslock-threshold", 0.7);
+    }
+
+    public boolean isChatStripColorsFromConsole() {
+        return config.getBoolean("chat.strip-colors-from-console", true);
+    }
 }

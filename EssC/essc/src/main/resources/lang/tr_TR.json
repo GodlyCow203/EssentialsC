@@ -942,7 +942,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Envanter Değeri:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Toplam: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x eşya <color:#66AAFF><worth> <currency></color> karşılığında satıldı</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Envanter <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> eşya) karşılığında satıldı</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Envanter <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> eşya) karşılığında satıldı</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>Başka mesaj göndermeden önce lütfen <seconds> saniye bekleyin.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Yavaş mod aktif. Tekrar sohbet edebilirsiniz <time>."
 
 }

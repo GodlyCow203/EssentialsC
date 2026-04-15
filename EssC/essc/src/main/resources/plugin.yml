@@ -1004,6 +1004,14 @@ permissions:
     description: Allows you to use RGB Colors in the chat ( &#<RRGGBB> )
     default: op
 
+  essentialsc.chat.slowmode.bypass:
+    description: Bypass chat slow mode restrictions
+    default: op
+
+  essentialsc.chat.caps.bypass:
+    description: Bypass caps lock filter
+    default: op
+
   essentialsc.vanish.see:
     description: Allows the player to see other vanished players.
     default: op
