@@ -691,4 +691,12 @@ public class ConfigManager {
     public String getBroadcastPrefix() {
         return config.getString("broadcast.prefix", "<red><bold>[!]</bold></red> ");
     }
+
+    public boolean isJoinLeaveHideVanished() {
+        return config.getBoolean("join-leave-messages.hide-vanished", true);
+    }
+
+    public String getFirstJoinMessage() {
+        return config.getString("join-leave-messages.first-join", "<yellow><player> joined for the first time!");
+    }
 }
