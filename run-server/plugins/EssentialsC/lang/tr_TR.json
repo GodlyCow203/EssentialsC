@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Mağanda yapılandırması yeniden yüklendi!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>Kullanım: /shop [kategori] [sayfa]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Duyuru gönderildi!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200><color:#FFFFFF><world></color> dünyasına duyuru yapılıyor...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>Kullanım: /broadcast [dünya] <mesaj></color>",

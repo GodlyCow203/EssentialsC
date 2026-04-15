@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>દુકાન કોન્ફિગરેશન રિલોડ થઈ ગયું!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>વપરાશ: /shop [category] [page]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>બ્રોડકાસ્ટ મોકલવામાં આવ્યું!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>વિશ્વ <color:#FFFFFF><world></color> માં બ્રોડકાસ્ટ કરી રહ્યા છીએ...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>વપરાશ: /broadcast [world] <message></color>",

@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>상점 설정이 다시 로드되었습니다!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>사용법: /shop [category] [page]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>공지가 전송되었습니다!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>월드 <color:#FFFFFF><world></color>에 공지 중...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>사용법: /broadcast [world] <message></color>",

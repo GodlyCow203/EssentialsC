@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>दुकान कॉन्फिगरेशन रीलोड केले!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>वापर: /shop [category] [page]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>प्रसारण पाठवले!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200><color:#FFFFFF><world></color> जगात प्रसारण करत आहे...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>वापर: /broadcast [world] <message></color>",

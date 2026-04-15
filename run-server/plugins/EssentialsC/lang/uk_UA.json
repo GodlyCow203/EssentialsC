@@ -452,7 +452,7 @@
   "shop.reload-success": "<prefix> <color:#FFF200>Конфігурацію магазину перезавантажено!</color>",
   "command.usage.shop": "<prefix> <color:#FF0000>Використання: /shop [категорія] [сторінка]</color>",
 
-  "broadcast.format": "<prefix> <color:#FFF200><message></color>",
+  "broadcast.format": "<color:#FFF200><message></color>",
   "broadcast.success": "<prefix> <color:#FFF200>Оголошення надіслано!</color>",
   "broadcast.world.selected": "<prefix> <color:#FFF200>Оголошення для світу <color:#FFFFFF><world></color>...</color>",
   "command.usage.broadcast": "<prefix> <color:#FF0000>Використання: /broadcast [світ] <повідомлення></color>",
