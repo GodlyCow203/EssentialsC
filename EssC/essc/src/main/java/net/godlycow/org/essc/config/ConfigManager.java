@@ -687,4 +687,8 @@ public class ConfigManager {
     public boolean isFlyDisableOnJoin() {
         return config.getBoolean("fly.disable-on-join", false);
     }
+
+    public String getBroadcastPrefix() {
+        return config.getString("broadcast.prefix", "<red><bold>[!]</bold></red> ");
+    }
 }

@@ -32,11 +32,13 @@ public class BroadcastCommand extends Command {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("world", targetWorld.getName());
             sender.sendMessage(lang.get(sender, "broadcast.world.selected", placeholders));
-        } else {message = String.join(" ", args);
+        } else {
+            message = String.join(" ", args);
         }
 
+        String prefix = plugin.getConfigManager().getBroadcastPrefix();
         Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("message", message);
+        placeholders.put("message", prefix + message);
 
         if (worldSpecific) {
             for (Player player : targetWorld.getPlayers()) {

@@ -51,6 +51,13 @@ fly:
   # Whether to disable fly mode when the player joins the server.
   disable-on-join: false
 
+# Broadcast
+#
+# Settings for the /broadcast <args> command.
+
+broadcast:
+  # Prefix prepended to all broadcast messages. Supports MiniMessage.
+  prefix: "<red><bold>[!]</bold></red> "
 
 
 # Heal
