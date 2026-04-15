@@ -18,16 +18,24 @@ public class FlyManager implements Listener {
     private final EssentialsC plugin;
     private final Set<UUID> flyingPlayers;
     private final File dataFile;
+    private final boolean persistent;
+    private final boolean restoreOnJoin;
+    private final boolean disableOnJoin;
 
     public FlyManager(EssentialsC plugin) {
         this.plugin = plugin;
+        this.persistent = plugin.getConfigManager().isFlyPersistent();
+        this.restoreOnJoin = plugin.getConfigManager().isFlyRestoreOnJoin();
+        this.disableOnJoin = plugin.getConfigManager().isFlyDisableOnJoin();
         this.dataFile = new File(plugin.getDataFolder(), "flying_players.json");
-        this.flyingPlayers = loadData();
+        this.flyingPlayers = persistent ? loadData() : new HashSet<>();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        if (!persistent) return;
+
         Player player = event.getPlayer();
         if (player.isFlying() || player.getAllowFlight()) {
             if (flyingPlayers.add(player.getUniqueId())) {
@@ -43,13 +51,15 @@ public class FlyManager implements Listener {
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             if (!player.isOnline()) return;
 
-            if (player.hasPermission("essentialsc.fly.disable-on-join")) {
+            if (disableOnJoin || player.hasPermission("essentialsc.fly.disable-on-join")) {
                 player.setFlying(false);
                 player.setAllowFlight(false);
-                flyingPlayers.remove(player.getUniqueId());
-                saveData();
-                plugin.debug("Disabled fly for " + player.getName() + " (disable-on-join permission)");
-            } else if (flyingPlayers.contains(player.getUniqueId())) {
+                if (persistent) {
+                    flyingPlayers.remove(player.getUniqueId());
+                    saveData();
+                }
+                plugin.debug("Disabled fly for " + player.getName() + " (disable-on-join)");
+            } else if (persistent && restoreOnJoin && flyingPlayers.contains(player.getUniqueId())) {
                 player.setAllowFlight(true);
                 player.setFlying(true);
                 flyingPlayers.remove(player.getUniqueId());
@@ -58,7 +68,6 @@ public class FlyManager implements Listener {
             }
         }, 2L);
     }
-
 
     public boolean isFlying(Player player) {
         return player.getAllowFlight() && player.isFlying();
@@ -74,10 +83,11 @@ public class FlyManager implements Listener {
     }
 
     public boolean hasPersistentFly(UUID uuid) {
-        return flyingPlayers.contains(uuid);
+        return persistent && flyingPlayers.contains(uuid);
     }
 
     public void setPersistentFly(UUID uuid, boolean persistent) {
+        if (!this.persistent) return;
         if (persistent) {
             flyingPlayers.add(uuid);
         } else {
@@ -89,7 +99,6 @@ public class FlyManager implements Listener {
     public Set<UUID> getPersistentFlyPlayers() {
         return Collections.unmodifiableSet(new HashSet<>(flyingPlayers));
     }
-
 
     private Set<UUID> loadData() {
         Set<UUID> data = new HashSet<>();
@@ -109,6 +118,7 @@ public class FlyManager implements Listener {
     }
 
     private void saveData() {
+        if (!persistent) return;
         try {
             if (!dataFile.exists()) dataFile.createNewFile();
             try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dataFile), StandardCharsets.UTF_8))) {

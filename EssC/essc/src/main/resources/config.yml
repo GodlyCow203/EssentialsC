@@ -37,6 +37,21 @@ backup:
   # Create a backup automatically when the server shuts down.
   on-shutdown: true
 
+# Fly
+#
+# Settings for the /fly command.
+
+fly:
+  # Whether a player's fly status should be saved and persist between sessions.
+  persistent: true
+
+  # Whether to automatically restore fly mode when the player rejoins the server.
+  restore-on-join: true
+
+  # Whether to disable fly mode when the player joins the server.
+  disable-on-join: false
+
+
 
 # Heal
 #
