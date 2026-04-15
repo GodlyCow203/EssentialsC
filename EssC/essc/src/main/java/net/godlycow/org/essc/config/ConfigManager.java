@@ -699,4 +699,12 @@ public class ConfigManager {
     public String getFirstJoinMessage() {
         return config.getString("join-leave-messages.first-join", "<yellow><player> joined for the first time!");
     }
+
+    public boolean isSpawnTeleportOnRespawn() {
+        return config.getBoolean("spawn.teleport-on-respawn", true);
+    }
+
+    public boolean isSpawnAllowBedsToOverride() {
+        return config.getBoolean("spawn.allow-beds-to-override", true);
+    }
 }
