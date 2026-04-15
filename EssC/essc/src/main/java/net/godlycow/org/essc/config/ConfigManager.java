@@ -675,4 +675,16 @@ public class ConfigManager {
     public String getFallbackLanguage() {
         return config.getString("fallback-language", "en_US");
     }
+
+    public boolean isFlyPersistent() {
+        return config.getBoolean("fly.persistent", true);
+    }
+
+    public boolean isFlyRestoreOnJoin() {
+        return config.getBoolean("fly.restore-on-join", true);
+    }
+
+    public boolean isFlyDisableOnJoin() {
+        return config.getBoolean("fly.disable-on-join", false);
+    }
 }
