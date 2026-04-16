@@ -36,7 +36,7 @@ public class ChatApiImpl implements ChatApi {
 
     @Override
     public boolean canUseRgbCodes(Player player) {
-        return player.hasPermission("essentialsc.chat.rbgcodes");
+        return player.hasPermission("essentialsc.chat.rgbcodes");
     }
 
     @Override
