@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.api.impl;
 
 import net.godlycow.org.essc.api.ChatApi;
-import net.godlycow.org.essc.chat.luckperms.ChatManager;
+import net.godlycow.org.essc.chat.ChatManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
