@@ -575,6 +575,17 @@ nickname:
   # from real usernames.
   indicator: "~"
 
+  # Whether to show the player's real username when hovering over their nickname in chat.
+  show-realname-on-hover: true
+
+  # Format for the hover text when hovering a nickname in chat.
+  # Available placeholders: <realname>, <nick>, <prefix>, <suffix>
+  hover-format: "<gray>Real name: <white><realname>"
+
+  # Whether clicking a nickname in chat suggests the /msg <player> command.
+  click-suggest-msg: true
+
+
 
 # Shop
 #
