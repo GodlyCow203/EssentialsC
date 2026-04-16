@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Nilai Inventori:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Total: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Menjual <color:#66AAFF><amount></color>x item seharga <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Menjual inventori seharga <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> item)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Menjual inventori seharga <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> item)</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>Mohon tunggu <seconds> detik sebelum mengirim pesan berikutnya.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Mode lambat aktif. Anda dapat mengobrol lagi dalam <time>."
 
 }

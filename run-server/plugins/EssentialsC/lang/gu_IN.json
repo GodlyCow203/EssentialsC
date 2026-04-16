@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>ઇન્વેન્ટરી કિંમત:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>કુલ: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x વસ્તુઓ <color:#66AAFF><worth> <currency></color> માં વેચી</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>ઇન્વેન્ટરી <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> વસ્તુઓ) માં વેચી</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ઇન્વેન્ટરી <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> વસ્તુઓ) માં વેચી</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>બીજો સંદેશો મોકલવા પહેલાં કૃપા કરીને <seconds> સેકંડ રાહ જુઓ.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>ધીમી મોડ સક્રિય છે. તમે <time> પછી ફરી ચેટ કરી શકો છો."
 
 }

@@ -937,6 +937,10 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>背包价值：</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>总计：<worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>出售了 <color:#66AAFF><amount></color>x 个物品，获得 <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>出售背包获得 <color:#66AAFF><worth> <currency></color>（<color:#66AAFF><amount></color> 个物品）</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>出售背包获得 <color:#66AAFF><worth> <currency></color>（<color:#66AAFF><amount></color> 个物品）</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>请等待 <seconds> 秒后再发送消息。",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>慢速模式已启用。你可以在 <time> 后再次发言。"
+
 
 }

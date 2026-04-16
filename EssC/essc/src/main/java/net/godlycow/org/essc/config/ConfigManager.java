@@ -386,6 +386,18 @@ public class ConfigManager {
         return val.equals("-1") ? null : new BigDecimal(val);
     }
 
+    public boolean isAHAllowEnchantedBooks() {
+        return config.getBoolean("auction-house.allow-enchanted-books", true);
+    }
+
+    public List<String> getAHBlacklistedMaterials() {
+        return config.getStringList("auction-house.blacklisted-materials");
+    }
+
+    public boolean isAHNotifyOnSale() {
+        return config.getBoolean("auction-house.notify-on-sale", true);
+    }
+
     public boolean isWarpEnabled() {
         return config.getBoolean("warp.enabled", true);
     }

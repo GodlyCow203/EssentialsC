@@ -941,8 +941,10 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>انوینٹری کی قیمت:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>کل: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x اشیاء <color:#66AAFF><worth> <currency></color> میں فروخت کیں</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>انوینٹری <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> اشیاء) میں فروخت کی</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>انوینٹری <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> اشیاء) میں فروخت کی</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>براہ کرم انتظار کریں <seconds> سیکنڈز قبل اگلا پیغام بھیجیں۔",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>سست موڈ فعال ہے۔ آپ <time> کے بعد دوبارہ چیٹ کر سکتے ہیں۔"
 
 }
 

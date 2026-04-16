@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>I libri incantati non sono ammessi nella casa d'aste.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Questo oggetto è in lista nera e non può essere venduto.",
 
   "warp.success": "<prefix> <color:#FFF200>Teletrasportato a <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' non trovato.</color>",

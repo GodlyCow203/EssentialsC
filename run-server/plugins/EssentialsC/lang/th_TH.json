@@ -942,7 +942,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>มูลค่าช่องเก็บของ:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>รวม: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>ขายไอเทม <color:#66AAFF><amount></color>x ชิ้น ได้ <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>ขายช่องเก็บของได้ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> ไอเทม)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>ขายช่องเก็บของได้ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> ไอเทม)</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>กรุณารอ <seconds> วินาทีก่อนส่งข้อความถัดไป",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>โหมดช้าทำงานอยู่ คุณสามารถแชทได้อีกครั้งใน <time>"
 
 }

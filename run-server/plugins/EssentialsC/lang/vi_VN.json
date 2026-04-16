@@ -942,7 +942,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Giá trị túi đồ:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Tổng: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Đã bán <color:#66AAFF><amount></color>x vật phẩm với giá <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Đã bán túi đồ với giá <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> vật phẩm)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Đã bán túi đồ với giá <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> vật phẩm)</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>Vui lòng đợi <seconds> giây trước khi gửi tin nhắn tiếp theo.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Chế độ chậm đang hoạt động. Bạn có thể chat lại sau <time>."
 
 }

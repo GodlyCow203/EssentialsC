@@ -618,6 +618,8 @@
   "ah.right_click_cancel": "<prefix> <color:#FFF200>Right-click to cancel this auction</color>",
   "ah.not_found": "<prefix> <color:#FF0000>This auction no longer exists.</color>",
   "ah.expired_waiting": "<prefix> <color:#FFF200>You have <color:#FFFFFF><count></color> expired items waiting!</color>",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Enchanted books are not allowed in the auction house.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>This item is blacklisted and cannot be sold.",
 
   "warp.success": "<prefix> <color:#FFF200>Teleported to <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' not found.</color>",

@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>경매장에서는 인챈트 북을 사용할 수 없습니다.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>이 아이템은 블랙리스트에 있어 판매할 수 없습니다.",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color>(으)로 순간이동했습니다!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>워프 '<color:#FFFFFF><warp></color>'을(를) 찾을 수 없습니다.</color>",

@@ -613,6 +613,8 @@
   "ah.right_click_cancel": "<prefix> <color:#FFF200>Chuột phải để hủy đấu giá này</color>",
   "ah.not_found": "<prefix> <color:#FF0000>Đấu giá này không còn tồn tại.</color>",
   "ah.expired_waiting": "<prefix> <color:#FFF200>Bạn có <color:#FFFFFF><count></color> vật phẩm hết hạn đang chờ!</color>",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Sách phù phép không được phép trong nhà đấu giá.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Vật phẩm này đã bị đưa vào danh sách đen và không thể bán.",
 
   "ah.gui.title.main": "<color:#9CA3AF>Nhà Đấu Giá <color:#6B7280>| <color:#9CA3AF>Trang <page>/<total>",
   "ah.gui.title.expired": "<color:#9CA3AF>Vật Phẩm Hết Hạn <color:#6B7280>| <color:#9CA3AF>Nhấn Để Nhận",

@@ -716,6 +716,8 @@
   "warp.max_reached": "<prefix> <color:#FF0000>Вы можете создать только <color:#FFFFFF><max></color> варпов.</color>",
   "warp.cannot_delete": "<prefix> <color:#FF0000>Вы не можете удалить этот варп.</color>",
   "warp.disabled": "<prefix> <color:#FF0000>Система варпов временно отключена.</color>",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Зачарованные книги запрещены в аукционном доме.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Этот предмет в черном списке и не может быть продан.",
 
   "warpadmin.economy_disabled": "<prefix> <color:#FF0000>Экономика отключена. Невозможно установить стоимость варпов.</color>",
   "warpadmin.status": "<prefix> <color:#FFF200>Статус системы варпов:</color>\n<color:#888888>Включено: <enabled>\nПерезарядка: <cooldown>с\nПодготовка: <warmup>с\nЧастицы: <particles>\nЗвуки: <sounds></color>",

@@ -121,6 +121,10 @@ public class EsscCommand extends Command {
                     plugin.getAuctionManager().reload();
                     plugin.debug("Auction reloaded");
                 }
+                if (plugin.getAhGuiManager() != null) {
+                    plugin.getAhGuiManager().reload();
+                    plugin.debug("Auction GUI reloaded");
+                }
 
                 if (plugin.getWarpManager() != null) {
                     plugin.getWarpManager().reload();

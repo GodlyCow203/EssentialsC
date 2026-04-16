@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>Стоимость инвентаря:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>Итого: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>Продано <color:#66AAFF><amount></color>x предметов за <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>Продан инвентарь за <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> предметов)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>Продан инвентарь за <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> предметов)</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>Пожалуйста, подождите <seconds> секунд перед следующим сообщением.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Активирован медленный режим чата. Вы сможете писать снова через <time>."
 
 }

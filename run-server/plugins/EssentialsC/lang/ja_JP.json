@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>インベントリ価値:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>合計: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>個のアイテムを<color:#66AAFF><worth> <currency></color>で販売しました</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>インベントリを<color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>個のアイテム)で販売しました</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>インベントリを<color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>個のアイテム)で販売しました</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>次のメッセージを送信する前に<seconds>秒お待ちください。",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>スローモードが有効です。<time>後に再度チャットできます。",
 
 }

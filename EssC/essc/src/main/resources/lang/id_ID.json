@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Buku sihir tidak diizinkan di rumah lelang.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Item ini masuk daftar hitam dan tidak dapat dijual.",
 
   "warp.success": "<prefix> <color:#FFF200>Teleport ke <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' tidak ditemukan.</color>",
