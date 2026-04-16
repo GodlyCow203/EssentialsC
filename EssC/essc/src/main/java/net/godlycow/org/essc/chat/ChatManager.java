@@ -1,4 +1,4 @@
-package net.godlycow.org.essc.chat.luckperms;
+package net.godlycow.org.essc.chat;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
