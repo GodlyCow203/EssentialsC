@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
 import java.util.*;
+import org.bukkit.Material;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -64,14 +65,28 @@ public class AuctionManager implements Listener {
         claiming.remove(e.getPlayer().getUniqueId());
     }
 
-    public CompletableFuture<Boolean> createAuction(Player seller, ItemStack item, BigDecimal price, long duration) {
+    public CompletableFuture<Boolean> createAuction(Player seller, ItemStack item, BigDecimal price, long duration, StringBuilder failReason) {
         int max = plugin.getConfigManager().getAHMaxAuctions();
         long count = activeAuctions.values().stream()
                 .filter(a -> a.getSellerUuid().equals(seller.getUniqueId()))
                 .count();
 
         if (!seller.hasPermission("essentialsc.ah.bypass.limit") && count >= max) {
+            failReason.append("max_auctions");
             return CompletableFuture.completedFuture(false);
+        }
+
+        if (!seller.hasPermission("essentialsc.ah.bypass.blacklist")) {
+            if (!plugin.getConfigManager().isAHAllowEnchantedBooks()
+                    && item.getType() == Material.ENCHANTED_BOOK) {
+                failReason.append("enchanted_books_disabled");
+                return CompletableFuture.completedFuture(false);
+            }
+            List<String> blacklist = plugin.getConfigManager().getAHBlacklistedMaterials();
+            if (!blacklist.isEmpty() && blacklist.contains(item.getType().name())) {
+                failReason.append("material_blacklisted");
+                return CompletableFuture.completedFuture(false);
+            }
         }
 
         ItemStack clone = item.clone();
@@ -194,6 +209,7 @@ public class AuctionManager implements Listener {
     }
 
     private void notifySeller(Auction auction, String buyerName) {
+        if (!plugin.getConfigManager().isAHNotifyOnSale()) return;
         Player seller = Bukkit.getPlayer(auction.getSellerUuid());
         if (seller != null && seller.isOnline()) {
             Bukkit.getScheduler().runTask(plugin, () -> {
@@ -230,6 +246,8 @@ public class AuctionManager implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             activeAuctions.clear();
             expiredItems.clear();
+            sellHistory.clear();
+            buyHistory.clear();
             loadAuctions();
             Bukkit.getOnlinePlayers().forEach(p ->
                     storage.loadExpiredItems(p.getUniqueId()).thenAccept(items -> {
@@ -248,8 +266,12 @@ public class AuctionManager implements Listener {
                 .filter(a -> a.getSellerUuid().equals(uuid))
                 .toList();
     }
-    public Optional<Auction> getAuction(int id) { return Optional.ofNullable(activeAuctions.get(id)); }
-    public List<ItemStack> getExpiredItems(UUID uuid) { return expiredItems.getOrDefault(uuid, new ArrayList<>()); }
+    public Optional<Auction> getAuction(int id) {
+        return Optional.ofNullable(activeAuctions.get(id));
+    }
+    public List<ItemStack> getExpiredItems(UUID uuid) {
+        return expiredItems.getOrDefault(uuid, new ArrayList<>());
+    }
 
     public boolean hasExpiredItems(UUID uuid) {
         List<ItemStack> cached = expiredItems.get(uuid);
@@ -258,6 +280,10 @@ public class AuctionManager implements Listener {
         }
         return false;
     }
-    public List<SellHistoryEntry> getSellHistory(UUID uuid) { return sellHistory.getOrDefault(uuid, new ArrayList<>()); }
-    public List<BuyHistoryEntry> getBuyHistory(UUID uuid) { return buyHistory.getOrDefault(uuid, new ArrayList<>()); }
+    public List<SellHistoryEntry> getSellHistory(UUID uuid) {
+        return sellHistory.getOrDefault(uuid, new ArrayList<>());
+    }
+    public List<BuyHistoryEntry> getBuyHistory(UUID uuid) {
+        return buyHistory.getOrDefault(uuid, new ArrayList<>());
+    }
 }

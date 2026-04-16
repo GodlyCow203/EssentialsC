@@ -852,6 +852,10 @@ permissions:
     description: Bypasses the max auctions per player limit
     default: op
 
+  essentialsc.ah.bypass.blacklist:
+    description: Bypass the blackedlisted Items
+    default: op
+
   essentialsc.ah.bypass.price.min:
     description: Bypasses the minimum price restriction
     default: op

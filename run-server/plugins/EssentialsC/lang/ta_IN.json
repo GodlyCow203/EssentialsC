@@ -940,7 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>சரக்கு மதிப்பு:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>மொத்தம்: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>x பொருட்களை <color:#66AAFF><worth> <currency></color> க்கு விற்றீர்கள்</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>சரக்கை <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> பொருட்கள்) க்கு விற்றீர்கள்</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>சரக்கை <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> பொருட்கள்) க்கு விற்றீர்கள்</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>மற்றொரு செய்தி அனுப்புவதற்கு முன் <seconds> வினாடிகள் காத்திருக்கவும்.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>மெதுவான பயன்முறை செயலில் உள்ளது. நீங்கள் <time> இல் மீண்டும் அரட்டலாம்."
 
 }

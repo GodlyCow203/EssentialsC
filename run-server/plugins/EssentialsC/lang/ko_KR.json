@@ -940,6 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>인벤토리 가치:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>총계: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55><color:#66AAFF><amount></color>개 아이템을 <color:#66AAFF><worth> <currency></color>에 판매했습니다</color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>인벤토리를 <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>개 아이템)에 판매했습니다</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>인벤토리를 <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>개 아이템)에 판매했습니다</color>",
+
+  "chat.slowmode.wait": "<prefix> <#FF0000>다음 메시지를 보내기 전에 <seconds>초 기다려 주세요.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>느린 모드가 활성화되어 있습니다. <time> 후에 다시 채팅할 수 있습니다."
 
 }

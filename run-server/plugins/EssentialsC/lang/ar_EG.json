@@ -940,7 +940,9 @@
   "worth.inventory.header": "<prefix> <color:#55FF55>قيمة الشنطة:</color>",
   "worth.inventory.total": "<prefix> <color:#66AAFF>المجموع: <worth> <currency></color>",
   "quicksell.success.hand": "<prefix> <color:#55FF55>اتباع <color:#66AAFF><amount></color>x حاجات بـ <color:#66AAFF><worth> <currency></color></color>",
-  "quicksell.success.inventory": "<prefix> <color:#55FF55>الشنطة اتباعت بـ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> حاجات)</color>"
+  "quicksell.success.inventory": "<prefix> <color:#55FF55>الشنطة اتباعت بـ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> حاجات)</color>",
 
+  "chat.slowmode.wait": "<prefix> <#FF0000>استنى <seconds> ثانية قبل ما تبعت رسالة تانية.",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>الوضع البطيء شغال. تقدر تكتب تاني بعد <time>."
 
 }

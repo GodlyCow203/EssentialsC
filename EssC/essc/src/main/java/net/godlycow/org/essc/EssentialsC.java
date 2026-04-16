@@ -3,7 +3,9 @@ package net.godlycow.org.essc;
 import net.godlycow.org.essc.afk.AFKManager;
 import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
+import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.AuctionManager;
+import net.godlycow.org.essc.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.bedrock.BedrockUtil;
@@ -113,7 +115,7 @@ public final class EssentialsC extends JavaPlugin {
     private LogoutDataManager logoutDataManager;
     private SellManager sellManager;
     private SellListener sellListener;
-
+    private AhGuiManager ahGuiManager;
 
 
 
@@ -238,6 +240,7 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isAHEnabled()) {
             auctionManager = new AuctionManager(this);
+            ahGuiManager = new AhGuiManager(this, new AhSoundManager(this));
             AhCommand ahCommand = new AhCommand(this);
             new AhListener(this, ahCommand);
         }
@@ -545,5 +548,9 @@ public final class EssentialsC extends JavaPlugin {
 
     public SellManager getSellManager() {
         return sellManager;
+    }
+
+    public AhGuiManager getAhGuiManager() {
+        return ahGuiManager;
     }
 }

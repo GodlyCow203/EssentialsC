@@ -692,6 +692,19 @@ auction-house:
   # Maximum price a player can list an item for. Set to -1 for no limit.
   max-price: "-1"
 
+  # Whether enchanted books are allowed to be sold.
+  allow-enchanted-books: false
+
+  # List of materials that cannot be sold.
+  # Use Bukkit material names (e.g. DIAMOND, NETHERITE_INGOT).
+  blacklisted-materials:
+    - DRAGON_EGG
+    - BEACON
+    - NETHER_STAR
+
+  # Whether to notify the player when they successfully sell items.
+  notify-on-sale: true
+
   gui:
     items:
       # Navigation buttons

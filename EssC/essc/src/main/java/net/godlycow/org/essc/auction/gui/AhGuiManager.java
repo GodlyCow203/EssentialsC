@@ -25,7 +25,7 @@ public class AhGuiManager {
     private static final int PER_PAGE = 28;
 
     private final EssentialsC plugin;
-    private final AhItemFactory items;
+    private AhItemFactory items;
     private final AhSoundManager sounds;
     private final MiniMessage mm = MiniMessage.miniMessage();
 
@@ -329,5 +329,9 @@ public class AhGuiManager {
     }
     public AhSoundManager getSoundManager() {
         return sounds;
+    }
+
+    public void reload() {
+        this.items = new AhItemFactory(plugin);
     }
 }

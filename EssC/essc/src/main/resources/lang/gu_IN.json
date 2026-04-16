@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>હરાજી ઘરમાં જાદુઈ પુસ્તકોની મંજૂરી નથી.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>આ વસ્તુ બ્લેકલિસ્ટમાં છે અને વેચાઈ શકતી નથી.",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color> પર ટેલિપોર્ટ થઈ ગયા!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>વાર્પ '<color:#FFFFFF><warp></color>' મળ્યું નથી.</color>",

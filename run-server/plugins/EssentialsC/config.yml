@@ -37,6 +37,27 @@ backup:
   # Create a backup automatically when the server shuts down.
   on-shutdown: true
 
+# Fly
+#
+# Settings for the /fly command.
+
+fly:
+  # Whether a player's fly status should be saved and persist between sessions.
+  persistent: true
+
+  # Whether to automatically restore fly mode when the player rejoins the server.
+  restore-on-join: true
+
+  # Whether to disable fly mode when the player joins the server.
+  disable-on-join: false
+
+# Broadcast
+#
+# Settings for the /broadcast <args> command.
+
+broadcast:
+  # Prefix prepended to all broadcast messages. Supports MiniMessage.
+  prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
 
 # Heal
 #
@@ -78,9 +99,6 @@ luckperms:
   # The chat format used for all players unless overridden by group-formats below.
   # Available placeholders: <DISPLAYNAME>, <USERNAME>, <MESSAGE>
   chat-format: '<DISPLAYNAME> &7» &f<MESSAGE>'
-
-  # The string inserted between the player name and the message.
-  chat-separator: '>> '
 
   # Per-group chat format overrides. The key must match the LuckPerms group name exactly.
   # Players in a listed group will use that format instead of chat-format above.
@@ -167,6 +185,24 @@ economy:
   format: "#,##0.00"
 
 
+# Chat
+
+chat:
+  slow-mode:
+    # Whether chat slow mode is enabled.
+    enabled: false
+
+    # Delay (in seconds) players must wait between sending messages.
+    delay-seconds: 3
+
+  # Caps lock prevention - converts messages with too many uppercase letters to lowercase.
+  # Threshold is the ratio of uppercase letters (0.0 to 1.0, e.g. 0.7 = 70%).
+  capslock-threshold: 0.7
+
+  # Whether to strip MiniMessage color formatting from console output.
+  strip-colors-from-console: true
+
+
 # Player List
 #
 # Settings for the /playerlist (or /list) command.
@@ -177,7 +213,6 @@ playerlist:
 
   # How many player names to show per line.
   players-per-line: 10
-
 
 # Random Teleport (RTP)
 
@@ -263,37 +298,34 @@ rtp:
 
 # Teleport Requests (TPA)
 
-teleport:
-  tpa:
-    # Seconds a player must wait between sending /tpa requests.
-    cooldown: 60
+tpa:
+  # Seconds a player must wait between sending /tpa requests.
+  cooldown: 60
 
-    # Seconds the player must stand still before being teleported.
-    warmup: 3
+  # Seconds the player must stand still before being teleported.
+  warmup: 3
 
-    # Seconds before an unanswered request automatically expires.
-    timeout: 60
+  # Seconds before an unanswered request automatically expires.
+  timeout: 60
 
-    # Maximum number of incoming TPA requests a player can have at once.
-    max-pending: 5
+  # Maximum number of incoming TPA requests a player can have at once.
+  max-pending: 5
 
-    # Maximum number of outgoing TPA requests a player can send at once.
-    max-outgoing: 1
+  # Maximum number of outgoing TPA requests a player can send at once.
+  max-outgoing: 1
 
-    # Economy cost charged per /tpa request. Set to 0.0 to disable.
-    cost: 0.0
+  # Cancel the teleport if the sender moves during the warmup.
+  deny-movement: true
 
-    # Cancel the teleport if the sender moves during the warmup.
-    deny-movement: true
+  # Play particles during the warmup.
+  particles: true
 
-    # Play particles during the warmup.
-    particles: true
+  # Play sounds during TPA events.
+  sounds: true
 
-    # Play sounds during TPA events.
-    sounds: true
+  # Worlds where /tpa and /tpahere are blocked.
+  blocked-worlds: []
 
-    # Worlds where /tpa and /tpahere are blocked.
-    blocked-worlds: []
 
 
 # Homes
@@ -361,6 +393,14 @@ spawn:
   # Cancel the teleport if the player moves during the warmup.
   cancel-on-movement: true
 
+  # Whether players should be teleported to the configured spawn on respawn.
+  teleport-on-respawn: true
+
+  # Whether beds can override the spawn location.
+  # If false, players will always respawn at the configured spawn.
+  allow-beds-to-override: true
+
+
 
 # Join and Leave Messages
 
@@ -376,6 +416,14 @@ join-leave-messages:
   # The message broadcast when a player leaves.
   # Available placeholders: <player>
   leave: "<dark_gray>[<#F52727>-<dark_gray>] <#FA8F8F><player> left the game"
+
+  # Whether vanished players should be hidden from other players.
+  hide-vanished: true
+
+  # Message broadcast when a player joins the server for the first time.
+  # Supports MiniMessage formatting (e.g. <yellow>, <player>).
+  first-join: "<#F5CF27><b>Welcome!<reset> <#F8DC63><player> just joined for the first time!"
+
 
 
 # Back
@@ -643,6 +691,19 @@ auction-house:
 
   # Maximum price a player can list an item for. Set to -1 for no limit.
   max-price: "-1"
+
+  # Whether enchanted books are allowed to be sold.
+  allow-enchanted-books: true
+
+  # List of materials that cannot be sold.
+  # Use Bukkit material names (e.g. DIAMOND, NETHERITE_INGOT).
+  blacklisted-materials:
+    - DRAGON_EGG
+    - BEACON
+    - NETHER_STAR
+
+  # Whether to notify the player when they successfully sell items.
+  notify-on-sale: false
 
   gui:
     items:
