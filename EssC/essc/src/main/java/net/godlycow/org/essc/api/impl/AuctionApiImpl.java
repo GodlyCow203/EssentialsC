@@ -71,7 +71,8 @@ public class AuctionApiImpl implements AuctionApi {
 
     @Override
     public CompletableFuture<Boolean> createAuction(Player seller, ItemStack item, BigDecimal price, long duration) {
-        return manager.createAuction(seller, item, price, duration);
+        StringBuilder failReason = new StringBuilder();
+        return manager.createAuction(seller, item, price, duration, failReason);
     }
 
     @Override
@@ -88,7 +89,6 @@ public class AuctionApiImpl implements AuctionApi {
     public boolean claimExpiredItems(Player player) {
         return manager.claimExpiredItems(player);
     }
-
 
     private net.godlycow.org.essc.api.auction.Auction toApi(net.godlycow.org.essc.auction.Auction a) {
         return new net.godlycow.org.essc.api.auction.Auction(
