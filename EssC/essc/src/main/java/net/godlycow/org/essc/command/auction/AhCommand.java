@@ -90,21 +90,31 @@ public class AhCommand extends Command {
         if (!validatePriceLimits(player, price)) return;
 
         long duration = plugin.getConfigManager().getAHDuration();
-        plugin.getAuctionManager().createAuction(player, item, price, duration).thenAccept(success -> {
-            Bukkit.getScheduler().runTask(plugin, () -> {
-                if (success) {
-                    player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
-                    player.sendMessage(lang.get(player, "ah.listed", Map.of(
-                            "price", plugin.getEconomyManager().format(price),
-                            "duration", String.valueOf(duration / 3600000)
-                    )));
-                    soundManager.playSuccess(player);
-                } else {
-                    player.sendMessage(lang.get(player, "ah.max_auctions_reached"));
-                    soundManager.playError(player);
-                }
-            });
-        });
+        StringBuilder failReason = new StringBuilder();
+
+        plugin.getAuctionManager().createAuction(player, item, price, duration, failReason)
+                .thenAccept(success -> {
+                    Bukkit.getScheduler().runTask(plugin, () -> {
+                        if (success) {
+                            player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+                            player.sendMessage(lang.get(player, "ah.listed", Map.of(
+                                    "price", plugin.getEconomyManager().format(price),
+                                    "duration", String.valueOf(duration / 3600000)
+                            )));
+                            soundManager.playSuccess(player);
+                        } else {
+                            String reason = failReason.toString();
+                            String messageKey = switch (reason) {
+                                case "max_auctions" -> "ah.max_auctions_reached";
+                                case "enchanted_books_disabled" -> "ah.sell.enchanted_books_disabled";
+                                case "material_blacklisted" -> "ah.sell.material_blacklisted";
+                                default -> "ah.invalid_subcommand";
+                            };
+                            player.sendMessage(lang.get(player, messageKey));
+                            soundManager.playError(player);
+                        }
+                    });
+                });
     }
 
     private BigDecimal parsePrice(Player player, String input) {
