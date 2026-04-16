@@ -968,7 +968,6 @@
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Please wait <seconds> seconds before sending another message.",
   "chat.slowmode.cooldown": "<prefix> <#FF0000>Slow mode is active. You can chat again in <time>."
-
 }
 
 

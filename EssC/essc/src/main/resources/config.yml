@@ -887,3 +887,4 @@ afk:
   # How to sort the /afklist output.
   # Options: time (longest AFK first), name (alphabetical), world
   list-sort-by: "time"
+
