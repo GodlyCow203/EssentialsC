@@ -6,6 +6,9 @@ import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
@@ -162,7 +165,39 @@ public class ChatManager implements Listener {
             Component suffixComponent = suffix.isEmpty() ? Component.empty()
                     : legacySerializer.deserialize(applyLegacyColors(LegacyColorConverter.convertHexAmpersandToLegacy(suffix)));
 
-            displayNameComponent = prefixComponent.append(nickComponent).append(suffixComponent);
+            Component baseDisplayName = prefixComponent.append(nickComponent).append(suffixComponent);
+
+            net.kyori.adventure.text.event.HoverEvent<?> hoverEvent = null;
+            net.kyori.adventure.text.event.ClickEvent clickEvent = null;
+
+            if (plugin.getConfigManager().isNickShowRealnameOnHover()) {
+                String hoverFormat = plugin.getConfigManager().getNickHoverFormat();
+                String hoverText = hoverFormat.replace("<realname>", player.getName())
+                        .replace("<nick>", cachedNick)
+                        .replace("<prefix>", prefix)
+                        .replace("<suffix>", suffix);
+                Component hoverComponent = plugin.getMiniMessage().deserialize(hoverText);
+                hoverEvent = net.kyori.adventure.text.event.HoverEvent.showText(hoverComponent);
+            }
+
+            if (plugin.getConfigManager().isNickClickSuggestMsg()) {
+                clickEvent = net.kyori.adventure.text.event.ClickEvent.suggestCommand("/msg " + player.getName() + " ");
+            }
+
+            if (hoverEvent != null || clickEvent != null) {
+                net.kyori.adventure.text.TextComponent textComponent = (net.kyori.adventure.text.TextComponent) baseDisplayName;
+                net.kyori.adventure.text.TextComponent.Builder builder = textComponent.toBuilder();
+
+                if (hoverEvent != null) {
+                    builder.hoverEvent(hoverEvent);
+                }
+                if (clickEvent != null) {
+                    builder.clickEvent(clickEvent);
+                }
+                displayNameComponent = builder.build();
+            } else {
+                displayNameComponent = baseDisplayName;
+            }
         } else {
             String nameFormat = LegacyColorConverter.convertHexAmpersandToLegacy(prefix)
                     + player.getName()
