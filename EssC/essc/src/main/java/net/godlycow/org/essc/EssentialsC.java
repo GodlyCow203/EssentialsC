@@ -14,7 +14,7 @@ import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
 import net.godlycow.org.essc.bstats.EconomyCharts;
-import net.godlycow.org.essc.chat.luckperms.ChatManager;
+import net.godlycow.org.essc.chat.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.PlayerListCommand;

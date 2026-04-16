@@ -735,4 +735,16 @@ public class ConfigManager {
     public boolean isChatStripColorsFromConsole() {
         return config.getBoolean("chat.strip-colors-from-console", true);
     }
+
+    public boolean isNickShowRealnameOnHover() {
+        return config.getBoolean("nickname.show-realname-on-hover", true);
+    }
+
+    public String getNickHoverFormat() {
+        return config.getString("nickname.hover-format", "<gray>Real name: <white><realname>");
+    }
+
+    public boolean isNickClickSuggestMsg() {
+        return config.getBoolean("nickname.click-suggest-msg", true);
+    }
 }
