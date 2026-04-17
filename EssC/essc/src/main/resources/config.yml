@@ -202,6 +202,15 @@ chat:
   # Whether to strip MiniMessage color formatting from console output.
   strip-colors-from-console: true
 
+  mention:
+    # Whether player mentions in chat are enabled.
+    enabled: true
+
+    # Format used when a player is mentioned.
+    # Available placeholder: <player>
+    # Supports MiniMessage formatting.
+    format: "<#4BA8DE><player><reset>"
+
 
 # Player List
 #

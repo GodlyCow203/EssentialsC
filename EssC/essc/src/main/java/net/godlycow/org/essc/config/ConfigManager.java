@@ -747,4 +747,12 @@ public class ConfigManager {
     public boolean isNickClickSuggestMsg() {
         return config.getBoolean("nickname.click-suggest-msg", true);
     }
+
+    public boolean isChatMentionEnabled() {
+        return config.getBoolean("chat.mention.enabled", true);
+    }
+
+    public String getChatMentionFormat() {
+        return config.getString("chat.mention.format", "<yellow>@<player></yellow>");
+    }
 }
