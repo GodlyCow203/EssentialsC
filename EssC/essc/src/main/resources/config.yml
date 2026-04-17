@@ -887,7 +887,7 @@ afk:
   prevent-pickup: true
 
   # Freeze the player in place while AFK so they cannot be pushed.
-  freeze-player: true
+  freeze-player: false
 
   # Commands that AFK players are not allowed to run.
   blocked-commands:
