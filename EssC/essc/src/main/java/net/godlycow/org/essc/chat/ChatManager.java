@@ -15,6 +15,7 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -97,19 +98,56 @@ public class ChatManager implements Listener {
                 for (char c : plain.toCharArray()) {
                     if (Character.isLetter(c)) {
                         letterCount++;
-                        if (Character.isUpperCase(c)) {
-                            upperCount++;
-                        }
+                        if (Character.isUpperCase(c)) upperCount++;
                     }
                 }
                 if (letterCount > 0) {
                     double ratio = (double) upperCount / letterCount;
                     if (ratio >= capsThreshold) {
-                        String lower = plain.toLowerCase();
-                        event.message(Component.text(lower));
+                        event.message(Component.text(plain.toLowerCase()));
                     }
                 }
             }
+        }
+
+        if (configManager.isChatMentionEnabled()) {
+            Component message = applyMessageColorsToComponent(player, event.message());
+            String plain = PlainTextComponentSerializer.plainText().serialize(message);
+
+            for (Player online : plugin.getServer().getOnlinePlayers()) {
+                if (online.equals(player)) continue;
+
+                String name = online.getName();
+                String nick = plugin.getNickManager() != null
+                        ? plugin.getNickManager().getCachedNickname(online.getUniqueId())
+                        : null;
+
+                String cleanNick;
+                if (nick != null && !nick.isEmpty()) {
+                    cleanNick = PlainTextComponentSerializer.plainText().serialize(
+                            plugin.getMiniMessage().deserialize(nick)
+                    );
+                } else {
+                    cleanNick = null;
+                }
+
+                if (plain.contains(name)) {
+                    online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
+                    String format = configManager.getChatMentionFormat().replace("<player>", name);
+                    Component colored = plugin.getMiniMessage().deserialize(format);
+                    message = message.replaceText(b -> b.matchLiteral(name).replacement(colored));
+                    plain = PlainTextComponentSerializer.plainText().serialize(message);
+                } else if (cleanNick != null && plain.contains(cleanNick)) {
+                    online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
+                    String format = configManager.getChatMentionFormat().replace("<player>", cleanNick);
+                    Component colored = plugin.getMiniMessage().deserialize(format);
+                    message = message.replaceText(b -> b.matchLiteral(cleanNick).replacement(colored));
+                    plain = PlainTextComponentSerializer.plainText().serialize(message);
+                }
+            }
+            event.message(message);
+        } else {
+            event.message(applyMessageColorsToComponent(player, event.message()));
         }
 
         if (!luckPermsEnabled || !useLuckPermsFormatting) {
@@ -117,13 +155,9 @@ public class ChatManager implements Listener {
             return;
         }
 
-        event.renderer(new ChatRenderer() {
-            @Override
-            public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
-                Component coloredMessage = applyMessageColorsToComponent(source, message);
-                return formatWithLuckPerms(source, coloredMessage);
-            }
-        });
+        event.renderer((source, sourceDisplayName, msg, viewer) ->
+                formatWithLuckPerms(source, msg)
+        );
 
         lastMessageTime.put(player.getUniqueId(), System.currentTimeMillis());
     }
@@ -236,6 +270,7 @@ public class ChatManager implements Listener {
 
         return Component.text(plain);
     }
+
 
     private String applyLegacyColors(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
