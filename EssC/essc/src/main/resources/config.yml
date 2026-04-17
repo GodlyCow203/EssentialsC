@@ -844,7 +844,7 @@ warp:
 
   # Limit how many warps a single player can create.
   limit-per-player:
-    enabled: false
+    enabled: true
     max: 5
 
 
