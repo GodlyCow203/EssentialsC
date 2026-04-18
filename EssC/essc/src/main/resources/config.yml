@@ -59,7 +59,7 @@ broadcast:
   # Prefix prepended to all broadcast messages. Supports MiniMessage.
   prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
 
-# Heal
+# Healx
 #
 # Settings for the /heal command.
 

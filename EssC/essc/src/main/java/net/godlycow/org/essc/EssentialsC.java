@@ -42,6 +42,7 @@ import net.godlycow.org.essc.spawn.*;
 import net.godlycow.org.essc.tab.*;
 import net.godlycow.org.essc.teleport.*;
 import net.godlycow.org.essc.util.*;
+import net.godlycow.org.essc.softwares.*;
 import net.godlycow.org.essc.vanish.*;
 import net.godlycow.org.essc.warp.*;
 
@@ -56,6 +57,7 @@ public final class EssentialsC extends JavaPlugin {
 
     private static EssentialsC instance;
 
+    private EssScheduler essScheduler;
     private ConfigManager configManager;
     private LanguageManager languageManager;
 
@@ -109,6 +111,7 @@ public final class EssentialsC extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        essScheduler = new EssScheduler(this);
         saveDefaultConfig();
         configManager = new ConfigManager(this);
         commandsConfig = new CommandsConfig(this);
@@ -355,6 +358,10 @@ public final class EssentialsC extends JavaPlugin {
 
     public static EssentialsC getInstance() {
         return instance;
+    }
+
+    public EssScheduler getEssScheduler() {
+        return essScheduler;
     }
 
     public ConfigManager getConfigManager() {
