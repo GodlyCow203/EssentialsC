@@ -67,12 +67,6 @@ public class ScoreboardManager implements Listener {
             synchronized (lock) {
                 stop();
 
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-
                 placeholderCache.clear();
                 loadConfig();
 
