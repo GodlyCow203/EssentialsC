@@ -137,6 +137,7 @@ commands:
   kit:
     description: Claim and manage kits
     usage: /kit [claim|cooldown|debug] <kit>
+    permission: essentialsc.kit
 
   kits:
     description: List and manage kits
@@ -346,6 +347,7 @@ commands:
   language:
     description: Change your language
     usage: /language <lang_key>
+    permission: essentialsc.language
 
   warp:
     description: Teleport to a warp location
@@ -582,6 +584,14 @@ permissions:
   essentialsc.back.admin:
     description: Bypass cooldowns and warmup for /back
     default: op
+
+  essentialsc.kit:
+    description: Use the /kit command
+    default: true
+
+  essentialsc.language:
+    description: Change your language with /language
+    default: true
 
   essentialsc.kits.*:
     description: Access to all kit features
@@ -933,6 +943,10 @@ permissions:
     description: Admin warp management
     default: op
 
+  essentialsc.afk:
+    description: Toggle AFK status
+    default: true
+
   essentialsc.afk.bypass.auto:
     description: Prevents automatic AFK detection
     default: op
@@ -945,7 +959,7 @@ permissions:
     description: See detailed AFK info in /afklist
     default: op
 
-  essc.version.notify:
+  essentialsc.version.notify:
     description: Notifies admins of updates on join
     default: op
 
@@ -1017,28 +1031,16 @@ permissions:
     description: Bypass caps lock filter
     default: op
 
+  essentialsc.vanish:
+    description: Toggle vanish mode
+    default: op
+
   essentialsc.vanish.see:
     description: Allows the player to see other vanished players.
     default: op
 
   essentialsc.vanish.onjoin:
     description: Automatically toggles vanish on when the player joins the server.
-    default: false
-
-  essentialsc.admin.eco.give:
-    description: Permission to give a Player Money
-    default: false
-
-  essentialsc.admin.eco.reset:
-    description: Permission to reset a players balance
-    default: false
-
-  essentialsc.admin.eco.set:
-    description: Permission to set a players balance to a specific amount
-    default: false
-
-  essentialsc.admin.eco.take:
-    description: Permission to take money from a player
     default: false
 
   essentialsc.tphere:
@@ -1104,6 +1106,3 @@ permissions:
   essentialsc.quicksell.inventory:
     description: Allows quick selling of entire inventory
     default: true
-
-
-
