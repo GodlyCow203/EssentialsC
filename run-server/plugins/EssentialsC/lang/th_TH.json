@@ -717,6 +717,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>ห้ามใช้หนังสือร่ายมนตร์ในบ้านประมูล",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>ไอเทมนี้อยู่ในรายชื่อแบล็คลิสต์และไม่สามารถขายได้",
 
   "warpadmin.economy_disabled": "<prefix> <color:#FF0000>เศรษฐกิจปิดใช้งาน ไม่สามารถตั้งค่าราคาวาร์ปได้</color>",
   "warpadmin.status": "<prefix> <color:#FFF200>สถานะระบบวาร์ป:</color>\n<color:#888888>เปิดใช้งาน: <enabled>\nคูลดาวน์: <cooldown> วิ\nเวลารอ: <warmup> วิ\nอนุภาค: <particles>\nเสียง: <sounds></color>",

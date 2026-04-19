@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Betoverde boeken zijn niet toegestaan in het veilinghuis.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Dit item staat op de zwarte lijst en kan niet worden verkocht.",
 
   "warp.success": "<prefix> <color:#FFF200>Geteleporteerd naar <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' niet gevonden.</color>",

@@ -59,7 +59,7 @@ broadcast:
   # Prefix prepended to all broadcast messages. Supports MiniMessage.
   prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
 
-# Heal
+# Healx
 #
 # Settings for the /heal command.
 
@@ -201,6 +201,15 @@ chat:
 
   # Whether to strip MiniMessage color formatting from console output.
   strip-colors-from-console: true
+
+  mention:
+    # Whether player mentions in chat are enabled.
+    enabled: true
+
+    # Format used when a player is mentioned.
+    # Available placeholder: <player>
+    # Supports MiniMessage formatting.
+    format: "<#4BA8DE><player><reset>"
 
 
 # Player List
@@ -575,6 +584,17 @@ nickname:
   # from real usernames.
   indicator: "~"
 
+  # Whether to show the player's real username when hovering over their nickname in chat.
+  show-realname-on-hover: true
+
+  # Format for the hover text when hovering a nickname in chat.
+  # Available placeholders: <realname>, <nick>, <prefix>, <suffix>
+  hover-format: "<gray>Real name: <white><realname>"
+
+  # Whether clicking a nickname in chat suggests the /msg <player> command.
+  click-suggest-msg: true
+
+
 
 # Shop
 #
@@ -693,7 +713,7 @@ auction-house:
   max-price: "-1"
 
   # Whether enchanted books are allowed to be sold.
-  allow-enchanted-books: true
+  allow-enchanted-books: false
 
   # List of materials that cannot be sold.
   # Use Bukkit material names (e.g. DIAMOND, NETHERITE_INGOT).
@@ -703,7 +723,7 @@ auction-house:
     - NETHER_STAR
 
   # Whether to notify the player when they successfully sell items.
-  notify-on-sale: false
+  notify-on-sale: true
 
   gui:
     items:
@@ -824,7 +844,7 @@ warp:
 
   # Limit how many warps a single player can create.
   limit-per-player:
-    enabled: false
+    enabled: true
     max: 5
 
 
@@ -867,7 +887,7 @@ afk:
   prevent-pickup: true
 
   # Freeze the player in place while AFK so they cannot be pushed.
-  freeze-player: true
+  freeze-player: false
 
   # Commands that AFK players are not allowed to run.
   blocked-commands:
@@ -887,3 +907,4 @@ afk:
   # How to sort the /afklist output.
   # Options: time (longest AFK first), name (alphabetical), world
   list-sort-by: "time"
+

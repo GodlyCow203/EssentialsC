@@ -695,6 +695,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>نیلامی گھر میں جادوئی کتابوں کی اجازت نہیں ہے۔",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>یہ آئٹم بلیک لسٹ میں ہے اور فروخت نہیں ہو سکتا۔",
 
   "warp.success": "<prefix> <color:#FFF200>Teleported to <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' not found.</color>",

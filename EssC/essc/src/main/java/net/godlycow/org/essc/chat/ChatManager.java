@@ -4,11 +4,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.util.LegacyColorConverter;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
@@ -21,7 +17,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import io.papermc.paper.chat.ChatRenderer;
 
 import java.util.Map;
 import java.util.UUID;
@@ -89,30 +84,29 @@ public class ChatManager implements Listener {
             }
         }
 
+        String rawMessage = LegacyComponentSerializer.legacyAmpersand().serialize(event.message());
         double capsThreshold = configManager.getChatCapslockThreshold();
+        String processedMessage = rawMessage;
         if (capsThreshold > 0 && capsThreshold <= 1.0 && !player.hasPermission("essentialsc.chat.caps.bypass")) {
-            String plain = PlainTextComponentSerializer.plainText().serialize(event.message());
-            if (plain.length() >= 3) {
+            if (rawMessage.length() >= 3) {
                 int upperCount = 0;
                 int letterCount = 0;
-                for (char c : plain.toCharArray()) {
+                for (char c : rawMessage.toCharArray()) {
                     if (Character.isLetter(c)) {
                         letterCount++;
                         if (Character.isUpperCase(c)) upperCount++;
                     }
                 }
-                if (letterCount > 0) {
-                    double ratio = (double) upperCount / letterCount;
-                    if (ratio >= capsThreshold) {
-                        event.message(Component.text(plain.toLowerCase()));
-                    }
+                if (letterCount > 0 && (double) upperCount / letterCount >= capsThreshold) {
+                    processedMessage = rawMessage.toLowerCase();
                 }
             }
         }
 
+        final String finalMessage = processedMessage;
+
         if (configManager.isChatMentionEnabled()) {
-            Component message = applyMessageColorsToComponent(player, event.message());
-            String plain = PlainTextComponentSerializer.plainText().serialize(message);
+            Component message = applyMessageColorsToComponent(player, finalMessage);
 
             for (Player online : plugin.getServer().getOnlinePlayers()) {
                 if (online.equals(player)) continue;
@@ -122,32 +116,32 @@ public class ChatManager implements Listener {
                         ? plugin.getNickManager().getCachedNickname(online.getUniqueId())
                         : null;
 
-                String cleanNick;
+                String cleanNick = null;
                 if (nick != null && !nick.isEmpty()) {
                     cleanNick = PlainTextComponentSerializer.plainText().serialize(
                             plugin.getMiniMessage().deserialize(nick)
                     );
-                } else {
-                    cleanNick = null;
                 }
 
-                if (plain.contains(name)) {
+                String plainMsg = PlainTextComponentSerializer.plainText().serialize(message);
+
+                if (plainMsg.contains(name)) {
                     online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
-                    String format = configManager.getChatMentionFormat().replace("<player>", name);
-                    Component colored = plugin.getMiniMessage().deserialize(format);
+                    Component colored = plugin.getMiniMessage().deserialize(
+                            configManager.getChatMentionFormat().replace("<player>", name));
                     message = message.replaceText(b -> b.matchLiteral(name).replacement(colored));
-                    plain = PlainTextComponentSerializer.plainText().serialize(message);
-                } else if (cleanNick != null && plain.contains(cleanNick)) {
+                } else if (cleanNick != null && plainMsg.contains(cleanNick)) {
                     online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
-                    String format = configManager.getChatMentionFormat().replace("<player>", cleanNick);
-                    Component colored = plugin.getMiniMessage().deserialize(format);
-                    message = message.replaceText(b -> b.matchLiteral(cleanNick).replacement(colored));
-                    plain = PlainTextComponentSerializer.plainText().serialize(message);
+                    Component colored = plugin.getMiniMessage().deserialize(
+                            configManager.getChatMentionFormat().replace("<player>", cleanNick));
+                    String finalCleanNick = cleanNick;
+                    message = message.replaceText(b -> b.matchLiteral(finalCleanNick).replacement(colored));
                 }
             }
+
             event.message(message);
         } else {
-            event.message(applyMessageColorsToComponent(player, event.message()));
+            event.message(applyMessageColorsToComponent(player, finalMessage));
         }
 
         if (!luckPermsEnabled || !useLuckPermsFormatting) {
@@ -160,6 +154,34 @@ public class ChatManager implements Listener {
         );
 
         lastMessageTime.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+
+    private Component applyMessageColorsToComponent(Player player, String raw) {
+        boolean miniMessage = player.hasPermission("essentialsc.chat.minimessage");
+        boolean rgb = player.hasPermission("essentialsc.chat.rgbcodes");
+        boolean legacy = player.hasPermission("essentialsc.chat.legacycodes");
+
+        if (rgb && legacy) {
+            return plugin.getMiniMessage().deserialize(LegacyColorConverter.toMiniMessage(raw));
+        }
+
+        if (rgb) {
+            String hexOnly = LegacyColorConverter.convertHexAmpersand(
+                    LegacyColorConverter.convertHexBukkit(raw));
+            return plugin.getMiniMessage().deserialize(hexOnly);
+        }
+
+        if (legacy) {
+            String legacyOnly = LegacyColorConverter.convertAmpersand(
+                    LegacyColorConverter.convertSection(raw));
+            return plugin.getMiniMessage().deserialize(legacyOnly);
+        }
+
+        if (miniMessage) {
+            return plugin.getMiniMessage().deserialize(raw);
+        }
+
+        return Component.text(raw);
     }
 
     private Component formatWithLuckPerms(Player player, Component messageComponent) {
@@ -219,15 +241,9 @@ public class ChatManager implements Listener {
             }
 
             if (hoverEvent != null || clickEvent != null) {
-                net.kyori.adventure.text.TextComponent textComponent = (net.kyori.adventure.text.TextComponent) baseDisplayName;
-                net.kyori.adventure.text.TextComponent.Builder builder = textComponent.toBuilder();
-
-                if (hoverEvent != null) {
-                    builder.hoverEvent(hoverEvent);
-                }
-                if (clickEvent != null) {
-                    builder.clickEvent(clickEvent);
-                }
+                net.kyori.adventure.text.TextComponent.Builder builder = Component.text().append(baseDisplayName);
+                if (hoverEvent != null) builder.hoverEvent(hoverEvent);
+                if (clickEvent != null) builder.clickEvent(clickEvent);
                 displayNameComponent = builder.build();
             } else {
                 displayNameComponent = baseDisplayName;
@@ -253,25 +269,6 @@ public class ChatManager implements Listener {
                 .replaceText(b -> b.matchLiteral("<MESSAGE>").replacement(messageComponent));
     }
 
-    private Component applyMessageColorsToComponent(Player player, Component message) {
-        String plain = PlainTextComponentSerializer.plainText().serialize(message);
-
-        boolean legacy = player.hasPermission("essentialsc.chat.legacycodes");
-        boolean rgb = player.hasPermission("essentialsc.chat.rgbcodes");
-
-        if (rgb) {
-            String converted = LegacyColorConverter.convertHexAmpersandToLegacy(plain);
-            return legacySerializer.deserialize(applyLegacyColors(converted));
-        }
-
-        if (legacy) {
-            return legacySerializer.deserialize(applyLegacyColors(plain));
-        }
-
-        return Component.text(plain);
-    }
-
-
     private String applyLegacyColors(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
@@ -285,7 +282,7 @@ public class ChatManager implements Listener {
     }
 
     public Component formatMessage(Player player, String message) {
-        Component messageComponent = applyMessageColorsToComponent(player, Component.text(message));
+        Component messageComponent = applyMessageColorsToComponent(player, message);
         if (!luckPermsEnabled || !useLuckPermsFormatting) return messageComponent;
         return formatWithLuckPerms(player, messageComponent);
     }

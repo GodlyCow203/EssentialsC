@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Zaklęte książki są niedozwolone w domu aukcyjnym.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Ten przedmiot jest na czarnej liście i nie może być sprzedany.",
 
   "warp.success": "<prefix> <color:#FFF200>Przeteleportowano do <color:#FFFFFF><warp></color>!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' nie został znaleziony.</color>",
