@@ -17,6 +17,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.godlycow.org.essc.softwares.FeatureFlags;
 import org.bukkit.event.player.*;
 
 import java.time.Duration;
@@ -323,7 +325,14 @@ public class AFKManager implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+    public void onPaperChat(AsyncChatEvent event) {
+        if (!FeatureFlags.supportsPaperChatEvent()) return;
+        updateActivity(event.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onLegacyChat(AsyncPlayerChatEvent event) {
+        if (FeatureFlags.supportsPaperChatEvent()) return;
         updateActivity(event.getPlayer());
     }
 
@@ -447,5 +456,3 @@ public class AFKManager implements Listener {
     }
 
 }
-
-

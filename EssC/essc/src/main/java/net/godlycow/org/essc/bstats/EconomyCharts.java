@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.bstats;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.economy.EconomyManager;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -9,6 +8,9 @@ import org.bstats.charts.SingleLineChart;
 import org.bukkit.Bukkit;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -47,40 +49,30 @@ public class EconomyCharts {
                 return;
             }
 
-            AtomicLong total = new AtomicLong(0);
-            AtomicInteger count = new AtomicInteger(0);
-            AtomicInteger processed = new AtomicInteger(0);
-            int onlineCount = Bukkit.getOnlinePlayers().size();
+            Collection<? extends org.bukkit.entity.Player> online = Bukkit.getOnlinePlayers();
 
-            if (onlineCount == 0) {
+            if (online.isEmpty()) {
                 cachedOnlineBalances.set(0);
                 cachedActiveAccounts.set(0);
                 return;
             }
 
-            for (var player : Bukkit.getOnlinePlayers()) {
-                em.getBalance(player.getUniqueId()).thenAccept(balance -> {
-                    total.addAndGet(balance.longValue());
-                    if (balance.compareTo(BigDecimal.ZERO) > 0) {
-                        count.incrementAndGet();
-                    }
-                    processed.incrementAndGet();
-                });
-            }
+            AtomicLong total = new AtomicLong(0);
+            AtomicInteger count = new AtomicInteger(0);
 
-            int attempts = 0;
-            while (processed.get() < onlineCount && attempts < 50) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-                attempts++;
-            }
+            List<CompletableFuture<Void>> futures = online.stream()
+                    .map(player -> em.getBalance(player.getUniqueId()).thenAccept(balance -> {
+                        total.addAndGet(balance.longValue());
+                        if (balance.compareTo(BigDecimal.ZERO) > 0) {
+                            count.incrementAndGet();
+                        }
+                    }))
+                    .toList();
 
-            cachedOnlineBalances.set(total.get());
-            cachedActiveAccounts.set(count.get());
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).thenRun(() -> {
+                cachedOnlineBalances.set(total.get());
+                cachedActiveAccounts.set(count.get());
+            });
         }, 20L, 6000L);
     }
 
