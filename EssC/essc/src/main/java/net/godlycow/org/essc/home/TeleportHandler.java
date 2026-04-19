@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.home;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -9,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class TeleportHandler implements Listener {
     private final HomeDatabase repository;
 
     private final Map<UUID, Long> teleportCooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
     private final Map<UUID, Home> pendingDestination = new ConcurrentHashMap<>();
 
     public TeleportHandler(EssentialsC plugin, HomeDatabase repository) {
@@ -55,7 +55,7 @@ public class TeleportHandler implements Listener {
     }
 
     public void cancelTeleport(Player player) {
-        BukkitTask task = pendingTeleports.remove(player.getUniqueId());
+        SchedulerTask task = pendingTeleports.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
             pendingDestination.remove(player.getUniqueId());
@@ -95,7 +95,7 @@ public class TeleportHandler implements Listener {
 
             plugin.debug("Starting warmup for " + player.getName() + " to home '" + home.getName() + "' (" + warmup + "s)");
 
-            BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () ->
+            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () ->
                     completeTeleport(player, home), warmup * 20L);
 
             pendingTeleports.put(player.getUniqueId(), task);
@@ -111,20 +111,22 @@ public class TeleportHandler implements Listener {
         Location loc = home.toLocation(plugin.getServer());
         if (loc == null) return;
 
-        player.teleport(loc);
-        teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+            if (!success) return;
+            teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
-        player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.success",
-                Map.of("name", home.getName())));
+            player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.success",
+                    Map.of("name", home.getName())));
 
-        if (plugin.getConfigManager().isHomeParticles()) {
-            loc.getWorld().spawnParticle(Particle.PORTAL, loc, 50, 0.5, 1, 0.5);
-        }
-        if (plugin.getConfigManager().isHomeSounds()) {
-            player.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-        }
+            if (plugin.getConfigManager().isHomeParticles()) {
+                loc.getWorld().spawnParticle(Particle.PORTAL, loc, 50, 0.5, 1, 0.5);
+            }
+            if (plugin.getConfigManager().isHomeSounds()) {
+                player.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            }
 
-        plugin.debug("Teleported " + player.getName() + " to home '" + home.getName() + "'");
+            plugin.debug("Teleported " + player.getName() + " to home '" + home.getName() + "'");
+        });
     }
 
     @EventHandler
@@ -155,7 +157,7 @@ public class TeleportHandler implements Listener {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(BukkitTask::cancel);
+        pendingTeleports.values().forEach(SchedulerTask::cancel);
         pendingTeleports.clear();
         plugin.debug("HomeTeleportHandler shutdown complete.");
     }

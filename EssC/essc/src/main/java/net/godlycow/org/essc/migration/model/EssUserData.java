@@ -37,15 +37,4 @@ public record EssUserData(
         boolean powertoolsEnabled,
         String nickname
 ) {
-    /*
-    public boolean hasHome(String name) {
-        return homes != null && homes.containsKey(name.toLowerCase());
-    }
-    */
-
-    /*
-    public EssentialsHome getHome(String name) {
-        return homes != null ? homes.get(name.toLowerCase()) : null;
-    }
-    */
 }

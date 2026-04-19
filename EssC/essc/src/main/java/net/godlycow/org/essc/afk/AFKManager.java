@@ -2,10 +2,12 @@ package net.godlycow.org.essc.afk;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,8 +18,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -33,10 +33,10 @@ public class AFKManager implements Listener {
     private final Map<UUID, Instant> lastActivity = new ConcurrentHashMap<>();
     private final Map<UUID, Boolean> afkStatus = new ConcurrentHashMap<>();
     private final Map<UUID, Instant> afkStartTime = new ConcurrentHashMap<>();
-    private final Map<UUID, org.bukkit.Location> afkLocations = new ConcurrentHashMap<>();
+    private final Map<UUID, Location> afkLocations = new ConcurrentHashMap<>();
 
-    private BukkitTask checkTask;
-    private BukkitTask kickTask;
+    private SchedulerTask checkTask;
+    private SchedulerTask kickTask;
 
     public AFKManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -83,20 +83,10 @@ public class AFKManager implements Listener {
     }
 
     private void startTasks() {
-        checkTask = new BukkitRunnable() {
-            @Override
-            public void run() {
-                checkAFKStatus();
-            }
-        }.runTaskTimer(plugin, 100L, 100L);
+        checkTask = plugin.getEssScheduler().runGlobalTimer(this::checkAFKStatus, 100L, 100L);
 
         if (config.isAfkKickEnabled()) {
-            kickTask = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    checkAFKKick();
-                }
-            }.runTaskTimer(plugin, 1200L, 1200L);
+            kickTask = plugin.getEssScheduler().runGlobalTimer(this::checkAFKKick, 1200L, 1200L);
         }
     }
 
@@ -238,18 +228,6 @@ public class AFKManager implements Listener {
         }
     }
 
-    public boolean isAFK(Player player) {
-        return afkStatus.getOrDefault(player.getUniqueId(), false);
-    }
-
-    public boolean isAFK(UUID uuid) {
-        return afkStatus.getOrDefault(uuid, false);
-    }
-
-    public Instant getAFKStartTime(Player player) {
-        return afkStartTime.get(player.getUniqueId());
-    }
-
     public long getAFKDurationSeconds(Player player) {
         Instant start = afkStartTime.get(player.getUniqueId());
         if (start == null) return 0;
@@ -282,10 +260,6 @@ public class AFKManager implements Listener {
             }
         }
         return afkPlayers;
-    }
-
-    public int getAFKCount() {
-        return getAFKPlayers().size();
     }
 
     public void updateActivity(Player player) {
@@ -438,7 +412,7 @@ public class AFKManager implements Listener {
         lastActivity.put(player.getUniqueId(), Instant.now());
         afkStatus.put(player.getUniqueId(), false);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        plugin.getEssScheduler().runForEntityLater(player, () -> {
             if (player.isOnline()) {
                 updatePlayerListName(player);
             }
@@ -455,6 +429,23 @@ public class AFKManager implements Listener {
         afkStartTime.remove(uuid);
         afkLocations.remove(uuid);
     }
+
+    public boolean isAFK(Player player) {
+        return afkStatus.getOrDefault(player.getUniqueId(), false);
+    }
+
+    public boolean isAFK(UUID uuid) {
+        return afkStatus.getOrDefault(uuid, false);
+    }
+
+    public Instant getAFKStartTime(Player player) {
+        return afkStartTime.get(player.getUniqueId());
+    }
+
+    public int getAFKCount() {
+        return getAFKPlayers().size();
+    }
+
 }
 
 

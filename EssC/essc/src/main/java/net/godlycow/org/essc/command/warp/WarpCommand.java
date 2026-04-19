@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.warp;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.warp.Warp;
 import net.godlycow.org.essc.warp.WarpManager;
@@ -9,7 +10,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -118,18 +119,18 @@ public class WarpCommand extends Command {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
         }
 
-        new BukkitRunnable() {
+        plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
             long remaining = seconds;
 
             @Override
             public void run() {
                 if (!player.isOnline()) {
-                    cancel();
+                    warpManager.removePendingWarp(player.getUniqueId());
+                    warpManager.clearMovementTrack(player.getUniqueId());
                     return;
                 }
 
                 if (!warpManager.hasPendingWarp(player.getUniqueId())) {
-                    cancel();
                     return;
                 }
 
@@ -139,7 +140,6 @@ public class WarpCommand extends Command {
                         warpManager.removePendingWarp(player.getUniqueId());
                         warpManager.clearMovementTrack(player.getUniqueId());
                         player.sendMessage(lang.get(player, "warp.cancelled_movement"));
-                        cancel();
                         return;
                     }
                 }
@@ -150,14 +150,13 @@ public class WarpCommand extends Command {
                     warpManager.removePendingWarp(player.getUniqueId());
                     warpManager.clearMovementTrack(player.getUniqueId());
                     executeWarp(player, warp, cost);
-                    cancel();
                 } else {
                     if (plugin.getConfigManager().isWarpSounds() && remaining <= 3) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.8f + (0.1f * (3 - remaining)));
                     }
                 }
             }
-        }.runTaskTimer(plugin, 20L, 20L);
+        }, 20L, 20L);
     }
 
     private void executeWarp(Player player, Warp warp, double cost) {
@@ -172,30 +171,32 @@ public class WarpCommand extends Command {
         }
 
         Location dest = warp.getLocation();
-        player.teleport(dest);
+        plugin.getEssScheduler().teleportAsync(player, dest).thenAccept(success -> {
+            if (!success) return;
 
-        if (plugin.getConfigManager().isWarpParticles()) {
-            dest.getWorld().spawnParticle(Particle.PORTAL, dest, 100, 0.5, 1, 0.5);
-            dest.getWorld().spawnParticle(Particle.END_ROD, dest, 50, 0.5, 1, 0.5, 0.1);
-        }
+            if (plugin.getConfigManager().isWarpParticles()) {
+                dest.getWorld().spawnParticle(Particle.PORTAL, dest, 100, 0.5, 1, 0.5);
+                dest.getWorld().spawnParticle(Particle.END_ROD, dest, 50, 0.5, 1, 0.5, 0.1);
+            }
 
-        if (plugin.getConfigManager().isWarpSounds()) {
-            player.playSound(dest, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-        }
+            if (plugin.getConfigManager().isWarpSounds()) {
+                player.playSound(dest, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            }
 
-        if (plugin.getConfigManager().getWarpCooldown() > 0) {
-            warpManager.setCooldown(player.getUniqueId());
-        }
+            if (plugin.getConfigManager().getWarpCooldown() > 0) {
+                warpManager.setCooldown(player.getUniqueId());
+            }
 
-        warpManager.recordWarpUsage(player.getUniqueId(), warp.getName());
+            warpManager.recordWarpUsage(player.getUniqueId(), warp.getName());
 
-        Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("warp", warp.getName());
-        player.sendMessage(lang.get(player, "warp.success", placeholders));
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("warp", warp.getName());
+            player.sendMessage(lang.get(player, "warp.success", placeholders));
 
-        plugin.debug(player.getName() + " warped to " + warp.getName() +
-                " [particles:" + plugin.getConfigManager().isWarpParticles() +
-                ", sounds:" + plugin.getConfigManager().isWarpSounds() + "]");
+            plugin.debug(player.getName() + " warped to " + warp.getName() +
+                    " [particles:" + plugin.getConfigManager().isWarpParticles() +
+                    ", sounds:" + plugin.getConfigManager().isWarpSounds() + "]");
+        });
     }
 
     @Override

@@ -63,7 +63,8 @@ public class MOTDManager implements Listener {
         plugin.debug("MOTD reloaded");
     }
 
-    public void shutdown() {}
+    public void shutdown() {
+    }
 
     private void createDefaultMotdFile() {
         try {
@@ -172,13 +173,11 @@ public class MOTDManager implements Listener {
         }
     }
 
-    public void setLine1(String line)      { this.line1 = line; }
-    public void setLine2(String line)      { this.line2 = line; }
-    public String getLine1()               { return line1; }
-    public String getLine2()               { return line2; }
-    public boolean isEnabled()             { return enabled; }
-    public void setEnabled(boolean e)      { this.enabled = e; }
-    public int getMaxLineWidth()           { return maxLineWidth; }
-    public void setMaxLineWidth(int w)     { this.maxLineWidth = w; }
-    public File getMotdFile()              { return motdFile; }
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean e) {
+        this.enabled = e;
+    }
 }

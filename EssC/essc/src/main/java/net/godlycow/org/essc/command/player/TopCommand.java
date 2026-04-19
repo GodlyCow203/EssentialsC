@@ -44,13 +44,14 @@ public class TopCommand extends Command {
                 teleport.setYaw(current.getYaw());
                 teleport.setPitch(current.getPitch());
 
-                player.teleport(teleport);
-
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("y", String.valueOf(y));
-                player.sendMessage(lang.get(player, "top.success", placeholders));
 
-                plugin.debug("Teleported " + player.getName() + " to top at Y=" + y);
+                plugin.getEssScheduler().teleportAsync(player, teleport).thenAccept(success -> {
+                    if (!success) return;
+                    player.sendMessage(lang.get(player, "top.success", placeholders));
+                    plugin.debug("Teleported " + player.getName() + " to top at Y=" + teleport.getBlockY());
+                });
                 return true;
             }
         }

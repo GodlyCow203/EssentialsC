@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.configuration.ConfigurationSection;
@@ -309,7 +310,7 @@ public class ShopManager {
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 ShopGUI gui = new ShopGUI(plugin, this, player, balance.doubleValue());
                 gui.openMain();
                 if (shopListener != null) {
@@ -341,7 +342,7 @@ public class ShopManager {
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 ShopGUI gui = new ShopGUI(plugin, this, player, balance.doubleValue());
                 gui.openCategory(category, page);
                 if (shopListener != null) {
@@ -399,14 +400,14 @@ public class ShopManager {
 
         plugin.getEconomyManager().has(player.getUniqueId(), price).thenAccept(hasEnough -> {
             if (!hasEnough) {
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
                     player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-money"));
                 });
                 return;
             }
 
             plugin.getEconomyManager().withdraw(player.getUniqueId(), price).thenAccept(success -> {
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
                     if (!success) {
                         player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
                         return;
@@ -484,7 +485,7 @@ public class ShopManager {
             BigDecimal price = BigDecimal.valueOf(totalPrice);
 
             plugin.getEconomyManager().deposit(player.getUniqueId(), price).thenAccept(v -> {
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
                     completeSale(player, item, amount, totalPrice);
                 });
             });

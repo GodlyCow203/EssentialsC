@@ -136,6 +136,8 @@ public final class EssentialsC extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        StartupBanner.print(this, getLogger());
+
         saveResource("lang/en_US.json", false);
         saveResource("lang/de_DE.json", false);
 
@@ -192,7 +194,11 @@ public final class EssentialsC extends JavaPlugin {
         new FlyManager(this);
 
         if (configManager.isScoreboardEnabled()) {
-            scoreboardManager = new ScoreboardManager(this);
+            if (ServerSoftware.isFolia()) {
+                getLogger().warning("Scoreboard feature is not supported on Folia (getNewScoreboard() is unavailable). Disabling scoreboard.");
+            } else {
+                scoreboardManager = new ScoreboardManager(this);
+            }
         }
 
         if (getConfigManager().isLuckPermsTabEnabled() || configManager.isNickEnabled()) {

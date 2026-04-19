@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.back;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -12,7 +13,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.scheduler.BukkitTask;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,7 +21,7 @@ public class BackManager implements Listener {
 
     private final Map<UUID, Location> backLocations = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
     private final Set<UUID> isTeleporting = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     private long warmup;
@@ -98,7 +98,7 @@ public class BackManager implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "back.pending",
                 Map.of("seconds", String.valueOf(warmup))));
 
-        BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
             completeTeleport(player, target);
         }, warmup * 20L);
 
@@ -112,29 +112,31 @@ public class BackManager implements Listener {
 
         isTeleporting.add(player.getUniqueId());
 
-        player.teleport(location);
+        plugin.getEssScheduler().teleportAsync(player, location).thenAccept(success -> {
+            plugin.getEssScheduler().runGlobalLater(() -> {
+                isTeleporting.remove(player.getUniqueId());
+            }, 1L);
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            isTeleporting.remove(player.getUniqueId());
-        }, 1L);
+            if (!success) return;
 
-        if (cooldown > 0) {
-            cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
-        }
+            if (cooldown > 0) {
+                cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+            }
 
-        if (particles) {
-            location.getWorld().spawnParticle(Particle.PORTAL, location, 50, 0.5, 1, 0.5);
-        }
-        if (sounds) {
-            player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-        }
+            if (particles) {
+                location.getWorld().spawnParticle(Particle.PORTAL, location, 50, 0.5, 1, 0.5);
+            }
+            if (sounds) {
+                player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            }
 
-        player.sendMessage(plugin.getLanguageManager().get(player, "back.success"));
-        plugin.debug("Teleported " + player.getName() + " to back location");
+            player.sendMessage(plugin.getLanguageManager().get(player, "back.success"));
+            plugin.debug("Teleported " + player.getName() + " to back location");
+        });
     }
 
     public void cancelTeleport(Player player, String reason) {
-        BukkitTask task = warmupTasks.remove(player.getUniqueId());
+        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
         if (task == null) return;
 
         task.cancel();
@@ -193,13 +195,21 @@ public class BackManager implements Listener {
     }
 
 
-    public long getWarmupSeconds() { return warmup; }
-    public long getCooldownSeconds() { return cooldown; }
-
-    public boolean isParticlesEnabled() { return particles; }
-    public boolean isSoundsEnabled() { return sounds; }
-
-    public boolean isCancelOnMovementEnabled() { return cancelOnMovement; }
+    public long getWarmupSeconds() {
+        return warmup;
+    }
+    public long getCooldownSeconds() {
+        return cooldown;
+    }
+    public boolean isParticlesEnabled() {
+        return particles;
+    }
+    public boolean isSoundsEnabled() {
+        return sounds;
+    }
+    public boolean isCancelOnMovementEnabled() {
+        return cancelOnMovement;
+    }
 
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -244,7 +254,7 @@ public class BackManager implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        BukkitTask task = warmupTasks.remove(player.getUniqueId());
+        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
         backLocations.remove(player.getUniqueId());
@@ -255,7 +265,7 @@ public class BackManager implements Listener {
     }
 
     public void shutdown() {
-        warmupTasks.values().forEach(BukkitTask::cancel);
+        warmupTasks.values().forEach(SchedulerTask::cancel);
         warmupTasks.clear();
         backLocations.clear();
         cooldowns.clear();

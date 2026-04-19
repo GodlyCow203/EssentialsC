@@ -50,23 +50,12 @@ public class AhSession {
         return new AhSession(uuid, page, false, false, false, false, true);
     }
 
-    public UUID getPlayerUuid() { return playerUuid; }
-    public int getPage() { return page; }
-    public boolean isExpiredView() { return expiredView; }
-    public boolean isListingsView() { return listingsView; }
-    public boolean isHistoryView() { return historyView; }
-    public boolean isSellHistoryView() { return sellHistoryView; }
-    public boolean isBuyHistoryView() { return buyHistoryView; }
-    public long getCreatedAt() { return createdAt; }
-    public boolean isStale() { return System.currentTimeMillis() - createdAt > 300000; }
-
-    public synchronized boolean tryAcquireProcessing() {
-        if (processing) return false;
-        processing = true;
-        return true;
+    public int getPage() {
+        return page;
     }
 
-    public synchronized void releaseProcessing() {
-        processing = false;
+    public boolean isStale() {
+        return System.currentTimeMillis() - createdAt > 300000;
     }
+
 }

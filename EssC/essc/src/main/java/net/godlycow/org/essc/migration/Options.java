@@ -15,13 +15,6 @@ public record Options(
         if (conflictStrategy == null) conflictStrategy = ConflictStrategy.SKIP;
     }
 
-    /*
-    public Options(boolean importUsers, boolean importWarps, boolean importEconomy,
-                   boolean importHomes, boolean importNicks, boolean importMutes, boolean importBans) {
-        this(importUsers, importWarps, importEconomy, importHomes, importNicks, importMutes, importBans, false, ConflictStrategy.SKIP);
-    }
-     */
-
     @Override
     public String toString() {
         return String.format(

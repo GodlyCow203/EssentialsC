@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.spawn;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -14,7 +15,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class SpawnManager implements Listener {
     private Location spawnLocation;
 
     private final Map<UUID, Long> teleportCooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
 
     public SpawnManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -145,7 +145,7 @@ public class SpawnManager implements Listener {
                     Map.of("seconds", String.valueOf(warmup))));
             plugin.debug("Starting spawn warmup for " + player.getName() + " (" + warmup + "s)");
 
-            BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
                 completeTeleport(player, spawn);
             }, warmup * 20L);
 
@@ -158,23 +158,25 @@ public class SpawnManager implements Listener {
     private void completeTeleport(Player player, Location location) {
         pendingTeleports.remove(player.getUniqueId());
 
-        player.teleport(location);
-        teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+        plugin.getEssScheduler().teleportAsync(player, location).thenAccept(success -> {
+            if (!success) return;
+            teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
-        player.sendMessage(plugin.getLanguageManager().get(player, "spawn.success"));
+            player.sendMessage(plugin.getLanguageManager().get(player, "spawn.success"));
 
-        if (plugin.getConfigManager().isSpawnParticles()) {
-            location.getWorld().spawnParticle(Particle.PORTAL, location, 50, 0.5, 1, 0.5);
-        }
-        if (plugin.getConfigManager().isSpawnSounds()) {
-            player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-        }
+            if (plugin.getConfigManager().isSpawnParticles()) {
+                location.getWorld().spawnParticle(Particle.PORTAL, location, 50, 0.5, 1, 0.5);
+            }
+            if (plugin.getConfigManager().isSpawnSounds()) {
+                player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            }
 
-        plugin.debug("Teleported " + player.getName() + " to spawn");
+            plugin.debug("Teleported " + player.getName() + " to spawn");
+        });
     }
 
     public void cancelTeleport(Player player) {
-        BukkitTask task = pendingTeleports.remove(player.getUniqueId());
+        SchedulerTask task = pendingTeleports.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
             plugin.debug("Cancelled spawn teleport for " + player.getName());
@@ -192,7 +194,7 @@ public class SpawnManager implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore() && isSpawnSet()) {
             plugin.debug("First join teleport for " + player.getName());
-            player.teleport(getSpawn());
+            plugin.getEssScheduler().teleportAsync(player, getSpawn());
         }
     }
 
@@ -247,7 +249,7 @@ public class SpawnManager implements Listener {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(BukkitTask::cancel);
+        pendingTeleports.values().forEach(SchedulerTask::cancel);
         pendingTeleports.clear();
     }
 }

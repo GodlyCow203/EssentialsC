@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.economy;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.util.PaginatedList;
 import org.bukkit.Bukkit;
@@ -30,12 +31,12 @@ public class BaltopCommand extends Command {
         final int finalPage = page;
         sender.sendMessage(lang.get(sender, "baltop.loading"));
 
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+        plugin.getEssScheduler().runAsync(() -> {
             try {
                 Map<UUID, BigDecimal> top = plugin.getEconomyManager()
                         .getTopBalances(PER_PAGE * finalPage).get();
 
-                plugin.getServer().getScheduler().runTask(plugin, () ->
+                plugin.getEssScheduler().runGlobal(() ->
                         displayTop(sender, new ArrayList<>(top.entrySet()), finalPage));
 
             } catch (InterruptedException | ExecutionException e) {

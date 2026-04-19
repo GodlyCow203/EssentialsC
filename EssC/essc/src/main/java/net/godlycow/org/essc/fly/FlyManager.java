@@ -48,7 +48,7 @@ public class FlyManager implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        plugin.getEssScheduler().runForEntityLater(player, () -> {
             if (!player.isOnline()) return;
 
             if (disableOnJoin || player.hasPermission("essentialsc.fly.disable-on-join")) {
@@ -76,10 +76,6 @@ public class FlyManager implements Listener {
     public void setFlying(Player player, boolean flying) {
         player.setAllowFlight(flying);
         player.setFlying(flying);
-    }
-
-    public void toggleFlying(Player player) {
-        setFlying(player, !isFlying(player));
     }
 
     public boolean hasPersistentFly(UUID uuid) {

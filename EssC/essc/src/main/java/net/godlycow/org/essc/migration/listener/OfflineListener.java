@@ -9,16 +9,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ol implements Listener {
+public class OfflineListener implements Listener {
     private final EssentialsC plugin;
     private final Map<UUID, org.bukkit.Location> pendingBackLocations = new ConcurrentHashMap<>();
 
-    public ol(EssentialsC plugin) {
+    public OfflineListener(EssentialsC plugin) {
         this.plugin = plugin;
-    }
-
-    public void setPendingBackLocation(UUID uuid, org.bukkit.Location location) {
-        pendingBackLocations.put(uuid, location);
     }
 
     @EventHandler

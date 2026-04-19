@@ -123,22 +123,42 @@ public class MigrationValidator {
         private Set<String> missingWorlds = new HashSet<>();
         private Set<String> foundWorlds = new HashSet<>();
 
-        public void addError(String error) { errors.add(error); }
-        public void addWarning(String warning) { warnings.add(warning); }
+        public void addError(String error) {
+            errors.add(error);
+        }
+        public void addWarning(String warning) {
+            warnings.add(warning);
+        }
 
-        public boolean isValid() { return errors.isEmpty(); }
-        public List<String> getErrors() { return errors; }
-        public List<String> getWarnings() { return warnings; }
+        public boolean isValid() {
+            return errors.isEmpty();
+        }
+        public List<String> getErrors() {
+            return errors;
+        }
+        public List<String> getWarnings() {
+            return warnings;
+        }
 
-        public void setUserCount(int count) { this.userCount = count; }
-        public void setWarpCount(int count) { this.warpCount = count; }
-        public void setMissingWorlds(Set<String> worlds) { this.missingWorlds = worlds; }
-        public void setFoundWorlds(Set<String> worlds) { this.foundWorlds = worlds; }
+        public void setUserCount(int count) {
+            this.userCount = count;
+        }
+        public void setWarpCount(int count) {
+            this.warpCount = count;
+        }
+        public void setMissingWorlds(Set<String> worlds) {
+            this.missingWorlds = worlds;
+        }
+        public void setFoundWorlds(Set<String> worlds) {
+            this.foundWorlds = worlds;
+        }
 
-        public int getUserCount() { return userCount; }
-        public int getWarpCount() { return warpCount; }
-        public Set<String> getMissingWorlds() { return missingWorlds; }
-        public Set<String> getFoundWorlds() { return foundWorlds; }
+        public int getUserCount() {
+            return userCount;
+        }
+        public int getWarpCount() {
+            return warpCount;
+        }
 
         @Override
         public String toString() {

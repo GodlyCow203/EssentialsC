@@ -143,7 +143,7 @@ public class ShopListener implements Listener {
         Inventory inv = event.getInventory();
         if (!(inv.getHolder() instanceof ShopHolder)) return;
 
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
+        plugin.getEssScheduler().runForEntity(player, () -> {
             Inventory current = player.getOpenInventory().getTopInventory();
             if (!(current.getHolder() instanceof ShopHolder)) {
                 removeSession(player);

@@ -27,24 +27,6 @@ public class TABHook {
         setTablistName(tabPlayer, display);
     }
 
-    public void resetNick(Player player) {
-        TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(player.getUniqueId());
-        if (tabPlayer == null) return;
-
-        TabListFormatManager tablistManager = TabAPI.getInstance().getTabListFormatManager();
-        if (tablistManager != null) {
-            tablistManager.setName(tabPlayer, null);
-        }
-
-        NameTagManager nameTagManager = TabAPI.getInstance().getNameTagManager();
-        if (nameTagManager != null) {
-            nameTagManager.setPrefix(tabPlayer, null);
-            nameTagManager.setSuffix(tabPlayer, null);
-        }
-
-        plugin.debug("TABHook: Reset TAB display for " + player.getName());
-    }
-
     private void setTablistName(TabPlayer tabPlayer, String display) {
         TabListFormatManager manager = TabAPI.getInstance().getTabListFormatManager();
         if (manager == null) {
@@ -52,16 +34,6 @@ public class TABHook {
             return;
         }
         manager.setName(tabPlayer, display);
-    }
-
-    private void setNametag(TabPlayer tabPlayer, String display) {
-        NameTagManager manager = TabAPI.getInstance().getNameTagManager();
-        if (manager == null) {
-            plugin.debug("TABHook: NameTagManager is null (scoreboard-teams disabled in TAB?)");
-            return;
-        }
-        manager.setPrefix(tabPlayer, display);
-        manager.setSuffix(tabPlayer, null);
     }
 
     private String buildDisplay(Player player, String nickname) {

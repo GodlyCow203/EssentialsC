@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scheduler.BukkitRunnable;
+
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -58,17 +58,20 @@ public class TabManager implements Listener {
     }
 
     private void startRefreshTask() {
-        new BukkitRunnable() {
-            @Override public void run() { refreshAll(); }
-        }.runTaskTimer(plugin, 20L, 20L);
+        plugin.getEssScheduler().runGlobalTimer(this::refreshAll, 20L, 20L);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Bukkit.getScheduler().runTaskLater(plugin, () -> updatePlayerTab(event.getPlayer()), 5L);
+        plugin.getEssScheduler().runForEntityLater(event.getPlayer(), () -> updatePlayerTab(event.getPlayer()), 5L);
     }
 
     public void updatePlayerTab(Player player) {
+        if (player == null || !player.isOnline()) return;
+        doUpdatePlayerTab(player);
+    }
+
+    private void doUpdatePlayerTab(Player player) {
         if (player == null || !player.isOnline()) return;
 
         if (plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(player)) {
@@ -132,6 +135,8 @@ public class TabManager implements Listener {
     }
 
     private void updateScoreboardTeam(Player player, String lpPrefix, String lpSuffix) {
+        if (net.godlycow.org.essc.softwares.ServerSoftware.isFolia()) return;
+
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         String teamName = TeamNameUtil.fromUUID(player.getUniqueId());
 
@@ -163,6 +168,10 @@ public class TabManager implements Listener {
         for (Player player : Bukkit.getOnlinePlayers()) updatePlayerTab(player);
     }
 
-    public boolean isEnabled()        { return luckPermsEnabled && useLuckPermsTab; }
-    public boolean isUsingTABPlugin() { return tabHook != null; }
+    public boolean isEnabled()  {
+        return luckPermsEnabled && useLuckPermsTab;
+    }
+    public boolean isUsingTABPlugin() {
+        return tabHook != null;
+    }
 }

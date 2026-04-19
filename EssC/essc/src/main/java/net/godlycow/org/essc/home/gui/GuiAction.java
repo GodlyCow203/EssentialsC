@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public class GuiAction {
             int max = plugin.getHomeManager().getMaxHomes(player);
 
             if (count >= max) {
-                sync(() -> {
+                sync(player, () -> {
                     player.sendMessage(lang(player, "home.set.limit_reached",
                             Map.of("limit", String.valueOf(max))));
                     manager.playSound(player, GuiManager.GuiSound.ERROR);
@@ -46,7 +47,7 @@ public class GuiAction {
             }
 
             plugin.getHomeManager().setHome(player, name, player.getLocation()).whenComplete((success, err2) -> {
-                sync(() -> {
+                sync(player, () -> {
                     if (success) {
                         player.sendMessage(lang(player, "home.set.success", Map.of("name", name)));
                         manager.playSound(player, GuiManager.GuiSound.SUCCESS);
@@ -62,7 +63,7 @@ public class GuiAction {
 
     public void handleDelete(Player player, String homeName, UUID targetUuid) {
         plugin.getHomeManager().deleteHome(targetUuid, homeName).whenComplete((success, err) -> {
-            sync(() -> {
+            sync(player, () -> {
                 if (success) {
                     player.sendMessage(lang(player, "home.delete.success", Map.of("name", homeName)));
                     manager.playSound(player, GuiManager.GuiSound.SUCCESS);
@@ -91,7 +92,7 @@ public class GuiAction {
 
         plugin.getHomeManager().homeExists(targetUuid, newName).whenComplete((exists, err) -> {
             if (exists) {
-                sync(() -> {
+                sync(player, () -> {
                     player.sendMessage(lang(player, "home.set.already_exists", Map.of("name", newName)));
                     manager.playSound(player, GuiManager.GuiSound.ERROR);
                     returnToAppropriateView(player, targetUuid);
@@ -101,7 +102,7 @@ public class GuiAction {
 
             plugin.getHomeManager().getHome(targetUuid, oldName).whenComplete((home, err2) -> {
                 if (home == null) {
-                    sync(() -> {
+                    sync(player, () -> {
                         player.sendMessage(lang(player, "home.not_found", Map.of("name", oldName)));
                         manager.playSound(player, GuiManager.GuiSound.ERROR);
                         returnToAppropriateView(player, targetUuid);
@@ -112,7 +113,7 @@ public class GuiAction {
                 plugin.getHomeManager().setHome(targetUuid, newName, home.toLocation(plugin.getServer()))
                         .whenComplete((ok, err3) -> {
                             if (!ok) {
-                                sync(() -> {
+                                sync(player, () -> {
                                     player.sendMessage(lang(player, "home.set.failed", Map.of("name", newName)));
                                     manager.playSound(player, GuiManager.GuiSound.ERROR);
                                     returnToAppropriateView(player, targetUuid);
@@ -121,7 +122,7 @@ public class GuiAction {
                             }
 
                             plugin.getHomeManager().deleteHome(targetUuid, oldName).whenComplete((del, err4) ->
-                                    sync(() -> {
+                                    sync(player, () -> {
                                         player.sendMessage(lang(player, "home.gui.rename_success",
                                                 Map.of("old", oldName, "new", newName)));
                                         manager.playSound(player, GuiManager.GuiSound.SUCCESS);
@@ -136,7 +137,7 @@ public class GuiAction {
     public void handleUpdate(Player player, String homeName, UUID targetUuid) {
         Location loc = player.getLocation();
         plugin.getHomeManager().setHome(targetUuid, homeName, loc).whenComplete((success, err) ->
-                sync(() -> {
+                sync(player, () -> {
                     if (success) {
                         player.sendMessage(lang(player, "home.set.updated", Map.of("name", homeName)));
                         manager.playSound(player, GuiManager.GuiSound.SUCCESS);
@@ -153,7 +154,7 @@ public class GuiAction {
         manager.closeGui(player);
 
         plugin.getHomeManager().getHome(targetUuid, homeName).whenComplete((home, err) ->
-                sync(() -> {
+                sync(player, () -> {
                     if (home == null) {
                         player.sendMessage(lang(player, "home.teleport.not_found", Map.of("name", homeName)));
                         manager.playSound(player, GuiManager.GuiSound.ERROR);
@@ -167,12 +168,13 @@ public class GuiAction {
                     } else {
                         Location loc = home.toLocation(plugin.getServer());
                         if (loc != null) {
-                            player.teleport(loc);
-                            player.sendMessage(lang(player, "home.admin.teleported_to_other",
-                                    Map.of("player",
-                                            Bukkit.getOfflinePlayer(targetUuid).getName() != null
-                                                    ? Bukkit.getOfflinePlayer(targetUuid).getName() : targetUuid.toString(),
-                                            "name", homeName)));
+                            String targetName = Bukkit.getOfflinePlayer(targetUuid).getName() != null
+                                    ? Bukkit.getOfflinePlayer(targetUuid).getName() : targetUuid.toString();
+                            plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+                                if (!success) return;
+                                player.sendMessage(lang(player, "home.admin.teleported_to_other",
+                                        Map.of("player", targetName, "name", homeName)));
+                            });
                         }
                     }
                 })
@@ -205,7 +207,7 @@ public class GuiAction {
         return plugin.getLanguageManager().get(player, key, placeholders);
     }
 
-    private void sync(Runnable task) {
-        plugin.getServer().getScheduler().runTask(plugin, task);
+    private void sync(Player player, Runnable task) {
+        plugin.getEssScheduler().runForEntity(player, task);
     }
 }

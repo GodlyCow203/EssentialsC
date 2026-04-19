@@ -284,14 +284,6 @@ public class ChatManager implements Listener {
         return luckPermsEnabled;
     }
 
-    public boolean canUseColorCodes(Player p) {
-        return p.hasPermission("essentialsc.chat.legacycodes");
-    }
-
-    public boolean canUseRgbCodes(Player p) {
-        return p.hasPermission("essentialsc.chat.rbgcodes");
-    }
-
     public Component formatMessage(Player player, String message) {
         Component messageComponent = applyMessageColorsToComponent(player, Component.text(message));
         if (!luckPermsEnabled || !useLuckPermsFormatting) return messageComponent;

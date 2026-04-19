@@ -1,13 +1,11 @@
 package net.godlycow.org.essc.backup;
 
 import net.godlycow.org.essc.EssentialsC;
-import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class BackupManager {
 
     public void createAsync(java.util.function.Consumer<String> onSuccess,
                             java.util.function.Consumer<String> onFailure) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        plugin.getEssScheduler().runAsync(() -> {
             try {
                 String fileName = "backup-" + LocalDateTime.now().format(TIMESTAMP_FORMAT) + ".zip";
                 File zipFile = new File(backupFolder, fileName);
@@ -42,9 +40,9 @@ public class BackupManager {
 
                 pruneOldBackups();
 
-                Bukkit.getScheduler().runTask(plugin, () -> onSuccess.accept(fileName));
+                plugin.getEssScheduler().runGlobal(() -> onSuccess.accept(fileName));
             } catch (IOException e) {
-                Bukkit.getScheduler().runTask(plugin, () -> onFailure.accept(e.getMessage()));
+                plugin.getEssScheduler().runGlobal(() -> onFailure.accept(e.getMessage()));
             }
         });
     }
@@ -64,10 +62,6 @@ public class BackupManager {
         File file = new File(backupFolder, fileName);
         if (!file.exists() || !file.getParentFile().equals(backupFolder)) return false;
         return file.delete();
-    }
-
-    public File getBackupFolder() {
-        return backupFolder;
     }
 
     private void zip(File sourceFolder, File dest) throws IOException {

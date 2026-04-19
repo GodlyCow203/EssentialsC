@@ -22,10 +22,22 @@ public class SellHistoryEntry {
         this.timestamp = timestamp;
     }
 
-    public int getAuctionId() { return auctionId; }
-    public UUID getSellerUuid() { return sellerUuid; }
-    public String getBuyerName() { return buyerName; }
-    public ItemStack getItem() { return item.clone(); }
-    public BigDecimal getPrice() { return price; }
-    public long getTimestamp() { return timestamp; }
+    public int getAuctionId() {
+        return auctionId;
+    }
+    public UUID getSellerUuid() {
+        return sellerUuid;
+    }
+    public String getBuyerName() {
+        return buyerName;
+    }
+    public ItemStack getItem() {
+        return item.clone();
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+    public long getTimestamp() {
+        return timestamp;
+    }
 }

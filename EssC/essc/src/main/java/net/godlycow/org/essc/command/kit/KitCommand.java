@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.kit;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.kit.Kit;
 import org.bukkit.command.CommandSender;
@@ -101,7 +102,7 @@ public class KitCommand extends Command {
                 return;
             }
 
-            plugin.getServer().getScheduler().runTask(plugin, () ->
+            plugin.getEssScheduler().runForEntity(player, () ->
                     plugin.getKitManager().giveKit(player, kit));
         });
     }

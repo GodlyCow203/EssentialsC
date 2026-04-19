@@ -30,14 +30,34 @@ public class Kit {
         this.networkSync = networkSync;
     }
 
-    public String getName()        { return name; }
-    public String getDisplayName() { return displayName; }
-    public String getPermission()  { return permission; }
-    public long getCooldown()      { return cooldown; }
-    public boolean isOneTime()     { return oneTime; }
-    public boolean isFirstJoin()   { return firstJoin; }
-    public int getMaxClaims()      { return maxClaims; }
-    public List<ItemStack> getItems() { return items; }
-    public String getDescription() { return description; }
-    public boolean isNetworkSync() { return networkSync; }
+    public String getName() {
+        return name;
+    }
+    public String getDisplayName() {
+        return displayName;
+    }
+    public String getPermission() {
+        return permission;
+    }
+    public long getCooldown() {
+        return cooldown;
+    }
+    public boolean isOneTime() {
+        return oneTime;
+    }
+    public boolean isFirstJoin() {
+        return firstJoin;
+    }
+    public int getMaxClaims() {
+        return maxClaims;
+    }
+    public List<ItemStack> getItems() {
+        return items;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public boolean isNetworkSync() {
+        return networkSync;
+    }
 }

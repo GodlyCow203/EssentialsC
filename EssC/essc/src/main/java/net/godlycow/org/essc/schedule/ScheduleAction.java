@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.schedule;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -129,7 +130,7 @@ public interface ScheduleAction {
                 BossBar bar = BossBar.bossBar(name, 1.0f, color, overlay);
                 p.showBossBar(bar);
 
-                Bukkit.getScheduler().runTaskLater(plugin, () -> p.hideBossBar(bar), duration * 20L);
+                plugin.getEssScheduler().runGlobalLater(() -> p.hideBossBar(bar), duration * 20L);
             }
         }
     }

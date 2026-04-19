@@ -219,11 +219,4 @@ public class ShopGUI {
         }
     }
 
-    public void setCachedBalance(double balance) {
-        this.cachedBalance = balance;
-    }
-
-    public double getCachedBalance() {
-        return cachedBalance;
-    }
 }

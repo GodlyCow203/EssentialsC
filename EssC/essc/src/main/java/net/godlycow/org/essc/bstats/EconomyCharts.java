@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.bstats;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.economy.EconomyManager;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -38,7 +39,7 @@ public class EconomyCharts {
     }
 
     private static void startCacheUpdater(EssentialsC plugin) {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+        plugin.getEssScheduler().runAsyncTimer(() -> {
             EconomyManager em = plugin.getEconomyManager();
             if (em == null) {
                 cachedOnlineBalances.set(0);

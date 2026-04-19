@@ -190,5 +190,7 @@ public class AuctionStorage {
         }
     }
 
-    public Database getDatabase() { return database; }
+    public Database getDatabase() {
+        return database;
+    }
 }

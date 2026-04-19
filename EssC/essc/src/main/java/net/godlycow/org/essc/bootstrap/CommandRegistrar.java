@@ -94,16 +94,43 @@ public class CommandRegistrar {
         register("tphereall",      new TPHereAllCommand(plugin));
         register("kit",            new KitCommand(plugin));
         register("kits",           new KitsCommand(plugin));
+        register("realname",       new RealNameCommand(plugin));
+        register("playtime",       new PlaytimeCommand(plugin));
+        register("uptime",         new UptimeCommand(plugin));
+        register("tphere",         new TPHereCommand(plugin));
+        register("broadcast",      new BroadcastCommand(plugin));
+        register("enchant",        new EnchantCommand(plugin));
+        register("unenchant",      new UnenchantCommand(plugin));
+        register("hat",            new HatCommand(plugin));
+        register("sudo",           new SudoCommand(plugin));
+        register("kick",           new KickCommand(plugin));
+        register("ban",            new BanCommand(plugin, punishmentManager));
+        register("unban",          new UnbanCommand(plugin, punishmentManager));
+        register("mute",           new MuteCommand(plugin, punishmentManager));
+        register("unmute",         new UnmuteCommand(plugin, punishmentManager));
+        register("checkpunish",    new CheckpunishCommand(plugin, punishmentManager));
+        register("ignore",         new IgnoreCommand(plugin));
+        register("msg",            new MsgCommand(plugin));
+        register("reply",          new ReplyCommand(plugin));
+        register("seen",           new SeenCommand(plugin));
+        register("top",            new TopCommand(plugin));
+        register("ptime",          new PtimeCommand(plugin));
+        register("pweather",       new PweatherCommand(plugin));
+        register("ah",             new AhCommand(plugin));
+        register("language",       new LanguageCommand(plugin));
+        register("warp",           new WarpCommand(plugin));
+        register("setwarp",        new SetWarpCommand(plugin));
+        register("delwarp",        new DelWarpCommand(plugin));
+        register("warps",          new WarpsCommand(plugin));
+        register("warpadmin",      new WarpAdminCommand(plugin));
+        register("afk",            new AFKCommand(plugin));
+        register("afklist",        new AFKListCommand(plugin));
+        register("migration",      new MigrationCommand(plugin));
 
         if (plugin.getConfigManager().isNickEnabled()) {
             register("nick",     new NickCommand(plugin));
             register("realname", new RealNameCommand(plugin));
         }
-        register("realname",   new RealNameCommand(plugin));
-
-        register("playtime",   new PlaytimeCommand(plugin));
-        register("uptime",     new UptimeCommand(plugin));
-        register("tphere",     new TPHereCommand(plugin));
 
         if (plugin.getConfigManager().isShopEnabled()) {
             register("shop", new ShopCommand(plugin));
@@ -130,34 +157,6 @@ public class CommandRegistrar {
             plugin.debug("Sell commands unregistered (sell.enabled is false)");
         }
 
-        register("broadcast",    new BroadcastCommand(plugin));
-        register("enchant",      new EnchantCommand(plugin));
-        register("unenchant",    new UnenchantCommand(plugin));
-        register("hat",          new HatCommand(plugin));
-        register("sudo",         new SudoCommand(plugin));
-        register("kick",         new KickCommand(plugin));
-        register("ban",          new BanCommand(plugin, punishmentManager));
-        register("unban",        new UnbanCommand(plugin, punishmentManager));
-        register("mute",         new MuteCommand(plugin, punishmentManager));
-        register("unmute",       new UnmuteCommand(plugin, punishmentManager));
-        register("checkpunish",  new CheckpunishCommand(plugin, punishmentManager));
-        register("ignore",       new IgnoreCommand(plugin));
-        register("msg",          new MsgCommand(plugin));
-        register("reply",        new ReplyCommand(plugin));
-        register("seen",         new SeenCommand(plugin));
-        register("top",          new TopCommand(plugin));
-        register("ptime",        new PtimeCommand(plugin));
-        register("pweather",     new PweatherCommand(plugin));
-        register("ah",           new AhCommand(plugin));
-        register("language",     new LanguageCommand(plugin));
-        register("warp",         new WarpCommand(plugin));
-        register("setwarp",      new SetWarpCommand(plugin));
-        register("delwarp",      new DelWarpCommand(plugin));
-        register("warps",        new WarpsCommand(plugin));
-        register("warpadmin",    new WarpAdminCommand(plugin));
-        register("afk",          new AFKCommand(plugin));
-        register("afklist",      new AFKListCommand(plugin));
-        register("migration",    new MigrationCommand(plugin));
     }
 
     private void register(String name, Command command) {

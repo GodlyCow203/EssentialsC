@@ -279,54 +279,136 @@ public class ShopItem {
     }
 
 
-    public String getId() { return id; }
-    public Material getMaterial() { return material; }
-    public void setMaterial(Material material) { this.material = material; }
-    public int getAmount() { return amount; }
-    public void setAmount(int amount) { this.amount = amount; }
-    public String getDisplayName() { return displayName; }
-    public void setDisplayName(String displayName) { this.displayName = displayName; }
-    public List<String> getLore() { return lore; }
-    public void setLore(List<String> lore) { this.lore = lore; }
-    public double getBuyPrice() { return buyPrice; }
-    public void setBuyPrice(double buyPrice) { this.buyPrice = buyPrice; }
-    public double getSellPrice() { return sellPrice; }
-    public void setSellPrice(double sellPrice) { this.sellPrice = sellPrice; }
-    public boolean isBuyable() { return buyable; }
-    public void setBuyable(boolean buyable) { this.buyable = buyable; }
-    public boolean isSellable() { return sellable; }
-    public void setSellable(boolean sellable) { this.sellable = sellable; }
-    public int getSlot() { return slot; }
-    public void setSlot(int slot) { this.slot = slot; }
-    public int getPage() { return page; }
-    public void setPage(int page) { this.page = page; }
-    public String getPermission() { return permission; }
-    public void setPermission(String permission) { this.permission = permission; }
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-    public String getTextureUrl() { return textureUrl; }
-    public void setTextureUrl(String textureUrl) { this.textureUrl = textureUrl; }
-    public void setSkullOwner(String skullOwner) { this.skullOwner = skullOwner; }
-    public boolean isGlow() { return glow; }
-    public void setGlow(boolean glow) { this.glow = glow; }
-    public Map<Enchantment, Integer> getEnchantments() { return enchantments; }
-    public void addEnchantment(Enchantment enchantment, int level) { this.enchantments.put(enchantment, level); }
-
-    public List<String> getCommands() { return commands; }
-    public void setCommands(List<String> commands) { this.commands = commands; }
-
-    public int getMaxStack() { return maxStack; }
-    public void setMaxStack(int maxStack) { this.maxStack = maxStack; }
-
-    public boolean isSpawner() { return spawner; }
-    public void setSpawner(boolean spawner) { this.spawner = spawner; }
-    public String getSpawnerType() { return spawnerType; }
-    public void setSpawnerType(String spawnerType) { this.spawnerType = spawnerType; }
-
-    public boolean isEnchantedBook() { return enchantedBook; }
-    public void setEnchantedBook(boolean enchantedBook) { this.enchantedBook = enchantedBook; }
-    public Map<Enchantment, Integer> getStoredEnchantments() { return storedEnchantments; }
-    public void addStoredEnchantment(Enchantment enchantment, int level) { this.storedEnchantments.put(enchantment, level); }
+    public String getId() {
+        return id;
+    }
+    public Material getMaterial() {
+        return material;
+    }
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+    public String getDisplayName() {
+        return displayName;
+    }
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+    public List<String> getLore() {
+        return lore;
+    }
+    public void setLore(List<String> lore) {
+        this.lore = lore;
+    }
+    public double getBuyPrice() {
+        return buyPrice;
+    }
+    public void setBuyPrice(double buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+    public double getSellPrice() {
+        return sellPrice;
+    }
+    public void setSellPrice(double sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+    public boolean isBuyable() {
+        return buyable;
+    }
+    public void setBuyable(boolean buyable) {
+        this.buyable = buyable;
+    }
+    public boolean isSellable() {
+        return sellable;
+    }
+    public void setSellable(boolean sellable) {
+        this.sellable = sellable;
+    }
+    public int getSlot() {
+        return slot;
+    }
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
+    public int getPage() {
+        return page;
+    }
+    public void setPage(int page) {
+        this.page = page;
+    }
+    public String getPermission() {
+        return permission;
+    }
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public void setTextureUrl(String textureUrl) {
+        this.textureUrl = textureUrl;
+    }
+    public void setSkullOwner(String skullOwner) {
+        this.skullOwner = skullOwner;
+    }
+    public void setGlow(boolean glow) {
+        this.glow = glow;
+    }
+    public Map<Enchantment, Integer> getEnchantments() {
+        return enchantments;
+    }
+    public void addEnchantment(Enchantment enchantment, int level) {
+        this.enchantments.put(enchantment, level);
+    }
+    public List<String> getCommands() {
+        return commands;
+    }
+    public void setCommands(List<String> commands) {
+        this.commands = commands;
+    }
+    public int getMaxStack() {
+        return maxStack;
+    }
+    public void setMaxStack(int maxStack) {
+        this.maxStack = maxStack;
+    }
+    public boolean isSpawner() {
+        return spawner;
+    }
+    public void setSpawner(boolean spawner) {
+        this.spawner = spawner;
+    }
+    public String getSpawnerType() {
+        return spawnerType;
+    }
+    public void setSpawnerType(String spawnerType) {
+        this.spawnerType = spawnerType;
+    }
+    public boolean isEnchantedBook() {
+        return enchantedBook;
+    }
+    public void setEnchantedBook(boolean enchantedBook) {
+        this.enchantedBook = enchantedBook;
+    }
+    public Map<Enchantment, Integer> getStoredEnchantments() {
+        return storedEnchantments;
+    }
+    public void addStoredEnchantment(Enchantment enchantment, int level) {
+        this.storedEnchantments.put(enchantment, level);
+    }
 }

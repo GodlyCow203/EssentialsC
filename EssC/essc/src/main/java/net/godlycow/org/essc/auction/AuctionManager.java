@@ -183,7 +183,7 @@ public class AuctionManager implements Listener {
     }
 
     private void startExpiryTask() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+        plugin.getEssScheduler().runAsyncTimer(() -> {
             long now = System.currentTimeMillis();
             List<Auction> expired = activeAuctions.values().stream()
                     .filter(Auction::isExpired)
@@ -212,7 +212,7 @@ public class AuctionManager implements Listener {
         if (!plugin.getConfigManager().isAHNotifyOnSale()) return;
         Player seller = Bukkit.getPlayer(auction.getSellerUuid());
         if (seller != null && seller.isOnline()) {
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(seller, () -> {
                 seller.sendMessage(plugin.getLanguageManager().get(seller, "ah.sold", Map.of(
                         "item", auction.getItem().getType().toString(),
                         "price", plugin.getEconomyManager().format(auction.getPrice()),
@@ -243,7 +243,7 @@ public class AuctionManager implements Listener {
     }
 
     public void reload() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        plugin.getEssScheduler().runAsync(() -> {
             activeAuctions.clear();
             expiredItems.clear();
             sellHistory.clear();
@@ -260,7 +260,9 @@ public class AuctionManager implements Listener {
         storage.disconnect();
     }
 
-    public List<Auction> getActiveAuctions() { return new ArrayList<>(activeAuctions.values()); }
+    public List<Auction> getActiveAuctions() {
+        return new ArrayList<>(activeAuctions.values());
+    }
     public List<Auction> getPlayerAuctions(UUID uuid) {
         return activeAuctions.values().stream()
                 .filter(a -> a.getSellerUuid().equals(uuid))
