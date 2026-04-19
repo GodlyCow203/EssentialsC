@@ -194,7 +194,11 @@ public class SpawnManager implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore() && isSpawnSet()) {
             plugin.debug("First join teleport for " + player.getName());
-            plugin.getEssScheduler().teleportAsync(player, getSpawn());
+            plugin.getEssScheduler().runForEntityLater(player, () -> {
+                if (player.isOnline()) {
+                    plugin.getEssScheduler().teleportAsync(player, getSpawn());
+                }
+            }, 1L);
         }
     }
 
