@@ -275,7 +275,7 @@ public class TPAManager implements Listener {
                     teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation().add(0, 1, 0), 10);
                     ticks++;
                 }
-            }, 0L, 1L);
+            }, 1L, 1L);
         }
 
         final SchedulerTask finalParticleTask = particleTask;
