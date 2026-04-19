@@ -71,11 +71,4 @@ public class AuctionEconomy {
         overflow.values().forEach(drop ->
                 player.getWorld().dropItemNaturally(player.getLocation(), drop));
     }
-
-    public boolean validatePrice(Player player, BigDecimal price, BigDecimal min, BigDecimal max) {
-        if (price.compareTo(BigDecimal.ZERO) <= 0) return false;
-        if (!player.hasPermission("essentialsc.ah.bypass.price.min") && price.compareTo(min) < 0) return false;
-        if (max != null && !player.hasPermission("essentialsc.ah.bypass.price.max") && price.compareTo(max) > 0) return false;
-        return true;
-    }
 }

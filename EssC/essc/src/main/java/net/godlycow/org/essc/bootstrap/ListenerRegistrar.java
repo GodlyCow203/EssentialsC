@@ -11,11 +11,10 @@ public class ListenerRegistrar {
         plugin.getServer().getPluginManager().registerEvents(new InvseeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new EnderSeeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new VersionChecker(plugin), plugin);
         if (plugin.getConfigManager().isWarpEnabled()) {
             plugin.getServer().getPluginManager().registerEvents(new WarpListener(plugin), plugin);
         }
-
-        plugin.getServer().getPluginManager().registerEvents(new VersionChecker(plugin), plugin);
     }
 
 }

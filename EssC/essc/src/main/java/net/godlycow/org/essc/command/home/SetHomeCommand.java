@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,14 +57,14 @@ public class SetHomeCommand extends Command {
                 int max = plugin.getHomeManager().getMaxHomes(player);
 
                 if (!alreadyExists && count >= max) {
-                    plugin.getServer().getScheduler().runTask(plugin, () ->
+                    plugin.getEssScheduler().runForEntity(player, () ->
                             player.sendMessage(lang.get(player, "home.set.limit_reached",
                                     Map.of("limit", String.valueOf(max)))));
                     return;
                 }
 
                 plugin.getHomeManager().setHome(player, name, player.getLocation()).whenComplete((success, err3) -> {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    plugin.getEssScheduler().runForEntity(player, () -> {
                         if (success) {
                             String key = alreadyExists ? "home.set.updated" : "home.set.success";
                             player.sendMessage(lang.get(player, key, Map.of("name", name)));

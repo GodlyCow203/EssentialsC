@@ -74,7 +74,7 @@ public class Database {
                 plugin.getLogger().log(Level.SEVERE, "Database error", e);
                 throw new RuntimeException(e);
             }
-        }, runnable -> plugin.getServer().getScheduler().runTaskAsynchronously(plugin, runnable).getTaskId());
+        }, plugin.getEssScheduler().asyncExecutor());
     }
 
     @FunctionalInterface

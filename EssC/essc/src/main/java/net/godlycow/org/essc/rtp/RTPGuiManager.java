@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.rtp;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -16,8 +17,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
+
+
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class RTPGuiManager implements Listener {
     private final MiniMessage miniMessage;
 
     private final Map<UUID, Inventory> openInventories = new HashMap<>();
-    private final Map<UUID, BukkitTask> updateTasks = new HashMap<>();
+    private final Map<UUID, SchedulerTask> updateTasks = new HashMap<>();
     private final Map<UUID, Integer> playerPages = new HashMap<>();
     private static final int[] WORLD_SLOTS = {11, 13, 15};
 
@@ -221,22 +222,19 @@ public class RTPGuiManager implements Listener {
 
 
     private void startUpdateTask(Player player) {
-
         UUID uuid = player.getUniqueId();
 
-        BukkitTask old = updateTasks.remove(uuid);
+        SchedulerTask old = updateTasks.remove(uuid);
         if (old != null) old.cancel();
 
-        BukkitTask task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!player.isOnline() || !openInventories.containsKey(uuid)) {
-                    cancel();
-                    return;
-                }
-                refreshInventory(player);
+        SchedulerTask task = plugin.getEssScheduler().runForEntityTimer(player, () -> {
+            if (!player.isOnline() || !openInventories.containsKey(uuid)) {
+                SchedulerTask t = updateTasks.remove(uuid);
+                if (t != null) t.cancel();
+                return;
             }
-        }.runTaskTimer(plugin, 20L, 20L);
+            refreshInventory(player);
+        }, 20L, 20L);
 
         updateTasks.put(uuid, task);
     }
@@ -297,7 +295,7 @@ public class RTPGuiManager implements Listener {
         openInventories.remove(uuid);
         playerPages.remove(uuid);
 
-        BukkitTask task = updateTasks.remove(uuid);
+        SchedulerTask task = updateTasks.remove(uuid);
         if (task != null) task.cancel();
 
         player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1f, 1f);
@@ -319,7 +317,7 @@ public class RTPGuiManager implements Listener {
         player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1f, forward ? 1.2f : 0.8f);
     }
     public void shutdown() {
-        updateTasks.values().forEach(BukkitTask::cancel);
+        updateTasks.values().forEach(SchedulerTask::cancel);
         updateTasks.clear();
         openInventories.clear();
         playerPages.clear();

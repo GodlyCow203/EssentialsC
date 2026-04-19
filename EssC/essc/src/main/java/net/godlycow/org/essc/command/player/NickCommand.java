@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
@@ -96,7 +97,7 @@ public class NickCommand extends Command {
 
     private boolean handleSelfReset(Player player) {
         plugin.getNickManager().removeNickname(player.getUniqueId()).thenRun(() -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 plugin.getNickManager().clearNickname(player);
                 player.sendMessage(lang.get(player, "nick.success.reset.self"));
                 plugin.debug(player.getName() + " reset own nickname");
@@ -113,7 +114,7 @@ public class NickCommand extends Command {
         }
 
         plugin.getNickManager().removeNickname(target.getUniqueId()).thenRun(() -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(admin, () -> {
                 plugin.getNickManager().clearNickname(target);
 
                 Map<String, String> adminPlaceholders = new HashMap<>();
@@ -169,7 +170,7 @@ public class NickCommand extends Command {
     private void checkAndSet(Player sender, UUID targetUuid, Player targetPlayer, String nickname, boolean self) {
         if (plugin.getConfigManager().isNickUnique()) {
             plugin.getNickManager().isNicknameTaken(nickname, targetUuid).thenAccept(taken -> {
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                plugin.getEssScheduler().runForEntity(sender, () -> {
                     if (taken) {
                         sender.sendMessage(lang.get(sender, "nick.error.exists"));
                         return;
@@ -184,7 +185,7 @@ public class NickCommand extends Command {
 
     private void doSetNickname(Player sender, UUID targetUuid, Player targetPlayer, String nickname, boolean self) {
         plugin.getNickManager().setNickname(targetUuid, nickname).thenRun(() -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(sender, () -> {
                 plugin.getNickManager().applyNickname(targetPlayer);
                 String plainNick = PlainTextComponentSerializer.plainText().serialize(plugin.getMiniMessage().deserialize(nickname));
 

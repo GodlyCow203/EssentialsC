@@ -28,6 +28,15 @@ public class PlayerScoreboard {
         this.playerId = player.getUniqueId();
         this.lineCount = Math.min(config.getLineCount(), 32);
 
+        if (net.godlycow.org.essc.softwares.ServerSoftware.isFolia()) {
+            this.scoreboard = null;
+            this.teams = new Team[0];
+            this.lastValues = new String[0];
+            this.objective = null;
+            destroyed.set(true);
+            return;
+        }
+
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         this.teams = new Team[lineCount];
         this.lastValues = new String[lineCount];
@@ -113,8 +122,6 @@ public class PlayerScoreboard {
             }
         }
     }
-
-    public UUID getPlayerId() { return playerId; }
 
     public boolean isActive() {
         return !destroyed.get() && scoreboard != null;

@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -62,7 +63,7 @@ public class HomeGuiListener implements Listener {
     public void onClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
         if (event.getInventory().getHolder() instanceof GuiManager.HomeHolder) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            plugin.getEssScheduler().runForEntityLater(player, () -> {
                 if (player.getOpenInventory().getTopInventory().getHolder()
                         instanceof GuiManager.HomeHolder) return;
                 manager.clearState(player);
@@ -91,7 +92,7 @@ public class HomeGuiListener implements Listener {
             case "home" -> {
                 plugin.getHomeManager().getHome(player.getUniqueId(), data).whenComplete((home, err) -> {
                     if (home != null) {
-                        Bukkit.getScheduler().runTask(plugin, () -> manager.openHomeDetails(player, home, player.getUniqueId()));
+                        plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, player.getUniqueId()));
                     }
                 });
             }
@@ -100,7 +101,7 @@ public class HomeGuiListener implements Listener {
                 if (adminTarget != null) {
                     plugin.getHomeManager().getHome(adminTarget, data).whenComplete((home, err) -> {
                         if (home != null) {
-                            Bukkit.getScheduler().runTask(plugin, () -> manager.openHomeDetails(player, home, adminTarget));
+                            plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, adminTarget));
                         }
                     });
                 }
@@ -142,9 +143,9 @@ public class HomeGuiListener implements Listener {
                 final UUID backTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(backTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        Bukkit.getScheduler().runTask(plugin, () -> manager.openHomeDetails(player, home, backTarget));
+                        plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, backTarget));
                     } else {
-                        Bukkit.getScheduler().runTask(plugin, () -> {
+                        plugin.getEssScheduler().runForEntity(player, () -> {
                             if (backTarget.equals(player.getUniqueId())) {
                                 manager.openHomeList(player);
                             } else {
@@ -173,7 +174,7 @@ public class HomeGuiListener implements Listener {
                 final UUID updateTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(updateTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        Bukkit.getScheduler().runTask(plugin, () -> manager.openConfirmUpdate(player, home, updateTarget));
+                        plugin.getEssScheduler().runForEntity(player, () -> manager.openConfirmUpdate(player, home, updateTarget));
                     }
                 });
             }
@@ -181,7 +182,7 @@ public class HomeGuiListener implements Listener {
                 final UUID deleteTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(deleteTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        Bukkit.getScheduler().runTask(plugin, () -> manager.openConfirmDelete(player, home, deleteTarget));
+                        plugin.getEssScheduler().runForEntity(player, () -> manager.openConfirmDelete(player, home, deleteTarget));
                     }
                 });
             }

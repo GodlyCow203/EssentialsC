@@ -49,11 +49,6 @@ public class VaultHook {
         return hooked;
     }
 
-    public VaultEconomy getVaultEconomy() {
-        return vaultEconomy;
-    }
-    
-
     private BigDecimal getBalanceSync(UUID uuid) {
         try (Connection conn = economyManager.getDatabase().openFreshConnection()) {
             try (PreparedStatement ps = conn.prepareStatement(

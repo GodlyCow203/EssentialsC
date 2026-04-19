@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.home.Home;
 import org.bukkit.Location;
@@ -55,7 +56,7 @@ public class HomeCommand extends Command {
 
     private void teleportToHome(Player player, UUID targetUuid, String name, String targetName) {
         plugin.getHomeManager().getHome(targetUuid, name).whenComplete((home, err) -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (home == null) {
                     player.sendMessage(lang.get(player, "home.teleport.not_found", Map.of("name", name)));
                     return;
@@ -64,9 +65,10 @@ public class HomeCommand extends Command {
                 if (targetName != null) {
                     Location loc = home.toLocation(plugin.getServer());
                     if (loc != null) {
-                        player.teleport(loc);
-                        player.sendMessage(lang.get(player, "home.admin.teleported_to_other",
-                                Map.of("player", targetName, "name", name)));
+                        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+                            if (success) player.sendMessage(lang.get(player, "home.admin.teleported_to_other",
+                                    Map.of("player", targetName, "name", name)));
+                        });
                     }
                 } else {
                     plugin.getHomeManager().startTeleport(player, home);
@@ -77,7 +79,7 @@ public class HomeCommand extends Command {
 
     private void showHomeList(Player player) {
         plugin.getHomeManager().getHomes(player.getUniqueId()).whenComplete((homes, err) -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (homes == null || homes.isEmpty()) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
                     return;

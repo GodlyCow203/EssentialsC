@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.auction;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.command.Command;
@@ -94,7 +95,7 @@ public class AhCommand extends Command {
 
         plugin.getAuctionManager().createAuction(player, item, price, duration, failReason)
                 .thenAccept(success -> {
-                    Bukkit.getScheduler().runTask(plugin, () -> {
+                    plugin.getEssScheduler().runForEntity(player, () -> {
                         if (success) {
                             player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                             player.sendMessage(lang.get(player, "ah.listed", Map.of(
@@ -171,7 +172,7 @@ public class AhCommand extends Command {
         }
 
         plugin.getAuctionManager().cancelAuction(player, id).thenAccept(success -> {
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (success) {
                     player.sendMessage(lang.get(player, "ah.cancelled"));
                     soundManager.playCancel(player);

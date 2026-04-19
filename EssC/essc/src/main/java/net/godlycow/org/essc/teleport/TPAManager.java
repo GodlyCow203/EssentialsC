@@ -2,6 +2,7 @@ package net.godlycow.org.essc.teleport;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.economy.EconomyManager;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -29,7 +28,7 @@ public class TPAManager implements Listener {
     private final Set<UUID> blockedPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Map<UUID, Set<UUID>> ignoredPlayers = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
     private long cooldownDuration;
     private long warmupDuration;
     private long timeoutDuration;
@@ -263,34 +262,31 @@ public class TPAManager implements Listener {
 
         teleporting.add(teleporter.getUniqueId());
 
-        BukkitTask particleTask = null;
+        SchedulerTask particleTask = null;
         if (useParticles) {
-            particleTask = new BukkitRunnable() {
+            particleTask = plugin.getEssScheduler().runForEntityTimer(teleporter, new Runnable() {
                 int ticks = 0;
                 @Override
                 public void run() {
                     if (!teleporter.isOnline() || !teleporting.contains(teleporter.getUniqueId())) {
-                        cancel();
+                        warmupTasks.remove(teleporter.getUniqueId());
                         return;
                     }
                     teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation().add(0, 1, 0), 10);
-                    if (++ticks >= warmupDuration) cancel();
+                    ticks++;
                 }
-            }.runTaskTimer(plugin, 0L, 1L);
+            }, 0L, 1L);
         }
 
-        final BukkitTask finalParticleTask = particleTask;
+        final SchedulerTask finalParticleTask = particleTask;
 
-        BukkitTask task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (teleporting.contains(teleporter.getUniqueId())) {
-                    executeTeleport(teleporter, destination);
-                }
-                warmupTasks.remove(teleporter.getUniqueId());
-                if (finalParticleTask != null) finalParticleTask.cancel();
+        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(teleporter, () -> {
+            if (teleporting.contains(teleporter.getUniqueId())) {
+                executeTeleport(teleporter, destination);
             }
-        }.runTaskLater(plugin, warmupDuration);
+            warmupTasks.remove(teleporter.getUniqueId());
+            if (finalParticleTask != null) finalParticleTask.cancel();
+        }, warmupDuration);
 
         warmupTasks.put(teleporter.getUniqueId(), task);
     }
@@ -300,25 +296,28 @@ public class TPAManager implements Listener {
 
         if (!teleporter.isOnline() || !destination.isOnline()) return;
 
-        teleporter.teleport(destination.getLocation());
+        Location dest = destination.getLocation();
+        plugin.getEssScheduler().teleportAsync(teleporter, dest).thenAccept(success -> {
+            if (!success) return;
 
-        if (useSounds) {
-            teleporter.playSound(teleporter.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-            destination.playSound(destination.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-        }
+            if (useSounds) {
+                teleporter.playSound(teleporter.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+                destination.playSound(destination.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            }
 
-        if (useParticles) {
-            teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation(), 100, 0.5, 1, 0.5);
-        }
+            if (useParticles) {
+                teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation(), 100, 0.5, 1, 0.5);
+            }
 
-        teleporter.sendMessage(plugin.getLanguageManager().get(teleporter, "tpa.teleport.success"));
+            teleporter.sendMessage(plugin.getLanguageManager().get(teleporter, "tpa.teleport.success"));
+        });
     }
 
     public void cancelTeleport(Player player, String reason) {
         if (!teleporting.contains(player.getUniqueId())) return;
 
         teleporting.remove(player.getUniqueId());
-        BukkitTask task = warmupTasks.remove(player.getUniqueId());
+        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
         String msgKey = switch(reason) {
@@ -404,30 +403,27 @@ public class TPAManager implements Listener {
     }
 
     private void startCleanupTask() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                long now = System.currentTimeMillis();
+        plugin.getEssScheduler().runGlobalTimer(() -> {
+            long now = System.currentTimeMillis();
 
-                List<TPARequest> toRemove = new ArrayList<>();
+            List<TPARequest> toRemove = new ArrayList<>();
 
-                incomingRequests.values().forEach(list -> {
-                    list.stream()
-                            .filter(r -> r.isExpired(timeoutDuration) && !r.isExpired())
-                            .forEach(toRemove::add);
-                });
+            incomingRequests.values().forEach(list -> {
+                list.stream()
+                        .filter(r -> r.isExpired(timeoutDuration) && !r.isExpired())
+                        .forEach(toRemove::add);
+            });
 
-                toRemove.forEach(req -> {
-                    notifyExpired(req);
-                    removeRequestFromBothMaps(req);
-                });
+            toRemove.forEach(req -> {
+                notifyExpired(req);
+                removeRequestFromBothMaps(req);
+            });
 
-                incomingRequests.entrySet().removeIf(e -> e.getValue().isEmpty());
-                outgoingRequests.entrySet().removeIf(e -> e.getValue().isEmpty());
+            incomingRequests.entrySet().removeIf(e -> e.getValue().isEmpty());
+            outgoingRequests.entrySet().removeIf(e -> e.getValue().isEmpty());
 
-                cooldowns.entrySet().removeIf(e -> e.getValue() <= now);
-            }
-        }.runTaskTimer(plugin, 20L, 20L);
+            cooldowns.entrySet().removeIf(e -> e.getValue() <= now);
+        }, 20L, 20L);
     }
 
     private void notifyExpired(TPARequest request) {

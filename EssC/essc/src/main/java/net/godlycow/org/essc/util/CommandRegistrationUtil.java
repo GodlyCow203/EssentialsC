@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.util;
 
+import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -62,7 +63,8 @@ public class CommandRegistrationUtil {
     }
 
     public static void syncCommands() {
-        Bukkit.getScheduler().runTaskLater(JavaPlugin.getProvidingPlugin(CommandRegistrationUtil.class), () -> {
+        EssentialsC plugin = (EssentialsC) JavaPlugin.getProvidingPlugin(CommandRegistrationUtil.class);
+        plugin.getEssScheduler().runGlobalLater(() -> {
             try {
                 Bukkit.getServer().getClass().getMethod("syncCommands").invoke(Bukkit.getServer());
             } catch (Exception e) {

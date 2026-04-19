@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.setup;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -65,28 +66,28 @@ public class FirstRunHandler implements Listener {
         long delay = 200L;
         long gap   = 60L;
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        plugin.getEssScheduler().runGlobalLater(() -> {
             plugin.getLogger().info("Running PlaceholderAPI expansion installs...");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Vault");
         }, delay);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () ->
+        plugin.getEssScheduler().runGlobalLater(() ->
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Player"),
                 delay + gap);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () ->
+        plugin.getEssScheduler().runGlobalLater(() ->
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Server"),
                 delay + gap * 2);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () ->
+        plugin.getEssScheduler().runGlobalLater(() ->
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Statistic"),
                 delay + gap * 3);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () ->
+        plugin.getEssScheduler().runGlobalLater(() ->
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download LuckPerms"),
                 delay + gap * 4);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        plugin.getEssScheduler().runGlobalLater(() -> {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi reload");
             sendNotice(player, "<color:#AAAAAA>Installed: <color:#FFFFFF>Vault, Player, Server, Statistic, LuckPerms</color>. PlaceholderAPI reloaded.");
             sendNotice(player, "<color:#AAAAAA>This message will not appear again.");

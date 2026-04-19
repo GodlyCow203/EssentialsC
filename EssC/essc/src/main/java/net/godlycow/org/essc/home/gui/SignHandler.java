@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,7 +10,7 @@ import org.bukkit.block.Sign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.scheduler.BukkitTask;
+
 
 import java.util.Map;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class SignHandler {
     private final GuiManager manager;
 
     private final Map<UUID, PendingInput> pending = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> timeouts = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> timeouts = new ConcurrentHashMap<>();
     private final Map<UUID, Location> originalBlocks = new ConcurrentHashMap<>();
 
     public SignHandler(EssentialsC plugin, GuiManager manager) {
@@ -87,7 +88,7 @@ public class SignHandler {
 
             player.openSign(sign, Side.FRONT);
 
-            BukkitTask task = Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
                 if (pending.remove(player.getUniqueId()) != null) {
                     restoreBlock(player);
                     player.sendMessage(plugin.getLanguageManager().get(player, "home.gui.input_timeout"));
@@ -101,7 +102,7 @@ public class SignHandler {
 
     private void handleInput(Player player, String[] lines) {
         PendingInput input = pending.remove(player.getUniqueId());
-        BukkitTask task = timeouts.remove(player.getUniqueId());
+        SchedulerTask task = timeouts.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
         restoreBlock(player);
@@ -161,7 +162,7 @@ public class SignHandler {
 
     public void cancel(Player player) {
         PendingInput input = pending.remove(player.getUniqueId());
-        BukkitTask task = timeouts.remove(player.getUniqueId());
+        SchedulerTask task = timeouts.remove(player.getUniqueId());
         if (task != null) task.cancel();
         restoreBlock(player);
     }
@@ -189,6 +190,11 @@ public class SignHandler {
         }
     }
 
-    private record PendingInput(InputType type, String targetHome, UUID targetUuid) {}
-    public enum InputType { RENAME, CREATE, SEARCH_HOMES, SEARCH_PLAYERS }
+    private record PendingInput(InputType type, String targetHome, UUID targetUuid) {
+
+    }
+
+    public enum InputType {
+        RENAME, CREATE, SEARCH_HOMES, SEARCH_PLAYERS
+    }
 }

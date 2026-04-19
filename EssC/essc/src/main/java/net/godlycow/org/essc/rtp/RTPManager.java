@@ -1,12 +1,11 @@
 package net.godlycow.org.essc.rtp;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +17,7 @@ public class RTPManager {
     private final EssentialsC plugin;
     private final Random random = new Random();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, BukkitTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
     private final Set<UUID> rtpInProgress = ConcurrentHashMap.newKeySet();
 
     private boolean enabled;
@@ -91,7 +90,7 @@ public class RTPManager {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(BukkitTask::cancel);
+        pendingTeleports.values().forEach(SchedulerTask::cancel);
         pendingTeleports.clear();
     }
 
@@ -182,22 +181,22 @@ public class RTPManager {
 
         Location initialLocation = player.getLocation().clone();
 
-        BukkitTask task = new BukkitRunnable() {
+        SchedulerTask task = plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
             int seconds = (int) actualWarmup;
 
             @Override
             public void run() {
                 if (!player.isOnline()) {
-                    cancel();
                     rtpInProgress.remove(player.getUniqueId());
-                    pendingTeleports.remove(player.getUniqueId());
+                    SchedulerTask t = pendingTeleports.remove(player.getUniqueId());
+                    if (t != null) t.cancel();
                     return;
                 }
 
                 if (cancelOnMovement && !hasBypassPermission(player, "movement") && hasMoved(initialLocation, player.getLocation())) {
-                    cancel();
                     rtpInProgress.remove(player.getUniqueId());
-                    pendingTeleports.remove(player.getUniqueId());
+                    SchedulerTask t = pendingTeleports.remove(player.getUniqueId());
+                    if (t != null) t.cancel();
                     player.sendMessage(plugin.getLanguageManager().get(player, "rtp.warmup.cancelled"));
                     return;
                 }
@@ -205,8 +204,8 @@ public class RTPManager {
                 seconds--;
 
                 if (seconds <= 0) {
-                    cancel();
-                    pendingTeleports.remove(player.getUniqueId());
+                    SchedulerTask t = pendingTeleports.remove(player.getUniqueId());
+                    if (t != null) t.cancel();
                     executeRTP(player, world);
                 } else {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 0.5f, 1.0f);
@@ -215,7 +214,7 @@ public class RTPManager {
                     player.sendActionBar(plugin.getLanguageManager().get(player, "rtp.warmup.actionbar", ph));
                 }
             }
-        }.runTaskTimer(plugin, 20L, 20L);
+        }, 20L, 20L);
 
         pendingTeleports.put(player.getUniqueId(), task);
     }
@@ -229,7 +228,7 @@ public class RTPManager {
     private void executeRTP(Player player, World world) {
         player.sendMessage(plugin.getLanguageManager().get(player, "rtp.searching"));
 
-        findSafeLocation(world).thenAccept(location -> Bukkit.getScheduler().runTask(plugin, () -> {
+        findSafeLocation(world).thenAccept(location -> plugin.getEssScheduler().runForEntity(player, () -> {
             if (!player.isOnline()) {
                 rtpInProgress.remove(player.getUniqueId());
                 return;
@@ -242,81 +241,87 @@ public class RTPManager {
             }
 
             Location finalLoc = location.clone();
-            finalLoc.getChunk().load();
             finalLoc.setYaw(random.nextFloat() * 360);
             finalLoc.setPitch(0);
 
-            player.teleport(finalLoc);
+            player.teleportAsync(finalLoc).thenAccept(success -> {
+                if (!success) {
+                    rtpInProgress.remove(player.getUniqueId());
+                    return;
+                }
 
-            cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
-            rtpInProgress.remove(player.getUniqueId());
+                cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+                rtpInProgress.remove(player.getUniqueId());
 
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("x", String.valueOf(finalLoc.getBlockX()));
-            placeholders.put("y", String.valueOf(finalLoc.getBlockY()));
-            placeholders.put("z", String.valueOf(finalLoc.getBlockZ()));
-            placeholders.put("world", world.getName());
-            player.sendMessage(plugin.getLanguageManager().get(player, "rtp.success", placeholders));
+                Map<String, String> placeholders = new HashMap<>();
+                placeholders.put("x", String.valueOf(finalLoc.getBlockX()));
+                placeholders.put("y", String.valueOf(finalLoc.getBlockY()));
+                placeholders.put("z", String.valueOf(finalLoc.getBlockZ()));
+                placeholders.put("world", world.getName());
+                player.sendMessage(plugin.getLanguageManager().get(player, "rtp.success", placeholders));
 
-            if (particles) {
-                spawnTeleportParticles(finalLoc);
-            }
-            player.playSound(finalLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
-            world.playSound(finalLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+                if (particles) {
+                    spawnTeleportParticles(finalLoc);
+                }
+                player.playSound(finalLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+                world.playSound(finalLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            });
         }));
     }
 
     private CompletableFuture<Location> findSafeLocation(World world) {
-        return CompletableFuture.supplyAsync(() -> {
-            WorldRTPSettings settings = getWorldSettings(world.getName());
-            Location spawn = world.getSpawnLocation();
+        WorldRTPSettings settings = getWorldSettings(world.getName());
+        Location spawn = world.getSpawnLocation();
+        int attempts = world.getEnvironment() == World.Environment.THE_END ? maxAttempts * 3 : maxAttempts;
 
-            int attempts = world.getEnvironment() == World.Environment.THE_END ? maxAttempts * 3 : maxAttempts;
+        return tryFindSafe(world, settings, spawn, attempts, 0);
+    }
 
-            for (int i = 0; i < attempts; i++) {
-                double angle = random.nextDouble() * Math.PI * 2;
-                int distance = settings.minRadius() + random.nextInt(settings.maxRadius() - settings.minRadius());
+    private CompletableFuture<Location> tryFindSafe(World world, WorldRTPSettings settings,
+                                                    Location spawn, int maxAttempts, int attempt) {
+        if (attempt >= maxAttempts) return CompletableFuture.completedFuture(null);
 
-                int x = spawn.getBlockX() + (int) (Math.cos(angle) * distance);
-                int z = spawn.getBlockZ() + (int) (Math.sin(angle) * distance);
+        double angle = random.nextDouble() * Math.PI * 2;
+        int distance = settings.minRadius() + random.nextInt(settings.maxRadius() - settings.minRadius());
+        int x = spawn.getBlockX() + (int) (Math.cos(angle) * distance);
+        int z = spawn.getBlockZ() + (int) (Math.sin(angle) * distance);
 
-                if (useBorder) {
-                    WorldBorder border = world.getWorldBorder();
-                    Location center = border.getCenter();
-                    double radius = border.getSize() / 2;
+        if (useBorder) {
+            WorldBorder border = world.getWorldBorder();
+            Location center = border.getCenter();
+            double radius = border.getSize() / 2;
+            if (Math.abs(x - center.getBlockX()) > radius || Math.abs(z - center.getBlockZ()) > radius) {
+                return tryFindSafe(world, settings, spawn, maxAttempts, attempt + 1);
+            }
+        }
 
-                    if (Math.abs(x - center.getBlockX()) > radius || Math.abs(z - center.getBlockZ()) > radius) {
-                        continue;
-                    }
-                }
-
-                int y;
-                if (world.getEnvironment() == World.Environment.NETHER) {
-                    y = findSafeNetherY(world, x, z);
-                    if (y <= 0) continue;
-                } else if (world.getEnvironment() == World.Environment.THE_END) {
-                    y = world.getHighestBlockYAt(x, z);
-                    if (y <= 0) continue;
-                } else {
-                    y = world.getHighestBlockYAt(x, z);
-                }
-
-                if (y < minY) y = minY;
-                if (y > maxY) y = maxY;
-
-                Location loc = new Location(world, x + 0.5, y + 1, z + 0.5);
-
-                Biome biome = world.getBiome(x, y, z);
-                if (settings.blockedBiomes().contains(biome.name().toLowerCase())) {
-                    continue;
-                }
-
-                if (isSafeLocation(loc)) {
-                    return loc;
+        return world.getChunkAtAsync(x >> 4, z >> 4).thenCompose(chunk -> {
+            int y;
+            if (world.getEnvironment() == World.Environment.NETHER) {
+                y = findSafeNetherY(world, x, z);
+                if (y <= 0) return tryFindSafe(world, settings, spawn, maxAttempts, attempt + 1);
+            } else {
+                y = world.getHighestBlockYAt(x, z);
+                if (world.getEnvironment() == World.Environment.THE_END && y <= 0) {
+                    return tryFindSafe(world, settings, spawn, maxAttempts, attempt + 1);
                 }
             }
 
-            return null;
+            if (y < minY) y = minY;
+            if (y > maxY) y = maxY;
+
+            Location loc = new Location(world, x + 0.5, y + 1, z + 0.5);
+
+            Biome biome = world.getBiome(x, y, z);
+            if (settings.blockedBiomes().contains(biome.name().toLowerCase())) {
+                return tryFindSafe(world, settings, spawn, maxAttempts, attempt + 1);
+            }
+
+            if (isSafeLocation(loc)) {
+                return CompletableFuture.completedFuture(loc);
+            }
+
+            return tryFindSafe(world, settings, spawn, maxAttempts, attempt + 1);
         });
     }
 

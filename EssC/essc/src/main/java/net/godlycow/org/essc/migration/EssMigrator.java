@@ -390,19 +390,46 @@ public class EssMigrator {
         final AtomicInteger bansMigrated = new AtomicInteger(0);
         final AtomicInteger bansFailed = new AtomicInteger(0);
         final List<String> warnings = new ArrayList<>();
-        void addWarning(String warning) { warnings.add(warning); }
-        public int usersMigrated() { return usersMigrated.get(); }
-        public int usersFailed() { return usersFailed.get(); }
-        public int warpsMigrated() { return warpsMigrated.get(); }
-        public int warpsFailed() { return warpsFailed.get(); }
-        public int homesMigrated() { return homesMigrated.get(); }
-        public int homesSkipped() { return homesSkipped.get(); }
-        public int economyRecords() { return economyRecords.get(); }
-        public int nicknamesMigrated() { return nicknamesMigrated.get(); }
-        public int mutesMigrated() { return mutesMigrated.get(); }
-        public int bansMigrated() { return bansMigrated.get(); }
-        public int bansFailed() { return bansFailed.get(); }
-        public List<String> warnings() { return warnings; }
+        void addWarning(String warning) {
+            warnings.add(warning);
+        }
+        public int usersMigrated() {
+            return usersMigrated.get();
+        }
+        public int usersFailed() {
+            return usersFailed.get();
+        }
+        public int warpsMigrated() {
+            return warpsMigrated.get();
+        }
+        public int warpsFailed() {
+            return warpsFailed.get();
+        }
+        public int homesMigrated() {
+
+            return homesMigrated.get();
+        }
+        public int homesSkipped() {
+            return homesSkipped.get();
+        }
+        public int economyRecords() {
+            return economyRecords.get();
+        }
+        public int nicknamesMigrated() {
+            return nicknamesMigrated.get();
+        }
+        public int mutesMigrated() {
+            return mutesMigrated.get();
+        }
+        public int bansMigrated() {
+            return bansMigrated.get();
+        }
+        public int bansFailed() {
+            return bansFailed.get();
+        }
+        public List<String> warnings() {
+            return warnings;
+        }
 
         @Override
         public String toString() {

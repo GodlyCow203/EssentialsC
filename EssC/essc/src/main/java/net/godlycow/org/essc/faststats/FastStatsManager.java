@@ -16,7 +16,4 @@ public class FastStatsManager {
         plugin.getLogger().info("enabled faststats");
     }
 
-    public Metrics getMetrics() {
-        return metrics;
-    }
 }

@@ -2,12 +2,10 @@ package net.godlycow.org.essc.version;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -30,66 +28,55 @@ public class VersionChecker implements Listener {
     }
 
     private void checkVersion(EssentialsC plugin) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                HttpURLConnection conn = null;
-                try {
-                    URL url = new URL(MODRINTH_API_URL);
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(5000);
-                    conn.setReadTimeout(5000);
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setRequestProperty("User-Agent", "EssentialsC/" + plugin.getDescription().getVersion());
+        plugin.getEssScheduler().runAsync(() -> {
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL(MODRINTH_API_URL);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setRequestProperty("User-Agent", "EssentialsC/" + plugin.getDescription().getVersion());
 
-                    int responseCode = conn.getResponseCode();
-                    if (responseCode != 200) {
-                        throw new Exception("HTTP " + responseCode);
-                    }
+                int responseCode = conn.getResponseCode();
+                if (responseCode != 200) {
+                    throw new Exception("HTTP " + responseCode);
+                }
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    reader.close();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
 
-                    String json = response.toString();
-                    Matcher matcher = VERSION_PATTERN.matcher(json);
+                String json = response.toString();
+                Matcher matcher = VERSION_PATTERN.matcher(json);
 
-                    if (matcher.find()) {
-                        latestVersion = matcher.group(1);
-                        String currentVersion = plugin.getDescription().getVersion();
-                        updateAvailable = !currentVersion.equalsIgnoreCase(latestVersion);
+                if (matcher.find()) {
+                    latestVersion = matcher.group(1);
+                    String currentVersion = plugin.getDescription().getVersion();
+                    updateAvailable = !currentVersion.equalsIgnoreCase(latestVersion);
 
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                logVersionStatus(plugin, currentVersion);
-                            }
-                        }.runTask(plugin);
-                    } else {
-                        throw new Exception("Could not parse version from response");
-                    }
+                    plugin.getEssScheduler().runGlobal(() -> logVersionStatus(plugin, currentVersion));
+                } else {
+                    throw new Exception("Could not parse version from response");
+                }
 
-                } catch (Exception e) {
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            plugin.getLogger().warning("================================");
-                            plugin.getLogger().warning("Could not check for updates: " + e.getMessage());
-                            plugin.getLogger().warning("================================");
-                        }
-                    }.runTask(plugin);
-                } finally {
-                    if (conn != null) {
-                        conn.disconnect();
-                    }
+            } catch (Exception e) {
+                plugin.getEssScheduler().runGlobal(() -> {
+                    plugin.getLogger().warning("================================");
+                    plugin.getLogger().warning("Could not check for updates: " + e.getMessage());
+                    plugin.getLogger().warning("================================");
+                });
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
                 }
             }
-        }.runTaskAsynchronously(plugin);
+        });
     }
 
     private void logVersionStatus(EssentialsC plugin, String currentVersion) {
@@ -117,7 +104,7 @@ public class VersionChecker implements Listener {
         if (!updateAvailable) return;
         if (!player.hasPermission("essentialsc.version.notify") && !player.isOp()) return;
 
-        Bukkit.getScheduler().runTaskLater(EssentialsC.getInstance(), () -> {
+        EssentialsC.getInstance().getEssScheduler().runForEntityLater(player, () -> {
             if (!player.isOnline()) return;
 
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));

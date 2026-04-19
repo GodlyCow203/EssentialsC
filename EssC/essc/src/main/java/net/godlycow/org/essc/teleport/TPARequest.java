@@ -23,14 +23,24 @@ public class TPARequest {
         this.requesterLocation = requester.getLocation().clone();
     }
 
-    public UUID getRequester() { return requester; }
-    public UUID getTarget() { return target; }
-    public Type getType() { return type; }
-    public long getTimestamp() { return timestamp; }
-    public Location getRequesterLocation() { return requesterLocation; }
-    public boolean isExpired() { return expired; }
-    public void setExpired(boolean expired) { this.expired = expired; }
-
+    public UUID getRequester() {
+        return requester;
+    }
+    public UUID getTarget() {
+        return target;
+    }
+    public Type getType() {
+        return type;
+    }
+    public long getTimestamp() {
+        return timestamp;
+    }
+    public boolean isExpired() {
+        return expired;
+    }
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
     public boolean isExpired(long timeoutMillis) {
         return System.currentTimeMillis() - timestamp > timeoutMillis;
     }

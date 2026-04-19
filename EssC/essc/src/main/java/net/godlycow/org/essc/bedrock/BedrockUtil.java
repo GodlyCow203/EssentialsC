@@ -36,10 +36,6 @@ public class BedrockUtil {
         return null;
     }
 
-    public Optional<Player> resolvePlayerOpt(String name) {
-        return Optional.ofNullable(resolvePlayer(name));
-    }
-
     public OfflinePlayer resolveOfflinePlayer(String name) {
         if (name == null || name.isBlank()) return null;
 
@@ -60,27 +56,9 @@ public class BedrockUtil {
 
         return null;
     }
-
-    public Optional<OfflinePlayer> resolveOfflinePlayerOpt(String name) {
-        return Optional.ofNullable(resolveOfflinePlayer(name));
-    }
-
     public boolean isBedrockPlayer(Player player) {
         return floodgateHook.isBedrockPlayer(player);
     }
-
-    public boolean isBedrockPlayer(UUID uuid) {
-        return floodgateHook.isBedrockPlayer(uuid);
-    }
-
-    public boolean isFloodgateAvailable() {
-        return floodgateHook.isAvailable();
-    }
-
-    public String getFloodgatePrefix() {
-        return floodgateHook.getPrefix();
-    }
-
 
     private OfflinePlayer searchOffline(String name) {
         return Arrays.stream(plugin.getServer().getOfflinePlayers())

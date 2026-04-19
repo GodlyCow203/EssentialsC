@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.nick;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.database.Database;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -157,7 +158,7 @@ public class NickManager implements Listener {
         if (!plugin.getConfigManager().isNickEnabled()) return;
 
         getNickname(player.getUniqueId()).thenAccept(opt -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (opt.isPresent()) {
                     String nick = opt.get();
                     player.displayName(plugin.getMiniMessage().deserialize(nick));

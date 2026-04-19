@@ -43,8 +43,6 @@ public class TpOfflineCommand extends Command {
             return true;
         }
 
-        player.teleport(loc);
-
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("player", target.getName());
         placeholders.put("world", loc.getWorld().getName());
@@ -52,8 +50,11 @@ public class TpOfflineCommand extends Command {
         placeholders.put("y", String.format("%.1f", loc.getY()));
         placeholders.put("z", String.format("%.1f", loc.getZ()));
 
-        player.sendMessage(lang.get(player, "tpoffline.success", placeholders));
-        plugin.debug(player.getName() + " teleported to " + target.getName() + "'s logout location");
+        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+            if (!success) return;
+            player.sendMessage(lang.get(player, "tpoffline.success", placeholders));
+            plugin.debug(player.getName() + " teleported to " + target.getName() + "'s logout location");
+        });
 
         return true;
     }

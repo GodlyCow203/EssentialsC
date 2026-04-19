@@ -93,12 +93,4 @@ public class LogoutDataManager implements Listener {
         return config.getString(uuid.toString() + ".name");
     }
 
-    public long getLogoutTime(UUID uuid) {
-        return config.getLong(uuid.toString() + ".time");
-    }
-
-    public void clearData(UUID uuid) {
-        config.set(uuid.toString(), null);
-        save();
-    }
 }

@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command.tpa;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -49,15 +50,18 @@ public class TPHereCommand extends Command {
 
         plugin.getBackManager().setBackLocation(target, target.getLocation());
 
-        target.teleport(player.getLocation());
+        Location dest = player.getLocation();
+        plugin.getEssScheduler().teleportAsync(target, dest).thenAccept(success -> {
+            if (!success) return;
 
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("target", target.getName());
-        player.sendMessage(lang.get(player, "tphere.success", senderPlaceholders));
+            Map<String, String> senderPlaceholders = new HashMap<>();
+            senderPlaceholders.put("target", target.getName());
+            player.sendMessage(lang.get(player, "tphere.success", senderPlaceholders));
 
-        Map<String, String> targetPlaceholders = new HashMap<>();
-        targetPlaceholders.put("player", player.getName());
-        target.sendMessage(lang.get(target, "tphere.teleported", targetPlaceholders));
+            Map<String, String> targetPlaceholders = new HashMap<>();
+            targetPlaceholders.put("player", player.getName());
+            target.sendMessage(lang.get(target, "tphere.teleported", targetPlaceholders));
+        });
 
         plugin.debug("TPHere: " + player.getName() + " teleported " + target.getName() + " to their location");
 

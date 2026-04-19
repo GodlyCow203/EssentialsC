@@ -96,12 +96,25 @@ public class ScoreboardConfig {
         return sb.toString();
     }
 
-    public boolean isEnabled() { return enabled; }
-    public int getUpdateInterval() { return updateInterval; }
-    public boolean isPersistent() { return persistent; }
-    public Component getTitle() { return title; }
-    public String getTitleRaw() { return titleRaw; }
-    public List<String> getLines() { return lines; }
-    public List<String[]> getLineTemplates() { return lineTemplates; }
-    public int getLineCount() { return lines.size(); }
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public int getUpdateInterval() {
+        return updateInterval;
+    }
+    public boolean isPersistent() {
+        return persistent;
+    }
+    public Component getTitle() {
+        return title;
+    }
+    public String getTitleRaw() {
+        return titleRaw;
+    }
+    public List<String> getLines() {
+        return lines;
+    }
+    public int getLineCount() {
+        return lines.size();
+    }
 }

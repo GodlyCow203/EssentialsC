@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.auction.AhSession;
 import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.Auction;
@@ -87,7 +88,7 @@ public class AhListener implements Listener {
             soundManager.playPageTurn(player);
             player.closeInventory();
 
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            plugin.getEssScheduler().runForEntityLater(player, () -> {
                 switch (navType) {
                     case "main" -> ahCommand.openMainGui(player, page);
                     case "listings" -> ahCommand.openListingsGui(player, page);
@@ -151,44 +152,44 @@ public class AhListener implements Listener {
             case "expired" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openExpiredGui(player), 1L);
             }
             case "listings" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openListingsGui(player, 1), 1L);
             }
             case "claim_all" -> handleClaimAll(player);
             case "refresh" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openMainGui(player, 1), 1L);
             }
             case "history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openHistoryTypeGui(player), 1L);
             }
             case "sell_history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openSellHistoryGui(player, 1), 1L);
             }
             case "buy_history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openBuyHistoryGui(player, 1), 1L);
             }
             case "history_type" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(plugin,
+                plugin.getEssScheduler().runForEntityLater(player,
                         () -> ahCommand.openHistoryTypeGui(player), 1L);
             }
         }
@@ -222,7 +223,7 @@ public class AhListener implements Listener {
         soundManager.playSuccess(player);
         player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed"));
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        plugin.getEssScheduler().runForEntityLater(player, () -> {
             if (!plugin.getAuctionManager().getExpiredItems(player.getUniqueId()).isEmpty()) {
                 ahCommand.openExpiredGui(player);
             } else {
@@ -267,7 +268,7 @@ public class AhListener implements Listener {
         player.closeInventory();
 
         plugin.getAuctionManager().cancelAuction(player, auction.getId()).thenAccept(success -> {
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (success) {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.cancelled"));
                     soundManager.playCancel(player);
@@ -296,7 +297,7 @@ public class AhListener implements Listener {
         player.closeInventory();
 
         plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 if (success) {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
                             "item", auction.getItem().getType().toString(),

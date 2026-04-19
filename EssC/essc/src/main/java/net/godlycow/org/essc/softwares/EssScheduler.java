@@ -2,8 +2,10 @@ package net.godlycow.org.essc.softwares;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class EssScheduler {
@@ -25,11 +27,11 @@ public class EssScheduler {
     public SchedulerTask runGlobal(Runnable task) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getGlobalRegionScheduler().run(plugin, t -> task.run())
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, t -> task.run())
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTask(plugin, task)
+                    plugin.getServer().getScheduler().runTask(plugin, task)
             );
         }
     }
@@ -37,11 +39,11 @@ public class EssScheduler {
     public SchedulerTask runGlobalLater(Runnable task, long delayTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, t -> task.run(), delayTicks)
+                    plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, t -> task.run(), delayTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
             );
         }
     }
@@ -49,11 +51,11 @@ public class EssScheduler {
     public SchedulerTask runGlobalTimer(Runnable task, long delayTicks, long periodTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, t -> task.run(), delayTicks, periodTicks)
+                    plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, t -> task.run(), delayTicks, periodTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
+                    plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
             );
         }
     }
@@ -63,11 +65,11 @@ public class EssScheduler {
             long delayMs = delayTicks * 50L;
             long periodMs = periodTicks * 50L;
             return new SchedulerTask(
-                plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, t -> task.run(), delayMs, periodMs, java.util.concurrent.TimeUnit.MILLISECONDS)
+                    plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, t -> task.run(), delayMs, periodMs, java.util.concurrent.TimeUnit.MILLISECONDS)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, task, delayTicks, periodTicks)
+                    plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, task, delayTicks, periodTicks)
             );
         }
     }
@@ -75,11 +77,11 @@ public class EssScheduler {
     public SchedulerTask runForEntity(Entity entity, Runnable task) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                entity.getScheduler().run(plugin, t -> task.run(), null)
+                    entity.getScheduler().run(plugin, t -> task.run(), null)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTask(plugin, task)
+                    plugin.getServer().getScheduler().runTask(plugin, task)
             );
         }
     }
@@ -87,11 +89,11 @@ public class EssScheduler {
     public SchedulerTask runForEntityLater(Entity entity, Runnable task, long delayTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                entity.getScheduler().runDelayed(plugin, t -> task.run(), null, delayTicks)
+                    entity.getScheduler().runDelayed(plugin, t -> task.run(), null, delayTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
             );
         }
     }
@@ -99,11 +101,11 @@ public class EssScheduler {
     public SchedulerTask runForEntityTimer(Entity entity, Runnable task, long delayTicks, long periodTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                entity.getScheduler().runAtFixedRate(plugin, t -> task.run(), null, delayTicks, periodTicks)
+                    entity.getScheduler().runAtFixedRate(plugin, t -> task.run(), null, delayTicks, periodTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
+                    plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
             );
         }
     }
@@ -111,11 +113,11 @@ public class EssScheduler {
     public SchedulerTask runForLocation(Location location, Runnable task) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getRegionScheduler().run(plugin, location, t -> task.run())
+                    plugin.getServer().getRegionScheduler().run(plugin, location, t -> task.run())
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTask(plugin, task)
+                    plugin.getServer().getScheduler().runTask(plugin, task)
             );
         }
     }
@@ -123,11 +125,11 @@ public class EssScheduler {
     public SchedulerTask runForLocationLater(Location location, Runnable task, long delayTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getRegionScheduler().runDelayed(plugin, location, t -> task.run(), delayTicks)
+                    plugin.getServer().getRegionScheduler().runDelayed(plugin, location, t -> task.run(), delayTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task, delayTicks)
             );
         }
     }
@@ -135,12 +137,32 @@ public class EssScheduler {
     public SchedulerTask runForLocationTimer(Location location, Runnable task, long delayTicks, long periodTicks) {
         if (ServerSoftware.isFolia()) {
             return new SchedulerTask(
-                plugin.getServer().getRegionScheduler().runAtFixedRate(plugin, location, t -> task.run(), delayTicks, periodTicks)
+                    plugin.getServer().getRegionScheduler().runAtFixedRate(plugin, location, t -> task.run(), delayTicks, periodTicks)
             );
         } else {
             return new SchedulerTask(
-                plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
+                    plugin.getServer().getScheduler().runTaskTimer(plugin, task, delayTicks, periodTicks)
             );
+        }
+    }
+
+    public CompletableFuture<Boolean> teleportAsync(Player player, Location location) {
+        if (ServerSoftware.isFolia()) {
+            return player.teleportAsync(location);
+        } else {
+            try {
+                return player.teleportAsync(location);
+            } catch (NoSuchMethodError e) {
+                return CompletableFuture.completedFuture(player.teleport(location));
+            }
+        }
+    }
+
+    public void runOnRegion(Location location, Runnable task) {
+        if (ServerSoftware.isFolia()) {
+            plugin.getServer().getRegionScheduler().run(plugin, location, t -> task.run());
+        } else {
+            plugin.getServer().getScheduler().runTask(plugin, task);
         }
     }
 

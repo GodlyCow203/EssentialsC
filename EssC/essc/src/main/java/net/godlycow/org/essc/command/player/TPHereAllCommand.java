@@ -25,17 +25,17 @@ public class TPHereAllCommand extends Command {
         Player player = (Player) sender;
         Location targetLocation = player.getLocation();
 
-        int teleportedCount = 0;
         int skippedCount = 0;
 
         Set<UUID> blockedPlayers = plugin.getTPAManager() != null
                 ? plugin.getTPAManager().getBlockedPlayers()
                 : Collections.emptySet();
 
+        List<java.util.concurrent.CompletableFuture<Boolean>> futures = new java.util.ArrayList<>();
+        List<Player> targets = new java.util.ArrayList<>();
+
         for (Player target : Bukkit.getOnlinePlayers()) {
-            if (target == player) {
-                continue;
-            }
+            if (target == player) continue;
 
             if (plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(target)) {
                 if (!player.hasPermission("essentialsc.vanish.bypass")) {
@@ -51,20 +51,33 @@ public class TPHereAllCommand extends Command {
                 }
             }
 
-            target.teleport(targetLocation);
-            teleportedCount++;
-
-            Map<String, String> targetPlaceholders = new HashMap<>();
-            targetPlaceholders.put("player", player.getName());
-            target.sendMessage(lang.get(target, "tphereall.teleported", targetPlaceholders));
+            targets.add(target);
+            futures.add(plugin.getEssScheduler().teleportAsync(target, targetLocation));
         }
 
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("count", String.valueOf(teleportedCount));
-        senderPlaceholders.put("skipped", String.valueOf(skippedCount));
-        player.sendMessage(lang.get(player, "tphereall.success", senderPlaceholders));
+        final int skipped = skippedCount;
+        java.util.concurrent.CompletableFuture.allOf(futures.toArray(new java.util.concurrent.CompletableFuture[0]))
+                .thenRun(() -> {
+                    int teleportedCount = 0;
+                    for (int i = 0; i < futures.size(); i++) {
+                        try {
+                            if (futures.get(i).get()) {
+                                teleportedCount++;
+                                Player target = targets.get(i);
+                                Map<String, String> targetPlaceholders = new HashMap<>();
+                                targetPlaceholders.put("player", player.getName());
+                                target.sendMessage(lang.get(target, "tphereall.teleported", targetPlaceholders));
+                            }
+                        } catch (Exception ignored) {}
+                    }
 
-        plugin.debug("TPHereAll: " + player.getName() + " teleported " + teleportedCount + " players, skipped " + skippedCount);
+                    Map<String, String> senderPlaceholders = new HashMap<>();
+                    senderPlaceholders.put("count", String.valueOf(teleportedCount));
+                    senderPlaceholders.put("skipped", String.valueOf(skipped));
+                    player.sendMessage(lang.get(player, "tphereall.success", senderPlaceholders));
+
+                    plugin.debug("TPHereAll: " + player.getName() + " teleported " + teleportedCount + " players, skipped " + skipped);
+                });
 
         return true;
     }

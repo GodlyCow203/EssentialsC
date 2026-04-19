@@ -26,16 +26,40 @@ public class Auction {
         this.claimed = false;
     }
 
-    public int getId() { return id; }
-    public UUID getSellerUuid() { return sellerUuid; }
-    public String getSellerName() { return sellerName; }
-    public ItemStack getItem() { return item.clone(); }
-    public BigDecimal getPrice() { return price; }
-    public long getListedTime() { return listedTime; }
-    public long getDuration() { return duration; }
-    public boolean isClaimed() { return claimed; }
-    public void setClaimed(boolean claimed) { this.claimed = claimed; }
-    public long getExpiryTime() { return listedTime + duration; }
-    public boolean isExpired() { return System.currentTimeMillis() > getExpiryTime(); }
-    public long getTimeRemaining() { return Math.max(0, getExpiryTime() - System.currentTimeMillis()); }
+    public int getId() {
+        return id;
+    }
+    public UUID getSellerUuid() {
+        return sellerUuid;
+    }
+    public String getSellerName() {
+        return sellerName;
+    }
+    public ItemStack getItem() {
+        return item.clone();
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+    public long getListedTime() {
+        return listedTime;
+    }
+    public long getDuration() {
+        return duration;
+    }
+    public boolean isClaimed() {
+        return claimed;
+    }
+    public void setClaimed(boolean claimed) {
+        this.claimed = claimed;
+    }
+    public long getExpiryTime() {
+        return listedTime + duration;
+    }
+    public boolean isExpired() {
+        return System.currentTimeMillis() > getExpiryTime();
+    }
+    public long getTimeRemaining() {
+        return Math.max(0, getExpiryTime() - System.currentTimeMillis());
+    }
 }

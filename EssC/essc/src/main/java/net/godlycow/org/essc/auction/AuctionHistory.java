@@ -5,7 +5,10 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class AuctionHistory {
-    public enum Type { SELL, BUY }
+
+    public enum Type {
+        SELL, BUY
+    }
 
     private final int id;
     private final UUID playerUuid;
@@ -28,12 +31,16 @@ public class AuctionHistory {
         this.auctionId = auctionId;
     }
 
-    public int getId() { return id; }
-    public UUID getPlayerUuid() { return playerUuid; }
-    public Type getType() { return type; }
-    public ItemStack getItem() { return item.clone(); }
-    public BigDecimal getPrice() { return price; }
-    public String getOtherParty() { return otherParty; }
-    public long getTimestamp() { return timestamp; }
-    public int getAuctionId() { return auctionId; }
+    public int getId() {
+        return id;
+    }
+    public Type getType() {
+        return type;
+    }
+    public ItemStack getItem() {
+        return item.clone();
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
 }

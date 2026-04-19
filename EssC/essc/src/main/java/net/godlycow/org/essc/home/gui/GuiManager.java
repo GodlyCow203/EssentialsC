@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.home.Home;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -38,11 +39,6 @@ public class GuiManager {
         startCleanupTask();
     }
 
-    public boolean isGuiMode() {
-        return plugin.getConfigManager().getHomeMode().equals("gui");
-    }
-
-
     public void openHomeList(Player player) {
         openHomeList(player, 0, SortMode.ALPHABETICAL, null);
     }
@@ -67,7 +63,7 @@ public class GuiManager {
             playerStates.put(player.getUniqueId(),
                     new PlayerState(targetPage, sort, search, sorted, GuiViewMode.OWN_HOMES, null));
 
-            runSync(() -> {
+            runSync(player, () -> {
                 if (!player.isOnline()) return;
                 Inventory gui = builder.buildHomeList(player, sorted, targetPage, totalPages, sort);
                 applyHolder(gui, player.getUniqueId(), GuiMode.LIST, null, GuiViewMode.OWN_HOMES);
@@ -84,7 +80,7 @@ public class GuiManager {
             return;
         }
 
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
             Inventory gui = builder.buildPlayerManagement(player);
             applyHolder(gui, null, GuiMode.PLAYER_TYPE_SELECT, null, GuiViewMode.ADMIN);
@@ -98,11 +94,11 @@ public class GuiManager {
 
         plugin.getHomeManager().getAllHomeOwners().whenComplete((uuids, err) -> {
             if (err != null || uuids == null) {
-                runSync(() -> player.sendMessage(plugin.getLanguageManager().get(player, "home.gui.error")));
+                runSync(player, () -> player.sendMessage(plugin.getLanguageManager().get(player, "home.gui.error")));
                 return;
             }
 
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            plugin.getEssScheduler().runAsync(() -> {
                 List<OfflinePlayer> players = new ArrayList<>();
                 for (UUID uuid : uuids) {
                     OfflinePlayer p = Bukkit.getOfflinePlayer(uuid);
@@ -128,7 +124,7 @@ public class GuiManager {
                         new PlayerState(targetPage, SortMode.ALPHABETICAL, search, null, GuiViewMode.ADMIN, type));
 
                 final List<OfflinePlayer> finalPlayers = players;
-                runSync(() -> {
+                runSync(player, () -> {
                     if (!player.isOnline()) return;
                     Inventory gui = builder.buildPlayerList(player, finalPlayers, targetPage, totalPages, type);
                     applyHolder(gui, null, GuiMode.PLAYER_LIST, null, GuiViewMode.ADMIN);
@@ -143,7 +139,7 @@ public class GuiManager {
         if (!checkCooldown(player)) return;
 
         plugin.getHomeManager().getHomes(targetUuid).whenComplete((homes, err) ->
-                runSync(() -> {
+                runSync(player, () -> {
                     if (!player.isOnline()) return;
                     Inventory gui = builder.buildPlayerHomes(player, targetUuid, targetName, homes);
                     applyHolder(gui, targetUuid, GuiMode.ADMIN_PLAYER, null, GuiViewMode.ADMIN);
@@ -156,7 +152,7 @@ public class GuiManager {
     public void openHomeDetails(Player player, Home home, UUID targetUuid) {
         if (!checkCooldown(player)) return;
 
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
             boolean isAdmin = !targetUuid.equals(player.getUniqueId());
             Inventory gui = builder.buildHomeDetails(player, home, targetUuid);
@@ -170,7 +166,7 @@ public class GuiManager {
     public void openCreateGui(Player player) {
         if (!checkCooldown(player)) return;
 
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
             Inventory gui = builder.buildCreate(player);
             applyHolder(gui, player.getUniqueId(), GuiMode.CREATE, null, GuiViewMode.OWN_HOMES);
@@ -182,7 +178,7 @@ public class GuiManager {
     public void openConfirmDelete(Player player, Home home, UUID targetUuid) {
         if (!checkCooldown(player)) return;
 
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
             Inventory gui = builder.buildConfirmDelete(player, home, targetUuid);
             applyHolder(gui, targetUuid, GuiMode.CONFIRM_DELETE, home.getName(),
@@ -195,7 +191,7 @@ public class GuiManager {
     public void openConfirmUpdate(Player player, Home home, UUID targetUuid) {
         if (!checkCooldown(player)) return;
 
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
             Inventory gui = builder.buildConfirmUpdate(player, home, targetUuid);
             applyHolder(gui, targetUuid, GuiMode.CONFIRM_UPDATE, home.getName(),
@@ -251,7 +247,7 @@ public class GuiManager {
 
     public void playSound(Player player, GuiSound type) {
         if (!plugin.getConfigManager().isHomeSounds()) return;
-        runSync(() -> {
+        runSync(player, () -> {
             if (!player.isOnline()) return;
 
             Sound sound;
@@ -288,12 +284,12 @@ public class GuiManager {
         return true;
     }
 
-    private void runSync(Runnable task) {
-        plugin.getServer().getScheduler().runTask(plugin, task);
+    private void runSync(Player player, Runnable task) {
+        plugin.getEssScheduler().runForEntity(player, task);
     }
 
     private void startCleanupTask() {
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+        plugin.getEssScheduler().runGlobalTimer(() -> {
             long now = System.currentTimeMillis();
             playerStates.entrySet().removeIf(entry -> {
                 if (entry.getValue().isExpired(now)) {
@@ -357,12 +353,26 @@ public class GuiManager {
             this.viewMode   = viewMode;
         }
 
-        @Override public Inventory getInventory() { return inventory; }
-        public void setInventory(Inventory inv)   { this.inventory = inv; }
-        public GuiManager getManager()        { return manager; }
-        public GuiMode getMode()                  { return mode; }
-        public String getHomeName()               { return homeName; }
-        public UUID getTargetUuid()               { return targetUuid; }
-        public GuiViewMode getViewMode()          { return viewMode; }
+        @Override public Inventory getInventory() {
+            return inventory;
+        }
+        public void setInventory(Inventory inv) {
+            this.inventory = inv;
+        }
+        public GuiManager getManager() {
+            return manager;
+        }
+        public GuiMode getMode() {
+            return mode;
+        }
+        public String getHomeName() {
+            return homeName;
+        }
+        public UUID getTargetUuid() {
+            return targetUuid;
+        }
+        public GuiViewMode getViewMode() {
+            return viewMode;
+        }
     }
 }

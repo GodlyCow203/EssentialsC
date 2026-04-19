@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.home.Home;
 import org.bukkit.Bukkit;
@@ -36,7 +37,7 @@ public class HomesCommand extends Command {
             plugin.debug("Listing homes for " + target.getName() + " (requested by " + player.getName() + ")");
 
             plugin.getHomeManager().getHomes(target.getUniqueId()).thenAccept(homes -> {
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
                     sendHomeList(player, homes, target.getName());
                 });
             });
@@ -46,7 +47,7 @@ public class HomesCommand extends Command {
         plugin.debug("Listing homes for " + player.getName());
 
         plugin.getHomeManager().getHomes(player.getUniqueId()).thenAccept(homes -> {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
                 int max = plugin.getHomeManager().getMaxHomes(player);
                 String used = String.valueOf(homes.size());
                 String limit = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);

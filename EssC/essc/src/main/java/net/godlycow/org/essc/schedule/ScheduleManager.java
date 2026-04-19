@@ -1,9 +1,10 @@
 package net.godlycow.org.essc.schedule;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.scheduler.BukkitTask;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +22,8 @@ public class ScheduleManager {
     private final File file;
 
     private final Map<String, Schedule> schedules = new LinkedHashMap<>();
-    private final Map<String, BukkitTask> tasks   = new HashMap<>();
-    private BukkitTask clockTask;
+    private final Map<String, SchedulerTask> tasks   = new HashMap<>();
+    private SchedulerTask clockTask;
     private boolean masterEnabled = true;
 
     public ScheduleManager(EssentialsC plugin) {
@@ -77,8 +78,8 @@ public class ScheduleManager {
 
             if (schedule.isIntervalBased()) {
                 long ticks = schedule.getInterval() * 20L;
-                BukkitTask task = plugin.getServer().getScheduler()
-                        .runTaskTimer(plugin, () -> run(schedule), ticks, ticks);
+                SchedulerTask task = plugin.getEssScheduler().runGlobalTimer(
+                        () -> run(schedule), ticks, ticks);
                 tasks.put(schedule.getName(), task);
             }
         }
@@ -88,8 +89,7 @@ public class ScheduleManager {
 
         if (hasTimeBased) {
             long secondsUntilNextMinute = 60 - LocalTime.now().getSecond();
-            clockTask = plugin.getServer().getScheduler().runTaskTimer(
-                    plugin,
+            clockTask = plugin.getEssScheduler().runGlobalTimer(
                     this::tickClock,
                     secondsUntilNextMinute * 20L,
                     60 * 20L
@@ -98,7 +98,7 @@ public class ScheduleManager {
     }
 
     private void stopTasks() {
-        tasks.values().forEach(BukkitTask::cancel);
+        tasks.values().forEach(SchedulerTask::cancel);
         tasks.clear();
         if (clockTask != null) {
             clockTask.cancel();

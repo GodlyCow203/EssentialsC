@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.scoreboard;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -9,7 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitTask;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class ScoreboardManager implements Listener {
     private final Set<UUID> disabledPlayers = new HashSet<>();
 
     private ScoreboardConfig config;
-    private BukkitTask updateTask;
+    private SchedulerTask updateTask;
     private File dataFile;
     private YamlConfiguration dataConfig;
     private final AtomicBoolean reloading = new AtomicBoolean(false);
@@ -106,7 +107,7 @@ public class ScoreboardManager implements Listener {
 
     private void start() {
         Bukkit.getOnlinePlayers().forEach(this::addPlayer);
-        updateTask = Bukkit.getScheduler().runTaskTimer(plugin, this::updateAll,
+        updateTask = plugin.getEssScheduler().runGlobalTimer(this::updateAll,
                 10L, config.getUpdateInterval());
     }
 
@@ -114,24 +115,27 @@ public class ScoreboardManager implements Listener {
         if (disabledPlayers.contains(player.getUniqueId())) return;
         if (!player.isOnline()) return;
 
-        try {
-            PlayerScoreboard existing;
-            synchronized (boards) {
-                existing = boards.remove(player.getUniqueId());
-            }
-            if (existing != null) {
-                existing.hide(player);
-                existing.destroy();
-            }
+        plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
+            if (!player.isOnline()) return;
+            try {
+                PlayerScoreboard existing;
+                synchronized (boards) {
+                    existing = boards.remove(player.getUniqueId());
+                }
+                if (existing != null) {
+                    existing.hide(player);
+                    existing.destroy();
+                }
 
-            PlayerScoreboard board = new PlayerScoreboard(player, config);
-            synchronized (boards) {
-                boards.put(player.getUniqueId(), board);
+                PlayerScoreboard board = new PlayerScoreboard(player, config);
+                synchronized (boards) {
+                    boards.put(player.getUniqueId(), board);
+                }
+                board.show(player);
+            } catch (Exception e) {
+                plugin.getLogger().log(Level.WARNING, "Failed to add scoreboard for " + player.getName(), e);
             }
-            board.show(player);
-        } catch (Exception e) {
-            plugin.getLogger().log(Level.WARNING, "Failed to add scoreboard for " + player.getName(), e);
-        }
+        });
     }
 
     public void stop() {
@@ -147,11 +151,13 @@ public class ScoreboardManager implements Listener {
                     Map.Entry<UUID, PlayerScoreboard> entry = it.next();
                     try {
                         Player player = Bukkit.getPlayer(entry.getKey());
+                        PlayerScoreboard sb = entry.getValue();
                         if (player != null && player.isOnline()) {
-                            entry.getValue().hide(player);
-                            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+                            plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
+                                try { sb.hide(player); } catch (Exception ignored) {}
+                            });
                         }
-                        entry.getValue().destroy();
+                        sb.destroy();
                     } catch (Exception e) {
                         plugin.getLogger().warning("Error stopping scoreboard: " + e.getMessage());
                     }
@@ -179,11 +185,17 @@ public class ScoreboardManager implements Listener {
                 ProcessedData cached = placeholderCache.get(uuid);
 
                 if (cached != null && (now - cached.timestamp) < CACHE_TTL_MS) {
-                    try {
-                        board.updateProcessed(player, cached.title, Arrays.asList(cached.lines));
-                    } catch (Exception e) {
-                        plugin.getLogger().warning("Error updating scoreboard from cache for " + player.getName());
-                    }
+                    final PlayerScoreboard cachedBoard = board;
+                    final ProcessedData cachedData = cached;
+                    final Player cachedPlayer = player;
+                    plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
+                        if (!cachedPlayer.isOnline() || !cachedBoard.isActive()) return;
+                        try {
+                            cachedBoard.updateProcessed(cachedPlayer, cachedData.title, Arrays.asList(cachedData.lines));
+                        } catch (Exception e) {
+                            plugin.getLogger().warning("Error updating scoreboard from cache for " + cachedPlayer.getName());
+                        }
+                    });
                 } else {
                     stalePlayers.add(player);
                 }
@@ -193,7 +205,7 @@ public class ScoreboardManager implements Listener {
         if (!stalePlayers.isEmpty()) {
             final List<Player> toProcess = new ArrayList<>(stalePlayers);
 
-            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            plugin.getEssScheduler().runAsync(() -> {
                 List<ProcessedResult> results = new ArrayList<>(toProcess.size());
 
                 for (Player player : toProcess) {
@@ -213,29 +225,34 @@ public class ScoreboardManager implements Listener {
                 }
 
                 if (!results.isEmpty()) {
-                    Bukkit.getScheduler().runTask(plugin, () -> {
-                        final long applyTime = System.currentTimeMillis();
+                    final long applyTime = System.currentTimeMillis();
 
-                        for (ProcessedResult result : results) {
-                            Player player = Bukkit.getPlayer(result.uuid);
-                            if (player == null || !player.isOnline()) continue;
+                    for (ProcessedResult result : results) {
+                        Player player = Bukkit.getPlayer(result.uuid);
+                        if (player == null || !player.isOnline()) continue;
 
-                            PlayerScoreboard board;
-                            synchronized (boards) {
-                                board = boards.get(result.uuid);
-                            }
-                            if (board == null || !board.isActive()) continue;
-
-                            placeholderCache.put(result.uuid,
-                                    new ProcessedData(result.title, result.lines, applyTime));
-
-                            try {
-                                board.updateProcessed(player, result.title, Arrays.asList(result.lines));
-                            } catch (Exception e) {
-                                plugin.getLogger().warning("Error updating scoreboard for " + player.getName() + ": " + e.getMessage());
-                            }
+                        PlayerScoreboard board;
+                        synchronized (boards) {
+                            board = boards.get(result.uuid);
                         }
-                    });
+                        if (board == null || !board.isActive()) continue;
+
+                        placeholderCache.put(result.uuid,
+                                new ProcessedData(result.title, result.lines, applyTime));
+
+                        final PlayerScoreboard finalBoard = board;
+                        final ProcessedResult finalResult = result;
+                        final Player finalPlayer = player;
+
+                        plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
+                            if (!finalPlayer.isOnline() || !finalBoard.isActive()) return;
+                            try {
+                                finalBoard.updateProcessed(finalPlayer, finalResult.title, Arrays.asList(finalResult.lines));
+                            } catch (Exception e) {
+                                plugin.getLogger().warning("Error updating scoreboard for " + finalPlayer.getName() + ": " + e.getMessage());
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -401,10 +418,10 @@ public class ScoreboardManager implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         if (!config.isEnabled() || reloading.get()) return;
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            Player player = event.getPlayer();
-            if (player.isOnline() && !reloading.get()) {
-                addPlayer(player);
+        Player joining = event.getPlayer();
+        plugin.getEssScheduler().runForLocationLater(joining.getLocation(), () -> {
+            if (joining.isOnline() && !reloading.get()) {
+                addPlayer(joining);
             }
         }, 10L);
     }

@@ -497,11 +497,4 @@ public class HomeItems {
 
     public NamespacedKey getActionKey() { return keyAction; }
 
-    public String getAction(PersistentDataContainer pdc) {
-        return pdc.get(keyAction, PersistentDataType.STRING);
-    }
-
-    public boolean hasAction(PersistentDataContainer pdc) {
-        return pdc.has(keyAction, PersistentDataType.STRING);
-    }
 }
