@@ -191,7 +191,7 @@ public final class EssentialsC extends JavaPlugin {
         rulesManager.load();
 
 
-        new FlyManager(this);
+        flyManager = new FlyManager(this);
 
         if (configManager.isScoreboardEnabled()) {
             if (ServerSoftware.isFolia()) {
