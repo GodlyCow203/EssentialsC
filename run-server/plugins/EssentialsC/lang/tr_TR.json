@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Büyülü kitaplara müzayede evinde izin verilmez.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Bu eşya kara listededir ve satılamaz.",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color> konumuna ışınlandınız!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>'<color:#FFFFFF><warp></color>' ışınlanma noktası bulunamadı.</color>",

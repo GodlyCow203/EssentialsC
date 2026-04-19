@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>オークションハウスではエンチャント本は使用できません。",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>このアイテムはブラックリストに登録されており、販売できません。",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color>にテレポートしました！</color>",
   "warp.not_found": "<prefix> <color:#FF0000>ワープ '<color:#FFFFFF><warp></color>' が見つかりません。</color>",
@@ -943,6 +945,6 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>インベントリを<color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>個のアイテム)で販売しました</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>次のメッセージを送信する前に<seconds>秒お待ちください。",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>スローモードが有効です。<time>後に再度チャットできます。",
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>スローモードが有効です。<time>後に再度チャットできます。"
 
 }

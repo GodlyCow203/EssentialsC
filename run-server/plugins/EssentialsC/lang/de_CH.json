@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Verzaubereti Büecher sind im Auktionshuus nöd erlaubt.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Dä Gstand staht uf dr schwarze Lischt und cha nöd verchouft wärde.",
 
   "warp.success": "<prefix> <color:#FFF200>Zu <color:#FFFFFF><warp></color> teleportiert!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>Warp '<color:#FFFFFF><warp></color>' nid gfunde.</color>",

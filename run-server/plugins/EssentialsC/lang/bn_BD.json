@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>নিলাম ঘরে যাদুকর বই অনুমোদিত নয়।",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>এই আইটেমটি ব্ল্যাকলিস্টে রয়েছে এবং বিক্রি করা যাবে না।",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color>-এ টেলিপোর্ট হয়েছে!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>ওয়ার্প '<color:#FFFFFF><warp></color>' পাওয়া যায়নি।</color>",

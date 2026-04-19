@@ -694,6 +694,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>ஏல வீட்டில் மந்திர புத்தகங்கள் அனுமதிக்கப்படவில்லை.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>இந்த பொருள் கருப்பு பட்டியலில் உள்ளது மற்றும் விற்க முடியாது.",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color> க்கு அழைக்கப்பட்டீர்கள்!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>வார்ப் '<color:#FFFFFF><warp></color>' கிடைக்கவில்லை.</color>",

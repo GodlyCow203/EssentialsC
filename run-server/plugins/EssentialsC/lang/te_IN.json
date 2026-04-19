@@ -695,6 +695,8 @@
   "ah.gui.separator": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.separator_top": "<color:#4B5563>━━━━━━━━━━━━━━━━━━━━━</color>",
   "ah.gui.filler.name": " ",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>వేలం ఇంట్లో మాయా పుస్తకాలను అనుమతించరు.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>ఈ వస్తువు నల్ల జాబితాలో ఉంది మరియు అమ్మలేము.",
 
   "warp.success": "<prefix> <color:#FFF200><color:#FFFFFF><warp></color>కు టెలిపోర్ట్ అయ్యారు!</color>",
   "warp.not_found": "<prefix> <color:#FF0000>వార్ప్ '<color:#FFFFFF><warp></color>' కనుగొనబడలేదు.</color>",

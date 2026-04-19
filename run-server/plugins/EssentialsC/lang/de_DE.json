@@ -613,6 +613,8 @@
   "ah.right_click_cancel": "<prefix> <color:#FFF200>Rechtsklick, um diese Auktion abzubrechen</color>",
   "ah.not_found": "<prefix> <color:#FF0000>Diese Auktion existiert nicht mehr.</color>",
   "ah.expired_waiting": "<prefix> <color:#FFF200>Du hast <color:#FFFFFF><count></color> abgelaufene Gegenstände wartend!</color>",
+  "ah.sell.enchanted_books_disabled": "<prefix> <#FF0000>Verzauberte Bücher sind im Auktionshaus nicht erlaubt.",
+  "ah.sell.material_blacklisted": "<prefix> <#FF0000>Dieser Gegenstand steht auf der schwarzen Liste und kann nicht verkauft werden.",
 
 
   "warp.success": "<prefix> <color:#FFF200>Zu <color:#FFFFFF><warp></color> teleportiert!</color>",
