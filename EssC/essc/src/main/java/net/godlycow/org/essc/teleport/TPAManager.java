@@ -296,7 +296,13 @@ public class TPAManager implements Listener {
 
         if (!teleporter.isOnline() || !destination.isOnline()) return;
 
+        Location from = teleporter.getLocation();
         Location dest = destination.getLocation();
+
+        if (plugin.getBackManager() != null) {
+            plugin.getBackManager().setBackLocation(teleporter, from);
+        }
+
         plugin.getEssScheduler().teleportAsync(teleporter, dest).thenAccept(success -> {
             if (!success) return;
 
