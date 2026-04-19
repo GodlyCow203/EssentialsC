@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,7 +22,6 @@ public class BackManager implements Listener {
     private final Map<UUID, Location> backLocations = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
     private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
-    private final Set<UUID> isTeleporting = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     private long warmup;
     private long cooldown;
@@ -50,7 +49,6 @@ public class BackManager implements Listener {
         this.sounds = cfg.isBackSounds();
         this.cancelOnMovement = cfg.isBackCancelOnMovement();
     }
-
 
     public void setBackLocation(Player player, Location location) {
         if (location == null || location.getWorld() == null) return;
@@ -110,13 +108,7 @@ public class BackManager implements Listener {
 
         if (!player.isOnline()) return;
 
-        isTeleporting.add(player.getUniqueId());
-
-        plugin.getEssScheduler().teleportAsync(player, location).thenAccept(success -> {
-            plugin.getEssScheduler().runGlobalLater(() -> {
-                isTeleporting.remove(player.getUniqueId());
-            }, 1L);
-
+        plugin.getEssScheduler().teleportAsync(player, location, false).thenAccept(success -> {
             if (!success) return;
 
             if (cooldown > 0) {
@@ -173,6 +165,7 @@ public class BackManager implements Listener {
         Location loc = backLocations.get(uuid);
         return Optional.ofNullable(loc != null ? loc.clone() : null);
     }
+
     public boolean hasPendingTeleport(UUID uuid) {
         return warmupTasks.containsKey(uuid);
     }
@@ -194,40 +187,31 @@ public class BackManager implements Listener {
         return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
     }
 
-
     public long getWarmupSeconds() {
         return warmup;
     }
+
     public long getCooldownSeconds() {
         return cooldown;
     }
+
     public boolean isParticlesEnabled() {
         return particles;
     }
+
     public boolean isSoundsEnabled() {
         return sounds;
     }
+
     public boolean isCancelOnMovementEnabled() {
         return cancelOnMovement;
     }
-
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         setBackLocation(player, player.getLocation());
         plugin.debug("Stored death location for " + player.getName());
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
-        Player player = event.getPlayer();
-
-        if (isTeleporting.contains(player.getUniqueId())) {
-            return;
-        }
-
-        setBackLocation(player, event.getFrom());
     }
 
     @EventHandler
@@ -259,7 +243,6 @@ public class BackManager implements Listener {
 
         backLocations.remove(player.getUniqueId());
         cooldowns.remove(player.getUniqueId());
-        isTeleporting.remove(player.getUniqueId());
 
         plugin.debug("Cleared back data for " + player.getName());
     }
@@ -269,6 +252,5 @@ public class BackManager implements Listener {
         warmupTasks.clear();
         backLocations.clear();
         cooldowns.clear();
-        isTeleporting.clear();
     }
 }

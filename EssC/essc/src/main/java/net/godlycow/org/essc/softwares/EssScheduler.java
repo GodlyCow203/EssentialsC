@@ -147,6 +147,17 @@ public class EssScheduler {
     }
 
     public CompletableFuture<Boolean> teleportAsync(Player player, Location location) {
+        return teleportAsync(player, location, true);
+    }
+
+    public CompletableFuture<Boolean> teleportAsync(Player player, Location location, boolean saveBack) {
+        net.godlycow.org.essc.EssentialsC essc = (net.godlycow.org.essc.EssentialsC) plugin;
+        net.godlycow.org.essc.back.BackManager backManager = essc.getBackManager();
+
+        if (saveBack && backManager != null && player.isOnline()) {
+            backManager.setBackLocation(player, player.getLocation());
+        }
+
         if (ServerSoftware.isFolia()) {
             return player.teleportAsync(location);
         } else {

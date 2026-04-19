@@ -244,7 +244,7 @@ public class RTPManager {
             finalLoc.setYaw(random.nextFloat() * 360);
             finalLoc.setPitch(0);
 
-            player.teleportAsync(finalLoc).thenAccept(success -> {
+            plugin.getEssScheduler().teleportAsync(player, finalLoc).thenAccept(success -> {
                 if (!success) {
                     rtpInProgress.remove(player.getUniqueId());
                     return;
