@@ -76,18 +76,23 @@ public class WarpCommand extends Command {
 
         double cost = warp.getCost();
         if (cost > 0 && plugin.isVaultHooked() && !player.hasPermission("essentialsc.warp.free")) {
-
-            double balance = plugin.getEconomyManager()
-                    .getBalance(player.getUniqueId())
-                    .join()
-                    .doubleValue();
-
-            if (balance < cost) {
-                Map<String, String> placeholders = new HashMap<>();
-                placeholders.put("cost", String.format("%.2f", cost));
-                player.sendMessage(lang.get(player, "warp.insufficient_funds", placeholders));
-                return true;
-            }
+            plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
+                    if (balance.doubleValue() < cost) {
+                        Map<String, String> placeholders = new HashMap<>();
+                        placeholders.put("cost", String.format("%.2f", cost));
+                        player.sendMessage(lang.get(player, "warp.insufficient_funds", placeholders));
+                        return;
+                    }
+                    long warmupSeconds = plugin.getConfigManager().getWarpWarmup();
+                    if (warmupSeconds > 0 && !player.hasPermission("essentialsc.warp.bypass.warmup")) {
+                        startWarmup(player, warp, warmupSeconds, cost);
+                    } else {
+                        executeWarp(player, warp, cost);
+                    }
+                });
+            });
+            return true;
         }
 
 
