@@ -301,7 +301,7 @@ public class AFKManager implements Listener {
         Bukkit.broadcast(message);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
@@ -319,7 +319,9 @@ public class AFKManager implements Listener {
             }
         }
 
-        if (event.getFrom().distanceSquared(event.getTo()) > 0.01) {
+        Location to = event.getTo();
+        if (to == null) return;
+        if (event.getFrom().distanceSquared(to) > 0.01) {
             updateActivity(player);
         }
     }
@@ -336,7 +338,7 @@ public class AFKManager implements Listener {
         updateActivity(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0];
@@ -375,7 +377,7 @@ public class AFKManager implements Listener {
         updateActivity(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerPickupItem(PlayerAttemptPickupItemEvent event) {
         Player player = event.getPlayer();
 
@@ -387,7 +389,7 @@ public class AFKManager implements Listener {
         updateActivity(player);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
 
@@ -399,7 +401,7 @@ public class AFKManager implements Listener {
         updateActivity(player);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player player) {
             updateActivity(player);
