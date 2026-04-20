@@ -12,7 +12,7 @@ import java.util.List;
 public class EconomyRegistrar {
 
     private static final List<String> ECONOMY_COMMANDS =
-            List.of("balance", "bal", "pay", "eco", "baltop", "balancetop");
+            List.of("balance", "pay", "eco", "baltop");
 
     private final EssentialsC plugin;
 
@@ -36,11 +36,9 @@ public class EconomyRegistrar {
         }
 
         register("balance", new BalanceCommand(plugin));
-        register("bal", new BalanceCommand(plugin));
         register("pay", new PayCommand(plugin));
         register("eco", new EcoCommand(plugin));
         register("baltop", new BaltopCommand(plugin));
-        register("balancetop", new BaltopCommand(plugin));
 
         CommandRegistrationUtil.syncCommands();
     }
