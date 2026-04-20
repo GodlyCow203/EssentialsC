@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.teleport;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -15,7 +14,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,7 +32,6 @@ public class TPAManager implements Listener {
     private long timeoutDuration;
     private int maxPending;
     private int maxOutgoing;
-    private double cost;
     private boolean denyMovement;
     private boolean useParticles;
     private boolean useSounds;
@@ -61,6 +58,7 @@ public class TPAManager implements Listener {
         this.maxPending = cm.getTPAMaxPending();
         this.maxOutgoing = cm.getTPAMaxOutgoing();
         this.denyMovement = cm.isTPADenyMovement();
+
         this.useParticles = cm.isTPAParticles();
         this.useSounds = cm.isTPASounds();
         this.blockedWorlds = cm.getTPABlockedWorlds();
@@ -115,15 +113,6 @@ public class TPAManager implements Listener {
             return false;
         }
 
-        if (cost > 0 && plugin.getEconomyManager() != null) {
-            EconomyManager eco = plugin.getEconomyManager();
-            if (!eco.has(requester.getUniqueId(), BigDecimal.valueOf(cost)).join()) {
-                requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.insufficient_funds",
-                        Map.of("cost", eco.format(BigDecimal.valueOf(cost)))));
-                return false;
-            }
-        }
-
         TPARequest request = new TPARequest(requester, target, type);
 
         incomingRequests.computeIfAbsent(target.getUniqueId(), k -> new ArrayList<>()).add(request);
@@ -164,10 +153,6 @@ public class TPAManager implements Listener {
                 .orElse(null);
 
         if (request == null) return false;
-
-        if (cost > 0 && plugin.getEconomyManager() != null) {
-            plugin.getEconomyManager().withdraw(requester.getUniqueId(), BigDecimal.valueOf(cost));
-        }
 
         removeRequestFromBothMaps(request);
 
