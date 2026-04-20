@@ -10,9 +10,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class VanishManager implements Listener {
     private final EssentialsC plugin;
@@ -25,7 +25,7 @@ public class VanishManager implements Listener {
 
     public VanishManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.vanishedPlayers = new HashSet<>();
+        this.vanishedPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
         loadConfig();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
