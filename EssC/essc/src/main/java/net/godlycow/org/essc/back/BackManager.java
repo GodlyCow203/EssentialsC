@@ -108,8 +108,12 @@ public class BackManager implements Listener {
 
         if (!player.isOnline()) return;
 
+        Location preBackLocation = player.getLocation().clone();
+
         plugin.getEssScheduler().teleportAsync(player, location, false).thenAccept(success -> {
             if (!success) return;
+
+            backLocations.put(player.getUniqueId(), preBackLocation);
 
             if (cooldown > 0) {
                 cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
