@@ -233,7 +233,7 @@ public class KitManager implements Listener {
                     if (!(entry.getKey() instanceof String key)) continue;
                     if (!(entry.getValue() instanceof Number lvl)) continue;
 
-                    Enchantment enchant = Enchantment.getByName(key.toUpperCase());
+                    @SuppressWarnings("deprecation") Enchantment enchant = Enchantment.getByName(key.toUpperCase());
                     if (enchant != null) {
                         meta.addEnchant(enchant, lvl.intValue(), true);
                     }
