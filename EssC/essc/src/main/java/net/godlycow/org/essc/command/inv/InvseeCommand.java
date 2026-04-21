@@ -25,7 +25,8 @@ public class InvseeCommand extends Command {
 
         if (target == null) {
             OfflinePlayer offlineTarget = plugin.getServer().getOfflinePlayer(args[0]);
-            if (!offlineTarget.hasPlayedBefore() && offlineTarget.getName() == null) {
+
+            if (!offlineTarget.hasPlayedBefore()) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", args[0]);
                 player.sendMessage(lang.get(player, "error.player_not_found", placeholders));
@@ -37,7 +38,15 @@ public class InvseeCommand extends Command {
                 return true;
             }
 
-            player.openInventory(offlineTarget.getPlayer().getInventory());
+            Player offlinePlayer = offlineTarget.getPlayer();
+            if (offlinePlayer == null) {
+                Map<String, String> placeholders = new HashMap<>();
+                placeholders.put("target", offlineTarget.getName());
+                player.sendMessage(lang.get(player, "error.player_offline_no_inventory", placeholders));
+                return true;
+            }
+
+            player.openInventory(offlinePlayer.getInventory());
 
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("target", offlineTarget.getName());
