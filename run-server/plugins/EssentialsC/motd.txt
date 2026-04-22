@@ -1,1 +1,0 @@
-%center%Change this in the motd.txt file
