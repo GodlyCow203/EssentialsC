@@ -11,7 +11,8 @@ softdepend:
   - PlaceholderAPI
   - LuckPerms
   - DiscordSRV
-  - floodgate
+  - Floodgate
+  - TAB
 
 load-before:
   - EconomyShopGUI-Premium
