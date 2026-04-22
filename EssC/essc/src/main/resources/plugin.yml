@@ -1106,3 +1106,11 @@ permissions:
   essentialsc.quicksell.inventory:
     description: Allows quick selling of entire inventory
     default: true
+
+  essentialsc.dback:
+    description: Teleport to your last death location
+    default: true
+
+  essentialsc.dback.admin:
+    description: Bypass warmup and cooldown for /dback
+    default: op
