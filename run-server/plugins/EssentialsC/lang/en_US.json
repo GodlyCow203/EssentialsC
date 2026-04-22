@@ -967,7 +967,16 @@
   "ah.gui.filler.name": " ",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Please wait <seconds> seconds before sending another message.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Slow mode is active. You can chat again in <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Slow mode is active. You can chat again in <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Teleported to your death location.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>You have no death location to return to.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleporting to death location in <color:#FFF200><seconds></color> seconds... Don't move!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>You are already preparing to teleport!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Please wait <color:#FFFFFF><seconds></color> seconds before using /dback again.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleport cancelled because you moved.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleport cancelled.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>The world you died in is no longer available.</color>"
 }
 
 
