@@ -1112,3 +1112,7 @@ permissions:
   essentialsc.dback.admin:
     description: Bypass warmup and cooldown for /dback
     default: op
+
+  essentialsc.nick.minimessage:
+    description: Allow MiniMessage tags (colors, gradients) in nicknames
+    default: op

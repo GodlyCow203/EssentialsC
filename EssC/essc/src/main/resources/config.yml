@@ -594,6 +594,10 @@ nickname:
   # Whether clicking a nickname in chat suggests the /msg <player> command.
   click-suggest-msg: true
 
+  # When a player has a nickname, show "Nick (RealName)" in Discord
+  # instead of just the plain nickname. Requires DiscordSRV.
+  discord-show-realname: true
+
 
 
 # Shop

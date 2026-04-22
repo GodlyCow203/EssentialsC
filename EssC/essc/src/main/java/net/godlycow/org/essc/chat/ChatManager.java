@@ -228,10 +228,14 @@ public class ChatManager implements Listener {
 
             if (plugin.getConfigManager().isNickShowRealnameOnHover()) {
                 String hoverFormat = plugin.getConfigManager().getNickHoverFormat();
-                String hoverText = hoverFormat.replace("<realname>", player.getName())
-                        .replace("<nick>", cachedNick)
-                        .replace("<prefix>", prefix)
-                        .replace("<suffix>", suffix);
+                String safeCachedNick = plugin.getMiniMessage().escapeTags(
+                        PlainTextComponentSerializer.plainText().serialize(
+                                plugin.getMiniMessage().deserialize(cachedNick)));
+                String hoverText = hoverFormat
+                        .replace("<realname>", player.getName())
+                        .replace("<nick>", safeCachedNick)
+                        .replace("<prefix>", plugin.getMiniMessage().escapeTags(prefix))
+                        .replace("<suffix>", plugin.getMiniMessage().escapeTags(suffix));
                 Component hoverComponent = plugin.getMiniMessage().deserialize(hoverText);
                 hoverEvent = net.kyori.adventure.text.event.HoverEvent.showText(hoverComponent);
             }

@@ -80,7 +80,7 @@ public class NickCommand extends Command {
     }
 
     private boolean handleSelfSet(Player player, String nickname) {
-        String processed = processNick(nickname);
+        String processed = processNick(nickname, player);
         if (!validateSync(player, processed)) return true;
 
         checkAndSet(player, player.getUniqueId(), player, processed, true);
@@ -88,7 +88,7 @@ public class NickCommand extends Command {
     }
 
     private boolean handleOtherSet(Player admin, Player target, String nickname) {
-        String processed = processNick(nickname);
+        String processed = processNick(nickname, admin);
         if (!validateSync(admin, processed)) return true;
 
         checkAndSet(admin, target.getUniqueId(), target, processed, false);
@@ -203,7 +203,7 @@ public class NickCommand extends Command {
                     Map<String, String> targetPlaceholders = new HashMap<>();
                     targetPlaceholders.put("admin", sender.getName());
                     targetPlaceholders.put("nick", plainNick);
-                    targetPlayer.sendMessage(lang.get(targetPlayer, "nick.success.by", targetPlaceholders));
+                    targetPlayer.sendMessage(lang.get(targetPlayer, "nick.success.set.by", targetPlaceholders));
 
                     plugin.debug(sender.getName() + " set " + targetPlayer.getName() + "'s nickname to: " + nickname);
                 }
@@ -211,12 +211,15 @@ public class NickCommand extends Command {
         });
     }
 
-    private String processNick(String input) {
+    private String processNick(String input, Player player) {
         if (!plugin.getConfigManager().isNickColorsAllowed()) {
             input = input.replace("&", "").replace("§", "");
         }
         if (!plugin.getConfigManager().isNickFormatAllowed()) {
             input = input.replaceAll("(?i)&[klmnor]", "");
+        }
+        if (!player.hasPermission("essentialsc.nick.minimessage")) {
+            input = plugin.getMiniMessage().escapeTags(input);
         }
         return input;
     }

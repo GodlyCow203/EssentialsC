@@ -1,9 +1,9 @@
 package net.godlycow.org.essc.nick;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.database.Database;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -161,8 +161,17 @@ public class NickManager implements Listener {
             plugin.getEssScheduler().runForEntity(player, () -> {
                 if (opt.isPresent()) {
                     String nick = opt.get();
-                    player.displayName(plugin.getMiniMessage().deserialize(nick));
-                    plugin.debug("Applied nickname display name to " + player.getName() + ": " + nick);
+
+                    Component nickComponent = plugin.getMiniMessage().deserialize(nick);
+                    player.displayName(nickComponent);
+
+                    if (plugin.getConfigManager().isDiscordNickShowRealname()) {
+                        String plainNick = PlainTextComponentSerializer.plainText().serialize(nickComponent);
+                        String discordName = plainNick + " (" + player.getName() + ")";
+                        player.setDisplayName(discordName);
+                    }
+
+                    plugin.debug("Applied nickname to " + player.getName() + ": " + nick);
                 }
                 if (plugin.getTabManager() != null) {
                     plugin.getTabManager().updatePlayerTab(player);
@@ -173,6 +182,7 @@ public class NickManager implements Listener {
 
     public void clearNickname(Player player) {
         player.displayName(Component.text(player.getName()));
+        player.setDisplayName(player.getName());
         nickCache.remove(player.getUniqueId());
 
         if (plugin.getTabManager() != null) {

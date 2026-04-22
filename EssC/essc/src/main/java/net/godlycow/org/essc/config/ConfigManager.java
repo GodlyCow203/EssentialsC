@@ -755,4 +755,8 @@ public class ConfigManager {
     public String getChatMentionFormat() {
         return config.getString("chat.mention.format", "<yellow>@<player></yellow>");
     }
+
+    public boolean isDiscordNickShowRealname() {
+        return config.getBoolean("nickname.discord-show-realname", true);
+    }
 }
