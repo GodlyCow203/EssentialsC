@@ -101,7 +101,13 @@ public class TabManager implements Listener {
         String lpPrefix = "";
         String lpSuffix = "";
         if (luckPermsEnabled && useLuckPermsTab) {
-            CachedMetaData metaData = luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
+            CachedMetaData metaData = null;
+            try {
+                metaData = luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
+            } catch (IllegalStateException e) {
+                plugin.debug("TabManager: LuckPerms user not yet loaded for " + player.getName() + ", skipping tab update");
+                return;
+            }
             lpPrefix = metaData.getPrefix() != null ? metaData.getPrefix() : "";
             lpSuffix = metaData.getSuffix() != null ? metaData.getSuffix() : "";
 

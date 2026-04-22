@@ -1,22 +1,13 @@
-name: TestApi
+name: KitAPITest
 version: 1.0.0
-main: net.godlycow.org.api.test.testApi.Main
-api-version: 1.20
-author: _GodlyCow
+main: net.godlycow.org.api.test.TestAPI
 depend: [EssentialsC]
+api-version: '1.20'
 commands:
-  testapi:
-    description: Test EssentialsC Home API
-    usage: /testapi <create|delete|teleport|instant|cancel|limit|all>
-  testshop:
-    description: Test EssentialsC Shop API
-    usage: /testshop <info|categories|find|purchase|sell|balance|open|reload|all>
-
-  testah:
-    description: Test Auction House API
-    usage: /testah <subcommand>
-
-  testback:
-    description: Test Back API features
-    usage: /testback <subcommand>
-
+  testkit:
+    description: Run Kit API tests
+    usage: /testkit [crud|query|claim|events|playerdata|async|sync|all]
+    permission: kitapi.test
+permissions:
+  kitapi.test:
+    default: op
