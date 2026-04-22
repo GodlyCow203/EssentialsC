@@ -14,9 +14,6 @@ softdepend:
   - Floodgate
   - TAB
 
-load-before:
-  - EconomyShopGUI-Premium
-  - EconomyShopGUI
 
 
 commands:
