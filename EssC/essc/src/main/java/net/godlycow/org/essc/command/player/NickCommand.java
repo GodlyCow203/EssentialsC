@@ -216,7 +216,7 @@ public class NickCommand extends Command {
             input = input.replace("&", "").replace("§", "");
         }
         if (!plugin.getConfigManager().isNickFormatAllowed()) {
-            input = input.replaceAll("(?i)&[klmnor]", "");
+            input = input.replaceAll("(?i)[&§][klmnor]", "");
         }
         if (!player.hasPermission("essentialsc.nick.minimessage")) {
             input = plugin.getMiniMessage().escapeTags(input);
