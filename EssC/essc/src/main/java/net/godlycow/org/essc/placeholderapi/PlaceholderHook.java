@@ -20,6 +20,14 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
     private final ShopPlaceholders shopPlaceholders;
     private final RTPPlaceholders rtpPlaceholders;
     private final NickPlaceholders nickPlaceholders;
+    private final EconomyPlaceholders economyPlaceholders;
+    private final AFKPlaceholders afkPlaceholders;
+    private final TPAPlaceholders tpaPlaceholders;
+    private final WarpPlaceholders warpPlaceholders;
+    private final KitPlaceholders kitPlaceholders;
+    private final AuctionPlaceholders auctionPlaceholders;
+    private final PunishmentPlaceholders punishmentPlaceholders;
+    private final PlaytimePlaceholders playtimePlaceholders;
 
     public PlaceholderHook(EssentialsC plugin) {
         this.plugin = plugin;
@@ -28,6 +36,14 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         this.shopPlaceholders = new ShopPlaceholders(plugin);
         this.rtpPlaceholders = new RTPPlaceholders(plugin);
         this.nickPlaceholders = new NickPlaceholders(plugin);
+        this.economyPlaceholders = new EconomyPlaceholders(plugin);
+        this.afkPlaceholders = new AFKPlaceholders(plugin);
+        this.tpaPlaceholders = new TPAPlaceholders(plugin);
+        this.warpPlaceholders = new WarpPlaceholders(plugin);
+        this.kitPlaceholders = new KitPlaceholders(plugin);
+        this.auctionPlaceholders = new AuctionPlaceholders(plugin);
+        this.punishmentPlaceholders = new PunishmentPlaceholders(plugin);
+        this.playtimePlaceholders = new PlaytimePlaceholders(plugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -68,30 +84,46 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
             return "";
         }
 
-        String vanishResult = vanishPlaceholders.onRequest(player, identifier);
-        if (vanishResult != null) {
-            return vanishResult;
-        }
+        String result;
 
-        String homeResult = homePlaceholders.onRequest(player, identifier);
-        if (homeResult != null) {
-            return homeResult;
-        }
+        result = vanishPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
 
-        String shopResult = shopPlaceholders.onRequest(player, identifier);
-        if (shopResult != null) {
-            return shopResult;
-        }
+        result = homePlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
 
-        String rtpResult = rtpPlaceholders.onRequest(player, identifier);
-        if (rtpResult != null) {
-            return rtpResult;
-        }
+        result = shopPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
 
-        String nickResult = nickPlaceholders.onRequest(player, identifier);
-        if (nickResult != null) {
-            return nickResult;
-        }
+        result = rtpPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = nickPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = economyPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = afkPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = tpaPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = warpPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = kitPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = auctionPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = punishmentPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
+        result = playtimePlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
 
         return null;
     }
@@ -100,6 +132,7 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         homePlaceholders.clearCache(event.getPlayer().getUniqueId());
         shopPlaceholders.clearCache(event.getPlayer().getUniqueId());
+        economyPlaceholders.clearCache(event.getPlayer().getUniqueId());
     }
 
     public static List<String> getAllPlaceholders() {
@@ -110,6 +143,14 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         placeholders.addAll(ShopPlaceholders.getPlaceholderList());
         placeholders.addAll(RTPPlaceholders.getPlaceholderList());
         placeholders.addAll(NickPlaceholders.getPlaceholderList());
+        placeholders.addAll(EconomyPlaceholders.getPlaceholderList());
+        placeholders.addAll(AFKPlaceholders.getPlaceholderList());
+        placeholders.addAll(TPAPlaceholders.getPlaceholderList());
+        placeholders.addAll(WarpPlaceholders.getPlaceholderList());
+        placeholders.addAll(KitPlaceholders.getPlaceholderList());
+        placeholders.addAll(AuctionPlaceholders.getPlaceholderList());
+        placeholders.addAll(PunishmentPlaceholders.getPlaceholderList());
+        placeholders.addAll(PlaytimePlaceholders.getPlaceholderList());
 
         return placeholders;
     }
