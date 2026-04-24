@@ -4,7 +4,6 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.kit.Kit;
 import net.godlycow.org.essc.api.kit.KitClaimProfile;
 import net.godlycow.org.essc.api.kit.KitManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -124,7 +123,7 @@ public class KitManagerImpl implements KitManager {
         var impl = (KitImpl) kit;
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        plugin.getEssScheduler().runForEntity(player, () -> {
             try {
                 plugin.getKitManager().giveKit(player, impl.getInternalKit());
                 future.complete(null);
