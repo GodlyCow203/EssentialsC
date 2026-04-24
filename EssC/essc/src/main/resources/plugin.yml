@@ -442,6 +442,11 @@ commands:
     usage: /quicksell [hand|inventory]
     permission: essentialsc.quicksell.hand
 
+  dback:
+    description: Teleport to your last death location
+    usage: /dback
+    permission: essentialsc.dback
+
 permissions:
   essentialsc.heal:
     description: Heal command
