@@ -197,7 +197,7 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isScoreboardEnabled()) {
             if (ServerSoftware.isFolia()) {
-                getLogger().warning("Scoreboard feature is not supported on Folia (getNewScoreboard() is unavailable). Disabling scoreboard.");
+                getLogger().warning("Scoreboard feature is not *yet* supported by EssentialsC");
             } else {
                 scoreboardManager = new ScoreboardManager(this);
             }
