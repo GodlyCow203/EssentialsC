@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventario venduto per <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> oggetti)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Attendere <seconds> secondi prima di inviare un altro messaggio.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>La modalità lenta è attiva. Puoi chattare di nuovo tra <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>La modalità lenta è attiva. Puoi chattare di nuovo tra <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Teletrasportato alla tua posizione di morte.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Non hai una posizione di morte a cui tornare.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teletrasporto alla posizione di morte tra <color:#FFF200><seconds></color> secondi... Non muoverti!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Stai già preparando il teletrasporto!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Attendi <color:#FFFFFF><seconds></color> secondi prima di usare di nuovo /dback.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teletrasporto annullato perché ti sei mosso.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teletrasporto annullato.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Il mondo in cui sei morto non è più disponibile.</color>"
 
 }

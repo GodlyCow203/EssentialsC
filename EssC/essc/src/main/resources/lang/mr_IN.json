@@ -946,6 +946,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>इन्वेंटरी <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> वस्तू) मध्ये विकली</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>पुढील संदेश पाठवण्यापूर्वी कृपया <seconds> सेकंद थांबा.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>धीमे मोड सक्रिय आहे. तुम्ही <time> नंतर पुन्हा चॅट करू शकता."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>धीमे मोड सक्रिय आहे. तुम्ही <time> नंतर पुन्हा चॅट करू शकता.",
+
+  "dback.success": "<prefix> <color:#FFF200>तुमच्या मृत्यूच्या ठिकाणी टेलिपोर्ट केले.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>तुमच्याकडे परत जाण्यासाठी मृत्यूचे ठिकाण नाही.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> सेकंदात मृत्यूच्या ठिकाणी टेलिपोर्ट होत आहे... हलू नका!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>तुम्ही आधीच टेलिपोर्ट करण्याची तयारी करत आहात!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>/dback पुन्हा वापरण्यापूर्वी <color:#FFFFFF><seconds></color> सेकंद प्रतीक्षा करा.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>तुम्ही हलल्यामुळे टेलिपोर्ट रद्द झाले.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>टेलिपोर्ट रद्द झाले.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>ज्या जगात तुम्ही मेलात ते आता उपलब्ध नाही.</color>"
 
 }

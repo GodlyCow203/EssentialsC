@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>ఇన్వెంటరీని <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> వస్తువులు) కు అమ్మారు</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>మరో సందేశం పంపడానికి ముందు <seconds> సెకన్లు వేచి ఉండండి.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>నెమ్మది మోడ్ సక్రియంలో ఉంది. మీరు <time> తర్వాత మళ్లీ చాట్ చేయవచ్చు."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>నెమ్మది మోడ్ సక్రియంలో ఉంది. మీరు <time> తర్వాత మళ్లీ చాట్ చేయవచ్చు.",
+
+  "dback.success": "<prefix> <color:#FFF200>మీ మరణ స్థానానికి టెలిపోర్ట్ చేయబడింది.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>మీరు తిరిగి వెళ్ళడానికి మరణ స్థానం లేదు.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> సెకన్లలో మరణ స్థానానికి టెలిపోర్ట్ అవుతోంది... కదలకండి!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>మీరు ఇప్పటికే టెలిపోర్ట్ కు సిద్ధమవుతున్నారు!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>/dback ను మళ్ళీ ఉపయోగించడానికి <color:#FFFFFF><seconds></color> సెకన్లు వేచి ఉండండి.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>మీరు కదిలినందున టెలిపోర్ట్ రద్దు చేయబడింది.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>టెలిపోర్ట్ రద్దు చేయబడింది.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>మీరు చనిపోయిన ప్రపంచం ఇప్పుడు అందుబాటులో లేదు.</color>"
 
 }

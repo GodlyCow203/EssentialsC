@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>인벤토리를 <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>개 아이템)에 판매했습니다</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>다음 메시지를 보내기 전에 <seconds>초 기다려 주세요.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>느린 모드가 활성화되어 있습니다. <time> 후에 다시 채팅할 수 있습니다."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>느린 모드가 활성화되어 있습니다. <time> 후에 다시 채팅할 수 있습니다.",
+
+  "dback.success": "<prefix> <color:#FFF200>사망 위치로 텔레포트되었습니다.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>돌아갈 사망 위치가 없습니다.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color>초 후 사망 위치로 텔레포트됩니다... 움직이지 마세요!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>이미 텔레포트를 준비 중입니다!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>/dback를 다시 사용하기 전에 <color:#FFFFFF><seconds></color>초 기다려 주세요.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>움직여서 텔레포트가 취소되었습니다.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>텔레포트가 취소되었습니다.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>사망한 월드는 더 이상 사용할 수 없습니다.</color>"
 
 }

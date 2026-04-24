@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Ibinenta ang inventory para sa <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Mangyaring maghintay ng <seconds> segundo bago magpadala ng isa pang mensahe.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Ang slow mode ay aktibo. Maaari kang makapag-usap muli sa <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Ang slow mode ay aktibo. Maaari kang makapag-usap muli sa <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Na-teleport sa iyong lugar ng pagkamatay.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Wala kang lugar ng pagkamatay na babalikan.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Na-teleport sa lugar ng pagkamatay sa loob ng <color:#FFF200><seconds></color> segundo... Huwag gumalaw!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Naghahanda ka nang mag-teleport!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Mangyaring maghintay ng <color:#FFFFFF><seconds></color> segundo bago gamitin ulit ang /dback.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Nakansela ang teleport dahil gumalaw ka.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Nakansela ang teleport.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Ang mundo kung saan ka namatay ay hindi na available.</color>"
 
 }

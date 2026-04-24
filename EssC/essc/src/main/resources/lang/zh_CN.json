@@ -942,7 +942,14 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>出售背包获得 <color:#66AAFF><worth> <currency></color>（<color:#66AAFF><amount></color> 个物品）</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>请等待 <seconds> 秒后再发送消息。",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>慢速模式已启用。你可以在 <time> 后再次发言。"
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>慢速模式已启用。你可以在 <time> 后再次发言。",
 
-
+  "dback.success": "<prefix> <color:#FFF200>已传送至你的死亡地点。</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>你没有可返回的死亡地点。</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>将在 <color:#FFF200><seconds></color> 秒后传送至死亡地点……请勿移动！</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>你正在准备传送中！</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>请等待 <color:#FFFFFF><seconds></color> 秒后再使用 /dback。</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>传送已取消，因为你移动了。</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>传送已取消。</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>你死亡时所在的世界已不可用。</color>"
 }

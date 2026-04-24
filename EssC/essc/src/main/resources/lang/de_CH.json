@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventar für <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> Gständ) verchouft</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Bitte wart <seconds> Sekunde vor dere nächschte Nachricht.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsame Modus isch aktiv. Du chasch wider chatte in <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsame Modus isch aktiv. Du chasch wider chatte in <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Zu deinem Todesort teleportiert.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Du hast keinen Todesort, zu dem du zrugg chasch.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleportier in <color:#FFF200><seconds></color> Sekunde zum Todesort... Nid bewege!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Du bereitisch scho uf d'Teleportation vor!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Warte <color:#FFFFFF><seconds></color> Sekunde, bevor du /dback nomol bruuchsch.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportation abbroche, wills du dich bewegt hesch.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportation abbroche.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>D'Wält, i däre du gstorbe bisch, isch nümme verfüegbar.</color>"
 
 }

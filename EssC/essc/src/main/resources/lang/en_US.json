@@ -38,7 +38,6 @@
   "essc.placeholders.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF><count></color> placeholders available</color>",
   "essc.help.placeholders": "<prefix> <color:#FFF200>/essc placeholders <color:#AAAAAA>- List all available placeholders</color></color>",
 
-
   "command.usage.heal": "<prefix> <color:#FF0000>Usage: /heal</color>",
   "command.usage.essc": "<prefix> <color:#FF0000>Usage: /essc <reload|version|debug|help></color>",
   "error.player_only": "<prefix> <color:#FF0000>This command can only be used by players.</color>",

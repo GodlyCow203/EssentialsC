@@ -866,6 +866,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventar für <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> Gegenstände) verkauft</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Bitte warten Sie <seconds> Sekunden, bevor Sie eine weitere Nachricht senden.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsamer Modus ist aktiv. Sie können wieder chatten in <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsamer Modus ist aktiv. Sie können wieder chatten in <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Zu deinem Todesort teleportiert.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Du hast keinen Todesort, zu dem du zurückkehren kannst.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleportiere in <color:#FFF200><seconds></color> Sekunden zum Todesort... Nicht bewegen!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Du bereitest dich bereits auf die Teleportation vor!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Warte <color:#FFFFFF><seconds></color> Sekunden, bevor du /dback erneut verwendest.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportation abgebrochen, weil du dich bewegt hast.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportation abgebrochen.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Die Welt, in der du gestorben bist, ist nicht mehr verfügbar.</color>"
 
 }

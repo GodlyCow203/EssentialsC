@@ -947,6 +947,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>ขายช่องเก็บของได้ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> ไอเทม)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>กรุณารอ <seconds> วินาทีก่อนส่งข้อความถัดไป",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>โหมดช้าทำงานอยู่ คุณสามารถแชทได้อีกครั้งใน <time>"
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>โหมดช้าทำงานอยู่ คุณสามารถแชทได้อีกครั้งใน <time>",
+
+  "dback.success": "<prefix> <color:#FFF200>เทเลพอร์ตไปยังตำแหน่งที่คุณตายแล้ว</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>คุณไม่มีตำแหน่งที่ตายเพื่อกลับไป</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>กำลังเทเลพอร์ตไปยังตำแหน่งที่ตายในอีก <color:#FFF200><seconds></color> วินาที... อย่าขยับ!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>คุณกำลังเตรียมเทเลพอร์ตอยู่แล้ว!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>กรุณารอ <color:#FFFFFF><seconds></color> วินาทีก่อนใช้ /dback อีกครั้ง</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>การเทเลพอร์ตถูกยกเลิกเนื่องจากคุณขยับ</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>การเทเลพอร์ตถูกยกเลิกแล้ว</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>โลกที่คุณตายอยู่ไม่สามารถใช้งานได้อีกต่อไป</color>"
 
 }

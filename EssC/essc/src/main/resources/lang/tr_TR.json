@@ -947,6 +947,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Envanter <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> eşya) karşılığında satıldı</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Başka mesaj göndermeden önce lütfen <seconds> saniye bekleyin.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Yavaş mod aktif. Tekrar sohbet edebilirsiniz <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Yavaş mod aktif. Tekrar sohbet edebilirsiniz <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Ölüm konumunuza ışınlandınız.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Geri dönebileceğiniz bir ölüm konumunuz yok.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> saniye içinde ölüm konumuna ışınlanılıyor... Kımıldamayın!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Zaten ışınlanmaya hazırlanıyorsunuz!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Lütfen /dback'i tekrar kullanmadan önce <color:#FFFFFF><seconds></color> saniye bekleyin.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Hareket ettiğiniz için ışınlanma iptal edildi.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Işınlanma iptal edildi.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Öldüğünüz dünya artık mevcut değil.</color>"
 
 }

@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventar fir <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> Artikele) verkaaft</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Wann echtlech <seconds> Sekonnen waarden, ier Dir eng weider Noriicht schéckt.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsame Modus ass aktiv. Dir kënnt nees chatten an <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langsame Modus ass aktiv. Dir kënnt nees chatten an <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Teleportéiert op däin Doudesplaz.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Du hues keng Doudesplaz fir zréckzekommen.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleportéieren op d'Doudesplaz an <color:#FFF200><seconds></color> Sekonnen... Beweg dech net!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Du bereets dech schonn op d'Teleportatioun vir!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Wart <color:#FFFFFF><seconds></color> Sekonnen ier du /dback nees benotz.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportatioun ofgebrach, well dech bewegt hues.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportatioun ofgebrach.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>D'Welt an där du gestuerwe bass ass net méi disponibel.</color>"
 
 }

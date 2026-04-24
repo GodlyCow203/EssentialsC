@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>インベントリを<color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color>個のアイテム)で販売しました</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>次のメッセージを送信する前に<seconds>秒お待ちください。",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>スローモードが有効です。<time>後に再度チャットできます。"
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>スローモードが有効です。<time>後に再度チャットできます。",
+
+  "dback.success": "<prefix> <color:#FFF200>死亡地点にテレポートしました。</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>戻る死亡地点がありません。</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color>秒後に死亡地点へテレポートします... 動かないでください！</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>すでにテレポートの準備中です！</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>/dbackを再使用する前に<color:#FFFFFF><seconds></color>秒お待ちください。</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>移動したためテレポートがキャンセルされました。</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>テレポートがキャンセルされました。</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>死亡したワールドは利用できなくなりました。</color>"
 
 }

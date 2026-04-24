@@ -946,6 +946,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Sålde inventariet för <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> föremål)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Vänligen vänta <seconds> sekunder innan du skickar nästa meddelande.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Långsamt läge är aktivt. Du kan chatta igen om <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Långsamt läge är aktivt. Du kan chatta igen om <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Teleporterad till din dödsplats.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Du har ingen dödsplats att återvända till.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleporterar till dödsplats om <color:#FFF200><seconds></color> sekunder... Rör dig inte!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Du förbereder redan en teleportation!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Vänta <color:#FFFFFF><seconds></color> sekunder innan du använder /dback igen.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportation avbruten eftersom du rörde dig.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportation avbruten.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Världen du dog i är inte längre tillgänglig.</color>"
 
 }

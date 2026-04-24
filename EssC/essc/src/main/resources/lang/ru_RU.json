@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Продан инвентарь за <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> предметов)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Пожалуйста, подождите <seconds> секунд перед следующим сообщением.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Активирован медленный режим чата. Вы сможете писать снова через <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Активирован медленный режим чата. Вы сможете писать снова через <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Телепортация на место вашей смерти.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>У вас нет места смерти для возвращения.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Телепортация на место смерти через <color:#FFF200><seconds></color> секунд... Не двигайтесь!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Вы уже готовитесь к телепортации!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Подождите <color:#FFFFFF><seconds></color> секунд перед повторным использованием /dback.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Телепортация отменена, так как вы двинулись.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Телепортация отменена.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Мир, в котором вы умерли, больше недоступен.</color>"
 
 }

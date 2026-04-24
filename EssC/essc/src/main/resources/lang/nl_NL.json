@@ -946,6 +946,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Inventaris verkocht voor <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> items)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Wacht alstublieft <seconds> seconden voordat u een volgend bericht verstuurt.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langzame modus is actief. U kunt weer chatten over <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Langzame modus is actief. U kunt weer chatten over <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Geteleporteerd naar je doodslocatie.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Je hebt geen doodslocatie om naar terug te keren.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Teleporteren naar doodslocatie over <color:#FFF200><seconds></color> seconden... Beweeg niet!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Je bent al bezig met voorbereiden om te teleporteren!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Wacht <color:#FFFFFF><seconds></color> seconden voordat je /dback opnieuw gebruikt.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportatie geannuleerd omdat je bewoog.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportatie geannuleerd.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>De wereld waarin je bent gestorven is niet langer beschikbaar.</color>"
 
 }

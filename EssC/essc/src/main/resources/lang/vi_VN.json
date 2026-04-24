@@ -947,6 +947,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Đã bán túi đồ với giá <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> vật phẩm)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Vui lòng đợi <seconds> giây trước khi gửi tin nhắn tiếp theo.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Chế độ chậm đang hoạt động. Bạn có thể chat lại sau <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Chế độ chậm đang hoạt động. Bạn có thể chat lại sau <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Đã dịch chuyển đến vị trí chết của bạn.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Bạn không có vị trí chết nào để quay lại.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Đang dịch chuyển đến vị trí chết sau <color:#FFF200><seconds></color> giây... Đừng di chuyển!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Bạn đang chuẩn bị dịch chuyển!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Vui lòng chờ <color:#FFFFFF><seconds></color> giây trước khi sử dụng /dback lại.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Dịch chuyển đã bị hủy vì bạn đã di chuyển.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Dịch chuyển đã bị hủy.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Thế giới bạn đã chết không còn khả dụng nữa.</color>"
 
 }

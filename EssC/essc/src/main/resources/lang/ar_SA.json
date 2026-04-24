@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>تم بيع المخزون مقابل <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> عناصر)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>يرجى الانتظار <seconds> ثانية قبل إرسال رسالة أخرى.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>الوضع البطيء مفعل. يمكنك الدردشة مرة أخرى بعد <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>الوضع البطيء مفعل. يمكنك الدردشة مرة أخرى بعد <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>تم الانتقال إلى موقع موتك.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>ليس لديك موقع موت للعودة إليه.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>جارٍ الانتقال إلى موقع الموت خلال <color:#FFF200><seconds></color> ثانية... لا تتحرك!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>أنت تستعد للانتقال بالفعل!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>يرجى الانتظار <color:#FFFFFF><seconds></color> ثانية قبل استخدام /dback مرة أخرى.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>تم إلغاء الانتقال لأنك تحركت.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>تم إلغاء الانتقال.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>العالم الذي مت فيه لم يعد متاحًا.</color>"
 
 }

@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>சரக்கை <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> பொருட்கள்) க்கு விற்றீர்கள்</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>மற்றொரு செய்தி அனுப்புவதற்கு முன் <seconds> வினாடிகள் காத்திருக்கவும்.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>மெதுவான பயன்முறை செயலில் உள்ளது. நீங்கள் <time> இல் மீண்டும் அரட்டலாம்."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>மெதுவான பயன்முறை செயலில் உள்ளது. நீங்கள் <time> இல் மீண்டும் அரட்டலாம்.",
+
+  "dback.success": "<prefix> <color:#FFF200>உங்கள் இறப்பு இடத்திற்கு டெலிபோர்ட் செய்யப்பட்டது.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>திரும்பச் செல்ல உங்களுக்கு இறப்பு இடம் இல்லை.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> வினாடிகளில் இறப்பு இடத்திற்கு டெலிபோர்ட் செய்யப்படுகிறது... அசையாதீர்கள்!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>நீங்கள் ஏற்கனவே டெலிபோர்ட் செய்ய தயாராகிக் கொண்டிருக்கிறீர்கள்!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>/dback ஐ மீண்டும் பயன்படுத்துவதற்கு முன் <color:#FFFFFF><seconds></color> வினாடிகள் காத்திருக்கவும்.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>நீங்கள் நகர்ந்ததால் டெலிபோர்ட் ரத்து செய்யப்பட்டது.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>டெலிபோர்ட் ரத்து செய்யப்பட்டது.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>நீங்கள் இறந்த உலகம் இனி கிடைக்கவில்லை.</color>"
 
 }

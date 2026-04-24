@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>الشنطة اتباعت بـ <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> حاجات)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>استنى <seconds> ثانية قبل ما تبعت رسالة تانية.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>الوضع البطيء شغال. تقدر تكتب تاني بعد <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>الوضع البطيء شغال. تقدر تكتب تاني بعد <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>اتنقلت لمكان موتك.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>مش ليك مكان موت ترجعله.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>هننقلك لمكان الموت بعد <color:#FFF200><seconds></color> ثانية... متتحركش!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>انت بتستعد للنقل أصلاً!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>استنى <color:#FFFFFF><seconds></color> ثانية قبل ما تستخدم /dback تاني.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>النقل اتلغي عشان تحركت.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>النقل اتلغي.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>العالم اللي مت فيه مش متاح تاني.</color>"
 
 }

@@ -945,6 +945,15 @@
   "quicksell.success.inventory": "<prefix> <color:#55FF55>Menjual inventori seharga <color:#66AAFF><worth> <currency></color> (<color:#66AAFF><amount></color> item)</color>",
 
   "chat.slowmode.wait": "<prefix> <#FF0000>Mohon tunggu <seconds> detik sebelum mengirim pesan berikutnya.",
-  "chat.slowmode.cooldown": "<prefix> <#FF0000>Mode lambat aktif. Anda dapat mengobrol lagi dalam <time>."
+  "chat.slowmode.cooldown": "<prefix> <#FF0000>Mode lambat aktif. Anda dapat mengobrol lagi dalam <time>.",
+
+  "dback.success": "<prefix> <color:#FFF200>Diteleportasi ke lokasi kematianmu.</color>",
+  "dback.no_location": "<prefix> <color:#FF0000>Kamu tidak memiliki lokasi kematian untuk kembali.</color>",
+  "dback.pending": "<prefix> <color:#FFFFFF>Meneleportasi ke lokasi kematian dalam <color:#FFF200><seconds></color> detik... Jangan bergerak!</color>",
+  "dback.already_pending": "<prefix> <color:#FF0000>Kamu sudah sedang mempersiapkan teleportasi!</color>",
+  "dback.cooldown": "<prefix> <color:#FF0000>Tunggu <color:#FFFFFF><seconds></color> detik sebelum menggunakan /dback lagi.</color>",
+  "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportasi dibatalkan karena kamu bergerak.</color>",
+  "dback.cancelled": "<prefix> <color:#FF0000>Teleportasi dibatalkan.</color>",
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Dunia tempat kamu mati tidak lagi tersedia.</color>"
 
 }
