@@ -1,8 +1,6 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.afk.*;
-import net.godlycow.org.essc.api.*;
-import net.godlycow.org.essc.api.impl.*;
 import net.godlycow.org.essc.auction.*;
 import net.godlycow.org.essc.auction.gui.*;
 import net.godlycow.org.essc.back.*;
@@ -45,6 +43,8 @@ import net.godlycow.org.essc.util.*;
 import net.godlycow.org.essc.softwares.*;
 import net.godlycow.org.essc.vanish.*;
 import net.godlycow.org.essc.warp.*;
+import net.godlycow.org.essc.api.*;
+import net.godlycow.org.essc.api.impl.*;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bstats.bukkit.Metrics;
@@ -87,7 +87,6 @@ public final class EssentialsC extends JavaPlugin {
     private PlaceholderHook placeholderHook;
     private FastStatsManager fastStats;
     private ChatManager chatManager;
-    private EssentialsCAPIImpl apiImpl;
     private DiscordSRVHook discordSRVHook;
     private RTPManager rtpManager;
     private RTPGuiManager rtpGuiManager;
@@ -105,8 +104,7 @@ public final class EssentialsC extends JavaPlugin {
     private SellManager sellManager;
     private SellListener sellListener;
     private AhGuiManager ahGuiManager;
-
-
+    private EssentialsCAPIImpl apiImplementation;
 
     @Override
     public void onLoad() {
@@ -160,6 +158,10 @@ public final class EssentialsC extends JavaPlugin {
         spawnManager = new SpawnManager(this);
         backManager = new BackManager(this);
         kitManager = new KitManager(this);
+
+        apiImplementation = new EssentialsCAPIImpl(this);
+        APIProvider.register(apiImplementation);
+
         vanishManager = new VanishManager(this);
         punishmentManager = new PunishmentManager(this);
         ignoreManager = new IgnoreManager(this);
@@ -263,8 +265,6 @@ public final class EssentialsC extends JavaPlugin {
         }
         getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
 
-        apiImpl = new EssentialsCAPIImpl(this);
-        apiImpl.enable();
 
         getLogger().info("EssentialsC enabled");
     }
@@ -295,9 +295,7 @@ public final class EssentialsC extends JavaPlugin {
         if (scoreboardManager != null) {
             scoreboardManager.shutdown();
         }
-        if (apiImpl != null) {
-            apiImpl.disable();
-        }
+
         if (backManager != null) {
             backManager.shutdown();
         }
@@ -325,6 +323,10 @@ public final class EssentialsC extends JavaPlugin {
             } catch (Exception e) {
                 getLogger().warning("[Backup] Shutdown backup error: " + e.getMessage());
             }
+        }
+
+        if (apiImplementation != null) {
+            APIProvider.unregister();
         }
 
         getLogger().info("EssentialsC disabled");
@@ -490,10 +492,6 @@ public final class EssentialsC extends JavaPlugin {
         return chatManager;
     }
 
-    public EssentialsCAPI getAPI() {
-        return apiImpl;
-    }
-
     public DiscordSRVHook getDiscordSRVHook() {
         return discordSRVHook;
     }
@@ -538,10 +536,6 @@ public final class EssentialsC extends JavaPlugin {
         return backupManager;
     }
 
-    public TPAManager getTpaManager() {
-        return tpaManager;
-    }
-
     public LogoutDataManager getLogoutDataManager() {
         return logoutDataManager;
     }
@@ -553,4 +547,5 @@ public final class EssentialsC extends JavaPlugin {
     public AhGuiManager getAhGuiManager() {
         return ahGuiManager;
     }
+
 }

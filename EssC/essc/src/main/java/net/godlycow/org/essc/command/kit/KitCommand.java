@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.command.kit;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.kit.Kit;
 import org.bukkit.command.CommandSender;
@@ -154,7 +153,7 @@ public class KitCommand extends Command {
         if (!kit.getItems().isEmpty()) {
             player.sendMessage(lang.get(player, "kit.debug.itemlist"));
             for (var item : kit.getItems()) {
-                player.sendMessage("  <gray>- " + item.getType() + " x" + item.getAmount());
+                player.sendMessage(lang.get(player, "kit.debug.item_entry", Map.of("type", item.getType().name(), "amount", String.valueOf(item.getAmount()))));
             }
         }
     }
@@ -189,8 +188,12 @@ public class KitCommand extends Command {
         long mins = dur.toMinutesPart();
         long secs = dur.toSecondsPart();
 
-        if (hours > 0) return String.format("%dh %dm %ds", hours, mins, secs);
-        if (mins > 0) return String.format("%dm %ds", mins, secs);
+        if (hours > 0) {
+            return String.format("%dh %dm %ds", hours, mins, secs);
+        }
+        if (mins > 0) {
+            return String.format("%dm %ds", mins, secs);
+        }
         return secs + "s";
     }
 

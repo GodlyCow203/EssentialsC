@@ -1,13 +1,10 @@
-name: KitAPITest
+name: EssentialsCAPITest
 version: 1.0.0
-main: net.godlycow.org.api.test.TestAPI
+main: net.godlycow.org.api.test.Main
+api-version: '1.21'
 depend: [EssentialsC]
-api-version: '1.20'
+
 commands:
-  testkit:
-    description: Run Kit API tests
-    usage: /testkit [crud|query|claim|events|playerdata|async|sync|all]
-    permission: kitapi.test
-permissions:
-  kitapi.test:
-    default: op
+  tkit:
+    description: Test the EssentialsC Kit API
+    usage: /tkit <subcommand>

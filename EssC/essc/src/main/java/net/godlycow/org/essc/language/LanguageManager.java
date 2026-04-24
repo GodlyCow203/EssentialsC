@@ -88,10 +88,6 @@ public class LanguageManager {
         }
     }
 
-    private String sanitize(String value) {
-        return miniMessage.escapeTags(value);
-    }
-
     public @NotNull Component get(CommandSender sender, String key, Map<String, String> placeholders) {
         String locale = defaultLang;
 
@@ -155,7 +151,7 @@ public class LanguageManager {
 
         if (placeholders != null) {
             for (var entry : placeholders.entrySet()) {
-                raw = raw.replace("<" + entry.getKey() + ">", sanitize(entry.getValue()));
+                raw = raw.replace("<" + entry.getKey() + ">", entry.getValue());
             }
         }
 
