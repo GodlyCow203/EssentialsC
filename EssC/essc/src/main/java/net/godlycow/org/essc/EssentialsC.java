@@ -177,7 +177,6 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isEconomyEnabled()) {
             EconomyCharts.register(this, metrics);
         }
-        getLogger().info("bStats Metrics initialized successfully!");
 
         registerPlaceholderAPI();
 
