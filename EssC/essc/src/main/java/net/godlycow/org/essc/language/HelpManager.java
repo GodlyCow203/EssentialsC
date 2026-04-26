@@ -239,10 +239,33 @@ public class HelpManager {
 
     private Map<String, String> resolveLanguageMap(CommandSender sender) {
         String locale = defaultLang;
-        if (sender instanceof Player player) locale = player.locale().toString();
-        if (!cache.containsKey(locale)) loadIntoCache(locale);
+
+        if (sender instanceof Player player) {
+            String manualLang = plugin.getLanguageManager().getPlayerLanguage(player.getUniqueId());
+
+            if (manualLang != null) {
+                locale = manualLang;
+            } else {
+                String clientLocale = player.locale().toString();
+
+                for (String supported : SUPPORTED_LANGUAGES) {
+                    if (supported.equalsIgnoreCase(clientLocale)) {
+                        locale = supported;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!cache.containsKey(locale)) {
+            loadIntoCache(locale);
+        }
+
         Map<String, String> map = cache.get(locale);
-        if (map == null) map = cache.get(defaultLang);
+        if (map == null || map.isEmpty()) {
+            map = cache.get(defaultLang);
+        }
+
         return map != null ? map : new HashMap<>();
     }
 
