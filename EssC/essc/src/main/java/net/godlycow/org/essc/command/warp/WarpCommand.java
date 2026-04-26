@@ -109,6 +109,10 @@ public class WarpCommand extends Command {
     private void startWarmup(Player player, Warp warp, long seconds, double cost) {
         WarpManager warpManager = plugin.getWarpManager();
 
+        warpManager.cancelWarmupTask(player.getUniqueId());
+        warpManager.removePendingWarp(player.getUniqueId());
+        warpManager.clearMovementTrack(player.getUniqueId());
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
         placeholders.put("time", String.valueOf(seconds));
@@ -124,24 +128,35 @@ public class WarpCommand extends Command {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
         }
 
-        plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
+        SchedulerTask[] taskHolder = new SchedulerTask[1];
+
+        SchedulerTask task = plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
             long remaining = seconds;
 
             @Override
             public void run() {
                 if (!player.isOnline()) {
+                    warpManager.cancelWarmupTask(player.getUniqueId());
                     warpManager.removePendingWarp(player.getUniqueId());
                     warpManager.clearMovementTrack(player.getUniqueId());
                     return;
                 }
 
                 if (!warpManager.hasPendingWarp(player.getUniqueId())) {
+                    warpManager.cancelWarmupTask(player.getUniqueId());
+                    return;
+                }
+
+                Warp pending = warpManager.getPendingWarp(player.getUniqueId());
+                if (pending == null || !pending.getName().equalsIgnoreCase(warp.getName())) {
+                    warpManager.cancelWarmupTask(player.getUniqueId());
                     return;
                 }
 
                 if (plugin.getConfigManager().isWarpCancelOnMovement()) {
                     Location original = warpManager.getTrackedLocation(player.getUniqueId());
                     if (original != null && player.getLocation().distanceSquared(original) > 0.1) {
+                        warpManager.cancelWarmupTask(player.getUniqueId());
                         warpManager.removePendingWarp(player.getUniqueId());
                         warpManager.clearMovementTrack(player.getUniqueId());
                         player.sendMessage(lang.get(player, "warp.cancelled_movement"));
@@ -154,6 +169,7 @@ public class WarpCommand extends Command {
                 if (remaining <= 0) {
                     warpManager.removePendingWarp(player.getUniqueId());
                     warpManager.clearMovementTrack(player.getUniqueId());
+                    warpManager.cancelWarmupTask(player.getUniqueId());
                     executeWarp(player, warp, cost);
                 } else {
                     if (plugin.getConfigManager().isWarpSounds() && remaining <= 3) {
@@ -162,6 +178,8 @@ public class WarpCommand extends Command {
                 }
             }
         }, 20L, 20L);
+
+        warpManager.setWarmupTask(player.getUniqueId(), task);
     }
 
     private void executeWarp(Player player, Warp warp, double cost) {
