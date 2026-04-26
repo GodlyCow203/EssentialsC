@@ -2,6 +2,8 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.util.LegacyColorConverter;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -48,7 +50,8 @@ public class MsgCommand extends Command {
         for (int i = 1; i < args.length; i++) {
             messageBuilder.append(args[i]).append(" ");
         }
-        String message = messageBuilder.toString().trim();
+        String rawMessage = messageBuilder.toString().trim();
+        String message = MiniMessage.miniMessage().escapeTags(LegacyColorConverter.strip(rawMessage));
 
         if (message.isEmpty()) {
             sendUsage(sender);
