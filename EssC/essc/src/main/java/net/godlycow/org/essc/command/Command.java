@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandExecutor;
@@ -8,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +27,6 @@ public abstract class Command implements CommandExecutor, TabCompleter {
     public Command(EssentialsC plugin, String name) {
         this(plugin, name, null, false, 0, null);
     }
-
 
     public Command(EssentialsC plugin, String name, String permission, boolean playerOnly) {
         this(plugin, name, permission, playerOnly, 0, "command.usage." + name);
@@ -62,6 +63,11 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if (args.length >= 1 && args[0].equalsIgnoreCase("help")) {
+            sendHelp(sender, args);
+            return true;
+        }
+
         if (args.length < minArgs) {
             sendUsage(sender);
             return true;
@@ -77,7 +83,6 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         }
     }
 
-
     public abstract boolean execute(CommandSender sender, String[] args);
 
     @Override
@@ -86,11 +91,36 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         if (permission != null && !sender.hasPermission(permission)) {
             return Collections.emptyList();
         }
+
+        if (args.length == 1) {
+            List<String> base = tabComplete(sender, args);
+            if (base == null) return null;
+
+            String partial = args[0].toLowerCase();
+            if ("help".startsWith(partial)) {
+                List<String> merged = new ArrayList<>(base);
+                if (!merged.contains("help")) merged.add(0, "help");
+                return merged;
+            }
+            return base;
+        }
+
         return tabComplete(sender, args);
     }
 
     public List<String> tabComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
+    }
+
+    protected void sendHelp(CommandSender sender, String[] args) {
+        HelpManager helpManager = plugin.getHelpManager();
+        if (helpManager == null) {
+            sendUsage(sender);
+            return;
+        }
+
+        String sub = args.length >= 2 ? args[1].toLowerCase() : null;
+        helpManager.sendHelp(sender, name, sub);
     }
 
     protected void sendUsage(CommandSender sender) {
@@ -101,8 +131,19 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         }
     }
 
-    public String getName() { return name; }
-    public String getPermission() { return permission; }
-    public boolean isPlayerOnly() { return playerOnly; }
-    public String[] getAliases() { return aliases; }
+    public String getName() {
+        return name;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public boolean isPlayerOnly() {
+        return playerOnly;
+    }
+
+    public String[] getAliases() {
+        return aliases;
+    }
 }

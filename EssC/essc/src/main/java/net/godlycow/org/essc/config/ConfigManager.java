@@ -759,4 +759,16 @@ public class ConfigManager {
     public boolean isDiscordNickShowRealname() {
         return config.getBoolean("nickname.discord-show-realname", true);
     }
+
+    public boolean isHelpSoundEnabled() {
+        return config.getBoolean("help.play-sound", true);
+    }
+
+    public boolean isHelpAnimated() {
+        return config.getBoolean("help.animated", true);
+    }
+
+    public long getHelpAnimationDelay() {
+        return config.getLong("help.animation-delay-ticks", 3);
+    }
 }

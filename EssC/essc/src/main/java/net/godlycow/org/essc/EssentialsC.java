@@ -60,6 +60,7 @@ public final class EssentialsC extends JavaPlugin {
     private EssScheduler essScheduler;
     private ConfigManager configManager;
     private LanguageManager languageManager;
+    private net.godlycow.org.essc.language.HelpManager helpManager;
 
     private EconomyManager economyManager;
     private VaultHook vaultHook;
@@ -141,6 +142,9 @@ public final class EssentialsC extends JavaPlugin {
 
         languageManager = new LanguageManager(this);
         languageManager.load(configManager.getDefaultLanguage());
+
+        helpManager = new net.godlycow.org.essc.language.HelpManager(this);
+        helpManager.load(configManager.getDefaultLanguage());
         scheduleManager = new ScheduleManager(this);
         scheduleManager.load();
 
@@ -377,6 +381,10 @@ public final class EssentialsC extends JavaPlugin {
 
     public LanguageManager getLanguageManager() {
         return languageManager;
+    }
+
+    public net.godlycow.org.essc.language.HelpManager getHelpManager() {
+        return helpManager;
     }
 
     public EconomyManager getEconomyManager() {

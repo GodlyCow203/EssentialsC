@@ -19,6 +19,10 @@ default-language: en_US
 # Must match a file in the lang/ folder (e.g. en_US -> lang/en_US.json).
 fallback-language: en_US
 
+help.play-sound        → isHelpSoundEnabled()      default: true
+help.animated          → isHelpAnimated()           default: true
+help.animation-delay-ticks → getHelpAnimationDelay() default: 3
+
 # Backup
 #
 # EssentialsC can automatically back up its entire data folder (database,

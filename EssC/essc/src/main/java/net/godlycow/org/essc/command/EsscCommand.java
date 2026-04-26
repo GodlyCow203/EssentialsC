@@ -38,6 +38,7 @@ public class EsscCommand extends Command {
 
                 plugin.getConfigManager().reload();
                 plugin.getLanguageManager().reload();
+                if (plugin.getHelpManager() != null) plugin.getHelpManager().reload();
 
                 EssLog.setDebug(plugin.getConfigManager().isDebug());
 
