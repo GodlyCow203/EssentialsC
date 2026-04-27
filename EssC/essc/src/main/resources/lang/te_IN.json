@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dback ను మళ్ళీ ఉపయోగించడానికి <color:#FFFFFF><seconds></color> సెకన్లు వేచి ఉండండి.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>మీరు కదిలినందున టెలిపోర్ట్ రద్దు చేయబడింది.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>టెలిపోర్ట్ రద్దు చేయబడింది.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>మీరు చనిపోయిన ప్రపంచం ఇప్పుడు అందుబాటులో లేదు.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>మీరు చనిపోయిన ప్రపంచం ఇప్పుడు అందుబాటులో లేదు.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>ప్రస్తుతం ఎవరూ ప్లేయర్లు ఆన్‌లైన్‌లో లేరు.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>ప్లేయర్ <color:#FFFFFF><target></color> ఆఫ్‌లైన్‌లో ఉన్నారు మరియు సేవ్ చేసిన ఇన్వెంటరీ ఏదీ లేదు.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>ప్లేయర్ <color:#FFFFFF><player></color> కనుగొనబడలేదు.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>నెట్‌వర్క్ సింక్: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>మిమ్మల్ని <color:#FFFFFF><muter></color> మ్యూట్ చేశారు. కారణం: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>మీ నిక్ నేమ్ <color:#FFFFFF><admin></color> ద్వారా <color:#FFFFFF><nick></color>కి మార్చబడింది.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> చెల్లించడానికి మీ దగ్గర తగినంత నిధులు లేవు.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>ట్రిగ్గర్: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>స్థితి: </color>"
 
 }

@@ -955,6 +955,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dback पुन्हा वापरण्यापूर्वी <color:#FFFFFF><seconds></color> सेकंद प्रतीक्षा करा.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>तुम्ही हलल्यामुळे टेलिपोर्ट रद्द झाले.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>टेलिपोर्ट रद्द झाले.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>ज्या जगात तुम्ही मेलात ते आता उपलब्ध नाही.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>ज्या जगात तुम्ही मेलात ते आता उपलब्ध नाही.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>एकही खेळाडू ऑनलाइन नाही.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>खेळाडू <color:#FFFFFF><target></color> ऑफलाइन आहे आणि त्याची कोणतीही इन्व्हेंटरी सेव्ह केलेली नाही.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>खेळाडू <color:#FFFFFF><player></color> सापडला नाही.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>नेटवर्क सिंक: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>तुम्हाला <color:#FFFFFF><muter></color> द्वारे म्यूट केले गेले आहे. कारण: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>तुमचे टोपणनाव <color:#FFFFFF><admin></color> द्वारे <color:#FFFFFF><nick></color> वर सेट केले गेले आहे.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> भरण्यासाठी तुमच्याकडे पुरेसा निधी नाही.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>ट्रिगर: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>स्थिती: </color>"
 
 }

@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Attendi <color:#FFFFFF><seconds></color> secondi prima di usare di nuovo /dback.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teletrasporto annullato perché ti sei mosso.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teletrasporto annullato.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Il mondo in cui sei morto non è più disponibile.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Il mondo in cui sei morto non è più disponibile.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Non ci sono giocatori online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Il giocatore <color:#FFFFFF><target></color> è offline e non ha un inventario salvato.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Giocatore <color:#FFFFFF><player></color> non trovato.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Sincronizzazione di Rete: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Sei stato silenziato da <color:#FFFFFF><muter></color>. Motivo: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Il tuo soprannome è stato impostato su <color:#FFFFFF><nick></color> da <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Non hai fondi sufficienti per pagare <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Trigger: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Stato: </color>"
 
 }

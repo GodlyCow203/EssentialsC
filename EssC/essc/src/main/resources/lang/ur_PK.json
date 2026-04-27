@@ -955,7 +955,18 @@
   "dback.cooldown": "<prefix> <color:#FF0000>براہ کرم /dback دوبارہ استعمال کرنے سے پہلے <color:#FFFFFF><seconds></color> سیکنڈ انتظار کریں۔</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>آپ کے حرکت کرنے کی وجہ سے ٹیلی پورٹ منسوخ ہو گیا۔</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>ٹیلی پورٹ منسوخ ہو گیا۔</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>جس دنیا میں آپ مرے تھے وہ اب دستیاب نہیں ہے۔</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>جس دنیا میں آپ مرے تھے وہ اب دستیاب نہیں ہے۔</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>کوئی کھلاڑی آن لائن نہیں ہے۔</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>کھلاڑی <color:#FFFFFF><target></color> آف لائن ہے اور اس کی کوئی انوینٹری محفوظ نہیں ہے۔</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>کھلاڑی <color:#FFFFFF><player></color> نہیں ملا۔</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>نیٹ ورک سنک: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>آپ کو <color:#FFFFFF><muter></color> نے خاموش کر دیا ہے۔ وجہ: <color:#FFFFFF><reason></color>۔ (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>آپ کا نک نیم <color:#FFFFFF><admin></color> نے <color:#FFFFFF><nick></color> سیٹ کر دیا ہے۔</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>آپ کے پاس <color:#FFFFFF><amount></color> ادا کرنے کے لیے کافی رقم نہیں ہے۔</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>ٹریگر: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>حالت: </color>"
 
 }
 

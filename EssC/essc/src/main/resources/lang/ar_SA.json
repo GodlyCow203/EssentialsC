@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>يرجى الانتظار <color:#FFFFFF><seconds></color> ثانية قبل استخدام /dback مرة أخرى.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>تم إلغاء الانتقال لأنك تحركت.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>تم إلغاء الانتقال.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>العالم الذي مت فيه لم يعد متاحًا.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>العالم الذي مت فيه لم يعد متاحًا.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>لا يوجد لاعبون متصلون.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>اللاعب <color:#FFFFFF><target></color> غير متصل ولا يملك حقيبة محفوظة.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>لم يتم العثور على اللاعب <color:#FFFFFF><player></color>.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>مزامنة الشبكة: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>لقد تم كتمك بواسطة <color:#FFFFFF><muter></color>. السبب: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>تم تعيين لقبك إلى <color:#FFFFFF><nick></color> بواسطة <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>ليس لديك أموال كافية لدفع <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>المشغل: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>الحالة: </color>"
 
 }

@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dback를 다시 사용하기 전에 <color:#FFFFFF><seconds></color>초 기다려 주세요.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>움직여서 텔레포트가 취소되었습니다.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>텔레포트가 취소되었습니다.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>사망한 월드는 더 이상 사용할 수 없습니다.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>사망한 월드는 더 이상 사용할 수 없습니다.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>현재 접속 중인 플레이어가 없습니다.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>플레이어 <color:#FFFFFF><target></color> 님이 오프라인 상태이며 저장된 인벤토리가 없습니다.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>플레이어 <color:#FFFFFF><player></color> 님을 찾을 수 없습니다.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>네트워크 동기화: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000><color:#FFFFFF><muter></color> 님에 의해 채팅이 금지되었습니다. 사유: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200><color:#FFFFFF><admin></color> 님이 당신의 닉네임을 <color:#FFFFFF><nick></color>(으)로 설정했습니다.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color>을(를) 지불할 잔액이 부족합니다.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>트리거: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>상태: </color>"
 
 }

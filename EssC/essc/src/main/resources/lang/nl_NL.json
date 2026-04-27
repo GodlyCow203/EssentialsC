@@ -955,6 +955,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Wacht <color:#FFFFFF><seconds></color> seconden voordat je /dback opnieuw gebruikt.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportatie geannuleerd omdat je bewoog.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teleportatie geannuleerd.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>De wereld waarin je bent gestorven is niet langer beschikbaar.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>De wereld waarin je bent gestorven is niet langer beschikbaar.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Er zijn geen spelers online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Speler <color:#FFFFFF><target></color> is offline en heeft geen opgeslagen inventaris.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Speler <color:#FFFFFF><player></color> niet gevonden.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Netwerksynchronisatie: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Je bent gedempt door <color:#FFFFFF><muter></color>. Reden: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Je bijnaam is ingesteld op <color:#FFFFFF><nick></color> door <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Je hebt onvoldoende saldo om <color:#FFFFFF><amount></color> te betalen.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Trigger: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Status: </color>"
 
 }

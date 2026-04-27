@@ -956,6 +956,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Lütfen /dback'i tekrar kullanmadan önce <color:#FFFFFF><seconds></color> saniye bekleyin.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Hareket ettiğiniz için ışınlanma iptal edildi.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Işınlanma iptal edildi.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Öldüğünüz dünya artık mevcut değil.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Öldüğünüz dünya artık mevcut değil.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Çevrimiçi oyuncu yok.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Oyuncu <color:#FFFFFF><target></color> çevrimdışı ve kayıtlı bir envanteri yok.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Oyuncu <color:#FFFFFF><player></color> bulunamadı.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Ağ Senkronizasyonu: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000><color:#FFFFFF><muter></color> tarafından susturuldunuz. Sebep: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Takma adınız <color:#FFFFFF><admin></color> tarafından <color:#FFFFFF><nick></color> olarak ayarlandı.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> ödemek için yeterli bakiyeniz yok.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Tetikleyici: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Durum: </color>"
 
 }

@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Tunggu <color:#FFFFFF><seconds></color> detik sebelum menggunakan /dback lagi.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportasi dibatalkan karena kamu bergerak.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teleportasi dibatalkan.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Dunia tempat kamu mati tidak lagi tersedia.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Dunia tempat kamu mati tidak lagi tersedia.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Tidak ada pemain yang online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Pemain <color:#FFFFFF><target></color> sedang offline dan tidak memiliki inventaris yang tersimpan.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Pemain <color:#FFFFFF><player></color> tidak ditemukan.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Sinkronisasi Jaringan: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Anda disenyapkan oleh <color:#FFFFFF><muter></color>. Alasan: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Nama panggilan Anda diatur menjadi <color:#FFFFFF><nick></color> oleh <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Anda tidak memiliki cukup dana untuk membayar <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Pemicu: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Status: </color>"
 
 }

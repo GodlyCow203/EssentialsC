@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Veuillez attendre <color:#FFFFFF><seconds></color> secondes avant de réutiliser /dback.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Téléportation annulée car vous avez bougé.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Téléportation annulée.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Le monde dans lequel vous êtes mort n'est plus disponible.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Le monde dans lequel vous êtes mort n'est plus disponible.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Il n'y a aucun joueur en ligne.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Le joueur <color:#FFFFFF><target></color> est hors ligne et n'a pas d'inventaire sauvegardé.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Joueur <color:#FFFFFF><player></color> non trouvé.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Sync Réseau: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Vous avez été rendu muet par <color:#FFFFFF><muter></color>. Raison: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Votre pseudonyme a été défini sur <color:#FFFFFF><nick></color> par <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Vous n'avez pas assez de fonds pour payer <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Déclencheur: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>État: </color>"
 
 }

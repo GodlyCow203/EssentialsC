@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dbackを再使用する前に<color:#FFFFFF><seconds></color>秒お待ちください。</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>移動したためテレポートがキャンセルされました。</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>テレポートがキャンセルされました。</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>死亡したワールドは利用できなくなりました。</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>死亡したワールドは利用できなくなりました。</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>オンラインのプレイヤーはいません。</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>プレイヤー <color:#FFFFFF><target></color> はオフラインで、保存されたインベントリがありません。</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>プレイヤー <color:#FFFFFF><player></color> が見つかりませんでした。</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>ネットワーク同期: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000><color:#FFFFFF><muter></color> によってミュートされました。理由: <color:#FFFFFF><reason></color>。 (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>あなたのニックネームは <color:#FFFFFF><admin></color> によって <color:#FFFFFF><nick></color> に設定されました。</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> を支払うための資金が不足しています。</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>トリガー: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>状態: </color>"
 
 }

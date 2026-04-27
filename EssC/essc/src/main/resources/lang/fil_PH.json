@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Mangyaring maghintay ng <color:#FFFFFF><seconds></color> segundo bago gamitin ulit ang /dback.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Nakansela ang teleport dahil gumalaw ka.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Nakansela ang teleport.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Ang mundo kung saan ka namatay ay hindi na available.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Ang mundo kung saan ka namatay ay hindi na available.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Walang mga manlalaro na online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Ang manlalarong <color:#FFFFFF><target></color> ay offline at walang naka-save na inventory.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Hindi nahanap ang manlalarong <color:#FFFFFF><player></color>.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Network Sync: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Naka-mute ka kay <color:#FFFFFF><muter></color>. Dahilan: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Ang iyong nickname ay pinalitan sa <color:#FFFFFF><nick></color> ni <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Wala kang sapat na pondo para magbayad ng <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Trigger: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Estado: </color>"
 
 }

@@ -956,6 +956,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Vui lòng chờ <color:#FFFFFF><seconds></color> giây trước khi sử dụng /dback lại.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Dịch chuyển đã bị hủy vì bạn đã di chuyển.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Dịch chuyển đã bị hủy.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Thế giới bạn đã chết không còn khả dụng nữa.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Thế giới bạn đã chết không còn khả dụng nữa.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Không có người chơi nào đang trực tuyến.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Người chơi <color:#FFFFFF><target></color> đang ngoại tuyến và không có kho đồ được lưu.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Không tìm thấy người chơi <color:#FFFFFF><player></color>.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Đồng bộ mạng: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Bạn đã bị tắt tiếng bởi <color:#FFFFFF><muter></color>. Lý do: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Biệt danh của bạn đã được đặt thành <color:#FFFFFF><nick></color> bởi <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Bạn không có đủ tiền để thanh toán <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Kích hoạt: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Trạng thái: </color>"
 
 }

@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dback আবার ব্যবহার করার আগে <color:#FFFFFF><seconds></color> সেকেন্ড অপেক্ষা করুন।</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>আপনি নড়াচড়া করার কারণে টেলিপোর্ট বাতিল করা হয়েছে।</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>টেলিপোর্ট বাতিল করা হয়েছে।</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>যে বিশ্বে আপনি মারা গিয়েছিলেন তা আর উপলব্ধ নেই।</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>যে বিশ্বে আপনি মারা গিয়েছিলেন তা আর উপলব্ধ নেই।</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>কোনো খেলোয়াড় অনলাইন নেই।</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>খেলোয়াড় <color:#FFFFFF><target></color> অফলাইনে আছেন এবং কোনো সংরক্ষিত ইনভেন্টরি নেই।</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>খেলোয়াড় <color:#FFFFFF><player></color> খুঁজে পাওয়া যায়নি।</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>নেটওয়ার্ক সিঙ্ক: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>আপনাকে <color:#FFFFFF><muter></color> মিউট করেছেন। কারণ: <color:#FFFFFF><reason></color>। (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>আপনার ডাকনাম <color:#FFFFFF><admin></color> দ্বারা <color:#FFFFFF><nick></color> এ সেট করা হয়েছে।</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> পরিশোধ করার জন্য আপনার পর্যাপ্ত অর্থ নেই।</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>ট্রিগার: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>অবস্থা: </color>"
 
 }

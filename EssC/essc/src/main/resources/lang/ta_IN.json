@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>/dback ஐ மீண்டும் பயன்படுத்துவதற்கு முன் <color:#FFFFFF><seconds></color> வினாடிகள் காத்திருக்கவும்.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>நீங்கள் நகர்ந்ததால் டெலிபோர்ட் ரத்து செய்யப்பட்டது.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>டெலிபோர்ட் ரத்து செய்யப்பட்டது.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>நீங்கள் இறந்த உலகம் இனி கிடைக்கவில்லை.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>நீங்கள் இறந்த உலகம் இனி கிடைக்கவில்லை.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>ஆன்லைனில் வீரர்கள் யாரும் இல்லை.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>வீரர் <color:#FFFFFF><target></color> ஆஃப்லைனில் உள்ளார் மற்றும் அவரிடம் சேமிக்கப்பட்ட பொருட்கள் எதுவும் இல்லை.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>வீரர் <color:#FFFFFF><player></color> காணப்படவில்லை.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>பிணைய ஒத்திசைவு: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>நீங்கள் <color:#FFFFFF><muter></color> என்பவரால் மியூட் செய்யப்பட்டுள்ளீர்கள். காரணம்: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>உங்கள் புனைப்பெயர் <color:#FFFFFF><admin></color> என்பவரால் <color:#FFFFFF><nick></color> என மாற்றப்பட்டது.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000><color:#FFFFFF><amount></color> செலுத்த உங்களிடம் போதுமான நிதி இல்லை.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>தூண்டுதல்: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>நிலை: </color>"
 
 }

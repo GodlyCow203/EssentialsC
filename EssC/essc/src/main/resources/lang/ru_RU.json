@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Подождите <color:#FFFFFF><seconds></color> секунд перед повторным использованием /dback.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Телепортация отменена, так как вы двинулись.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Телепортация отменена.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Мир, в котором вы умерли, больше недоступен.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Мир, в котором вы умерли, больше недоступен.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Нет игроков в сети.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Игрок <color:#FFFFFF><target></color> не в сети, и его инвентарь не сохранён.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Игрок <color:#FFFFFF><player></color> не найден.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Синхронизация сети: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Вам запретил писать в чат <color:#FFFFFF><muter></color>. Причина: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Ваш никнейм был изменён на <color:#FFFFFF><nick></color> администратором <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>У вас недостаточно средств, чтобы заплатить <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Триггер: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Состояние: </color>"
 
 }

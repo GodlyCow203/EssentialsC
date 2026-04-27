@@ -951,5 +951,16 @@
   "dback.cooldown": "<prefix> <color:#FF0000>请等待 <color:#FFFFFF><seconds></color> 秒后再使用 /dback。</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>传送已取消，因为你移动了。</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>传送已取消。</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>你死亡时所在的世界已不可用。</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>你死亡时所在的世界已不可用。</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>目前没有玩家在线。</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>玩家 <color:#FFFFFF><target></color> 已离线且没有保存的背包物品。</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>未找到玩家 <color:#FFFFFF><player></color>。</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>网络同步: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>你已被 <color:#FFFFFF><muter></color> 禁言。原因: <color:#FFFFFF><reason></color>。(<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>你的昵称已被 <color:#FFFFFF><admin></color> 设置为 <color:#FFFFFF><nick></color>。</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>你没有足够的资金支付 <color:#FFFFFF><amount></color>。</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>触发条件: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>状态: </color>"
 }

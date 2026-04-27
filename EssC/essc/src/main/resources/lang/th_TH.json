@@ -956,6 +956,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>กรุณารอ <color:#FFFFFF><seconds></color> วินาทีก่อนใช้ /dback อีกครั้ง</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>การเทเลพอร์ตถูกยกเลิกเนื่องจากคุณขยับ</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>การเทเลพอร์ตถูกยกเลิกแล้ว</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>โลกที่คุณตายอยู่ไม่สามารถใช้งานได้อีกต่อไป</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>โลกที่คุณตายอยู่ไม่สามารถใช้งานได้อีกต่อไป</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>ไม่มีผู้เล่นออนไลน์อยู่ในขณะนี้</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>ผู้เล่น <color:#FFFFFF><target></color> ออฟไลน์และไม่มีข้อมูลกระเป๋าที่บันทึกไว้</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>ไม่พบผู้เล่น <color:#FFFFFF><player></color></color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>การประสานข้อมูลเครือข่าย: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>คุณถูกปิดเสียงโดย <color:#FFFFFF><muter></color> สาเหตุ: <color:#FFFFFF><reason></color> (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>ชื่อเล่นของคุณถูกเปลี่ยนเป็น <color:#FFFFFF><nick></color> โดย <color:#FFFFFF><admin></color></color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>คุณมีเงินไม่เพียงพอที่จะจ่าย <color:#FFFFFF><amount></color></color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>ตัวกระตุ้น: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>สถานะ: </color>"
 
 }

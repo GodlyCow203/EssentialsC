@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Poczekaj <color:#FFFFFF><seconds></color> sekund przed ponownym użyciem /dback.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportacja anulowana, ponieważ się poruszyłeś.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teleportacja anulowana.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>Świat, w którym zginąłeś, nie jest już dostępny.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>Świat, w którym zginąłeś, nie jest już dostępny.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Brak graczy online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Gracz <color:#FFFFFF><target></color> jest offline i nie ma zapisanego ekwipunku.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Nie znaleziono gracza <color:#FFFFFF><player></color>.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Synchronizacja sieci: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Zostałeś wyciszony przez <color:#FFFFFF><muter></color>. Powód: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Twój pseudonim został ustawiony na <color:#FFFFFF><nick></color> przez <color:#FFFFFF><admin></color>.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Nie masz wystarczających środków, aby zapłacić <color:#FFFFFF><amount></color>.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Wyzwalacz: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Status: </color>"
 
 }

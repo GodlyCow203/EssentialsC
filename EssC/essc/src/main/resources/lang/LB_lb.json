@@ -954,6 +954,17 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Wart <color:#FFFFFF><seconds></color> Sekonnen ier du /dback nees benotz.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teleportatioun ofgebrach, well dech bewegt hues.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teleportatioun ofgebrach.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>D'Welt an där du gestuerwe bass ass net méi disponibel.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>D'Welt an där du gestuerwe bass ass net méi disponibel.</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>Et si keng Spiller online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>De Spiller <color:#FFFFFF><target></color> ass offline an huet keen gespäicherten Inventar.</color>",
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Spiller <color:#FFFFFF><player></color> net fonnt.</color>",
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Netzwierk-Synchronisatioun: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+  "mute.chat_blocked": "<prefix> <color:#FF0000>Du bass vum <color:#FFFFFF><muter></color> stomm geschalt ginn. Grond: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+  "nick.success.set.by": "<prefix> <color:#FFF200>Däi Spëtznumm gouf vum <color:#FFFFFF><admin></color> op <color:#FFFFFF><nick></color> gesat.</color>",
+  "pay.insufficient": "<prefix> <color:#FF0000>Du hues net genuch Suen fir <color:#FFFFFF><amount></color> ze bezuelen.</color>",
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Ausléiser: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>Zoustand: </color>"
 
 }
