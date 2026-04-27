@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -31,6 +33,11 @@ public class SyncListener implements Listener {
 
         onlinePlayers.put(uuid, name);
         syncManager.onPlayerJoin(player);
+
+        var nickSyncManager = plugin.getNicknameSyncManager();
+        if (nickSyncManager != null) {
+            nickSyncManager.onPlayerJoin(player);
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -42,9 +49,8 @@ public class SyncListener implements Listener {
         syncManager.onPlayerQuit(player);
     }
 
-
-    public java.util.Set<UUID> getOnlinePlayers() {
-        return java.util.Collections.unmodifiableSet(onlinePlayers.keySet());
+    public Set<UUID> getOnlinePlayers() {
+        return Collections.unmodifiableSet(onlinePlayers.keySet());
     }
 
     public void shutdown() {

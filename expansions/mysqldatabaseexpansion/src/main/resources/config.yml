@@ -21,3 +21,7 @@ mysql:
 network-kits:
   enabled: true
 
+network-nicknames:
+  enabled: true
+  # How often to pull nicknames from MySQL for all online players (in ticks, 20 = 1s)
+  poll-interval-ticks: 40

@@ -20,9 +20,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NickManager implements Listener {
+
     private final EssentialsC plugin;
     private final Database database;
     private final Map<UUID, String> nickCache = new ConcurrentHashMap<>();
+
+    private NicknameSyncHook networkHook;
 
     public NickManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -100,6 +103,11 @@ public class NickManager implements Listener {
                 stmt.executeUpdate();
 
                 nickCache.put(uuid, nickname);
+
+                if (networkHook != null) {
+                    networkHook.onNicknameSet(uuid, nickname);
+                }
+
                 return true;
             } catch (SQLException e) {
                 plugin.getLogger().severe("Failed to set nickname: " + e.getMessage());
@@ -119,6 +127,10 @@ public class NickManager implements Listener {
                 boolean removed = stmt.executeUpdate() > 0;
                 if (removed) {
                     nickCache.remove(uuid);
+
+                    if (networkHook != null) {
+                        networkHook.onNicknameCleared(uuid);
+                    }
                 }
                 return removed;
             }
@@ -195,6 +207,18 @@ public class NickManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         applyNickname(event.getPlayer());
+    }
+
+    public void setNetworkHook(NicknameSyncHook hook) {
+        this.networkHook = hook;
+    }
+
+    public void clearNetworkHook() {
+        this.networkHook = null;
+    }
+
+    public NicknameSyncHook getNetworkHook() {
+        return networkHook;
     }
 
     public void reload() {

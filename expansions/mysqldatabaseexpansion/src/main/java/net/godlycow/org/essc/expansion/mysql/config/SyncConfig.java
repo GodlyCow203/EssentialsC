@@ -15,6 +15,8 @@ public class SyncConfig {
     private String serverId;
     private int maxPoolSize;
     private boolean networkKitsEnabled;
+    private boolean networkNicknamesEnabled;
+    private int nicknamePollIntervalTicks;
 
     public SyncConfig(MySQLDatabaseExpansion plugin) {
         this.plugin = plugin;
@@ -25,7 +27,7 @@ public class SyncConfig {
         FileConfiguration cfg = plugin.getConfig();
 
         host = cfg.getString("mysql.host", "localhost");
-        port= cfg.getInt("mysql.port", 3306);
+        port = cfg.getInt("mysql.port", 3306);
         database = cfg.getString("mysql.database", "essc_sync");
         username = cfg.getString("mysql.username", "root");
         password = cfg.getString("mysql.password", "");
@@ -35,6 +37,9 @@ public class SyncConfig {
         serverId = cfg.getString("server-id", "server-1");
 
         networkKitsEnabled = cfg.getBoolean("network-kits.enabled", true);
+
+        networkNicknamesEnabled = cfg.getBoolean("network-nicknames.enabled", true);
+        nicknamePollIntervalTicks = cfg.getInt("network-nicknames.poll-interval-ticks", 40);
     }
 
     public String getJdbcUrl() {
@@ -42,29 +47,43 @@ public class SyncConfig {
                 + "?useSSL=false&autoReconnect=true&characterEncoding=utf8";
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    public String getServerId(){
+
+    public String getServerId() {
         return serverId;
     }
-    public int getMaxPoolSize(){
+
+    public int getMaxPoolSize() {
         return maxPoolSize;
     }
-    public boolean isNetworkKitsEnabled(){
+
+    public boolean isNetworkKitsEnabled() {
         return networkKitsEnabled;
+    }
+
+    public boolean isNetworkNicknamesEnabled() {
+        return networkNicknamesEnabled;
+    }
+
+    public long getNicknamePollIntervalTicks() {
+        return nicknamePollIntervalTicks;
     }
 
     public int getPollIntervalTicks() {
         return 20;
     }
-    public int getPushDebounceMs(){
+
+    public int getPushDebounceMs() {
         return 0;
     }
-    public int getLocalPushIntervalTicks(){
+
+    public int getLocalPushIntervalTicks() {
         return 20;
     }
 }
