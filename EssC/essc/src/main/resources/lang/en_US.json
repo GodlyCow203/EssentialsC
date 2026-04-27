@@ -975,7 +975,26 @@
   "dback.cooldown": "<prefix> <color:#FF0000>Please wait <color:#FFFFFF><seconds></color> seconds before using /dback again.</color>",
   "dback.cancelled.move": "<prefix> <color:#FF0000>Teleport cancelled because you moved.</color>",
   "dback.cancelled": "<prefix> <color:#FF0000>Teleport cancelled.</color>",
-  "dback.world_unloaded": "<prefix> <color:#FF0000>The world you died in is no longer available.</color>"
+  "dback.world_unloaded": "<prefix> <color:#FF0000>The world you died in is no longer available.</color>",
+
+  "banlist.history.header": "<prefix> <color:#AAAAAA>Ban History</color>",
+
+  "error.no_players_online": "<prefix> <color:#FF0000>There are no players online.</color>",
+  "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Player <color:#FFFFFF><target></color> is offline and has no saved inventory.</color>",
+
+  "home.admin.player_not_found": "<prefix> <color:#FF0000>Player <color:#FFFFFF><player></color> not found.</color>",
+
+  "kit.debug.networksync": "<prefix> <color:#AAAAAA>Network Sync: <color:#66AAFF><val></color>",
+  "kit.debug.item_entry": "<prefix> <color:#AAAAAA>- <color:#66AAFF><type></color> x<amount></color>",
+
+  "mute.chat_blocked": "<prefix> <color:#FF0000>You are muted by <color:#FFFFFF><muter></color>. Reason: <color:#FFFFFF><reason></color>. (<expires>)</color>",
+
+  "nick.success.set.by": "<prefix> <color:#FFF200>Your nickname was set to <color:#FFFFFF><nick></color> by <color:#FFFFFF><admin></color>.</color>",
+
+  "pay.insufficient": "<prefix> <color:#FF0000>You do not have enough funds to pay <color:#FFFFFF><amount></color>.</color>",
+
+  "schedules.info.trigger.prefix": "<color:#AAAAAA>Trigger: </color>",
+  "schedules.info.state.prefix": "<color:#AAAAAA>State: </color>"
 }
 
 
