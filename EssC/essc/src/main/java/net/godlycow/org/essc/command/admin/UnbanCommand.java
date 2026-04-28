@@ -6,10 +6,9 @@ import net.godlycow.org.essc.punishment.PunishmentManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UnbanCommand extends Command {
 
@@ -25,37 +24,35 @@ public class UnbanCommand extends Command {
         String targetName = args[0];
         OfflinePlayer target = plugin.getServer().getOfflinePlayer(targetName);
 
+        if (!target.hasPlayedBefore() && !target.isOnline()) {
+            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
+            return true;
+        }
+
         if (!punishmentManager.isBanned(target.getUniqueId())) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", targetName);
-            sender.sendMessage(lang.get(sender, "unban.not_banned", placeholders));
+            sender.sendMessage(lang.get(sender, "unban.not_banned", Map.of("target", target.getName())));
             return true;
         }
 
         punishmentManager.unbanPlayer(target.getUniqueId());
 
-        Map<String, String> broadcastPlaceholders = new HashMap<>();
-        broadcastPlaceholders.put("target", targetName);
-        broadcastPlaceholders.put("unbanner", sender.getName());
+        plugin.getServer().broadcast(lang.get(sender, "unban.broadcast", Map.of(
+                "target", target.getName(),
+                "unbanner", sender.getName()
+        )), "essentialsc.ban.notify");
 
-        plugin.getServer().broadcast(lang.get(sender, "unban.broadcast", broadcastPlaceholders), "essentialsc.ban.notify");
-
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("target", targetName);
-        sender.sendMessage(lang.get(sender, "unban.success", senderPlaceholders));
-
-        plugin.debug("Unbanned " + targetName + " by " + sender.getName());
+        sender.sendMessage(lang.get(sender, "unban.success", Map.of("target", target.getName())));
         return true;
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return punishmentManager.getAllBans().stream()
+            return punishmentManager.getActiveBans().stream()
                     .map(PunishmentManager.BanEntry::name)
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .toList();
+                    .collect(Collectors.toList());
         }
-        return Collections.emptyList();
+        return super.tabComplete(sender, args);
     }
 }

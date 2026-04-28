@@ -13,15 +13,19 @@ public class PunishmentManager {
     private final EssentialsC plugin;
     private final File banFile;
     private final File muteFile;
+    private final File ipHistoryFile;
     private FileConfiguration banConfig;
     private FileConfiguration muteConfig;
+    private FileConfiguration ipHistoryConfig;
     private NetworkPunishmentHook networkHook = null;
 
     public PunishmentManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.banFile = new File(plugin.getDataFolder(), "bans.yml");
         this.muteFile = new File(plugin.getDataFolder(), "mutes.yml");
+        this.ipHistoryFile = new File(plugin.getDataFolder(), "ip-history.yml");
         loadFiles();
+        loadIpHistory();
     }
 
     public void setNetworkHook(NetworkPunishmentHook hook) {
@@ -56,6 +60,30 @@ public class PunishmentManager {
         catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
     }
 
+    private void loadIpHistory() {
+        if (!ipHistoryFile.exists()) {
+            try { ipHistoryFile.createNewFile(); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to create ip-history.yml"); }
+        }
+        ipHistoryConfig = YamlConfiguration.loadConfiguration(ipHistoryFile);
+    }
+
+    private void saveIpHistory() {
+        try { ipHistoryConfig.save(ipHistoryFile); }
+        catch (IOException e) { plugin.getLogger().severe("Failed to save ip-history.yml"); }
+    }
+
+    public void recordIp(UUID uuid, String name, String ip) {
+        String path = "players." + uuid;
+        ipHistoryConfig.set(path + ".name", name);
+        ipHistoryConfig.set(path + ".ip", ip);
+        ipHistoryConfig.set(path + ".time", System.currentTimeMillis());
+        saveIpHistory();
+    }
+
+    public String getLastIp(UUID uuid) {
+        return ipHistoryConfig.getString("players." + uuid + ".ip");
+    }
 
     public void banPlayer(UUID uuid, String name, String reason, String banner, long expires) {
         String path = "players." + uuid;
@@ -128,7 +156,6 @@ public class PunishmentManager {
         return e.expires() <= 0 || e.expires() > System.currentTimeMillis();
     }
 
-
     public void banIp(String ip, String reason, String banner, long expires) {
         String safeIp = ip.replace('.', '_');
         String path   = "ips." + safeIp;
@@ -195,14 +222,22 @@ public class PunishmentManager {
         return e.expires() <= 0 || e.expires() > System.currentTimeMillis();
     }
 
-
     public void mutePlayer(UUID uuid, String name, String reason, String muter, long expires) {
+        mutePlayer(uuid, name, reason, muter, expires, false);
+    }
+
+    public void mutePlayer(UUID uuid, String name, String reason, String muter, long expires, boolean offlineNotification) {
         String path = uuid.toString();
         muteConfig.set(path + ".name",    name);
         muteConfig.set(path + ".reason",  reason);
         muteConfig.set(path + ".muter",   muter);
         muteConfig.set(path + ".time",    System.currentTimeMillis());
         muteConfig.set(path + ".expires", expires);
+
+        if (offlineNotification) {
+            muteConfig.set(path + ".offline_notification", true);
+        }
+
         saveMutes();
         plugin.debug("Muted " + name + " by " + muter + " until " + expires);
 
@@ -238,6 +273,15 @@ public class PunishmentManager {
                 muteConfig.getLong(path + ".expires"));
     }
 
+    public boolean hasOfflineMuteNotification(UUID uuid) {
+        return muteConfig.getBoolean(uuid.toString() + ".offline_notification", false);
+    }
+
+    public void clearOfflineMuteNotification(UUID uuid) {
+        muteConfig.set(uuid.toString() + ".offline_notification", null);
+        saveMutes();
+    }
+
     public List<MuteEntry> getAllMutes() {
         List<MuteEntry> mutes = new ArrayList<>();
         for (String key : muteConfig.getKeys(false)) {
@@ -249,7 +293,6 @@ public class PunishmentManager {
         }
         return mutes;
     }
-
 
     public record BanEntry(UUID uuid, String name, String reason, String banner, long time, long expires) {}
     public record IpBanEntry(String ip, String reason, String banner, long time, long expires) {}

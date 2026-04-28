@@ -40,11 +40,19 @@ public class BanIpCommand extends Command {
             } else {
                 OfflinePlayer offlineTarget = plugin.getServer().getOfflinePlayer(target);
                 if (offlineTarget.hasPlayedBefore()) {
-                    sender.sendMessage(lang.get(sender, "banip.player_offline_no_ip", Map.of("player", target)));
+                    String storedIp = punishmentManager.getLastIp(offlineTarget.getUniqueId());
+                    if (storedIp != null) {
+                        ip = storedIp;
+                        targetName = offlineTarget.getName();
+                        sender.sendMessage(lang.get(sender, "banip.stored_ip_used", Map.of("ip", ip, "player", targetName)));
+                    } else {
+                        sender.sendMessage(lang.get(sender, "banip.no_stored_ip", Map.of("player", target)));
+                        return true;
+                    }
                 } else {
                     sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", target)));
+                    return true;
                 }
-                return true;
             }
         }
 

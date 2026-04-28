@@ -902,5 +902,14 @@
   "home.notifications.disabled": "<prefix> <color:#FF0000>Home notifications disabled. <color:#FFFFFF>You will no longer receive home admin alerts.</color></color>",
   "home.notification.admin.deleted": "<prefix> <color:#FF0000>Your home <color:#FFFFFF><bold><name></bold></color> was deleted by an admin <color:#FFFFFF>(<admin>)</color></color>",
   "home.notification.admin.renamed": "<prefix> <color:#FFF200>Your home <color:#FFFFFF><bold><old></bold></color> was renamed to <color:#FFFFFF><bold><new></bold></color> by an admin <color:#FFFFFF>(<admin>)</color></color>",
-  "home.notification.admin.relocated": "<prefix> <color:#FFF200>Your home <color:#FFFFFF><bold><name></bold></color> was relocated by an admin <color:#FFFFFF>(<admin>)</color></color>"
+  "home.notification.admin.relocated": "<prefix> <color:#FFF200>Your home <color:#FFFFFF><bold><name></bold></color> was relocated by an admin <color:#FFFFFF>(<admin>)</color></color>",
+  "mute.join_notification": "<prefix> <color:#FF0000>You were muted while offline by <color:#FFFFFF><muter></color> for: <color:#FFFFFF><reason></color>. Duration: <color:#FFFFFF><duration></color></color>",
+  "banip.stored_ip_used": "<prefix> <color:#FFF200>Player was offline. Using last known IP: <color:#FFFFFF><ip></color></color>",
+  "banip.no_stored_ip": "<prefix> <color:#FF0000>Could not find a stored IP for offline player <color:#FFFFFF><player></color>. They must have joined at least once.</color>",
+  "checkpunish.ban.active": "<prefix> <color:#FF0000>● Banned: <color:#FFFFFF><reason></color> by <color:#FFFFFF><banner></color> (<color:#FFFFFF><time></color>, expires: <color:#FFFFFF><expires></color>)</color>",
+  "checkpunish.ban.none": "<prefix> <color:#FFF200>● Not banned</color>",
+  "checkpunish.mute.active": "<prefix> <color:#FF0000>● Muted: <color:#FFFFFF><reason></color> by <color:#FFFFFF><muter></color> (<color:#FFFFFF><time></color>, expires: <color:#FFFFFF><expires></color>)</color>",
+  "checkpunish.mute.none": "<prefix> <color:#FFF200>● Not muted</color>",
+  "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP Banned: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> by <color:#FFFFFF><banner></color></color>",
+  "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP not banned</color>"
 }

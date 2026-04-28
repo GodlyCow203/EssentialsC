@@ -71,15 +71,12 @@ public class BanCommand extends Command {
 
         punishmentManager.banPlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
 
-        if (target.isOnline()) {
-            Player onlineTarget = target.getPlayer();
-            if (onlineTarget != null) {
-                onlineTarget.kick(lang.get(onlineTarget, "ban.screen_message", Map.of(
-                        "reason",   reason,
-                        "banner",   sender.getName(),
-                        "duration", DurationParser.format(duration)
-                )));
-            }
+        if (target.isOnline() && target.getPlayer() != null) {
+            target.getPlayer().kick(lang.get(target.getPlayer(), "ban.screen_message", Map.of(
+                    "reason",   reason,
+                    "banner",   sender.getName(),
+                    "duration", DurationParser.format(duration)
+            )));
         }
 
         String durationStr = DurationParser.format(duration);

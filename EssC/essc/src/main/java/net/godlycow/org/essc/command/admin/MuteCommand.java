@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.DurationParser;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,23 +21,31 @@ public class MuteCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        Player target = plugin.getBedrockUtil().resolvePlayer(args[0]);
-
-        if (target == null) {
-            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
-            return true;
+        Player onlineTarget = plugin.getBedrockUtil().resolvePlayer(args[0]);
+        OfflinePlayer target;
+        if (onlineTarget != null) {
+            target = onlineTarget;
+        } else {
+            target = plugin.getServer().getOfflinePlayer(args[0]);
+            if (!target.hasPlayedBefore() && !target.isOnline()) {
+                sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
+                return true;
+            }
         }
 
-        if (target.equals(sender)) {
+        if (sender instanceof Player playerSender && target.getUniqueId().equals(playerSender.getUniqueId())) {
             sender.sendMessage(lang.get(sender, "mute.cannot_mute_self"));
             return true;
         }
 
-        if (target.hasPermission("essentialsc.mute.exempt")) {
-            if (!(sender instanceof Player playerSender) || !playerSender.hasPermission("essentialsc.mute.exempt.bypass")) {
-                sender.sendMessage(lang.get(sender, "mute.exempt"));
-                plugin.debug("Denied: " + target.getName() + " is exempt from being muted");
-                return true;
+        if (target.isOnline()) {
+            Player p = target.getPlayer();
+            if (p != null && p.hasPermission("essentialsc.mute.exempt")) {
+                if (!(sender instanceof Player playerSender) || !playerSender.hasPermission("essentialsc.mute.exempt.bypass")) {
+                    sender.sendMessage(lang.get(sender, "mute.exempt"));
+                    plugin.debug("Denied: " + p.getName() + " is exempt from being muted");
+                    return true;
+                }
             }
         }
 
@@ -56,16 +65,19 @@ public class MuteCommand extends Command {
         String reason = buildReason(args, reasonStart, "Breaking chat rules");
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
 
-        plugin.debug("Muting " + target.getName() + " by " + sender.getName() + " for: " + reason);
-        punishmentManager.mutePlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
+        boolean wasOffline = !target.isOnline();
+        plugin.debug("Muting " + target.getName() + " by " + sender.getName() + " for: " + reason + " offline=" + wasOffline);
+        punishmentManager.mutePlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires, wasOffline);
 
         String durationStr = DurationParser.format(duration);
 
-        target.sendMessage(lang.get(target, "mute.target_message", Map.of(
-                "reason",   reason,
-                "muter",    sender.getName(),
-                "duration", durationStr
-        )));
+        if (target.isOnline() && target.getPlayer() != null) {
+            target.getPlayer().sendMessage(lang.get(target.getPlayer(), "mute.target_message", Map.of(
+                    "reason",   reason,
+                    "muter",    sender.getName(),
+                    "duration", durationStr
+            )));
+        }
 
         plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "mute.broadcast_temp" : "mute.broadcast", Map.of(
                 "target",   target.getName(),
@@ -102,11 +114,12 @@ public class MuteCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return plugin.getServer().getOnlinePlayers().stream()
+            List<String> list = new ArrayList<>(plugin.getServer().getOnlinePlayers().stream()
                     .filter(p -> !p.equals(sender))
                     .map(Player::getName)
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .toList();
+                    .toList());
+            return list;
         }
         if (args.length == 2 && args[1].isEmpty()) {
             return Arrays.asList("-t:1h", "-t:1d", "-t:7d", "-t:30d");

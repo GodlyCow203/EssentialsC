@@ -3,13 +3,12 @@ package net.godlycow.org.essc.command.admin;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.punishment.PunishmentManager;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UnmuteCommand extends Command {
 
@@ -22,49 +21,38 @@ public class UnmuteCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        Player target = plugin.getServer().getPlayer(args[0]);
+        String targetName = args[0];
+        OfflinePlayer target = plugin.getServer().getOfflinePlayer(targetName);
 
-        if (target == null) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", args[0]);
-            sender.sendMessage(lang.get(sender, "error.player_not_found", placeholders));
+        if (!target.hasPlayedBefore() && !target.isOnline()) {
+            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
             return true;
         }
 
         if (!punishmentManager.isMuted(target.getUniqueId())) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", target.getName());
-            sender.sendMessage(lang.get(sender, "unmute.not_muted", placeholders));
+            sender.sendMessage(lang.get(sender, "unmute.not_muted", Map.of("target", target.getName())));
             return true;
         }
 
         punishmentManager.unmutePlayer(target.getUniqueId());
 
-        target.sendMessage(lang.get(target, "unmute.target_message"));
+        plugin.getServer().broadcast(lang.get(sender, "unmute.broadcast", Map.of(
+                "target", target.getName(),
+                "unmuter", sender.getName()
+        )), "essentialsc.mute.notify");
 
-        Map<String, String> broadcastPlaceholders = new HashMap<>();
-        broadcastPlaceholders.put("target", target.getName());
-        broadcastPlaceholders.put("unmuter", sender.getName());
-
-        plugin.getServer().broadcast(lang.get(sender, "unmute.broadcast", broadcastPlaceholders), "essentialsc.mute.notify");
-
-        Map<String, String> senderPlaceholders = new HashMap<>();
-        senderPlaceholders.put("target", target.getName());
-        sender.sendMessage(lang.get(sender, "unmute.success", senderPlaceholders));
-
-        plugin.debug("Unmuted " + target.getName() + " by " + sender.getName());
+        sender.sendMessage(lang.get(sender, "unmute.success", Map.of("target", target.getName())));
         return true;
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return plugin.getServer().getOnlinePlayers().stream()
-                    .filter(p -> punishmentManager.isMuted(p.getUniqueId()))
-                    .map(Player::getName)
+            return punishmentManager.getAllMutes().stream()
+                    .map(PunishmentManager.MuteEntry::name)
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .toList();
+                    .collect(Collectors.toList());
         }
-        return Collections.emptyList();
+        return super.tabComplete(sender, args);
     }
 }
