@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class GuiBuilder {
 
-    static final int[] HOME_SLOTS = {11, 13, 15, 29, 31, 33};
-    static final int HOMES_PER_PAGE = 6;
+    static final int[] HOME_SLOTS = {10, 12, 14, 16, 19, 21, 23, 25};
+    static final int HOMES_PER_PAGE = 8;
 
     private final EssentialsC plugin;
     private final HomeItems items;
@@ -61,6 +61,7 @@ public class GuiBuilder {
                 : items.placeholder(player, Material.GRAY_STAINED_GLASS_PANE));
         gui.setItem(50, items.createButton(player));
         gui.setItem(51, items.infoPanel(player, used, maxHomes, page + 1, totalPages));
+        gui.setItem(52, items.placeholder(player, Material.GRAY_STAINED_GLASS_PANE));
         gui.setItem(53, page < totalPages - 1 ? items.nextPageButton(player, page) : items.closeButton(player));
 
         return gui;
@@ -199,7 +200,7 @@ public class GuiBuilder {
     }
 
     public Inventory buildConfirmDelete(Player player, Home home, java.util.UUID targetUuid) {
-        Component title = lang(player, "home.gui.confirm_delete_title");
+        Component title = lang(player, "home.gui.confirm_delete_title", Map.of("name", home.getName()));
         boolean own = targetUuid.equals(player.getUniqueId());
         Inventory gui = Bukkit.createInventory(
                 new GuiManager.HomeHolder(null, GuiManager.GuiMode.CONFIRM_DELETE,
@@ -216,7 +217,7 @@ public class GuiBuilder {
     }
 
     public Inventory buildConfirmUpdate(Player player, Home home, java.util.UUID targetUuid) {
-        Component title = lang(player, "home.gui.confirm_update_title");
+        Component title = lang(player, "home.gui.confirm_update_title", Map.of("name", home.getName()));
         boolean own = targetUuid.equals(player.getUniqueId());
         Inventory gui = Bukkit.createInventory(
                 new GuiManager.HomeHolder(null, GuiManager.GuiMode.CONFIRM_UPDATE,
@@ -244,10 +245,18 @@ public class GuiBuilder {
 
 
     private void fill(Inventory gui, Player player) {
-        int[] borders = {0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
-        for (int slot : borders) {
-            if (isEmpty(gui, slot)) gui.setItem(slot, items.borderItem(player));
+        for (int i = 0; i < 9; i++) {
+            if (isEmpty(gui, i)) gui.setItem(i, items.borderItem(player));
         }
+        if (isEmpty(gui, 9))  gui.setItem(9,  items.borderItem(player));
+        if (isEmpty(gui, 17)) gui.setItem(17, items.borderItem(player));
+        if (isEmpty(gui, 18)) gui.setItem(18, items.borderItem(player));
+        if (isEmpty(gui, 26)) gui.setItem(26, items.borderItem(player));
+        for (int i = 27; i < 36; i++) {
+            if (isEmpty(gui, i)) gui.setItem(i, items.borderItem(player));
+        }
+        if (isEmpty(gui, 36)) gui.setItem(36, items.borderItem(player));
+        if (isEmpty(gui, 44)) gui.setItem(44, items.borderItem(player));
         for (int i = 0; i < gui.getSize(); i++) {
             if (isEmpty(gui, i)) gui.setItem(i, items.background(player));
         }

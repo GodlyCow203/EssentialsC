@@ -2,6 +2,7 @@ package net.godlycow.org.essc.auction;
 
 import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
 import java.util.*;
-import org.bukkit.Material;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +25,7 @@ public class AuctionManager implements Listener {
     private final Set<UUID> claiming = ConcurrentHashMap.newKeySet();
     private final Map<UUID, List<SellHistoryEntry>> sellHistory = new ConcurrentHashMap<>();
     private final Map<UUID, List<BuyHistoryEntry>> buyHistory = new ConcurrentHashMap<>();
+    private final Map<UUID, Boolean> notificationsCache = new ConcurrentHashMap<>();
 
     public AuctionManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -50,19 +51,43 @@ public class AuctionManager implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        storage.loadExpiredItems(e.getPlayer().getUniqueId()).thenAccept(items -> {
+        Player player = e.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        storage.loadExpiredItems(uuid).thenAccept(items -> {
             if (!items.isEmpty()) {
-                expiredItems.put(e.getPlayer().getUniqueId(), new ArrayList<>(items));
-                e.getPlayer().sendMessage(plugin.getLanguageManager().get(e.getPlayer(),
+                expiredItems.put(uuid, new ArrayList<>(items));
+                player.sendMessage(plugin.getLanguageManager().get(player,
                         "ah.expired_waiting", Map.of("count", String.valueOf(items.size()))));
             }
         });
+
+        storage.loadNotificationsEnabled(uuid).thenAccept(enabled ->
+                notificationsCache.put(uuid, enabled));
+
+        deliverPendingSaleNotifications(player);
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         expiredItems.remove(e.getPlayer().getUniqueId());
         claiming.remove(e.getPlayer().getUniqueId());
+    }
+
+    private void deliverPendingSaleNotifications(Player player) {
+        storage.loadAndClearSaleNotifications(player.getUniqueId()).thenAccept(notifications -> {
+            if (notifications.isEmpty()) return;
+            plugin.getEssScheduler().runForEntity(player, () -> {
+                if (!player.isOnline()) return;
+                for (AuctionStorage.SaleNotification n : notifications) {
+                    player.sendMessage(plugin.getLanguageManager().get(player, "ah.sold", Map.of(
+                            "item", n.itemName(),
+                            "price", plugin.getEconomyManager().format(BigDecimal.valueOf(n.price())),
+                            "buyer", n.buyerName()
+                    )));
+                }
+            });
+        });
     }
 
     public CompletableFuture<Boolean> createAuction(Player seller, ItemStack item, BigDecimal price, long duration, StringBuilder failReason) {
@@ -184,7 +209,6 @@ public class AuctionManager implements Listener {
 
     private void startExpiryTask() {
         plugin.getEssScheduler().runAsyncTimer(() -> {
-            long now = System.currentTimeMillis();
             List<Auction> expired = activeAuctions.values().stream()
                     .filter(Auction::isExpired)
                     .toList();
@@ -210,15 +234,24 @@ public class AuctionManager implements Listener {
 
     private void notifySeller(Auction auction, String buyerName) {
         if (!plugin.getConfigManager().isAHNotifyOnSale()) return;
+
+        boolean notificationsEnabled = notificationsCache.getOrDefault(auction.getSellerUuid(), true);
+        if (!notificationsEnabled) return;
+
         Player seller = Bukkit.getPlayer(auction.getSellerUuid());
+        String itemName = auction.getItem().getType().toString();
+
         if (seller != null && seller.isOnline()) {
             plugin.getEssScheduler().runForEntity(seller, () -> {
                 seller.sendMessage(plugin.getLanguageManager().get(seller, "ah.sold", Map.of(
-                        "item", auction.getItem().getType().toString(),
+                        "item", itemName,
                         "price", plugin.getEconomyManager().format(auction.getPrice()),
                         "buyer", buyerName
                 )));
             });
+        } else {
+            storage.saveSaleNotification(auction.getSellerUuid(), itemName,
+                    auction.getPrice().doubleValue(), buyerName);
         }
     }
 
@@ -242,17 +275,30 @@ public class AuctionManager implements Listener {
         if (list.size() > 100) list.subList(100, list.size()).clear();
     }
 
+    public boolean isNotificationsEnabled(UUID uuid) {
+        return notificationsCache.getOrDefault(uuid, true);
+    }
+
+    public void setNotificationsEnabled(UUID uuid, boolean enabled) {
+        notificationsCache.put(uuid, enabled);
+        storage.saveNotificationsEnabled(uuid, enabled);
+    }
+
     public void reload() {
         plugin.getEssScheduler().runAsync(() -> {
             activeAuctions.clear();
             expiredItems.clear();
             sellHistory.clear();
             buyHistory.clear();
+            notificationsCache.clear();
             loadAuctions();
-            Bukkit.getOnlinePlayers().forEach(p ->
-                    storage.loadExpiredItems(p.getUniqueId()).thenAccept(items -> {
-                        if (!items.isEmpty()) expiredItems.put(p.getUniqueId(), items);
-                    }));
+            Bukkit.getOnlinePlayers().forEach(p -> {
+                storage.loadExpiredItems(p.getUniqueId()).thenAccept(items -> {
+                    if (!items.isEmpty()) expiredItems.put(p.getUniqueId(), items);
+                });
+                storage.loadNotificationsEnabled(p.getUniqueId()).thenAccept(enabled ->
+                        notificationsCache.put(p.getUniqueId(), enabled));
+            });
         });
     }
 
@@ -263,28 +309,30 @@ public class AuctionManager implements Listener {
     public List<Auction> getActiveAuctions() {
         return new ArrayList<>(activeAuctions.values());
     }
+
     public List<Auction> getPlayerAuctions(UUID uuid) {
         return activeAuctions.values().stream()
                 .filter(a -> a.getSellerUuid().equals(uuid))
                 .toList();
     }
+
     public Optional<Auction> getAuction(int id) {
         return Optional.ofNullable(activeAuctions.get(id));
     }
+
     public List<ItemStack> getExpiredItems(UUID uuid) {
         return expiredItems.getOrDefault(uuid, new ArrayList<>());
     }
 
     public boolean hasExpiredItems(UUID uuid) {
         List<ItemStack> cached = expiredItems.get(uuid);
-        if (cached != null && !cached.isEmpty()) {
-            return true;
-        }
-        return false;
+        return cached != null && !cached.isEmpty();
     }
+
     public List<SellHistoryEntry> getSellHistory(UUID uuid) {
         return sellHistory.getOrDefault(uuid, new ArrayList<>());
     }
+
     public List<BuyHistoryEntry> getBuyHistory(UUID uuid) {
         return buyHistory.getOrDefault(uuid, new ArrayList<>());
     }

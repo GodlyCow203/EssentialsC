@@ -895,5 +895,12 @@
   "essc.backup.delete.success": "<prefix> <color:#FFF200>Backup <color:#FFFFFF><name></color> deleted.</color>",
   "essc.backup.delete.not_found": "<prefix> <color:#FF0000>Backup <color:#FFFFFF><name></color> not found.</color>",
   "essc.help.backup": "<prefix> <color:#FFF200>/essc backup <color:#FFFFFF>[list|delete]</color> — Manage plugin data backups.</color>",
-  "command.usage.essc": "<prefix> <color:#FF0000>Usage: /essc <reload|version|debug|help></color>"
+  "command.usage.essc": "<prefix> <color:#FF0000>Usage: /essc <reload|version|debug|help></color>",
+  "ah.notifications.enabled": "<prefix> <color:#FFF200>Auction notifications enabled. <color:#FFFFFF>You will be notified when your items sell.</color></color>",
+  "ah.notifications.disabled": "<prefix> <color:#FF0000>Auction notifications disabled. <color:#FFFFFF>You will no longer receive sale alerts.</color></color>",
+  "home.notifications.enabled": "<prefix> <color:#FFF200>Home notifications enabled. <color:#FFFFFF>You will be notified when an admin modifies your homes.</color></color>",
+  "home.notifications.disabled": "<prefix> <color:#FF0000>Home notifications disabled. <color:#FFFFFF>You will no longer receive home admin alerts.</color></color>",
+  "home.notification.admin.deleted": "<prefix> <color:#FF0000>Your home <color:#FFFFFF><bold><name></bold></color> was deleted by an admin <color:#FFFFFF>(<admin>)</color></color>",
+  "home.notification.admin.renamed": "<prefix> <color:#FFF200>Your home <color:#FFFFFF><bold><old></bold></color> was renamed to <color:#FFFFFF><bold><new></bold></color> by an admin <color:#FFFFFF>(<admin>)</color></color>",
+  "home.notification.admin.relocated": "<prefix> <color:#FFF200>Your home <color:#FFFFFF><bold><name></bold></color> was relocated by an admin <color:#FFFFFF>(<admin>)</color></color>"
 }

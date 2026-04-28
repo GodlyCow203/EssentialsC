@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -131,7 +130,9 @@ public class HomeGuiListener implements Listener {
                 manager.playSound(player, GuiManager.GuiSound.CLOSE);
             }
             case "back" -> {
-                if (holder.getMode() == GuiManager.GuiMode.ADMIN_PLAYER) {
+                if (holder.getMode() == GuiManager.GuiMode.PLAYER_TYPE_SELECT) {
+                    manager.openHomeList(player);
+                } else if (holder.getMode() == GuiManager.GuiMode.ADMIN_PLAYER) {
                     manager.openPlayerManagementTypeSelection(player);
                 } else if (holder.getViewMode() == GuiManager.GuiViewMode.ADMIN) {
                     manager.openPlayerManagementTypeSelection(player);

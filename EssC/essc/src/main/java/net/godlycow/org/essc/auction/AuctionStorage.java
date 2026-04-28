@@ -55,6 +55,24 @@ public class AuctionStorage {
                     claimed BOOLEAN DEFAULT FALSE
                 )
             """).execute();
+
+            conn.prepareStatement("""
+                CREATE TABLE IF NOT EXISTS ah_sale_notifications (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    seller_uuid TEXT NOT NULL,
+                    item_name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    buyer_name TEXT NOT NULL,
+                    sold_at INTEGER NOT NULL
+                )
+            """).execute();
+
+            conn.prepareStatement("""
+                CREATE TABLE IF NOT EXISTS ah_notifications_settings (
+                    uuid TEXT PRIMARY KEY,
+                    enabled INTEGER NOT NULL DEFAULT 1
+                )
+            """).execute();
         }
     }
 
@@ -153,6 +171,78 @@ public class AuctionStorage {
             return null;
         });
     }
+
+    public CompletableFuture<Void> saveSaleNotification(UUID sellerUuid, String itemName,
+                                                        double price, String buyerName) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement("""
+                INSERT INTO ah_sale_notifications (seller_uuid, item_name, price, buyer_name, sold_at)
+                VALUES (?, ?, ?, ?, ?)
+            """)) {
+                stmt.setString(1, sellerUuid.toString());
+                stmt.setString(2, itemName);
+                stmt.setDouble(3, price);
+                stmt.setString(4, buyerName);
+                stmt.setLong(5, System.currentTimeMillis());
+                stmt.executeUpdate();
+            }
+            return null;
+        });
+    }
+
+    public CompletableFuture<List<SaleNotification>> loadAndClearSaleNotifications(UUID uuid) {
+        return database.async(conn -> {
+            List<SaleNotification> list = new ArrayList<>();
+            try (PreparedStatement sel = conn.prepareStatement(
+                    "SELECT item_name, price, buyer_name FROM ah_sale_notifications WHERE seller_uuid = ? ORDER BY sold_at ASC")) {
+                sel.setString(1, uuid.toString());
+                ResultSet rs = sel.executeQuery();
+                while (rs.next()) {
+                    list.add(new SaleNotification(
+                            rs.getString("item_name"),
+                            rs.getDouble("price"),
+                            rs.getString("buyer_name")
+                    ));
+                }
+            }
+            if (!list.isEmpty()) {
+                try (PreparedStatement del = conn.prepareStatement(
+                        "DELETE FROM ah_sale_notifications WHERE seller_uuid = ?")) {
+                    del.setString(1, uuid.toString());
+                    del.executeUpdate();
+                }
+            }
+            return list;
+        });
+    }
+
+    public CompletableFuture<Boolean> loadNotificationsEnabled(UUID uuid) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT enabled FROM ah_notifications_settings WHERE uuid = ?")) {
+                stmt.setString(1, uuid.toString());
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) return rs.getInt("enabled") == 1;
+            }
+            return true;
+        });
+    }
+
+    public CompletableFuture<Void> saveNotificationsEnabled(UUID uuid, boolean enabled) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement("""
+                INSERT INTO ah_notifications_settings (uuid, enabled) VALUES (?, ?)
+                ON CONFLICT(uuid) DO UPDATE SET enabled = excluded.enabled
+            """)) {
+                stmt.setString(1, uuid.toString());
+                stmt.setInt(2, enabled ? 1 : 0);
+                stmt.executeUpdate();
+            }
+            return null;
+        });
+    }
+
+    public record SaleNotification(String itemName, double price, String buyerName) {}
 
     private Auction deserializeAuction(ResultSet rs) throws SQLException {
         return new Auction(

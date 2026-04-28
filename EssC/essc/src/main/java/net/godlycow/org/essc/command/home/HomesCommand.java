@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.home.Home;
 import org.bukkit.Bukkit;
@@ -9,6 +8,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +21,11 @@ public class HomesCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
+
+        if (args.length > 0 && args[0].equalsIgnoreCase("notifications")) {
+            handleNotifications(player);
+            return true;
+        }
 
         if (plugin.getConfigManager().isHomeGuiMode()) {
             plugin.getHomeGuiManager().openHomeList(player);
@@ -79,6 +84,20 @@ public class HomesCommand extends Command {
         return true;
     }
 
+    private void handleNotifications(Player player) {
+        if (!player.hasPermission("essentialsc.home.notifications")) {
+            player.sendMessage(lang.get(player, "error.no_permission"));
+            return;
+        }
+
+        boolean current = plugin.getHomeNotificationManager().isNotificationsEnabled(player.getUniqueId());
+        boolean newValue = !current;
+        plugin.getHomeNotificationManager().setNotificationsEnabled(player.getUniqueId(), newValue);
+        player.sendMessage(lang.get(player, newValue
+                ? "home.notifications.enabled"
+                : "home.notifications.disabled"));
+    }
+
     private void sendHomeList(Player player, List<Home> homes, String targetName) {
         player.sendMessage(lang.get(player, "home.list.header_other", Map.of("player", targetName)));
 
@@ -91,5 +110,24 @@ public class HomesCommand extends Command {
             player.sendMessage(lang.get(player, "home.list.entry",
                     Map.of("name", home.getName(), "world", home.getWorld())));
         }
+    }
+
+    @Override
+    public List<String> tabComplete(CommandSender sender, String[] args) {
+        List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            if (sender.hasPermission("essentialsc.home.notifications")
+                    && "notifications".startsWith(args[0].toLowerCase())) {
+                completions.add("notifications");
+            }
+            if (sender.hasPermission("essentialsc.home.admin")) {
+                for (Player online : plugin.getServer().getOnlinePlayers()) {
+                    if (online.getName().toLowerCase().startsWith(args[0].toLowerCase())) {
+                        completions.add(online.getName());
+                    }
+                }
+            }
+        }
+        return completions;
     }
 }

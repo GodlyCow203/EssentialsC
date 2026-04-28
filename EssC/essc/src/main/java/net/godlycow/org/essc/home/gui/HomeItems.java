@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.bukkit.Material.RED_BED;
+
+
 public class HomeItems {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
@@ -38,15 +41,15 @@ public class HomeItems {
     }
 
     public ItemStack background(Player player) {
-        return create(player, Material.BLACK_STAINED_GLASS_PANE, lang(player, "home.gui.items.background"), List.of());
+        return create(player, Material.GRAY_STAINED_GLASS_PANE, lang(player, "home.gui.items.background"), List.of());
     }
 
     public ItemStack borderItem(Player player) {
-        return create(player, Material.GRAY_STAINED_GLASS_PANE, lang(player, "home.gui.items.border"), List.of());
+        return create(player, Material.LIGHT_GRAY_STAINED_GLASS_PANE, lang(player, "home.gui.items.border"), List.of());
     }
 
     public ItemStack placeholder(Player player, Material material) {
-        return create(player, material, Component.empty(), List.of());
+        return create(player, Material.GRAY_STAINED_GLASS_PANE, Component.empty(), List.of());
     }
 
     public ItemStack homeDisplay(Player player, Home home) {
@@ -146,7 +149,7 @@ public class HomeItems {
     public ItemStack refreshButton(Player player) {
         Component name = lang(player, "home.gui.items.refresh.name");
         List<Component> lore = List.of(Component.empty(), lang(player, "home.gui.items.refresh.lore"));
-        ItemStack item = create(player, Material.WHITE_CANDLE, name, lore);
+        ItemStack item = create(player, Material.CLOCK, name, lore);
         tag(item, "action:refresh");
         return item;
     }
@@ -214,7 +217,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.create_default.footer")
         );
-        ItemStack item = create(player, Material.OAK_SAPLING, name, lore);
+        ItemStack item = create(player, Material.POTION, name, lore);
         tag(item, "action:create_default");
         return item;
     }
@@ -228,7 +231,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.teleport.footer")
         );
-        ItemStack item = create(player, Material.ENDER_PEARL, name, lore);
+        ItemStack item = create(player, Material.GREEN_CANDLE, name, lore);
         tag(item, "action:teleport:" + homeName + ":" + targetUuid);
         return item;
     }
@@ -256,7 +259,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.update.footer")
         );
-        ItemStack item = create(player, Material.COMPASS, name, lore);
+        ItemStack item = create(player, Material.YELLOW_CANDLE, name, lore);
         tag(item, "action:update:" + homeName + ":" + targetUuid);
         return item;
     }
@@ -269,7 +272,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.delete.warning")
         );
-        ItemStack item = create(player, Material.RED_TERRACOTTA, name, lore);
+        ItemStack item = create(player, Material.RED_CANDLE, name, lore);
         tag(item, "action:delete:" + homeName + ":" + targetUuid);
         return item;
     }
@@ -277,7 +280,7 @@ public class HomeItems {
 
     public ItemStack infoPanel(Player player, int used, int max, int page, int total) {
         String maxStr = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
-        Material mat = (max != Integer.MAX_VALUE && used >= max) ? Material.RED_CONCRETE : Material.KNOWLEDGE_BOOK;
+        Material mat = (max != Integer.MAX_VALUE && used >= max) ? Material.ORANGE_CANDLE     : Material.KNOWLEDGE_BOOK;
         Component name = lang(player, "home.gui.items.info.name");
         List<Component> lore = List.of(
                 Component.empty(),
@@ -300,12 +303,12 @@ public class HomeItems {
                 lang(player, "home.gui.items.coords.lore.yaw",   Map.of("yaw", String.format("%.1f", home.getYaw()))),
                 lang(player, "home.gui.items.coords.lore.pitch", Map.of("pitch", String.format("%.1f", home.getPitch())))
         );
-        return create(player, Material.FILLED_MAP, name, lore);
+        return create(player, Material.ENDER_EYE, name, lore);
     }
 
     public ItemStack confirmIcon(Player player, Home home, String type) {
         boolean isDelete = type.equals("delete");
-        Material mat = isDelete ? Material.RED_CONCRETE : Material.YELLOW_CONCRETE;
+        Material mat = isDelete ? Material.ORANGE_CANDLE : Material.ORANGE_CANDLE;
         String key = isDelete ? "home.gui.items.confirm_delete" : "home.gui.items.confirm_update";
 
         Component name = lang(player, key + ".name", Map.of("name", home.getName()));
@@ -319,7 +322,7 @@ public class HomeItems {
     public ItemStack confirmYesButton(Player player, String type, String homeName, UUID targetUuid) {
         Component name = lang(player, "home.gui.items.yes.name");
         List<Component> lore = List.of(Component.empty(), lang(player, "home.gui.items.yes.lore", Map.of("action", type)));
-        ItemStack item = create(player, Material.LIME_CONCRETE, name, lore);
+        ItemStack item = create(player, Material.GREEN_CANDLE, name, lore);
         tag(item, "action:confirm_" + type + ":" + homeName + ":" + targetUuid);
         return item;
     }
@@ -333,7 +336,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.no.footer")
         );
-        ItemStack item = create(player, Material.RED_CONCRETE, name, lore);
+        ItemStack item = create(player, Material.RED_CANDLE, name, lore);
         tag(item, "action:back_details:" + homeName + ":" + targetUuid);
         return item;
     }
@@ -348,7 +351,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.online.footer")
         );
-        ItemStack item = create(player, Material.LIME_CONCRETE, name, lore);
+        ItemStack item = create(player, Material.GREEN_DYE, name, lore);
         tag(item, "action:player_type:ONLINE");
         return item;
     }
@@ -362,7 +365,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.offline.footer")
         );
-        ItemStack item = create(player, Material.RED_CONCRETE, name, lore);
+        ItemStack item = create(player, Material.RED_DYE, name, lore);
         tag(item, "action:player_type:OFFLINE");
         return item;
     }
@@ -376,7 +379,7 @@ public class HomeItems {
                 Component.empty(),
                 lang(player, "home.gui.items.all.footer")
         );
-        ItemStack item = create(player, Material.CYAN_CONCRETE, name, lore);
+        ItemStack item = create(player, Material.YELLOW_DYE, name, lore);
         tag(item, "action:player_type:ALL");
         return item;
     }
@@ -401,7 +404,7 @@ public class HomeItems {
 
         meta.setOwningPlayer(target);
         String targetName = target.getName() != null ? target.getName() : "Unknown";
-        String status = target.isOnline() ? "<green>● Online" : "<red>● Offline";
+        String status = target.isOnline() ? "<#28DE00>● Online" : "<#DE0000>● Offline";
 
         meta.displayName(noItalic(MM.deserialize("<blue><bold>" + targetName)));
 
@@ -481,7 +484,7 @@ public class HomeItems {
         if (lower.contains("ocean"))  return Material.WATER_BUCKET;
         if (lower.contains("desert")) return Material.SAND;
         if (lower.contains("snow"))   return Material.SNOW_BLOCK;
-        return Material.GRASS_BLOCK;
+        return RED_BED;
     }
 
     private String formatCoord(double val) { return String.format("%.1f", val); }

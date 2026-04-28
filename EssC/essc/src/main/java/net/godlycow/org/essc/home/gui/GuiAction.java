@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
+import net.godlycow.org.essc.home.HomeNotificationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -62,11 +62,20 @@ public class GuiAction {
     }
 
     public void handleDelete(Player player, String homeName, UUID targetUuid) {
+        boolean isAdminAction = !targetUuid.equals(player.getUniqueId());
+
         plugin.getHomeManager().deleteHome(targetUuid, homeName).whenComplete((success, err) -> {
             sync(player, () -> {
                 if (success) {
                     player.sendMessage(lang(player, "home.delete.success", Map.of("name", homeName)));
                     manager.playSound(player, GuiManager.GuiSound.SUCCESS);
+
+                    if (isAdminAction) {
+                        plugin.getHomeNotificationManager().notifyAdminAction(
+                                targetUuid,
+                                HomeNotificationManager.NotificationType.DELETED,
+                                homeName, null, player.getName());
+                    }
                 } else {
                     player.sendMessage(lang(player, "home.delete.not_found", Map.of("name", homeName)));
                     manager.playSound(player, GuiManager.GuiSound.ERROR);
@@ -89,6 +98,8 @@ public class GuiAction {
             returnToAppropriateView(player, targetUuid);
             return;
         }
+
+        boolean isAdminAction = !targetUuid.equals(player.getUniqueId());
 
         plugin.getHomeManager().homeExists(targetUuid, newName).whenComplete((exists, err) -> {
             if (exists) {
@@ -126,6 +137,14 @@ public class GuiAction {
                                         player.sendMessage(lang(player, "home.gui.rename_success",
                                                 Map.of("old", oldName, "new", newName)));
                                         manager.playSound(player, GuiManager.GuiSound.SUCCESS);
+
+                                        if (isAdminAction) {
+                                            plugin.getHomeNotificationManager().notifyAdminAction(
+                                                    targetUuid,
+                                                    HomeNotificationManager.NotificationType.RENAMED,
+                                                    oldName, newName, player.getName());
+                                        }
+
                                         returnToAppropriateView(player, targetUuid);
                                     })
                             );
@@ -135,12 +154,21 @@ public class GuiAction {
     }
 
     public void handleUpdate(Player player, String homeName, UUID targetUuid) {
+        boolean isAdminAction = !targetUuid.equals(player.getUniqueId());
         Location loc = player.getLocation();
+
         plugin.getHomeManager().setHome(targetUuid, homeName, loc).whenComplete((success, err) ->
                 sync(player, () -> {
                     if (success) {
                         player.sendMessage(lang(player, "home.set.updated", Map.of("name", homeName)));
                         manager.playSound(player, GuiManager.GuiSound.SUCCESS);
+
+                        if (isAdminAction) {
+                            plugin.getHomeNotificationManager().notifyAdminAction(
+                                    targetUuid,
+                                    HomeNotificationManager.NotificationType.RELOCATED,
+                                    homeName, null, player.getName());
+                        }
                     } else {
                         player.sendMessage(lang(player, "home.set.failed", Map.of("name", homeName)));
                         manager.playSound(player, GuiManager.GuiSound.ERROR);

@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.home.gui;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.home.Home;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -201,33 +200,45 @@ public class GuiManager {
         });
     }
 
-    public void openSearchSign(Player player)       { signHandler.openSearchSign(player); }
-    public void openPlayerSearchSign(Player player) { signHandler.openPlayerSearchSign(player); }
+    public void openSearchSign(Player player) {
+        signHandler.openSearchSign(player);
+    }
+
+    public void openPlayerSearchSign(Player player) {
+        signHandler.openPlayerSearchSign(player);
+    }
+
     public void openRenameSign(Player player, String currentName, UUID targetUuid) {
         signHandler.openRenameSign(player, currentName, targetUuid);
     }
-    public void openCreateSign(Player player) { signHandler.openCreateSign(player); }
 
+    public void openCreateSign(Player player) {
+        signHandler.openCreateSign(player);
+    }
 
     public void handleCreate(Player player, String name){
         actionHandler.handleCreate(player, name);
     }
+
     public void handleDelete(Player player, String name, UUID targetUuid) {
         actionHandler.handleDelete(player, name, targetUuid);
     }
+
     public void handleRename(Player player, String oldName, String newName, UUID targetUuid){
         actionHandler.handleRename(player, oldName, newName, targetUuid);
     }
+
     public void handleUpdate(Player player, String name, UUID targetUuid){
         actionHandler.handleUpdate(player, name, targetUuid);
     }
+
     public void handleTeleport(Player player, String name, UUID targetUuid){
-        actionHandler.handleTeleport(player, name, targetUuid); }
+        actionHandler.handleTeleport(player, name, targetUuid);
+    }
 
     public void handlePlayerSearch(Player player, String query){
         actionHandler.handlePlayerSearch(player, query);
     }
-
 
     public void closeGui(Player player) {
         player.closeInventory();
@@ -242,7 +253,9 @@ public class GuiManager {
         return playerStates.get(player.getUniqueId());
     }
 
-    public HomeItems getItems() { return items; }
+    public HomeItems getItems() {
+        return items;
+    }
 
 
     public void playSound(Player player, GuiSound type) {

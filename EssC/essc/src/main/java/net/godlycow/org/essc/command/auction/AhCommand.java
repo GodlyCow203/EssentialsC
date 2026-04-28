@@ -1,14 +1,13 @@
 package net.godlycow.org.essc.command.auction;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.gui.AhGuiManager;
+import net.godlycow.org.essc.auction.gui.AhItemFactory;
 import net.godlycow.org.essc.command.Command;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
@@ -40,6 +39,7 @@ public class AhCommand extends Command {
             case "cancel", "c" -> handleCancel(player, args);
             case "expired", "e" -> guiManager.openExpiredGui(player);
             case "listings", "l", "my" -> guiManager.openListingsGui(player, 1);
+            case "notifications", "notif", "notify" -> handleNotifications(player);
             case "reload", "rl" -> handleReload(player);
             case "help", "?" -> sendUsage(player);
             default -> {
@@ -64,6 +64,22 @@ public class AhCommand extends Command {
             return false;
         }
         return true;
+    }
+
+    private void handleNotifications(Player player) {
+        if (!player.hasPermission("essentialsc.ah.notifications")) {
+            player.sendMessage(lang.get(player, "error.no_permission"));
+            soundManager.playError(player);
+            return;
+        }
+
+        boolean current = plugin.getAuctionManager().isNotificationsEnabled(player.getUniqueId());
+        boolean newValue = !current;
+        plugin.getAuctionManager().setNotificationsEnabled(player.getUniqueId(), newValue);
+        player.sendMessage(lang.get(player, newValue
+                ? "ah.notifications.enabled"
+                : "ah.notifications.disabled"));
+        soundManager.playClick(player);
     }
 
     private void handleSell(Player player, String[] args) {
@@ -203,6 +219,7 @@ public class AhCommand extends Command {
         if (args.length == 1) {
             List<String> subs = new ArrayList<>(Arrays.asList("sell", "expired", "listings", "help"));
             if (sender.hasPermission("essentialsc.ah.cancel")) subs.add("cancel");
+            if (sender.hasPermission("essentialsc.ah.notifications")) subs.add("notifications");
             if (sender.hasPermission("essentialsc.ah.reload")) subs.add("reload");
             return subs.stream().filter(s -> s.startsWith(args[0].toLowerCase())).toList();
         }
@@ -218,13 +235,34 @@ public class AhCommand extends Command {
         return Collections.emptyList();
     }
 
-    public void openMainGui(Player player, int page) { guiManager.openMainGui(player, page); }
-    public void openExpiredGui(Player player) { guiManager.openExpiredGui(player); }
-    public void openListingsGui(Player player, int page) { guiManager.openListingsGui(player, page); }
-    public void openHistoryTypeGui(Player player) { guiManager.openHistoryTypeGui(player); }
-    public void openSellHistoryGui(Player player, int page) { guiManager.openSellHistoryGui(player, page); }
-    public void openBuyHistoryGui(Player player, int page) { guiManager.openBuyHistoryGui(player, page); }
+    public void openMainGui(Player player, int page) {
+        guiManager.openMainGui(player, page);
+    }
 
-    public AhSoundManager getSoundManager() { return soundManager; }
-    public net.godlycow.org.essc.auction.gui.AhItemFactory getItemFactory() { return guiManager.getItemFactory(); }
+    public void openExpiredGui(Player player) {
+        guiManager.openExpiredGui(player);
+    }
+
+    public void openListingsGui(Player player, int page) {
+        guiManager.openListingsGui(player, page);
+    }
+
+    public void openHistoryTypeGui(Player player) {
+        guiManager.openHistoryTypeGui(player);
+    }
+
+    public void openSellHistoryGui(Player player, int page) {
+        guiManager.openSellHistoryGui(player, page);
+    }
+
+    public void openBuyHistoryGui(Player player, int page) {
+        guiManager.openBuyHistoryGui(player, page);
+    }
+
+    public AhSoundManager getSoundManager() {
+        return soundManager; }
+
+    public AhItemFactory getItemFactory() {
+        return guiManager.getItemFactory();
+    }
 }

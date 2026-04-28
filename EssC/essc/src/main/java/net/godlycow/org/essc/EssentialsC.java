@@ -67,6 +67,7 @@ public final class EssentialsC extends JavaPlugin {
 
     private TPAManager tpaManager;
     private HomeManager homeManager;
+    private HomeNotificationManager homeNotificationManager;
     private GuiManager homeGuiManager;
     private SpawnManager spawnManager;
     private BackManager backManager;
@@ -158,6 +159,7 @@ public final class EssentialsC extends JavaPlugin {
 
         tpaManager = new TPAManager(this);
         homeManager = new HomeManager(this);
+        homeNotificationManager = new HomeNotificationManager(this);
         homeGuiManager = new GuiManager(this);
         spawnManager = new SpawnManager(this);
         backManager = new BackManager(this);
@@ -354,6 +356,9 @@ public final class EssentialsC extends JavaPlugin {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         getHomeManager().getHomes(player.getUniqueId());
+        if (homeNotificationManager != null) {
+            homeNotificationManager.deliverPending(player);
+        }
     }
 
     @EventHandler
@@ -417,6 +422,10 @@ public final class EssentialsC extends JavaPlugin {
 
     public HomeManager getHomeManager() {
         return homeManager;
+    }
+
+    public HomeNotificationManager getHomeNotificationManager() {
+        return homeNotificationManager;
     }
 
     public GuiManager getHomeGuiManager() {

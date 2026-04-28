@@ -114,7 +114,7 @@ commands:
 
   homes:
     description: List all your homes
-    usage: /homes [player]
+    usage: /homes [player|notifications]
     permission: essentialsc.homes
 
   spawn:
@@ -134,7 +134,7 @@ commands:
 
   kit:
     description: Claim and manage kits
-    usage: /kit [claim|cooldown|debug] <kit>
+    usage: /kit [claim|cooldown|notifications|debug] <kit>
     permission: essentialsc.kit
 
   kits:
@@ -339,7 +339,7 @@ commands:
 
   ah:
     description: Auction House commands
-    usage: /ah [sell|cancel|expired|listings|page]
+    usage: /ah [sell|cancel|expired|listings|notifications|page]
     permission: essentialsc.ah.use
 
   language:
@@ -568,6 +568,10 @@ permissions:
     description: Teleport to other players' homes
     default: op
 
+  essentialsc.home.notifications:
+    description: Toggle admin home action notifications with /homes notifications
+    default: true
+
   essentialsc.spawn:
     description: Allow teleporting to spawn
     default: true
@@ -608,6 +612,10 @@ permissions:
 
   essentialsc.kits.list:
     description: View available kits
+    default: true
+
+  essentialsc.kit.notifications:
+    description: Toggle kit cooldown notifications with /kit notifications
     default: true
 
   essentialsc.scoreboard.toggle:
@@ -861,6 +869,10 @@ permissions:
   essentialsc.ah.admin:
     description: Allows canceling any auction and full admin control
     default: op
+
+  essentialsc.ah.notifications:
+    description: Toggle sale notifications with /ah notifications
+    default: true
 
   essentialsc.ah.bypass.limit:
     description: Bypasses the max auctions per player limit
