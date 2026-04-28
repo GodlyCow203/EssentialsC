@@ -6,7 +6,6 @@ import net.godlycow.org.essc.api.kit.event.KitDataLoadEvent;
 import net.godlycow.org.essc.api.kit.event.KitDataSaveEvent;
 import net.godlycow.org.essc.database.Database;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +21,7 @@ public class KitData {
     private final EssentialsC plugin;
     private final Database database;
     private final ConcurrentHashMap<UUID, Map<String, PlayerKitData>> playerCache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, Boolean> notificationsCache = new ConcurrentHashMap<>();
 
     public KitData(EssentialsC plugin) {
         this.plugin = plugin;
@@ -54,10 +54,20 @@ public class KitData {
              )) {
             stmt.execute();
         }
+
+        try (Connection conn = database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "CREATE TABLE IF NOT EXISTS kit_settings (" +
+                             "uuid TEXT PRIMARY KEY, " +
+                             "notifications_enabled INTEGER DEFAULT 1" +
+                             ")"
+             )) {
+            stmt.execute();
+        }
     }
 
-    public void loadPlayerData(UUID uuid) {
-        database.async(conn -> {
+    public CompletableFuture<Void> loadPlayerData(UUID uuid) {
+        return database.async(conn -> {
             Map<String, PlayerKitData> data = new HashMap<>();
             try (PreparedStatement stmt = conn.prepareStatement(
                     "SELECT kit_name, last_claimed, claim_count FROM kit_claims WHERE uuid = ?"
@@ -84,6 +94,40 @@ public class KitData {
             Bukkit.getPluginManager().callEvent(loadEvent);
 
             plugin.debug("Loaded kit data for " + uuid + " (" + data.size() + " entries)");
+        });
+    }
+
+    public CompletableFuture<Void> loadNotificationsEnabled(UUID uuid) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT notifications_enabled FROM kit_settings WHERE uuid = ?"
+            )) {
+                stmt.setString(1, uuid.toString());
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("notifications_enabled") == 1;
+                }
+            }
+            return true;
+        }).thenAccept(enabled -> notificationsCache.put(uuid, enabled));
+    }
+
+    public boolean isNotificationsEnabled(UUID uuid) {
+        return notificationsCache.getOrDefault(uuid, true);
+    }
+
+    public void setNotificationsEnabled(UUID uuid, boolean enabled) {
+        notificationsCache.put(uuid, enabled);
+        database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO kit_settings (uuid, notifications_enabled) VALUES (?, ?) " +
+                            "ON CONFLICT(uuid) DO UPDATE SET notifications_enabled = excluded.notifications_enabled"
+            )) {
+                stmt.setString(1, uuid.toString());
+                stmt.setInt(2, enabled ? 1 : 0);
+                stmt.executeUpdate();
+            }
+            return null;
         });
     }
 
@@ -166,5 +210,6 @@ public class KitData {
 
     public void clearCache() {
         playerCache.clear();
+        notificationsCache.clear();
     }
 }

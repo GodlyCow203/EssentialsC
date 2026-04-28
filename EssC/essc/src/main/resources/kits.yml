@@ -2,7 +2,7 @@ kits:
   starter:
     display-name: "<#2791F5>Starter Kit"
     description: "Basic items"
-    cooldown: 86400 # 24 hours
+    cooldown: 8 # 24 hours
     one-time: false
     first-join: true
     max-claims: 10

@@ -6,13 +6,15 @@ import net.godlycow.org.essc.api.kit.event.KitCooldownExpireEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.Set;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class KitCooldowns {
     private final EssentialsC plugin;
     private final KitData data;
-    private final Set<String> expiredNotifications = ConcurrentHashMap.newKeySet();
+    private final Map<String, Long> lastNotified = new ConcurrentHashMap<>();
 
     public KitCooldowns(EssentialsC plugin, KitData data) {
         this.plugin = plugin;
@@ -31,8 +33,10 @@ public class KitCooldowns {
 
         if (secondsRemaining == 0 && kit.getCooldown() > 0) {
             String notificationKey = player.getUniqueId().toString() + ":" + kit.getName();
-            if (!expiredNotifications.contains(notificationKey)) {
-                expiredNotifications.add(notificationKey);
+            Long notifiedAt = lastNotified.get(notificationKey);
+
+            if (notifiedAt == null || notifiedAt != claimData.lastClaimed) {
+                lastNotified.put(notificationKey, claimData.lastClaimed);
 
                 KitImpl apiKit = new KitImpl(kit);
                 KitCooldownExpireEvent expireEvent = new KitCooldownExpireEvent(player, apiKit, claimData.lastClaimed);
@@ -45,10 +49,22 @@ public class KitCooldowns {
 
     public void clearNotification(Player player, Kit kit) {
         String notificationKey = player.getUniqueId().toString() + ":" + kit.getName();
-        expiredNotifications.remove(notificationKey);
+        lastNotified.remove(notificationKey);
     }
 
     public void clearAllNotifications() {
-        expiredNotifications.clear();
+        lastNotified.clear();
+    }
+
+    public boolean isNotificationsEnabled(UUID uuid) {
+        return data.isNotificationsEnabled(uuid);
+    }
+
+    public void setNotificationsEnabled(UUID uuid, boolean enabled) {
+        data.setNotificationsEnabled(uuid, enabled);
+    }
+
+    public CompletableFuture<Void> loadNotificationsEnabled(UUID uuid) {
+        return data.loadNotificationsEnabled(uuid);
     }
 }

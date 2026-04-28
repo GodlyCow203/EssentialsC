@@ -43,6 +43,7 @@ public class KitCommand extends Command {
                 }
                 handleCooldown(player, args[1]);
             }
+            case "notifications" -> handleNotifications(player);
             case "debug" -> {
                 if (!player.hasPermission("essentialsc.kits.admin")) {
                     player.sendMessage(lang.get(player, "error.no_permission"));
@@ -129,6 +130,13 @@ public class KitCommand extends Command {
         });
     }
 
+    private void handleNotifications(Player player) {
+        boolean current = plugin.getKitManager().isNotificationsEnabled(player.getUniqueId());
+        boolean newValue = !current;
+        plugin.getKitManager().setNotificationsEnabled(player.getUniqueId(), newValue);
+        player.sendMessage(lang.get(player, newValue ? "kit.notifications.enabled" : "kit.notifications.disabled"));
+    }
+
     private void handleDebug(Player player, String kitName) {
         Kit kit = plugin.getKitManager().getKit(kitName);
 
@@ -200,7 +208,7 @@ public class KitCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            List<String> subs = new java.util.ArrayList<>(List.of("claim", "cooldown"));
+            List<String> subs = new java.util.ArrayList<>(List.of("claim", "cooldown", "notifications"));
             if (sender.hasPermission("essentialsc.kits.admin")) {
                 subs.add("debug");
             }

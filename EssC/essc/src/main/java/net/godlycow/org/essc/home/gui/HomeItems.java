@@ -3,6 +3,7 @@ package net.godlycow.org.essc.home.gui;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.home.Home;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -12,7 +13,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
@@ -30,6 +30,11 @@ public class HomeItems {
     public HomeItems(EssentialsC plugin) {
         this.plugin = plugin;
         this.keyAction = new NamespacedKey(plugin, "hgui_action");
+    }
+
+    private Component noItalic(Component component) {
+        if (component == null) return Component.empty();
+        return component.decoration(TextDecoration.ITALIC, false);
     }
 
     public ItemStack background(Player player) {
@@ -398,14 +403,14 @@ public class HomeItems {
         String targetName = target.getName() != null ? target.getName() : "Unknown";
         String status = target.isOnline() ? "<green>● Online" : "<red>● Offline";
 
-        meta.displayName(MM.deserialize("<blue><bold>" + targetName));
+        meta.displayName(noItalic(MM.deserialize("<blue><bold>" + targetName)));
 
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
-        lore.add(MM.deserialize("<gray>Status: " + status));
-        lore.add(MM.deserialize("<gray>UUID: <dark_gray>" + target.getUniqueId().toString().substring(0, 8) + "…"));
+        lore.add(noItalic(MM.deserialize("<gray>Status: " + status)));
+        lore.add(noItalic(MM.deserialize("<gray>UUID: <dark_gray>" + target.getUniqueId().toString().substring(0, 8) + "…")));
         lore.add(Component.empty());
-        lore.add(MM.deserialize("<blue>Click to manage homes"));
+        lore.add(noItalic(MM.deserialize("<blue>Click to manage homes")));
         meta.lore(lore);
 
         meta.getPersistentDataContainer().set(keyAction, PersistentDataType.STRING,
@@ -453,8 +458,10 @@ public class HomeItems {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return item;
 
-        meta.displayName(name);
-        meta.lore(lore);
+        meta.displayName(noItalic(name));
+        if (lore != null && !lore.isEmpty()) {
+            meta.lore(lore.stream().map(this::noItalic).toList());
+        }
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
         item.setItemMeta(meta);
         return item;
@@ -495,6 +502,8 @@ public class HomeItems {
         return plugin.getLanguageManager().get(player, key, placeholders);
     }
 
-    public NamespacedKey getActionKey() { return keyAction; }
+    public NamespacedKey getActionKey() {
+        return keyAction;
+    }
 
 }

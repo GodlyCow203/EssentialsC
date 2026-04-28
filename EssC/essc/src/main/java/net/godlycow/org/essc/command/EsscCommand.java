@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.util.EssLog;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class EsscCommand extends Command {
 
     private static final DateTimeFormatter DISPLAY_FORMAT =
@@ -69,7 +71,6 @@ public class EsscCommand extends Command {
 
                 if (plugin.getSpawnManager() != null) {
                     plugin.getSpawnManager().reload();
-                    sender.sendMessage(lang.get(sender, "essc.reload.spawn"));
                     plugin.debug("Spawn configuration reloaded");
                 }
 
@@ -173,8 +174,11 @@ public class EsscCommand extends Command {
                     plugin.debug("SellGUI reloaded");
                 }
 
-                sender.sendMessage(lang.get(sender, "essc.reload.success"));
-                EssLog.info("Reload completed by " + sender.getName());
+                sender.sendMessage(lang.get(sender, "essc.reload.success", Map.of(
+                        "version", plugin.getDescription().getVersion()
+                )));
+
+                Bukkit.getLogger().info("Reload completed by " + sender.getName());
             }
 
             case "backup" -> executeBackup(sender, args);

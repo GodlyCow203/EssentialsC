@@ -5,6 +5,7 @@ import net.godlycow.org.essc.auction.Auction;
 import net.godlycow.org.essc.auction.BuyHistoryEntry;
 import net.godlycow.org.essc.auction.SellHistoryEntry;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -45,6 +46,11 @@ public class AhItemFactory {
         this.navKey = new NamespacedKey(plugin, "ah_nav");
     }
 
+    private Component noItalic(Component component) {
+        if (component == null) return Component.empty();
+        return component.decoration(TextDecoration.ITALIC, false);
+    }
+
     public ItemStack createAuctionItem(Auction auction, Player viewer) {
         ItemStack display = auction.getItem().clone();
         ItemMeta meta = display.getItemMeta();
@@ -53,28 +59,28 @@ public class AhItemFactory {
         List<Component> lore = createBaseLore(viewer);
 
         String priceStr = plugin.getEconomyManager().format(auction.getPrice());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price",
-                Map.of("price", priceStr)));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price",
+                Map.of("price", priceStr))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller",
-                Map.of("seller", auction.getSellerName())));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller",
+                Map.of("seller", auction.getSellerName()))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left",
-                Map.of("time", formatTime(auction.getTimeRemaining()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left",
+                Map.of("time", formatTime(auction.getTimeRemaining())))));
 
         lore.add(Component.empty());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         boolean isOwn = auction.getSellerUuid().equals(viewer.getUniqueId());
         if (isOwn) {
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.your_auction"));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.your_auction")));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel")));
         } else {
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_purchase"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_purchase")));
         }
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id",
-                Map.of("id", String.valueOf(auction.getId()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id",
+                Map.of("id", String.valueOf(auction.getId())))));
 
         meta.lore(lore);
         PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -93,17 +99,17 @@ public class AhItemFactory {
         List<Component> lore = createBaseLore(viewer);
 
         String priceStr = plugin.getEconomyManager().format(auction.getPrice());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price",
-                Map.of("price", priceStr)));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price",
+                Map.of("price", priceStr))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left",
-                Map.of("time", formatTime(auction.getTimeRemaining()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left",
+                Map.of("time", formatTime(auction.getTimeRemaining())))));
 
         lore.add(Component.empty());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel"));
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id",
-                Map.of("id", String.valueOf(auction.getId()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel")));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id",
+                Map.of("id", String.valueOf(auction.getId())))));
 
         meta.lore(lore);
         meta.getPersistentDataContainer().set(auctionKey, PersistentDataType.INTEGER, auction.getId());
@@ -119,17 +125,17 @@ public class AhItemFactory {
 
         List<Component> lore = createBaseLore(viewer);
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.sold_for",
-                Map.of("price", plugin.getEconomyManager().format(entry.getPrice()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.sold_for",
+                Map.of("price", plugin.getEconomyManager().format(entry.getPrice())))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.buyer",
-                Map.of("buyer", entry.getBuyerName())));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.buyer",
+                Map.of("buyer", entry.getBuyerName()))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when",
-                Map.of("time", formatTimeAgo(entry.getTimestamp()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when",
+                Map.of("time", formatTimeAgo(entry.getTimestamp())))));
 
         lore.add(Component.empty());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         display.setItemMeta(meta);
@@ -143,17 +149,17 @@ public class AhItemFactory {
 
         List<Component> lore = createBaseLore(viewer);
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.bought_for",
-                Map.of("price", plugin.getEconomyManager().format(entry.getPrice()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.bought_for",
+                Map.of("price", plugin.getEconomyManager().format(entry.getPrice())))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller_name",
-                Map.of("seller", entry.getSellerName())));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller_name",
+                Map.of("seller", entry.getSellerName()))));
 
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when",
-                Map.of("time", formatTimeAgo(entry.getTimestamp()))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when",
+                Map.of("time", formatTimeAgo(entry.getTimestamp())))));
 
         lore.add(Component.empty());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         display.setItemMeta(meta);
@@ -167,10 +173,10 @@ public class AhItemFactory {
 
         List<Component> lore = meta.hasLore() ? new ArrayList<>(meta.lore()) : new ArrayList<>();
         lore.add(Component.empty());
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_claim"));
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.lore.slot",
-                Map.of("slot", String.valueOf(slot))));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_claim")));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.slot",
+                Map.of("slot", String.valueOf(slot)))));
 
         meta.lore(lore);
         meta.getPersistentDataContainer().set(claimKey, PersistentDataType.BYTE, (byte) 1);
@@ -191,7 +197,7 @@ public class AhItemFactory {
         } else {
             name = plugin.getLanguageManager().get(viewer, nameKey);
         }
-        meta.displayName(name);
+        meta.displayName(noItalic(name));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -219,18 +225,18 @@ public class AhItemFactory {
         } else {
             name = plugin.getLanguageManager().get(viewer, nameKey);
         }
-        meta.displayName(name);
+        meta.displayName(noItalic(name));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         List<Component> lore = new ArrayList<>();
         List<String> customLore = plugin.getConfigManager().getAHGuiLore(configPath, null);
         if (customLore != null && !customLore.isEmpty()) {
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
         } else {
             for (String key : loreKeys) {
-                lore.add(plugin.getLanguageManager().get(viewer, key));
+                lore.add(noItalic(plugin.getLanguageManager().get(viewer, key)));
             }
         }
 
@@ -255,9 +261,9 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(player, "ah.gui.item.info.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.name")));
         }
 
         int active = plugin.getAuctionManager().getPlayerAuctions(player.getUniqueId()).size();
@@ -269,25 +275,25 @@ public class AhItemFactory {
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = createBaseLore(player);
             String maxStr = bypass ? "∞" : String.valueOf(max);
             String color = (active >= max && !bypass) ? "<color:#EF4444>" : "<color:#10B981>";
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.active",
-                    Map.of("count", String.valueOf(active), "max", maxStr, "color", color)));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.active",
+                    Map.of("count", String.valueOf(active), "max", maxStr, "color", color))));
             if (hasExpired) {
-                lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.expired"));
+                lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.expired")));
             }
             lore.add(Component.empty());
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_sell"));
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_cancel"));
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_expired"));
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_listings"));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_sell")));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_cancel")));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_expired")));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_listings")));
             lore.add(Component.empty());
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
             meta.lore(lore);
         }
 
@@ -309,26 +315,26 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.name")));
         }
 
         List<String> customLore = plugin.getConfigManager().getAHGuiLore(configPath, null);
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = createBaseLore(viewer);
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.items_waiting",
-                    Map.of("count", String.valueOf(count))));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.items_waiting",
+                    Map.of("count", String.valueOf(count)))));
             lore.add(Component.empty());
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.click_individual"));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.claim_all"));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.click_individual")));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.claim_all")));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
             meta.lore(lore);
         }
 
@@ -349,9 +355,9 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.name")));
         }
 
         BigDecimal totalEarnings = history.stream()
@@ -362,17 +368,17 @@ public class AhItemFactory {
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = createBaseLore(viewer);
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_sales",
-                    Map.of("count", String.valueOf(history.size()))));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_earnings",
-                    Map.of("amount", plugin.getEconomyManager().format(totalEarnings))));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_sales",
+                    Map.of("count", String.valueOf(history.size())))));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_earnings",
+                    Map.of("amount", plugin.getEconomyManager().format(totalEarnings)))));
             lore.add(Component.empty());
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
             meta.lore(lore);
         }
 
@@ -394,9 +400,9 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.name")));
         }
 
         BigDecimal totalSpent = history.stream()
@@ -407,17 +413,17 @@ public class AhItemFactory {
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = createBaseLore(viewer);
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_purchases",
-                    Map.of("count", String.valueOf(history.size()))));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_spent",
-                    Map.of("amount", plugin.getEconomyManager().format(totalSpent))));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_purchases",
+                    Map.of("count", String.valueOf(history.size())))));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_spent",
+                    Map.of("amount", plugin.getEconomyManager().format(totalSpent)))));
             lore.add(Component.empty());
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
             meta.lore(lore);
         }
 
@@ -439,9 +445,9 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.close.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.close.name")));
         }
 
         meta.getPersistentDataContainer().set(closeKey, PersistentDataType.BYTE, (byte) 1);
@@ -469,25 +475,25 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".name")));
         }
 
         List<String> customLore = plugin.getConfigManager().getAHGuiLore(configPath, null);
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = new ArrayList<>();
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".lore1"));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".lore2"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".lore1")));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty." + type + ".lore2")));
             if (type.equals("auction")) {
                 lore.add(Component.empty());
-                lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty.auction.help"));
+                lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty.auction.help")));
             }
             meta.lore(lore);
         }
@@ -509,22 +515,22 @@ public class AhItemFactory {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".name")));
         }
 
         List<String> customLore = plugin.getConfigManager().getAHGuiLore(configPath, null);
         if (customLore != null && !customLore.isEmpty()) {
             List<Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<Component> lore = new ArrayList<>();
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".lore1"));
-            lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".lore2"));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".lore1")));
+            lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.empty_history." + type + ".lore2")));
             meta.lore(lore);
         }
 
@@ -538,15 +544,15 @@ public class AhItemFactory {
     }
 
     public ItemStack createFiller(Material defaultMat, String configPath) {
-        Material material = plugin.getConfigManager().getAHGuiMaterial(configPath, defaultMat);
+        Material material = plugin.getConfigManager().getAHGuiMaterial(configPath + ".material", defaultMat);
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
         String configName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (configName != null && !configName.isEmpty()) {
-            meta.displayName(mm.deserialize(configName));
+            meta.displayName(noItalic(mm.deserialize(configName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(null, "ah.gui.filler.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(null, "ah.gui.filler.name")));
         }
 
         if (plugin.getConfigManager().getAHGuiGlow(configPath, false)) {
@@ -561,7 +567,7 @@ public class AhItemFactory {
 
     private List<Component> createBaseLore(Player viewer) {
         List<Component> lore = new ArrayList<>();
-        lore.add(plugin.getLanguageManager().get(viewer, "ah.gui.separator_top"));
+        lore.add(noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator_top")));
         lore.add(Component.empty());
         return lore;
     }

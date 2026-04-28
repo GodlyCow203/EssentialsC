@@ -2,6 +2,7 @@ package net.godlycow.org.essc.kit;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.impl.kit.KitImpl;
+import net.godlycow.org.essc.api.kit.event.KitCooldownExpireEvent;
 import net.godlycow.org.essc.api.kit.event.KitFirstJoinEvent;
 import net.godlycow.org.essc.api.kit.event.KitReloadEvent;
 import org.bukkit.Bukkit;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -36,6 +38,20 @@ public class KitManager implements Listener {
         definitions.loadAll();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.debug("KitManager initialized");
+
+        startCooldownNotificationTask();
+    }
+
+    private void startCooldownNotificationTask() {
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                for (Kit kit : definitions.getKits()) {
+                    if (kit.getCooldown() > 0 && data.hasClaimed(player.getUniqueId(), kit.getName())) {
+                        cooldowns.getRemainingSeconds(player, kit);
+                    }
+                }
+            }
+        }, 20L * 30, 20L * 30);
     }
 
     public void setNetworkHook(KitSyncHook hook) {
@@ -55,29 +71,58 @@ public class KitManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        data.loadPlayerData(player.getUniqueId());
 
-        if (!player.hasPlayedBefore()) {
-            plugin.debug("First join detected for " + player.getName() + ", checking first-join kits");
+        CompletableFuture<Void> dataFuture = data.loadPlayerData(player.getUniqueId());
+        CompletableFuture<Void> notifFuture = cooldowns.loadNotificationsEnabled(player.getUniqueId());
 
-            for (Kit kit : definitions.getKits()) {
-                if (kit.isFirstJoin()) {
-                    KitImpl apiKit = new KitImpl(kit);
-                    KitFirstJoinEvent firstJoinEvent = new KitFirstJoinEvent(player, apiKit);
-                    Bukkit.getPluginManager().callEvent(firstJoinEvent);
+        CompletableFuture.allOf(dataFuture, notifFuture).thenRun(() -> {
+            plugin.getServer().getScheduler().runTask(plugin, () -> {
+                if (!player.isOnline()) return;
 
-                    if (!firstJoinEvent.isCancelled()) {
-                        plugin.debug("Giving first-join kit: " + kit.getName());
-                        giveKit(player, kit);
+                if (!player.hasPlayedBefore()) {
+                    plugin.debug("First join detected for " + player.getName() + ", checking first-join kits");
+
+                    for (Kit kit : definitions.getKits()) {
+                        if (kit.isFirstJoin()) {
+                            KitImpl apiKit = new KitImpl(kit);
+                            KitFirstJoinEvent firstJoinEvent = new KitFirstJoinEvent(player, apiKit);
+                            Bukkit.getPluginManager().callEvent(firstJoinEvent);
+
+                            if (!firstJoinEvent.isCancelled()) {
+                                plugin.debug("Giving first-join kit: " + kit.getName());
+                                giveKit(player, kit);
+                            }
+                        }
                     }
                 }
-            }
-        }
+
+                for (Kit kit : definitions.getKits()) {
+                    if (kit.getCooldown() > 0 && data.hasClaimed(player.getUniqueId(), kit.getName())) {
+                        cooldowns.getRemainingSeconds(player, kit);
+                    }
+                }
+            });
+        });
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         data.removePlayerCache(event.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onCooldownExpire(KitCooldownExpireEvent event) {
+        Player player = event.getPlayer();
+        if (player == null || !player.isOnline()) return;
+        if (!cooldowns.isNotificationsEnabled(player.getUniqueId())) return;
+
+        Kit kit = definitions.getKit(event.getKit().getName());
+        if (kit == null) return;
+
+        player.sendMessage(plugin.getLanguageManager().get(player, "kit.notification.available",
+                Map.of("kit", kit.getDisplayName())));
+
+        plugin.debug("Sent cooldown expiry notification to " + player.getName() + " for kit " + kit.getName());
     }
 
     public Kit getKit(String name) {
@@ -146,6 +191,14 @@ public class KitManager implements Listener {
         claims.execute(player, kit);
     }
 
+    public boolean isNotificationsEnabled(UUID uuid) {
+        return cooldowns.isNotificationsEnabled(uuid);
+    }
+
+    public void setNotificationsEnabled(UUID uuid, boolean enabled) {
+        cooldowns.setNotificationsEnabled(uuid, enabled);
+    }
+
     public void reload() {
         definitions.loadAll();
         data.clearCache();
@@ -153,6 +206,7 @@ public class KitManager implements Listener {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             data.loadPlayerData(p.getUniqueId());
+            cooldowns.loadNotificationsEnabled(p.getUniqueId());
         }
 
         KitReloadEvent reloadEvent = new KitReloadEvent(definitions.getKitCount(), System.currentTimeMillis());

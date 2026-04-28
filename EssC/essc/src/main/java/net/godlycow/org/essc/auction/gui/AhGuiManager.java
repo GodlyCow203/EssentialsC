@@ -2,6 +2,8 @@ package net.godlycow.org.essc.auction.gui;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.auction.*;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -33,6 +35,11 @@ public class AhGuiManager {
         this.plugin = plugin;
         this.sounds = sounds;
         this.items = new AhItemFactory(plugin);
+    }
+
+    private Component noItalic(Component component) {
+        if (component == null) return Component.empty();
+        return component.decoration(TextDecoration.ITALIC, false);
     }
 
     public void openMainGui(Player player, int page) {
@@ -262,27 +269,27 @@ public class AhGuiManager {
 
         String customName = plugin.getConfigManager().getAHGuiName(configPath, null);
         if (customName != null && !customName.isEmpty()) {
-            meta.displayName(mm.deserialize(customName));
+            meta.displayName(noItalic(mm.deserialize(customName)));
         } else {
-            meta.displayName(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.name"));
+            meta.displayName(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.name")));
         }
 
         List<String> customLore = plugin.getConfigManager().getAHGuiLore(configPath, null);
         if (customLore != null && !customLore.isEmpty()) {
             List<net.kyori.adventure.text.Component> lore = new ArrayList<>();
             for (String line : customLore) {
-                lore.add(mm.deserialize(line));
+                lore.add(noItalic(mm.deserialize(line)));
             }
             meta.lore(lore);
         } else {
             List<net.kyori.adventure.text.Component> lore = new ArrayList<>();
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
             lore.add(net.kyori.adventure.text.Component.empty());
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.total",
-                    Map.of("count", String.valueOf(totalItems))));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.total",
+                    Map.of("count", String.valueOf(totalItems)))));
             lore.add(net.kyori.adventure.text.Component.empty());
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.cancel_tip"));
-            lore.add(plugin.getLanguageManager().get(player, "ah.gui.separator"));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.cancel_tip")));
+            lore.add(noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
             meta.lore(lore);
         }
 
