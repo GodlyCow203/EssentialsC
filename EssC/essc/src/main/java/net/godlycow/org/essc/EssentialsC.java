@@ -237,7 +237,6 @@ public final class EssentialsC extends JavaPlugin {
         }
 
         new ListenerRegistrar(this);
-        new CommandRegistrar(this).registerAll();
 
         if (configManager.isEconomyEnabled()) {
             debug("economyManager was null in onEnable, running EconomyRegistrar fallback.");
