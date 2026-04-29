@@ -1,77 +1,121 @@
-title: <gradient:#00E5FF:#FFC857><bold>Server Shop</bold></gradient>
+title: "<gradient:#00E5FF:#FFC857><bold>Server Shop</bold></gradient>"
 size: 54
 fill-empty: true
-fill-material: BLACK_STAINED_GLASS_PANE
+fill-material: "BLACK_STAINED_GLASS_PANE"
+
+category-title: "<gradient:#00E5FF:#FFC857><bold><category></bold></gradient>"
+
+items-per-page: 28
+
+buttons:
+
+  prev-page:
+    slot: 45
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0="
+    name: "<color:#474747>Previous Page"
+
+  next-page:
+    slot: 53
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0="
+    name: "<color:#474747>Next Page"
+
+  page-indicator:
+    slot: 49
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGZkYzRiYjAzNGQ4ZjQzMTdhYzRmZTNhNDBjNDNkNjIzNGE4ZjUxODkyZGVjNjYzNDBhMTJkYTg3Y2NmNTkxNyJ9fX0="
+    name: "<color:#F5C827>Page <current>/<max>"
+
+  close:
+    slot: 48
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWZkMjQwMDAwMmFkOWZiYmJkMDA2Njk0MWViNWIxYTM4NGFiOWIwZTQ4YTE3OGVlOTZlNGQxMjlhNTIwODY1NCJ9fX0="
+    name: "<color:#F52727>Close"
+    enabled: true
+
+  back:
+    slot: 48
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJlZWVmZDk4NmFkMTA2NDM0YzY0ZmFjNjY5ZjcwZWY4OGRjNmJiNmM4MmNiZDdmYThkNjY0MzY5NzNkYjFhZCJ9fX0="
+    name: "<color:#F52727>Back to Categories"
+
+  balance:
+    slot: 50
+    slot-category: 47
+    material: PLAYER_HEAD
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjA5Mjk5YTExN2JlZTg4ZDMyNjJmNmFiOTgyMTFmYmEzNDRlY2FlMzliNDdlYzg0ODEyOTcwNmRlZGM4MWU0ZiJ9fX0="
+    name: "<color:#F5C827>Your Balance"
 
 categories:
   farming:
-    name: <bold><color:#6DFF9E>Farming</color></bold>
+    name: "<bold><color:#6DFF9E>Farming</color></bold>"
     material: WHEAT
     slot: 12
     file: farming.yml
     lore:
-      - <color:#A0A0A0>Crops, food, and farming drops
+      - "<color:#A0A0A0>Crops, food, and farming drops"
 
   mining:
-    name: <bold><color:#FFD46B>Mining</color></bold>
+    name: "<bold><color:#FFD46B>Mining</color></bold>"
     material: DIAMOND_PICKAXE
     slot: 14
     file: mining.yml
     lore:
-      - <color:#A0A0A0>Ores, gems, and minerals
+      - "<color:#A0A0A0>Ores, gems, and minerals"
 
   combat:
-    name: <bold><color:#FF6B6B>Combat</color></bold>
+    name: "<bold><color:#FF6B6B>Combat</color></bold>"
     material: IRON_SWORD
     slot: 22
     file: combat.yml
     lore:
-      - <color:#A0A0A0>Weapons, armor, and PvP gear
+      - "<color:#A0A0A0>Weapons, armor, and PvP gear"
 
   spawners:
-    name: <bold><color:#FF9F5A>Spawners</color></bold>
+    name: "<bold><color:#FF9F5A>Spawners</color></bold>"
     material: SPAWNER
     slot: 23
     file: spawners.yml
     lore:
-      - <color:#A0A0A0>Mob spawners and eggs
+      - "<color:#A0A0A0>Mob spawners and eggs"
 
   enchanted_books:
-    name: <bold><color:#8B8DFF>Enchanted Books</color></bold>
+    name: "<bold><color:#8B8DFF>Enchanted Books</color></bold>"
     material: ENCHANTED_BOOK
     slot: 21
     file: enchanted_books.yml
     lore:
-      - <color:#A0A0A0>High-tier enchantments
+      - "<color:#A0A0A0>High-tier enchantments"
 
   tools:
-    name: <bold><color:#48B8B1>Tools</color></bold>
+    name: "<bold><color:#48B8B1>Tools</color></bold>"
     material: NETHERITE_PICKAXE
     slot: 20
     file: tools.yml
     lore:
-      - <color:#A0A0A0>Utility and special tools
+      - "<color:#A0A0A0>Utility and special tools"
 
   blocks:
-    name: <bold><color:#CFCFCF>Blocks</color></bold>
+    name: "<bold><color:#CFCFCF>Blocks</color></bold>"
     material: STONE
     slot: 32
     file: blocks.yml
     lore:
-      - <color:#A0A0A0>Building and decoration blocks
+      - "<color:#A0A0A0>Building and decoration blocks"
 
   redstone:
-    name: <bold><color:#FF4C4C>Redstone</color></bold>
+    name: "<bold><color:#FF4C4C>Redstone</color></bold>"
     material: REDSTONE
     slot: 30
     file: redstone.yml
     lore:
-      - <color:#A0A0A0>Components and mechanisms
+      - "<color:#A0A0A0>Components and mechanisms"
 
   misc:
-    name: <bold><color:#C58CFF>Misc</color></bold>
+    name: "<bold><color:#C58CFF>Misc</color></bold>"
     material: CHEST
     slot: 24
     file: misc.yml
     lore:
-      - <color:#A0A0A0>Rare and miscellaneous items
+      - "<color:#A0A0A0>Rare and miscellaneous items"

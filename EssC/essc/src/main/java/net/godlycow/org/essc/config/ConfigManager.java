@@ -313,34 +313,6 @@ public class ConfigManager {
         return config.getString("shop.currency.plural", "Dollars");
     }
 
-    public String getShopMainMenuTitle() {
-        return config.getString("shop.main-menu-title", "Shop");
-    }
-
-    public int getShopMainMenuSize() {
-        return config.getInt("shop.main-menu-size", 54);
-    }
-
-    public String getShopCategoryMenuTitle() {
-        return config.getString("shop.category-menu-title", "Shop - <category>");
-    }
-
-    public boolean isShopCloseButtonEnabled() {
-        return config.getBoolean("shop.close-button-enabled", true);
-    }
-
-    public int getShopItemsPerPage() {
-        return config.getInt("shop.items-per-page", 28);
-    }
-
-    public boolean isShopFillEmptySlots() {
-        return config.getBoolean("shop.fill-empty-slots", true);
-    }
-
-    public String getShopFillMaterial() {
-        return config.getString("shop.fill-material", "LIGHT_GRAY_STAINED_GLASS_PANE");
-    }
-
     public boolean isShopLogTransactions() {
         return config.getBoolean("shop.log-transactions", true);
     }

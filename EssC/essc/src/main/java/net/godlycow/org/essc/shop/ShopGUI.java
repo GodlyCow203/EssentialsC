@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.SkullTextureUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -16,20 +17,12 @@ import org.bukkit.profile.PlayerProfile;
 import java.util.*;
 
 public class ShopGUI {
+
     private final EssentialsC plugin;
     private final ShopManager shopManager;
     private final Player player;
     private final MiniMessage mm;
     private double cachedBalance;
-
-    private static final int SLOT_PREV_PAGE        = 45;
-    private static final int SLOT_BALANCE_CATEGORY  = 47;
-    private static final int SLOT_BACK_BUTTON       = 48;
-    private static final int SLOT_PAGE_INDICATOR    = 49;
-    private static final int SLOT_NEXT_PAGE         = 53;
-
-    private static final int SLOT_BALANCE_MAIN      = 50;
-    private static final int SLOT_CLOSE_BUTTON      = 48;
 
     public ShopGUI(EssentialsC plugin, ShopManager shopManager, Player player) {
         this.plugin = plugin;
@@ -48,14 +41,13 @@ public class ShopGUI {
     }
 
     public void openMain() {
-        String title = plugin.getConfigManager().getShopMainMenuTitle();
-        int size = plugin.getConfigManager().getShopMainMenuSize();
+        ShopMainConfig cfg = shopManager.getMainConfig();
 
         ShopHolder holder = new ShopHolder(ShopHolder.Type.MAIN);
-        Inventory inv = Bukkit.createInventory(holder, size, mm.deserialize(title));
+        Inventory inv = Bukkit.createInventory(holder, cfg.getSize(), mm.deserialize(cfg.getTitle()));
 
-        if (plugin.getConfigManager().isShopFillEmptySlots()) {
-            fillEmptySlots(inv);
+        if (cfg.isFillEmpty()) {
+            fillEmptySlots(inv, cfg.getFillMaterial());
         }
 
         for (ShopCategory category : shopManager.getCategories().values()) {
@@ -64,21 +56,22 @@ public class ShopGUI {
             inv.setItem(category.getSlot(), createCategoryIcon(category));
         }
 
-        addBalanceHead(inv, false);
-        addCloseButton(inv);
+        addBalanceHead(inv, cfg, false);
+        addCloseButton(inv, cfg);
 
         player.openInventory(inv);
     }
 
     public void openCategory(ShopCategory category, int page) {
-        String title = plugin.getConfigManager().getShopCategoryMenuTitle()
-                .replace("<category>", category.getDisplayName());
+        ShopMainConfig cfg = shopManager.getMainConfig();
+
+        String title = cfg.getCategoryTitle().replace("<category>", category.getDisplayName());
 
         ShopHolder holder = new ShopHolder(ShopHolder.Type.CATEGORY, category.getId(), page);
         Inventory inv = Bukkit.createInventory(holder, 54, mm.deserialize(title));
 
-        if (plugin.getConfigManager().isShopFillEmptySlots()) {
-            fillEmptySlots(inv);
+        if (cfg.isFillEmpty()) {
+            fillEmptySlots(inv, cfg.getFillMaterial());
         }
 
         String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
@@ -90,9 +83,9 @@ public class ShopGUI {
             inv.setItem(entry.getKey(), item.createDisplayItem(cachedBalance, currencySingular, currencyPlural));
         }
 
-        addNavigation(inv, category, page);
-        addBalanceHead(inv, true);
-        addBackButton(inv);
+        addNavigation(inv, cfg, category, page);
+        addBalanceHead(inv, cfg, true);
+        addBackButton(inv, cfg);
 
         player.openInventory(inv);
     }
@@ -111,25 +104,39 @@ public class ShopGUI {
         lore.add(mm.deserialize("<color:#F5C827>Click to browse!").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
+
+        if (category.getIcon() == Material.PLAYER_HEAD && category.getTextureUrl() != null) {
+            if (meta instanceof SkullMeta skullMeta) {
+                SkullTextureUtil.applyTexture(skullMeta, category.getTextureUrl(), plugin.getLogger());
+                item.setItemMeta(skullMeta);
+                return item;
+            }
+        }
+
         item.setItemMeta(meta);
         return item;
     }
 
-    private void addBalanceHead(Inventory inv, boolean isCategory) {
-        int slot = isCategory ? SLOT_BALANCE_CATEGORY : SLOT_BALANCE_MAIN;
+    private void addBalanceHead(Inventory inv, ShopMainConfig cfg, boolean isCategory) {
+        ShopMainConfig.ButtonConfig btn = cfg.getBalanceButton();
+        int slot = isCategory ? btn.getSlotCategory() : btn.getSlot();
 
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
 
-        PlayerProfile profile = Bukkit.createPlayerProfile(player.getUniqueId(), "");
-        meta.setOwnerProfile(profile);
+        if (btn.getTexture() != null) {
+            SkullTextureUtil.applyTexture(meta, btn.getTexture(), plugin.getLogger());
+        } else {
+            PlayerProfile profile = Bukkit.createPlayerProfile(player.getUniqueId(), player.getName());
+            meta.setOwnerProfile(profile);
+        }
 
-        String formattedBalance  = String.format("%.2f", cachedBalance);
-        String currencySingular  = plugin.getConfigManager().getShopCurrencySingular();
-        String currencyPlural    = plugin.getConfigManager().getShopCurrencyPlural();
-        String currency          = cachedBalance == 1.0 ? currencySingular : currencyPlural;
+        String formattedBalance = String.format("%.2f", cachedBalance);
+        String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
+        String currencyPlural   = plugin.getConfigManager().getShopCurrencyPlural();
+        String currency         = cachedBalance == 1.0 ? currencySingular : currencyPlural;
 
-        meta.displayName(mm.deserialize("<color:#F5C827>Your Balance").decoration(TextDecoration.ITALIC, false));
+        meta.displayName(mm.deserialize(btn.getName()).decoration(TextDecoration.ITALIC, false));
 
         List<Component> lore = new ArrayList<>();
         lore.add(mm.deserialize("<color:#57F527>" + formattedBalance + " " + currency).decoration(TextDecoration.ITALIC, false));
@@ -141,21 +148,50 @@ public class ShopGUI {
         inv.setItem(slot, head);
     }
 
-    private void addNavigation(Inventory inv, ShopCategory category, int currentPage) {
+    private void addNavigation(Inventory inv, ShopMainConfig cfg, ShopCategory category, int currentPage) {
         int maxPage = category.getMaxPage();
 
         if (currentPage > 1) {
-            inv.setItem(SLOT_PREV_PAGE, createNavigationButton("<color:#474747>Previous Page", Material.ARROW));
+            ShopMainConfig.ButtonConfig prev = cfg.getPrevPageButton();
+            inv.setItem(prev.getSlot(), createButton(prev, null));
         }
 
-        inv.setItem(SLOT_PAGE_INDICATOR, createPageIndicator(currentPage, maxPage));
+        ShopMainConfig.ButtonConfig indicator = cfg.getPageIndicatorButton();
+        String indicatorName = indicator.getName()
+                .replace("<current>", String.valueOf(currentPage))
+                .replace("<max>", String.valueOf(maxPage));
+        inv.setItem(indicator.getSlot(), createButton(indicator, indicatorName));
 
         if (currentPage < maxPage) {
-            inv.setItem(SLOT_NEXT_PAGE, createNavigationButton("<color:#474747>Next Page", Material.ARROW));
+            ShopMainConfig.ButtonConfig next = cfg.getNextPageButton();
+            inv.setItem(next.getSlot(), createButton(next, null));
         }
     }
 
-    private ItemStack createNavigationButton(String name, Material material) {
+    private void addBackButton(Inventory inv, ShopMainConfig cfg) {
+        ShopMainConfig.ButtonConfig btn = cfg.getBackButton();
+        inv.setItem(btn.getSlot(), createButton(btn, null));
+    }
+
+    private void addCloseButton(Inventory inv, ShopMainConfig cfg) {
+        ShopMainConfig.ButtonConfig btn = cfg.getCloseButton();
+        if (!btn.isEnabled()) return;
+        inv.setItem(btn.getSlot(), createButton(btn, null));
+    }
+
+    private ItemStack createButton(ShopMainConfig.ButtonConfig btn, String nameOverride) {
+        Material material = parseMaterial(btn.getMaterial(), Material.PAPER);
+        String name = nameOverride != null ? nameOverride : btn.getName();
+
+        if (material == Material.PLAYER_HEAD && btn.getTexture() != null) {
+            ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+            SkullMeta meta = (SkullMeta) item.getItemMeta();
+            SkullTextureUtil.applyTexture(meta, btn.getTexture(), plugin.getLogger());
+            meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));
+            item.setItemMeta(meta);
+            return item;
+        }
+
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.displayName(mm.deserialize(name).decoration(TextDecoration.ITALIC, false));
@@ -163,35 +199,16 @@ public class ShopGUI {
         return item;
     }
 
-    private ItemStack createPageIndicator(int current, int max) {
-        ItemStack item = new ItemStack(Material.PAPER);
-        ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<color:#F5C827>Page " + current + "/" + max).decoration(TextDecoration.ITALIC, false));
-        item.setItemMeta(meta);
-        return item;
-    }
-
-    private void addBackButton(Inventory inv) {
-        ItemStack item = new ItemStack(Material.BARRIER);
-        ItemMeta meta = item.getItemMeta();
-        meta.displayName(mm.deserialize("<color:#F52727>Back to Categories").decoration(TextDecoration.ITALIC, false));
-        item.setItemMeta(meta);
-        inv.setItem(SLOT_BACK_BUTTON, item);
-    }
-
-    private void addCloseButton(Inventory inv) {
-        if (plugin.getConfigManager().isShopCloseButtonEnabled()) {
-            ItemStack item = new ItemStack(Material.BARRIER);
-            ItemMeta meta = item.getItemMeta();
-            meta.displayName(mm.deserialize("<color:#F52727>Close").decoration(TextDecoration.ITALIC, false));
-            item.setItemMeta(meta);
-            inv.setItem(SLOT_CLOSE_BUTTON, item);
+    private Material parseMaterial(String name, Material fallback) {
+        try {
+            return Material.valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning("Invalid shop button material: " + name + ". Falling back to " + fallback.name() + ".");
+            return fallback;
         }
     }
 
-    private void fillEmptySlots(Inventory inv) {
-        String materialName = plugin.getConfigManager().getShopFillMaterial();
-
+    private void fillEmptySlots(Inventory inv, String materialName) {
         Material fillMaterial;
         try {
             fillMaterial = Material.valueOf(materialName.toUpperCase());
@@ -218,5 +235,4 @@ public class ShopGUI {
             }
         }
     }
-
 }

@@ -23,6 +23,7 @@ public class ShopManager {
     private final Map<String, ShopCategory> categories;
     private File shopFolder;
     private YamlConfiguration mainConfig;
+    private ShopMainConfig shopMainConfig;
     private ShopListener shopListener;
 
     public ShopManager(EssentialsC plugin) {
@@ -60,6 +61,7 @@ public class ShopManager {
             createDefaultMainFile(mainFile);
         }
         mainConfig = YamlConfiguration.loadConfiguration(mainFile);
+        shopMainConfig = new ShopMainConfig(mainConfig);
 
         ConfigurationSection catsSection = mainConfig.getConfigurationSection("categories");
         if (catsSection != null) {
@@ -204,7 +206,7 @@ public class ShopManager {
         }
 
         if (!hasExplicitLayout && !collected.isEmpty()) {
-            int itemsPerPage = plugin.getConfigManager().getShopItemsPerPage();
+            int itemsPerPage = mainConfig.getInt("items-per-page", 28);
             int[] availableSlots = buildAutoSlots(itemsPerPage);
             plugin.debug("Auto-assigning slots for category '" + category.getId()
                     + "' (" + collected.size() + " items, " + itemsPerPage + " per page)");
@@ -583,12 +585,17 @@ public class ShopManager {
         return categories.get(id);
     }
 
+    public ShopMainConfig getMainConfig() {
+        return shopMainConfig;
+    }
+
     public void reload() {
         categories.clear();
 
         File mainFile = new File(shopFolder, "main.yml");
         if (mainFile.exists()) {
             mainConfig = YamlConfiguration.loadConfiguration(mainFile);
+            shopMainConfig = new ShopMainConfig(mainConfig);
         }
 
         ConfigurationSection catsSection = mainConfig.getConfigurationSection("categories");

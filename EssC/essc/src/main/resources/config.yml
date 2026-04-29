@@ -615,35 +615,12 @@ nickname:
 
 # Shop
 #
-# Settings for the /shop command and GUI.
+# System settings for the /shop command.
+# GUI appearance, button layout, and category configuration are in shop/main.yml.
 
 shop:
   # Set to false to disable the shop system and unregister /shop.
   enabled: true
-
-  # Title of the main shop menu. Supports MiniMessage.
-  main-menu-title: "<#F52727><b>Server Shop"
-
-  # Number of slots in the main shop menu. Must be a multiple of 9, max 54.
-  main-menu-size: 54
-
-  # Title displayed on category pages. <category> is replaced with the category name.
-  category-title: "<#F52727><category>"
-
-  # Title displayed on the category item menu. <category> is replaced.
-  category-menu-title: "<#F52727>Shop - <category>"
-
-  # Show a close button in the shop GUI.
-  close-button-enabled: true
-
-  # Number of items displayed per category page.
-  items-per-page: 28
-
-  # Fill empty GUI slots with a decorative item.
-  fill-empty-slots: true
-
-  # The material used to fill empty slots. Must be a valid Bukkit Material name.
-  fill-material: "BLACK_STAINED_GLASS_PANE"
 
   # Log every buy and sell transaction to the console and plugin log.
   log-transactions: true

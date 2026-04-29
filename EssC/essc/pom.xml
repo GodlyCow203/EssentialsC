@@ -49,6 +49,11 @@
             </snapshots>
         </repository>
 
+        <repository>
+            <id>skinsrestorer</id>
+            <url>https://repo.skinsrestorer.net/repository/maven-public/</url>
+        </repository>
+
     </repositories>
 
 
@@ -142,6 +147,13 @@
             <groupId>com.github.NEZNAMY</groupId>
             <artifactId>TAB-API</artifactId>
             <version>5.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.skinsrestorer</groupId>
+            <artifactId>skinsrestorer-api</artifactId>
+            <version>15.0.12</version>
             <scope>provided</scope>
         </dependency>
 

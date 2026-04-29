@@ -1,5 +1,7 @@
 package net.godlycow.org.essc.shop;
 
+import net.godlycow.org.essc.util.SkullTextureUtil;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -151,8 +153,10 @@ public class ShopItem {
             SkullMeta skullMeta = (SkullMeta) meta;
             if (skullOwner != null) {
                 skullMeta.setOwningPlayer(org.bukkit.Bukkit.getOfflinePlayer(skullOwner));
-            } else if (textureUrl != null || base64Texture != null) {
-                setSkullTexture(skullMeta, textureUrl, base64Texture);
+            } else {
+                String textureValue = textureUrl != null ? textureUrl : base64Texture;
+                SkullTextureUtil.applyTexture(skullMeta, textureValue,
+                        JavaPlugin.getProvidingPlugin(getClass()).getLogger());
             }
         }
 
@@ -208,24 +212,6 @@ public class ShopItem {
         return item;
     }
 
-    private void setSkullTexture(SkullMeta meta, String url, String base64) {
-        try {
-            PlayerProfile profile = org.bukkit.Bukkit.createPlayerProfile(UUID.randomUUID(), "");
-            PlayerTextures textures = profile.getTextures();
-
-            if (url != null) {
-                URL textureUrl = new URL(url);
-                textures.setSkin(textureUrl);
-            } else if (base64 != null) {
-                URL textureUrl = new URL("http://textures.minecraft.net/texture/" + base64);
-                textures.setSkin(textureUrl);
-            }
-
-            profile.setTextures(textures);
-            meta.setOwnerProfile(profile);
-        } catch (MalformedURLException e) {
-        }
-    }
 
 
     public ItemStack createDisplayItem(double playerBalance, String currencySingular, String currencyPlural) {
