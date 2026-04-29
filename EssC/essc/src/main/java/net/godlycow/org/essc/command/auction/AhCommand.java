@@ -1,9 +1,9 @@
 package net.godlycow.org.essc.command.auction;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.auction.gui.AhItemFactory;
+import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -17,10 +17,10 @@ public class AhCommand extends Command {
     private final AhGuiManager guiManager;
     private final AhSoundManager soundManager;
 
-    public AhCommand(EssentialsC plugin) {
+    public AhCommand(EssentialsC plugin, AhGuiManager guiManager) {
         super(plugin, "ah", "essentialsc.ah.use", true, 0, "command.usage.ah");
-        this.soundManager = new AhSoundManager(plugin);
-        this.guiManager = new AhGuiManager(plugin, soundManager);
+        this.guiManager = guiManager;
+        this.soundManager = guiManager.getSoundManager();
     }
 
     @Override
@@ -207,6 +207,7 @@ public class AhCommand extends Command {
             return;
         }
         plugin.getAuctionManager().reload();
+        guiManager.reload();
         player.sendMessage(lang.get(player, "ah.reloaded"));
         soundManager.playSuccess(player);
     }
@@ -260,7 +261,8 @@ public class AhCommand extends Command {
     }
 
     public AhSoundManager getSoundManager() {
-        return soundManager; }
+        return soundManager;
+    }
 
     public AhItemFactory getItemFactory() {
         return guiManager.getItemFactory();

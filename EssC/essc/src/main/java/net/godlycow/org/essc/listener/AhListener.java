@@ -1,14 +1,13 @@
 package net.godlycow.org.essc.listener;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
-import net.godlycow.org.essc.auction.AhSession;
 import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.Auction;
 import net.godlycow.org.essc.auction.gui.AhItemFactory;
 import net.godlycow.org.essc.command.auction.AhCommand;
-import org.bukkit.Bukkit;
+import net.godlycow.org.essc.gui.GuiSession;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,20 +43,18 @@ public class AhListener implements Listener {
         if (!plugin.getConfigManager().isAHEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        if (!player.hasMetadata("ah_session")) return;
+        if (!player.hasMetadata("gui_session")) return;
 
-        AhSession session = (AhSession) player.getMetadata("ah_session").get(0).value();
-        if (session == null || session.isStale()) {
-            player.removeMetadata("ah_session", plugin);
+        GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
+        if (session == null || session.isStale() || !session.getGuiId().startsWith("auction_")) {
+            if (session == null || session.isStale()) player.removeMetadata("gui_session", plugin);
             return;
         }
 
         event.setCancelled(true);
 
         if (event.getClickedInventory() != event.getInventory()) {
-            if (event.isShiftClick()) {
-                event.setCancelled(true);
-            }
+            if (event.isShiftClick()) event.setCancelled(true);
             return;
         }
 
@@ -75,15 +72,15 @@ public class AhListener implements Listener {
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
 
-        if (container.has(itemFactory.getCloseKey(), PersistentDataType.BYTE)) {
+        if (container.has(new NamespacedKey(plugin, "gui_close"), PersistentDataType.BYTE)) {
             soundManager.playClose(player);
             player.closeInventory();
             return;
         }
 
-        if (container.has(itemFactory.getPageKey(), PersistentDataType.INTEGER)) {
-            int page = container.get(itemFactory.getPageKey(), PersistentDataType.INTEGER);
-            String navType = container.getOrDefault(itemFactory.getNavKey(), PersistentDataType.STRING, "main");
+        if (container.has(new NamespacedKey(plugin, "gui_page"), PersistentDataType.INTEGER)) {
+            int page = container.get(new NamespacedKey(plugin, "gui_page"), PersistentDataType.INTEGER);
+            String navType = container.getOrDefault(new NamespacedKey(plugin, "gui_nav"), PersistentDataType.STRING, "main");
 
             soundManager.playPageTurn(player);
             player.closeInventory();
@@ -92,17 +89,15 @@ public class AhListener implements Listener {
                 switch (navType) {
                     case "main" -> ahCommand.openMainGui(player, page);
                     case "listings" -> ahCommand.openListingsGui(player, page);
-                    case "expired" -> ahCommand.openExpiredGui(player);
                     case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
                     case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
-                    case "history_type" -> ahCommand.openHistoryTypeGui(player);
                 }
             }, 1L);
             return;
         }
 
-        if (container.has(itemFactory.getActionKey(), PersistentDataType.STRING)) {
-            String action = container.get(itemFactory.getActionKey(), PersistentDataType.STRING);
+        if (container.has(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING)) {
+            String action = container.get(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING);
             handleAction(player, action);
             return;
         }
@@ -122,18 +117,22 @@ public class AhListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-
-        if (player.hasMetadata("ah_session")) {
-            event.setCancelled(true);
+        if (player.hasMetadata("gui_session")) {
+            GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
+            if (session != null && session.getGuiId().startsWith("auction_")) {
+                event.setCancelled(true);
+            }
         }
     }
 
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
-
-        if (player.hasMetadata("ah_session")) {
-            player.removeMetadata("ah_session", plugin);
+        if (player.hasMetadata("gui_session")) {
+            GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
+            if (session != null && session.getGuiId().startsWith("auction_")) {
+                player.removeMetadata("gui_session", plugin);
+            }
         }
     }
 
@@ -152,45 +151,52 @@ public class AhListener implements Listener {
             case "expired" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openExpiredGui(player), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openExpiredGui(player), 1L);
             }
             case "listings" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openListingsGui(player, 1), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openListingsGui(player, 1), 1L);
             }
             case "claim_all" -> handleClaimAll(player);
             case "refresh" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openMainGui(player, 1), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openMainGui(player, 1), 1L);
             }
             case "history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openHistoryTypeGui(player), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openHistoryTypeGui(player), 1L);
             }
             case "sell_history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openSellHistoryGui(player, 1), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openSellHistoryGui(player, 1), 1L);
             }
             case "buy_history" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openBuyHistoryGui(player, 1), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openBuyHistoryGui(player, 1), 1L);
             }
             case "history_type" -> {
                 soundManager.playClick(player);
                 player.closeInventory();
-                plugin.getEssScheduler().runForEntityLater(player,
-                        () -> ahCommand.openHistoryTypeGui(player), 1L);
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openHistoryTypeGui(player), 1L);
+            }
+            case "back_main" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openMainGui(player, 1), 1L);
+            }
+            case "back_history" -> {
+                soundManager.playClick(player);
+                player.closeInventory();
+                plugin.getEssScheduler().runForEntityLater(player, () -> ahCommand.openHistoryTypeGui(player), 1L);
+            }
+            case "close" -> {
+                soundManager.playClose(player);
+                player.closeInventory();
             }
         }
     }

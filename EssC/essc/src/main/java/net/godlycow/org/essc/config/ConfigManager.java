@@ -656,6 +656,14 @@ public class ConfigManager {
         return config.getString("auction-house.gui.items." + path + ".name", defaultName);
     }
 
+    public String getAHGuiTexture(String path, String defaultTexture) {
+        String value = config.getString("auction-house.gui.items." + path + ".texture", defaultTexture);
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return value;
+    }
+
     public String getFallbackLanguage() {
         return config.getString("fallback-language", "en_US");
     }

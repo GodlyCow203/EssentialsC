@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.command.*;
 import net.godlycow.org.essc.command.admin.*;
 import net.godlycow.org.essc.command.afk.AFKCommand;
@@ -37,12 +38,14 @@ public class CommandRegistrar {
     private final PunishmentManager punishmentManager;
     private final CommandsConfig commandsConfig;
     private final LogoutDataManager logoutDataManager;
+    private AhGuiManager ahGuiManager;
 
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
         this.punishmentManager = plugin.getPunishmentManager();
         this.commandsConfig = plugin.getCommandsConfig();
         this.logoutDataManager = plugin.getLogoutDataManager();
+        this.ahGuiManager = plugin.getAhGuiManager();
     }
 
     public void registerAll() {
@@ -117,7 +120,7 @@ public class CommandRegistrar {
         register("top",            new TopCommand(plugin));
         register("ptime",          new PtimeCommand(plugin));
         register("pweather",       new PweatherCommand(plugin));
-        register("ah",             new AhCommand(plugin));
+        register("ah",             new AhCommand(plugin,ahGuiManager));
         register("language",       new LanguageCommand(plugin));
         register("warp",           new WarpCommand(plugin));
         register("setwarp",        new SetWarpCommand(plugin));
