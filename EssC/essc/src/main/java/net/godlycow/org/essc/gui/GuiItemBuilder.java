@@ -28,11 +28,15 @@ public class GuiItemBuilder {
     }
 
     public ItemStack build(GuiButton config, Player player) {
-        if (config == null) return new ItemStack(Material.AIR);
+        if (config == null) {
+            return new ItemStack(Material.AIR);
+        }
 
         ItemStack item = new ItemStack(config.getMaterial(), config.getAmount());
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) return item;
+        if (meta == null) {
+            return item;
+        }
 
         if (config.getMaterial() == Material.PLAYER_HEAD && config.getSkullTexture() != null) {
             SkullTextureUtil.applyTexture((SkullMeta) meta, config.getSkullTexture(), plugin.getLogger());
@@ -51,8 +55,12 @@ public class GuiItemBuilder {
             meta.lore(lore);
         }
 
-        if (config.isHideAttributes()) meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        if (config.isHideEnchants()) meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (config.isHideAttributes()) {
+            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        }
+        if (config.isHideEnchants()) {
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         if (config.isGlow()) {
             meta.addEnchant(Enchantment.LURE, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -61,11 +69,12 @@ public class GuiItemBuilder {
             meta.setCustomModelData(config.getCustomModelData());
         }
 
-        if (config.getAction() != null && !config.getAction().isEmpty()) {
+        String action = config.getAction();
+        if (action != null && !action.isEmpty()) {
             meta.getPersistentDataContainer().set(
                     new NamespacedKey(plugin, "gui_action"),
                     PersistentDataType.STRING,
-                    config.getAction()
+                    action
             );
         }
 
@@ -76,19 +85,25 @@ public class GuiItemBuilder {
     public ItemStack buildSimple(Material material, Component name, List<Component> lore, boolean hideAttributes) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) return item;
+        if (meta == null) {
+            return item;
+        }
 
         meta.displayName(ComponentHelper.noItalic(name));
         if (lore != null && !lore.isEmpty()) {
             meta.lore(ComponentHelper.noItalic(lore));
         }
-        if (hideAttributes) meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        if (hideAttributes) {
+            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        }
         item.setItemMeta(meta);
         return item;
     }
 
     private Component resolveText(String text, Player player) {
-        if (text == null || text.isEmpty()) return Component.empty();
+        if (text == null || text.isEmpty()) {
+            return Component.empty();
+        }
         if (text.startsWith("lang:")) {
             return plugin.getLanguageManager().get(player, text.substring(5));
         }

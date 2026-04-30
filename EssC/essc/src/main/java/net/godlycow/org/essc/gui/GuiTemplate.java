@@ -18,7 +18,7 @@ public class GuiTemplate {
     public GuiTemplate(String id, FileConfiguration config) {
         this.id = id;
         this.rawTitle = config.getString("title", "<dark_gray>GUI");
-        this.size = Math.max(9, Math.min(54, config.getInt("size", 54)));
+        this.size = resolveSize(config.getInt("size", 54));
 
         var itemsSection = config.getConfigurationSection("items");
         if (itemsSection != null) {
@@ -29,6 +29,16 @@ public class GuiTemplate {
                 }
             }
         }
+    }
+
+    private static int resolveSize(int raw) {
+        int clamped = Math.max(9, Math.min(54, raw));
+        int remainder = clamped % 9;
+        if (remainder == 0) {
+            return clamped;
+        }
+        int rounded = clamped + (9 - remainder);
+        return Math.min(54, rounded);
     }
 
     public Component resolveTitle(Player player, EssentialsC plugin, Map<String, String> placeholders) {

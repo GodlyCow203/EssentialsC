@@ -23,7 +23,7 @@ public class GuiButton {
 
     public GuiButton(String id, ConfigurationSection section) {
         this.id = id;
-        this.material = parseMaterial(section.getString("material", "STONE"));
+        this.material = parseMaterial(section.getString("material", "STONE"), id);
         this.name = section.getString("name", " ");
         this.lore = section.getStringList("lore");
         this.slots = parseSlots(section);
@@ -36,10 +36,14 @@ public class GuiButton {
         this.action = section.getString("action", null);
     }
 
-    private static Material parseMaterial(String name) {
+    private static Material parseMaterial(String name, String buttonId) {
+        if (name == null || name.isBlank()) {
+            return Material.STONE;
+        }
         try {
             return Material.valueOf(name.toUpperCase());
         } catch (IllegalArgumentException e) {
+            System.err.println("[EssentialsC] [GUI] Unknown material '" + name + "' for button '" + buttonId + "', defaulting to STONE.");
             return Material.STONE;
         }
     }
@@ -50,8 +54,8 @@ public class GuiButton {
             list.add(section.getInt("slot"));
         }
         if (section.contains("slots")) {
-            for (int i : section.getIntegerList("slots")) {
-                list.add(i);
+            for (int slot : section.getIntegerList("slots")) {
+                list.add(slot);
             }
         }
         return list;
