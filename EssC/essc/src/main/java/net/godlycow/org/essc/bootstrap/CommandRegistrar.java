@@ -38,7 +38,7 @@ public class CommandRegistrar {
     private final PunishmentManager punishmentManager;
     private final CommandsConfig commandsConfig;
     private final LogoutDataManager logoutDataManager;
-    private AhGuiManager ahGuiManager;
+    private final AhGuiManager ahGuiManager;
 
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
@@ -84,7 +84,7 @@ public class CommandRegistrar {
         register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
         register("ban-ip",         new BanIpCommand(plugin, punishmentManager));
-        register("tpoffline",      new TpOfflineCommand(plugin,logoutDataManager));
+        register("tpoffline",      new TpOfflineCommand(plugin, logoutDataManager));
         register("banlist",        new BanListCommand(plugin, punishmentManager));
         register("clearinventory", new ClearInventoryCommand(plugin));
         register("schedules",      new SchedulesCommand(plugin));
@@ -120,7 +120,6 @@ public class CommandRegistrar {
         register("top",            new TopCommand(plugin));
         register("ptime",          new PtimeCommand(plugin));
         register("pweather",       new PweatherCommand(plugin));
-        register("ah",             new AhCommand(plugin,ahGuiManager));
         register("language",       new LanguageCommand(plugin));
         register("warp",           new WarpCommand(plugin));
         register("setwarp",        new SetWarpCommand(plugin));
@@ -132,7 +131,7 @@ public class CommandRegistrar {
         register("migration",      new MigrationCommand(plugin));
 
         if (plugin.getConfigManager().isNickEnabled()) {
-            register("nick",     new NickCommand(plugin));
+            register("nick", new NickCommand(plugin));
             register("realname", new RealNameCommand(plugin));
         }
 
@@ -161,6 +160,12 @@ public class CommandRegistrar {
             plugin.debug("Sell commands unregistered (sell.enabled is false)");
         }
 
+        if (plugin.getConfigManager().isAHEnabled()) {
+            register("ah", new AhCommand(plugin, ahGuiManager));
+        } else {
+            CommandRegistrationUtil.unregisterCommand("ah");
+            plugin.debug("AH command unregistered (ah.enabled is false)");
+        }
     }
 
     private void register(String name, Command command) {
@@ -177,6 +182,7 @@ public class CommandRegistrar {
             plugin.getLogger().warning("Command '" + name + "' not found in plugin.yml – skipping.");
             return;
         }
+
         switch (commandsConfig.getPriority(name)) {
             case "override" -> {
                 CommandRegistrationUtil.unregisterCommand(name);
