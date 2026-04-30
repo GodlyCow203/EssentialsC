@@ -36,6 +36,7 @@ import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.listener.AhListener;
 import net.godlycow.org.essc.listener.BanListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
+import net.godlycow.org.essc.listener.WarpListener;
 import net.godlycow.org.essc.motd.MOTDManager;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
@@ -64,11 +65,12 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class EssentialsC extends JavaPlugin {
+public final class EssentialsC extends JavaPlugin implements Listener {
 
     private static EssentialsC instance;
 
@@ -101,15 +103,12 @@ public final class EssentialsC extends JavaPlugin {
     private AuctionManager auctionManager;
     private WarpManager warpManager;
     private AFKManager afkManager;
-    private PlaceholderHook placeholderHook;
-    private FastStatsManager fastStats;
     private ChatManager chatManager;
     private DiscordSRVHook discordSRVHook;
     private RTPManager rtpManager;
     private RTPGuiManager rtpGuiManager;
     private TabManager tabManager;
     private FlyManager flyManager;
-    private FloodgateHook floodgateHook;
     private BedrockUtil bedrockUtil;
     private RulesManager rulesManager;
     private CommandsConfig commandsConfig;
@@ -119,7 +118,6 @@ public final class EssentialsC extends JavaPlugin {
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
     private LogoutDataManager logoutDataManager;
     private SellManager sellManager;
-    private SellListener sellListener;
     private AhGuiManager ahGuiManager;
     private EssentialsCAPIImpl apiImplementation;
 
@@ -201,10 +199,10 @@ public final class EssentialsC extends JavaPlugin {
 
         registerPlaceholderAPI();
 
-        fastStats = new FastStatsManager();
+        FastStatsManager fastStats = new FastStatsManager();
         fastStats.init(this);
 
-        floodgateHook = new FloodgateHook(this);
+        FloodgateHook floodgateHook = new FloodgateHook(this);
         bedrockUtil = new BedrockUtil(this, floodgateHook);
 
         new FirstRunHandler(this);
@@ -258,7 +256,6 @@ public final class EssentialsC extends JavaPlugin {
         if (configManager.isAHEnabled()) {
             GuiFramework guiFramework = new GuiFramework(this);
             guiFramework.loadTemplates();
-
             auctionManager = new AuctionManager(this);
             ahGuiManager = new AhGuiManager(this, guiFramework, new AhSoundManager(this));
             AhCommand ahCommand = new AhCommand(this, ahGuiManager);
@@ -267,7 +264,7 @@ public final class EssentialsC extends JavaPlugin {
 
         if (configManager.isWarpEnabled()) {
             warpManager = new WarpManager(this);
-            getServer().getPluginManager().registerEvents(new net.godlycow.org.essc.listener.WarpListener(this), this);
+            getServer().getPluginManager().registerEvents(new WarpListener(this), this);
         }
 
         if (configManager.isAfkEnabled()) {
@@ -280,7 +277,7 @@ public final class EssentialsC extends JavaPlugin {
         }
 
         if (configManager.isSellEnabled()) {
-            sellListener = new SellListener(this);
+            SellListener sellListener = new SellListener(this);
             sellManager = new SellManager(this, sellListener);
             sellListener.setSellManager(sellManager);
             getServer().getPluginManager().registerEvents(sellListener, this);
@@ -320,7 +317,6 @@ public final class EssentialsC extends JavaPlugin {
         if (scoreboardManager != null) {
             scoreboardManager.shutdown();
         }
-
         if (backManager != null) {
             backManager.shutdown();
         }
@@ -337,7 +333,6 @@ public final class EssentialsC extends JavaPlugin {
         if (scheduleManager != null) {
             scheduleManager.shutdown();
         }
-
         if (configManager.isBackupOnShutdown()) {
             getLogger().info("[Backup] Creating shutdown backup...");
             try {
@@ -363,7 +358,7 @@ public final class EssentialsC extends JavaPlugin {
             return;
         }
 
-        placeholderHook = new PlaceholderHook(this);
+        PlaceholderHook placeholderHook = new PlaceholderHook(this);
 
         if (placeholderHook.register()) {
             getLogger().info("PlaceholderAPI hook registered successfully!");
@@ -418,10 +413,6 @@ public final class EssentialsC extends JavaPlugin {
 
     public void setEconomyManager(EconomyManager economyManager) {
         this.economyManager = economyManager;
-    }
-
-    public VaultHook getVaultHook() {
-        return vaultHook;
     }
 
     public void setVaultHook(VaultHook vaultHook) {
@@ -518,10 +509,6 @@ public final class EssentialsC extends JavaPlugin {
 
     public AFKManager getAfkManager() {
         return afkManager;
-    }
-
-    public PlaceholderHook getPlaceholderHook() {
-        return placeholderHook;
     }
 
     public ChatManager getChatManager() {
