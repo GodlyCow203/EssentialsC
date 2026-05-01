@@ -38,10 +38,12 @@ public class GuiItemBuilder {
             return item;
         }
 
-        if (config.getMaterial() == Material.PLAYER_HEAD && config.getSkullTexture() != null) {
-            SkullTextureUtil.applyTexture((SkullMeta) meta, config.getSkullTexture(), plugin.getLogger());
-        } else if (config.getMaterial() == Material.PLAYER_HEAD && meta instanceof SkullMeta skullMeta) {
-            skullMeta.setOwningPlayer(player);
+        if (config.getMaterial() == Material.PLAYER_HEAD && meta instanceof SkullMeta skullMeta) {
+            if (config.getSkullTexture() != null) {
+                SkullTextureUtil.applyTexture(skullMeta, config.getSkullTexture(), plugin.getLogger());
+            } else {
+                skullMeta.setOwningPlayer(player);
+            }
         }
 
         Component name = resolveText(config.getName(), player);

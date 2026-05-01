@@ -48,8 +48,10 @@ import net.godlycow.org.essc.rules.RulesManager;
 import net.godlycow.org.essc.schedule.ScheduleManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.setup.FirstRunHandler;
+import net.godlycow.org.essc.shop.ShopGuiManager;
 import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
+import net.godlycow.org.essc.shop.ShopSoundManager;
 import net.godlycow.org.essc.shop.sell.SellListener;
 import net.godlycow.org.essc.shop.sell.SellManager;
 import net.godlycow.org.essc.softwares.EssScheduler;
@@ -246,20 +248,29 @@ public final class EssentialsC extends JavaPlugin implements Listener {
             debug("EconomyManager event listener registered.");
         }
 
-        if (configManager.isShopEnabled()) {
-            shopManager = new ShopManager(this);
-            ShopListener shopListener = new ShopListener(this, shopManager);
-            shopManager.setShopListener(shopListener);
-            getServer().getPluginManager().registerEvents(shopListener, this);
+        GuiFramework guiFramework = null;
+        if (configManager.isAHEnabled() || configManager.isShopEnabled()) {
+            guiFramework = new GuiFramework(this);
+            guiFramework.loadTemplates();
         }
 
         if (configManager.isAHEnabled()) {
-            GuiFramework guiFramework = new GuiFramework(this);
-            guiFramework.loadTemplates();
             auctionManager = new AuctionManager(this);
             ahGuiManager = new AhGuiManager(this, guiFramework, new AhSoundManager(this));
             AhCommand ahCommand = new AhCommand(this, ahGuiManager);
             new AhListener(this, ahCommand);
+        }
+        if (configManager.isShopEnabled()) {
+            shopManager = new ShopManager(this);
+            ShopSoundManager shopSounds = new ShopSoundManager(this);
+            ShopListener shopListener = new ShopListener(this, shopManager, shopSounds);
+            shopManager.setShopListener(shopListener);
+            getServer().getPluginManager().registerEvents(shopListener, this);
+
+            if (guiFramework != null) {
+                ShopGuiManager shopGuiManager = new ShopGuiManager(this, guiFramework, shopManager, shopSounds);
+                shopManager.setShopGuiManager(shopGuiManager);
+            }
         }
 
         if (configManager.isWarpEnabled()) {

@@ -1,14 +1,19 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,24 +22,28 @@ import java.util.UUID;
 public class ShopListener implements Listener {
     private final EssentialsC plugin;
     private final ShopManager shopManager;
+    private final ShopSoundManager sounds;
     private final Map<UUID, ShopSession> sessions = new HashMap<>();
 
-    private static final int SLOT_PREV_PAGE       = 45;
-    private static final int SLOT_BALANCE_CATEGORY = 47;
-    private static final int SLOT_BACK_BUTTON      = 48;
-    private static final int SLOT_CLOSE_BUTTON     = 48;
-    private static final int SLOT_PAGE_INDICATOR   = 49;
-    private static final int SLOT_BALANCE_MAIN     = 50;
-    private static final int SLOT_NEXT_PAGE        = 53;
+    private final NamespacedKey guiActionKey;
+    private final NamespacedKey shopItemKey;
+    private final NamespacedKey shopCategoryKey;
+    private final NamespacedKey shopPageKey;
 
-    public ShopListener(EssentialsC plugin, ShopManager shopManager) {
+    public ShopListener(EssentialsC plugin, ShopManager shopManager, ShopSoundManager sounds) {
         this.plugin = plugin;
         this.shopManager = shopManager;
+        this.sounds = sounds;
+        this.guiActionKey = new NamespacedKey(plugin, "gui_action");
+        this.shopItemKey = new NamespacedKey(plugin, "shop_item");
+        this.shopCategoryKey = new NamespacedKey(plugin, "shop_category");
+        this.shopPageKey = new NamespacedKey(plugin, "shop_page");
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
+        if (event.getClickedInventory() == null || event.getClickedInventory() != event.getInventory()) return;
 
         InventoryHolder holder = event.getInventory().getHolder();
         if (!(holder instanceof ShopHolder shopHolder)) return;
@@ -44,42 +53,70 @@ public class ShopListener implements Listener {
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null || clicked.getType().isAir()) return;
 
-        if (shopHolder.isMain()) {
-            handleMainMenuClick(player, event.getSlot());
-        } else {
-            handleCategoryClick(player, shopHolder, event.getSlot(),
-                    event.isShiftClick(), event.isLeftClick(), event.isRightClick());
+        sounds.playClick(player);
+
+        ItemMeta meta = clicked.getItemMeta();
+        if (meta == null) return;
+
+        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+
+        String guiAction = pdc.get(guiActionKey, PersistentDataType.STRING);
+        if (guiAction != null) {
+            handleGuiAction(player, guiAction, shopHolder);
+            return;
+        }
+
+        Integer targetPage = pdc.get(shopPageKey, PersistentDataType.INTEGER);
+        if (targetPage != null) {
+            String categoryId = shopHolder.getCategoryId();
+            if (categoryId != null) {
+                sounds.playPageTurn(player);
+                setSession(player, new ShopSession(categoryId, targetPage));
+                shopManager.openCategory(player, categoryId, targetPage);
+            }
+            return;
+        }
+
+        String categoryId = pdc.get(shopCategoryKey, PersistentDataType.STRING);
+        if (categoryId != null) {
+            setSession(player, new ShopSession(categoryId, 1));
+            shopManager.openCategory(player, categoryId, 1);
+            return;
+        }
+
+        String itemId = pdc.get(shopItemKey, PersistentDataType.STRING);
+        if (itemId != null && shopHolder.isCategory()) {
+            handleShopItemClick(player, shopHolder, itemId, event);
         }
     }
 
-    private void handleMainMenuClick(Player player, int slot) {
-        if (slot == SLOT_BALANCE_MAIN) {
-            shopManager.openMainShop(player);
-            return;
-        }
-
-        if (slot == SLOT_CLOSE_BUTTON) {
-            player.closeInventory();
-            removeSession(player);
-            return;
-        }
-
-        for (ShopCategory category : shopManager.getCategories().values()) {
-            if (!category.isEnabled()) continue;
-            if (category.getPermission() != null && !player.hasPermission(category.getPermission())) continue;
-
-            if (category.getSlot() == slot) {
-                setSession(player, new ShopSession(category.getId(), 1));
-                shopManager.openCategory(player, category.getId(), 1);
-                return;
+    private void handleGuiAction(Player player, String action, ShopHolder holder) {
+        switch (action) {
+            case "close" -> {
+                sounds.playClose(player);
+                player.closeInventory();
+                removeSession(player);
+            }
+            case "back" -> {
+                sounds.playClose(player);
+                removeSession(player);
+                shopManager.openMainShop(player);
+            }
+            case "balance" -> {
+                sounds.playClick(player);
+                ShopSession session = getSession(player);
+                if (session != null && session.getCategoryId() != null) {
+                    shopManager.openCategory(player, session.getCategoryId(), holder.getPage());
+                } else {
+                    shopManager.openMainShop(player);
+                }
             }
         }
     }
 
-    private void handleCategoryClick(Player player, ShopHolder holder, int slot,
-                                     boolean shift, boolean left, boolean right) {
+    private void handleShopItemClick(Player player, ShopHolder holder, String itemId, InventoryClickEvent event) {
         String categoryId = holder.getCategoryId();
-        int page          = holder.getPage();
+        int page = holder.getPage();
 
         ShopCategory category = shopManager.getCategory(categoryId);
         if (category == null) {
@@ -88,51 +125,36 @@ public class ShopListener implements Listener {
             return;
         }
 
-        if (slot == SLOT_PREV_PAGE && left) {
-            if (page > 1) {
-                int newPage = page - 1;
-                setSession(player, new ShopSession(categoryId, newPage));
-                shopManager.openCategory(player, categoryId, newPage);
-            }
-            return;
-        }
-
-        if (slot == SLOT_NEXT_PAGE && left) {
-            if (page < category.getMaxPage()) {
-                int newPage = page + 1;
-                setSession(player, new ShopSession(categoryId, newPage));
-                shopManager.openCategory(player, categoryId, newPage);
-            }
-            return;
-        }
-
-        if (slot == SLOT_PAGE_INDICATOR) return;
-
-        if (slot == SLOT_BALANCE_CATEGORY) {
-            shopManager.openCategory(player, categoryId, page);
-            return;
-        }
-
-        if (slot == SLOT_BACK_BUTTON) {
-            removeSession(player);
-            shopManager.openMainShop(player);
-            return;
-        }
-
-        ShopItem item = category.getPageItems(page).get(slot);
-        if (item == null) return;
+        ShopItem item = category.getPageItems(page).get(event.getSlot());
+        if (item == null || !item.getId().equals(itemId)) return;
 
         if (item.getPermission() != null && !player.hasPermission(item.getPermission())) {
+            sounds.playNoPermission(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
             return;
         }
 
-        if (left) {
-            int amount = shift ? Math.min(64, item.getMaxStack()) : 1;
+        if (event.isLeftClick()) {
+            int amount = event.isShiftClick() ? Math.min(64, item.getMaxStack()) : 1;
             shopManager.processPurchase(player, item, amount);
-        } else if (right) {
-            int amount = shift ? Math.min(64, item.getMaxStack()) : 1;
+        } else if (event.isRightClick()) {
+            int amount = event.isShiftClick() ? Math.min(64, item.getMaxStack()) : 1;
             shopManager.processSale(player, item, amount);
+        }
+    }
+
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+
+        Inventory topInv = player.getOpenInventory().getTopInventory();
+        if (topInv == null || !(topInv.getHolder() instanceof ShopHolder)) return;
+
+        for (int slot : event.getRawSlots()) {
+            if (slot < topInv.getSize()) {
+                event.setCancelled(true);
+                return;
+            }
         }
     }
 
@@ -162,4 +184,10 @@ public class ShopListener implements Listener {
     public void removeSession(Player player) {
         sessions.remove(player.getUniqueId());
     }
+
+    public ShopSoundManager getSounds() {
+        return sounds;
+    }
+
+
 }

@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.configuration.ConfigurationSection;
@@ -25,6 +24,7 @@ public class ShopManager {
     private YamlConfiguration mainConfig;
     private ShopMainConfig shopMainConfig;
     private ShopListener shopListener;
+    private ShopGuiManager shopGuiManager;
 
     public ShopManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -46,6 +46,14 @@ public class ShopManager {
 
     public void setShopListener(ShopListener listener) {
         this.shopListener = listener;
+    }
+
+    public ShopListener getShopListener() {
+        return shopListener;
+    }
+
+    public void setShopGuiManager(ShopGuiManager shopGuiManager) {
+        this.shopGuiManager = shopGuiManager;
     }
 
     private void loadShop() {
@@ -206,7 +214,7 @@ public class ShopManager {
         }
 
         if (!hasExplicitLayout && !collected.isEmpty()) {
-            int itemsPerPage = mainConfig.getInt("items-per-page", 28);
+            int itemsPerPage = shopMainConfig.getItemsPerPage();
             int[] availableSlots = buildAutoSlots(itemsPerPage);
             plugin.debug("Auto-assigning slots for category '" + category.getId()
                     + "' (" + collected.size() + " items, " + itemsPerPage + " per page)");
@@ -224,6 +232,7 @@ public class ShopManager {
             category.addItem(item);
         }
     }
+
     private int[] buildAutoSlots(int itemsPerPage) {
         int capacity = Math.min(itemsPerPage, 45);
         int[] slots = new int[capacity];
@@ -232,6 +241,7 @@ public class ShopManager {
         }
         return slots;
     }
+
     private void createDefaultFiles() {
         File mainFile = new File(shopFolder, "main.yml");
         createDefaultMainFile(mainFile);
@@ -241,10 +251,6 @@ public class ShopManager {
 
     private void createDefaultMainFile(File file) {
         YamlConfiguration config = new YamlConfiguration();
-        config.set("title", "<gradient:#06FFA5:#FFE66D>Server Shop</gradient>");
-        config.set("size", 54);
-        config.set("fill-empty", true);
-        config.set("fill-material", "BLACK_STAINED_GLASS_PANE");
 
         ConfigurationSection categories = config.createSection("categories");
 
@@ -302,9 +308,13 @@ public class ShopManager {
             return;
         }
 
+        if (shopGuiManager == null) {
+            plugin.getLogger().warning("ShopGuiManager is not initialized!");
+            return;
+        }
+
         if (plugin.getEconomyManager() == null) {
-            ShopGUI gui = new ShopGUI(plugin, this, player, 0.0);
-            gui.openMain();
+            shopGuiManager.openMainShop(player, 0.0);
             if (shopListener != null) {
                 shopListener.setSession(player, new ShopSession(null, 1));
             }
@@ -313,8 +323,7 @@ public class ShopManager {
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
-                ShopGUI gui = new ShopGUI(plugin, this, player, balance.doubleValue());
-                gui.openMain();
+                shopGuiManager.openMainShop(player, balance.doubleValue());
                 if (shopListener != null) {
                     shopListener.setSession(player, new ShopSession(null, 1));
                 }
@@ -334,9 +343,13 @@ public class ShopManager {
             return;
         }
 
+        if (shopGuiManager == null) {
+            plugin.getLogger().warning("ShopGuiManager is not initialized!");
+            return;
+        }
+
         if (plugin.getEconomyManager() == null) {
-            ShopGUI gui = new ShopGUI(plugin, this, player, 0.0);
-            gui.openCategory(category, page);
+            shopGuiManager.openCategory(player, category, page, 0.0);
             if (shopListener != null) {
                 shopListener.setSession(player, new ShopSession(categoryId, page));
             }
@@ -345,8 +358,7 @@ public class ShopManager {
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
-                ShopGUI gui = new ShopGUI(plugin, this, player, balance.doubleValue());
-                gui.openCategory(category, page);
+                shopGuiManager.openCategory(player, category, page, balance.doubleValue());
                 if (shopListener != null) {
                     shopListener.setSession(player, new ShopSession(categoryId, page));
                 }
@@ -356,21 +368,25 @@ public class ShopManager {
 
     public void processPurchase(Player player, ShopItem item, int amount) {
         if (!item.isBuyable()) {
+            shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-buyable"));
             return;
         }
 
         if (item.getPermission() != null && !player.hasPermission(item.getPermission())) {
+            shopListener.getSounds().playNoPermission(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
             return;
         }
 
         if (item.getStock() == 0) {
+            shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.out-of-stock"));
             return;
         }
 
         if (item.getStock() > 0 && item.getStock() < amount) {
+            shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-stock"));
             return;
         }
@@ -389,6 +405,7 @@ public class ShopManager {
         giveItem.setAmount(amount);
 
         if (!canFitInInventory(player, giveItem)) {
+            shopListener.getSounds().playInventoryFull(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.inventory-full"));
             return;
         }
@@ -403,6 +420,7 @@ public class ShopManager {
         plugin.getEconomyManager().has(player.getUniqueId(), price).thenAccept(hasEnough -> {
             if (!hasEnough) {
                 plugin.getEssScheduler().runForEntity(player, () -> {
+                    shopListener.getSounds().playInsufficientFunds(player);
                     player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-money"));
                 });
                 return;
@@ -411,6 +429,7 @@ public class ShopManager {
             plugin.getEconomyManager().withdraw(player.getUniqueId(), price).thenAccept(success -> {
                 plugin.getEssScheduler().runForEntity(player, () -> {
                     if (!success) {
+                        shopListener.getSounds().playError(player);
                         player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
                         return;
                     }
@@ -455,6 +474,8 @@ public class ShopManager {
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), formatted);
         }
 
+        shopListener.getSounds().playPurchase(player);
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
         placeholders.put("amount", String.valueOf(amount));
@@ -468,6 +489,7 @@ public class ShopManager {
 
     public void processSale(Player player, ShopItem item, int amount) {
         if (!item.isSellable()) {
+            shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-sellable"));
             return;
         }
@@ -475,6 +497,7 @@ public class ShopManager {
         ItemStack checkItem = item.createComparisonItem(amount);
 
         if (!containsMatchingItem(player, checkItem, amount)) {
+            shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-items"));
             return;
         }
@@ -558,6 +581,8 @@ public class ShopManager {
             database.logSale(player.getUniqueId(), item.getId(), amount, totalPrice);
         }
 
+        shopListener.getSounds().playSale(player);
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
         placeholders.put("amount", String.valueOf(amount));
@@ -627,6 +652,10 @@ public class ShopManager {
                     categories.put(categoryId, category);
                 }
             }
+        }
+
+        if (shopGuiManager != null) {
+            shopGuiManager.reload();
         }
 
         plugin.debug("Shop reloaded with " + categories.size() + " categories");

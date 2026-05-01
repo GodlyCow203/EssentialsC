@@ -50,7 +50,9 @@ public class GuiFramework {
                 "auction_expired.yml",
                 "auction_history_type.yml",
                 "auction_sell_history.yml",
-                "auction_buy_history.yml"
+                "auction_buy_history.yml",
+                "shop_main.yml",
+                "shop_category.yml"
         };
 
         for (String guiName : defaultGuis) {
