@@ -78,9 +78,9 @@ public class AhListener implements Listener {
             return;
         }
 
-        if (container.has(new NamespacedKey(plugin, "gui_page"), PersistentDataType.INTEGER)) {
-            int page = container.get(new NamespacedKey(plugin, "gui_page"), PersistentDataType.INTEGER);
-            String navType = container.getOrDefault(new NamespacedKey(plugin, "gui_nav"), PersistentDataType.STRING, "main");
+        if (container.has(itemFactory.getPageKey(), PersistentDataType.INTEGER)) {
+            int page = container.get(itemFactory.getPageKey(), PersistentDataType.INTEGER);
+            String navType = container.getOrDefault(itemFactory.getNavKey(), PersistentDataType.STRING, "main");
 
             soundManager.playPageTurn(player);
             player.closeInventory();
