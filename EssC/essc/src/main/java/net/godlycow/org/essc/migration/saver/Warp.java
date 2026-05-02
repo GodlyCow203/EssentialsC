@@ -30,10 +30,10 @@ public class Warp {
                 case ABORT -> CompletableFuture.failedFuture(
                         new RuntimeException("Conflict abort requested for warp: " + data.name())
                 );
-                case OVERWRITE -> {
-                    plugin.getWarpManager().deleteWarp(data.name());
-                    yield createWarp(targetName, data, dryRun);
-                }
+                case OVERWRITE -> plugin.getWarpManager()
+                        .deleteWarp(data.name())
+                        .thenCompose(deleted -> createWarp(targetName, data, dryRun));
+
                 case CREATE -> createWarp(targetName, data, dryRun);
             };
         });
@@ -46,28 +46,38 @@ public class Warp {
             );
         }
 
-        boolean created = plugin.getWarpManager().createWarp(name, data.location());
-        if (!created) {
-            return CompletableFuture.completedFuture(new WarpResult(false, "createWarp returned false", null));
-        }
+        return plugin.getWarpManager().createWarp(name, data.location()).thenCompose(created -> {
+            if (!created) {
+                return CompletableFuture.completedFuture(
+                        new WarpResult(false, "createWarp returned false", null)
+                );
+            }
 
-        net.godlycow.org.essc.warp.Warp warp = plugin.getWarpManager().getWarp(name);
-        if (warp == null) {
-            return CompletableFuture.completedFuture(new WarpResult(false, "Failed to retrieve created warp", null));
-        }
+            net.godlycow.org.essc.warp.Warp warp = plugin.getWarpManager().getWarp(name);
+            if (warp == null) {
+                return CompletableFuture.completedFuture(
+                        new WarpResult(false, "Failed to retrieve created warp", null)
+                );
+            }
 
-        warp.setPermission(data.permission());
-        warp.setCost(data.cost());
-        warp.setHidden(data.hidden());
-        warp.setDescription(data.description());
-        warp.setCategory(data.category());
+            warp.setPermission(data.permission());
+            warp.setCost(data.cost());
+            warp.setHidden(data.hidden());
+            warp.setDescription(data.description());
+            warp.setCategory(data.category());
 
-        boolean updated = plugin.getWarpManager().updateWarp(warp);
-        if (updated) {
-            plugin.debug("Migrated warp: " + name + " with properties");
-        }
+            return plugin.getWarpManager().updateWarp(warp).thenApply(updated -> {
+                if (updated) {
+                    plugin.debug("Migrated warp: " + name + " with properties");
+                }
 
-        return CompletableFuture.completedFuture(new WarpResult(updated, updated ? null : "updateWarp failed", name));
+                return new WarpResult(
+                        updated,
+                        updated ? null : "updateWarp failed",
+                        name
+                );
+            });
+        });
     }
 
     public record WarpResult(boolean success, String error, String finalName) {}
