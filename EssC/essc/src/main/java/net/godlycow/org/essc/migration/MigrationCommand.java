@@ -123,12 +123,12 @@ public class MigrationCommand extends Command {
                 return;
             }
 
-            progress progress = currentMigrator.getProgress();
-            if (progress.getPercentComplete() < 100) {
+            MigrationProgress MigrationProgress = currentMigrator.getProgress();
+            if (MigrationProgress.getPercentComplete() < 100) {
                 sender.sendMessage(lang.get(sender, "migration.progress", Map.of(
-                        "stage", progress.getCurrentStage(),
-                        "percent", String.valueOf(progress.getPercentComplete()),
-                        "eta", progress.getEstimatedTimeRemaining()
+                        "stage", MigrationProgress.getCurrentStage(),
+                        "percent", String.valueOf(MigrationProgress.getPercentComplete()),
+                        "eta", MigrationProgress.getEstimatedTimeRemaining()
                 )));
             }
         }, 100L, 200L);
@@ -140,14 +140,14 @@ public class MigrationCommand extends Command {
             return;
         }
 
-        progress progress = currentMigrator.getProgress();
+        MigrationProgress MigrationProgress = currentMigrator.getProgress();
         sender.sendMessage(lang.get(sender, "migration.progress_detail", Map.of(
-                "stage", progress.getCurrentStage(),
-                "users", progress.getProcessedUsers() + "/" + progress.getTotalUsers(),
-                "warps", progress.getProcessedWarps() + "/" + progress.getTotalWarps(),
-                "percent", String.valueOf(progress.getPercentComplete()),
-                "elapsed", String.valueOf(progress.getElapsedTimeMs() / 1000) + "s",
-                "eta", progress.getEstimatedTimeRemaining()
+                "stage", MigrationProgress.getCurrentStage(),
+                "users", MigrationProgress.getProcessedUsers() + "/" + MigrationProgress.getTotalUsers(),
+                "warps", MigrationProgress.getProcessedWarps() + "/" + MigrationProgress.getTotalWarps(),
+                "percent", String.valueOf(MigrationProgress.getPercentComplete()),
+                "elapsed", String.valueOf(MigrationProgress.getElapsedTimeMs() / 1000) + "s",
+                "eta", MigrationProgress.getEstimatedTimeRemaining()
         )));
     }
 

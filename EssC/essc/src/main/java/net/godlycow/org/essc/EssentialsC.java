@@ -1,21 +1,14 @@
 package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.afk.AFKManager;
-import net.godlycow.org.essc.api.APIProvider;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
-import net.godlycow.org.essc.auction.AhSoundManager;
 import net.godlycow.org.essc.auction.AuctionManager;
 import net.godlycow.org.essc.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.back.BackManager;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.bedrock.BedrockUtil;
-import net.godlycow.org.essc.bedrock.FloodgateHook;
-import net.godlycow.org.essc.bootstrap.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.EconomyRegistrar;
-import net.godlycow.org.essc.bootstrap.ListenerRegistrar;
-import net.godlycow.org.essc.bstats.EconomyCharts;
 import net.godlycow.org.essc.chat.ChatManager;
-import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.config.CommandsConfig;
@@ -24,47 +17,36 @@ import net.godlycow.org.essc.data.LogoutDataManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.economy.VaultHook;
-import net.godlycow.org.essc.faststats.FastStatsManager;
 import net.godlycow.org.essc.fly.FlyManager;
-import net.godlycow.org.essc.gui.GuiFramework;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.home.HomeNotificationManager;
 import net.godlycow.org.essc.home.gui.GuiManager;
 import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
+import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
-import net.godlycow.org.essc.listener.AhListener;
-import net.godlycow.org.essc.listener.BanListener;
 import net.godlycow.org.essc.listener.JoinLeaveListener;
-import net.godlycow.org.essc.listener.WarpListener;
 import net.godlycow.org.essc.motd.MOTDManager;
 import net.godlycow.org.essc.msg.ReplyManager;
 import net.godlycow.org.essc.nick.NickManager;
-import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
+import net.godlycow.org.essc.plugin.PluginLoader;
+import net.godlycow.org.essc.plugin.PluginShutdown;
 import net.godlycow.org.essc.punishment.PunishmentManager;
 import net.godlycow.org.essc.rtp.RTPGuiManager;
 import net.godlycow.org.essc.rtp.RTPManager;
 import net.godlycow.org.essc.rules.RulesManager;
 import net.godlycow.org.essc.schedule.ScheduleManager;
 import net.godlycow.org.essc.scoreboard.ScoreboardManager;
-import net.godlycow.org.essc.setup.FirstRunHandler;
-import net.godlycow.org.essc.shop.ShopGuiManager;
-import net.godlycow.org.essc.shop.ShopListener;
 import net.godlycow.org.essc.shop.ShopManager;
-import net.godlycow.org.essc.shop.ShopSoundManager;
-import net.godlycow.org.essc.shop.sell.SellListener;
 import net.godlycow.org.essc.shop.sell.SellManager;
 import net.godlycow.org.essc.softwares.EssScheduler;
-import net.godlycow.org.essc.softwares.ServerSoftware;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.tab.TabManager;
 import net.godlycow.org.essc.teleport.TPAManager;
 import net.godlycow.org.essc.util.EssLog;
-import net.godlycow.org.essc.util.StartupBanner;
 import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -78,12 +60,11 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     private EssScheduler essScheduler;
     private ConfigManager configManager;
+    private CommandsConfig commandsConfig;
     private LanguageManager languageManager;
-    private net.godlycow.org.essc.language.HelpManager helpManager;
-
+    private HelpManager helpManager;
     private EconomyManager economyManager;
     private VaultHook vaultHook;
-
     private TPAManager tpaManager;
     private HomeManager homeManager;
     private HomeNotificationManager homeNotificationManager;
@@ -94,11 +75,8 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private VanishManager vanishManager;
     private ScoreboardManager scoreboardManager;
     private EconomyRegistrar economyRegistrar;
-    private JoinLeaveListener joinLeaveListener;
-    private RenameCommand renameCommand;
     private ShopManager shopManager;
     private NickManager nickManager;
-    private HatCommand hatCommand;
     private PunishmentManager punishmentManager;
     private IgnoreManager ignoreManager;
     private ReplyManager replyManager;
@@ -113,34 +91,39 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private FlyManager flyManager;
     private BedrockUtil bedrockUtil;
     private RulesManager rulesManager;
-    private CommandsConfig commandsConfig;
     private ScheduleManager scheduleManager;
     private MOTDManager motdManager;
     private BackupManager backupManager;
-    private final MiniMessage miniMessage = MiniMessage.miniMessage();
     private LogoutDataManager logoutDataManager;
     private SellManager sellManager;
     private AhGuiManager ahGuiManager;
     private EssentialsCAPIImpl apiImplementation;
+    private HatCommand hatCommand;
+    public JoinLeaveListener joinLeaveListener;;
+    private RenameCommand renameCommand;
+
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
     public void onLoad() {
         instance = this;
         essScheduler = new EssScheduler(this);
         saveDefaultConfig();
+
         configManager = new ConfigManager(this);
+        configManager.migrate();
+
         commandsConfig = new CommandsConfig(this);
         commandsConfig.load();
-        configManager.migrate();
-        EssLog.init(getLogger(), configManager.isDebug());
 
+        EssLog.init(getLogger(), configManager.isDebug());
 
         if (configManager.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");
             economyManager = new EconomyManager(this);
             vaultHook = new VaultHook(economyManager);
             if (vaultHook.hook()) {
-                getLogger().info("Successfully hooked into Vault!");
+                getLogger().info("Successfully hooked into Vault.");
             } else {
                 getLogger().warning("Vault not found, skipping Vault economy registration.");
             }
@@ -151,231 +134,12 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        StartupBanner.print(this, getLogger());
-
-        saveResource("lang/en_US.json", false);
-        saveResource("lang/de_DE.json", false);
-
-        languageManager = new LanguageManager(this);
-        languageManager.load(configManager.getDefaultLanguage());
-
-        helpManager = new net.godlycow.org.essc.language.HelpManager(this);
-        helpManager.load(configManager.getDefaultLanguage());
-        scheduleManager = new ScheduleManager(this);
-        scheduleManager.load();
-
-        if (configManager.isBackupEnabled()) {
-            backupManager = new BackupManager(this);
-        }
-
-        if (configManager.isMotdEnabled()) {
-            motdManager = new MOTDManager(this);
-        }
-
-        tpaManager = new TPAManager(this);
-        homeManager = new HomeManager(this);
-        homeNotificationManager = new HomeNotificationManager(this);
-        homeGuiManager = new GuiManager(this);
-        spawnManager = new SpawnManager(this);
-        backManager = new BackManager(this);
-        kitManager = new KitManager(this);
-
-        apiImplementation = new EssentialsCAPIImpl(this);
-        APIProvider.register(apiImplementation);
-
-        vanishManager = new VanishManager(this);
-        punishmentManager = new PunishmentManager(this);
-        ignoreManager = new IgnoreManager(this);
-        replyManager = new ReplyManager();
-        chatManager = new ChatManager(this);
-        logoutDataManager = new LogoutDataManager(this);
-
-
-        int pluginId = 29401;
-        Metrics metrics = new Metrics(this, pluginId);
-        getLogger().info("bStats Metrics initialized successfully!");
-
-        if (configManager.isEconomyEnabled()) {
-            EconomyCharts.register(this, metrics);
-        }
-
-        registerPlaceholderAPI();
-
-        FastStatsManager fastStats = new FastStatsManager();
-        fastStats.init(this);
-
-        FloodgateHook floodgateHook = new FloodgateHook(this);
-        bedrockUtil = new BedrockUtil(this, floodgateHook);
-
-        new FirstRunHandler(this);
-
-        rulesManager = new RulesManager(this);
-        rulesManager.load();
-
-
-        flyManager = new FlyManager(this);
-
-        if (configManager.isScoreboardEnabled()) {
-            if (ServerSoftware.isFolia()) {
-                getLogger().warning("Scoreboard feature is not *yet* supported by EssentialsC");
-            } else {
-                scoreboardManager = new ScoreboardManager(this);
-            }
-        }
-
-        if (getConfigManager().isLuckPermsTabEnabled() || configManager.isNickEnabled()) {
-            this.tabManager = new TabManager(this);
-        }
-
-        if (configManager.isNickEnabled()) {
-            nickManager = new NickManager(this);
-        }
-
-        if (configManager.isRTPEnabled()) {
-            rtpManager = new RTPManager(this);
-            rtpGuiManager = new RTPGuiManager(this, rtpManager);
-        }
-
-        new ListenerRegistrar(this);
-
-        if (configManager.isEconomyEnabled()) {
-            debug("economyManager was null in onEnable, running EconomyRegistrar fallback.");
-            new EconomyRegistrar(this).enable();
-        }
-
-        if (economyManager != null) {
-            getServer().getPluginManager().registerEvents(economyManager, this);
-            debug("EconomyManager event listener registered.");
-        }
-
-        GuiFramework guiFramework = null;
-        if (configManager.isAHEnabled() || configManager.isShopEnabled()) {
-            guiFramework = new GuiFramework(this);
-            guiFramework.loadTemplates();
-        }
-
-        if (configManager.isAHEnabled()) {
-            auctionManager = new AuctionManager(this);
-            ahGuiManager = new AhGuiManager(this, guiFramework, new AhSoundManager(this));
-            AhCommand ahCommand = new AhCommand(this, ahGuiManager);
-            new AhListener(this, ahCommand);
-        }
-        if (configManager.isShopEnabled()) {
-            shopManager = new ShopManager(this);
-            ShopSoundManager shopSounds = new ShopSoundManager(this);
-            ShopListener shopListener = new ShopListener(this, shopManager, shopSounds);
-            shopManager.setShopListener(shopListener);
-            getServer().getPluginManager().registerEvents(shopListener, this);
-
-            if (guiFramework != null) {
-                ShopGuiManager shopGuiManager = new ShopGuiManager(this, guiFramework, shopManager, shopSounds);
-                shopManager.setShopGuiManager(shopGuiManager);
-            }
-        }
-
-        if (configManager.isWarpEnabled()) {
-            warpManager = new WarpManager(this);
-            getServer().getPluginManager().registerEvents(new WarpListener(this), this);
-        }
-
-        if (configManager.isAfkEnabled()) {
-            afkManager = new AFKManager(this);
-        }
-
-        if (configManager.isDiscordSRVEnabled()) {
-            discordSRVHook = new DiscordSRVHook(this);
-            discordSRVHook.init();
-        }
-
-        if (configManager.isSellEnabled()) {
-            SellListener sellListener = new SellListener(this);
-            sellManager = new SellManager(this, sellListener);
-            sellListener.setSellManager(sellManager);
-            getServer().getPluginManager().registerEvents(sellListener, this);
-        }
-
-        new CommandRegistrar(this).registerAll();
-
-        getServer().getPluginManager().registerEvents(new BanListener(this, punishmentManager), this);
-
-
-        getLogger().info("EssentialsC enabled");
+        new PluginLoader(this).start();
     }
 
     @Override
     public void onDisable() {
-        if (economyManager != null) {
-            economyManager.shutdown();
-        }
-        if (afkManager != null) {
-            afkManager.shutdown();
-        }
-        if (homeManager != null) {
-            homeManager.shutdown();
-        }
-        if (auctionManager != null) {
-            auctionManager.shutdown();
-        }
-        if (shopManager != null) {
-            shopManager.shutdown();
-        }
-        if (kitManager != null) {
-            kitManager.shutdown();
-        }
-        if (nickManager != null) {
-            nickManager.shutdown();
-        }
-        if (scoreboardManager != null) {
-            scoreboardManager.shutdown();
-        }
-        if (backManager != null) {
-            backManager.shutdown();
-        }
-        if (discordSRVHook != null) {
-            discordSRVHook.shutdown();
-        }
-        if (rtpManager != null) {
-            rtpManager.shutdown();
-        }
-        if (rtpGuiManager != null) {
-            rtpGuiManager.shutdown();
-        }
-
-        if (scheduleManager != null) {
-            scheduleManager.shutdown();
-        }
-        if (configManager.isBackupOnShutdown()) {
-            getLogger().info("[Backup] Creating shutdown backup...");
-            try {
-                backupManager.createAsync(
-                        name -> getLogger().info("[Backup] Shutdown backup created: " + name),
-                        err  -> getLogger().warning("[Backup] Shutdown backup failed: " + err)
-                );
-            } catch (Exception e) {
-                getLogger().warning("[Backup] Shutdown backup error: " + e.getMessage());
-            }
-        }
-
-        if (apiImplementation != null) {
-            APIProvider.unregister();
-        }
-
-        getLogger().info("EssentialsC disabled");
-    }
-
-    private void registerPlaceholderAPI() {
-        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            getLogger().info("PlaceholderAPI not found, skipping placeholder registration.");
-            return;
-        }
-
-        PlaceholderHook placeholderHook = new PlaceholderHook(this);
-
-        if (placeholderHook.register()) {
-            getLogger().info("PlaceholderAPI hook registered successfully!");
-        } else {
-            getLogger().warning("Failed to register PlaceholderAPI hook!");
-        }
+        new PluginShutdown(this).stop();
     }
 
     @EventHandler
@@ -410,12 +174,24 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         return configManager;
     }
 
+    public CommandsConfig getCommandsConfig() {
+        return commandsConfig;
+    }
+
     public LanguageManager getLanguageManager() {
         return languageManager;
     }
 
-    public net.godlycow.org.essc.language.HelpManager getHelpManager() {
+    public void setLanguageManager(LanguageManager languageManager) {
+        this.languageManager = languageManager;
+    }
+
+    public HelpManager getHelpManager() {
         return helpManager;
+    }
+
+    public void setHelpManager(HelpManager helpManager) {
+        this.helpManager = helpManager;
     }
 
     public EconomyManager getEconomyManager() {
@@ -424,6 +200,10 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setEconomyManager(EconomyManager economyManager) {
         this.economyManager = economyManager;
+    }
+
+    public VaultHook getVaultHook() {
+        return vaultHook;
     }
 
     public void setVaultHook(VaultHook vaultHook) {
@@ -442,144 +222,272 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         return tpaManager;
     }
 
+    public void setTpaManager(TPAManager tpaManager) {
+        this.tpaManager = tpaManager;
+    }
+
     public HomeManager getHomeManager() {
         return homeManager;
+    }
+
+    public void setHomeManager(HomeManager homeManager) {
+        this.homeManager = homeManager;
     }
 
     public HomeNotificationManager getHomeNotificationManager() {
         return homeNotificationManager;
     }
 
+    public void setHomeNotificationManager(HomeNotificationManager homeNotificationManager) {
+        this.homeNotificationManager = homeNotificationManager;
+    }
+
     public GuiManager getHomeGuiManager() {
         return homeGuiManager;
+    }
+
+    public void setHomeGuiManager(GuiManager homeGuiManager) {
+        this.homeGuiManager = homeGuiManager;
     }
 
     public SpawnManager getSpawnManager() {
         return spawnManager;
     }
 
+    public void setSpawnManager(SpawnManager spawnManager) {
+        this.spawnManager = spawnManager;
+    }
+
     public BackManager getBackManager() {
         return backManager;
+    }
+
+    public void setBackManager(BackManager backManager) {
+        this.backManager = backManager;
     }
 
     public KitManager getKitManager() {
         return kitManager;
     }
 
+    public void setKitManager(KitManager kitManager) {
+        this.kitManager = kitManager;
+    }
+
     public VanishManager getVanishManager() {
         return vanishManager;
+    }
+
+    public void setVanishManager(VanishManager vanishManager) {
+        this.vanishManager = vanishManager;
     }
 
     public ScoreboardManager getScoreboardManager() {
         return scoreboardManager;
     }
 
+    public void setScoreboardManager(ScoreboardManager scoreboardManager) {
+        this.scoreboardManager = scoreboardManager;
+    }
+
     public EconomyRegistrar getEconomyRegistrar() {
         return economyRegistrar;
-    }
-
-    public JoinLeaveListener getJoinLeaveListener() {
-        return joinLeaveListener;
-    }
-
-    public RenameCommand getRenameCommand() {
-        return renameCommand;
     }
 
     public NickManager getNickManager() {
         return nickManager;
     }
 
+    public void setNickManager(NickManager nickManager) {
+        this.nickManager = nickManager;
+    }
+
     public ShopManager getShopManager() {
         return shopManager;
     }
 
-    public HatCommand getHatCommand() {
-        return hatCommand;
+    public void setShopManager(ShopManager shopManager) {
+        this.shopManager = shopManager;
     }
 
     public PunishmentManager getPunishmentManager() {
         return punishmentManager;
     }
 
+    public void setPunishmentManager(PunishmentManager punishmentManager) {
+        this.punishmentManager = punishmentManager;
+    }
+
     public IgnoreManager getIgnoreManager() {
         return ignoreManager;
+    }
+
+    public void setIgnoreManager(IgnoreManager ignoreManager) {
+        this.ignoreManager = ignoreManager;
     }
 
     public ReplyManager getReplyManager() {
         return replyManager;
     }
 
+    public void setReplyManager(ReplyManager replyManager) {
+        this.replyManager = replyManager;
+    }
+
     public AuctionManager getAuctionManager() {
         return auctionManager;
+    }
+
+    public void setAuctionManager(AuctionManager auctionManager) {
+        this.auctionManager = auctionManager;
     }
 
     public WarpManager getWarpManager() {
         return warpManager;
     }
 
+    public void setWarpManager(WarpManager warpManager) {
+        this.warpManager = warpManager;
+    }
+
     public AFKManager getAfkManager() {
         return afkManager;
+    }
+
+    public void setAfkManager(AFKManager afkManager) {
+        this.afkManager = afkManager;
     }
 
     public ChatManager getChatManager() {
         return chatManager;
     }
 
+    public void setChatManager(ChatManager chatManager) {
+        this.chatManager = chatManager;
+    }
+
     public DiscordSRVHook getDiscordSRVHook() {
         return discordSRVHook;
+    }
+
+    public void setDiscordSRVHook(DiscordSRVHook discordSRVHook) {
+        this.discordSRVHook = discordSRVHook;
     }
 
     public RTPManager getRtpManager() {
         return rtpManager;
     }
 
+    public void setRtpManager(RTPManager rtpManager) {
+        this.rtpManager = rtpManager;
+    }
+
     public RTPGuiManager getRtpGuiManager() {
         return rtpGuiManager;
+    }
+
+    public void setRtpGuiManager(RTPGuiManager rtpGuiManager) {
+        this.rtpGuiManager = rtpGuiManager;
     }
 
     public TabManager getTabManager() {
         return tabManager;
     }
 
+    public void setTabManager(TabManager tabManager) {
+        this.tabManager = tabManager;
+    }
+
     public FlyManager getFlyManager() {
         return flyManager;
+    }
+
+    public void setFlyManager(FlyManager flyManager) {
+        this.flyManager = flyManager;
     }
 
     public BedrockUtil getBedrockUtil() {
         return bedrockUtil;
     }
 
+    public void setBedrockUtil(BedrockUtil bedrockUtil) {
+        this.bedrockUtil = bedrockUtil;
+    }
+
     public RulesManager getRulesManager() {
         return rulesManager;
     }
 
-    public CommandsConfig getCommandsConfig() {
-        return commandsConfig;
+    public void setRulesManager(RulesManager rulesManager) {
+        this.rulesManager = rulesManager;
     }
 
     public ScheduleManager getScheduleManager() {
         return scheduleManager;
     }
 
-    public MOTDManager getMotdManager(){
+    public void setScheduleManager(ScheduleManager scheduleManager) {
+        this.scheduleManager = scheduleManager;
+    }
+
+    public MOTDManager getMotdManager() {
         return motdManager;
+    }
+
+    public void setMotdManager(MOTDManager motdManager) {
+        this.motdManager = motdManager;
     }
 
     public BackupManager getBackupManager() {
         return backupManager;
     }
 
+    public void setBackupManager(BackupManager backupManager) {
+        this.backupManager = backupManager;
+    }
+
     public LogoutDataManager getLogoutDataManager() {
         return logoutDataManager;
+    }
+
+    public void setLogoutDataManager(LogoutDataManager logoutDataManager) {
+        this.logoutDataManager = logoutDataManager;
     }
 
     public SellManager getSellManager() {
         return sellManager;
     }
 
+    public void setSellManager(SellManager sellManager) {
+        this.sellManager = sellManager;
+    }
+
     public AhGuiManager getAhGuiManager() {
         return ahGuiManager;
+    }
+
+    public void setAhGuiManager(AhGuiManager ahGuiManager) {
+        this.ahGuiManager = ahGuiManager;
+    }
+
+    public EssentialsCAPIImpl getApiImplementation() {
+        return apiImplementation;
+    }
+
+    public void setApiImplementation(EssentialsCAPIImpl apiImplementation) {
+        this.apiImplementation = apiImplementation;
+    }
+
+    public  HatCommand getHatCommand(){
+        return hatCommand;
+    }
+
+    public JoinLeaveListener getJoinLeaveListener(){
+        return joinLeaveListener;
+    }
+
+    public RenameCommand getRenameCommand(){
+        return renameCommand;
     }
 
 }

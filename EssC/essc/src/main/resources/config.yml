@@ -356,7 +356,7 @@ home:
   # How players interact with their homes.
   # "command" — players type /home <name> directly.
   # "gui"     — all home interactions go through an inventory GUI.
-  mode: gui
+  mode: command
 
   # The home name used when no name argument is given in command mode,
   # and for the quick-create button in GUI mode.

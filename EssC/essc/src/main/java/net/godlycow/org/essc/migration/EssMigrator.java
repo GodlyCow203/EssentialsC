@@ -36,7 +36,7 @@ public class EssMigrator {
     private final UserDataMapper userTransformer;
     private final WarpMapper warpTransformer;
     private final MigrationValidator validator;
-    private final progress progress;
+    private final MigrationProgress MigrationProgress;
     private final Economy economyWriter;
     private final Home homeWriter;
     private final Nick nicknameWriter;
@@ -54,7 +54,7 @@ public class EssMigrator {
         this.userTransformer = new UserDataMapper(plugin);
         this.warpTransformer = new WarpMapper();
         this.validator = new MigrationValidator(plugin, essentialsDataFolder);
-        this.progress = new progress();
+        this.MigrationProgress = new MigrationProgress();
         this.stats = new MigrationResult();
 
 
@@ -70,7 +70,7 @@ public class EssMigrator {
     public CompletableFuture<MigrationResult> migrate(Options options) {
         return CompletableFuture.supplyAsync(() -> {
             plugin.debug("Starting migration with options: " + options);
-            progress.setStage("Validating");
+            MigrationProgress.setStage("Validating");
 
 
             ValidationReport validation = validator.validate(options).join();
@@ -78,8 +78,8 @@ public class EssMigrator {
                 throw new MigrationException("Validation failed: " + String.join(", ", validation.getErrors()));
             }
 
-            progress.setTotalUsers(validation.getUserCount());
-            progress.setTotalWarps(validation.getWarpCount());
+            MigrationProgress.setTotalUsers(validation.getUserCount());
+            MigrationProgress.setTotalWarps(validation.getWarpCount());
 
 
 
@@ -92,30 +92,30 @@ public class EssMigrator {
                 plugin.getLogger().info("=== DRY RUN MODE - No changes will be made ===");
             }
 
-            progress.setStage("Migrating Warps");
+            MigrationProgress.setStage("Migrating Warps");
             if (options.importWarps()) {
                 migrateWarps(options);
             }
 
-            progress.setStage("Migrating Users");
+            MigrationProgress.setStage("Migrating Users");
             if (options.importUsers()) {
                 migrateUsers(options);
             }
 
-            progress.setStage("Migrating Bans");
+            MigrationProgress.setStage("Migrating Bans");
             if (options.importBans()) {
                 migrateBans(options);
             }
 
-            progress.setStage("Complete");
+            MigrationProgress.setStage("Complete");
 
             plugin.debug("Migration complete: " + stats);
             return stats;
         });
     }
 
-    public progress getProgress() {
-        return progress;
+    public MigrationProgress getProgress() {
+        return MigrationProgress;
     }
 
     private void migrateWarps(Options options) {
@@ -147,7 +147,7 @@ public class EssMigrator {
                 }
 
                 var result = warpWriter.write(transfer, options.dryRun()).join();
-                progress.incrementWarps();
+                MigrationProgress.incrementWarps();
 
                 if (result.success()) {
                     stats.warpsMigrated.incrementAndGet();
@@ -188,7 +188,7 @@ public class EssMigrator {
                 }
 
                 migrateSingleUser(userData, options);
-                progress.incrementUsers();
+                MigrationProgress.incrementUsers();
                 stats.usersMigrated.incrementAndGet();
 
             } catch (Exception e) {
@@ -295,12 +295,12 @@ public class EssMigrator {
             }
 
             JsonArray banArray = element.getAsJsonArray();
-            progress.setTotalBans(banArray.size());
+            MigrationProgress.setTotalBans(banArray.size());
             plugin.debug("Found " + banArray.size() + " bans to migrate");
 
             for (JsonElement banElement : banArray) {
                 if (!banElement.isJsonObject()) continue;
-                progress.incrementBans();
+                MigrationProgress.incrementBans();
 
 
                 JsonObject banObj = banElement.getAsJsonObject();

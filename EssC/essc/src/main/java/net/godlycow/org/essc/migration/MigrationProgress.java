@@ -2,7 +2,7 @@ package net.godlycow.org.essc.migration;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class progress {
+public class MigrationProgress {
     private final AtomicInteger totalUsers = new AtomicInteger(0);
     private final AtomicInteger processedUsers = new AtomicInteger(0);
     private final AtomicInteger totalWarps = new AtomicInteger(0);
