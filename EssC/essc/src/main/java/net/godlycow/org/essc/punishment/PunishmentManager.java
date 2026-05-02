@@ -51,13 +51,17 @@ public class PunishmentManager {
     }
 
     public void saveBans() {
-        try { banConfig.save(banFile); }
-        catch (IOException e) { plugin.getLogger().severe("Failed to save bans.yml"); }
+        plugin.getEssScheduler().runAsync(() -> {
+            try { banConfig.save(banFile); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to save bans.yml"); }
+        });
     }
 
     public void saveMutes() {
-        try { muteConfig.save(muteFile); }
-        catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
+        plugin.getEssScheduler().runAsync(() -> {
+            try { muteConfig.save(muteFile); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
+        });
     }
 
     private void loadIpHistory() {
@@ -69,8 +73,10 @@ public class PunishmentManager {
     }
 
     private void saveIpHistory() {
-        try { ipHistoryConfig.save(ipHistoryFile); }
-        catch (IOException e) { plugin.getLogger().severe("Failed to save ip-history.yml"); }
+        plugin.getEssScheduler().runAsync(() -> {
+            try { ipHistoryConfig.save(ipHistoryFile); }
+            catch (IOException e) { plugin.getLogger().severe("Failed to save ip-history.yml"); }
+        });
     }
 
     public void recordIp(UUID uuid, String name, String ip) {

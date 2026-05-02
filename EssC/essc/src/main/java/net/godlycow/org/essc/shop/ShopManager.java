@@ -502,19 +502,24 @@ public class ShopManager {
             return;
         }
 
-        removeMatchingItems(player, checkItem, amount);
-
         double totalPrice = item.getSellPrice() * amount;
 
         if (plugin.getEconomyManager() != null) {
             BigDecimal price = BigDecimal.valueOf(totalPrice);
 
-            plugin.getEconomyManager().deposit(player.getUniqueId(), price).thenAccept(v -> {
+            plugin.getEconomyManager().deposit(player.getUniqueId(), price).thenAccept(deposited -> {
                 plugin.getEssScheduler().runForEntity(player, () -> {
+                    if (!deposited) {
+                        shopListener.getSounds().playError(player);
+                        player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
+                        return;
+                    }
+                    removeMatchingItems(player, checkItem, amount);
                     completeSale(player, item, amount, totalPrice);
                 });
             });
         } else {
+            removeMatchingItems(player, checkItem, amount);
             completeSale(player, item, amount, totalPrice);
         }
     }

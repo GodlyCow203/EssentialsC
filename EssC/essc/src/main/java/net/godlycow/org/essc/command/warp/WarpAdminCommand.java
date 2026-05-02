@@ -60,12 +60,17 @@ public class WarpAdminCommand extends Command {
 
         String perm = args[2].equalsIgnoreCase("none") ? null : args[2];
         warp.setPermission(perm);
-        plugin.getWarpManager().updateWarp(warp);
 
+        String langKey = perm != null ? "warpadmin.perm_set" : "warpadmin.perm_removed";
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
         placeholders.put("perm", perm != null ? perm : "none");
-        player.sendMessage(lang.get(player, perm != null ? "warpadmin.perm_set" : "warpadmin.perm_removed", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, langKey, placeholders))
+                )
+        );
     }
 
     private void handleSetCost(Player player, String[] args) {
@@ -90,12 +95,16 @@ public class WarpAdminCommand extends Command {
             }
 
             warp.setCost(cost);
-            plugin.getWarpManager().updateWarp(warp);
 
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("warp", warp.getName());
             placeholders.put("cost", String.format("%.2f", cost));
-            player.sendMessage(lang.get(player, "warpadmin.cost_set", placeholders));
+
+            plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                    plugin.getEssScheduler().runForEntity(player, () ->
+                            player.sendMessage(lang.get(player, "warpadmin.cost_set", placeholders))
+                    )
+            );
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get(player, "warpadmin.invalid_number"));
         }
@@ -112,11 +121,15 @@ public class WarpAdminCommand extends Command {
 
         String desc = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
         warp.setDescription(desc);
-        plugin.getWarpManager().updateWarp(warp);
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
-        player.sendMessage(lang.get(player, "warpadmin.desc_set", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, "warpadmin.desc_set", placeholders))
+                )
+        );
     }
 
     private void handleSetCategory(Player player, String[] args) {
@@ -129,12 +142,16 @@ public class WarpAdminCommand extends Command {
         if (warp == null) return;
 
         warp.setCategory(args[2]);
-        plugin.getWarpManager().updateWarp(warp);
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
         placeholders.put("category", args[2]);
-        player.sendMessage(lang.get(player, "warpadmin.category_set", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, "warpadmin.category_set", placeholders))
+                )
+        );
     }
 
     private void handleHide(Player player, String[] args) {
@@ -147,11 +164,15 @@ public class WarpAdminCommand extends Command {
         if (warp == null) return;
 
         warp.setHidden(true);
-        plugin.getWarpManager().updateWarp(warp);
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
-        player.sendMessage(lang.get(player, "warpadmin.hidden", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, "warpadmin.hidden", placeholders))
+                )
+        );
     }
 
     private void handleUnhide(Player player, String[] args) {
@@ -164,11 +185,15 @@ public class WarpAdminCommand extends Command {
         if (warp == null) return;
 
         warp.setHidden(false);
-        plugin.getWarpManager().updateWarp(warp);
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
-        player.sendMessage(lang.get(player, "warpadmin.unhidden", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, "warpadmin.unhidden", placeholders))
+                )
+        );
     }
 
     private void handleMove(Player player, String[] args) {
@@ -181,11 +206,15 @@ public class WarpAdminCommand extends Command {
         if (warp == null) return;
 
         warp.setLocation(player.getLocation());
-        plugin.getWarpManager().updateWarp(warp);
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("warp", warp.getName());
-        player.sendMessage(lang.get(player, "warpadmin.moved", placeholders));
+
+        plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
+                plugin.getEssScheduler().runForEntity(player, () ->
+                        player.sendMessage(lang.get(player, "warpadmin.moved", placeholders))
+                )
+        );
     }
 
     private void handleInfo(Player player, String[] args) {

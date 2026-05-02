@@ -50,12 +50,18 @@ public class SetWarpCommand extends Command {
 
             Warp existing = plugin.getWarpManager().getWarp(warpName);
             existing.setLocation(player.getLocation());
-            plugin.getWarpManager().updateWarp(existing);
-
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("warp", warpName);
-            player.sendMessage(lang.get(player, "warp.updated", placeholders));
-            plugin.debug(player.getName() + " updated warp: " + warpName);
+            plugin.getWarpManager().updateWarp(existing).thenAccept(success -> {
+                plugin.getEssScheduler().runForEntity(player, () -> {
+                    Map<String, String> placeholders = new HashMap<>();
+                    placeholders.put("warp", warpName);
+                    if (success) {
+                        player.sendMessage(lang.get(player, "warp.updated", placeholders));
+                        plugin.debug(player.getName() + " updated warp: " + warpName);
+                    } else {
+                        player.sendMessage(lang.get(player, "error.internal"));
+                    }
+                });
+            });
             return true;
         }
 
@@ -74,20 +80,22 @@ public class SetWarpCommand extends Command {
         }
 
         Location loc = player.getLocation();
-        boolean success = plugin.getWarpManager().createWarp(warpName, loc);
-
-        if (success) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("warp", warpName);
-            placeholders.put("world", loc.getWorld().getName());
-            placeholders.put("x", String.format("%.1f", loc.getX()));
-            placeholders.put("y", String.format("%.1f", loc.getY()));
-            placeholders.put("z", String.format("%.1f", loc.getZ()));
-            player.sendMessage(lang.get(player, "warp.created", placeholders));
-            plugin.debug(player.getName() + " created warp: " + warpName);
-        } else {
-            player.sendMessage(lang.get(player, "error.internal"));
-        }
+        plugin.getWarpManager().createWarp(warpName, loc).thenAccept(success -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
+                if (success) {
+                    Map<String, String> placeholders = new HashMap<>();
+                    placeholders.put("warp", warpName);
+                    placeholders.put("world", loc.getWorld().getName());
+                    placeholders.put("x", String.format("%.1f", loc.getX()));
+                    placeholders.put("y", String.format("%.1f", loc.getY()));
+                    placeholders.put("z", String.format("%.1f", loc.getZ()));
+                    player.sendMessage(lang.get(player, "warp.created", placeholders));
+                    plugin.debug(player.getName() + " created warp: " + warpName);
+                } else {
+                    player.sendMessage(lang.get(player, "error.internal"));
+                }
+            });
+        });
 
         return true;
     }

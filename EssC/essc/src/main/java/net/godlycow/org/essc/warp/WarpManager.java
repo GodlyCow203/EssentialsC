@@ -1,20 +1,22 @@
 package net.godlycow.org.essc.warp;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.database.Database;
 import net.godlycow.org.essc.softwares.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import java.io.File;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class WarpManager {
     private final EssentialsC plugin;
-    private Connection connection;
-    private final File databaseFile;
+    private final Database database;
     private final Map<String, Warp> warpCache = new ConcurrentHashMap<>();
     private final Map<UUID, Warp> pendingWarps = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
@@ -23,23 +25,13 @@ public class WarpManager {
 
     public WarpManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.databaseFile = new File(plugin.getDataFolder(), "warps.db");
+        this.database = new Database(plugin, "warps.db");
         initializeDatabase();
-        loadWarps();
     }
 
     private void initializeDatabase() {
-        try {
-            if (!databaseFile.exists()) {
-                databaseFile.getParentFile().mkdirs();
-                databaseFile.createNewFile();
-            }
-
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection("jdbc:sqlite:" + databaseFile.getAbsolutePath());
-            }
-
-            try (Statement stmt = connection.createStatement()) {
+        database.async(conn -> {
+            try (Statement stmt = conn.createStatement()) {
                 stmt.execute("""
                     CREATE TABLE IF NOT EXISTS warps (
                         name TEXT PRIMARY KEY,
@@ -67,12 +59,12 @@ public class WarpManager {
                     )
                 """);
             }
-
             plugin.debug("Warp database initialized successfully");
-        } catch (Exception e) {
+            return null;
+        }).thenRun(this::loadWarpsAsync).exceptionally(e -> {
             plugin.getLogger().severe("Failed to initialize warp database: " + e.getMessage());
-            e.printStackTrace();
-        }
+            return null;
+        });
     }
 
     public void setWarmupTask(UUID uuid, SchedulerTask task) {
@@ -101,9 +93,8 @@ public class WarpManager {
         pendingWarps.clear();
         movementTracker.clear();
 
-        loadWarps();
+        loadWarpsAsync();
 
-        plugin.debug("Warp system reloaded. Loaded " + warpCache.size() + " warps.");
         plugin.debug("Config - Enabled: " + plugin.getConfigManager().isWarpEnabled() +
                 ", Cooldown: " + plugin.getConfigManager().getWarpCooldown() +
                 "s, Warmup: " + plugin.getConfigManager().getWarpWarmup() +
@@ -112,126 +103,134 @@ public class WarpManager {
                 ", Sounds: " + plugin.getConfigManager().isWarpSounds());
     }
 
-    public void loadWarps() {
-        warpCache.clear();
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM warps")) {
+    private void loadWarpsAsync() {
+        database.async(conn -> {
+            Map<String, Warp> loaded = new HashMap<>();
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM warps")) {
 
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String worldName = rs.getString("world");
-                World world = plugin.getServer().getWorld(worldName);
+                while (rs.next()) {
+                    String name = rs.getString("name");
+                    String worldName = rs.getString("world");
+                    World world = plugin.getServer().getWorld(worldName);
 
-                if (world == null) {
-                    plugin.debug("World '" + worldName + "' not found for warp '" + name + "'");
-                    continue;
+                    if (world == null) {
+                        plugin.debug("World '" + worldName + "' not found for warp '" + name + "'");
+                        continue;
+                    }
+
+                    Location loc = new Location(world,
+                            rs.getDouble("x"), rs.getDouble("y"), rs.getDouble("z"),
+                            rs.getFloat("yaw"), rs.getFloat("pitch"));
+
+                    Warp warp = new Warp(name, loc);
+                    warp.setPermission(rs.getString("permission"));
+                    warp.setCost(rs.getDouble("cost"));
+                    warp.setHidden(rs.getInt("hidden") == 1);
+                    warp.setDescription(rs.getString("description"));
+                    warp.setCategory(rs.getString("category"));
+
+                    loaded.put(name.toLowerCase(), warp);
                 }
-
-                Location loc = new Location(world,
-                        rs.getDouble("x"), rs.getDouble("y"), rs.getDouble("z"),
-                        rs.getFloat("yaw"), rs.getFloat("pitch"));
-
-                Warp warp = new Warp(name, loc);
-                warp.setPermission(rs.getString("permission"));
-                warp.setCost(rs.getDouble("cost"));
-                warp.setHidden(rs.getInt("hidden") == 1);
-                warp.setDescription(rs.getString("description"));
-                warp.setCategory(rs.getString("category"));
-
-                warpCache.put(name.toLowerCase(), warp);
             }
-
+            return loaded;
+        }).thenAccept(loaded -> {
+            warpCache.clear();
+            warpCache.putAll(loaded);
             plugin.debug("Loaded " + warpCache.size() + " warps from database");
-        } catch (SQLException e) {
+        }).exceptionally(e -> {
             plugin.getLogger().severe("Failed to load warps: " + e.getMessage());
-            e.printStackTrace();
-        }
+            return null;
+        });
     }
 
     public boolean isSystemEnabled() {
         return plugin.getConfigManager().isWarpEnabled();
     }
 
-    public boolean createWarp(String name, Location location) {
+    public CompletableFuture<Boolean> createWarp(String name, Location location) {
         if (warpCache.containsKey(name.toLowerCase())) {
-            return false;
+            return CompletableFuture.completedFuture(false);
         }
 
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "INSERT INTO warps (name, world, x, y, z, yaw, pitch, permission, cost, hidden, description, category) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO warps (name, world, x, y, z, yaw, pitch, permission, cost, hidden, description, category) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
-            stmt.setString(1, name);
-            stmt.setString(2, location.getWorld().getName());
-            stmt.setDouble(3, location.getX());
-            stmt.setDouble(4, location.getY());
-            stmt.setDouble(5, location.getZ());
-            stmt.setFloat(6, location.getYaw());
-            stmt.setFloat(7, location.getPitch());
-            stmt.setString(8, null);
-            stmt.setDouble(9, 0.0);
-            stmt.setInt(10, 0);
-            stmt.setString(11, "");
-            stmt.setString(12, "default");
-
-            stmt.executeUpdate();
+                stmt.setString(1, name);
+                stmt.setString(2, location.getWorld().getName());
+                stmt.setDouble(3, location.getX());
+                stmt.setDouble(4, location.getY());
+                stmt.setDouble(5, location.getZ());
+                stmt.setFloat(6, location.getYaw());
+                stmt.setFloat(7, location.getPitch());
+                stmt.setNull(8, java.sql.Types.VARCHAR);
+                stmt.setDouble(9, 0.0);
+                stmt.setInt(10, 0);
+                stmt.setString(11, "");
+                stmt.setString(12, "default");
+                stmt.executeUpdate();
+            }
 
             Warp warp = new Warp(name, location);
             warpCache.put(name.toLowerCase(), warp);
-
             plugin.debug("Created warp: " + name);
             return true;
-        } catch (SQLException e) {
+        }).exceptionally(e -> {
             plugin.getLogger().severe("Failed to create warp: " + e.getMessage());
             return false;
-        }
+        });
     }
 
-    public boolean deleteWarp(String name) {
+    public CompletableFuture<Boolean> deleteWarp(String name) {
         if (!warpCache.containsKey(name.toLowerCase())) {
-            return false;
+            return CompletableFuture.completedFuture(false);
         }
 
-        try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM warps WHERE name = ?")) {
-            stmt.setString(1, name);
-            stmt.executeUpdate();
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM warps WHERE name = ?")) {
+                stmt.setString(1, name);
+                stmt.executeUpdate();
+            }
 
             warpCache.remove(name.toLowerCase());
             plugin.debug("Deleted warp: " + name);
             return true;
-        } catch (SQLException e) {
+        }).exceptionally(e -> {
             plugin.getLogger().severe("Failed to delete warp: " + e.getMessage());
             return false;
-        }
+        });
     }
 
-    public boolean updateWarp(Warp warp) {
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "UPDATE warps SET world=?, x=?, y=?, z=?, yaw=?, pitch=?, permission=?, cost=?, hidden=?, description=?, category=? " +
-                        "WHERE name=?")) {
+    public CompletableFuture<Boolean> updateWarp(Warp warp) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE warps SET world=?, x=?, y=?, z=?, yaw=?, pitch=?, permission=?, cost=?, hidden=?, description=?, category=? " +
+                            "WHERE name=?")) {
 
-            stmt.setString(1, warp.getLocation().getWorld().getName());
-            stmt.setDouble(2, warp.getLocation().getX());
-            stmt.setDouble(3, warp.getLocation().getY());
-            stmt.setDouble(4, warp.getLocation().getZ());
-            stmt.setFloat(5, warp.getLocation().getYaw());
-            stmt.setFloat(6, warp.getLocation().getPitch());
-            stmt.setString(7, warp.getPermission());
-            stmt.setDouble(8, warp.getCost());
-            stmt.setInt(9, warp.isHidden() ? 1 : 0);
-            stmt.setString(10, warp.getDescription());
-            stmt.setString(11, warp.getCategory());
-            stmt.setString(12, warp.getName());
-
-            stmt.executeUpdate();
+                stmt.setString(1, warp.getLocation().getWorld().getName());
+                stmt.setDouble(2, warp.getLocation().getX());
+                stmt.setDouble(3, warp.getLocation().getY());
+                stmt.setDouble(4, warp.getLocation().getZ());
+                stmt.setFloat(5, warp.getLocation().getYaw());
+                stmt.setFloat(6, warp.getLocation().getPitch());
+                stmt.setString(7, warp.getPermission());
+                stmt.setDouble(8, warp.getCost());
+                stmt.setInt(9, warp.isHidden() ? 1 : 0);
+                stmt.setString(10, warp.getDescription());
+                stmt.setString(11, warp.getCategory());
+                stmt.setString(12, warp.getName());
+                stmt.executeUpdate();
+            }
 
             warpCache.put(warp.getName().toLowerCase(), warp);
             plugin.debug("Updated warp: " + warp.getName());
             return true;
-        } catch (SQLException e) {
+        }).exceptionally(e -> {
             plugin.getLogger().severe("Failed to update warp: " + e.getMessage());
             return false;
-        }
+        });
     }
 
     public Warp getWarp(String name) {
@@ -309,36 +308,43 @@ public class WarpManager {
     }
 
     public void recordWarpUsage(UUID uuid, String warpName) {
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "INSERT INTO player_warp_usage (uuid, warp_name, uses, last_used) " +
-                        "VALUES (?, ?, 1, ?) " +
-                        "ON CONFLICT(uuid, warp_name) DO UPDATE SET " +
-                        "uses = uses + 1, last_used = excluded.last_used")) {
+        database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO player_warp_usage (uuid, warp_name, uses, last_used) " +
+                            "VALUES (?, ?, 1, ?) " +
+                            "ON CONFLICT(uuid, warp_name) DO UPDATE SET " +
+                            "uses = uses + 1, last_used = excluded.last_used")) {
 
-            stmt.setString(1, uuid.toString());
-            stmt.setString(2, warpName);
-            stmt.setLong(3, System.currentTimeMillis());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
+                stmt.setString(1, uuid.toString());
+                stmt.setString(2, warpName);
+                stmt.setLong(3, System.currentTimeMillis());
+                stmt.executeUpdate();
+            }
+            return null;
+        }).exceptionally(e -> {
             plugin.debug("Failed to record warp usage: " + e.getMessage());
-        }
+            return null;
+        });
     }
 
-    public int getWarpUsage(UUID uuid, String warpName) {
-        try (PreparedStatement stmt = connection.prepareStatement(
-                "SELECT uses FROM player_warp_usage WHERE uuid = ? AND warp_name = ?")) {
+    public CompletableFuture<Integer> getWarpUsage(UUID uuid, String warpName) {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT uses FROM player_warp_usage WHERE uuid = ? AND warp_name = ?")) {
 
-            stmt.setString(1, uuid.toString());
-            stmt.setString(2, warpName);
-            ResultSet rs = stmt.executeQuery();
+                stmt.setString(1, uuid.toString());
+                stmt.setString(2, warpName);
+                ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                return rs.getInt("uses");
+                if (rs.next()) {
+                    return rs.getInt("uses");
+                }
             }
-        } catch (SQLException e) {
+            return 0;
+        }).exceptionally(e -> {
             plugin.debug("Failed to get warp usage: " + e.getMessage());
-        }
-        return 0;
+            return 0;
+        });
     }
 
     public void close() {
@@ -348,12 +354,6 @@ public class WarpManager {
             }
         }
         warmupTasks.clear();
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            plugin.getLogger().severe("Error closing warp database: " + e.getMessage());
-        }
+        database.disconnect();
     }
 }

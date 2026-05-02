@@ -99,7 +99,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private AhGuiManager ahGuiManager;
     private EssentialsCAPIImpl apiImplementation;
     private HatCommand hatCommand;
-    public JoinLeaveListener joinLeaveListener;;
+    public JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();

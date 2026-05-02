@@ -55,14 +55,21 @@ public class PayCommand extends Command {
             plugin.getEconomyManager().withdraw(player.getUniqueId(), amount).thenAccept(success -> {
                 if (success) {
                     plugin.getEconomyManager().deposit(target.getUniqueId(), amount).thenAccept(deposited -> {
-                        String formatted = plugin.getEconomyManager().format(amount);
+                        plugin.getEssScheduler().runForEntity(player, () -> {
+                            if (!deposited) {
+                                plugin.getEconomyManager().deposit(player.getUniqueId(), amount);
+                                player.sendMessage(lang.get(player, "error.internal"));
+                                return;
+                            }
 
-                        player.sendMessage(lang.get(player, "pay.sent",
-                                Map.of("amount", formatted, "player", target.getName())));
-                        target.sendMessage(lang.get(target, "pay.received",
-                                Map.of("amount", formatted, "player", player.getName())));
+                            String formatted = plugin.getEconomyManager().format(amount);
+                            player.sendMessage(lang.get(player, "pay.sent",
+                                    Map.of("amount", formatted, "player", target.getName())));
+                            target.sendMessage(lang.get(target, "pay.received",
+                                    Map.of("amount", formatted, "player", player.getName())));
 
-                        plugin.debug(player.getName() + " paid " + formatted + " to " + target.getName());
+                            plugin.debug(player.getName() + " paid " + formatted + " to " + target.getName());
+                        });
                     });
                 }
             });

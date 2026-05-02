@@ -45,16 +45,18 @@ public class DelWarpCommand extends Command {
             return true;
         }
 
-        boolean success = plugin.getWarpManager().deleteWarp(warpName);
-
-        if (success) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("warp", warpName);
-            player.sendMessage(lang.get(player, "warp.deleted", placeholders));
-            plugin.debug(player.getName() + " deleted warp: " + warpName);
-        } else {
-            player.sendMessage(lang.get(player, "error.internal"));
-        }
+        plugin.getWarpManager().deleteWarp(warpName).thenAccept(success -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
+                if (success) {
+                    Map<String, String> placeholders = new HashMap<>();
+                    placeholders.put("warp", warpName);
+                    player.sendMessage(lang.get(player, "warp.deleted", placeholders));
+                    plugin.debug(player.getName() + " deleted warp: " + warpName);
+                } else {
+                    player.sendMessage(lang.get(player, "error.internal"));
+                }
+            });
+        });
 
         return true;
     }
