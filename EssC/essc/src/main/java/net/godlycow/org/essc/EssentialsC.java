@@ -16,6 +16,7 @@ import net.godlycow.org.essc.config.ConfigManager;
 import net.godlycow.org.essc.data.LogoutDataManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
+import net.godlycow.org.essc.user.UserManager;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
@@ -95,6 +96,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private MOTDManager motdManager;
     private BackupManager backupManager;
     private LogoutDataManager logoutDataManager;
+    private UserManager userManager;
     private SellManager sellManager;
     private AhGuiManager ahGuiManager;
     private EssentialsCAPIImpl apiImplementation;
@@ -145,6 +147,9 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        if (getUserManager() != null) {
+            getUserManager().loadProfile(player.getUniqueId(), player.getName());
+        }
         getHomeManager().getHomes(player.getUniqueId());
         if (homeNotificationManager != null) {
             homeNotificationManager.deliverPending(player);
@@ -153,6 +158,9 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        if (getUserManager() != null) {
+            getUserManager().clearCache(event.getPlayer().getUniqueId());
+        }
         getHomeManager().clearCache(event.getPlayer().getUniqueId());
     }
 
@@ -452,6 +460,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setLogoutDataManager(LogoutDataManager logoutDataManager) {
         this.logoutDataManager = logoutDataManager;
+    }
+
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 
     public SellManager getSellManager() {

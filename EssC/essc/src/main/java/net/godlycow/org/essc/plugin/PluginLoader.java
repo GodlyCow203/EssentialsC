@@ -25,6 +25,7 @@ import net.godlycow.org.essc.gui.GuiFramework;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.home.HomeNotificationManager;
 import net.godlycow.org.essc.home.gui.GuiManager;
+import net.godlycow.org.essc.user.UserManager;
 import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.HelpManager;
@@ -142,6 +143,7 @@ public final class PluginLoader {
         plugin.setReplyManager(new ReplyManager());
         plugin.setChatManager(new ChatManager(plugin));
         plugin.setLogoutDataManager(new LogoutDataManager(plugin));
+        plugin.setUserManager(new UserManager(plugin));
         plugin.setFlyManager(new FlyManager(plugin));
 
         RulesManager rulesManager = new RulesManager(plugin);

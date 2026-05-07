@@ -448,6 +448,11 @@ commands:
     usage: /dback
     permission: essentialsc.dback
 
+  user:
+    description: View the internal EssentialsC profile of a player
+    usage: /user <player> [profile|states|punishments|locations|cooldowns|all]
+    permission: essentialsc.user
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1133,4 +1138,16 @@ permissions:
 
   essentialsc.nick.minimessage:
     description: Allow MiniMessage tags (colors, gradients) in nicknames
+    default: op
+
+  essentialsc.user:
+    description: View player profiles with /user
+    default: op
+
+  essentialsc.user.ip:
+    description: See the last known IP address in /user profile
+    default: op
+
+  essentialsc.user.offline:
+    description: Allow tab-completing offline player names in /user
     default: op

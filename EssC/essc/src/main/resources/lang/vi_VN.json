@@ -195,7 +195,7 @@
   "baltop.empty": "<prefix> <color:#FF0000>Không tìm thấy dữ liệu cho trang này.</color>",
   "baltop.loading": "<prefix> <color:#AAAAAA>Đang tải xếp hạng số dư...</color>",
   "baltop.footer": "<color:#666666>═══════════════════════</color>",
-  "baltop.next": "<color:#AAAAAA>Nhập <color:#FFFFFF>/baltop <trang></color> để xem thêm</color>",
+  "baltop.next": "<color:#AAAAAA>Nhập <color:#FFFFFF>/baltop <page></color> để xem thêm</color>",
 
   "worth.hand.empty": "<prefix> <color:#FF0000>Bạn không cầm vật phẩm nào.</color>",
   "worth.hand.header": "<prefix> <color:#FFF200><color:#FFFFFF><item></color> x<color:#FFF200><amount></color> của bạn trị giá <color:#FFAA00><worth> <currency></color></color>",

@@ -18,7 +18,6 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -161,6 +160,10 @@ public class SpawnManager implements Listener {
         plugin.getEssScheduler().teleportAsync(player, location).thenAccept(success -> {
             if (!success) return;
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+
+            if (plugin.getUserManager() != null) {
+                plugin.getUserManager().getCooldownManager().setSpawnLastTeleport(player.getUniqueId(), System.currentTimeMillis() / 1000L);
+            }
 
             player.sendMessage(plugin.getLanguageManager().get(player, "spawn.success"));
 

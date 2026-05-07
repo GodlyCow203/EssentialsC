@@ -76,6 +76,10 @@ public class FlyManager implements Listener {
     public void setFlying(Player player, boolean flying) {
         player.setAllowFlight(flying);
         player.setFlying(flying);
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getStateManager().setFlyEnabled(player.getUniqueId(), flying);
+        }
     }
 
     public boolean hasPersistentFly(UUID uuid) {

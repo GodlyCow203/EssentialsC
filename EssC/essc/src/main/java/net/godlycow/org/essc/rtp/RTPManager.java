@@ -334,6 +334,10 @@ public class RTPManager {
                 cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
                 rtpInProgress.remove(player.getUniqueId());
 
+                if (plugin.getUserManager() != null) {
+                    plugin.getUserManager().getCooldownManager().setRtpLastUsed(player.getUniqueId(), System.currentTimeMillis() / 1000L);
+                }
+
                 RtpPostTeleportEvent postEvent = new RtpPostTeleportEvent(player, world, finalLoc1);
                 Bukkit.getPluginManager().callEvent(postEvent);
 

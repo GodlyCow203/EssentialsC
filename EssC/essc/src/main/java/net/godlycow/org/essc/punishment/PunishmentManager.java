@@ -101,6 +101,10 @@ public class PunishmentManager {
         saveBans();
         plugin.debug("Banned " + name + " (" + uuid + ") by " + banner + " until " + expires);
 
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getPunishmentManager().banPlayer(uuid, reason, banner, expires);
+        }
+
         if (networkHook != null) networkHook.onBan(uuid, name, reason, banner, expires);
     }
 
@@ -108,6 +112,10 @@ public class PunishmentManager {
         banConfig.set("players." + uuid, null);
         saveBans();
         plugin.debug("Unbanned " + uuid);
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getPunishmentManager().unbanPlayer(uuid);
+        }
 
         if (networkHook != null) networkHook.onUnban(uuid);
     }
@@ -247,6 +255,13 @@ public class PunishmentManager {
         saveMutes();
         plugin.debug("Muted " + name + " by " + muter + " until " + expires);
 
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getPunishmentManager().mutePlayer(uuid, reason, muter, expires);
+            if (offlineNotification) {
+                plugin.getUserManager().getPreferenceManager().setMuteOfflineNotification(uuid, true);
+            }
+        }
+
         if (networkHook != null) networkHook.onMute(uuid, name, reason, muter, expires);
     }
 
@@ -254,6 +269,10 @@ public class PunishmentManager {
         muteConfig.set(uuid.toString(), null);
         saveMutes();
         plugin.debug("Unmuted " + uuid);
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getPunishmentManager().unmutePlayer(uuid);
+        }
 
         if (networkHook != null) networkHook.onUnmute(uuid);
     }

@@ -56,6 +56,11 @@ public class BackManager implements Listener {
     public void setBackLocation(Player player, Location location) {
         if (location == null || location.getWorld() == null) return;
         backLocations.put(player.getUniqueId(), location.clone());
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getLocationManager().setBackLocation(player.getUniqueId(), location);
+        }
+
         plugin.debug("Set back location for " + player.getName() + ": " +
                 location.getWorld().getName() + " (" + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ() + ")");
     }
@@ -293,6 +298,11 @@ public class BackManager implements Listener {
         Location deathLoc = player.getLocation().clone();
         deathLocations.put(player.getUniqueId(), deathLoc);
         setBackLocation(player, deathLoc);
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getLocationManager().setDeathLocation(player.getUniqueId(), deathLoc);
+        }
+
         plugin.debug("Stored death location for " + player.getName());
     }
 
@@ -321,6 +331,10 @@ public class BackManager implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getLocationManager().setLogoutLocation(player.getUniqueId(), player.getLocation());
+        }
 
         SchedulerTask task = warmupTasks.remove(player.getUniqueId());
         if (task != null) task.cancel();

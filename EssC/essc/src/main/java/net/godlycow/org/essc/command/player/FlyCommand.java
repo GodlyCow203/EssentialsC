@@ -18,15 +18,26 @@ public class FlyCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        if (player.getAllowFlight()) {
-            player.setAllowFlight(false);
-            player.setFlying(false);
-            player.sendMessage(lang.get(player, "fly.disabled"));
-            plugin.debug("Disabled fly mode for " + player.getName());
+        if (plugin.getFlyManager() != null) {
+            plugin.getFlyManager().setFlying(player, !player.getAllowFlight());
+            if (player.getAllowFlight()) {
+                player.sendMessage(lang.get(player, "fly.enabled"));
+                plugin.debug("Enabled fly mode for " + player.getName());
+            } else {
+                player.sendMessage(lang.get(player, "fly.disabled"));
+                plugin.debug("Disabled fly mode for " + player.getName());
+            }
         } else {
-            player.setAllowFlight(true);
-            player.sendMessage(lang.get(player, "fly.enabled"));
-            plugin.debug("Enabled fly mode for " + player.getName());
+            if (player.getAllowFlight()) {
+                player.setAllowFlight(false);
+                player.setFlying(false);
+                player.sendMessage(lang.get(player, "fly.disabled"));
+                plugin.debug("Disabled fly mode for " + player.getName());
+            } else {
+                player.setAllowFlight(true);
+                player.sendMessage(lang.get(player, "fly.enabled"));
+                plugin.debug("Enabled fly mode for " + player.getName());
+            }
         }
 
         return true;

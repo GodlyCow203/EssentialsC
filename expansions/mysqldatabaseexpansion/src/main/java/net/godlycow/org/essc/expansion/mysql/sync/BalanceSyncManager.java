@@ -67,19 +67,20 @@ public class BalanceSyncManager {
 
         db.fetchBalance(uuid).thenAccept(remoteOpt -> {
             essc.getEconomyManager().getBalance(uuid).thenAccept(localBalance -> {
+                BigDecimal localAmount = localBalance;
                 if (remoteOpt.isPresent()) {
                     BigDecimal remote = remoteOpt.get();
-                    if (remote.compareTo(localBalance) != 0) {
+                    if (remote.compareTo(localAmount) != 0) {
                         essc.getEconomyManager().setBalance(uuid, remote).thenRun(() -> {
                             lastKnownBalances.put(uuid, remote);
                             plugin.getLogger().info("[MySQLExpansion] Join sync: " + name + " updated to " + remote);
                         });
                     } else {
-                        lastKnownBalances.put(uuid, localBalance);
+                        lastKnownBalances.put(uuid, localAmount);
                     }
                 } else {
-                    lastKnownBalances.put(uuid, localBalance);
-                    db.pushBalance(uuid, name, localBalance, config.getServerId());
+                    lastKnownBalances.put(uuid, localAmount);
+                    db.pushBalance(uuid, name, localAmount, config.getServerId());
                 }
             });
         });
@@ -153,11 +154,12 @@ public class BalanceSyncManager {
 
             String finalName = name;
             essc.getEconomyManager().getBalance(uuid).thenAccept(balance -> {
+                BigDecimal amount = balance;
                 BigDecimal lastKnown = lastKnownBalances.get(uuid);
 
-                if (force || lastKnown == null || lastKnown.compareTo(balance) != 0) {
-                    db.pushBalance(uuid, finalName, balance, config.getServerId())
-                            .thenRun(() -> lastKnownBalances.put(uuid, balance))
+                if (force || lastKnown == null || lastKnown.compareTo(amount) != 0) {
+                    db.pushBalance(uuid, finalName, amount, config.getServerId())
+                            .thenRun(() -> lastKnownBalances.put(uuid, amount))
                             .exceptionally(ex -> {
                                 plugin.getLogger().log(Level.FINE, "[MySQLExpansion] Push failed for " + uuid, ex);
                                 return null;
@@ -171,7 +173,6 @@ public class BalanceSyncManager {
             plugin.getLogger().log(Level.FINE, "[MySQLExpansion] Push error", e);
         }
     }
-
 
     private void pushOfflineChanges() {
         long windowEnd = System.currentTimeMillis() / 1000;

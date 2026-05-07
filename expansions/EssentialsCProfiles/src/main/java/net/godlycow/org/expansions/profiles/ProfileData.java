@@ -62,7 +62,7 @@ public class ProfileData {
         b.name      = target.getName() != null ? target.getName() : "Unknown";
         b.online    = target.isOnline();
         b.firstJoin = target.getFirstPlayed();
-        b.lastSeen  = target.isOnline() ? System.currentTimeMillis() : target.getLastPlayed();
+        b.lastSeen  = target.isOnline() ? System.currentTimeMillis() : 0;
 
         try { b.playtimeTicks = target.getStatistic(Statistic.PLAY_ONE_MINUTE); } catch (Exception ignored) {}
         try { b.kills         = target.getStatistic(Statistic.PLAYER_KILLS);    } catch (Exception ignored) {}

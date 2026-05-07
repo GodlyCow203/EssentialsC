@@ -28,6 +28,9 @@ public final class PluginShutdown {
         if (plugin.getHomeManager() != null) {
             plugin.getHomeManager().shutdown();
         }
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().shutdown();
+        }
         if (plugin.getAuctionManager() != null) {
             plugin.getAuctionManager().shutdown();
         }

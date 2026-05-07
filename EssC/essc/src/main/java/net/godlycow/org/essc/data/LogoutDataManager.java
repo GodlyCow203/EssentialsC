@@ -65,6 +65,11 @@ public class LogoutDataManager implements Listener {
         config.set(path + ".time", System.currentTimeMillis());
 
         save();
+
+        if (plugin.getUserManager() != null) {
+            plugin.getUserManager().getLocationManager().setLogoutLocation(uuid, loc);
+        }
+
         plugin.debug("Saved logout location for " + event.getPlayer().getName());
     }
 

@@ -312,6 +312,9 @@ public class ScoreboardManager implements Listener {
             disabledPlayers.remove(uuid);
             addPlayer(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.enabled"));
+            if (plugin.getUserManager() != null) {
+                plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, false);
+            }
         } else {
             disabledPlayers.add(uuid);
             removePlayer(player);
@@ -322,6 +325,9 @@ public class ScoreboardManager implements Listener {
                 plugin.getLogger().warning("Error resetting scoreboard: " + e.getMessage());
             }
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.disabled"));
+            if (plugin.getUserManager() != null) {
+                plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, true);
+            }
         }
 
         if (config.isPersistent()) {
@@ -413,6 +419,12 @@ public class ScoreboardManager implements Listener {
         if (!config.isEnabled() || reloading.get()) return;
 
         Player joining = event.getPlayer();
+        UUID uuid = joining.getUniqueId();
+
+        if (plugin.getUserManager() != null && plugin.getUserManager().getStateManager().isScoreboardDisabled(uuid)) {
+            disabledPlayers.add(uuid);
+        }
+
         plugin.getEssScheduler().runForLocationLater(joining.getLocation(), () -> {
             if (joining.isOnline() && !reloading.get()) {
                 addPlayer(joining);

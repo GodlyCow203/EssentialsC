@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "compile",
+			"type": "shell",
+			"command": "mvn"
+		},
+		{
+			"label": "compile",
+			"type": "shell",
+			"command": "mvn",
+			"args": [
+				"compile"
+			]
+		},
+		{
+			"label": "compile",
+			"type": "shell",
+			"command": "mvn compile"
+		},
+		{
+			"label": "compile-essc",
+			"type": "shell",
+			"command": "mvn compile -rf :EssentialsC"
+		}
+	]
+}
