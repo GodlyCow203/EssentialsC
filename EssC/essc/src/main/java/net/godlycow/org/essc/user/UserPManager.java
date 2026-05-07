@@ -3,10 +3,10 @@ package net.godlycow.org.essc.user;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class UserPreferenceManager {
+public class UserPManager {
     private final UserManager userManager;
 
-    public UserPreferenceManager(UserManager userManager) {
+    public UserPManager(UserManager userManager) {
         this.userManager = userManager;
     }
 

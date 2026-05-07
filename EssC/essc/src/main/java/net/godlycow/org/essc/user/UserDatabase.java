@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class UserDatabase implements UserRepository {
+public class UserDatabase implements UserRepo {
     private final Database database;
 
     private static final String CREATE_USERS_TABLE = """

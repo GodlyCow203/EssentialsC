@@ -1,11 +1,10 @@
 package net.godlycow.org.essc.user;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public interface UserRepository {
+public interface UserRepo {
     CompletableFuture<UserProfile> findOrCreate(UUID uuid, String username);
     CompletableFuture<UserProfile> findByUuid(UUID uuid);
     CompletableFuture<Boolean> save(UserProfile profile);

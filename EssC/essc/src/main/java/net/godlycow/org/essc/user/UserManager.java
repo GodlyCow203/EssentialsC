@@ -13,7 +13,7 @@ public class UserManager {
     private final Map<UUID, UserProfile> cache = new ConcurrentHashMap<>();
 
     private final UserLocationManager locationManager;
-    private final UserPreferenceManager preferenceManager;
+    private final UserPManager preferenceManager;
     private final UserPunishmentManager punishmentManager;
     private final UserStateManager stateManager;
     private final UserCooldownManager cooldownManager;
@@ -22,7 +22,7 @@ public class UserManager {
         this.plugin = plugin;
         this.repository = new UserDatabase(plugin);
         this.locationManager = new UserLocationManager(this);
-        this.preferenceManager = new UserPreferenceManager(this);
+        this.preferenceManager = new UserPManager(this);
         this.punishmentManager = new UserPunishmentManager(this);
         this.stateManager = new UserStateManager(this);
         this.cooldownManager = new UserCooldownManager(this);
@@ -76,7 +76,7 @@ public class UserManager {
         plugin.debug("UserManager shutdown complete.");
     }
 
-    public UserRepository getRepository() {
+    public UserRepo getRepository() {
         return repository;
     }
 
@@ -84,7 +84,7 @@ public class UserManager {
         return locationManager;
     }
 
-    public UserPreferenceManager getPreferenceManager() {
+    public UserPManager getPreferenceManager() {
         return preferenceManager;
     }
 
