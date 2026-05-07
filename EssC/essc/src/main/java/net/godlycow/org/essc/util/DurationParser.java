@@ -29,18 +29,28 @@ public final class DurationParser {
 
         while (m.find()) {
             matched = true;
-            long value = Long.parseLong(m.group(1));
+            long value;
+            try {
+                value = Long.parseLong(m.group(1));
+            } catch (NumberFormatException e) {
+                return INVALID;
+            }
             String unit = m.group(2).toLowerCase();
-            total += switch (unit) {
-                case "y"  -> TimeUnit.DAYS.toMillis(value * 365);
-                case "mo" -> TimeUnit.DAYS.toMillis(value * 30);
-                case "w"  -> TimeUnit.DAYS.toMillis(value * 7);
-                case "d"  -> TimeUnit.DAYS.toMillis(value);
-                case "h"  -> TimeUnit.HOURS.toMillis(value);
-                case "m"  -> TimeUnit.MINUTES.toMillis(value);
-                case "s"  -> TimeUnit.SECONDS.toMillis(value);
-                default   -> 0L;
-            };
+            try {
+                long segment = switch (unit) {
+                    case "y"  -> Math.multiplyExact(value, TimeUnit.DAYS.toMillis(365));
+                    case "mo" -> Math.multiplyExact(value, TimeUnit.DAYS.toMillis(30));
+                    case "w"  -> Math.multiplyExact(value, TimeUnit.DAYS.toMillis(7));
+                    case "d"  -> Math.multiplyExact(value, TimeUnit.DAYS.toMillis(1));
+                    case "h"  -> Math.multiplyExact(value, TimeUnit.HOURS.toMillis(1));
+                    case "m"  -> Math.multiplyExact(value, TimeUnit.MINUTES.toMillis(1));
+                    case "s"  -> Math.multiplyExact(value, TimeUnit.SECONDS.toMillis(1));
+                    default   -> 0L;
+                };
+                total = Math.addExact(total, segment);
+            } catch (ArithmeticException e) {
+                return INVALID;
+            }
         }
 
         if (matched) return total > 0 ? total : INVALID;

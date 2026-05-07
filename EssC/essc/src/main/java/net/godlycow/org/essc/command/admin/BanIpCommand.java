@@ -77,7 +77,7 @@ public class BanIpCommand extends Command {
         if (args.length > 1 && args[1].startsWith("-t:")) {
             duration = DurationParser.parse(args[1].substring(3));
             if (duration == DurationParser.INVALID) {
-                sender.sendMessage(lang.get(sender, "banip.invalid_duration"));
+                sender.sendMessage(lang.get(sender, "error.invalid_duration"));
                 return true;
             }
             if (duration == DurationParser.PERMANENT) duration = 0;
