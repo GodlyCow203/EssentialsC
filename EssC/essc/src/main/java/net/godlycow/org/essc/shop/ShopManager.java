@@ -402,7 +402,7 @@ public class ShopManager {
             giveItem.setItemMeta(meta);
         }
 
-        giveItem.setAmount(amount);
+        giveItem.setAmount(amount * item.getAmount());
 
         if (!canFitInInventory(player, giveItem)) {
             shopListener.getSounds().playInventoryFull(player);
@@ -468,9 +468,11 @@ public class ShopManager {
             database.logPurchase(player.getUniqueId(), item.getId(), amount, totalPrice);
         }
 
+        int totalItems = amount * item.getAmount();
+
         for (String cmd : item.getCommands()) {
             String formatted = cmd.replace("%player%", player.getName())
-                    .replace("%amount%", String.valueOf(amount));
+                    .replace("%amount%", String.valueOf(totalItems));
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), formatted);
         }
 
@@ -478,13 +480,13 @@ public class ShopManager {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
-        placeholders.put("amount", String.valueOf(amount));
+        placeholders.put("amount", String.valueOf(totalItems));
         placeholders.put("price", String.valueOf(totalPrice));
         player.sendMessage(plugin.getLanguageManager().get(player, "shop.purchase-success", placeholders));
 
         refreshPlayerGUI(player);
 
-        plugin.debug(player.getName() + " bought " + amount + "x " + item.getId() + " for " + totalPrice);
+        plugin.debug(player.getName() + " bought " + totalItems + "x " + item.getId() + " for " + totalPrice);
     }
 
     public void processSale(Player player, ShopItem item, int amount) {
@@ -494,9 +496,10 @@ public class ShopManager {
             return;
         }
 
-        ItemStack checkItem = item.createComparisonItem(amount);
+        ItemStack checkItem = item.createComparisonItem(1);
+        int totalItemsRequired = amount * item.getAmount();
 
-        if (!containsMatchingItem(player, checkItem, amount)) {
+        if (!containsMatchingItem(player, checkItem, totalItemsRequired)) {
             shopListener.getSounds().playError(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-items"));
             return;
@@ -514,12 +517,12 @@ public class ShopManager {
                         player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
                         return;
                     }
-                    removeMatchingItems(player, checkItem, amount);
+                    removeMatchingItems(player, checkItem, totalItemsRequired);
                     completeSale(player, item, amount, totalPrice);
                 });
             });
         } else {
-            removeMatchingItems(player, checkItem, amount);
+            removeMatchingItems(player, checkItem, totalItemsRequired);
             completeSale(player, item, amount, totalPrice);
         }
     }
@@ -588,9 +591,11 @@ public class ShopManager {
 
         shopListener.getSounds().playSale(player);
 
+        int totalItems = amount * item.getAmount();
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
-        placeholders.put("amount", String.valueOf(amount));
+        placeholders.put("amount", String.valueOf(totalItems));
         placeholders.put("price", String.valueOf(totalPrice));
         player.sendMessage(plugin.getLanguageManager().get(player, "shop.sale-success", placeholders));
 
