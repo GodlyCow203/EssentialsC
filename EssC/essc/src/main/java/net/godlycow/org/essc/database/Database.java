@@ -45,6 +45,10 @@ public class Database {
         }
     }
 
+    public String getDbPath() {
+        return dbPath;
+    }
+
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {

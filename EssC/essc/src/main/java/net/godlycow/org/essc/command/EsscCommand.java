@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.backup.BackupManager;
+import net.godlycow.org.essc.command.admin.DumpCommand;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.util.EssLog;
 import org.bukkit.Bukkit;
@@ -33,6 +34,14 @@ public class EsscCommand extends Command {
         }
 
         switch (args[0].toLowerCase()) {
+
+            case "dump" -> {
+                String[] dumpArgs = args.length > 1
+                        ? java.util.Arrays.copyOfRange(args, 1, args.length)
+                        : new String[0];
+                new DumpCommand(plugin).execute(sender, dumpArgs);
+            }
+
             case "reload" -> {
                 plugin.debug("Reload requested by " + sender.getName());
 
@@ -218,10 +227,14 @@ public class EsscCommand extends Command {
 
             case "help" -> showHelp(sender);
 
+
+
             default -> {
                 sender.sendMessage(lang.get(sender, "essc.error.unknown_arg"));
                 EssLog.warn("Unknown subcommand: " + args[0] + " by " + sender.getName());
             }
+
+
         }
 
         return true;
@@ -300,7 +313,7 @@ public class EsscCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders"), args[0]);
+            return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders", "dump"), args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("backup")) {
             return filter(List.of("list", "delete"), args[1]);

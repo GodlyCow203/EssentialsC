@@ -451,7 +451,12 @@ commands:
   user:
     description: View the internal EssentialsC profile of a player
     usage: /user <player> [profile|states|punishments|locations|cooldowns|all]
-    permission: essentialsc.user
+    permission: essentialsc.
+
+  dump:
+    description: Generate a server dump
+    usage: /essc dump [sections...]
+    permission: essc.dump
 
 permissions:
   essentialsc.heal:
@@ -1150,4 +1155,12 @@ permissions:
 
   essentialsc.user.offline:
     description: Allow tab-completing offline player names in /user
+    default: op
+
+  essc.dump:
+    description: Run /essc dump and save locally
+    default: op
+
+  essc.dump.upload:
+    description: Upload the dump and receive a viewer link
     default: op

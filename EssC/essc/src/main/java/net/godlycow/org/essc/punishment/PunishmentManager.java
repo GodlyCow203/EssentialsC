@@ -37,6 +37,10 @@ public class PunishmentManager {
         this.networkHook = null;
     }
 
+    public NetworkPunishmentHook getNetworkHook() {
+        return networkHook;
+    }
+
     private void loadFiles() {
         if (!banFile.exists()) {
             try { banFile.createNewFile(); }

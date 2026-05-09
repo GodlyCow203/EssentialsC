@@ -967,6 +967,11 @@
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Last RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Last RTP: <color:#FFFFFF>Never</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Last Spawn Teleport: <color:#FFFFFF><time></color></color>",
-  "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Last Spawn Teleport: <color:#FFFFFF>Never</color></color>"
+  "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Last Spawn Teleport: <color:#FFFFFF>Never</color></color>",
+
+  "dump.saved": "<prefix> <color:#AAAAAA>Last Dump: <color:#00C200>Saved to <color:#FFFFFF><file></color></color>",
+  "dump.error.write": "<prefix> <color:#AAAAAA>Last Dump: <color:#FF0000>Write failed. Check console.</color>",
+  "dump.upload.starting": "<prefix> <color:#AAAAAA>Last Dump: <color:#00C200>Uploading...</color>",
+  "dump.upload.success": "<prefix> <color:#AAAAAA>Last Dump: <color:#00C200>Dump uploaded successfully!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Click to open)</gray>",  "dump.upload.error": "<prefix> <color:#AAAAAA>Last Dump: <color:#FF0000>Upload failed: <color:#FFFFFF><error></color></color>"
 
 }
