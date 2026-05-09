@@ -477,6 +477,8 @@
   "kits.help.header": "<prefix> <color:#FFFFFF>Kit Commands:</color>",
   "kits.help.list": " <color:#FFFFFF>/kits list</color> <color:#AAAAAA>- View all kits</color>",
   "kits.help.claim": " <color:#FFFFFF>/kit claim <kit></color> <color:#AAAAAA>- Claim a kit</color>",
+
+
   "kits.help.cooldown": " <color:#FFFFFF>/kit cooldown <kit></color> <color:#AAAAAA>- Check cooldown</color>",
   "kits.help.reload": " <color:#FFFFFF>/kits reload</color> <color:#AAAAAA>- Reload kits</color>",
   "kits.help.debug": " <color:#FFFFFF>/kit debug <kit></color> <color:#AAAAAA>- Debug kit</color>",
