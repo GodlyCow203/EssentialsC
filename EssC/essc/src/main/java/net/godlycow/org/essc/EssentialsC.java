@@ -17,6 +17,7 @@ import net.godlycow.org.essc.data.LogoutDataManager;
 import net.godlycow.org.essc.discord.DiscordSRVHook;
 import net.godlycow.org.essc.economy.EconomyManager;
 import net.godlycow.org.essc.user.UserManager;
+import net.godlycow.org.essc.user.UserProfile;
 import net.godlycow.org.essc.economy.VaultHook;
 import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
@@ -54,6 +55,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.UUID;
 
 public final class EssentialsC extends JavaPlugin implements Listener {
 
@@ -159,7 +162,13 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (getUserManager() != null) {
-            getUserManager().clearCache(event.getPlayer().getUniqueId());
+            UUID uuid = event.getPlayer().getUniqueId();
+            UserProfile profile = getUserManager().getCachedProfile(uuid);
+            if (profile != null) {
+                getUserManager().saveAsync(profile).thenRun(() -> getUserManager().clearCache(uuid));
+            } else {
+                getUserManager().clearCache(uuid);
+            }
         }
         getHomeManager().clearCache(event.getPlayer().getUniqueId());
     }

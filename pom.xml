@@ -7,7 +7,7 @@
 
     <groupId>net.godlycow.org</groupId>
     <artifactId>EssentialsC-parent</artifactId>
-    <version>4.1.6</version>
+    <version>4.1.7</version>
     <name>EssentialsC Parent</name>
     <description>Parent project for EssentialsC plugin and API</description>
     <packaging>pom</packaging>

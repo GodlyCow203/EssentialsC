@@ -9,7 +9,7 @@
     <parent>
         <groupId>net.godlycow.org</groupId>
         <artifactId>EssentialsC-parent</artifactId>
-        <version>4.1.6</version>
+        <version>4.1.7</version>
     </parent>
 
     <artifactId>EssentialsC-aggregator</artifactId>
