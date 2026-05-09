@@ -210,10 +210,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         this.economyManager = economyManager;
     }
 
-    public VaultHook getVaultHook() {
-        return vaultHook;
-    }
-
     public void setVaultHook(VaultHook vaultHook) {
         this.vaultHook = vaultHook;
     }
