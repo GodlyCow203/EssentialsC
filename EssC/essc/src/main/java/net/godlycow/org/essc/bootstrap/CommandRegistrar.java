@@ -98,7 +98,6 @@ public class CommandRegistrar {
         register("tphereall",      new TPHereAllCommand(plugin));
         register("kit",            new KitCommand(plugin));
         register("kits",           new KitsCommand(plugin));
-        register("realname",       new RealNameCommand(plugin));
         register("playtime",       new PlaytimeCommand(plugin));
         register("uptime",         new UptimeCommand(plugin));
         register("tphere",         new TPHereCommand(plugin));
