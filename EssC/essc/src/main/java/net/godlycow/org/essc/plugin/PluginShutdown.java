@@ -61,6 +61,27 @@ public final class PluginShutdown {
         if (plugin.getScheduleManager() != null) {
             plugin.getScheduleManager().shutdown();
         }
+        if (plugin.getWarpManager() != null) {
+            plugin.getWarpManager().shutdown();
+        }
+        if (plugin.getPunishmentManager() != null) {
+            plugin.getPunishmentManager().shutdown();
+        }
+        if (plugin.getIgnoreManager() != null) {
+            plugin.getIgnoreManager().shutdown();
+        }
+        if (plugin.getFlyManager() != null) {
+            plugin.getFlyManager().shutdown();
+        }
+        if (plugin.getTabManager() != null) {
+            plugin.getTabManager().shutdown();
+        }
+        if (plugin.getChatManager() != null) {
+            plugin.getChatManager().shutdown();
+        }
+        if (plugin.getSpawnManager() != null) {
+            plugin.getSpawnManager().shutdown();
+        }
 
         plugin.debug("All managers shut down.");
     }

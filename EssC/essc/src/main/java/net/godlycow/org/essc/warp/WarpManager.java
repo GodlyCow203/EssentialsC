@@ -347,13 +347,16 @@ public class WarpManager {
         });
     }
 
-    public void close() {
+    public void shutdown() {
         for (SchedulerTask task : warmupTasks.values()) {
             if (!task.isCancelled()) {
                 task.cancel();
             }
         }
         warmupTasks.clear();
+
+        plugin.debug("Shutting down the Warp Manager");
         database.disconnect();
+
     }
 }

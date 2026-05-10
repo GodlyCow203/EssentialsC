@@ -323,6 +323,14 @@ public class PunishmentManager {
         return mutes;
     }
 
+    public void shutdown() {
+        saveBans();
+        saveMutes();
+        saveIpHistory();
+        networkHook = null;
+        plugin.debug("Shutting down the Punishment Manager");
+    }
+
     public record BanEntry(UUID uuid, String name, String reason, String banner, long time, long expires) {}
     public record IpBanEntry(String ip, String reason, String banner, long time, long expires) {}
     public record MuteEntry(UUID uuid, String name, String reason, String muter, long time, long expires) {}

@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -258,5 +259,8 @@ public class SpawnManager implements Listener {
     public void shutdown() {
         pendingTeleports.values().forEach(SchedulerTask::cancel);
         pendingTeleports.clear();
+        teleportCooldowns.clear();
+        HandlerList.unregisterAll(this);
+        plugin.debug("Shutting down the Spawn Manager");
     }
 }

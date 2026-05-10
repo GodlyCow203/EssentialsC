@@ -3,6 +3,7 @@ package net.godlycow.org.essc.fly;
 import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -130,5 +131,13 @@ public class FlyManager implements Listener {
         } catch (IOException e) {
             plugin.getLogger().warning("Could not save flying players data");
         }
+    }
+
+    public void shutdown() {
+        if (persistent) {
+            saveData();
+        }
+        HandlerList.unregisterAll(this);
+        plugin.debug("Shutting down the flyManager");
     }
 }

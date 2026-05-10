@@ -12,6 +12,7 @@ import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -177,7 +178,13 @@ public class TabManager implements Listener {
     public boolean isEnabled()  {
         return luckPermsEnabled && useLuckPermsTab;
     }
-    public boolean isUsingTABPlugin() {
-        return tabHook != null;
+
+    public void shutdown() {
+        luckPerms = null;
+        luckPermsEnabled = false;
+        useLuckPermsTab = false;
+        HandlerList.unregisterAll(this);
+        plugin.debug("Shutting down the Tab Manager");
     }
+
 }

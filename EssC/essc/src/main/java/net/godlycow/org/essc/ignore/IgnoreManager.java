@@ -98,4 +98,11 @@ public class IgnoreManager {
     public String getLastKnownName(UUID uuid) {
         return lastKnownNames.get(uuid);
     }
+
+    public void shutdown() {
+        save();
+        ignoreCache.clear();
+        lastKnownNames.clear();
+        plugin.debug("Shutting down the Ignore Manager");
+    }
 }

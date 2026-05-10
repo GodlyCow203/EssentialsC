@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.chat;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.config.ConfigManager;
@@ -15,8 +16,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import io.papermc.paper.event.player.AsyncChatEvent;
 
 import java.util.Map;
 import java.util.UUID;
@@ -277,17 +278,13 @@ public class ChatManager implements Listener {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    public boolean isLuckPermsChatEnabled() {
-        return useLuckPermsFormatting;
-    }
 
-    public boolean isLuckPermsAvailable() {
-        return luckPermsEnabled;
-    }
-
-    public Component formatMessage(Player player, String message) {
-        Component messageComponent = applyMessageColorsToComponent(player, message);
-        if (!luckPermsEnabled || !useLuckPermsFormatting) return messageComponent;
-        return formatWithLuckPerms(player, messageComponent);
+    public void shutdown() {
+        lastMessageTime.clear();
+        luckPerms = null;
+        luckPermsEnabled = false;
+        useLuckPermsFormatting = false;
+        HandlerList.unregisterAll(this);
+        plugin.debug("Shutting down the ChatManager");
     }
 }
