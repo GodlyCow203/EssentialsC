@@ -33,7 +33,7 @@ public class RulesManager {
         try {
             if (!rulesFile.exists()) {
                 if (rulesFile.createNewFile()) {
-                    plugin.getLogger().info("Created rules.txt");
+                    plugin.debug("Created rules.txt");
                     createDefaultRules();
                 }
             }
@@ -82,8 +82,6 @@ public class RulesManager {
                 writer.newLine();
             }
 
-            plugin.getLogger().info("Populated rules.txt with colorful default rules");
-
         } catch (IOException e) {
             plugin.getLogger().severe("Failed to create default rules.txt: " + e.getMessage());
         }
@@ -91,10 +89,6 @@ public class RulesManager {
 
     public List<Component> getRules() {
         return new ArrayList<>(rules);
-    }
-
-    public int getRuleCount() {
-        return rules.size();
     }
 
     public void reload() {

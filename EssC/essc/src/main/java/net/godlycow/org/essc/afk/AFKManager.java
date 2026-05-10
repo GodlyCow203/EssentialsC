@@ -46,7 +46,7 @@ public class AFKManager implements Listener {
         this.miniMessage = plugin.getMiniMessage();
 
         if (!config.isAfkEnabled()) {
-            plugin.getLogger().info("AFK system is disabled in config");
+            plugin.debug("AFK system is disabled in config");
             return;
         }
 

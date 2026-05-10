@@ -84,14 +84,14 @@ public class ScoreboardManager implements Listener {
                 if (config.isEnabled()) {
                     Bukkit.getOnlinePlayers().forEach(this::addPlayer);
                     start();
-                    plugin.getLogger().info("Scoreboard reloaded successfully");
+                    plugin.debug("Scoreboard reloaded successfully");
                 } else {
                     Bukkit.getOnlinePlayers().forEach(p -> {
                         try {
                             p.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
                         } catch (Exception ignored) {}
                     });
-                    plugin.getLogger().info("Scoreboard disabled in config");
+                    plugin.debug("Scoreboard disabled in config");
                 }
             }
         } finally {
@@ -391,7 +391,7 @@ public class ScoreboardManager implements Listener {
             });
             saveDisabled();
             oldFile.renameTo(new File(plugin.getDataFolder(), "scoreboards/disabled.txt.backup"));
-            plugin.getLogger().info("Migrated scoreboard data to YAML format");
+            plugin.debug("Migrated scoreboard data to YAML format");
         } catch (Exception e) {
             plugin.getLogger().log(Level.WARNING, "Failed to migrate old scoreboard data", e);
         }

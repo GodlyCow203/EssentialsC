@@ -86,4 +86,5 @@ public class SyncConfig {
     public int getLocalPushIntervalTicks() {
         return 20;
     }
+
 }

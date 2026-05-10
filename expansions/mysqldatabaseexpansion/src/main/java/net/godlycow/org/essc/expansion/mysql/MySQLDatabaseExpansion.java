@@ -122,6 +122,7 @@ public class MySQLDatabaseExpansion extends JavaPlugin {
         getLogger().info("EssentialsC-MySQLExpansion disabled.");
     }
 
+
     public static MySQLDatabaseExpansion getInstance() {
         return instance;
     }

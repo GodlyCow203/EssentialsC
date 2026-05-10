@@ -97,7 +97,7 @@ public class KitDefinitions {
             }
         }
 
-        plugin.getLogger().info("Loaded " + kits.size() + " kits");
+        plugin.debug("Loaded " + kits.size() + " kits");
     }
 
     private void registerPermission(String permission) {

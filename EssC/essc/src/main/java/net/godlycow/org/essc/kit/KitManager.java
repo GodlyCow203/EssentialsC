@@ -56,12 +56,12 @@ public class KitManager implements Listener {
 
     public void setNetworkHook(KitSyncHook hook) {
         this.networkHook = hook;
-        plugin.getLogger().info("[KitManager] Network kit sync hook registered.");
+        plugin.debug("[KitManager] Network kit sync hook registered.");
     }
 
     public void clearNetworkHook() {
         this.networkHook = null;
-        plugin.getLogger().info("[KitManager] Network kit sync hook cleared.");
+        plugin.debug("[KitManager] Network kit sync hook cleared.");
     }
 
     public KitSyncHook getNetworkHook() {

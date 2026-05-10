@@ -240,7 +240,7 @@ public class LanguageManager {
                 try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
                     PRETTY_GSON.toJson(existing, writer);
                 }
-                plugin.getLogger().info("[EssentialsC] Migrated missing keys in lang/" + code + ".json");
+                plugin.debug("[EssentialsC] Migrated missing keys in lang/" + code + ".json");
             }
         } catch (Exception e) {
             plugin.getLogger().warning("Failed to migrate lang file " + code + ": " + e.getMessage());

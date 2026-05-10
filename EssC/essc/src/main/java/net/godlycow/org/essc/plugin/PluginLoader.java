@@ -93,7 +93,7 @@ public final class PluginLoader {
         registerPlaceholderAPI();
         timer.mark("placeholderapi");
         String timings = timer.finish();
-        plugin.getLogger().info("EssentialsC enabled — " + timings);
+        plugin.debug("EssentialsC enabled — " + timings);
     }
 
     private void loadLanguages() {
@@ -248,7 +248,7 @@ public final class PluginLoader {
     private void startMetrics() {
         int pluginId = 29401;
         Metrics metrics = new Metrics(plugin, pluginId);
-        plugin.getLogger().info("bStats Metrics initialized.");
+        plugin.debug("bStats Metrics initialized.");
 
         if (plugin.getConfigManager().isEconomyEnabled()) {
             EconomyCharts.register(plugin, metrics);
@@ -260,13 +260,13 @@ public final class PluginLoader {
 
     private void registerPlaceholderAPI() {
         if (plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            plugin.getLogger().info("PlaceholderAPI not found, skipping placeholder registration.");
+            plugin.debug("PlaceholderAPI not found, skipping placeholder registration.");
             return;
         }
 
         PlaceholderHook placeholderHook = new PlaceholderHook(plugin);
         if (placeholderHook.register()) {
-            plugin.getLogger().info("PlaceholderAPI hook registered successfully.");
+            plugin.debug("PlaceholderAPI hook registered successfully.");
         } else {
             plugin.getLogger().warning("Failed to register PlaceholderAPI hook.");
         }

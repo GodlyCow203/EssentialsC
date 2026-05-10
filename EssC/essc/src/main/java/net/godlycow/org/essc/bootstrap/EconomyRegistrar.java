@@ -29,9 +29,9 @@ public class EconomyRegistrar {
             plugin.setVaultHook(vaultHook);
 
             if (vaultHook.hook()) {
-                plugin.getLogger().info("Successfully hooked into Vault!");
+                plugin.debug("Successfully hooked into Vault!");
             } else {
-                plugin.getLogger().info("Using built-in economy system");
+                plugin.debug("Using built-in economy system");
             }
         }
 

@@ -42,7 +42,7 @@ public class ConfigMigrator {
             }
             if (!defaults.isConfigurationSection(key) && !config.isSet(key)) {
                 config.set(key, defaults.get(key));
-                plugin.getLogger().info("[EssentialsC] config.yml — added missing key: " + key);
+                plugin.debug("[EssentialsC] config.yml — added missing key: " + key);
                 dirty = true;
             }
         }
@@ -51,7 +51,7 @@ public class ConfigMigrator {
             runConfigVersionMigrations(config, version);
             config.set("config-version", CURRENT_CONFIG_VERSION);
             dirty = true;
-            plugin.getLogger().info("[EssentialsC] config.yml updated from version " + version + " to " + CURRENT_CONFIG_VERSION);
+            plugin.debug("[EssentialsC] config.yml updated from version " + version + " to " + CURRENT_CONFIG_VERSION);
         }
 
         if (dirty) {
@@ -79,7 +79,7 @@ public class ConfigMigrator {
             }
             if (!config.isSet(key)) {
                 config.set(key, defaults.get(key));
-                plugin.getLogger().info("[EssentialsC] commands.yml — added missing key: " + key);
+                plugin.debug("[EssentialsC] commands.yml — added missing key: " + key);
                 dirty = true;
             }
         }
@@ -88,7 +88,7 @@ public class ConfigMigrator {
             runCommandsVersionMigrations(config, version);
             config.set("config-version", CURRENT_COMMANDS_VERSION);
             dirty = true;
-            plugin.getLogger().info("[EssentialsC] commands.yml updated from version " + version + " to " + CURRENT_COMMANDS_VERSION);
+            plugin.debug("[EssentialsC] commands.yml updated from version " + version + " to " + CURRENT_COMMANDS_VERSION);
         }
 
         if (dirty) {

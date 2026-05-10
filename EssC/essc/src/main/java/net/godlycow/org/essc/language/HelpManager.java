@@ -314,7 +314,7 @@ public class HelpManager {
                 try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
                     PRETTY_GSON.toJson(existing, writer);
                 }
-                plugin.getLogger().info("[EssentialsC] Migrated missing keys in lang/help/" + code + ".json");
+                plugin.debug("[EssentialsC] Migrated missing keys in lang/help/" + code + ".json");
             }
         } catch (Exception e) {
             plugin.getLogger().warning("[EssentialsC] Failed to migrate help/" + code + ".json: " + e.getMessage());

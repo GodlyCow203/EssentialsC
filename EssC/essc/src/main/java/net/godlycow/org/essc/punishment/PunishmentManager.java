@@ -30,7 +30,7 @@ public class PunishmentManager {
 
     public void setNetworkHook(NetworkPunishmentHook hook) {
         this.networkHook = hook;
-        plugin.getLogger().info("[PunishmentManager] Network punishment hook registered.");
+        plugin.debug("[PunishmentManager] Network punishment hook registered.");
     }
 
     public void clearNetworkHook() {

@@ -15,7 +15,7 @@ public final class PluginShutdown {
         shutdownManagers();
         runBackup();
         unregisterAPI();
-        plugin.getLogger().info("EssentialsC disabled.");
+        plugin.debug("EssentialsC disabled.");
     }
 
     private void shutdownManagers() {
@@ -96,10 +96,10 @@ public final class PluginShutdown {
             return;
         }
 
-        plugin.getLogger().info("[Backup] Creating shutdown backup...");
+        plugin.debug("[Backup] Creating shutdown backup...");
         try {
             plugin.getBackupManager().createAsync(
-                    name -> plugin.getLogger().info("[Backup] Shutdown backup created: " + name),
+                    name -> plugin.debug("[Backup] Shutdown backup created: " + name),
                     err  -> plugin.getLogger().warning("[Backup] Shutdown backup failed: " + err)
             );
         } catch (Exception ex) {

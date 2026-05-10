@@ -65,7 +65,7 @@ public class GuiFramework {
                                 new InputStreamReader(resource, StandardCharsets.UTF_8)
                         );
                         defaultConfig.save(targetFile);
-                        plugin.getLogger().info("[GUI] Extracted default GUI config: " + guiName);
+                        plugin.debug("[GUI] Extracted default GUI config: " + guiName);
                     } else {
                         plugin.getLogger().warning("[GUI] Default GUI config not found in resources: " + resourcePath);
                     }

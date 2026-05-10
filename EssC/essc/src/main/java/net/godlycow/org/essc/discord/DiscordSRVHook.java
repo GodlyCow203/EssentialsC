@@ -45,12 +45,12 @@ public class DiscordSRVHook {
         }
 
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") == null) {
-            plugin.getLogger().info("DiscordSRV not found, skipping Discord integration.");
+            plugin.debug("DiscordSRV not found, skipping Discord integration.");
             return;
         }
 
         DiscordSRV.api.subscribe(this);
-        plugin.getLogger().info("DiscordSRV hook registered, waiting for Discord connection...");
+        plugin.debug("DiscordSRV hook registered, waiting for Discord connection...");
     }
 
     public void shutdown() {
@@ -64,7 +64,7 @@ public class DiscordSRVHook {
         this.discordSRV = DiscordSRV.getPlugin();
         this.jda = DiscordSRV.getPlugin().getJda();
         this.hooked = true;
-        plugin.getLogger().info("DiscordSRV connected successfully! Discord integration active.");
+        plugin.debug("DiscordSRV connected successfully! Discord integration active.");
 
         validateChannels();
     }

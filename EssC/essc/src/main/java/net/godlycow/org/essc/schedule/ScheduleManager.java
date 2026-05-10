@@ -56,7 +56,7 @@ public class ScheduleManager {
         }
 
         startTasks();
-        plugin.getLogger().info("[Schedules] Loaded " + schedules.size() + " schedule(s).");
+        plugin.debug("[Schedules] Loaded " + schedules.size() + " schedule(s).");
     }
 
     public void reload() {
