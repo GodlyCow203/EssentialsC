@@ -97,8 +97,8 @@ public final class PluginLoader {
     }
 
     private void loadLanguages() {
-        plugin.saveResource("lang/en_US.json", false);
-        plugin.saveResource("lang/de_DE.json", false);
+        saveResourceIfAbsent("lang/en_US.json");
+        saveResourceIfAbsent("lang/de_DE.json");
 
         LanguageManager languageManager = new LanguageManager(plugin);
         languageManager.load(plugin.getConfigManager().getDefaultLanguage());
@@ -269,6 +269,13 @@ public final class PluginLoader {
             plugin.getLogger().info("PlaceholderAPI hook registered successfully.");
         } else {
             plugin.getLogger().warning("Failed to register PlaceholderAPI hook.");
+        }
+    }
+
+    private void saveResourceIfAbsent(String resourcePath) {
+        java.io.File target = new java.io.File(plugin.getDataFolder(), resourcePath);
+        if (!target.exists()) {
+            plugin.saveResource(resourcePath, false);
         }
     }
 }

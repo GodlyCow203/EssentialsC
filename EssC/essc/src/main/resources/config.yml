@@ -4,6 +4,9 @@
 # MiniMessage formatting is supported in all message fields.
 # MiniMessage reference: https://docs.advntr.dev/minimessage/format.html
 
+# The Config Version
+# Do NOT CHANGE this
+config-version: 1
 
 # General settings
 

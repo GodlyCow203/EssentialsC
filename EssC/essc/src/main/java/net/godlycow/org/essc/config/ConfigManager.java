@@ -10,10 +10,12 @@ import java.util.List;
 public class ConfigManager {
     private final EssentialsC plugin;
     private FileConfiguration config;
+    private final ConfigMigrator migrator;
 
     public ConfigManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
+        this.migrator = new ConfigMigrator(plugin);
     }
 
     public void reload() {
@@ -37,24 +39,8 @@ public class ConfigManager {
     }
 
     public void migrate() {
-        java.io.InputStream defStream = plugin.getResource("config.yml");
-        if (defStream == null) return;
-
-        org.bukkit.configuration.file.YamlConfiguration defaults =
-                org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(
-                        new java.io.InputStreamReader(defStream, java.nio.charset.StandardCharsets.UTF_8)
-                );
-
-        boolean dirty = false;
-        for (String key : defaults.getKeys(true)) {
-            if (!defaults.isConfigurationSection(key) && !config.isSet(key)) {
-                config.set(key, defaults.get(key));
-                plugin.getLogger().info("[EssentialsC] Migrated missing config key: " + key);
-                dirty = true;
-            }
-        }
-
-        if (dirty) plugin.saveConfig();
+        migrator.migrateConfig();
+        config = plugin.getConfig();
     }
 
     public boolean isEconomyEnabled() {

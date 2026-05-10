@@ -33,7 +33,9 @@ public class ScheduleManager {
 
 
     public void load() {
-        plugin.saveResource("schedules.yml", false);
+        if (!file.exists()) {
+            plugin.saveResource("schedules.yml", false);
+        }
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         migrate(config);
 

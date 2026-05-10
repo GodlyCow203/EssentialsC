@@ -5,11 +5,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 
 public class CommandsConfig {
@@ -17,14 +12,18 @@ public class CommandsConfig {
     private final EssentialsC plugin;
     private final File file;
     private FileConfiguration config;
+    private final ConfigMigrator migrator;
 
     public CommandsConfig(EssentialsC plugin) {
         this.plugin = plugin;
         this.file = new File(plugin.getDataFolder(), "commands.yml");
+        this.migrator = new ConfigMigrator(plugin);
     }
 
     public void load() {
-        plugin.saveResource("commands.yml", false);
+        if (!file.exists()) {
+            plugin.saveResource("commands.yml", false);
+        }
         config = YamlConfiguration.loadConfiguration(file);
         migrate();
     }
@@ -36,31 +35,7 @@ public class CommandsConfig {
     }
 
     public void migrate() {
-        InputStream defaultStream = plugin.getResource("commands.yml");
-        if (defaultStream == null) return;
-
-        FileConfiguration defaults = YamlConfiguration.loadConfiguration(
-                new InputStreamReader(defaultStream, StandardCharsets.UTF_8)
-        );
-
-        boolean dirty = false;
-        for (String key : defaults.getKeys(true)) {
-            if (!config.contains(key)) {
-                config.set(key, defaults.get(key));
-                plugin.getLogger().info("[EssentialsC] Migrated missing commands.yml key: " + key);
-                dirty = true;
-            }
-        }
-
-        if (dirty) save();
-    }
-
-    private void save() {
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            plugin.getLogger().severe("Could not save commands.yml: " + e.getMessage());
-        }
+        migrator.migrateCommands(config, file);
     }
 
     public boolean isEnabled(String command) {

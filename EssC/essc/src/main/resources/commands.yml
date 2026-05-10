@@ -1,5 +1,11 @@
 # EssentialsC — commands.yml
 #
+
+# The Config Version
+# Do NOT CHANGE this
+config-version: 1
+
+
 # Controls which commands EssentialsC registers and how they compete for their
 # plain name against Vanilla and other plugins.
 #

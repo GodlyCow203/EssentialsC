@@ -285,6 +285,11 @@ public class HelpManager {
         }
     }
 
+    private static final com.google.gson.Gson PRETTY_GSON = new com.google.gson.GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
+
     private void migrateHelpFile(String code) {
         File file = new File(plugin.getDataFolder(), "lang/help/" + code + ".json");
         if (!file.exists()) return;
@@ -307,7 +312,7 @@ public class HelpManager {
             }
             if (dirty) {
                 try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
-                    new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(existing, writer);
+                    PRETTY_GSON.toJson(existing, writer);
                 }
                 plugin.getLogger().info("[EssentialsC] Migrated missing keys in lang/help/" + code + ".json");
             }

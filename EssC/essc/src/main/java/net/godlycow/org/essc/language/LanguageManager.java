@@ -205,6 +205,11 @@ public class LanguageManager {
         load(defaultLang);
     }
 
+    private static final com.google.gson.Gson PRETTY_GSON = new com.google.gson.GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
+
     private void migrateLangFile(String code) {
         File file = new File(plugin.getDataFolder(), "lang/" + code + ".json");
         if (!file.exists()) return;
@@ -233,7 +238,7 @@ public class LanguageManager {
 
             if (dirty) {
                 try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
-                    new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(existing, writer);
+                    PRETTY_GSON.toJson(existing, writer);
                 }
                 plugin.getLogger().info("[EssentialsC] Migrated missing keys in lang/" + code + ".json");
             }
