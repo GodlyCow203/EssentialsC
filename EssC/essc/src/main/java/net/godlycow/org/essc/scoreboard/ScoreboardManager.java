@@ -2,19 +2,19 @@ package net.godlycow.org.essc.scoreboard;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.softwares.SchedulerTask;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
@@ -22,12 +22,11 @@ public class ScoreboardManager implements Listener {
     private final EssentialsC plugin;
     private final PlaceholderProcessor processor;
     private final Map<UUID, PlayerScoreboard> boards = new HashMap<>();
-    private final Set<UUID> disabledPlayers = new HashSet<>();
+    // Local cache of disabled state, synced with DB on changes
+    private final Set<UUID> disabledPlayers = ConcurrentHashMap.newKeySet();
 
     private ScoreboardConfig config;
     private SchedulerTask updateTask;
-    private File dataFile;
-    private YamlConfiguration dataConfig;
     private final AtomicBoolean reloading = new AtomicBoolean(false);
     private final Object lock = new Object();
 
@@ -41,16 +40,91 @@ public class ScoreboardManager implements Listener {
     public ScoreboardManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.processor = new PlaceholderProcessor();
-        this.dataFile = new File(plugin.getDataFolder(), "scoreboards/data.yml");
 
         loadConfig();
-        loadDisabled();
 
         if (config.isEnabled()) {
             start();
         }
-
         Bukkit.getPluginManager().registerEvents(this, plugin);
+
+        migrateOldScoreboardData();
+    }
+
+    private void migrateOldScoreboardData() {
+        File scoreboardsDir = new File(plugin.getDataFolder(), "scoreboards");
+        if (!scoreboardsDir.exists()) return;
+
+        Set<UUID> toDisable = new HashSet<>();
+
+        File dataFile = new File(scoreboardsDir, "data.yml");
+        if (dataFile.exists()) {
+            try {
+                org.bukkit.configuration.file.YamlConfiguration dataConfig =
+                        org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(dataFile);
+                List<String> uuidList = dataConfig.getStringList("disabled-players");
+                for (String uuidStr : uuidList) {
+                    try {
+                        toDisable.add(UUID.fromString(uuidStr));
+                    } catch (IllegalArgumentException ignored) {}
+                }
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to read legacy scoreboard data.yml: " + e.getMessage());
+            }
+        }
+
+        File oldTxtFile = new File(scoreboardsDir, "disabled.txt");
+        if (oldTxtFile.exists()) {
+            try {
+                java.nio.file.Files.readAllLines(oldTxtFile.toPath()).forEach(line -> {
+                    try {
+                        toDisable.add(UUID.fromString(line.trim()));
+                    } catch (IllegalArgumentException ignored) {}
+                });
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to read legacy scoreboard disabled.txt: " + e.getMessage());
+            }
+        }
+
+        if (toDisable.isEmpty()) {
+            cleanupOldScoreboardFiles(scoreboardsDir);
+            return;
+        }
+
+        int migrated = 0;
+        for (UUID uuid : toDisable) {
+            plugin.getUserManager().getRepository().findByUuid(uuid).thenAccept(profile -> {
+                if (profile != null) {
+                    profile.setScoreboardDisabled(true);
+                    profile.setUpdatedAt(System.currentTimeMillis() / 1000L);
+                    plugin.getUserManager().saveAsync(profile);
+                }
+            });
+            migrated++;
+        }
+
+        plugin.getLogger().info("Migrated " + migrated + " scoreboard disabled states to database.");
+
+        cleanupOldScoreboardFiles(scoreboardsDir);
+    }
+
+    private void cleanupOldScoreboardFiles(File scoreboardsDir) {
+        File dataFile = new File(scoreboardsDir, "data.yml");
+        if (dataFile.exists()) {
+            dataFile.renameTo(new File(scoreboardsDir, "data.yml.migrated"));
+        }
+        File oldTxtFile = new File(scoreboardsDir, "disabled.txt");
+        if (oldTxtFile.exists()) {
+            oldTxtFile.renameTo(new File(scoreboardsDir, "disabled.txt.migrated"));
+        }
+        File backupTxt = new File(scoreboardsDir, "disabled.txt.backup");
+        if (backupTxt.exists()) {
+            backupTxt.delete();
+        }
+        File[] remaining = scoreboardsDir.listFiles();
+        if (remaining != null && remaining.length == 0) {
+            scoreboardsDir.delete();
+        }
     }
 
     public void loadConfig() {
@@ -105,7 +179,7 @@ public class ScoreboardManager implements Listener {
                 10L, config.getUpdateInterval());
     }
 
-    private void addPlayer(Player player) {
+    private void addPlayer(@NonNull Player player) {
         if (disabledPlayers.contains(player.getUniqueId())) return;
         if (!player.isOnline()) return;
 
@@ -204,12 +278,16 @@ public class ScoreboardManager implements Listener {
 
                 for (Player player : toProcess) {
                     try {
-                        String title = translateColorCodes(processor.processString(player, config.getTitleRaw()));
+                        String title = LegacyColorConverter.toMiniMessage(
+                                processor.processString(player, config.getTitleRaw())
+                        );
                         List<String> lineList = config.getLines();
                         String[] lines = new String[lineList.size()];
 
                         for (int i = 0; i < lineList.size(); i++) {
-                            lines[i] = translateColorCodes(processor.processString(player, lineList.get(i)));
+                            lines[i] = LegacyColorConverter.toMiniMessage(
+                                    processor.processString(player, lineList.get(i))
+                            );
                         }
 
                         results.add(new ProcessedResult(player.getUniqueId(), title, lines));
@@ -258,65 +336,18 @@ public class ScoreboardManager implements Listener {
 
     private record ProcessedResult(UUID uuid, String title, String[] lines) {}
 
-    private String translateColorCodes(String text) {
-        if (text == null || text.isEmpty()) return text;
-
-        StringBuilder sb = new StringBuilder(text.length() + 16);
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == '&' && i + 1 < text.length()) {
-                char code = text.charAt(i + 1);
-                String replacement = switch (code) {
-                    case '0' -> "<black>";
-                    case '1' -> "<dark_blue>";
-                    case '2' -> "<dark_green>";
-                    case '3' -> "<dark_aqua>";
-                    case '4' -> "<dark_red>";
-                    case '5' -> "<dark_purple>";
-                    case '6' -> "<gold>";
-                    case '7' -> "<gray>";
-                    case '8' -> "<dark_gray>";
-                    case '9' -> "<blue>";
-                    case 'a' -> "<green>";
-                    case 'b' -> "<aqua>";
-                    case 'c' -> "<red>";
-                    case 'd' -> "<light_purple>";
-                    case 'e' -> "<yellow>";
-                    case 'f' -> "<white>";
-                    case 'k' -> "<obfuscated>";
-                    case 'l' -> "<bold>";
-                    case 'm' -> "<strikethrough>";
-                    case 'n' -> "<underlined>";
-                    case 'o' -> "<italic>";
-                    case 'r' -> "<reset>";
-                    default -> null;
-                };
-
-                if (replacement != null) {
-                    sb.append(replacement);
-                    i++;
-                    continue;
-                }
-            }
-            sb.append(c);
-        }
-
-        return sb.toString();
-    }
-
     public void toggle(Player player) {
         UUID uuid = player.getUniqueId();
+        boolean currentlyDisabled = disabledPlayers.contains(uuid);
 
-        if (disabledPlayers.contains(uuid)) {
+        if (currentlyDisabled) {
             disabledPlayers.remove(uuid);
+            plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, false);
             addPlayer(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.enabled"));
-            if (plugin.getUserManager() != null) {
-                plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, false);
-            }
         } else {
             disabledPlayers.add(uuid);
+            plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, true);
             removePlayer(player);
             placeholderCache.remove(uuid);
             try {
@@ -325,22 +356,11 @@ public class ScoreboardManager implements Listener {
                 plugin.getLogger().warning("Error resetting scoreboard: " + e.getMessage());
             }
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.disabled"));
-            if (plugin.getUserManager() != null) {
-                plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, true);
-            }
-        }
-
-        if (config.isPersistent()) {
-            saveDisabled();
         }
     }
 
     public boolean isEnabled(Player player) {
         return !disabledPlayers.contains(player.getUniqueId());
-    }
-
-    public boolean isGloballyEnabled() {
-        return config != null && config.isEnabled();
     }
 
     private void removePlayer(Player player) {
@@ -359,61 +379,6 @@ public class ScoreboardManager implements Listener {
         placeholderCache.remove(player.getUniqueId());
     }
 
-    private void loadDisabled() {
-        if (!config.isPersistent()) return;
-
-        File oldFile = new File(plugin.getDataFolder(), "scoreboards/disabled.txt");
-        if (oldFile.exists()) {
-            migrateFromOldFormat(oldFile);
-        }
-
-        if (!dataFile.exists()) return;
-
-        try {
-            dataConfig = YamlConfiguration.loadConfiguration(dataFile);
-            List<String> uuidList = dataConfig.getStringList("disabled-players");
-            for (String uuidStr : uuidList) {
-                try {
-                    disabledPlayers.add(UUID.fromString(uuidStr));
-                } catch (IllegalArgumentException ignored) {}
-            }
-        } catch (Exception e) {
-            plugin.getLogger().log(Level.WARNING, "Failed to load scoreboard data", e);
-        }
-    }
-
-    private void migrateFromOldFormat(File oldFile) {
-        try {
-            java.nio.file.Files.readAllLines(oldFile.toPath()).forEach(line -> {
-                try {
-                    disabledPlayers.add(UUID.fromString(line.trim()));
-                } catch (IllegalArgumentException ignored) {}
-            });
-            saveDisabled();
-            oldFile.renameTo(new File(plugin.getDataFolder(), "scoreboards/disabled.txt.backup"));
-            plugin.debug("Migrated scoreboard data to YAML format");
-        } catch (Exception e) {
-            plugin.getLogger().log(Level.WARNING, "Failed to migrate old scoreboard data", e);
-        }
-    }
-
-    private void saveDisabled() {
-        if (!config.isPersistent()) return;
-
-        try {
-            dataFile.getParentFile().mkdirs();
-            dataConfig = new YamlConfiguration();
-            List<String> uuidList = new ArrayList<>();
-            for (UUID uuid : disabledPlayers) {
-                uuidList.add(uuid.toString());
-            }
-            dataConfig.set("disabled-players", uuidList);
-            dataConfig.save(dataFile);
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.WARNING, "Failed to save scoreboard data", e);
-        }
-    }
-
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         if (!config.isEnabled() || reloading.get()) return;
@@ -421,8 +386,13 @@ public class ScoreboardManager implements Listener {
         Player joining = event.getPlayer();
         UUID uuid = joining.getUniqueId();
 
-        if (plugin.getUserManager() != null && plugin.getUserManager().getStateManager().isScoreboardDisabled(uuid)) {
-            disabledPlayers.add(uuid);
+        if (plugin.getUserManager() != null) {
+            boolean dbDisabled = plugin.getUserManager().getStateManager().isScoreboardDisabled(uuid);
+            if (dbDisabled) {
+                disabledPlayers.add(uuid);
+            } else {
+                disabledPlayers.remove(uuid);
+            }
         }
 
         plugin.getEssScheduler().runForLocationLater(joining.getLocation(), () -> {
@@ -440,6 +410,5 @@ public class ScoreboardManager implements Listener {
     public void shutdown() {
         reloading.set(true);
         stop();
-        saveDisabled();
     }
 }

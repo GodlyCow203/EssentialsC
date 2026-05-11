@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.scoreboard;
 
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.ConfigurationSection;
@@ -24,7 +25,7 @@ public class ScoreboardConfig {
         this.updateInterval = Math.max(1, config.getInt("update-interval", 20));
         this.persistent = config.getBoolean("persistent", true);
 
-        this.titleRaw = translateColorCodes(config.getString("title", "<gold><bold>MyServer</bold></gold>"));
+        this.titleRaw = LegacyColorConverter.toMiniMessage(config.getString("title", "<gold><bold>MyServer</bold></gold>"));
         this.title = MINI_MESSAGE.deserialize(titleRaw);
 
         List<String> rawLines = config.getStringList("lines");
@@ -34,7 +35,7 @@ public class ScoreboardConfig {
 
         List<String> processedLines = new ArrayList<>(rawLines.size());
         for (String line : rawLines) {
-            processedLines.add(translateColorCodes(line));
+            processedLines.add(LegacyColorConverter.toMiniMessage(line));
         }
         this.lines = Collections.unmodifiableList(processedLines);
 
@@ -49,61 +50,11 @@ public class ScoreboardConfig {
         return line.split("(?=%)", -1);
     }
 
-    private String translateColorCodes(String text) {
-        if (text == null || text.isEmpty()) return text;
-
-        StringBuilder sb = new StringBuilder(text.length() + 16);
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == '&' && i + 1 < text.length()) {
-                char code = text.charAt(i + 1);
-                String replacement = switch (code) {
-                    case '0' -> "<black>";
-                    case '1' -> "<dark_blue>";
-                    case '2' -> "<dark_green>";
-                    case '3' -> "<dark_aqua>";
-                    case '4' -> "<dark_red>";
-                    case '5' -> "<dark_purple>";
-                    case '6' -> "<gold>";
-                    case '7' -> "<gray>";
-                    case '8' -> "<dark_gray>";
-                    case '9' -> "<blue>";
-                    case 'a' -> "<green>";
-                    case 'b' -> "<aqua>";
-                    case 'c' -> "<red>";
-                    case 'd' -> "<light_purple>";
-                    case 'e' -> "<yellow>";
-                    case 'f' -> "<white>";
-                    case 'k' -> "<obfuscated>";
-                    case 'l' -> "<bold>";
-                    case 'm' -> "<strikethrough>";
-                    case 'n' -> "<underlined>";
-                    case 'o' -> "<italic>";
-                    case 'r' -> "<reset>";
-                    default -> null;
-                };
-
-                if (replacement != null) {
-                    sb.append(replacement);
-                    i++;
-                    continue;
-                }
-            }
-            sb.append(c);
-        }
-
-        return sb.toString();
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
     public int getUpdateInterval() {
         return updateInterval;
-    }
-    public boolean isPersistent() {
-        return persistent;
     }
     public Component getTitle() {
         return title;

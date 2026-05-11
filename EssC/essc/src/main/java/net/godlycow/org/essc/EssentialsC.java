@@ -23,7 +23,6 @@ import net.godlycow.org.essc.fly.FlyManager;
 import net.godlycow.org.essc.home.HomeManager;
 import net.godlycow.org.essc.home.HomeNotificationManager;
 import net.godlycow.org.essc.home.gui.GuiManager;
-import net.godlycow.org.essc.ignore.IgnoreManager;
 import net.godlycow.org.essc.kit.KitManager;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
@@ -82,7 +81,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private ShopManager shopManager;
     private NickManager nickManager;
     private PunishmentManager punishmentManager;
-    private IgnoreManager ignoreManager;
     private ReplyManager replyManager;
     private AuctionManager auctionManager;
     private WarpManager warpManager;
@@ -331,13 +329,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         this.punishmentManager = punishmentManager;
     }
 
-    public IgnoreManager getIgnoreManager() {
-        return ignoreManager;
-    }
 
-    public void setIgnoreManager(IgnoreManager ignoreManager) {
-        this.ignoreManager = ignoreManager;
-    }
 
     public ReplyManager getReplyManager() {
         return replyManager;

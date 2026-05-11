@@ -16,24 +16,25 @@ public class IgnoreCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
+        UUID playerUuid = player.getUniqueId();
 
         if (args.length == 0) {
-            Set<UUID> ignored = plugin.getIgnoreManager().getIgnored(player.getUniqueId());
-            if (ignored.isEmpty()) {
-                player.sendMessage(lang.get(player, "ignore.list_empty"));
-                return true;
-            }
+            plugin.getUserManager().getRepository().getIgnoredPlayers(playerUuid).thenAccept(ignored -> {
+                if (ignored.isEmpty()) {
+                    player.sendMessage(lang.get(player, "ignore.list_empty"));
+                    return;
+                }
 
-            player.sendMessage(lang.get(player, "ignore.list_header"));
-            for (UUID uuid : ignored) {
-                Player ignoredPlayer = plugin.getServer().getPlayer(uuid);
-                String name = ignoredPlayer != null ? ignoredPlayer.getName() : plugin.getIgnoreManager().getLastKnownName(uuid);
-                if (name == null) name = "Unknown";
+                player.sendMessage(lang.get(player, "ignore.list_header"));
+                for (UUID uuid : ignored) {
+                    Player ignoredPlayer = plugin.getServer().getPlayer(uuid);
+                    String name = ignoredPlayer != null ? ignoredPlayer.getName() : "Unknown";
 
-                Map<String, String> placeholders = new HashMap<>();
-                placeholders.put("player", name);
-                player.sendMessage(lang.get(player, "ignore.list_entry", placeholders));
-            }
+                    Map<String, String> placeholders = new HashMap<>();
+                    placeholders.put("player", name);
+                    player.sendMessage(lang.get(player, "ignore.list_entry", placeholders));
+                }
+            });
             return true;
         }
 
@@ -58,21 +59,28 @@ public class IgnoreCommand extends Command {
             return true;
         }
 
-        boolean isIgnoring = plugin.getIgnoreManager().isIgnoring(player.getUniqueId(), target.getUniqueId());
+        UUID targetUuid = target.getUniqueId();
+        plugin.getUserManager().getRepository().getIgnoredPlayers(playerUuid).thenAccept(ignored -> {
+            boolean isIgnoring = ignored.contains(targetUuid);
 
-        if (isIgnoring) {
-            plugin.getIgnoreManager().unignore(player.getUniqueId(), target.getUniqueId());
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", target.getName());
-            player.sendMessage(lang.get(player, "ignore.unignored", placeholders));
-            plugin.debug(player.getName() + " unignored " + target.getName());
-        } else {
-            plugin.getIgnoreManager().ignore(player.getUniqueId(), target.getUniqueId(), target.getName());
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", target.getName());
-            player.sendMessage(lang.get(player, "ignore.ignored", placeholders));
-            plugin.debug(player.getName() + " ignored " + target.getName());
-        }
+            if (isIgnoring) {
+                plugin.getUserManager().getRepository().removeIgnoredPlayer(playerUuid, targetUuid)
+                        .thenRun(() -> {
+                            Map<String, String> placeholders = new HashMap<>();
+                            placeholders.put("player", target.getName());
+                            player.sendMessage(lang.get(player, "ignore.unignored", placeholders));
+                            plugin.debug(player.getName() + " unignored " + target.getName());
+                        });
+            } else {
+                plugin.getUserManager().getRepository().addIgnoredPlayer(playerUuid, targetUuid, target.getName())
+                        .thenRun(() -> {
+                            Map<String, String> placeholders = new HashMap<>();
+                            placeholders.put("player", target.getName());
+                            player.sendMessage(lang.get(player, "ignore.ignored", placeholders));
+                            plugin.debug(player.getName() + " ignored " + target.getName());
+                        });
+            }
+        });
 
         return true;
     }
@@ -80,13 +88,7 @@ public class IgnoreCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1 && sender instanceof Player player) {
-            Set<UUID> ignored = plugin.getIgnoreManager().getIgnored(player.getUniqueId());
-            return plugin.getServer().getOnlinePlayers().stream()
-                    .filter(p -> !p.equals(sender))
-                    .filter(p -> !ignored.contains(p.getUniqueId()) || ignored.contains(p.getUniqueId()))
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .toList();
+            return plugin.getServer().getOnlinePlayers().stream().filter(p -> !p.equals(sender)).map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList();
         }
         return Collections.emptyList();
     }
