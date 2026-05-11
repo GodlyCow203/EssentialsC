@@ -2,12 +2,11 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.util.LegacyColorConverter;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class MsgCommand extends Command {
 
@@ -17,6 +16,11 @@ public class MsgCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
+        if (args.length < 2) {
+            sendUsage(sender);
+            return true;
+        }
+
         String targetName = args[0];
         Player target = plugin.getServer().getPlayer(targetName);
 
@@ -32,36 +36,41 @@ public class MsgCommand extends Command {
             return true;
         }
 
-        if (sender instanceof Player playerSender) {
-            if (plugin.getIgnoreManager().isIgnoring(target.getUniqueId(), playerSender.getUniqueId())) {
-                sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
-                return true;
-            }
-        }
-
-        if (sender instanceof Player playerSender) {
-            if (plugin.getIgnoreManager().isIgnoring(playerSender.getUniqueId(), target.getUniqueId())) {
-                sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
-                return true;
-            }
-        }
-
         StringBuilder messageBuilder = new StringBuilder();
         for (int i = 1; i < args.length; i++) {
             messageBuilder.append(args[i]).append(" ");
         }
-        String rawMessage = messageBuilder.toString().trim();
-        String message = MiniMessage.miniMessage().escapeTags(LegacyColorConverter.strip(rawMessage));
+        String message = messageBuilder.toString().trim();
 
         if (message.isEmpty()) {
             sendUsage(sender);
             return true;
         }
 
-        if (sender instanceof Player playerSender) {
-            plugin.getReplyManager().setReplyTarget(target.getUniqueId(), playerSender.getUniqueId());
+        Player senderPlayer = sender instanceof Player ? (Player) sender : null;
+
+        if (senderPlayer != null) {
+            try {
+                Set<UUID> targetIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId()).get();
+                if (targetIgnored.contains(senderPlayer.getUniqueId())) {
+                    sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
+                    return true;
+                }
+
+                Set<UUID> senderIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(senderPlayer.getUniqueId()).get();
+                if (senderIgnored.contains(target.getUniqueId())) {
+                    sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
+                    return true;
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                plugin.getLogger().warning("Failed to check ignore status for msg: " + e.getMessage());
+            }
         }
-        plugin.getReplyManager().setReplyTarget(target.getUniqueId(), sender instanceof Player ? ((Player) sender).getUniqueId() : null);
+
+        if (senderPlayer != null) {
+            plugin.getReplyManager().setReplyTarget(senderPlayer.getUniqueId(), target.getUniqueId());
+            plugin.getReplyManager().setReplyTarget(target.getUniqueId(), senderPlayer.getUniqueId());
+        }
 
         plugin.debug("Message from " + sender.getName() + " to " + target.getName() + ": " + message);
 
@@ -71,7 +80,7 @@ public class MsgCommand extends Command {
         sender.sendMessage(lang.get(sender, "msg.outgoing", senderPlaceholders));
 
         Map<String, String> targetPlaceholders = new HashMap<>();
-        targetPlaceholders.put("sender", sender instanceof Player ? sender.getName() : "Console");
+        targetPlaceholders.put("sender", sender.getName());
         targetPlaceholders.put("message", message);
         target.sendMessage(lang.get(target, "msg.incoming", targetPlaceholders));
 
@@ -92,10 +101,11 @@ public class MsgCommand extends Command {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
+            String partial = args[0].toLowerCase();
             return plugin.getServer().getOnlinePlayers().stream()
                     .filter(p -> !p.equals(sender))
                     .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
+                    .filter(name -> name.toLowerCase().startsWith(partial))
                     .toList();
         }
         return Collections.emptyList();

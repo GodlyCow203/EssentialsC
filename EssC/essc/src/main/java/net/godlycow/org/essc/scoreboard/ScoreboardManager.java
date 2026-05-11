@@ -22,7 +22,6 @@ public class ScoreboardManager implements Listener {
     private final EssentialsC plugin;
     private final PlaceholderProcessor processor;
     private final Map<UUID, PlayerScoreboard> boards = new HashMap<>();
-    // Local cache of disabled state, synced with DB on changes
     private final Set<UUID> disabledPlayers = ConcurrentHashMap.newKeySet();
 
     private ScoreboardConfig config;

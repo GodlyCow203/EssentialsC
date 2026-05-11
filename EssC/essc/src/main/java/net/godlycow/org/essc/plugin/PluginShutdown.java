@@ -67,9 +67,6 @@ public final class PluginShutdown {
         if (plugin.getPunishmentManager() != null) {
             plugin.getPunishmentManager().shutdown();
         }
-        if (plugin.getIgnoreManager() != null) {
-            plugin.getIgnoreManager().shutdown();
-        }
         if (plugin.getFlyManager() != null) {
             plugin.getFlyManager().shutdown();
         }

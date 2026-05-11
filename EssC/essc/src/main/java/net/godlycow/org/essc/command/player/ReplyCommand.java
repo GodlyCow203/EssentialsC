@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class ReplyCommand extends Command {
 
@@ -50,14 +51,20 @@ public class ReplyCommand extends Command {
 
         Player playerSender = (Player) sender;
 
-        if (plugin.getIgnoreManager().isIgnoring(target.getUniqueId(), playerSender.getUniqueId())) {
-            sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
-            return true;
-        }
+        try {
+            Set<UUID> targetIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId()).get();
+            if (targetIgnored.contains(playerSender.getUniqueId())) {
+                sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
+                return true;
+            }
 
-        if (plugin.getIgnoreManager().isIgnoring(playerSender.getUniqueId(), target.getUniqueId())) {
-            sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
-            return true;
+            Set<UUID> senderIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(playerSender.getUniqueId()).get();
+            if (senderIgnored.contains(target.getUniqueId())) {
+                sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
+                return true;
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            plugin.debug("Failed to check ignore status for reply: " + e.getMessage());
         }
 
         plugin.getReplyManager().setReplyTarget(target.getUniqueId(), playerSender.getUniqueId());
