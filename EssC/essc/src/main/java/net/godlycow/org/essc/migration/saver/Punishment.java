@@ -38,7 +38,8 @@ public class Punishment {
             );
             plugin.debug("Migrated mute for " + data.name());
             return new PunishmentResult(true, null);
-        }, runnable -> plugin.getServer().getScheduler().runTask(plugin, runnable).getTaskId());
+        },
+                plugin.getEssScheduler().asyncExecutor());
     }
 
     public CompletableFuture<PunishmentResult> writeBan(BanTransfer data, boolean dryRun) {
@@ -66,7 +67,8 @@ public class Punishment {
             );
             plugin.debug("Migrated ban for " + data.name());
             return new PunishmentResult(true, null);
-        }, runnable -> plugin.getServer().getScheduler().runTask(plugin, runnable).getTaskId());
+        }
+        , plugin.getEssScheduler().asyncExecutor());
     }
 
     public record PunishmentResult(boolean success, String message) {}

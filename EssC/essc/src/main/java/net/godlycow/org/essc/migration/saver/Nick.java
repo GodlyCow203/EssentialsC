@@ -49,7 +49,7 @@ public class Nick {
 
                     Player onlinePlayer = plugin.getServer().getPlayer(data.uuid());
                     if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
+                        plugin.getEssScheduler().runForEntity(onlinePlayer, () -> {
                             plugin.getNickManager().applyNickname(onlinePlayer);
                             plugin.debug("Applied migrated nickname to online player: " + onlinePlayer.getName());
                         });
