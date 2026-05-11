@@ -65,7 +65,7 @@ public class ShopGuiManager {
             if (category.getPermission() != null && !player.hasPermission(category.getPermission())) continue;
             int slot = category.getSlot();
             if (slot >= 0 && slot < inv.getSize()) {
-                inv.setItem(slot, createCategoryIcon(category));
+                inv.setItem(slot, createCategoryIcon(category, player));
             }
         }
 
@@ -170,7 +170,7 @@ public class ShopGuiManager {
         }
     }
 
-    private ItemStack createCategoryIcon(ShopCategory category) {
+    private ItemStack createCategoryIcon(ShopCategory category, Player player) {
         ItemStack item = new ItemStack(category.getIcon());
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return item;
@@ -182,7 +182,7 @@ public class ShopGuiManager {
             lore.add(mm.deserialize(line).decoration(TextDecoration.ITALIC, false));
         }
         lore.add(mm.deserialize("").decoration(TextDecoration.ITALIC, false));
-        lore.add(mm.deserialize("<color:#F5C827>Click to browse!").decoration(TextDecoration.ITALIC, false));
+        lore.add(plugin.getLanguageManager().get(player, "shop.gui.main.category-lore-click").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
 
@@ -202,7 +202,28 @@ public class ShopGuiManager {
 
     private ItemStack createShopItemDisplay(ShopItem item, Player player, double balance,
                                             String currencySingular, String currencyPlural) {
-        ItemStack display = item.createDisplayItem(balance, currencySingular, currencyPlural);
+        String buyCurrency = item.getBuyPrice() == 1.0 ? currencySingular : currencyPlural;
+        String sellCurrency = item.getSellPrice() == 1.0 ? currencySingular : currencyPlural;
+
+        Component buyLine = plugin.getLanguageManager().get(player, "shop.gui.item.buy-line", Map.of(
+                "price", String.valueOf(item.getBuyPrice()),
+                "currency", buyCurrency
+        )).decoration(TextDecoration.ITALIC, false);
+
+        Component sellLine = plugin.getLanguageManager().get(player, "shop.gui.item.sell-line", Map.of(
+                "price", String.valueOf(item.getSellPrice()),
+                "currency", sellCurrency
+        )).decoration(TextDecoration.ITALIC, false);
+
+        Component stockLine = plugin.getLanguageManager().get(player, "shop.gui.item.stock-line", Map.of(
+                "stock", String.valueOf(item.getStock())
+        )).decoration(TextDecoration.ITALIC, false);
+
+        Component leftClick = plugin.getLanguageManager().get(player, "shop.gui.item.left-click").decoration(TextDecoration.ITALIC, false);
+        Component rightClick = plugin.getLanguageManager().get(player, "shop.gui.item.right-click").decoration(TextDecoration.ITALIC, false);
+        Component shiftClick = plugin.getLanguageManager().get(player, "shop.gui.item.shift-click").decoration(TextDecoration.ITALIC, false);
+
+        ItemStack display = item.createDisplayItem(balance, buyLine, sellLine, stockLine, leftClick, rightClick, shiftClick);
         ItemMeta meta = display.getItemMeta();
         if (meta != null) {
             meta.getPersistentDataContainer().set(shopItemKey, PersistentDataType.STRING, item.getId());
@@ -224,9 +245,14 @@ public class ShopGuiManager {
         meta.displayName(mm.deserialize(config.getName()).decoration(TextDecoration.ITALIC, false));
 
         List<Component> lore = new ArrayList<>();
-        lore.add(mm.deserialize("<color:#57F527>" + formattedBalance + " " + currency).decoration(TextDecoration.ITALIC, false));
+
+        Map<String, String> balancePlaceholders = Map.of(
+                "balance", formattedBalance,
+                "currency", currency
+        );
+        lore.add(plugin.getLanguageManager().get(player, "shop.gui.main.balance-line", balancePlaceholders).decoration(TextDecoration.ITALIC, false));
         lore.add(mm.deserialize("").decoration(TextDecoration.ITALIC, false));
-        lore.add(mm.deserialize("<color:#474747>Click <gray>to refresh").decoration(TextDecoration.ITALIC, false));
+        lore.add(plugin.getLanguageManager().get(player, "shop.gui.main.balance-refresh-hint").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
         item.setItemMeta(meta);

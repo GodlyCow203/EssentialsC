@@ -119,23 +119,28 @@ public class SellGUI {
         ItemMeta confirmMeta = confirmButton.getItemMeta();
 
         if (hasItems) {
-            confirmMeta.displayName(mm.deserialize("<color:#57F527><bold>Confirm Sale</bold></color>"));
+            confirmMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.confirm.name"));
             String currency = totalWorth == 1.0 ?
                     plugin.getConfigManager().getShopCurrencySingular() :
                     plugin.getConfigManager().getShopCurrencyPlural();
 
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("amount", String.valueOf(countItems()));
+            placeholders.put("worth", FormatUtil.formatNumber(totalWorth));
+            placeholders.put("currency", currency);
+
             List<Component> lore = new ArrayList<>();
-            lore.add(mm.deserialize(""));
-            lore.add(mm.deserialize("<color:#F5C827>Total Items: <white>" + countItems()));
-            lore.add(mm.deserialize("<color:#F5C827>Total Worth: <white>" + FormatUtil.formatNumber(totalWorth) + " " + currency));
-            lore.add(mm.deserialize(""));
-            lore.add(mm.deserialize("<color:#474747>Click <gray>to sell all items"));
+            lore.add(Component.empty());
+            lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.items", placeholders));
+            lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.worth", placeholders));
+            lore.add(Component.empty());
+            lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.action"));
             confirmMeta.lore(lore);
         } else {
-            confirmMeta.displayName(mm.deserialize("<color:#57F527><bold>Confirm Sale</bold></color>"));
+            confirmMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.confirm.name"));
             List<Component> lore = new ArrayList<>();
-            lore.add(mm.deserialize(""));
-            lore.add(mm.deserialize("<color:#888888>Add items to sell"));
+            lore.add(Component.empty());
+            lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.empty"));
             confirmMeta.lore(lore);
         }
 
@@ -144,11 +149,11 @@ public class SellGUI {
 
         ItemStack cancelButton = new ItemStack(Material.RED_DYE);
         ItemMeta cancelMeta = cancelButton.getItemMeta();
-        cancelMeta.displayName(mm.deserialize("<color:#F52727><bold>Cancel</bold></color>"));
+        cancelMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.cancel.name"));
 
         List<Component> cancelLore = new ArrayList<>();
-        cancelLore.add(mm.deserialize(""));
-        cancelLore.add(mm.deserialize("<color:#474747>Click <gray>to return items"));
+        cancelLore.add(Component.empty());
+        cancelLore.add(plugin.getLanguageManager().get(player, "sell.gui.cancel.lore.action"));
         cancelMeta.lore(cancelLore);
 
         cancelButton.setItemMeta(cancelMeta);

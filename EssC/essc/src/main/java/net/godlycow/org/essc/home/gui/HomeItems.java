@@ -5,6 +5,7 @@ import net.godlycow.org.essc.home.Home;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -404,16 +405,15 @@ public class HomeItems {
 
         meta.setOwningPlayer(target);
         String targetName = target.getName() != null ? target.getName() : "Unknown";
-        String status = target.isOnline() ? "<#28DE00>● Online" : "<#DE0000>● Offline";
+        String statusKey = target.isOnline() ? "home.gui.admin.player.status.online" : "home.gui.admin.player.status.offline";
 
-        meta.displayName(noItalic(MM.deserialize("<blue><bold>" + targetName)));
+        meta.displayName(noItalic(lang(viewer, "home.gui.admin.player.name", Map.of("player", targetName))));
 
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
-        lore.add(noItalic(MM.deserialize("<gray>Status: " + status)));
-        lore.add(noItalic(MM.deserialize("<gray>UUID: <dark_gray>" + target.getUniqueId().toString().substring(0, 8) + "…")));
+        lore.add(noItalic(lang(viewer, "home.gui.admin.player.lore.status", Map.of("status", PlainTextComponentSerializer.plainText().serialize(plugin.getLanguageManager().get(viewer, statusKey))))));        lore.add(noItalic(lang(viewer, "home.gui.admin.player.lore.uuid", Map.of("uuid", target.getUniqueId().toString().substring(0, 8)))));
         lore.add(Component.empty());
-        lore.add(noItalic(MM.deserialize("<blue>Click to manage homes")));
+        lore.add(noItalic(lang(viewer, "home.gui.admin.player.lore.click")));
         meta.lore(lore);
 
         meta.getPersistentDataContainer().set(keyAction, PersistentDataType.STRING,

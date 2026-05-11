@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.shop;
 
 import net.godlycow.org.essc.util.SkullTextureUtil;
-
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -15,13 +15,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
-import net.kyori.adventure.text.format.TextDecoration;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShopItem {
     private final String id;
@@ -214,33 +212,28 @@ public class ShopItem {
 
 
 
-    public ItemStack createDisplayItem(double playerBalance, String currencySingular, String currencyPlural) {
+    public ItemStack createDisplayItem(double playerBalance,
+                                       net.kyori.adventure.text.Component buyLine,
+                                       net.kyori.adventure.text.Component sellLine,
+                                       net.kyori.adventure.text.Component stockLine,
+                                       net.kyori.adventure.text.Component leftClick,
+                                       net.kyori.adventure.text.Component rightClick,
+                                       net.kyori.adventure.text.Component shiftClick) {
         ItemStack item = createItemStack();
         ItemMeta meta = item.getItemMeta();
 
         List<net.kyori.adventure.text.Component> newLore = new ArrayList<>();
 
         if (buyable) {
-            String currency = buyPrice == 1.0 ? currencySingular : currencyPlural;
-            String buyText = "<color:#57F527>➤ Buy: <color:#F5C827>" + buyPrice + " " + currency;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                    .deserialize(buyText)
-                    .decoration(TextDecoration.ITALIC, false));
+            newLore.add(buyLine);
         }
 
         if (sellable) {
-            String currency = sellPrice == 1.0 ? currencySingular : currencyPlural;
-            String sellText = "<color:#F52727>➤ Sell: <color:#F5C827>" + sellPrice + " " + currency;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                    .deserialize(sellText)
-                    .decoration(TextDecoration.ITALIC, false));
+            newLore.add(sellLine);
         }
 
         if (stock != -1) {
-            String stockText = "<color:#AAAAAA>➤ Stock: <color:#FFFFFF>" + stock;
-            newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                    .deserialize(stockText)
-                    .decoration(TextDecoration.ITALIC, false));
+            newLore.add(stockLine);
         }
 
         newLore.add(net.kyori.adventure.text.Component.empty());
@@ -249,15 +242,9 @@ public class ShopItem {
             newLore.addAll(meta.lore());
         }
 
-        newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<#474747>Left-Click <gray>to buy")
-                .decoration(TextDecoration.ITALIC, false));
-        newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<#474747>Right-Click <gray>to sell")
-                .decoration(TextDecoration.ITALIC, false));
-        newLore.add(net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
-                .deserialize("<#474747>Shift-Click <gray>for stack")
-                .decoration(TextDecoration.ITALIC, false));
+        newLore.add(leftClick);
+        newLore.add(rightClick);
+        newLore.add(shiftClick);
 
         meta.lore(newLore);
         item.setItemMeta(meta);
