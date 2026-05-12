@@ -44,7 +44,6 @@ import net.godlycow.org.essc.softwares.EssScheduler;
 import net.godlycow.org.essc.spawn.SpawnManager;
 import net.godlycow.org.essc.tab.TabManager;
 import net.godlycow.org.essc.teleport.TPAManager;
-import net.godlycow.org.essc.util.EssLog;
 import net.godlycow.org.essc.vanish.VanishManager;
 import net.godlycow.org.essc.warp.WarpManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -119,7 +118,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         commandsConfig = new CommandsConfig(this);
         commandsConfig.load();
 
-        EssLog.init(getLogger(), configManager.isDebug());
 
         if (configManager.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");

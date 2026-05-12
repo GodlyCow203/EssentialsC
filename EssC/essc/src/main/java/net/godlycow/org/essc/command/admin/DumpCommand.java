@@ -6,7 +6,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.dump.DumpSectionCollector;
 import net.godlycow.org.essc.dump.PasteUploadClient;
-import net.godlycow.org.essc.util.EssLog;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -62,7 +62,7 @@ public class DumpCommand extends Command {
 
         } catch (IOException e) {
             sender.sendMessage(lang.get(sender, "dump.error.write"));
-            EssLog.warn("Failed to write dump file: " + e.getMessage());
+            Bukkit.getLogger().warning("Failed to write dump file: " + e.getMessage());
             return true;
         }
 
@@ -70,7 +70,7 @@ public class DumpCommand extends Command {
                 lang.get(sender, "dump.saved", Map.of("file", dumpFile.getPath()))
         );
 
-        EssLog.info(
+        plugin.debug(
                 "Dump saved to " + dumpFile.getPath() + " by " + sender.getName()
         );
 
@@ -89,7 +89,7 @@ public class DumpCommand extends Command {
                             lang.get(sender, "dump.upload.success", Map.of("url", viewerUrl))
                     );
 
-                    EssLog.info("Dump upload link: " + viewerUrl);
+                    Bukkit.getLogger().info("Dump upload link: " + viewerUrl);
                 });
 
             } catch (IOException e) {
@@ -104,7 +104,7 @@ public class DumpCommand extends Command {
                         )
                 );
 
-                EssLog.warn("Dump upload failed: " + error);
+                Bukkit.getLogger().warning("Dump upload failed: " + error);
             }
         });
 

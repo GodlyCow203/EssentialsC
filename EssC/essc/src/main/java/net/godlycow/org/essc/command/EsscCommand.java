@@ -4,7 +4,6 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.command.admin.DumpCommand;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
-import net.godlycow.org.essc.util.EssLog;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
@@ -50,8 +49,6 @@ public class EsscCommand extends Command {
                 plugin.getConfigManager().reload();
                 plugin.getLanguageManager().reload();
                 if (plugin.getHelpManager() != null) plugin.getHelpManager().reload();
-
-                EssLog.setDebug(plugin.getConfigManager().isDebug());
 
                 boolean isEconomyEnabled = plugin.getConfigManager().isEconomyEnabled();
 
@@ -195,7 +192,7 @@ public class EsscCommand extends Command {
             case "version" -> {
                 String version = plugin.getDescription().getVersion();
                 sender.sendMessage(lang.get(sender, "essc.version", Map.of("version", version)));
-                EssLog.debug("Version checked by " + sender.getName());
+                plugin.debug("Version checked by " + sender.getName());
             }
 
             case "debug" -> {
@@ -203,11 +200,10 @@ public class EsscCommand extends Command {
                 boolean newState = !current;
 
                 plugin.getConfigManager().setDebug(newState);
-                EssLog.setDebug(newState);
 
                 String state = newState ? "enabled" : "disabled";
                 sender.sendMessage(lang.get(sender, "essc.debug.toggled", Map.of("state", state)));
-                EssLog.info("Debug mode " + state + " by " + sender.getName());
+                Bukkit.getLogger().info("Debug mode " + state + " by " + sender.getName());
             }
 
             case "placeholders" -> {
@@ -222,7 +218,7 @@ public class EsscCommand extends Command {
                 sender.sendMessage("");
                 sender.sendMessage(lang.get(sender, "essc.placeholders.footer",
                         Map.of("count", String.valueOf(placeholders.size()))));
-                EssLog.debug("Placeholders listed by " + sender.getName());
+                plugin.debug("Placeholders listed by " + sender.getName());
             }
 
             case "help" -> showHelp(sender);
@@ -231,7 +227,7 @@ public class EsscCommand extends Command {
 
             default -> {
                 sender.sendMessage(lang.get(sender, "essc.error.unknown_arg"));
-                EssLog.warn("Unknown subcommand: " + args[0] + " by " + sender.getName());
+                plugin.debug("Unknown subcommand: " + args[0] + " by " + sender.getName());
             }
 
 
@@ -281,7 +277,7 @@ public class EsscCommand extends Command {
                 if (plugin.getBackupManager().delete(fileName)) {
                     sender.sendMessage(lang.get(sender, "essc.backup.delete.success",
                             Map.of("name", fileName)));
-                    EssLog.info("Backup deleted: " + fileName + " by " + sender.getName());
+                    Bukkit.getLogger().info("Backup deleted: " + fileName + " by " + sender.getName());
                 } else {
                     sender.sendMessage(lang.get(sender, "essc.backup.delete.not_found",
                             Map.of("name", fileName)));

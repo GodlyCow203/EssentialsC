@@ -2,7 +2,6 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.util.EssLog;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -35,23 +34,23 @@ public class HealCommand extends Command {
 
             if (target != player && !player.hasPermission("essentialsc.heal.others")) {
                 player.sendMessage(lang.get(player, "error.no_permission"));
-                EssLog.info("Denied: " + player.getName() + " lacks permission essentialsc.heal.others");
+                plugin.debug("Denied: " + player.getName() + " lacks permission essentialsc.heal.others");
                 return true;
             }
         } else {
             target = player;
         }
 
-        EssLog.debug("Healing initiated for " + target.getName() + " by " + player.getName());
+        plugin.debug("Healing initiated for " + target.getName() + " by " + player.getName());
 
         double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         target.setHealth(maxHealth);
-        EssLog.debug("Set health to " + maxHealth);
+        plugin.debug("Set health to " + maxHealth);
 
         if (plugin.getConfig().getBoolean("heal.feed-player", true)) {
             target.setFoodLevel(20);
             target.setSaturation(20);
-            EssLog.debug("Fed player to full saturation");
+            plugin.debug("Fed player to full saturation");
         }
 
         target.setFireTicks(0);
@@ -62,7 +61,7 @@ public class HealCommand extends Command {
                     .toList();
 
             badEffects.forEach(e -> target.removePotionEffect(e.getType()));
-            EssLog.debug("Cleared " + badEffects.size() + " negative effects");
+            plugin.debug("Cleared " + badEffects.size() + " negative effects");
         }
 
         if (target == player) {
