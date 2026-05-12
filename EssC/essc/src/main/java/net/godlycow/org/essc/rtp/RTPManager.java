@@ -79,10 +79,20 @@ public class RTPManager {
     }
 
     public List<String> getConfiguredWorldNames() {
-        return worldSettings.keySet().stream()
-                .filter(name -> Bukkit.getWorld(name) != null)
-                .sorted()
-                .collect(Collectors.toList());
+        return worldSettings.keySet().stream().filter(name -> resolveWorld(name) != null).sorted().collect(Collectors.toList());
+    }
+
+    public World resolveWorld(String configuredName) {
+        World exact = Bukkit.getWorld(configuredName);
+        if (exact != null) {
+            return exact;
+        }
+        for (World world : Bukkit.getWorlds()) {
+            if (world.getName().endsWith(configuredName)) {
+                return world;
+            }
+        }
+        return null;
     }
 
     public void reload() {

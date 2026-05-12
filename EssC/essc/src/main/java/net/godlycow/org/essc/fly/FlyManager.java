@@ -19,18 +19,25 @@ public class FlyManager implements Listener {
     private final EssentialsC plugin;
     private final Set<UUID> flyingPlayers;
     private final File dataFile;
-    private final boolean persistent;
-    private final boolean restoreOnJoin;
-    private final boolean disableOnJoin;
+    private boolean persistent;
+    private boolean restoreOnJoin;
+    private boolean disableOnJoin;
 
     public FlyManager(EssentialsC plugin) {
         this.plugin = plugin;
+        this.dataFile = new File(plugin.getDataFolder(), "flying_players.json");
         this.persistent = plugin.getConfigManager().isFlyPersistent();
         this.restoreOnJoin = plugin.getConfigManager().isFlyRestoreOnJoin();
         this.disableOnJoin = plugin.getConfigManager().isFlyDisableOnJoin();
-        this.dataFile = new File(plugin.getDataFolder(), "flying_players.json");
         this.flyingPlayers = persistent ? loadData() : new HashSet<>();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    public void reload() {
+        this.persistent = plugin.getConfigManager().isFlyPersistent();
+        this.restoreOnJoin = plugin.getConfigManager().isFlyRestoreOnJoin();
+        this.disableOnJoin = plugin.getConfigManager().isFlyDisableOnJoin();
+        plugin.debug("Fly configuration reloaded");
     }
 
     @EventHandler
@@ -138,6 +145,6 @@ public class FlyManager implements Listener {
             saveData();
         }
         HandlerList.unregisterAll(this);
-        plugin.debug("Shutting down the flyManager");
+        plugin.debug("Shutting down the FlyManager");
     }
 }

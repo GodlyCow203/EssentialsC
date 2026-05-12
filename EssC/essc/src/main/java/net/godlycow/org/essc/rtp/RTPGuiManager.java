@@ -115,7 +115,7 @@ public class RTPGuiManager implements Listener {
 
     private ItemStack buildWorldItem(String worldName, Player viewer) {
 
-        World world = Bukkit.getWorld(worldName);
+        World world = rtpManager.resolveWorld(worldName);
         if (world == null) return createFiller();
 
         RTPManager.WorldRTPSettings settings = rtpManager.getWorldSettings(worldName);
@@ -267,7 +267,7 @@ public class RTPGuiManager implements Listener {
         if (worldIndex >= worlds.size()) return;
 
         String worldName = worlds.get(worldIndex);
-        World world = Bukkit.getWorld(worldName);
+        World world = rtpManager.resolveWorld(worldName);
 
         if (world == null) {
             player.sendMessage(plugin.getLanguageManager().get(player, "rtp.error.world_not_found"));

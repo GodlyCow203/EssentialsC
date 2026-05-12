@@ -180,6 +180,11 @@ public class EsscCommand extends Command {
                     plugin.debug("SellGUI reloaded");
                 }
 
+                if (plugin.getFlyManager() != null) {
+                    plugin.getFlyManager().reload();
+                    plugin.debug("FlyManager reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success", Map.of(
                         "version", plugin.getDescription().getVersion()
                 )));
