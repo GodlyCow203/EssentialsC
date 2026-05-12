@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> 将在 <color:#FFFFFF><time></color> 后可领取。</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>没有你可用的礼包。</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>可用礼包:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>用法: /kit <claim|cooldown> <礼包名称></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>调试: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>名称:</color> <color:#FFFFFF><name></color>",

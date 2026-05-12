@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> доступен через <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Нет доступных вам наборов.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Доступные наборы:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Использование: /kit <claim|cooldown> <название_набора></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Отладка: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Название:</color> <color:#FFFFFF><name></color>",

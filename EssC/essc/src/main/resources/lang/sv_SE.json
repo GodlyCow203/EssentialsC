@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> tillgänglig om <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Inga kit tillgängliga för dig.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Tillgängliga kit:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Användning: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Felsökning: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Namn:</color> <color:#FFFFFF><name></color>",

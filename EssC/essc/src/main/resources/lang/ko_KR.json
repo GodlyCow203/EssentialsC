@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> 키트가 <color:#FFFFFF><time></color> 후 사용 가능합니다.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>사용 가능한 키트가 없습니다.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>사용 가능한 키트:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>사용법: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>디버그: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>이름:</color> <color:#FFFFFF><name></color>",

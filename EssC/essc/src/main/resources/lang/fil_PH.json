@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> ay magiging available sa <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Walang available na kit para sa iyo.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Mga Available na Kit:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Paggamit: /kit <claim|cooldown> <kitname></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Debug: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Pangalan:</color> <color:#FFFFFF><name></color>",

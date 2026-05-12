@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> доступний через <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Для вас немає доступних наборів.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Доступні набори:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Використання: /kit <claim|cooldown> <назва_набору></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Налагодження: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Назва:</color> <color:#FFFFFF><name></color>",

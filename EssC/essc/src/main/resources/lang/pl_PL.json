@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> dostępny za <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Brak dostępnych dla ciebie zestawów.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Dostępne Zestawy:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Użycie: /kit <claim|cooldown> <nazwa_zestawu></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Debugowanie: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Nazwa:</color> <color:#FFFFFF><name></color>",

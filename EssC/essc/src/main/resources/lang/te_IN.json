@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> <color:#FFFFFF><time></color>లో అందుబాటులో ఉంటుంది.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>మీ కోసం అందుబాటులో ఉన్న కిట్‌లు లేవు.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>అందుబాటులో ఉన్న కిట్‌లు:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>వినియోగం: /kit <claim|cooldown> <కిట్_పేరు></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>డీబగ్: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>పేరు:</color> <color:#FFFFFF><name></color>",

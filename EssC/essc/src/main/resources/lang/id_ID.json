@@ -475,7 +475,7 @@
   "kit.cooldown.status": "<prefix> <color:#FFFFFF><kit></color> tersedia dalam <color:#FFFFFF><time></color>.</color>",
   "kit.list.empty": "<prefix> <color:#FF0000>Tidak ada kit yang tersedia untuk Anda.</color>",
   "kit.list.header": "<prefix> <color:#FFFFFF>Kit yang Tersedia:</color>",
-  "kit.list.entry": "<color:#FFFFFF><name></white>",
+  "kit.list.entry": "<status> <color:#FFFFFF><name></color> <dark_gray><kit></dark_gray>",
   "kit.usage": "<prefix> <color:#FF0000>Penggunaan: /kit <claim|cooldown> <namakit></color>",
   "kit.debug.header": "<prefix> <color:#FFFFFF>Debug: <color:#FFFFFF><kit></color></color>",
   "kit.debug.name": " <color:#AAAAAA>Nama:</color> <color:#FFFFFF><name></color>",
