@@ -88,7 +88,7 @@ public class RTPManager {
             return exact;
         }
         for (World world : Bukkit.getWorlds()) {
-            if (world.getName().endsWith(configuredName)) {
+            if (world.getName().endsWith("-" + configuredName)) {
                 return world;
             }
         }
