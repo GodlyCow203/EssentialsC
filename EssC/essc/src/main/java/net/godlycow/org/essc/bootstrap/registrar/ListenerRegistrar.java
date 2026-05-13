@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.bootstrap.registrar;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.listener.*;
 import net.godlycow.org.essc.plugin.listener.EnderSeeListener;
 import net.godlycow.org.essc.plugin.listener.InvseeListener;
 import net.godlycow.org.essc.plugin.listener.JoinLeaveListener;
