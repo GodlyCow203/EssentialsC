@@ -4,8 +4,11 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.backup.BackupManager;
 import net.godlycow.org.essc.command.admin.DumpCommand;
 import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
+import net.godlycow.org.essc.util.PaginatedList;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.time.Instant;
@@ -212,18 +215,17 @@ public class EsscCommand extends Command {
             }
 
             case "placeholders" -> {
-                sender.sendMessage(lang.get(sender, "essc.placeholders.header"));
-                sender.sendMessage("");
-
-                List<String> placeholders = PlaceholderHook.getAllPlaceholders();
-                for (String placeholder : placeholders) {
-                    sender.sendMessage("§7• §f" + placeholder);
+                int page = 1;
+                if (args.length >= 2) {
+                    try {
+                        page = Integer.parseInt(args[1]);
+                    } catch (NumberFormatException ignored) {
+                        sender.sendMessage(lang.get(sender, "essc.placeholders.invalid_page"));
+                        return true;
+                    }
                 }
-
-                sender.sendMessage("");
-                sender.sendMessage(lang.get(sender, "essc.placeholders.footer",
-                        Map.of("count", String.valueOf(placeholders.size()))));
-                plugin.debug("Placeholders listed by " + sender.getName());
+                sendPlaceholderPage(sender, page);
+                plugin.debug("Placeholders page " + page + " listed by " + sender.getName());
             }
 
             case "help" -> showHelp(sender);
@@ -302,6 +304,51 @@ public class EsscCommand extends Command {
         }
     }
 
+    private static final int PLACEHOLDERS_PER_PAGE = 10;
+    private static final MiniMessage MM = MiniMessage.miniMessage();
+
+    private void sendPlaceholderPage(CommandSender sender, int requestedPage) {
+        List<String> all = PlaceholderHook.getAllPlaceholders();
+        PaginatedList<String> paginated = new PaginatedList<>(all, PLACEHOLDERS_PER_PAGE);
+
+        int page = paginated.clamp(requestedPage);
+
+        if (!paginated.isValidPage(requestedPage)) {
+            sender.sendMessage(lang.get(sender, "essc.placeholders.invalid_page"));
+            return;
+        }
+
+        sender.sendMessage(lang.get(sender, "essc.placeholders.header", Map.of(
+                "page", String.valueOf(page),
+                "total_pages", String.valueOf(paginated.getTotalPages())
+        )));
+
+        for (String placeholder : paginated.getPage(page)) {
+            sender.sendMessage(MM.deserialize("<color:#AAAAAA>• </color><color:#FFFFFF>" + placeholder + "</color>"));
+        }
+
+        sender.sendMessage(lang.get(sender, "essc.placeholders.footer", Map.of(
+                "count", String.valueOf(all.size()),
+                "page", String.valueOf(page),
+                "total_pages", String.valueOf(paginated.getTotalPages())
+        )));
+
+        if (sender instanceof Player) {
+            boolean hasPrev = paginated.hasPreviousPage(page);
+            boolean hasNext = paginated.hasNextPage(page);
+
+            if (hasPrev || hasNext) {
+                Map<String, String> navPlaceholders = Map.of(
+                        "prev_page", String.valueOf(page - 1),
+                        "next_page", String.valueOf(page + 1),
+                        "has_prev", String.valueOf(hasPrev),
+                        "has_next", String.valueOf(hasNext)
+                );
+                sender.sendMessage(lang.get(sender, "essc.placeholders.navigation", navPlaceholders));
+            }
+        }
+    }
+
     private void showHelp(CommandSender sender) {
         sender.sendMessage(lang.get(sender, "essc.help.header"));
         sender.sendMessage(lang.get(sender, "essc.help.reload"));
@@ -315,6 +362,13 @@ public class EsscCommand extends Command {
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
             return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders", "dump"), args[0]);
+        }
+        if (args.length == 2 && args[0].equalsIgnoreCase("placeholders")) {
+            int totalPages = new PaginatedList<>(PlaceholderHook.getAllPlaceholders(), PLACEHOLDERS_PER_PAGE).getTotalPages();
+            return java.util.stream.IntStream.rangeClosed(1, totalPages)
+                    .mapToObj(String::valueOf)
+                    .filter(n -> n.startsWith(args[1]))
+                    .toList();
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("backup")) {
             return filter(List.of("list", "delete"), args[1]);
