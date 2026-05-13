@@ -2,8 +2,7 @@ package net.godlycow.org.essc.command.item;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.config.ConfigManager;
-import org.bukkit.Material;
+import net.godlycow.org.essc.plugin.config.ConfigManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

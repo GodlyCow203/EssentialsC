@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class KitImpl implements Kit {
-    private final net.godlycow.org.essc.kit.Kit internalKit;
+    private final net.godlycow.org.essc.modules.kit.Kit internalKit;
 
-    public KitImpl(net.godlycow.org.essc.kit.Kit internalKit) {
+    public KitImpl(net.godlycow.org.essc.modules.kit.Kit internalKit) {
         this.internalKit = internalKit;
     }
 
@@ -74,7 +74,7 @@ public class KitImpl implements Kit {
         return networkSync;
     }
 
-    public net.godlycow.org.essc.kit.Kit getInternalKit() {
+    public net.godlycow.org.essc.modules.kit.Kit getInternalKit() {
         return internalKit;
     }
 }

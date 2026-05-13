@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.kit;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.kit.Kit;
+import net.godlycow.org.essc.modules.kit.Kit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

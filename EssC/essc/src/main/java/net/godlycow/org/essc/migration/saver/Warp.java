@@ -53,7 +53,7 @@ public class Warp {
                 );
             }
 
-            net.godlycow.org.essc.warp.Warp warp = plugin.getWarpManager().getWarp(name);
+            net.godlycow.org.essc.modules.warp.Warp warp = plugin.getWarpManager().getWarp(name);
             if (warp == null) {
                 return CompletableFuture.completedFuture(
                         new WarpResult(false, "Failed to retrieve created warp", null)

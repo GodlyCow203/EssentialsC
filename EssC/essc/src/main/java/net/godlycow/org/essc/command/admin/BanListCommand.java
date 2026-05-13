@@ -2,9 +2,9 @@ package net.godlycow.org.essc.command.admin;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.punishment.PunishmentManager;
-import net.godlycow.org.essc.punishment.PunishmentManager.BanEntry;
-import net.godlycow.org.essc.punishment.PunishmentManager.IpBanEntry;
+import net.godlycow.org.essc.modules.punishment.PunishmentManager;
+import net.godlycow.org.essc.modules.punishment.PunishmentManager.BanEntry;
+import net.godlycow.org.essc.modules.punishment.PunishmentManager.IpBanEntry;
 import net.godlycow.org.essc.util.DurationParser;
 import net.godlycow.org.essc.util.PaginatedList;
 import net.kyori.adventure.text.Component;

@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
+import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

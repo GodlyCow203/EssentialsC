@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.admin;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.data.LogoutDataManager;
+import net.godlycow.org.essc.storage.data.LogoutDataManager;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;

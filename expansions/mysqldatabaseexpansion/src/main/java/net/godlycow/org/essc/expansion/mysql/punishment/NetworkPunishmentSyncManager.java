@@ -4,7 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
 import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
-import net.godlycow.org.essc.punishment.NetworkPunishmentHook;
+import net.godlycow.org.essc.modules.punishment.NetworkPunishmentHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;

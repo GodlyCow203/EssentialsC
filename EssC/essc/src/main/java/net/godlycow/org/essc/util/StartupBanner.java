@@ -1,6 +1,6 @@
 package net.godlycow.org.essc.util;
 
-import net.godlycow.org.essc.softwares.ServerSoftware;
+import net.godlycow.org.essc.server.software.ServerSoftware;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;

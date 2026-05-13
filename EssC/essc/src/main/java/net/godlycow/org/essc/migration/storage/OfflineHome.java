@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.migration.storage;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.database.Database;
+import net.godlycow.org.essc.storage.database.Database;
 import org.bukkit.Location;
 
 import java.sql.PreparedStatement;

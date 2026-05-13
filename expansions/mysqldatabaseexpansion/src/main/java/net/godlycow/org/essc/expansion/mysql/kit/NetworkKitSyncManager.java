@@ -4,7 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
 import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
-import net.godlycow.org.essc.kit.KitSyncHook;
+import net.godlycow.org.essc.modules.kit.KitSyncHook;
 
 import java.sql.SQLException;
 import java.util.UUID;

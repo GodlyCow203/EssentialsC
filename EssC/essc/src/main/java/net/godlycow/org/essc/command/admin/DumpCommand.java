@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.dump.DumpSectionCollector;
-import net.godlycow.org.essc.dump.PasteUploadClient;
+import net.godlycow.org.essc.plugin.dump.DumpSectionCollector;
+import net.godlycow.org.essc.plugin.dump.PasteUploadClient;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 

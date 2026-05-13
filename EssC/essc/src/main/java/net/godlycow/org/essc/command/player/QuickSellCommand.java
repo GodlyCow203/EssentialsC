@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.shop.sell.SellManager;
+import net.godlycow.org.essc.modules.shop.sell.SellManager;
 import net.godlycow.org.essc.util.FormatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

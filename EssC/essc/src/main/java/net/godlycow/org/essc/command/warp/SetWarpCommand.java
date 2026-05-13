@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.warp;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.warp.Warp;
+import net.godlycow.org.essc.modules.warp.Warp;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

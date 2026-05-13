@@ -1,9 +1,9 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.backup.BackupManager;
+import net.godlycow.org.essc.modules.backup.BackupManager;
 import net.godlycow.org.essc.command.admin.DumpCommand;
-import net.godlycow.org.essc.placeholderapi.PlaceholderHook;
+import net.godlycow.org.essc.integration.placeholderapi.PlaceholderHook;
 import net.godlycow.org.essc.util.PaginatedList;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;

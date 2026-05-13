@@ -3,7 +3,7 @@ package net.godlycow.org.essc.api.impl.rtp;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.rtp.*;
 import net.godlycow.org.essc.api.rtp.event.*;
-import net.godlycow.org.essc.rtp.RTPManager;
+import net.godlycow.org.essc.modules.rtp.RTPManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;

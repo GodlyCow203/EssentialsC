@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.admin;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.punishment.PunishmentManager;
+import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 

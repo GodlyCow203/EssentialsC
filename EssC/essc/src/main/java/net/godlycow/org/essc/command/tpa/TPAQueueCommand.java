@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.tpa;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.teleport.TPARequest;
+import net.godlycow.org.essc.modules.teleport.TPARequest;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

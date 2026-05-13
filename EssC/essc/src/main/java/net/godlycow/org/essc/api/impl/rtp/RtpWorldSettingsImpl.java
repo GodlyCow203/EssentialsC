@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.api.impl.rtp;
 
 import net.godlycow.org.essc.api.rtp.RtpWorldSettings;
-import net.godlycow.org.essc.rtp.RTPManager.WorldRTPSettings;
+import net.godlycow.org.essc.modules.rtp.RTPManager.WorldRTPSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;

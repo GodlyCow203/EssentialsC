@@ -1,10 +1,10 @@
 package net.godlycow.org.essc.command.warp;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
+import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.warp.Warp;
-import net.godlycow.org.essc.warp.WarpManager;
+import net.godlycow.org.essc.modules.warp.Warp;
+import net.godlycow.org.essc.modules.warp.WarpManager;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;

@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.command.economy;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.softwares.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.util.PaginatedList;
 import org.bukkit.Bukkit;

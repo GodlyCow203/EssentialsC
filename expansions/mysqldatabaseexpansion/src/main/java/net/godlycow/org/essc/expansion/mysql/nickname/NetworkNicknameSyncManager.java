@@ -4,7 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
 import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
-import net.godlycow.org.essc.nick.NicknameSyncHook;
+import net.godlycow.org.essc.modules.nick.NicknameSyncHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;

@@ -1,9 +1,9 @@
 package net.godlycow.org.essc.command.auction;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.auction.gui.AhGuiManager;
-import net.godlycow.org.essc.auction.gui.AhItemFactory;
-import net.godlycow.org.essc.auction.AhSoundManager;
+import net.godlycow.org.essc.modules.auction.gui.AhGuiManager;
+import net.godlycow.org.essc.modules.auction.gui.AhItemFactory;
+import net.godlycow.org.essc.modules.auction.AhSoundManager;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
