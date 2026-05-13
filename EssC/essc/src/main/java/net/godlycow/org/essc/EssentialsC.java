@@ -13,7 +13,6 @@ import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.plugin.config.CommandsConfig;
 import net.godlycow.org.essc.plugin.config.EssConfig;
-import net.godlycow.org.essc.storage.LogoutDataManager;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.storage.user.UserManager;
@@ -95,7 +94,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private ScheduleManager scheduleManager;
     private MOTDManager motdManager;
     private BackupManager backupManager;
-    private LogoutDataManager logoutDataManager;
     private UserManager userManager;
     private SellManager sellManager;
     private AhGuiManager ahGuiManager;
@@ -447,14 +445,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setBackupManager(BackupManager backupManager) {
         this.backupManager = backupManager;
-    }
-
-    public LogoutDataManager getLogoutDataManager() {
-        return logoutDataManager;
-    }
-
-    public void setLogoutDataManager(LogoutDataManager logoutDataManager) {
-        this.logoutDataManager = logoutDataManager;
     }
 
     public UserManager getUserManager() {

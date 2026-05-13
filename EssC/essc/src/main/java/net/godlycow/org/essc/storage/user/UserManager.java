@@ -2,6 +2,7 @@ package net.godlycow.org.essc.storage.user;
 
 import net.godlycow.org.essc.EssentialsC;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -68,6 +69,10 @@ public class UserManager {
 
     public void clearCache(UUID uuid) {
         cache.remove(uuid);
+    }
+
+    public Collection<UserProfile> getCachedProfiles() {
+        return cache.values();
     }
 
     public void shutdown() {

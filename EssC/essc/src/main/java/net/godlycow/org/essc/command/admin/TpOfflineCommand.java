@@ -2,7 +2,8 @@ package net.godlycow.org.essc.command.admin;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.storage.LogoutDataManager;
+import net.godlycow.org.essc.storage.user.UserManager;
+import net.godlycow.org.essc.storage.user.UserProfile;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -13,11 +14,11 @@ import java.util.stream.Collectors;
 
 public class TpOfflineCommand extends Command {
 
-    private final LogoutDataManager logoutData;
+    private final UserManager userManager;
 
-    public TpOfflineCommand(EssentialsC plugin, LogoutDataManager logoutData) {
+    public TpOfflineCommand(EssentialsC plugin, UserManager userManager) {
         super(plugin, "tpoffline", "essentialsc.tpoffline", true, 1, "command.usage.tpoffline");
-        this.logoutData = logoutData;
+        this.userManager = userManager;
     }
 
     @Override
@@ -34,17 +35,38 @@ public class TpOfflineCommand extends Command {
             return true;
         }
 
-        Location loc = logoutData.getLogoutLocation(target.getUniqueId());
-
-        if (loc == null) {
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("player", target.getName());
-            player.sendMessage(lang.get(player, "tpoffline.no_location", placeholders));
+        UserProfile cached = userManager.getCachedProfile(target.getUniqueId());
+        if (cached != null) {
+            teleportToProfile(player, cached);
             return true;
         }
 
+        userManager.getRepository().findByUuid(target.getUniqueId()).thenAccept(profile -> {
+            if (profile == null) {
+                Map<String, String> placeholders = new HashMap<>();
+                placeholders.put("player", targetName);
+                plugin.getEssScheduler().runGlobal(() ->
+                        player.sendMessage(lang.get(player, "tpoffline.no_location", placeholders)));
+                return;
+            }
+            plugin.getEssScheduler().runGlobal(() -> teleportToProfile(player, profile));
+        });
+
+        return true;
+    }
+
+    private void teleportToProfile(Player player, UserProfile profile) {
+        Location loc = profile.getLogoutLocation();
+
+        if (loc == null) {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("player", profile.getUsername());
+            player.sendMessage(lang.get(player, "tpoffline.no_location", placeholders));
+            return;
+        }
+
         Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("player", target.getName());
+        placeholders.put("player", profile.getUsername());
         placeholders.put("world", loc.getWorld().getName());
         placeholders.put("x", String.format("%.1f", loc.getX()));
         placeholders.put("y", String.format("%.1f", loc.getY()));
@@ -53,10 +75,8 @@ public class TpOfflineCommand extends Command {
         plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
             player.sendMessage(lang.get(player, "tpoffline.success", placeholders));
-            plugin.debug(player.getName() + " teleported to " + target.getName() + "'s logout location");
+            plugin.debug(player.getName() + " teleported to " + profile.getUsername() + "'s logout location");
         });
-
-        return true;
     }
 
     @Override
@@ -66,19 +86,16 @@ public class TpOfflineCommand extends Command {
 
             Set<String> suggestions = new HashSet<>();
 
-            suggestions.addAll(plugin.getServer().getOnlinePlayers().stream()
+            plugin.getServer().getOnlinePlayers().stream()
                     .map(Player::getName)
                     .filter(name -> name.toLowerCase().startsWith(input))
-                    .collect(Collectors.toList()));
+                    .forEach(suggestions::add);
 
-            for (String key : logoutData.getConfig().getKeys(false)) {
-                try {
-                    UUID uuid = UUID.fromString(key);
-                    String name = logoutData.getLastKnownName(uuid);
-                    if (name != null && name.toLowerCase().startsWith(input)) {
-                        suggestions.add(name);
-                    }
-                } catch (IllegalArgumentException ignored) {}
+            for (OfflinePlayer offline : plugin.getServer().getOfflinePlayers()) {
+                String name = offline.getName();
+                if (name != null && name.toLowerCase().startsWith(input)) {
+                    suggestions.add(name);
+                }
             }
 
             return suggestions.stream()
