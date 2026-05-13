@@ -1,6 +1,8 @@
-package net.godlycow.org.essc.server.software;
+package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.server.FeatureFlags;
+import net.godlycow.org.essc.server.software.ServerSoftware;
+import net.godlycow.org.essc.server.software.SoftwareCapabilities;
 import org.bukkit.plugin.Plugin;
 
 public final class EnvironmentProfile {

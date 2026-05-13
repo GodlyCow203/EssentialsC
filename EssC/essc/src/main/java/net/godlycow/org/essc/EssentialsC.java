@@ -12,8 +12,8 @@ import net.godlycow.org.essc.modules.ChatManager;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.plugin.config.CommandsConfig;
-import net.godlycow.org.essc.plugin.config.ConfigManager;
-import net.godlycow.org.essc.storage.data.LogoutDataManager;
+import net.godlycow.org.essc.plugin.config.EssConfig;
+import net.godlycow.org.essc.storage.LogoutDataManager;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.storage.user.UserManager;
@@ -61,7 +61,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private static EssentialsC instance;
 
     private EssScheduler essScheduler;
-    private ConfigManager configManager;
+    private EssConfig essConfig;
     private CommandsConfig commandsConfig;
     private LanguageManager languageManager;
     private HelpManager helpManager;
@@ -112,14 +112,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         essScheduler = new EssScheduler(this);
         saveDefaultConfig();
 
-        configManager = new ConfigManager(this);
-        configManager.migrate();
+        essConfig = new EssConfig(this);
+        essConfig.migrate();
 
         commandsConfig = new CommandsConfig(this);
         commandsConfig.load();
 
 
-        if (configManager.isEconomyEnabled()) {
+        if (essConfig.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");
             economyManager = new EconomyManager(this);
             vaultHook = new VaultHook(economyManager);
@@ -170,7 +170,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     }
 
     public void debug(String message) {
-        if (configManager != null && configManager.isDebug()) {
+        if (essConfig != null && essConfig.isDebug()) {
             getLogger().info("[DEBUG] " + message);
         }
     }
@@ -183,8 +183,8 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         return essScheduler;
     }
 
-    public ConfigManager getConfigManager() {
-        return configManager;
+    public EssConfig getConfigManager() {
+        return essConfig;
     }
 
     public CommandsConfig getCommandsConfig() {

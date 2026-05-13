@@ -3,7 +3,7 @@ package net.godlycow.org.essc.modules;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.plugin.config.ConfigManager;
+import net.godlycow.org.essc.plugin.config.EssConfig;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChatManager implements Listener {
 
     private final EssentialsC plugin;
-    private final ConfigManager configManager;
+    private final EssConfig essConfig;
 
     private final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.builder()
             .character(ChatColor.COLOR_CHAR)
@@ -42,13 +42,13 @@ public class ChatManager implements Listener {
 
     public ChatManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.configManager = plugin.getConfigManager();
+        this.essConfig = plugin.getConfigManager();
         reload();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     public void reload() {
-        this.useLuckPermsFormatting = configManager.isLuckPermsChatEnabled();
+        this.useLuckPermsFormatting = essConfig.isLuckPermsChatEnabled();
         if (useLuckPermsFormatting && plugin.getServer().getPluginManager().isPluginEnabled("LuckPerms")) {
             var provider = plugin.getServer().getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
@@ -72,9 +72,9 @@ public class ChatManager implements Listener {
     public void onPlayerChat(AsyncChatEvent event) {
         Player player = event.getPlayer();
 
-        if (configManager.isChatSlowModeEnabled() && !player.hasPermission("essentialsc.chat.slowmode.bypass")) {
+        if (essConfig.isChatSlowModeEnabled() && !player.hasPermission("essentialsc.chat.slowmode.bypass")) {
             long lastMsg = lastMessageTime.getOrDefault(player.getUniqueId(), 0L);
-            long delayMs = configManager.getChatSlowModeDelay() * 1000L;
+            long delayMs = essConfig.getChatSlowModeDelay() * 1000L;
             long remaining = (lastMsg + delayMs) - System.currentTimeMillis();
 
             if (remaining > 0) {
@@ -86,7 +86,7 @@ public class ChatManager implements Listener {
         }
 
         String rawMessage = LegacyComponentSerializer.legacyAmpersand().serialize(event.message());
-        double capsThreshold = configManager.getChatCapslockThreshold();
+        double capsThreshold = essConfig.getChatCapslockThreshold();
         String processedMessage = rawMessage;
         if (capsThreshold > 0 && capsThreshold <= 1.0 && !player.hasPermission("essentialsc.chat.caps.bypass")) {
             if (rawMessage.length() >= 3) {
@@ -106,7 +106,7 @@ public class ChatManager implements Listener {
 
         final String finalMessage = processedMessage;
 
-        if (configManager.isChatMentionEnabled()) {
+        if (essConfig.isChatMentionEnabled()) {
             Component message = applyMessageColorsToComponent(player, finalMessage);
 
             for (Player online : plugin.getServer().getOnlinePlayers()) {
@@ -129,12 +129,12 @@ public class ChatManager implements Listener {
                 if (plainMsg.contains(name)) {
                     online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
                     Component colored = plugin.getMiniMessage().deserialize(
-                            configManager.getChatMentionFormat().replace("<player>", name));
+                            essConfig.getChatMentionFormat().replace("<player>", name));
                     message = message.replaceText(b -> b.matchLiteral(name).replacement(colored));
                 } else if (cleanNick != null && plainMsg.contains(cleanNick)) {
                     online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
                     Component colored = plugin.getMiniMessage().deserialize(
-                            configManager.getChatMentionFormat().replace("<player>", cleanNick));
+                            essConfig.getChatMentionFormat().replace("<player>", cleanNick));
                     String finalCleanNick = cleanNick;
                     message = message.replaceText(b -> b.matchLiteral(finalCleanNick).replacement(colored));
                 }

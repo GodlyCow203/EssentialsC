@@ -1,6 +1,5 @@
-package net.godlycow.org.essc.util;
+package net.godlycow.org.essc;
 
-import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -11,7 +10,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.logging.Level;
 
-public class CommandRegistrationUtil {
+public class CommandRegistration {
     private static CommandMap commandMap;
     private static Map<String, Command> knownCommands;
 
@@ -47,7 +46,7 @@ public class CommandRegistrationUtil {
     }
 
     public static void unregisterCommands(List<String> commands) {
-        commands.forEach(CommandRegistrationUtil::unregisterCommand);
+        commands.forEach(CommandRegistration::unregisterCommand);
     }
 
     public static boolean isRegistered(String name) {
@@ -63,7 +62,7 @@ public class CommandRegistrationUtil {
     }
 
     public static void syncCommands() {
-        EssentialsC plugin = (EssentialsC) JavaPlugin.getProvidingPlugin(CommandRegistrationUtil.class);
+        EssentialsC plugin = (EssentialsC) JavaPlugin.getProvidingPlugin(CommandRegistration.class);
         plugin.getEssScheduler().runGlobalLater(() -> {
             try {
                 Bukkit.getServer().getClass().getMethod("syncCommands").invoke(Bukkit.getServer());

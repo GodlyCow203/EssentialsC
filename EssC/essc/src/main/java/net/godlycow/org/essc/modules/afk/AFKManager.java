@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.afk;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.plugin.config.ConfigManager;
+import net.godlycow.org.essc.plugin.config.EssConfig;
 import net.godlycow.org.essc.server.SchedulerTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AFKManager implements Listener {
 
     private final EssentialsC plugin;
-    private final ConfigManager config;
+    private final EssConfig config;
     private final MiniMessage miniMessage;
 
     private final Map<UUID, Instant> lastActivity = new ConcurrentHashMap<>();

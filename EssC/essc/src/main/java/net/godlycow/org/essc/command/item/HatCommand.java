@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.item;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.plugin.config.ConfigManager;
+import net.godlycow.org.essc.plugin.config.EssConfig;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +27,7 @@ public class HatCommand extends Command {
     }
 
     public void reload() {
-        ConfigManager config = plugin.getConfigManager();
+        EssConfig config = plugin.getConfigManager();
         blacklist = config.getHatBlacklistItems();
         blacklistEnabled = config.isHatBlacklistEnabled();
         allowBlocks = config.isHatAllowBlocks();

@@ -4,7 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.economy.*;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.plugin.economy.VaultHook;
-import net.godlycow.org.essc.util.CommandRegistrationUtil;
+import net.godlycow.org.essc.CommandRegistration;
 import org.bukkit.command.PluginCommand;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class EconomyRegistrar {
         register("eco", new EcoCommand(plugin));
         register("baltop", new BaltopCommand(plugin));
 
-        CommandRegistrationUtil.syncCommands();
+        CommandRegistration.syncCommands();
     }
 
     public void disable() {
@@ -62,8 +62,8 @@ public class EconomyRegistrar {
             }
         }
 
-        CommandRegistrationUtil.unregisterCommands(ECONOMY_COMMANDS);
-        CommandRegistrationUtil.syncCommands();
+        CommandRegistration.unregisterCommands(ECONOMY_COMMANDS);
+        CommandRegistration.syncCommands();
     }
 
     private void register(String name, net.godlycow.org.essc.command.Command command) {

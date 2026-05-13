@@ -22,12 +22,12 @@ import net.godlycow.org.essc.command.spawn.*;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.command.warp.*;
 import net.godlycow.org.essc.plugin.config.CommandsConfig;
-import net.godlycow.org.essc.storage.data.LogoutDataManager;
+import net.godlycow.org.essc.storage.LogoutDataManager;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.migration.MigrationCommand;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.modules.schedule.SchedulesCommand;
-import net.godlycow.org.essc.util.CommandRegistrationUtil;
+import net.godlycow.org.essc.CommandRegistration;
 import org.bukkit.command.PluginCommand;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class CommandRegistrar {
 
     public void registerAll() {
         registerCommands();
-        CommandRegistrationUtil.syncCommands();
+        CommandRegistration.syncCommands();
     }
 
     private void registerCommands() {
@@ -139,14 +139,14 @@ public class CommandRegistrar {
         if (plugin.getConfigManager().isShopEnabled()) {
             register("shop", new ShopCommand(plugin));
         } else {
-            CommandRegistrationUtil.unregisterCommand("shop");
+            CommandRegistration.unregisterCommand("shop");
             plugin.debug("Shop command unregistered (shop.enabled is false)");
         }
 
         if (plugin.getConfigManager().isRTPCommandRegistered()) {
             register("rtp", new RTPCommand(plugin));
         } else {
-            CommandRegistrationUtil.unregisterCommand("rtp");
+            CommandRegistration.unregisterCommand("rtp");
             plugin.debug("RTP command unregistered (rtp.register-command is false)");
         }
 
@@ -155,16 +155,16 @@ public class CommandRegistrar {
             register("worth", new WorthCommand(plugin));
             register("quicksell", new QuickSellCommand(plugin));
         } else {
-            CommandRegistrationUtil.unregisterCommand("sell");
-            CommandRegistrationUtil.unregisterCommand("worth");
-            CommandRegistrationUtil.unregisterCommand("quicksell");
+            CommandRegistration.unregisterCommand("sell");
+            CommandRegistration.unregisterCommand("worth");
+            CommandRegistration.unregisterCommand("quicksell");
             plugin.debug("Sell commands unregistered (sell.enabled is false)");
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
             register("ah", new AhCommand(plugin, ahGuiManager));
         } else {
-            CommandRegistrationUtil.unregisterCommand("ah");
+            CommandRegistration.unregisterCommand("ah");
             plugin.debug("AH command unregistered (ah.enabled is false)");
         }
     }
@@ -172,8 +172,8 @@ public class CommandRegistrar {
     private void register(String name, Command command) {
 
         if (!commandsConfig.isEnabled(name)) {
-            CommandRegistrationUtil.unregisterCommand(name);
-            CommandRegistrationUtil.unregisterCommand("essentialsc:" + name);
+            CommandRegistration.unregisterCommand(name);
+            CommandRegistration.unregisterCommand("essentialsc:" + name);
             plugin.debug("Command '" + name + "' disabled in commands.yml – unregistered.");
             return;
         }
@@ -186,14 +186,14 @@ public class CommandRegistrar {
 
         switch (commandsConfig.getPriority(name)) {
             case "override" -> {
-                CommandRegistrationUtil.unregisterCommand(name);
+                CommandRegistration.unregisterCommand(name);
                 pluginCommand.setExecutor(command);
                 pluginCommand.setTabCompleter(command);
                 pluginCommand.register(plugin.getServer().getCommandMap());
                 plugin.debug("Registered '" + name + "' with OVERRIDE priority.");
             }
             case "low" -> {
-                if (CommandRegistrationUtil.isRegistered(name)) {
+                if (CommandRegistration.isRegistered(name)) {
                     plugin.debug("Skipped '" + name + "' (LOW priority – already claimed).");
                     return;
                 }
@@ -210,7 +210,7 @@ public class CommandRegistrar {
 
         List<String> configAliases = commandsConfig.getAliases(name);
         for (String alias : configAliases) {
-            CommandRegistrationUtil.registerAlias(alias, pluginCommand);
+            CommandRegistration.registerAlias(alias, pluginCommand);
             plugin.debug("Registered alias '/" + alias + "' -> '" + name + "'");
         }
     }

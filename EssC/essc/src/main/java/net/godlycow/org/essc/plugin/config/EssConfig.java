@@ -7,12 +7,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ConfigManager {
+public class EssConfig {
     private final EssentialsC plugin;
     private FileConfiguration config;
     private final ConfigMigrator migrator;
 
-    public ConfigManager(EssentialsC plugin) {
+    public EssConfig(EssentialsC plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
         this.migrator = new ConfigMigrator(plugin);

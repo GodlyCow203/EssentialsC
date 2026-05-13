@@ -1,4 +1,4 @@
-package net.godlycow.org.essc.storage.data;
+package net.godlycow.org.essc.storage;
 
 import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Bukkit;

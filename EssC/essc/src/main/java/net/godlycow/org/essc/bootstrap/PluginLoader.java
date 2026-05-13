@@ -17,7 +17,7 @@ import net.godlycow.org.essc.bootstrap.registrar.ListenerRegistrar;
 import net.godlycow.org.essc.integration.metrics.bstats.EconomyCharts;
 import net.godlycow.org.essc.modules.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
-import net.godlycow.org.essc.storage.data.LogoutDataManager;
+import net.godlycow.org.essc.storage.LogoutDataManager;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
