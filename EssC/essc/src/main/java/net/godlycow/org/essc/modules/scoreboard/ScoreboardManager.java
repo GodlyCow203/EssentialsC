@@ -29,10 +29,8 @@ public class ScoreboardManager implements Listener {
     private final AtomicBoolean reloading = new AtomicBoolean(false);
     private final Object lock = new Object();
 
-    private final Map<UUID, ProcessedData> placeholderCache = new HashMap<>();
-    private static final long CACHE_TTL_MS = 1000L;
-
-    private final List<Player> stalePlayers = new ArrayList<>(64);
+    private final Map<UUID, ProcessedData> placeholderCache = new ConcurrentHashMap<>();
+    private static final long CACHE_TTL_MS = 3000L;
 
     private record ProcessedData(String title, String[] lines, long timestamp) {}
 
@@ -239,7 +237,8 @@ public class ScoreboardManager implements Listener {
         if (!config.isEnabled() || reloading.get()) return;
 
         final long now = System.currentTimeMillis();
-        stalePlayers.clear();
+        final List<Player> stale = new ArrayList<>();
+        final List<Object[]> cached = new ArrayList<>();
 
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 
@@ -248,88 +247,74 @@ public class ScoreboardManager implements Listener {
                 PlayerScoreboard board = boards.get(player.getUniqueId());
                 if (board == null || !board.isActive()) continue;
 
-                UUID uuid = player.getUniqueId();
-                ProcessedData cached = placeholderCache.get(uuid);
-
-                if (cached != null && (now - cached.timestamp) < CACHE_TTL_MS) {
-                    final PlayerScoreboard cachedBoard = board;
-                    final ProcessedData cachedData = cached;
-                    final Player cachedPlayer = player;
-                    plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
-                        if (!cachedPlayer.isOnline() || !cachedBoard.isActive()) return;
-                        try {
-                            cachedBoard.updateProcessed(cachedPlayer, cachedData.title, Arrays.asList(cachedData.lines));
-                        } catch (Exception e) {
-                            plugin.getLogger().warning("Error updating scoreboard from cache for " + cachedPlayer.getName());
-                        }
-                    });
+                ProcessedData data = placeholderCache.get(player.getUniqueId());
+                if (data != null && (now - data.timestamp()) < CACHE_TTL_MS) {
+                    cached.add(new Object[]{player, board, data});
                 } else {
-                    stalePlayers.add(player);
+                    stale.add(player);
                 }
             }
         }
 
-        if (!stalePlayers.isEmpty()) {
-            final List<Player> toProcess = new ArrayList<>(stalePlayers);
-
-            plugin.getEssScheduler().runAsync(() -> {
-                List<ProcessedResult> results = new ArrayList<>(toProcess.size());
-
-                for (Player player : toProcess) {
-                    try {
-                        String title = LegacyColorConverter.toMiniMessage(
-                                processor.processString(player, config.getTitleRaw())
-                        );
-                        List<String> lineList = config.getLines();
-                        String[] lines = new String[lineList.size()];
-
-                        for (int i = 0; i < lineList.size(); i++) {
-                            lines[i] = LegacyColorConverter.toMiniMessage(
-                                    processor.processString(player, lineList.get(i))
-                            );
-                        }
-
-                        results.add(new ProcessedResult(player.getUniqueId(), title, lines));
-                    } catch (Exception e) {
-                        plugin.getLogger().log(Level.WARNING, "Error processing placeholders for " + player.getName(), e);
-                    }
-                }
-
-                if (!results.isEmpty()) {
-                    final long applyTime = System.currentTimeMillis();
-
-                    for (ProcessedResult result : results) {
-                        Player player = Bukkit.getPlayer(result.uuid);
-                        if (player == null || !player.isOnline()) continue;
-
-                        PlayerScoreboard board;
-                        synchronized (boards) {
-                            board = boards.get(result.uuid);
-                        }
-                        if (board == null || !board.isActive()) continue;
-
-                        placeholderCache.put(result.uuid,
-                                new ProcessedData(result.title, result.lines, applyTime));
-
-                        final PlayerScoreboard finalBoard = board;
-                        final ProcessedResult finalResult = result;
-                        final Player finalPlayer = player;
-
-                        plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
-                            if (!finalPlayer.isOnline() || !finalBoard.isActive()) return;
-                            try {
-                                finalBoard.updateProcessed(finalPlayer, finalResult.title, Arrays.asList(finalResult.lines));
-                            } catch (Exception e) {
-                                plugin.getLogger().warning("Error updating scoreboard for " + finalPlayer.getName() + ": " + e.getMessage());
-                            }
-                        });
-                    }
+        if (!cached.isEmpty()) {
+            plugin.getEssScheduler().runGlobal(() -> {
+                for (Object[] entry : cached) {
+                    Player player = (Player) entry[0];
+                    PlayerScoreboard board = (PlayerScoreboard) entry[1];
+                    ProcessedData data = (ProcessedData) entry[2];
+                    if (!player.isOnline() || !board.isActive()) continue;
+                    board.updateProcessed(player, data.title(), Arrays.asList(data.lines()));
                 }
             });
         }
 
+        if (stale.isEmpty()) return;
+
+        plugin.getEssScheduler().runAsync(() -> {
+            List<ProcessedResult> results = new ArrayList<>(stale.size());
+
+            for (Player player : stale) {
+                if (!player.isOnline()) continue;
+                try {
+                    String title = LegacyColorConverter.toMiniMessage(
+                            processor.processString(player, config.getTitleRaw()));
+                    List<String> lineList = config.getLines();
+                    String[] lines = new String[lineList.size()];
+                    for (int i = 0; i < lineList.size(); i++) {
+                        lines[i] = LegacyColorConverter.toMiniMessage(
+                                processor.processString(player, lineList.get(i)));
+                    }
+                    results.add(new ProcessedResult(player.getUniqueId(), title, lines));
+                } catch (Exception e) {
+                    plugin.getLogger().log(Level.WARNING,
+                            "Error processing scoreboard placeholders for " + player.getName(), e);
+                }
+            }
+
+            if (results.isEmpty()) return;
+
+            final long applyTime = System.currentTimeMillis();
+            for (ProcessedResult result : results) {
+                placeholderCache.put(result.uuid(),
+                        new ProcessedData(result.title(), result.lines(), applyTime));
+            }
+
+            plugin.getEssScheduler().runGlobal(() -> {
+                for (ProcessedResult result : results) {
+                    Player player = Bukkit.getPlayer(result.uuid());
+                    if (player == null || !player.isOnline()) continue;
+                    PlayerScoreboard board;
+                    synchronized (boards) {
+                        board = boards.get(result.uuid());
+                    }
+                    if (board == null || !board.isActive()) continue;
+                    board.updateProcessed(player, result.title(), Arrays.asList(result.lines()));
+                }
+            });
+        });
+
         if ((now & 0x1F) == 0) {
-            placeholderCache.entrySet().removeIf(e -> (now - e.getValue().timestamp) > CACHE_TTL_MS * 2);
+            placeholderCache.entrySet().removeIf(e -> (now - e.getValue().timestamp()) > CACHE_TTL_MS * 2);
         }
     }
 

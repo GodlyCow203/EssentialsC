@@ -12,15 +12,23 @@ import java.util.UUID;
 public class WarpListener implements Listener {
 
     private final EssentialsC plugin;
+    private boolean warpEnabled;
+    private boolean cancelOnMovement;
 
     public WarpListener(EssentialsC plugin) {
         this.plugin = plugin;
+        reload();
+    }
+
+    public void reload() {
+        this.warpEnabled = plugin.getConfigManager().isWarpEnabled();
+        this.cancelOnMovement = plugin.getConfigManager().isWarpCancelOnMovement();
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!plugin.getConfigManager().isWarpEnabled()) return;
-        if (!plugin.getConfigManager().isWarpCancelOnMovement()) return;
+        if (!warpEnabled || !cancelOnMovement) return;
+        if (!plugin.getWarpManager().hasAnyPendingWarp()) return;
 
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();

@@ -1,7 +1,9 @@
 package net.godlycow.org.essc.modules.afk;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.plugin.config.EssConfig;
+import net.godlycow.org.essc.server.FeatureFlags;
 import net.godlycow.org.essc.server.SchedulerTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -17,12 +19,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import io.papermc.paper.event.player.AsyncChatEvent;
-import net.godlycow.org.essc.server.FeatureFlags;
 import org.bukkit.event.player.*;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,9 +31,9 @@ public class AFKManager implements Listener {
     private final EssConfig config;
     private final MiniMessage miniMessage;
 
-    private final Map<UUID, Instant> lastActivity = new ConcurrentHashMap<>();
+    private final Map<UUID, Long> lastActivity = new ConcurrentHashMap<>();
     private final Map<UUID, Boolean> afkStatus = new ConcurrentHashMap<>();
-    private final Map<UUID, Instant> afkStartTime = new ConcurrentHashMap<>();
+    private final Map<UUID, Long> afkStartTime = new ConcurrentHashMap<>();
     private final Map<UUID, Location> afkLocations = new ConcurrentHashMap<>();
 
     private SchedulerTask checkTask;
@@ -93,23 +92,20 @@ public class AFKManager implements Listener {
     }
 
     private void checkAFKStatus() {
-        long timeoutSeconds = config.getAfkTimeout();
-        Instant now = Instant.now();
+        long timeoutMs = config.getAfkTimeout() * 1000L;
+        long now = System.currentTimeMillis();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("essentialsc.afk.bypass.auto")) {
-                continue;
-            }
+            if (player.hasPermission("essentialsc.afk.bypass.auto")) continue;
 
             UUID uuid = player.getUniqueId();
-            Instant lastActive = lastActivity.getOrDefault(uuid, now);
-            long secondsInactive = Duration.between(lastActive, now).getSeconds();
-
+            long lastActive = lastActivity.getOrDefault(uuid, now);
+            long msInactive = now - lastActive;
             boolean currentlyAFK = afkStatus.getOrDefault(uuid, false);
 
-            if (!currentlyAFK && secondsInactive >= timeoutSeconds) {
+            if (!currentlyAFK && msInactive >= timeoutMs) {
                 setAFK(player, true, true);
-            } else if (currentlyAFK && secondsInactive < timeoutSeconds) {
+            } else if (currentlyAFK && msInactive < timeoutMs) {
                 setAFK(player, false, true);
             }
         }
@@ -118,23 +114,21 @@ public class AFKManager implements Listener {
     private void checkAFKKick() {
         if (!config.isAfkKickEnabled()) return;
 
-        long kickTimeoutSeconds = config.getAfkKickTimeout();
-        Instant now = Instant.now();
+        long kickTimeoutMs = config.getAfkKickTimeout() * 1000L;
+        long now = System.currentTimeMillis();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("essentialsc.afk.bypass.kick")) {
-                continue;
-            }
+            if (player.hasPermission("essentialsc.afk.bypass.kick")) continue;
 
             UUID uuid = player.getUniqueId();
             if (!afkStatus.getOrDefault(uuid, false)) continue;
 
-            Instant afkStart = afkStartTime.get(uuid);
+            Long afkStart = afkStartTime.get(uuid);
             if (afkStart == null) continue;
 
-            long afkDuration = Duration.between(afkStart, now).getSeconds();
+            long afkDurationMs = now - afkStart;
 
-            if (afkDuration >= kickTimeoutSeconds) {
+            if (afkDurationMs >= kickTimeoutMs) {
                 Component kickMessage = plugin.getLanguageManager().get(player, "afk.kick.message");
                 player.kick(kickMessage);
 
@@ -142,7 +136,7 @@ public class AFKManager implements Listener {
                     broadcastKick(player);
                 }
 
-                plugin.debug("Kicked " + player.getName() + " for being AFK too long (" + afkDuration + "s)");
+                plugin.debug("Kicked " + player.getName() + " for being AFK too long (" + (afkDurationMs / 1000) + "s)");
             }
         }
     }
@@ -156,7 +150,7 @@ public class AFKManager implements Listener {
         afkStatus.put(uuid, afk);
 
         if (afk) {
-            afkStartTime.put(uuid, Instant.now());
+            afkStartTime.put(uuid, System.currentTimeMillis());
 
             if (config.isAfkFreezePlayer()) {
                 afkLocations.put(uuid, player.getLocation().clone());
@@ -226,14 +220,14 @@ public class AFKManager implements Listener {
         boolean currentlyAFK = afkStatus.getOrDefault(uuid, false);
         setAFK(player, !currentlyAFK, true);
         if (currentlyAFK) {
-            lastActivity.put(uuid, Instant.now());
+            lastActivity.put(uuid, System.currentTimeMillis());
         }
     }
 
     public long getAFKDurationSeconds(Player player) {
-        Instant start = afkStartTime.get(player.getUniqueId());
+        Long start = afkStartTime.get(player.getUniqueId());
         if (start == null) return 0;
-        return Duration.between(start, Instant.now()).getSeconds();
+        return (System.currentTimeMillis() - start) / 1000L;
     }
 
     public String getAFKDurationFormatted(Player player) {
@@ -268,7 +262,7 @@ public class AFKManager implements Listener {
         if (player == null || !player.isOnline()) return;
 
         UUID uuid = player.getUniqueId();
-        lastActivity.put(uuid, Instant.now());
+        lastActivity.put(uuid, System.currentTimeMillis());
 
         if (afkStatus.getOrDefault(uuid, false)) {
             setAFK(player, false, true);
@@ -304,26 +298,26 @@ public class AFKManager implements Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        if (to == null) return;
+
+        if (from.getBlockX() == to.getBlockX()
+                && from.getBlockY() == to.getBlockY()
+                && from.getBlockZ() == to.getBlockZ()) {
+            return;
+        }
 
         if (isAFK(player) && config.isAfkFreezePlayer()) {
-            org.bukkit.Location afkLoc = afkLocations.get(player.getUniqueId());
+            Location afkLoc = afkLocations.get(player.getUniqueId());
             if (afkLoc != null) {
-                if (event.getTo() != null &&
-                        (event.getFrom().getX() != event.getTo().getX() ||
-                                event.getFrom().getY() != event.getTo().getY() ||
-                                event.getFrom().getZ() != event.getTo().getZ())) {
-
-                    event.setTo(afkLoc);
-                    return;
-                }
+                event.setTo(afkLoc);
+                return;
             }
         }
 
-        Location to = event.getTo();
-        if (to == null) return;
-        if (event.getFrom().distanceSquared(to) > 0.01) {
-            updateActivity(player);
-        }
+        updateActivity(player);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -420,7 +414,7 @@ public class AFKManager implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        lastActivity.put(player.getUniqueId(), Instant.now());
+        lastActivity.put(player.getUniqueId(), System.currentTimeMillis());
         afkStatus.put(player.getUniqueId(), false);
 
         plugin.getEssScheduler().runForEntityLater(player, () -> {
@@ -449,12 +443,7 @@ public class AFKManager implements Listener {
         return afkStatus.getOrDefault(uuid, false);
     }
 
-    public Instant getAFKStartTime(Player player) {
-        return afkStartTime.get(player.getUniqueId());
-    }
-
     public int getAFKCount() {
         return getAFKPlayers().size();
     }
-
 }

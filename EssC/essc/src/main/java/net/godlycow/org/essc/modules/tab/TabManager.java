@@ -16,9 +16,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TabManager implements Listener {
 
@@ -31,6 +35,10 @@ public class TabManager implements Listener {
     private final LegacyComponentSerializer legacyAmpersand = LegacyComponentSerializer.legacyAmpersand();
 
     private static final int TEAM_FIELD_MAX = 64;
+
+    private final Map<UUID, TabState> stateCache = new ConcurrentHashMap<>();
+
+    private record TabState(String prefix, String suffix, String nick, boolean afk) {}
 
     public TabManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -60,12 +68,17 @@ public class TabManager implements Listener {
     }
 
     private void startRefreshTask() {
-        plugin.getEssScheduler().runGlobalTimer(this::refreshAll, 20L, 20L);
+        plugin.getEssScheduler().runGlobalTimer(this::refreshAll, 100L, 100L);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         plugin.getEssScheduler().runForEntityLater(event.getPlayer(), () -> updatePlayerTab(event.getPlayer()), 5L);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(org.bukkit.event.player.PlayerQuitEvent event) {
+        stateCache.remove(event.getPlayer().getUniqueId());
     }
 
     public void updatePlayerTab(Player player) {
@@ -79,31 +92,32 @@ public class TabManager implements Listener {
         if (plugin.getVanishManager() != null && plugin.getVanishManager().isVanished(player)) {
             if (plugin.getConfigManager().isVanishHideFromTab()) {
                 player.playerListName(null);
+                stateCache.remove(player.getUniqueId());
                 return;
             }
         }
 
+        String cachedNick = plugin.getNickManager() != null
+                ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
+                : null;
+        String nick = cachedNick != null ? cachedNick : "";
+        boolean afk = plugin.getAfkManager() != null && plugin.getAfkManager().isAFK(player);
+
         if (tabHook != null) {
-            String cachedNick = plugin.getNickManager() != null
-                    ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
-                    : null;
             tabHook.updateNick(player, cachedNick);
             return;
         }
 
-        TextComponent.Builder builder = Component.text();
-
-        if (plugin.getAfkManager() != null && plugin.getAfkManager().isAFK(player)) {
-            String afkTag = plugin.getConfigManager().getAfkTabPlaceholder();
-            if (afkTag != null && !afkTag.isEmpty()) {
-                builder.append(plugin.getMiniMessage().deserialize(afkTag));
-            }
-        }
-
         String lpPrefix = "";
         String lpSuffix = "";
+
         if (luckPermsEnabled && useLuckPermsTab) {
-            CachedMetaData metaData = null;
+            TabState previous = stateCache.get(player.getUniqueId());
+            if (previous != null && previous.nick().equals(nick) && previous.afk() == afk) {
+                return;
+            }
+
+            CachedMetaData metaData;
             try {
                 metaData = luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
             } catch (IllegalStateException e) {
@@ -112,24 +126,34 @@ public class TabManager implements Listener {
             }
             lpPrefix = metaData.getPrefix() != null ? metaData.getPrefix() : "";
             lpSuffix = metaData.getSuffix() != null ? metaData.getSuffix() : "";
+        }
 
-            if (!lpPrefix.isEmpty()) {
-                builder.append(legacyAmpersand.deserialize(lpPrefix));
+        TabState current = new TabState(lpPrefix, lpSuffix, nick, afk);
+        TabState previous = stateCache.get(player.getUniqueId());
+
+        if (current.equals(previous)) return;
+        stateCache.put(player.getUniqueId(), current);
+
+        TextComponent.Builder builder = Component.text();
+
+        if (afk) {
+            String afkTag = plugin.getConfigManager().getAfkTabPlaceholder();
+            if (afkTag != null && !afkTag.isEmpty()) {
+                builder.append(plugin.getMiniMessage().deserialize(afkTag));
             }
+        }
+
+        if (!lpPrefix.isEmpty()) {
+            builder.append(legacyAmpersand.deserialize(lpPrefix));
         }
 
         boolean nickInTab = plugin.getNickManager() != null
                 && plugin.getConfigManager().isNickTabEnabled();
 
-        if (nickInTab) {
-            String cachedNick = plugin.getNickManager().getCachedNickname(player.getUniqueId());
-            if (cachedNick != null && !cachedNick.isEmpty()) {
-                String indicator = plugin.getConfigManager().getNickIndicator();
-                if (!indicator.isEmpty()) builder.append(Component.text(indicator));
-                builder.append(plugin.getMiniMessage().deserialize(cachedNick));
-            } else {
-                builder.append(Component.text(player.getName()));
-            }
+        if (nickInTab && !nick.isEmpty()) {
+            String indicator = plugin.getConfigManager().getNickIndicator();
+            if (!indicator.isEmpty()) builder.append(Component.text(indicator));
+            builder.append(plugin.getMiniMessage().deserialize(nick));
         } else {
             builder.append(Component.text(player.getName()));
         }
@@ -173,10 +197,14 @@ public class TabManager implements Listener {
     }
 
     public void refreshAll() {
-        for (Player player : Bukkit.getOnlinePlayers()) updatePlayerTab(player);
+        Collection<? extends Player> online = Bukkit.getOnlinePlayers();
+        if (online.isEmpty()) return;
+        for (Player player : online) {
+            doUpdatePlayerTab(player);
+        }
     }
 
-    public boolean isEnabled()  {
+    public boolean isEnabled() {
         return luckPermsEnabled && useLuckPermsTab;
     }
 
@@ -184,8 +212,8 @@ public class TabManager implements Listener {
         luckPerms = null;
         luckPermsEnabled = false;
         useLuckPermsTab = false;
+        stateCache.clear();
         HandlerList.unregisterAll(this);
         plugin.debug("Shutting down the Tab Manager");
     }
-
 }

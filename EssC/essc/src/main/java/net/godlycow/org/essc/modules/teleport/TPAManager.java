@@ -414,7 +414,7 @@ public class TPAManager implements Listener {
             outgoingRequests.entrySet().removeIf(e -> e.getValue().isEmpty());
 
             cooldowns.entrySet().removeIf(e -> e.getValue() <= now);
-        }, 20L, 20L);
+        }, 200L, 200L);
     }
 
     private void notifyExpired(TPARequest request) {

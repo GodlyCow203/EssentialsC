@@ -62,35 +62,19 @@ public class FirstRunHandler implements Listener {
         pendingNotice = false;
         sendNotice(player, "<color:#AAAAAA>First time setup detected. Installing recommended <color:#FFFFFF>PlaceholderAPI</color> expansions...");
 
-        long delay = 200L;
-        long gap   = 60L;
+        String[] expansions = {"Vault", "Player", "Server", "Statistic", "LuckPerms"};
 
         plugin.getEssScheduler().runGlobalLater(() -> {
             plugin.getLogger().info("Running PlaceholderAPI expansion installs...");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Vault");
-        }, delay);
-
-        plugin.getEssScheduler().runGlobalLater(() ->
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Player"),
-                delay + gap);
-
-        plugin.getEssScheduler().runGlobalLater(() ->
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Server"),
-                delay + gap * 2);
-
-        plugin.getEssScheduler().runGlobalLater(() ->
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download Statistic"),
-                delay + gap * 3);
-
-        plugin.getEssScheduler().runGlobalLater(() ->
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download LuckPerms"),
-                delay + gap * 4);
-
-        plugin.getEssScheduler().runGlobalLater(() -> {
+            for (String expansion : expansions) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download " + expansion);
+            }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi reload");
-            sendNotice(player, "<color:#AAAAAA>Installed: <color:#FFFFFF>Vault, Player, Server, Statistic, LuckPerms</color>. PlaceholderAPI reloaded.");
-            sendNotice(player, "<color:#AAAAAA>This message will not appear again.");
-        }, delay + gap * 5 + 40L);
+            if (player.isOnline()) {
+                sendNotice(player, "<color:#AAAAAA>Installed: <color:#FFFFFF>Vault, Player, Server, Statistic, LuckPerms</color>. PlaceholderAPI reloaded.");
+                sendNotice(player, "<color:#AAAAAA>This message will not appear again.");
+            }
+        }, 200L);
     }
 
     private void sendNotice(Player player, String miniMessage) {

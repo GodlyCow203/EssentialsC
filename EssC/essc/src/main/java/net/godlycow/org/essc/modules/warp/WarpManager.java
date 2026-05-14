@@ -281,6 +281,10 @@ public class WarpManager {
         return pendingWarps.containsKey(uuid);
     }
 
+    public boolean hasAnyPendingWarp() {
+        return !pendingWarps.isEmpty();
+    }
+
     public void setCooldown(UUID uuid) {
         cooldowns.put(uuid, System.currentTimeMillis());
     }
