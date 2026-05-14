@@ -28,6 +28,7 @@ public class BalanceSyncManager {
     private long lastOfflineCheck = 0;
     private final Map<UUID, BigDecimal> lastKnownBalances = new ConcurrentHashMap<>();
     private final Set<UUID> onlineOnThisServer = ConcurrentHashMap.newKeySet();
+    private final Set<UUID> pendingSync = ConcurrentHashMap.newKeySet();
 
     public BalanceSyncManager(MySQLDatabaseExpansion plugin, EssentialsC essc, SyncConfig config) {
         this.plugin = plugin;
@@ -43,7 +44,7 @@ public class BalanceSyncManager {
         pushTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::pushCycle, 20L, 20L);
         pullTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::pullCycle, 20L, 20L);
 
-        plugin.getLogger().info("[MySQLExpansion] Aggressive sync started - 1 second intervals");
+        plugin.getLogger().info("[MySQLExpansion] Sync started - 1 second intervals");
     }
 
     public void shutdown() {
@@ -63,31 +64,44 @@ public class BalanceSyncManager {
     public void onPlayerJoin(Player player) {
         UUID uuid = player.getUniqueId();
         String name = player.getName();
+
+        pendingSync.add(uuid);
         onlineOnThisServer.add(uuid);
 
         db.fetchBalance(uuid).thenAccept(remoteOpt -> {
             essc.getEconomyManager().getBalance(uuid).thenAccept(localBalance -> {
-                BigDecimal localAmount = localBalance;
                 if (remoteOpt.isPresent()) {
                     BigDecimal remote = remoteOpt.get();
-                    if (remote.compareTo(localAmount) != 0) {
+                    if (remote.compareTo(localBalance) != 0) {
                         essc.getEconomyManager().setBalance(uuid, remote).thenRun(() -> {
                             lastKnownBalances.put(uuid, remote);
+                            pendingSync.remove(uuid);
                             plugin.getLogger().info("[MySQLExpansion] Join sync: " + name + " updated to " + remote);
                         });
                     } else {
-                        lastKnownBalances.put(uuid, localAmount);
+                        lastKnownBalances.put(uuid, localBalance);
+                        pendingSync.remove(uuid);
                     }
                 } else {
-                    lastKnownBalances.put(uuid, localAmount);
-                    db.pushBalance(uuid, name, localAmount, config.getServerId());
+                    lastKnownBalances.put(uuid, localBalance);
+                    db.pushBalance(uuid, name, localBalance, config.getServerId())
+                            .thenRun(() -> pendingSync.remove(uuid));
                 }
+            }).exceptionally(ex -> {
+                pendingSync.remove(uuid);
+                plugin.getLogger().log(Level.WARNING, "[MySQLExpansion] Join sync failed for " + name, ex);
+                return null;
             });
+        }).exceptionally(ex -> {
+            pendingSync.remove(uuid);
+            plugin.getLogger().log(Level.WARNING, "[MySQLExpansion] Join fetch failed for " + name, ex);
+            return null;
         });
     }
 
     public void onPlayerQuit(Player player) {
         UUID uuid = player.getUniqueId();
+        pendingSync.remove(uuid);
         onlineOnThisServer.remove(uuid);
         pushNow(uuid);
     }
@@ -99,6 +113,7 @@ public class BalanceSyncManager {
     private void pushCycle() {
         try {
             for (UUID uuid : onlineOnThisServer) {
+                if (pendingSync.contains(uuid)) continue;
                 doPush(uuid, false);
             }
 
@@ -123,6 +138,8 @@ public class BalanceSyncManager {
                     UUID uuid = entry.getKey();
                     BigDecimal newBalance = entry.getValue();
 
+                    if (pendingSync.contains(uuid)) continue;
+
                     essc.getEconomyManager().setBalance(uuid, newBalance).thenAccept(success -> {
                         if (success) {
                             lastKnownBalances.put(uuid, newBalance);
@@ -146,6 +163,8 @@ public class BalanceSyncManager {
 
     private void doPush(UUID uuid, boolean force) {
         try {
+            if (!force && pendingSync.contains(uuid)) return;
+
             Player player = Bukkit.getPlayer(uuid);
             if (player == null && !force) return;
 
@@ -194,6 +213,7 @@ public class BalanceSyncManager {
                     UUID uuid = UUID.fromString(rs.getString("uuid"));
 
                     if (onlineOnThisServer.contains(uuid)) continue;
+                    if (pendingSync.contains(uuid)) continue;
 
                     String username = rs.getString("username");
                     BigDecimal balance = BigDecimal.valueOf(rs.getDouble("balance"));
