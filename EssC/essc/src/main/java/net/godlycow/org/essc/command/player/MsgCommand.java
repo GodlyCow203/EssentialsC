@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class MsgCommand extends Command {
 
@@ -49,24 +48,40 @@ public class MsgCommand extends Command {
 
         Player senderPlayer = sender instanceof Player ? (Player) sender : null;
 
-        if (senderPlayer != null) {
-            try {
-                Set<UUID> targetIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId()).get();
-                if (targetIgnored.contains(senderPlayer.getUniqueId())) {
-                    sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
-                    return true;
-                }
-
-                Set<UUID> senderIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(senderPlayer.getUniqueId()).get();
-                if (senderIgnored.contains(target.getUniqueId())) {
-                    sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
-                    return true;
-                }
-            } catch (InterruptedException | ExecutionException e) {
-                plugin.getLogger().warning("Failed to check ignore status for msg: " + e.getMessage());
-            }
+        if (senderPlayer == null) {
+            deliverMessage(sender, null, target, message);
+            return true;
         }
 
+        Player finalSenderPlayer = senderPlayer;
+        plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
+                .thenCompose(targetIgnored -> {
+                    if (targetIgnored.contains(finalSenderPlayer.getUniqueId())) {
+                        sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
+                        return null;
+                    }
+                    return plugin.getUserManager().getRepository().getIgnoredPlayers(finalSenderPlayer.getUniqueId());
+                })
+                .thenAccept(senderIgnored -> {
+                    if (senderIgnored == null) {
+                        return;
+                    }
+                    if (senderIgnored.contains(target.getUniqueId())) {
+                        sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
+                        return;
+                    }
+                    deliverMessage(sender, finalSenderPlayer, target, message);
+                })
+                .exceptionally(ex -> {
+                    plugin.getLogger().warning("Failed to check ignore status for msg: " + ex.getMessage());
+                    deliverMessage(sender, finalSenderPlayer, target, message);
+                    return null;
+                });
+
+        return true;
+    }
+
+    private void deliverMessage(CommandSender sender, Player senderPlayer, Player target, String message) {
         if (senderPlayer != null) {
             plugin.getReplyManager().setReplyTarget(senderPlayer.getUniqueId(), target.getUniqueId());
             plugin.getReplyManager().setReplyTarget(target.getUniqueId(), senderPlayer.getUniqueId());
@@ -94,8 +109,6 @@ public class MsgCommand extends Command {
                 online.sendMessage(lang.get(online, "msg.spy", spyPlaceholders));
             }
         }
-
-        return true;
     }
 
     @Override

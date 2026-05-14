@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class ReplyCommand extends Command {
 
@@ -16,14 +15,12 @@ public class ReplyCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        UUID replyTarget = null;
-
-        if (sender instanceof Player player) {
-            replyTarget = plugin.getReplyManager().getReplyTarget(player.getUniqueId());
-        } else {
+        if (!(sender instanceof Player playerSender)) {
             sender.sendMessage(lang.get(sender, "reply.console_no_reply"));
             return true;
         }
+
+        UUID replyTarget = plugin.getReplyManager().getReplyTarget(playerSender.getUniqueId());
 
         if (replyTarget == null) {
             sender.sendMessage(lang.get(sender, "reply.no_reply_target"));
@@ -34,7 +31,7 @@ public class ReplyCommand extends Command {
 
         if (target == null) {
             sender.sendMessage(lang.get(sender, "reply.target_offline"));
-            plugin.getReplyManager().removeReplyTarget(((Player) sender).getUniqueId());
+            plugin.getReplyManager().removeReplyTarget(playerSender.getUniqueId());
             return true;
         }
 
@@ -49,51 +46,59 @@ public class ReplyCommand extends Command {
             return true;
         }
 
-        Player playerSender = (Player) sender;
+        plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
+                .thenCompose(targetIgnored -> {
+                    if (targetIgnored.contains(playerSender.getUniqueId())) {
+                        sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
+                        return null;
+                    }
+                    return plugin.getUserManager().getRepository().getIgnoredPlayers(playerSender.getUniqueId());
+                })
+                .thenAccept(senderIgnored -> {
+                    if (senderIgnored == null) {
+                        return;
+                    }
+                    if (senderIgnored.contains(target.getUniqueId())) {
+                        sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
+                        return;
+                    }
+                    deliverReply(playerSender, target, message);
+                })
+                .exceptionally(ex -> {
+                    plugin.debug("Failed to check ignore status for reply: " + ex.getMessage());
+                    deliverReply(playerSender, target, message);
+                    return null;
+                });
 
-        try {
-            Set<UUID> targetIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId()).get();
-            if (targetIgnored.contains(playerSender.getUniqueId())) {
-                sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
-                return true;
-            }
+        return true;
+    }
 
-            Set<UUID> senderIgnored = plugin.getUserManager().getRepository().getIgnoredPlayers(playerSender.getUniqueId()).get();
-            if (senderIgnored.contains(target.getUniqueId())) {
-                sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
-                return true;
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            plugin.debug("Failed to check ignore status for reply: " + e.getMessage());
-        }
-
+    private void deliverReply(Player playerSender, Player target, String message) {
         plugin.getReplyManager().setReplyTarget(target.getUniqueId(), playerSender.getUniqueId());
         plugin.getReplyManager().setReplyTarget(playerSender.getUniqueId(), target.getUniqueId());
 
-        plugin.debug("Reply from " + sender.getName() + " to " + target.getName() + ": " + message);
+        plugin.debug("Reply from " + playerSender.getName() + " to " + target.getName() + ": " + message);
 
         Map<String, String> senderPlaceholders = new HashMap<>();
         senderPlaceholders.put("target", target.getName());
         senderPlaceholders.put("message", message);
-        sender.sendMessage(lang.get(sender, "msg.outgoing", senderPlaceholders));
+        playerSender.sendMessage(lang.get(playerSender, "msg.outgoing", senderPlaceholders));
 
         Map<String, String> targetPlaceholders = new HashMap<>();
-        targetPlaceholders.put("sender", sender.getName());
+        targetPlaceholders.put("sender", playerSender.getName());
         targetPlaceholders.put("message", message);
         target.sendMessage(lang.get(target, "msg.incoming", targetPlaceholders));
 
         Map<String, String> spyPlaceholders = new HashMap<>();
-        spyPlaceholders.put("sender", sender.getName());
+        spyPlaceholders.put("sender", playerSender.getName());
         spyPlaceholders.put("target", target.getName());
         spyPlaceholders.put("message", message);
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
-            if (online.hasPermission("essentialsc.msg.spy") && !online.equals(sender) && !online.equals(target)) {
+            if (online.hasPermission("essentialsc.msg.spy") && !online.equals(playerSender) && !online.equals(target)) {
                 online.sendMessage(lang.get(online, "msg.spy", spyPlaceholders));
             }
         }
-
-        return true;
     }
 
     @Override
