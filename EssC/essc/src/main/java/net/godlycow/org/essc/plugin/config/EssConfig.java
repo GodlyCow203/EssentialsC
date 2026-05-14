@@ -686,6 +686,10 @@ public class EssConfig {
         return config.getBoolean("spawn.allow-beds-to-override", true);
     }
 
+    public boolean isChatSystemEnabled() {
+        return config.getBoolean("chat.enabled", true);
+    }
+
     public boolean isChatSlowModeEnabled() {
         return config.getBoolean("chat.slow-mode.enabled", false);
     }
@@ -712,6 +716,14 @@ public class EssConfig {
 
     public boolean isNickClickSuggestMsg() {
         return config.getBoolean("nickname.click-suggest-msg", true);
+    }
+
+    public String getChatLinkRemovalMessage() {
+        return config.getString("chat.link-removal-message", "<red>[link removed]</red>");
+    }
+
+    public java.util.List<String> getChatLinkWhitelist() {
+        return config.getStringList("chat.link-whitelist");
     }
 
     public boolean isChatMentionEnabled() {

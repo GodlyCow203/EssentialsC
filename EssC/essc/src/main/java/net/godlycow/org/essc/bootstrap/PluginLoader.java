@@ -15,7 +15,7 @@ import net.godlycow.org.essc.bootstrap.registrar.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.registrar.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.registrar.ListenerRegistrar;
 import net.godlycow.org.essc.integration.metrics.bstats.EconomyCharts;
-import net.godlycow.org.essc.modules.ChatManager;
+import net.godlycow.org.essc.modules.chat.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
@@ -137,7 +137,11 @@ public final class PluginLoader {
         plugin.setVanishManager(new VanishManager(plugin));
         plugin.setPunishmentManager(new PunishmentManager(plugin));
         plugin.setReplyManager(new ReplyManager());
-        plugin.setChatManager(new ChatManager(plugin));
+        if (plugin.getConfigManager().isChatSystemEnabled()) {
+            plugin.setChatManager(new ChatManager(plugin));
+        } else {
+            plugin.getLogger().info("Chat system is disabled in config.");
+        }
         plugin.setUserManager(new UserManager(plugin));
         plugin.setFlyManager(new FlyManager(plugin));
 

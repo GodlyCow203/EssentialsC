@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 1
+config-version: 2
 
 # General settings
 
@@ -204,6 +204,19 @@ economy:
 # Chat
 
 chat:
+
+  # Should the chat system even be enabled ?
+  enabled: true
+
+  # the message that will be displayed instead of the link
+  link-removal-message: '<#F54927>[<#FF917D>link removed<#F54927>]'
+
+  # Which links should we allow ?
+  link-whitelist:
+    - "youtube.com"
+    - "modrinth.com"
+    - "net.godlycow.org/essc/landingpage"
+
   slow-mode:
     # Whether chat slow mode is enabled.
     enabled: false

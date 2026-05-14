@@ -8,7 +8,7 @@ import net.godlycow.org.essc.modules.back.BackManager;
 import net.godlycow.org.essc.modules.backup.BackupManager;
 import net.godlycow.org.essc.integration.bedrock.BedrockUtil;
 import net.godlycow.org.essc.bootstrap.registrar.EconomyRegistrar;
-import net.godlycow.org.essc.modules.ChatManager;
+import net.godlycow.org.essc.modules.chat.ChatManager;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.plugin.config.CommandsConfig;

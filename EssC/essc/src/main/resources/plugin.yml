@@ -1164,3 +1164,45 @@ permissions:
   essc.dump.upload:
     description: Upload the dump and receive a viewer link
     default: op
+
+  essentialsc.chat.color:
+    description: Allows using any color or formatting in chat
+    default: false
+
+  essentialsc.chat.minimessage:
+    description: Allows using MiniMessage tags in chat
+    default: false
+
+  essentialsc.chat.format.bold:
+    description: Allows using bold formatting in chat
+    default: false
+
+  essentialsc.chat.format.italic:
+    description: Allows using italic formatting in chat
+    default: false
+
+  essentialsc.chat.format.underline:
+    description: Allows using underline formatting in chat
+    default: false
+
+  essentialsc.chat.format.strikethrough:
+    description: Allows using strikethrough formatting in chat
+    default: false
+
+  essentialsc.chat.format.obfuscated:
+    description: Allows using obfuscated formatting in chat
+    default: false
+
+  essentialsc.chat.links:
+    description: Allows sending clickable links in chat
+    default: false
+
+  essentialsc.chat.mention:
+    description: Allows mentioning/pinging other players in chat
+    default: true
+
+  essentialsc.chat.mention.bypass:
+    description: Prevents the player from being pinged by others
+    default: false
+
+
