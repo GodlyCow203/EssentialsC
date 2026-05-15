@@ -49,7 +49,9 @@ public class ReplyCommand extends Command {
         plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
                 .thenCompose(targetIgnored -> {
                     if (targetIgnored.contains(playerSender.getUniqueId())) {
-                        sender.sendMessage(lang.get(sender, "msg.ignored_by_target"));
+                        plugin.getEssScheduler().runGlobal(() ->
+                                sender.sendMessage(lang.get(sender, "msg.ignored_by_target"))
+                        );
                         return null;
                     }
                     return plugin.getUserManager().getRepository().getIgnoredPlayers(playerSender.getUniqueId());
@@ -59,14 +61,20 @@ public class ReplyCommand extends Command {
                         return;
                     }
                     if (senderIgnored.contains(target.getUniqueId())) {
-                        sender.sendMessage(lang.get(sender, "msg.ignoring_target"));
+                        plugin.getEssScheduler().runGlobal(() ->
+                                sender.sendMessage(lang.get(sender, "msg.ignoring_target"))
+                        );
                         return;
                     }
-                    deliverReply(playerSender, target, message);
+                    plugin.getEssScheduler().runGlobal(() ->
+                            deliverReply(playerSender, target, message)
+                    );
                 })
                 .exceptionally(ex -> {
                     plugin.debug("Failed to check ignore status for reply: " + ex.getMessage());
-                    deliverReply(playerSender, target, message);
+                    plugin.getEssScheduler().runGlobal(() ->
+                            deliverReply(playerSender, target, message)
+                    );
                     return null;
                 });
 
