@@ -171,7 +171,8 @@ public class ShopManager {
             item.setMaxStack(itemSec.getInt("max-stack", 64));
 
             item.setSpawner(itemSec.getBoolean("spawner", false));
-            item.setSpawnerType(itemSec.getString("spawner-type", "PIG"));
+            String spawnerTypeFallback = itemSec.getString("spawner-type", itemSec.getString("spawnerType", "PIG"));
+            item.setSpawnerType(spawnerTypeFallback);
 
             item.setEnchantedBook(itemSec.getBoolean("enchanted-book", false));
             ConfigurationSection storedEnchants = itemSec.getConfigurationSection("enchanted-book-enchants");
@@ -393,16 +394,7 @@ public class ShopManager {
 
         double totalPrice = item.getBuyPrice() * amount;
 
-        ItemStack giveItem = item.createItemStack();
-        ItemMeta meta = giveItem.getItemMeta();
-
-        if (meta != null) {
-            meta.displayName(null);
-            meta.lore(null);
-            giveItem.setItemMeta(meta);
-        }
-
-        giveItem.setAmount(amount * item.getAmount());
+        ItemStack giveItem = item.createGiveItem(amount * item.getAmount());
 
         if (!canFitInInventory(player, giveItem)) {
             shopListener.getSounds().playInventoryFull(player);

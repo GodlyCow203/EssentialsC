@@ -1,10 +1,15 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -29,6 +34,7 @@ public class ShopListener implements Listener {
     private final NamespacedKey shopItemKey;
     private final NamespacedKey shopCategoryKey;
     private final NamespacedKey shopPageKey;
+    private final NamespacedKey spawnerTypeKey;
 
     public ShopListener(EssentialsC plugin, ShopManager shopManager, ShopSoundManager sounds) {
         this.plugin = plugin;
@@ -38,6 +44,38 @@ public class ShopListener implements Listener {
         this.shopItemKey = new NamespacedKey(plugin, "shop_item");
         this.shopCategoryKey = new NamespacedKey(plugin, "shop_category");
         this.shopPageKey = new NamespacedKey(plugin, "shop_page");
+        this.spawnerTypeKey = new NamespacedKey(plugin, "essc_spawner_type");
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onSpawnerPlace(BlockPlaceEvent event) {
+        if (event.isCancelled()) return;
+        if (event.getBlock().getType() != Material.SPAWNER) return;
+
+        ItemStack hand = event.getItemInHand();
+        if (hand.getType() != Material.SPAWNER) return;
+
+        ItemMeta handMeta = hand.getItemMeta();
+        if (handMeta == null) return;
+
+        String entityTypeName = handMeta.getPersistentDataContainer().get(spawnerTypeKey, PersistentDataType.STRING);
+        if (entityTypeName == null) return;
+
+        EntityType entityType;
+        try {
+            entityType = EntityType.valueOf(entityTypeName);
+        } catch (IllegalArgumentException ignored) {
+            return;
+        }
+
+        org.bukkit.Location blockLocation = event.getBlock().getLocation();
+        plugin.getEssScheduler().runForLocation(blockLocation, () -> {
+            org.bukkit.block.BlockState state = blockLocation.getBlock().getState();
+            if (state instanceof CreatureSpawner cs) {
+                cs.setSpawnedType(entityType);
+                cs.update(true, false);
+            }
+        });
     }
 
     @EventHandler

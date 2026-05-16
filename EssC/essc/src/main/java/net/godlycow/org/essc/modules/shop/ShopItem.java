@@ -137,14 +137,15 @@ public class ShopItem {
                     try {
                         EntityType entityType = EntityType.valueOf(spawnerType.toUpperCase());
                         cs.setSpawnedType(entityType);
-                        blockMeta.setBlockState(cs);
                     } catch (IllegalArgumentException e) {
                         cs.setSpawnedType(EntityType.PIG);
-                        blockMeta.setBlockState(cs);
                     }
+                    blockMeta.setBlockState(cs);
                 }
+                blockMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+                item.setItemMeta(blockMeta);
+                return item;
             }
-            meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         }
 
         if (itemMaterial == Material.PLAYER_HEAD && (textureUrl != null || base64Texture != null || skullOwner != null)) {
@@ -159,6 +160,60 @@ public class ShopItem {
         }
 
         item.setItemMeta(meta);
+        return item;
+    }
+
+    public ItemStack createGiveItem(int totalAmount) {
+        Material itemMaterial = this.material;
+        if (spawner) {
+            itemMaterial = Material.SPAWNER;
+        }
+        if (enchantedBook) {
+            itemMaterial = Material.ENCHANTED_BOOK;
+        }
+
+        ItemStack item = new ItemStack(itemMaterial, totalAmount);
+
+        if (spawner || itemMaterial == Material.SPAWNER) {
+            ItemMeta rawMeta = item.getItemMeta();
+            if (rawMeta instanceof BlockStateMeta blockMeta) {
+                if (blockMeta.getBlockState() instanceof CreatureSpawner cs) {
+                    try {
+                        cs.setSpawnedType(EntityType.valueOf(spawnerType.toUpperCase()));
+                    } catch (IllegalArgumentException ignored) {
+                        cs.setSpawnedType(EntityType.PIG);
+                    }
+                    blockMeta.setBlockState(cs);
+                }
+                blockMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+                NamespacedKey spawnerKey = new NamespacedKey(
+                        JavaPlugin.getProvidingPlugin(getClass()), "essc_spawner_type"
+                );
+                blockMeta.getPersistentDataContainer().set(
+                        spawnerKey, PersistentDataType.STRING, spawnerType.toUpperCase()
+                );
+                item.setItemMeta(blockMeta);
+            }
+            return item;
+        }
+
+        if (enchantedBook || itemMaterial == Material.ENCHANTED_BOOK) {
+            ItemMeta rawMeta = item.getItemMeta();
+            if (rawMeta instanceof EnchantmentStorageMeta bookMeta) {
+                storedEnchantments.forEach((ench, level) -> bookMeta.addStoredEnchant(ench, level, true));
+                item.setItemMeta(bookMeta);
+            }
+            return item;
+        }
+
+        if (!enchantments.isEmpty()) {
+            ItemMeta rawMeta = item.getItemMeta();
+            if (rawMeta != null) {
+                enchantments.forEach((ench, level) -> rawMeta.addEnchant(ench, level, true));
+                item.setItemMeta(rawMeta);
+            }
+        }
+
         return item;
     }
 
