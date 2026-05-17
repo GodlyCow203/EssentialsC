@@ -15,6 +15,7 @@ import net.godlycow.org.essc.bootstrap.registrar.CommandRegistrar;
 import net.godlycow.org.essc.bootstrap.registrar.EconomyRegistrar;
 import net.godlycow.org.essc.bootstrap.registrar.ListenerRegistrar;
 import net.godlycow.org.essc.integration.metrics.bstats.EconomyCharts;
+import net.godlycow.org.essc.integration.metrics.bstats.UsageCharts;
 import net.godlycow.org.essc.modules.chat.ChatManager;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
@@ -252,6 +253,8 @@ public final class PluginLoader {
         if (plugin.getConfigManager().isEconomyEnabled()) {
             EconomyCharts.register(plugin, metrics);
         }
+
+        UsageCharts.register(plugin, metrics);
 
         FastStatsManager fastStats = new FastStatsManager();
         fastStats.init(plugin);
