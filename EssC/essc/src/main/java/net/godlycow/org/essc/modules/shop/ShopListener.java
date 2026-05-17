@@ -81,10 +81,16 @@ public class ShopListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (event.getClickedInventory() == null || event.getClickedInventory() != event.getInventory()) return;
 
         InventoryHolder holder = event.getInventory().getHolder();
         if (!(holder instanceof ShopHolder shopHolder)) return;
+
+        if (event.getClickedInventory() != event.getInventory()) {
+            if (event.isShiftClick()) {
+                event.setCancelled(true);
+            }
+            return;
+        }
 
         event.setCancelled(true);
 
