@@ -6,7 +6,6 @@ import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -47,9 +46,9 @@ public class LanguageManager {
                 "zh_CN","pt_BR","de_CH","es_ES","en_GB","en_US", "LB_lb"
         };
 
-        Bukkit.getServer().getLogger().warning("Warning: the language file 'de_CH' is deprecated and will be remove in the future");
-        Bukkit.getServer().getLogger().warning("Warning: the language file 'en_GB' is deprecated and will be remove in the future");
-        Bukkit.getServer().getLogger().warning("Warning: the language file 'ar_EG' is deprecated and will be remove in the future");
+        plugin.getServer().getLogger().warning("Warning: the language file 'de_CH' is deprecated and will be remove in the future");
+        plugin.getServer().getLogger().warning("Warning: the language file 'en_GB' is deprecated and will be remove in the future");
+        plugin.getServer().getLogger().warning("Warning: the language file 'ar_EG' is deprecated and will be remove in the future");
 
         for (String lang : languages) {
             File file = new File(langFolder, lang + ".json");

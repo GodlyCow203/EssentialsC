@@ -5,6 +5,8 @@ import net.godlycow.org.essc.EssentialsC;
 import java.io.File;
 import java.sql.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 public class Database {
@@ -12,6 +14,7 @@ public class Database {
     private final String dbPath;
     private final String jdbcUrl;
     private Connection connection;
+    private final ExecutorService writeExecutor;
 
     public Database(EssentialsC plugin) {
         this(plugin, "economy.db");
@@ -27,6 +30,11 @@ public class Database {
 
         this.dbPath = new File(databasesDir, filename).getAbsolutePath();
         this.jdbcUrl = "jdbc:sqlite:" + dbPath;
+        this.writeExecutor = Executors.newSingleThreadExecutor(r -> {
+            Thread t = new Thread(r, "EssentialsC-DB-" + filename);
+            t.setDaemon(true);
+            return t;
+        });
     }
 
     public void connect() throws SQLException {
@@ -35,6 +43,7 @@ public class Database {
     }
 
     public void disconnect() {
+        writeExecutor.shutdown();
         if (connection != null) {
             try {
                 connection.close();
@@ -66,6 +75,7 @@ public class Database {
         try (Statement st = conn.createStatement()) {
             st.execute("PRAGMA journal_mode=WAL");
             st.execute("PRAGMA busy_timeout=5000");
+            st.execute("PRAGMA synchronous=NORMAL");
         }
         return conn;
     }
@@ -78,7 +88,7 @@ public class Database {
                 plugin.getLogger().log(Level.SEVERE, "Database error", e);
                 throw new RuntimeException(e);
             }
-        }, plugin.getEssScheduler().asyncExecutor());
+        }, writeExecutor);
     }
 
     @FunctionalInterface
