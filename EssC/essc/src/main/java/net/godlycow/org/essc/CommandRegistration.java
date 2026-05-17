@@ -3,11 +3,13 @@ package net.godlycow.org.essc;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class CommandRegistration {
@@ -30,6 +32,23 @@ public class CommandRegistration {
             }
         } catch (Exception e) {
             Bukkit.getLogger().log(Level.SEVERE, "Failed to access CommandMap", e);
+        }
+    }
+
+    public static boolean isOwnedByE(String name) {
+        initReflection();
+        if (knownCommands == null) return false;
+        Command cmd = knownCommands.get(name.toLowerCase());
+        if (cmd == null) return false;
+        if (cmd instanceof PluginCommand pc) {
+            return pc.getPlugin() instanceof EssentialsC;
+        }
+        return false;
+    }
+
+    public static void unregisterIfOwnedByE(String name) {
+        if (isOwnedByE(name)) {
+            unregisterCommand(name);
         }
     }
 

@@ -136,14 +136,14 @@ public class CommandRegistrar {
         if (plugin.getConfigManager().isShopEnabled()) {
             register("shop", new ShopCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("shop");
+            CommandRegistration.unregisterIfOwnedByE("shop");
             plugin.debug("Shop command unregistered (shop.enabled is false)");
         }
 
         if (plugin.getConfigManager().isRTPCommandRegistered()) {
             register("rtp", new RTPCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("rtp");
+            CommandRegistration.unregisterIfOwnedByE("rtp");
             plugin.debug("RTP command unregistered (rtp.register-command is false)");
         }
 
@@ -152,16 +152,16 @@ public class CommandRegistrar {
             register("worth", new WorthCommand(plugin));
             register("quicksell", new QuickSellCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("sell");
-            CommandRegistration.unregisterCommand("worth");
-            CommandRegistration.unregisterCommand("quicksell");
+            CommandRegistration.unregisterIfOwnedByE("sell");
+            CommandRegistration.unregisterIfOwnedByE("worth");
+            CommandRegistration.unregisterIfOwnedByE("quicksell");
             plugin.debug("Sell commands unregistered (sell.enabled is false)");
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
             register("ah", new AhCommand(plugin, ahGuiManager));
         } else {
-            CommandRegistration.unregisterCommand("ah");
+            CommandRegistration.unregisterIfOwnedByE("ah");
             plugin.debug("AH command unregistered (ah.enabled is false)");
         }
     }
@@ -169,8 +169,8 @@ public class CommandRegistrar {
     private void register(String name, Command command) {
 
         if (!commandsConfig.isEnabled(name)) {
-            CommandRegistration.unregisterCommand(name);
-            CommandRegistration.unregisterCommand("essentialsc:" + name);
+            CommandRegistration.unregisterIfOwnedByE(name);
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:" + name);
             plugin.debug("Command '" + name + "' disabled in commands.yml – unregistered.");
             return;
         }
