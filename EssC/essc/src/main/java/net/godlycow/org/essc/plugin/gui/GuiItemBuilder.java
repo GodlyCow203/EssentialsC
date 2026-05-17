@@ -41,8 +41,6 @@ public class GuiItemBuilder {
         if (config.getMaterial() == Material.PLAYER_HEAD && meta instanceof SkullMeta skullMeta) {
             if (config.getSkullTexture() != null) {
                 SkullTextureUtil.applyTexture(skullMeta, config.getSkullTexture(), plugin.getLogger());
-            } else {
-                skullMeta.setOwningPlayer(player);
             }
         }
 

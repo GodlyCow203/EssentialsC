@@ -367,6 +367,47 @@ public class ShopGuiManager {
         return mm.deserialize(text);
     }
 
+    public void updateBalanceSlot(Player player, double balance, String templateId) {
+        org.bukkit.inventory.Inventory open = player.getOpenInventory().getTopInventory();
+        if (open == null || !(open.getHolder() instanceof ShopHolder)) {
+            return;
+        }
+
+        GuiTemplate template = guiFramework.getTemplate(templateId);
+        if (template == null) {
+            return;
+        }
+
+        GuiButton balanceBtn = template.getItem("balance");
+        if (balanceBtn == null) {
+            return;
+        }
+
+        ItemStack balanceItem = createBalanceItem(player, balanceBtn, balance);
+        for (int slot : balanceBtn.getSlots()) {
+            if (slot >= 0 && slot < open.getSize()) {
+                open.setItem(slot, balanceItem);
+            }
+        }
+    }
+
+    public void refreshCategoryItems(org.bukkit.inventory.Inventory inv, Player player,
+                                     ShopCategory category, int page, double balance) {
+        String currencySingular = plugin.getConfigManager().getShopCurrencySingular();
+        String currencyPlural = plugin.getConfigManager().getShopCurrencyPlural();
+
+        for (Map.Entry<Integer, ShopItem> entry : category.getPageItems(page).entrySet()) {
+            ShopItem item = entry.getValue();
+            if (item.getPermission() != null && !player.hasPermission(item.getPermission())) {
+                continue;
+            }
+            int slot = entry.getKey();
+            if (slot >= 0 && slot < inv.getSize()) {
+                inv.setItem(slot, createShopItemDisplay(item, player, balance, currencySingular, currencyPlural));
+            }
+        }
+    }
+
     public void reload() {
         guiFramework.reload();
     }

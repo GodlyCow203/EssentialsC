@@ -314,20 +314,18 @@ public class ShopManager {
             return;
         }
 
+        shopGuiManager.openMainShop(player, 0.0);
+        if (shopListener != null) {
+            shopListener.setSession(player, new ShopSession(null, 1));
+        }
+
         if (plugin.getEconomyManager() == null) {
-            shopGuiManager.openMainShop(player, 0.0);
-            if (shopListener != null) {
-                shopListener.setSession(player, new ShopSession(null, 1));
-            }
             return;
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
-                shopGuiManager.openMainShop(player, balance.doubleValue());
-                if (shopListener != null) {
-                    shopListener.setSession(player, new ShopSession(null, 1));
-                }
+                shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_main");
             });
         });
     }
@@ -349,20 +347,18 @@ public class ShopManager {
             return;
         }
 
+        shopGuiManager.openCategory(player, category, page, 0.0);
+        if (shopListener != null) {
+            shopListener.setSession(player, new ShopSession(categoryId, page));
+        }
+
         if (plugin.getEconomyManager() == null) {
-            shopGuiManager.openCategory(player, category, page, 0.0);
-            if (shopListener != null) {
-                shopListener.setSession(player, new ShopSession(categoryId, page));
-            }
             return;
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
-                shopGuiManager.openCategory(player, category, page, balance.doubleValue());
-                if (shopListener != null) {
-                    shopListener.setSession(player, new ShopSession(categoryId, page));
-                }
+                shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_category");
             });
         });
     }
@@ -595,13 +591,33 @@ public class ShopManager {
     }
 
     private void refreshPlayerGUI(Player player) {
-        ShopSession session = shopListener != null ? shopListener.getSession(player) : null;
-
-        if (session != null && session.getCategoryId() != null) {
-            openCategory(player, session.getCategoryId(), session.getPage());
-        } else {
-            openMainShop(player);
+        if (plugin.getEconomyManager() == null) {
+            return;
         }
+
+        plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
+            plugin.getEssScheduler().runForEntity(player, () -> {
+                org.bukkit.inventory.Inventory open = player.getOpenInventory().getTopInventory();
+                if (open == null || !(open.getHolder() instanceof ShopHolder holder)) {
+                    return;
+                }
+
+                String templateId = holder.isMain() ? "shop_main" : "shop_category";
+                shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), templateId);
+
+                if (holder.isCategory()) {
+                    ShopSession session = shopListener != null ? shopListener.getSession(player) : null;
+                    if (session == null) {
+                        return;
+                    }
+                    ShopCategory category = categories.get(session.getCategoryId());
+                    if (category == null) {
+                        return;
+                    }
+                    shopGuiManager.refreshCategoryItems(open, player, category, session.getPage(), balance.doubleValue());
+                }
+            });
+        });
     }
 
     public Map<String, ShopCategory> getCategories() {
