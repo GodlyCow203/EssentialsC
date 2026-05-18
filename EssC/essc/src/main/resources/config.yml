@@ -185,6 +185,9 @@ economy:
   # The balance every new player starts with.
   starting-balance: "100.00"
 
+  # Put currency before the amount.
+  currency-before-amount: false
+
   currency:
     # Displayed when the amount is exactly 1.
     singular: "Dollar"

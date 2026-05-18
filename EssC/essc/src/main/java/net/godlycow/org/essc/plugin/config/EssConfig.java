@@ -749,4 +749,8 @@ public class EssConfig {
     public long getHelpAnimationDelay() {
         return config.getLong("help.animation-delay-ticks", 3);
     }
+
+    public boolean isCurrencyBeforeAmount() {
+        return config.getBoolean("economy.currency-before-amount", false);
+    }
 }

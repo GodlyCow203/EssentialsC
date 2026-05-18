@@ -282,8 +282,14 @@ public class EconomyManager implements EconomyService, Listener {
 
     @Override
     public String format(BigDecimal amount) {
-        return decimalFormat.format(amount) + " " +
-                (amount.compareTo(BigDecimal.ONE) == 0 ? currencySingular : currencyPlural);
+        String formattedAmount = decimalFormat.format(amount);
+        String currency = amount.compareTo(BigDecimal.ONE) == 0 ? currencySingular : currencyPlural;
+
+        if (plugin.getConfigManager().isCurrencyBeforeAmount()) {
+            return currency + " " + formattedAmount;
+        }
+
+        return formattedAmount + " " + currency;
     }
 
     public String formatPlain(BigDecimal amount) {
