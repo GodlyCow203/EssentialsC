@@ -323,10 +323,37 @@ public class PunishmentManager {
         return mutes;
     }
 
+    private void saveBansSync() {
+        try {
+            banConfig.save(banFile);
+        }
+        catch (IOException e) {
+            plugin.getLogger().severe("Failed to save bans.yml");
+        }
+    }
+
+    private void saveMutesSync() {
+        try {
+            muteConfig.save(muteFile);
+        }
+        catch (IOException e) {
+            plugin.getLogger().severe("Failed to save mutes.yml");
+        }
+    }
+
+    private void saveIpHistorySync() {
+        try {
+            ipHistoryConfig.save(ipHistoryFile);
+        }
+        catch (IOException e) {
+            plugin.getLogger().severe("Failed to save ip-history.yml");
+        }
+    }
+
     public void shutdown() {
-        saveBans();
-        saveMutes();
-        saveIpHistory();
+        saveBansSync();
+        saveMutesSync();
+        saveIpHistorySync();
         networkHook = null;
         plugin.debug("Shutting down the Punishment Manager");
     }
