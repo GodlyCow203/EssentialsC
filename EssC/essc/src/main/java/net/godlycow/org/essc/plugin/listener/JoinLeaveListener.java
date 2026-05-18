@@ -51,6 +51,7 @@ public class JoinLeaveListener implements Listener {
             player.sendMessage(componentMessage);
         }
 
+        Bukkit.getConsoleSender().sendMessage(componentMessage);
         plugin.debug("Custom join message sent for " + event.getPlayer().getName());
     }
 
@@ -78,9 +79,10 @@ public class JoinLeaveListener implements Listener {
             player.sendMessage(componentMessage);
         }
 
+        Bukkit.getConsoleSender().sendMessage(componentMessage);
         plugin.debug("Custom leave message sent for " + event.getPlayer().getName());
-    }
 
+    }
     private Component formatMessage(String message, String playerName) {
         return miniMessage.deserialize(message, Placeholder.unparsed("player", playerName));
     }
