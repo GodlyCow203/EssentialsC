@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Laatste Dump: <color:#FF0000>Schrijven mislukt. Controleer console.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Laatste Dump: <color:#00C200>Uploaden...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Laatste Dump: <color:#00C200>Dump succesvol geüpload!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klik om te openen)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Laatste Dump: <color:#FF0000>Uploaden mislukt: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Laatste Dump: <color:#FF0000>Uploaden mislukt: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Je hebt je eigen leven genomen.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Gebruik: /suicide"
 }

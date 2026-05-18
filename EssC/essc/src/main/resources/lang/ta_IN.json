@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>கடைசி டம்ப்: <color:#FF0000>எழுதுதல் தோல்வியடைந்தது. கன்சோலை சரிபார்க்கவும்.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>கடைசி டம்ப்: <color:#00C200>பதிவேற்றப்படுகிறது...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>கடைசி டம்ப்: <color:#00C200>டம்ப் வெற்றிகரமாக பதிவேற்றப்பட்டது!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(திறக்க கிளிக் செய்யவும்)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>கடைசி டம்ப்: <color:#FF0000>பதிவேற்றம் தோல்வியடைந்தது: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>கடைசி டம்ப்: <color:#FF0000>பதிவேற்றம் தோல்வியடைந்தது: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>உங்கள் உயிரை நீங்களே மாய்த்துக் கொண்டீர்கள்.",
+  "command.usage.suicide": "<prefix><color:#FF0000>பயன்பாடு: /suicide"
 }

@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● محظور IP: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> بواسطة <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP غير محظور</color>",
   "command.usage.user": "<prefix> <color:#FF0000>الاستخدام: /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>لم يتم العثور على ملف شخصي مخزن لـ <color:#FFFFFF><player></color>. قد يحتاج اللاعب إلى الاتصال.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>أمر فرعي غير معروف: <color:#FFFFFF><subcommand></color>. الخيارات الصالحة: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― الملف الشخصي ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― الحالات ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― العقوبات ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― المواقع ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― أوقات الانتظار ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>اسم المستخدم: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>آخر اسم معروف: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>تم الإنشاء: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>آخر تحديث: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>آخر IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>الملخص: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>الطيران: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>مختفي: <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>القواعد مقبولة: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>آخر هدف للرد: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>آخر هدف للرد: <color:#FFFFFF>لا يوجد</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>نعم</color>",
   "user.states.value.no": "<color:#FF5555>لا</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● محظور</color> <color:#AAAAAA>بواسطة <color:#FFFFFF><banner></color> — السبب: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>محظور في: <color:#FFFFFF><time></color> — تنتهي: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● غير محظور</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● مكتوم</color> <color:#AAAAAA>بواسطة <color:#FFFFFF><muter></color> — السبب: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>مكتوم في: <color:#FFFFFF><time></color> — تنتهي: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>إشعار غير متصل: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● غير مكتوم</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>العودة: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>العودة: <color:#FFFFFF>لا يوجد</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>الموت: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>الموت: <color:#FFFFFF>لا يوجد</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>تسجيل الخروج: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) في <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>تسجيل الخروج: <color:#FFFFFF>لا يوجد</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>آخر نقل عشوائي: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>آخر نقل عشوائي: <color:#FFFFFF>أبداً</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>آخر نقل للنقطة الرئيسية: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>آخر نقل للنقطة الرئيسية: <color:#FFFFFF>أبداً</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#00C200>تم الحفظ إلى <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#FF0000>فشل الكتابة. تحقق من الكونسول.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#00C200>جاري الرفع...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#00C200>تم رفع التفريغ بنجاح!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(انقر للفتح)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#FF0000>فشل الرفع: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#FF0000>فشل الرفع: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>لقد أنهيت حياتك.",
+  "command.usage.suicide": "<prefix><color:#FF0000>الاستخدام: /suicide"
 }

@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● آئی پی بین شدہ: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> بذریعہ <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● آئی پی بین نہیں ہے</color>",
   "command.usage.user": "<prefix> <color:#FF0000>استعمال: /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000><color:#FFFFFF><player></color> کے لیے کوئی کیشڈ پروفائل نہیں ملی۔ کھلاڑی کو آن لائن ہونا ضروری ہو سکتا ہے۔</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>نامعلوم سب کمانڈ: <color:#FFFFFF><subcommand></color>۔ درست اختیارات: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― پروفائل ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― حالتیں ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― سزائیں ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― مقامات ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― کول ڈاؤنز ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>یو یو آئی ڈی: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>صارف نام: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>آخری معلوم نام: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>بنایا گیا: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>آخری اپ ڈیٹ: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>آخری آئی پی: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>خلاصہ: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>اڑنا: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>غائب: <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>قوانین منظور: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>آخری جواب کا ہدف: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>آخری جواب کا ہدف: <color:#FFFFFF>کوئی نہیں</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>ہاں</color>",
   "user.states.value.no": "<color:#FF5555>نہیں</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● بین شدہ</color> <color:#AAAAAA>بذریعہ <color:#FFFFFF><banner></color> — وجہ: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>بین کیا گیا: <color:#FFFFFF><time></color> — ختم ہونے کی تاریخ: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● بین نہیں ہے</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● میوٹ شدہ</color> <color:#AAAAAA>بذریعہ <color:#FFFFFF><muter></color> — وجہ: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>میوٹ کیا گیا: <color:#FFFFFF><time></color> — ختم ہونے کی تاریخ: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>آف لائن اطلاع: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● میوٹ نہیں ہے</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>پیچھے: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>پیچھے: <color:#FFFFFF>کوئی نہیں</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>موت: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>موت: <color:#FFFFFF>کوئی نہیں</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>لاگ آؤٹ: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) <color:#FFFFFF><logout_time></color> پر</color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>لاگ آؤٹ: <color:#FFFFFF>کوئی نہیں</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>آخری آر ٹی پی: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>آخری آر ٹی پی: <color:#FFFFFF>کبھی نہیں</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>آخری اسپاون ٹیلی پورٹ: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>آخری اسپاون ٹیلی پورٹ: <color:#FFFFFF>کبھی نہیں</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#00C200><color:#FFFFFF><file></color> میں محفوظ کیا گیا</color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#FF0000>لکھنے میں ناکام۔ کنسول چیک کریں۔</color></color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#00C200>اپ لوڈ ہو رہا ہے...</color></color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#00C200>ڈمپ کامیابی سے اپ لوڈ ہو گیا!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(کھولنے کے لیے کلک کریں)</gray></color>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#FF0000>اپ لوڈ ناکام: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#FF0000>اپ لوڈ ناکام: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>آپ نے اپنی جان لے لی ہے۔",
+  "command.usage.suicide": "<prefix><color:#FF0000>طریقہ استعمال: /suicide"
 }

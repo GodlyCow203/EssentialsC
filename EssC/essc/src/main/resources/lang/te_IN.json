@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP బ్యాన్: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> <color:#FFFFFF><banner></color> ద్వారా</color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP బ్యాన్ చేయబడలేదు</color>",
   "command.usage.user": "<prefix> <color:#FF0000>వినియోగం: /user <ప్లేయర్> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000><color:#FFFFFF><player></color> కు కాష్ చేసిన ప్రొఫైల్ కనుగొనబడలేదు. ప్లేయర్ ఆన్‌లైన్‌లో ఉండాలి.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>తెలియని ఉపకమాండ్: <color:#FFFFFF><subcommand></color>. సరైన ఎంపికలు: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― ప్రొఫైల్ ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― స్థితులు ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― శిక్షలు ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― స్థానాలు ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― కూల్‌డౌన్లు ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>వినియోగదారు పేరు: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>చివరిగా తెలిసిన పేరు: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>సృష్టించబడింది: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>చివరి అప్‌డేట్: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>చివరి IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>సారాంశం: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>ఎగురుట: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>అదృశ్యం: <value></color>",
@@ -972,30 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>నియమాలు అంగీకరించబడ్డాయి: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>చివరి రిప్లై టార్గెట్: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>చివరి రిప్లై టార్గెట్: <color:#FFFFFF>లేదు</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>అవును</color>",
   "user.states.value.no": "<color:#FF5555>కాదు</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● బ్యాన్ చేయబడ్డారు</color> <color:#AAAAAA><color:#FFFFFF><banner></color> ద్వారా — కారణం: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>బ్యాన్ సమయం: <color:#FFFFFF><time></color> — కాలంచెల్లు: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● బ్యాన్ చేయబడలేదు</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● మ్యూట్ చేయబడ్డారు</color> <color:#AAAAAA><color:#FFFFFF><muter></color> ద్వారా — కారణం: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>మ్యూట్ సమయం: <color:#FFFFFF><time></color> — కాలంచెల్లు: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>ఆఫ్‌లైన్ నోటిఫికేషన్: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● మ్యూట్ చేయబడలేదు</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>వెనుక: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>వెనుక: <color:#FFFFFF>లేదు</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>మరణం: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>మరణం: <color:#FFFFFF>లేదు</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>లాగ్‌అవుట్: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) <color:#FFFFFF><logout_time></color> వద్ద</color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>లాగ్‌అవుట్: <color:#FFFFFF>లేదు</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>చివరి RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>చివరి RTP: <color:#FFFFFF>ఎప్పుడూ కాదు</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>చివరి స్పాన్ టెలిపోర్ట్: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>చివరి స్పాన్ టెలిపోర్ట్: <color:#FFFFFF>ఎప్పుడూ కాదు</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#00C200><color:#FFFFFF><file></color> కు సేవ్ చేయబడింది</color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#FF0000>రైట్ విఫలమైంది. కన్సోల్ తనిఖీ చేయండి.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#00C200>అప్‌లోడ్ అవుతోంది...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#00C200>డంప్ విజయవంతంగా అప్‌లోడ్ చేయబడింది!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(తెరవడానికి క్లిక్ చేయండి)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#FF0000>అప్‌లోడ్ విఫలమైంది: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#FF0000>అప్‌లోడ్ విఫలమైంది: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>మీరు మీ స్వంత ప్రాణాలను తీసుకున్నారు.",
+  "command.usage.suicide": "<prefix><color:#FF0000>వినియోగం: /suicide"
 }

@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP-Gebannt: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> vum <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP net gebannt</color>",
   "command.usage.user": "<prefix> <color:#FF0000>Benotzung: /user <Spiller> [Profil|Zoustänn|Bestrafungen|Plazen|Cooldowns|Alles]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>Kee gespäichert Profil fir <color:#FFFFFF><player></color> fonnt. De Spiller muss eventuell online sinn.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>Onbekannte Subcommand: <color:#FFFFFF><subcommand></color>. Gülteg Optiounen: Profil, Zoustänn, Bestrafungen, Plazen, Cooldowns, Alles</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― Profil ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― Statusen ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― Strofen ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― Positiounen ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― Ofkillzäiten ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>Benotzernumm: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>Leschte bekannte Numm: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>Erstallt den: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>Leschte Update: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>Leschten IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>Zesummefaassung: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>Fléien: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>Onsichtbar: <value></color>",
@@ -974,27 +969,25 @@
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>Leschte Äntwert-Zil: <color:#FFFFFF>Keen</color></color>",
   "user.states.value.yes": "<color:#55FF55>Jo</color>",
   "user.states.value.no": "<color:#FF5555>Nee</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● Gebannt</color> <color:#AAAAAA>vum <color:#FFFFFF><banner></color> — Grond: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Gebannt den: <color:#FFFFFF><time></color> — Léisst of den: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● Net gebannt</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● Gemutet</color> <color:#AAAAAA>vum <color:#FFFFFF><muter></color> — Grond: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Gemutet den: <color:#FFFFFF><time></color> — Léisst of den: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>Offline-Benoriichtegung: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● Net gemutet</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>Zréck: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>Zréck: <color:#FFFFFF>Keen</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>Doudesplaz: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>Doudesplaz: <color:#FFFFFF>Keng</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>Ofgemellt: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) um <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>Ofgemellt: <color:#FFFFFF>Keng</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Leschte RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Leschte RTP: <color:#FFFFFF>Ni</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Leschte Spawn-Teleport: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Leschte Spawn-Teleport: <color:#FFFFFF>Ni</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#00C200>Gespeichert op <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#FF0000>Schreiwe feelgeschloen. Kuck an d'Konsole.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#00C200>Eroplueden...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#00C200>Dump erfollegräich eropgelueden!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klick fir opzemaachen)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#FF0000>Eroplueden feelgeschloen: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#FF0000>Eroplueden feelgeschloen: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Du hues dir d'Liewe geholl.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Notzung: /suicide"
 }

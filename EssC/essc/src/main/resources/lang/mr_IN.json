@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>शेवटचा डंप: <color:#FF0000>लेखन अयशस्वी. कन्सोल तपासा.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>शेवटचा डंप: <color:#00C200>अपलोड करत आहे...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>शेवटचा डंप: <color:#00C200>डंप यशस्वीरित्या अपलोड केला!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(उघडण्यासाठी क्लिक करा)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>शेवटचा डंप: <color:#FF0000>अपलोड अयशस्वी: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>शेवटचा डंप: <color:#FF0000>अपलोड अयशस्वी: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>तुम्ही तुमचे स्वतःचे जीवन संपवले आहे.",
+  "command.usage.suicide": "<prefix><color:#FF0000>वापर: /suicide"
 }

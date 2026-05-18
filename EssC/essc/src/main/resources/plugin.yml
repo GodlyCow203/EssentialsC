@@ -458,6 +458,11 @@ commands:
     usage: /essc dump [sections...]
     permission: essc.dump
 
+  suicide:
+    description: Kill yourself
+    usage: /suicide
+    permission: essentialsc.suicide
+
 permissions:
   essentialsc.heal:
     description: Heal command

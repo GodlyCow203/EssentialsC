@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#FF0000>Scrittura fallita. Controlla la console.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#00C200>Caricamento in corso...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#00C200>Dump caricato con successo!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Clicca per aprire)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#FF0000>Caricamento fallito: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#FF0000>Caricamento fallito: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Ti sei tolto la vita.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

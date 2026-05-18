@@ -218,9 +218,7 @@ public class ScoreboardManager implements Listener {
                         Player player = Bukkit.getPlayer(entry.getKey());
                         PlayerScoreboard sb = entry.getValue();
                         if (player != null && player.isOnline()) {
-                            plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
-                                try { sb.hide(player); } catch (Exception ignored) {}
-                            });
+                            try { sb.hide(player); } catch (Exception ignored) {}
                         }
                         sb.destroy();
                     } catch (Exception e) {

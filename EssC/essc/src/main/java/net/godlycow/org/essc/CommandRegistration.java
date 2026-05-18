@@ -86,6 +86,7 @@ public class CommandRegistration {
             try {
                 Bukkit.getServer().getClass().getMethod("syncCommands").invoke(Bukkit.getServer());
             } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }, 1L);
     }

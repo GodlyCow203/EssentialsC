@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● Banni par IP : <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> par <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP non bannie</color>",
   "command.usage.user": "<prefix> <color:#FF0000>Utilisation : /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>Aucun profil en cache trouvé pour <color:#FFFFFF><player></color>. Le joueur doit peut-être être en ligne.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>Sous-commande inconnue : <color:#FFFFFF><subcommand></color>. Options valides : profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― Profil ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― États ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― Sanctions ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― Positions ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― Cooldowns ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID : <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>Nom d'utilisateur : <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>Dernier nom connu : <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>Créé : <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>Dernière mise à jour : <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>Dernière IP : <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>Résumé : <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>Vol : <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>Invisible : <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>Règles acceptées : <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>Dernière cible de réponse : <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>Dernière cible de réponse : <color:#FFFFFF>Aucun</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>Oui</color>",
   "user.states.value.no": "<color:#FF5555>Non</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● Banni</color> <color:#AAAAAA>par <color:#FFFFFF><banner></color> — Raison : <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Banni le : <color:#FFFFFF><time></color> — Expire : <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● Non banni</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● Muet</color> <color:#AAAAAA>par <color:#FFFFFF><muter></color> — Raison : <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Muté le : <color:#FFFFFF><time></color> — Expire : <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>Notification hors ligne : <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● Non muet</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>Retour : <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>Retour : <color:#FFFFFF>Aucun</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>Mort : <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>Mort : <color:#FFFFFF>Aucun</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>Déconnexion : <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) à <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>Déconnexion : <color:#FFFFFF>Aucun</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Dernier RTP : <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Dernier RTP : <color:#FFFFFF>Jamais</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Dernier téléport spawn : <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Dernier téléport spawn : <color:#FFFFFF>Jamais</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>Dernier dump : <color:#00C200>Sauvegardé dans <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>Dernier dump : <color:#FF0000>Écriture échouée. Vérifiez la console.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Dernier dump : <color:#00C200>Téléversement en cours...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Dernier dump : <color:#00C200>Dump téléversé avec succès !</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Cliquez pour ouvrir)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Dernier dump : <color:#FF0000>Téléversement échoué : <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Dernier dump : <color:#FF0000>Téléversement échoué : <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Vous avez mis fin à vos jours.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Utilisation : /suicide"
 }

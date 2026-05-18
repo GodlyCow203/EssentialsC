@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#FF0000>Ghi thất bại. Kiểm tra bảng điều khiển.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#00C200>Đang tải lên...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#00C200>Tải lên bản ghi thành công!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Nhấn để mở)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#FF0000>Tải lên thất bại: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#FF0000>Tải lên thất bại: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Bạn đã tự kết liễu đời mình.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Cách dùng: /suicide"
 }

@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>最后转储: <color:#FF0000>写入失败。请检查控制台。</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>最后转储: <color:#00C200>正在上传...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>最后转储: <color:#00C200>转储上传成功！</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(点击打开)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>最后转储: <color:#FF0000>上传失败: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>最后转储: <color:#FF0000>上传失败: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>你结束了自己的生命。",
+  "command.usage.suicide": "<prefix><color:#FF0000>用法：/suicide"
 }

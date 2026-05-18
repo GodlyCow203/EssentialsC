@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Letzter Dump: <color:#FF0000>Schreiben fehlgeschlagen. Konsole prüfen.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Letzter Dump: <color:#00C200>Wird hochgeladen...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Letzter Dump: <color:#00C200>Dump erfolgreich hochgeladen!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klicken zum Öffnen)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Letzter Dump: <color:#FF0000>Upload fehlgeschlagen: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Letzter Dump: <color:#FF0000>Upload fehlgeschlagen: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Du hast dir das Leben genommen.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Benutzung: /suicide"
 }

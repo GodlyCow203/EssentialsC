@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#FF0000>Penulisan gagal. Periksa konsol.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#00C200>Mengunggah...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#00C200>Dump berhasil diunggah!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klik untuk membuka)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#FF0000>Unggahan gagal: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#FF0000>Unggahan gagal: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Anda telah mengakhiri hidup Anda sendiri.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Penggunaan: /suicide"
 }

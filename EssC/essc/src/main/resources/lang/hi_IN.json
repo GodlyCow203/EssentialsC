@@ -942,19 +942,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● आईपी बैन: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> <color:#FFFFFF><banner></color> द्वारा</color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● आईपी बैन नहीं</color>",
   "command.usage.user": "<prefix> <color:#FF0000>उपयोग: /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000><color:#FFFFFF><player></color> के लिए कोई कैश्ड प्रोफाइल नहीं मिली। खिलाड़ी को ऑनलाइन होना आवश्यक हो सकता है।</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>अज्ञात सबकमांड: <color:#FFFFFF><subcommand></color>. मान्य विकल्प: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― प्रोफाइल ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― स्थितियां ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― दंड ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― स्थान ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― कूलडाउन ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>यूयूआईडी: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>उपयोगकर्ता नाम: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>अंतिम ज्ञात नाम: <color:#FFFFFF><last_known_name></color></color>",
@@ -964,7 +960,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>बनाया गया: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>अंतिम अपडेट: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>अंतिम आईपी: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>सारांश: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>उड़ान: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>अदृश्य: <value></color>",
@@ -973,31 +968,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>नियम स्वीकार: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>अंतिम रिप्लाई लक्ष्य: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>अंतिम रिप्लाई लक्ष्य: <color:#FFFFFF>कोई नहीं</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>हां</color>",
   "user.states.value.no": "<color:#FF5555>नहीं</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● बैन</color> <color:#AAAAAA><color:#FFFFFF><banner></color> द्वारा — कारण: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>बैन किया: <color:#FFFFFF><time></color> — समाप्ति: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● बैन नहीं</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● म्यूट</color> <color:#AAAAAA><color:#FFFFFF><muter></color> द्वारा — कारण: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>म्यूट किया: <color:#FFFFFF><time></color> — समाप्ति: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>ऑफलाइन सूचना: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● म्यूट नहीं</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>वापस: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>वापस: <color:#FFFFFF>कोई नहीं</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>मृत्यु: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>मृत्यु: <color:#FFFFFF>कोई नहीं</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>लॉगआउट: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) <color:#FFFFFF><logout_time></color> पर</color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>लॉगआउट: <color:#FFFFFF>कोई नहीं</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>अंतिम RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>अंतिम RTP: <color:#FFFFFF>कभी नहीं</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>अंतिम स्पॉन टेलीपोर्ट: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>अंतिम स्पॉन टेलीपोर्ट: <color:#FFFFFF>कभी नहीं</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#00C200><color:#FFFFFF><file></color> में सेव किया गया</color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#FF0000>राइट विफल। कंसोल जांचें।</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#00C200>अपलोड हो रहा है...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#00C200>डंप सफलतापूर्वक अपलोड हुआ!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(खोलने के लिए क्लिक करें)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#FF0000>अपलोड विफल: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#FF0000>अपलोड विफल: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>आपने अपनी जीवन लीला समाप्त कर ली है।",
+  "command.usage.suicide": "<prefix><color:#FF0000>उपयोग: /suicide"
 }

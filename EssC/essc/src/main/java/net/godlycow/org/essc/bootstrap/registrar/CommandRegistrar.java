@@ -126,6 +126,7 @@ public class CommandRegistrar {
         register("afklist",        new AFKListCommand(plugin));
         register("migration",      new MigrationCommand(plugin));
         register("user",           new UserCommand(plugin));
+        register("suicide",        new SuicideCommand(plugin));
 
 
         if (plugin.getConfigManager().isNickEnabled()) {

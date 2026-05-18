@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Ostatni zrzut: <color:#FF0000>Błąd zapisu. Sprawdź konsolę.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Ostatni zrzut: <color:#00C200>Wysyłanie...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Ostatni zrzut: <color:#00C200>Zrzut wysłany pomyślnie!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Kliknij, aby otworzyć)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Ostatni zrzut: <color:#FF0000>Błąd wysyłania: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Ostatni zrzut: <color:#FF0000>Błąd wysyłania: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Odebrałeś sobie życie.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Użycie: /suicide"
 }

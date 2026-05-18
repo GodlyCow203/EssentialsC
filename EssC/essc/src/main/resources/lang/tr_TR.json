@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP Yasaklı: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> tarafından <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP yasaklı değil</color>",
   "command.usage.user": "<prefix> <color:#FF0000>Kullanım: /user <oyuncu> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000><color:#FFFFFF><player></color> için önbelleğe alınmış profil bulunamadı. Oyuncunun çevrimiçi olması gerekebilir.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>Bilinmeyen alt komut: <color:#FFFFFF><subcommand></color>. Geçerli seçenekler: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― Profil ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― Durumlar ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― Cezalar ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― Konumlar ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― Bekleme Süreleri ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>Kullanıcı Adı: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>Son Bilinen Ad: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>Oluşturulma: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>Son Güncelleme: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>Son IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>Özet: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>Uçma: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>Görünmez: <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>Kurallar Kabul Edildi: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>Son Yanıt Hedefi: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>Son Yanıt Hedefi: <color:#FFFFFF>Yok</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>Evet</color>",
   "user.states.value.no": "<color:#FF5555>Hayır</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● Yasaklı</color> <color:#AAAAAA>tarafından <color:#FFFFFF><banner></color> — Sebep: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Yasaklanma: <color:#FFFFFF><time></color> — Bitiş: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● Yasaklı Değil</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● Susturulmuş</color> <color:#AAAAAA>tarafından <color:#FFFFFF><muter></color> — Sebep: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Susturulma: <color:#FFFFFF><time></color> — Bitiş: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>Çevrimdışı Bildirim: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● Susturulmamış</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>Geri: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>Geri: <color:#FFFFFF>Yok</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>Ölüm: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>Ölüm: <color:#FFFFFF>Yok</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>Çıkış: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) saat <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>Çıkış: <color:#FFFFFF>Yok</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Son RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Son RTP: <color:#FFFFFF>Hiçbir Zaman</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Son Doğuş Işınlanması: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Son Doğuş Işınlanması: <color:#FFFFFF>Hiçbir Zaman</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>Son Döküm: <color:#00C200><color:#FFFFFF><file></color> dosyasına kaydedildi</color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>Son Döküm: <color:#FF0000>Yazma başarısız. Konsolu kontrol et.</color></color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Son Döküm: <color:#00C200>Yükleniyor...</color></color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Son Döküm: <color:#00C200>Döküm başarıyla yüklendi!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Açmak için tıkla)</gray></color>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Son Döküm: <color:#FF0000>Yükleme başarısız: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Son Döküm: <color:#FF0000>Yükleme başarısız: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Kendi canına kıydın.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Kullanım: /suicide"
 }

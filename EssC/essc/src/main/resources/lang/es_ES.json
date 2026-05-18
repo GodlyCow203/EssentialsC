@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Último Volcado: <color:#FF0000>Error de escritura. Revisa la consola.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Último Volcado: <color:#00C200>Subiendo...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Último Volcado: <color:#00C200>¡Volcado subido exitosamente!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Clic para abrir)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Último Volcado: <color:#FF0000>Error al subir: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Último Volcado: <color:#FF0000>Error al subir: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Te has quitado la vida.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

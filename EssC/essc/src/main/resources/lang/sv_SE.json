@@ -988,5 +988,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>Senaste dump: <color:#FF0000>Skrivning misslyckades. Kontrollera konsolen.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Senaste dump: <color:#00C200>Laddar upp...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Senaste dump: <color:#00C200>Dump uppladdad framgångsrikt!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klicka för att öppna)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Senaste dump: <color:#FF0000>Uppladdning misslyckades: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Senaste dump: <color:#FF0000>Uppladdning misslyckades: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Du har tagit ditt eget liv.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Användning: /suicide"
 }

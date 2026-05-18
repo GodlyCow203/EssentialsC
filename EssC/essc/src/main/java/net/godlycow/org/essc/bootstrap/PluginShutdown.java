@@ -95,7 +95,7 @@ public final class PluginShutdown {
 
         plugin.debug("[Backup] Creating shutdown backup...");
         try {
-            plugin.getBackupManager().createAsync(
+            plugin.getBackupManager().createSync(
                     name -> plugin.debug("[Backup] Shutdown backup created: " + name),
                     err  -> plugin.getLogger().warning("[Backup] Shutdown backup failed: " + err)
             );

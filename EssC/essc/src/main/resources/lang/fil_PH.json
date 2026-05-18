@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP Banned: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> ni <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● Hindi banned ang IP</color>",
   "command.usage.user": "<prefix> <color:#FF0000>Paggamit: /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>Walang nahanap na cached profile para kay <color:#FFFFFF><player></color>. Kailangan sigurong online ang player.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>Hindi kilalang subcommand: <color:#FFFFFF><subcommand></color>. Mga wastong opsyon: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― Profile ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― Mga Estado ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― Mga Parusa ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― Mga Lokasyon ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― Cooldowns ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>Username: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>Huling Kilalang Pangalan: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>Nilikha: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>Huling Na-update: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>Huling IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>Buod: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>Liparan: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>Nawala: <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>Tinanggap ang Mga Patakaran: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>Huling Reply Target: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>Huling Reply Target: <color:#FFFFFF>Wala</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>Oo</color>",
   "user.states.value.no": "<color:#FF5555>Hindi</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● Banned</color> <color:#AAAAAA>ni <color:#FFFFFF><banner></color> — Dahilan: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Oras ng Ban: <color:#FFFFFF><time></color> — Mag-eexpire: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● Hindi Banned</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● Muted</color> <color:#AAAAAA>ni <color:#FFFFFF><muter></color> — Dahilan: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Oras ng Mute: <color:#FFFFFF><time></color> — Mag-eexpire: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>Offline Notification: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● Hindi Muted</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>Balik: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>Balik: <color:#FFFFFF>Wala</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>Kamatayan: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>Kamatayan: <color:#FFFFFF>Wala</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>Logout: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) sa <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>Logout: <color:#FFFFFF>Wala</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Huling RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Huling RTP: <color:#FFFFFF>Kailanman</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Huling Spawn Teleport: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Huling Spawn Teleport: <color:#FFFFFF>Kailanman</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>Huling Dump: <color:#00C200>Nai-save sa <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>Huling Dump: <color:#FF0000>Nabigo ang pagsulat. Suriin ang console.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Huling Dump: <color:#00C200>Nag-a-upload...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Huling Dump: <color:#00C200>Matagumpay na na-upload ang dump!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(I-click para buksan)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Huling Dump: <color:#FF0000>Nabigo ang upload: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Huling Dump: <color:#FF0000>Nabigo ang upload: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Kinuha mo ang iyong sariling buhay.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Paggamit: /suicide"
 }

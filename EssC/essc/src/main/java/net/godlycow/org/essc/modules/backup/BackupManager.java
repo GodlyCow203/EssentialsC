@@ -47,6 +47,19 @@ public class BackupManager {
         });
     }
 
+    public void createSync(java.util.function.Consumer<String> onSuccess,
+                           java.util.function.Consumer<String> onFailure) {
+        try {
+            String fileName = "backup-" + LocalDateTime.now().format(TIMESTAMP_FORMAT) + ".zip";
+            File zipFile = new File(backupFolder, fileName);
+            zip(plugin.getDataFolder(), zipFile);
+            pruneOldBackups();
+            onSuccess.accept(fileName);
+        } catch (IOException e) {
+            onFailure.accept(e.getMessage());
+        }
+    }
+
     public List<File> listBackups() {
         File[] files = backupFolder.listFiles(
                 f -> f.isFile() && f.getName().endsWith(".zip")

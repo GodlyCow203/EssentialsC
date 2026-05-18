@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● આઈપી બેન: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> <color:#FFFFFF><banner></color> દ્વારા</color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● આઈપી બેન નથી</color>",
   "command.usage.user": "<prefix> <color:#FF0000>વપરાશ: /user <player> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000><color:#FFFFFF><player></color> માટે કોઈ કેશ્ડ પ્રોફાઈલ મળ્યું નથી. ખેલાડીને ઓનલાઈન હોવું જરૂરી હોઈ શકે.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>અજ્ઞાત સબકમાન્ડ: <color:#FFFFFF><subcommand></color>. માન્ય વિકલ્પો: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― પ્રોફાઈલ ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― સ્થિતિઓ ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― દંડ ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― સ્થાન ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― કૂલડાઉન ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>યુયુઆઈડી: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>યુઝરનામ: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>છેલ્લી જાણીતું નામ: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>બનાવ્યું: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>છેલ્લો અપડેટ: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>છેલ્લી આઈપી: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>સારાંશ: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>ઉડાન: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>અદ્રશ્ય: <value></color>",
@@ -972,31 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>નિયમો સ્વીકાર્યા: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>છેલ્લો રિપ્લાય લક્ષ્ય: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>છેલ્લો રિપ્લાય લક્ષ્ય: <color:#FFFFFF>કોઈ નથી</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>હા</color>",
   "user.states.value.no": "<color:#FF5555>ના</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● બેન</color> <color:#AAAAAA><color:#FFFFFF><banner></color> દ્વારા — કારણ: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>બેન કર્યું: <color:#FFFFFF><time></color> — સમાપ્તિ: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● બેન નથી</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● મ્યૂટ</color> <color:#AAAAAA><color:#FFFFFF><muter></color> દ્વારા — કારણ: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>મ્યૂટ કર્યું: <color:#FFFFFF><time></color> — સમાપ્તિ: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>ઓફલાઈન સૂચના: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● મ્યૂટ નથી</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>પાછા: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>પાછા: <color:#FFFFFF>કોઈ નથી</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>મૃત્યુ: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>મૃત્યુ: <color:#FFFFFF>કોઈ નથી</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>લોગઆઉટ: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) <color:#FFFFFF><logout_time></color> પર</color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>લોગઆઉટ: <color:#FFFFFF>કોઈ નથી</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>છેલ્લો RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>છેલ્લો RTP: <color:#FFFFFF>ક્યારેય નથી</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>છેલ્લો સ્પોન ટેલિપોર્ટ: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>છેલ્લો સ્પોન ટેલિપોર્ટ: <color:#FFFFFF>ક્યારેય નથી</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#00C200><color:#FFFFFF><file></color> માં સેવ કર્યું</color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#FF0000>રાઈટ નિષ્ફળ. કન્સોલ તપાસો.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#00C200>અપલોડ થઈ રહ્યું છે...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#00C200>ડમ્પ સફળતાપૂર્વક અપલોડ થયું!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(ખોલવા માટે ક્લિક કરો)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#FF0000>અપલોડ નિષ્ફળ: <color:#FFFFFF><error></color></color>"
-
+  "dump.upload.error": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#FF0000>અપલોડ નિષ્ફળ: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>તમે તમારો પોતાનો જીવ લીધો છે.",
+  "command.usage.suicide": "<prefix><color:#FF0000>વપરાશ: /suicide"
 }

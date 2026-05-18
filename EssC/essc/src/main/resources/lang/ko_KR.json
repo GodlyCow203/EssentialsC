@@ -987,5 +987,7 @@
   "dump.error.write": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#FF0000>쓰기 실패. 콘솔을 확인하세요.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#00C200>업로드 중...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#00C200>덤프가 성공적으로 업로드되었습니다!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(클릭하여 열기)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#FF0000>업로드 실패: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#FF0000>업로드 실패: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>스스로 목숨을 끊었습니다.",
+  "command.usage.suicide": "<prefix><color:#FF0000>사용법: /suicide"
 }

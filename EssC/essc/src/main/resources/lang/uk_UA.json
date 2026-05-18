@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● IP заблоковано: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> гравцем <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP не заблоковано</color>",
   "command.usage.user": "<prefix> <color:#FF0000>Використання: /user <гравець> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>Не знайдено кешованого профілю для <color:#FFFFFF><player></color>. Гравець має бути онлайн.</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>Невідома підкоманда: <color:#FFFFFF><subcommand></color>. Доступні варіанти: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― Профіль ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― Стани ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― Покарання ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― Локації ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― Кулдауни ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>Ім'я користувача: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>Останнє відоме ім'я: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>Створено: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>Останнє оновлення: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>Останній IP: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>Зведення: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>Політ: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>Невидимість: <value></color>",
@@ -972,30 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>Правила прийнято: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>Остання ціль відповіді: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>Остання ціль відповіді: <color:#FFFFFF>Немає</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>Так</color>",
   "user.states.value.no": "<color:#FF5555>Ні</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● Заблоковано</color> <color:#AAAAAA>гравцем <color:#FFFFFF><banner></color> — Причина: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Заблоковано: <color:#FFFFFF><time></color> — Закінчується: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● Не заблоковано</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● Зам'ючено</color> <color:#AAAAAA>гравцем <color:#FFFFFF><muter></color> — Причина: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>Зам'ючено: <color:#FFFFFF><time></color> — Закінчується: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>Офлайн-сповіщення: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● Не зам'ючено</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>Назад: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>Назад: <color:#FFFFFF>Немає</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>Смерть: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>Смерть: <color:#FFFFFF>Немає</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>Вихід: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) о <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>Вихід: <color:#FFFFFF>Немає</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>Останній RTP: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>Останній RTP: <color:#FFFFFF>Ніколи</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>Остання телепортація на спавн: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>Остання телепортація на спавн: <color:#FFFFFF>Ніколи</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>Останній дамп: <color:#00C200>Збережено до <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>Останній дамп: <color:#FF0000>Помилка запису. Перевірте консоль.</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>Останній дамп: <color:#00C200>Завантаження...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>Останній дамп: <color:#00C200>Дамп успішно завантажено!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Клацніть, щоб відкрити)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>Останній дамп: <color:#FF0000>Завантаження не вдалося: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>Останній дамп: <color:#FF0000>Завантаження не вдалося: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>Ви вкоротили собі віку.",
+  "command.usage.suicide": "<prefix><color:#FF0000>Використання: /suicide"
 }

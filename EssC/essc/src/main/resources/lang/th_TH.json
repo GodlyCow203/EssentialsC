@@ -941,19 +941,15 @@
   "checkpunish.ipban.active": "<prefix> <color:#FF0000>● แบน IP: <color:#FFFFFF><ip></color> - <color:#FFFFFF><reason></color> โดย <color:#FFFFFF><banner></color></color>",
   "checkpunish.ipban.none": "<prefix> <color:#FFF200>● IP ไม่ถูกแบน</color>",
   "command.usage.user": "<prefix> <color:#FF0000>การใช้งาน: /user <ผู้เล่น> [profile|states|punishments|locations|cooldowns|all]</color>",
-
   "user.error.no_profile": "<prefix> <color:#FF0000>ไม่พบโปรไฟล์ที่แคชไว้สำหรับ <color:#FFFFFF><player></color> ผู้เล่นอาจต้องออนไลน์</color>",
   "user.error.unknown_subcommand": "<prefix> <color:#FF0000>คำสั่งย่อยไม่รู้จัก: <color:#FFFFFF><subcommand></color> ตัวเลือกที่ใช้ได้: profile, states, punishments, locations, cooldowns, all</color>",
-
   "user.header": "<prefix> <color:#FFF200>━━━ <color:#FFFFFF><player></color> ━━━</color>",
   "user.footer": "<prefix> <color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━</color>",
-
   "user.section.profile": "<prefix> <color:#FFF200>― โปรไฟล์ ―</color>",
   "user.section.states": "<prefix> <color:#FFF200>― สถานะ ―</color>",
   "user.section.punishments": "<prefix> <color:#FFF200>― การลงโทษ ―</color>",
   "user.section.locations": "<prefix> <color:#FFF200>― ตำแหน่ง ―</color>",
   "user.section.cooldowns": "<prefix> <color:#FFF200>― คูลดาวน์ ―</color>",
-
   "user.profile.uuid": "<prefix> <color:#AAAAAA>UUID: <color:#FFFFFF><uuid></color></color>",
   "user.profile.username": "<prefix> <color:#AAAAAA>ชื่อผู้ใช้: <color:#FFFFFF><username></color></color>",
   "user.profile.last_known_name": "<prefix> <color:#AAAAAA>ชื่อล่าสุดที่รู้จัก: <color:#FFFFFF><last_known_name></color></color>",
@@ -963,7 +959,6 @@
   "user.profile.created_at": "<prefix> <color:#AAAAAA>สร้างเมื่อ: <color:#FFFFFF><created_at></color></color>",
   "user.profile.updated_at": "<prefix> <color:#AAAAAA>อัปเดตล่าสุด: <color:#FFFFFF><updated_at></color></color>",
   "user.profile.last_ip": "<prefix> <color:#AAAAAA>IP ล่าสุด: <color:#FFFFFF><ip></color></color>",
-
   "user.states.summary": "<prefix> <color:#AAAAAA>สรุป: <color:#FFFFFF><summary></color></color>",
   "user.states.fly": "<prefix> <color:#AAAAAA>บิน: <value></color>",
   "user.states.vanished": "<prefix> <color:#AAAAAA>หายตัว: <value></color>",
@@ -972,30 +967,27 @@
   "user.states.rules_accepted": "<prefix> <color:#AAAAAA>ยอมรับกฎ: <value></color>",
   "user.states.last_reply_target": "<prefix> <color:#AAAAAA>เป้าหมายตอบกลับล่าสุด: <color:#FFFFFF><player></color></color>",
   "user.states.last_reply_target_none": "<prefix> <color:#AAAAAA>เป้าหมายตอบกลับล่าสุด: <color:#FFFFFF>ไม่มี</color></color>",
-
   "user.states.value.yes": "<color:#55FF55>ใช่</color>",
   "user.states.value.no": "<color:#FF5555>ไม่</color>",
-
   "user.punishments.banned": "<prefix> <color:#FF5555>● ถูกแบน</color> <color:#AAAAAA>โดย <color:#FFFFFF><banner></color> — เหตุผล: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>แบนเมื่อ: <color:#FFFFFF><time></color> — หมดอายุ: <color:#FFFFFF><expires></color></color>",
   "user.punishments.not_banned": "<prefix> <color:#55FF55>● ไม่ถูกแบน</color>",
   "user.punishments.muted": "<prefix> <color:#FFF200>● ถูกปิดเสียง</color> <color:#AAAAAA>โดย <color:#FFFFFF><muter></color> — เหตุผล: <color:#FFFFFF><reason></color>\n  <color:#AAAAAA>ปิดเสียงเมื่อ: <color:#FFFFFF><time></color> — หมดอายุ: <color:#FFFFFF><expires></color>\n  <color:#AAAAAA>การแจ้งเตือนออฟไลน์: <color:#FFFFFF><offline_notification></color></color>",
   "user.punishments.not_muted": "<prefix> <color:#55FF55>● ไม่ถูกปิดเสียง</color>",
-
   "user.locations.back": "<prefix> <color:#AAAAAA>ย้อนกลับ: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.back_none": "<prefix> <color:#AAAAAA>ย้อนกลับ: <color:#FFFFFF>ไม่มี</color></color>",
   "user.locations.death": "<prefix> <color:#AAAAAA>ตาย: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>)</color>",
   "user.locations.death_none": "<prefix> <color:#AAAAAA>ตาย: <color:#FFFFFF>ไม่มี</color></color>",
   "user.locations.logout": "<prefix> <color:#AAAAAA>ออก: <color:#FFFFFF><world></color> (<color:#FFFFFF><x>, <y>, <z></color>) เมื่อ <color:#FFFFFF><logout_time></color></color>",
   "user.locations.logout_none": "<prefix> <color:#AAAAAA>ออก: <color:#FFFFFF>ไม่มี</color></color>",
-
   "user.cooldowns.rtp": "<prefix> <color:#AAAAAA>RTP ล่าสุด: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.rtp_never": "<prefix> <color:#AAAAAA>RTP ล่าสุด: <color:#FFFFFF>ไม่เคย</color></color>",
   "user.cooldowns.spawn": "<prefix> <color:#AAAAAA>เทเลพอร์ตสปอว์นล่าสุด: <color:#FFFFFF><time></color></color>",
   "user.cooldowns.spawn_never": "<prefix> <color:#AAAAAA>เทเลพอร์ตสปอว์นล่าสุด: <color:#FFFFFF>ไม่เคย</color></color>",
-
   "dump.saved": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#00C200>บันทึกไปยัง <color:#FFFFFF><file></color></color>",
   "dump.error.write": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#FF0000>เขียนล้มเหลว ตรวจสอบคอนโซล</color>",
   "dump.upload.starting": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#00C200>กำลังอัปโหลด...</color>",
   "dump.upload.success": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#00C200>อัปโหลดดัมป์สำเร็จ!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(คลิกเพื่อเปิด)</gray>",
-  "dump.upload.error": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#FF0000>อัปโหลดล้มเหลว: <color:#FFFFFF><error></color></color>"
+  "dump.upload.error": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#FF0000>อัปโหลดล้มเหลว: <color:#FFFFFF><error></color></color>",
+  "suicide.success": "<prefix><color:#FFF200>คุณได้จบชีวิตตัวเองลงแล้ว",
+  "command.usage.suicide": "<prefix><color:#FF0000>วิธีใช้: /suicide"
 }
