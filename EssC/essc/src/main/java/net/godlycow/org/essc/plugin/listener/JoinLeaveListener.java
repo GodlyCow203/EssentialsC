@@ -3,7 +3,6 @@ package net.godlycow.org.essc.plugin.listener;
 import net.godlycow.org.essc.EssentialsC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,9 +14,11 @@ public class JoinLeaveListener implements Listener {
 
     private final EssentialsC plugin;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private final boolean placeholderAPIEnabled;
 
     public JoinLeaveListener(EssentialsC plugin) {
         this.plugin = plugin;
+        this.placeholderAPIEnabled = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
 
     @EventHandler
@@ -40,7 +41,7 @@ public class JoinLeaveListener implements Listener {
             return;
         }
 
-        Component componentMessage = formatMessage(message, event.getPlayer().getName());
+        Component componentMessage = formatMessage(message, event.getPlayer());
 
         event.setJoinMessage(null);
 
@@ -68,7 +69,7 @@ public class JoinLeaveListener implements Listener {
             return;
         }
 
-        Component componentMessage = formatMessage(message, event.getPlayer().getName());
+        Component componentMessage = formatMessage(message, event.getPlayer());
 
         event.setQuitMessage(null);
 
@@ -83,8 +84,20 @@ public class JoinLeaveListener implements Listener {
         plugin.debug("Custom leave message sent for " + event.getPlayer().getName());
 
     }
-    private Component formatMessage(String message, String playerName) {
-        return miniMessage.deserialize(message, Placeholder.unparsed("player", playerName));
+    private Component formatMessage(String message, Player player) {
+        String formattedMessage = message;
+        
+        if (placeholderAPIEnabled) {
+            try {
+                formattedMessage = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, formattedMessage);
+            } catch (Exception e) {
+                plugin.debug("PlaceholderAPI processing failed for " + player.getName() + ": " + e.getMessage());
+            }
+        }
+        
+        formattedMessage = formattedMessage.replace("<player>", player.getName());
+        
+        return miniMessage.deserialize(formattedMessage);
     }
 
     public void reload() {

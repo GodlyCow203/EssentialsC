@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 3
+config-version: 4
 
 # General settings
 
@@ -444,6 +444,7 @@ spawn:
 
 
 # Join and Leave Messages
+# Supports MiniMessage formatting and PlaceholderAPI placeholders (if installed).
 
 join-leave-messages:
   # Set to false to disable custom join and leave messages entirely,
@@ -451,18 +452,15 @@ join-leave-messages:
   enabled: true
 
   # The message broadcast when a player joins.
-  # Available placeholders: <player>
   join: "<dark_gray>[<#70F40B>+<dark_gray>] <#A3F863><player> joined the game"
 
   # The message broadcast when a player leaves.
-  # Available placeholders: <player>
   leave: "<dark_gray>[<#F52727>-<dark_gray>] <#FA8F8F><player> left the game"
 
   # Whether vanished players should be hidden from other players.
   hide-vanished: true
 
   # Message broadcast when a player joins the server for the first time.
-  # Supports MiniMessage formatting (e.g. <yellow>, <player>).
   first-join: "<#F5CF27><b>Welcome!<reset> <#F8DC63><player> just joined for the first time!"
 
 
