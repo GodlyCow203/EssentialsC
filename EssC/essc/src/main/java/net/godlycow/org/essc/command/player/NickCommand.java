@@ -211,10 +211,10 @@ public class NickCommand extends Command {
     }
 
     private String processNick(String input, Player player) {
-        if (!plugin.getConfigManager().isNickColorsAllowed()) {
-            input = input.replace("&", "").replace("§", "");
+        if (!player.hasPermission("essentialsc.nick.color")) {
+            input = input.replaceAll("(?i)[&§][0-9a-f]", "").replaceAll("(?i)[&§]x([&§][0-9a-f]){6}", "");
         }
-        if (!plugin.getConfigManager().isNickFormatAllowed()) {
+        if (!player.hasPermission("essentialsc.nick.format")) {
             input = input.replaceAll("(?i)[&§][klmnor]", "");
         }
         if (!player.hasPermission("essentialsc.nick.minimessage")) {

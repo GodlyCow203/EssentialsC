@@ -1218,4 +1218,12 @@ permissions:
     description: Hides the player from the baltop list
     default: false
 
+  essentialsc.nick.color:
+    default: false
+    description: Allow legacy color codes in nicknames
+
+  essentialsc.nick.format:
+    default: false
+    description: Allow legacy format codes in nicknames
+
 
