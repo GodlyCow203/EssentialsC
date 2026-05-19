@@ -66,7 +66,7 @@ public class KitsCommand extends Command {
                                 "perm", kit.getPermission())));
             } else {
                 sender.sendMessage(lang.get(sender, "kits.list.entry",
-                        Map.of("status", status, "kit", kit.getDisplayName())));
+                        Map.of("status", status, "kit", kit.getDisplayName(), "name", kit.getName())));
             }
         }
     }
