@@ -96,7 +96,7 @@ public class KitCommand extends Command {
         }
 
         plugin.getKitManager().getCooldownRemainingAsync(player, kit).thenAccept(cooldown -> {
-            if (cooldown > 0) {
+            if (cooldown > 0 && !plugin.getKitManager().hasCooldownBypass(player, kit)) {
                 player.sendMessage(lang.get(player, "kit.cooldown_active",
                         Map.of("kit", kit.getDisplayName(), "time", formatTime(cooldown))));
                 return;

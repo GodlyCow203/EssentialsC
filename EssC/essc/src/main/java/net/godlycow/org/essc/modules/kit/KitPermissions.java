@@ -66,7 +66,7 @@ public class KitPermissions {
             }
         }
 
-        if (kit.getCooldown() > 0 && !player.hasPermission("essentialsc.kits.admin")) {
+        if (kit.getCooldown() > 0 && !hasCooldownBypass(player, kit)) {
             if (claimData != null) {
                 long cooldownEnd = claimData.lastClaimed + (kit.getCooldown() * 1000L);
                 if (System.currentTimeMillis() < cooldownEnd) {
@@ -92,5 +92,12 @@ public class KitPermissions {
         }
 
         return event.isAvailable();
+    }
+
+    public boolean hasCooldownBypass(Player player, Kit kit) {
+        String perKitPermission = "essentialsc.kits.cooldown.bypass." + kit.getName().toLowerCase();
+        return player.hasPermission("essentialsc.kits.admin")
+                || player.hasPermission("essentialsc.kits.cooldown.bypass")
+                || player.hasPermission(perKitPermission);
     }
 }

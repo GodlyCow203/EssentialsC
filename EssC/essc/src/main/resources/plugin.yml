@@ -1210,4 +1210,8 @@ permissions:
     description: Prevents the player from being pinged by others
     default: false
 
+  essentialsc.kits.cooldown.bypass:
+    description: Bypass cooldowns for all kits
+    default: op
+
 

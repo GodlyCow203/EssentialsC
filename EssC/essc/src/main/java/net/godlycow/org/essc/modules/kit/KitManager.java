@@ -137,6 +137,10 @@ public class KitManager implements Listener {
         return permissions.hasPermission(player, kit);
     }
 
+    public boolean hasCooldownBypass(Player player, Kit kit) {
+        return permissions.hasCooldownBypass(player, kit);
+    }
+
     public boolean canClaim(Player player, Kit kit) {
         return permissions.canClaim(player, kit, data);
     }
