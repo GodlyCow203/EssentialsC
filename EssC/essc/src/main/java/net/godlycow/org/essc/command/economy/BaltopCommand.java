@@ -5,6 +5,7 @@ import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.util.PaginatedList;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -47,7 +48,14 @@ public class BaltopCommand extends Command {
         return true;
     }
 
+    private boolean isExempt(UUID uuid) {
+        Player online = Bukkit.getPlayer(uuid);
+        return online != null && online.hasPermission("essentialsc.baltop.exempt");
+    }
+
     private void displayTop(CommandSender sender, List<Map.Entry<UUID, BigDecimal>> entries, int page) {
+        entries.removeIf(e -> isExempt(e.getKey()));
+
         PaginatedList<Map.Entry<UUID, BigDecimal>> paged = new PaginatedList<>(entries, PER_PAGE);
 
         if (paged.isEmpty()) {

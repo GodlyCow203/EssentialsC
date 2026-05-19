@@ -1214,4 +1214,8 @@ permissions:
     description: Bypass cooldowns for all kits
     default: op
 
+  essentialsc.baltop.exempt:
+    description: Hides the player from the baltop list
+    default: false
+
 
