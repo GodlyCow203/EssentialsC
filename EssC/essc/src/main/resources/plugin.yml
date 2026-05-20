@@ -1226,4 +1226,8 @@ permissions:
     default: false
     description: Allow legacy format codes in nicknames
 
+  essentialsc.home.bed:
+    description: Allows using your bed/respawn anchor as a home waypoint.
+    default: false
+
 

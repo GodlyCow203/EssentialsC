@@ -49,6 +49,22 @@ public class HomeCommand extends Command {
         }
 
         String name = args[0].toLowerCase();
+
+        if (name.equals("bed") && player.hasPermission("essentialsc.home.bed")) {
+            Location bedLoc = player.getBedSpawnLocation();
+            if (bedLoc == null) {
+                player.sendMessage(lang.get(player, "home.bed.no_bed"));
+                return true;
+            }
+            plugin.getEssScheduler().teleportAsync(player, bedLoc).thenAccept(success -> {
+                if (success) {
+                    plugin.getEssScheduler().runForEntity(player, () ->
+                            player.sendMessage(lang.get(player, "home.bed.teleported")));
+                }
+            });
+            return true;
+        }
+
         teleportToHome(player, player.getUniqueId(), name, null);
         return true;
     }
@@ -79,24 +95,40 @@ public class HomeCommand extends Command {
     private void showHomeList(Player player) {
         plugin.getHomeManager().getHomes(player.getUniqueId()).whenComplete((homes, err) -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
-                if (homes == null || homes.isEmpty()) {
+                boolean hasBed = player.hasPermission("essentialsc.home.bed")
+                        && player.getBedSpawnLocation() != null;
+
+                if ((homes == null || homes.isEmpty()) && !hasBed) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
                     return;
                 }
 
                 int max = plugin.getHomeManager().getMaxHomes(player);
+                int used = (homes == null ? 0 : homes.size()) + (hasBed && plugin.getConfigManager().isBedHomeCountsInLimit() ? 1 : 0);
                 String maxStr = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
 
                 player.sendMessage(lang.get(player, "home.list.header",
-                        Map.of("used", String.valueOf(homes.size()), "limit", maxStr)));
+                        Map.of("used", String.valueOf(used), "limit", maxStr)));
 
-                for (Home home : homes) {
+                if (hasBed) {
+                    Location bedLoc = player.getBedSpawnLocation();
                     player.sendMessage(lang.get(player, "home.list.entry",
-                            Map.of("name", home.getName(),
-                                    "world", home.getWorld(),
-                                    "x", String.valueOf((int)home.getX()),
-                                    "y", String.valueOf((int)home.getY()),
-                                    "z", String.valueOf((int)home.getZ()))));
+                            Map.of("name", "bed",
+                                    "world", bedLoc.getWorld() != null ? bedLoc.getWorld().getName() : "?",
+                                    "x", String.valueOf((int) bedLoc.getX()),
+                                    "y", String.valueOf((int) bedLoc.getY()),
+                                    "z", String.valueOf((int) bedLoc.getZ()))));
+                }
+
+                if (homes != null) {
+                    for (Home home : homes) {
+                        player.sendMessage(lang.get(player, "home.list.entry",
+                                Map.of("name", home.getName(),
+                                        "world", home.getWorld(),
+                                        "x", String.valueOf((int) home.getX()),
+                                        "y", String.valueOf((int) home.getY()),
+                                        "z", String.valueOf((int) home.getZ()))));
+                    }
                 }
             });
         });
@@ -112,6 +144,11 @@ public class HomeCommand extends Command {
         if (args.length == 1) {
             String partial = args[0].toLowerCase();
             List<String> completions = new ArrayList<>();
+
+            if ("bed".startsWith(partial) && player.hasPermission("essentialsc.home.bed")
+                    && player.getBedSpawnLocation() != null) {
+                completions.add("bed");
+            }
 
             Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(player.getUniqueId());
             for (String name : homeNames) {

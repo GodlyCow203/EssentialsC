@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>స్థితి: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>హోమ్‌లను నిర్వహించడానికి క్లిక్ చేయండి",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>మీకు బెడ్ లేదా రీస్పాన్ యాంకర్ సెట్ చేయబడలేదు.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>మీ బెడ్‌కు టెలిపోర్ట్ చేయబడ్డారు!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>స్పాన్ స్థానం మీ ప్రస్తుత స్థానానికి సెట్ చేయబడింది!</color>",
   "spawn.success": "<prefix> <color:#FFF200>స్పాన్‌కు టెలిపోర్ట్ అయ్యారు!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> సెకన్లలో స్పాన్‌కు టెలిపోర్ట్ అవుతోంది... కదవకండి!</color>",

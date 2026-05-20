@@ -140,6 +140,10 @@ public class EssConfig {
         return getHomeMode().equals("gui");
     }
 
+    public boolean isBedHomeCountsInLimit() {
+        return config.getBoolean("home.bed-counts-in-limit", true);
+    }
+
     public long getSpawnCooldown() {
         return config.getLong("spawn.cooldown", 5);
     }

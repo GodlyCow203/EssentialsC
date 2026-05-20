@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>स्थिती: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>घरे व्यवस्थापित करण्यासाठी क्लिक करा",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>तुमचा बेड किंवा रिस्पॉन अँकर सेट केलेला नाही.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>तुमच्या बेडवर टेलिपोर्ट केले!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>स्पॉन स्थान तुमच्या सध्याच्या स्थानावर सेट केले!</color>",
   "spawn.success": "<prefix> <color:#FFF200>स्पॉनवर टेलिपोर्ट झाले!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> सेकंदात स्पॉनवर टेलिपोर्ट होत आहे... हलू नका!</color>",

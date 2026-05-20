@@ -42,6 +42,17 @@ public class HomeManager {
         return repository.getHomeCount(uuid);
     }
 
+    public CompletableFuture<Integer> getEffectiveHomeCount(Player player) {
+        return repository.getHomeCount(player.getUniqueId()).thenApply(count -> {
+            if (player.hasPermission("essentialsc.home.bed")
+                    && plugin.getConfigManager().isBedHomeCountsInLimit()
+                    && player.getBedSpawnLocation() != null) {
+                return count + 1;
+            }
+            return count;
+        });
+    }
+
     public CompletableFuture<Boolean> homeExists(UUID uuid, String name) {
         return repository.homeExists(uuid, name);
     }

@@ -53,19 +53,33 @@ public class HomesCommand extends Command {
 
         plugin.getHomeManager().getHomes(player.getUniqueId()).thenAccept(homes -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
+                boolean hasBed = player.hasPermission("essentialsc.home.bed")
+                        && player.getBedSpawnLocation() != null;
+
                 int max = plugin.getHomeManager().getMaxHomes(player);
-                String used = String.valueOf(homes.size());
+                int usedCount = homes.size() + (hasBed && plugin.getConfigManager().isBedHomeCountsInLimit() ? 1 : 0);
+                String used = String.valueOf(usedCount);
                 String limit = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
 
                 player.sendMessage(lang.get(player, "home.list.header",
                         Map.of("used", used, "limit", limit)));
 
-                if (homes.isEmpty()) {
+                if (homes.isEmpty() && !hasBed) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
                     return;
                 }
 
                 StringBuilder sb = new StringBuilder();
+
+                if (hasBed) {
+                    sb.append("<click:run_command:/home bed>")
+                            .append("<yellow>bed</yellow>")
+                            .append("</click>");
+                    if (!homes.isEmpty()) {
+                        sb.append("<gray>, </gray>");
+                    }
+                }
+
                 for (int i = 0; i < homes.size(); i++) {
                     Home home = homes.get(i);
                     sb.append("<click:run_command:/home ").append(home.getName()).append(">")

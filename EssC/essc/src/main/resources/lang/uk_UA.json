@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Статус: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Натисніть для керування домівками",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Ви не встановили ліжко або якір відродження.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Телепортовано до вашого ліжка!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Місце появи встановлено на вашу поточну позицію!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Телепортовано до місця появи!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Телепортація до місця появи через <color:#FFF200><seconds></color> секунд... Не рухайтеся!</color>",

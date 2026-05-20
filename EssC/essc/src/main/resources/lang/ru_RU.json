@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Статус: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Нажмите для управления домами",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>У вас не установлена кровать или якорь возрождения.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Телепортировано к вашей кровати!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Точка спавна установлена на вашу текущую позицию!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Телепортирован на спавн!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Телепортация на спавн через <color:#FFF200><seconds></color> секунд... Не двигайтесь!</color>",

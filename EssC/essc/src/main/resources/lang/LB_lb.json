@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Klick fir Heem ze verwalten",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Du hues kee Bett oder Respawn-Anker festgeluecht.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Teleportéiert bei däi Bett!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Spawn Positioun op deng aktuell Positioun gesat!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Op Spawn teleportéiert!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teleportéieren op Spawn an <color:#FFF200><seconds></color> Sekonnen... Beweg dech net!</color>",

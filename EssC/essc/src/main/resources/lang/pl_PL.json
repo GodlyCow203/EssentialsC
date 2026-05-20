@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Kliknij, aby zarządzać domami",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Nie masz ustawionego łóżka ani kotwicy odrodzenia.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Przeteleportowano do twojego łóżka!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Lokalizacja spawnu ustawiona na twoją aktualną pozycję!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Teleportowano na spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teleportacja na spawn za <color:#FFF200><seconds></color> sekund... Nie ruszaj się!</color>",

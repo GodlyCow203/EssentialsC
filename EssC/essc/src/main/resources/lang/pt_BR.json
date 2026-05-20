@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Clique para gerenciar casas",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Você não tem uma cama ou âncora de renascimento definida.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Teletransportado para sua cama!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Local de spawn definido para sua posição atual!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Teletransportado para o spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teletransportando para o spawn em <color:#FFF200><seconds></color> segundos... Não se mova!</color>",

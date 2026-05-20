@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>حالت: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>ہومز منظم کرنے کے لیے کلک کریں",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>آپ کا کوئی بیڈ یا ریسپان اینکر سیٹ نہیں ہے۔</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>آپ کے بیڈ پر ٹیلی پورٹ کیا گیا!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>اسپاون کی جگہ آپ کی موجودہ پوزیشن پر سیٹ کر دی گئی!</color>",
   "spawn.success": "<prefix> <color:#FFF200>اسپاون پر ٹیلیپورٹ!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color> سیکنڈ میں اسپاون پر ٹیلیپورٹ ہو رہا ہے... حرکت نہ کریں!</color>",

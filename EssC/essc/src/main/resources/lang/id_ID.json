@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Klik untuk mengelola rumah",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Kamu belum mengatur tempat tidur atau jangkar respawn.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Diteleportasi ke tempat tidurmu!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Lokasi spawn diatur ke posisi Anda saat ini!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Teleportasi ke spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teleportasi ke spawn dalam <color:#FFF200><seconds></color> detik... Jangan bergerak!</color>",

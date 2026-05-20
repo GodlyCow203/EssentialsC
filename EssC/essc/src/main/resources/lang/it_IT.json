@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Stato: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Clicca per gestire le case",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Non hai un letto o un'ancora di rinascita impostata.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Teletrasportato al tuo letto!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Posizione spawn impostata alla tua posizione attuale!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Teletrasportato allo spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teletrasporto allo spawn tra <color:#FFF200><seconds></color> secondi... Non muoverti!</color>",

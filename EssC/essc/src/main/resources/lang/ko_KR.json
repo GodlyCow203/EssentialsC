@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>상태: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>집을 관리하려면 클릭하세요",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>침대나 리스폰 정박기가 설정되어 있지 않습니다.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>침대로 이동했습니다!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>스폰 위치가 현재 위치로 설정되었습니다!</color>",
   "spawn.success": "<prefix> <color:#FFF200>스폰으로 순간이동했습니다!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF><color:#FFF200><seconds></color>초 후 스폰으로 순간이동합니다... 움직이지 마세요!</color>",

@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>สถานะ: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>คลิกเพื่อจัดการบ้าน",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>คุณยังไม่ได้ตั้งเตียงหรือจุดเกิดใหม่ไว้</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>วาร์ปไปยังเตียงของคุณแล้ว!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>ตั้งจุดเกิดเป็นตำแหน่งปัจจุบันของคุณ!</color>",
   "spawn.success": "<prefix> <color:#FFF200>เทเลพอร์ตไปยังจุดเกิด!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>กำลังเทเลพอร์ตไปยังจุดเกิดใน <color:#FFF200><seconds></color> วินาที... อย่าขยับ!</color>",

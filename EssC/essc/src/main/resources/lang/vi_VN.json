@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Trạng Thái: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Nhấn để quản lý nhà",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Bạn chưa đặt giường hoặc điểm hồi sinh.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Đã dịch chuyển đến giường của bạn!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Điểm spawn đã được đặt tại vị trí hiện tại của bạn!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Đã dịch chuyển đến điểm spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Sẽ dịch chuyển đến điểm spawn sau <color:#FFF200><seconds></color> giây... Đừng di chuyển!</color>",

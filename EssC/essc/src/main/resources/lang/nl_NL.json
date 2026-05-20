@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Klik om thuizen te beheren",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Je hebt geen bed of respawn-anker ingesteld.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Geteleporteerd naar je bed!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Spawnlocatie ingesteld op je huidige positie!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Geteleporteerd naar spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teleporteren naar spawn over <color:#FFF200><seconds></color> seconden... Beweeg niet!</color>",

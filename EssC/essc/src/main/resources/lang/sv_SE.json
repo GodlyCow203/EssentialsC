@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>Status: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>Klicka för att hantera hem",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>Du har ingen säng eller respawn-ankare inställt.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>Teleporterad till din säng!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>Spawnplats satt till din nuvarande position!</color>",
   "spawn.success": "<prefix> <color:#FFF200>Teleporterad till spawn!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>Teleporterar till spawn om <color:#FFF200><seconds></color> sekunder... Rör dig inte!</color>",

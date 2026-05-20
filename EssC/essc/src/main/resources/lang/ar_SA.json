@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>الحالة: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>انقر لإدارة المنازل",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>ليس لديك سرير أو مرساة إعادة ظهور محددة.</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>تم الانتقال إلى سريرك!</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>تم تعيين موقع الولادة إلى موقعك الحالي!</color>",
   "spawn.success": "<prefix> <color:#FFF200>تم النقل إلى موقع الولادة!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>جاري النقل إلى موقع الولادة خلال <color:#FFF200><seconds></color> ثانية... لا تتحرك!</color>",

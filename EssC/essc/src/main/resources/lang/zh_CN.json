@@ -366,6 +366,8 @@
   "home.gui.admin.player.lore.status": "<gray>状态: <status>",
   "home.gui.admin.player.lore.uuid": "<gray>UUID: <dark_gray><uuid>…",
   "home.gui.admin.player.lore.click": "<blue>点击管理家",
+  "home.bed.no_bed": "<prefix> <color:#FF0000>你没有设置床或重生锚点。</color>",
+  "home.bed.teleported": "<prefix> <color:#FFF200>已传送到你的床！</color>",
   "spawn.set.success": "<prefix> <color:#FFF200>出生点已设置为你当前的位置!</color>",
   "spawn.success": "<prefix> <color:#FFF200>已传送到出生点!</color>",
   "spawn.pending": "<prefix> <color:#FFFFFF>将在 <color:#FFF200><seconds></color> 秒后传送到出生点... 不要移动!</color>",

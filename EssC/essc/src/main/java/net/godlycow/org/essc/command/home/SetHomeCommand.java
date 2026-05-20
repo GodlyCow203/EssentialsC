@@ -52,7 +52,7 @@ public class SetHomeCommand extends Command {
         }
 
         plugin.getHomeManager().homeExists(player.getUniqueId(), name).whenComplete((alreadyExists, err1) -> {
-            plugin.getHomeManager().getHomeCount(player.getUniqueId()).whenComplete((count, err2) -> {
+            plugin.getHomeManager().getEffectiveHomeCount(player).whenComplete((count, err2) -> {
                 int max = plugin.getHomeManager().getMaxHomes(player);
 
                 if (!alreadyExists && count >= max) {
