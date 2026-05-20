@@ -407,6 +407,10 @@ home:
   # Play sounds during home teleport events.
   sounds: true
 
+  # If true, the bed home (essentialsc.home.bed permission) counts toward the player's home limit.
+  # Set to false to let the bed home be a free bonus slot.
+  bed-counts-in-limit: true
+
   # Worlds where /home and /sethome are completely blocked.
   # Use the exact world folder name.
   blocked-worlds:
