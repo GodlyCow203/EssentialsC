@@ -15,10 +15,12 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionType;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -217,6 +219,14 @@ public class KitDefinitions {
                     } else if (value instanceof Number n) {
                         container.set(namespacedKey, PersistentDataType.LONG, n.longValue());
                     }
+                }
+            }
+
+            Object potionTypeObj = map.get("potion-type");
+            if (potionTypeObj instanceof String potionTypeStr && meta instanceof PotionMeta potionMeta) {
+                PotionType potionType = PotionType.valueOf(potionTypeStr.toUpperCase());
+                if (potionType != null) {
+                    potionMeta.setBasePotionType(potionType);
                 }
             }
 
