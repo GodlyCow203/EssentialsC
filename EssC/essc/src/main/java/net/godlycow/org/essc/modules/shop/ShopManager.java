@@ -57,10 +57,12 @@ public class ShopManager {
     }
 
     private void loadShop() {
-        saveResourceFiles();
         shopFolder = new File(plugin.getDataFolder(), "shop");
-        if (!shopFolder.exists()) {
+        boolean firstSetup = !shopFolder.exists();
+
+        if (firstSetup) {
             shopFolder.mkdirs();
+            saveResourceFiles();
             createDefaultFiles();
         }
 
