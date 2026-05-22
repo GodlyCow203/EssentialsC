@@ -46,9 +46,9 @@ public class LanguageManager {
                 "zh_CN","pt_BR","de_CH","es_ES","en_GB","en_US", "LB_lb"
         };
 
-        plugin.getServer().getLogger().warning("Warning: the language file 'de_CH' is deprecated and will be remove in the future");
-        plugin.getServer().getLogger().warning("Warning: the language file 'en_GB' is deprecated and will be remove in the future");
-        plugin.getServer().getLogger().warning("Warning: the language file 'ar_EG' is deprecated and will be remove in the future");
+        plugin.getServer().getLogger().warning("[EssentialsC] Warning: the language file 'de_CH' is deprecated and will be removed in the future");
+        plugin.getServer().getLogger().warning("[EssentialsC] Warning: the language file 'en_GB' is deprecated and will be removed in the future");
+        plugin.getServer().getLogger().warning("[EssentialsC] Warning: the language file 'ar_EG' is deprecated and will be removed in the future");
 
         for (String lang : languages) {
             File file = new File(langFolder, lang + ".json");
