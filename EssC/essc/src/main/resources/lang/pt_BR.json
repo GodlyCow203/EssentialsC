@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Último dump: <color:#00C200>Dump enviado com sucesso!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Clique para abrir)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Último dump: <color:#FF0000>Falha no envio: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Você tirou a sua própria vida.",
+  "trash.gui.title": "<#444444>Lixeira",
+  "trash.opened": "<color:#AAAAAA>Jogue itens aqui para descartá-los permanentemente.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Este item não pode ser descartado.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Uso: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

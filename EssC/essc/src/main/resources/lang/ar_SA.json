@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#00C200>تم رفع التفريغ بنجاح!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(انقر للفتح)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>آخر تفريغ: <color:#FF0000>فشل الرفع: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>لقد أنهيت حياتك.",
+  "trash.gui.title": "<#444444>سلة المهملات",
+  "trash.opened": "<color:#AAAAAA>ضع العناصر هنا لحذفها نهائياً.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>لا يمكن حذف هذا العنصر.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>الاستخدام: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>الاستخدام: /suicide"
 }

@@ -129,6 +129,7 @@ public class CommandRegistrar {
         register("suicide",        new SuicideCommand(plugin));
 
 
+
         if (plugin.getConfigManager().isNickEnabled()) {
             register("nick", new NickCommand(plugin));
             register("realname", new RealNameCommand(plugin));
@@ -164,6 +165,14 @@ public class CommandRegistrar {
         } else {
             CommandRegistration.unregisterIfOwnedByE("ah");
             plugin.debug("AH command unregistered (ah.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isTrashEnabled()) {
+            register("trash", new TrashCommand(plugin, plugin.getGuiFramework()));
+
+        } else {
+            CommandRegistration.unregisterIfOwnedByE("trash");
+            plugin.debug("Trash command unregistered ( trash.enabled is false");
         }
     }
 

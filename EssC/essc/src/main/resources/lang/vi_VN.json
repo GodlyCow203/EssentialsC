@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#00C200>Tải lên bản ghi thành công!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Nhấn để mở)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Bản ghi cuối: <color:#FF0000>Tải lên thất bại: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Bạn đã tự kết liễu đời mình.",
+  "trash.gui.title": "<#444444>Thùng rác",
+  "trash.opened": "<color:#AAAAAA>Thả vật phẩm vào để xóa vĩnh viễn.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Vật phẩm này không thể xóa.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Cách dùng: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Cách dùng: /suicide"
 }

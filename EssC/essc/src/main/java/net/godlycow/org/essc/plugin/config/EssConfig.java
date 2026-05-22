@@ -757,4 +757,12 @@ public class EssConfig {
     public boolean isCurrencyBeforeAmount() {
         return config.getBoolean("economy.currency-before-amount", false);
     }
+
+    public boolean isTrashEnabled() {
+        return config.getBoolean("trash.enabled", true);
+    }
+
+    public boolean isTrashLogDisposals() {
+        return config.getBoolean("trash.log-disposals", false);
+    }
 }

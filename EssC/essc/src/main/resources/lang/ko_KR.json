@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#00C200>덤프가 성공적으로 업로드되었습니다!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(클릭하여 열기)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>마지막 덤프: <color:#FF0000>업로드 실패: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>스스로 목숨을 끊었습니다.",
+  "trash.gui.title": "<#444444>쓰레기통",
+  "trash.opened": "<color:#AAAAAA>아이템을 넣어 영구적으로 삭제하세요.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>이 아이템은 버릴 수 없습니다.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>사용법: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>사용법: /suicide"
 }

@@ -75,6 +75,14 @@ broadcast:
   # Prefix prepended to all broadcast messages. Supports MiniMessage.
   prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
 
+trash:
+  enabled: true
+  log-disposals: false
+  blacklisted-materials:
+    - BEACON
+    - DRAGON_EGG
+    - NETHER_STAR
+
 # Healx
 #
 # Settings for the /heal command.

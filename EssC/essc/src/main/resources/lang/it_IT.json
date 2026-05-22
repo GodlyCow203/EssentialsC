@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#00C200>Dump caricato con successo!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Clicca per aprire)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Ultimo Dump: <color:#FF0000>Caricamento fallito: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Ti sei tolto la vita.",
+  "trash.gui.title": "<#444444>Cestino",
+  "trash.opened": "<color:#AAAAAA>Trascina gli oggetti qui per eliminarli definitivamente.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Questo oggetto non può essere eliminato.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Utilizzo: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

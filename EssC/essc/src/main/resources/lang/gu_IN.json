@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#00C200>ડમ્પ સફળતાપૂર્વક અપલોડ થયું!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(ખોલવા માટે ક્લિક કરો)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>છેલ્લો ડમ્પ: <color:#FF0000>અપલોડ નિષ્ફળ: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>તમે તમારો પોતાનો જીવ લીધો છે.",
+  "trash.gui.title": "<#444444>કચરાપેટી",
+  "trash.opened": "<color:#AAAAAA>વસ્તુઓને કાયમી ધોરણે કાઢી નાખવા માટે અહીં મૂકો.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>આ વસ્તુને કચરાપેટીમાં નાખી શકાતી નથી.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>ઉપયોગ: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>વપરાશ: /suicide"
 }

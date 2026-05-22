@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#00C200>Dump berhasil diunggah!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klik untuk membuka)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Dump Terakhir: <color:#FF0000>Unggahan gagal: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Anda telah mengakhiri hidup Anda sendiri.",
+  "trash.gui.title": "<#444444>Tempat Sampah",
+  "trash.opened": "<color:#AAAAAA>Masukkan item untuk membuangnya secara permanen.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Item ini tidak bisa dibuang.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Penggunaan: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Penggunaan: /suicide"
 }

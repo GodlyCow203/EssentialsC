@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#00C200>อัปโหลดดัมป์สำเร็จ!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(คลิกเพื่อเปิด)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>ดัมป์ล่าสุด: <color:#FF0000>อัปโหลดล้มเหลว: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>คุณได้จบชีวิตตัวเองลงแล้ว",
+  "trash.gui.title": "<#444444>ถังขยะ",
+  "trash.opened": "<color:#AAAAAA>วางไอเทมลงไปเพื่อทิ้งอย่างถาวร</color>",
+  "trash.error.blacklisted": "<color:#FF0000>ไม่สามารถทิ้งไอเทมนี้ได้</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>การใช้งาน: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>วิธีใช้: /suicide"
 }

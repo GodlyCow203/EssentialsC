@@ -184,9 +184,10 @@ public final class PluginLoader {
         }
 
         GuiFramework guiFramework = null;
-        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled()) {
+        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled() || plugin.getConfigManager().isTrashEnabled()) {
             guiFramework = new GuiFramework(plugin);
             guiFramework.loadTemplates();
+            plugin.setGuiFramework(guiFramework);
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {

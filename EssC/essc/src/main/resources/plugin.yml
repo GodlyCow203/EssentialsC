@@ -463,6 +463,11 @@ commands:
     usage: /suicide
     permission: essentialsc.suicide
 
+  trash:
+    description: Open a virtual trash inventory to discard items
+    usage: /trash
+    permission: essentialsc.trash
+
 permissions:
   essentialsc.heal:
     description: Heal command

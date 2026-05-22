@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Последний дамп: <color:#00C200>Дамп успешно загружен!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Кликните для открытия)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Последний дамп: <color:#FF0000>Ошибка загрузки: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Вы покончили с собой.",
+  "trash.gui.title": "<#444444>Мусорка",
+  "trash.opened": "<color:#AAAAAA>Положите предметы, чтобы удалить их навсегда.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Этот предмет нельзя выбросить.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Использование: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Использование: /suicide"
 }

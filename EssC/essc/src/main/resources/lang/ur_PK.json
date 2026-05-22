@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#00C200>ڈمپ کامیابی سے اپ لوڈ ہو گیا!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(کھولنے کے لیے کلک کریں)</gray></color>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>آخری ڈمپ: <color:#FF0000>اپ لوڈ ناکام: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>آپ نے اپنی جان لے لی ہے۔",
+  "trash.gui.title": "<#444444>کوڑا دان",
+  "trash.opened": "<color:#AAAAAA>چیزوں کو مستقل طور پر ضائع کرنے کے لیے یہاں ڈالیں۔</color>",
+  "trash.error.blacklisted": "<color:#FF0000>یہ چیز ضائع نہیں کی جا سکتی۔</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>استعمال: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>طریقہ استعمال: /suicide"
 }

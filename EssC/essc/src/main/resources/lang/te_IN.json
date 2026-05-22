@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#00C200>డంప్ విజయవంతంగా అప్‌లోడ్ చేయబడింది!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(తెరవడానికి క్లిక్ చేయండి)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>చివరి డంప్: <color:#FF0000>అప్‌లోడ్ విఫలమైంది: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>మీరు మీ స్వంత ప్రాణాలను తీసుకున్నారు.",
+  "trash.gui.title": "<#444444>ట్రాష్",
+  "trash.opened": "<color:#AAAAAA>ఐటమ్‌లను శాశ్వతంగా తొలగించడానికి ఇక్కడ వేయండి.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>ఆ ఐటమ్‌ను ట్రాష్ చేయలేము.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>వాడకం: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>వినియోగం: /suicide"
 }

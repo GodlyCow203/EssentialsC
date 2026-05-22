@@ -992,5 +992,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#00C200>डंप सफलतापूर्वक अपलोड हुआ!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(खोलने के लिए क्लिक करें)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>अंतिम डंप: <color:#FF0000>अपलोड विफल: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>आपने अपनी जीवन लीला समाप्त कर ली है।",
+  "trash.gui.title": "<#444444>ट्रैश",
+  "trash.opened": "<color:#AAAAAA>वस्तुओं को स्थायी रूप से हटाने के लिए यहाँ डालें。</color>",
+  "trash.error.blacklisted": "<color:#FF0000>इस वस्तु को ट्रैश नहीं किया जा सकता。</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>उपयोग: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>उपयोग: /suicide"
 }

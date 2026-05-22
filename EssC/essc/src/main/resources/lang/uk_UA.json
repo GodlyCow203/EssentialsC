@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Останній дамп: <color:#00C200>Дамп успішно завантажено!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Клацніть, щоб відкрити)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Останній дамп: <color:#FF0000>Завантаження не вдалося: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Ви вкоротили собі віку.",
+  "trash.gui.title": "<#444444>Смітник",
+  "trash.opened": "<color:#AAAAAA>Покладіть предмети, щоб назавжди їх видалити.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Цей предмет не можна викинути.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Використання: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Використання: /suicide"
 }

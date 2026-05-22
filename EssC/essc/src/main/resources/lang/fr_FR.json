@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Dernier dump : <color:#00C200>Dump téléversé avec succès !</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Cliquez pour ouvrir)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Dernier dump : <color:#FF0000>Téléversement échoué : <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Vous avez mis fin à vos jours.",
+  "trash.gui.title": "<#444444>Corbeille",
+  "trash.opened": "<color:#AAAAAA>Déposez des objets pour les supprimer définitivement.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Cet objet ne peut pas être jeté.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Utilisation : /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Utilisation : /suicide"
 }

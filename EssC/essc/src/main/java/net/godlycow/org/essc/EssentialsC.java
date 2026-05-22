@@ -15,6 +15,7 @@ import net.godlycow.org.essc.plugin.config.CommandsConfig;
 import net.godlycow.org.essc.plugin.config.EssConfig;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
+import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.storage.user.UserManager;
 import net.godlycow.org.essc.storage.user.UserProfile;
 import net.godlycow.org.essc.plugin.economy.VaultHook;
@@ -101,6 +102,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private HatCommand hatCommand;
     public JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
+    private GuiFramework guiFramework;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -489,6 +491,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public RenameCommand getRenameCommand(){
         return renameCommand;
+    }
+
+    public GuiFramework getGuiFramework() {
+        return guiFramework;
+    }
+
+    public void setGuiFramework(GuiFramework guiFramework) {
+        this.guiFramework = guiFramework;
     }
 
 }

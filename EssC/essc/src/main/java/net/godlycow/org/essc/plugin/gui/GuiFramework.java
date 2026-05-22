@@ -52,7 +52,8 @@ public class GuiFramework {
                 "auction_sell_history.yml",
                 "auction_buy_history.yml",
                 "shop_main.yml",
-                "shop_category.yml"
+                "shop_category.yml",
+                "trash.yml"
         };
 
         for (String guiName : defaultGuis) {

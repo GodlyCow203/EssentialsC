@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Son Döküm: <color:#00C200>Döküm başarıyla yüklendi!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Açmak için tıkla)</gray></color>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Son Döküm: <color:#FF0000>Yükleme başarısız: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Kendi canına kıydın.",
+  "trash.gui.title": "<#444444>Çöp Kutusu",
+  "trash.opened": "<color:#AAAAAA>Eşyaları kalıcı olarak silmek için buraya at.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Bu eşya çöpe atılamaz.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Kullanım: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Kullanım: /suicide"
 }

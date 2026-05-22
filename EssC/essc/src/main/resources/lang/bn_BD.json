@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>শেষ ডাম্প: <color:#00C200>ডাম্প সফলভাবে আপলোড করা হয়েছে!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(খুলতে ক্লিক করুন)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>শেষ ডাম্প: <color:#FF0000>আপলোড ব্যর্থ: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>আপনি নিজের জীবন নিজেই শেষ করেছেন।",
+  "trash.gui.title": "<#444444>আবর্জনার ঝুড়ি",
+  "trash.opened": "<color:#AAAAAA>স্থায়ীভাবে মুছে ফেলার জন্য আইটেমগুলো এখানে ফেলুন。</color>",
+  "trash.error.blacklisted": "<color:#FF0000>এই আইটেমটি আবর্জনার ঝুড়িতে ফেলা যাবে না。</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>ব্যবহার: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>ব্যবহার: /suicide"
 }

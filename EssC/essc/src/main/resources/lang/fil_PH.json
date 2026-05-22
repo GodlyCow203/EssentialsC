@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Huling Dump: <color:#00C200>Matagumpay na na-upload ang dump!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(I-click para buksan)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Huling Dump: <color:#FF0000>Nabigo ang upload: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Kinuha mo ang iyong sariling buhay.",
+  "trash.gui.title": "<#444444>Basurahan",
+  "trash.opened": "<color:#AAAAAA>Ihulog ang mga item para permanenteng mabura.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Hindi maaaring itapon ang item na iyan.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Gamit: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Paggamit: /suicide"
 }

@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>最后转储: <color:#00C200>转储上传成功！</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(点击打开)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>最后转储: <color:#FF0000>上传失败: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>你结束了自己的生命。",
+  "trash.gui.title": "<#444444>垃圾桶",
+  "trash.opened": "<color:#AAAAAA>放入物品以永久丢弃它们。</color>",
+  "trash.error.blacklisted": "<color:#FF0000>该物品无法被丢弃。</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>用法: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>用法：/suicide"
 }

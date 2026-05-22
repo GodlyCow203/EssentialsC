@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Último Volcado: <color:#00C200>¡Volcado subido exitosamente!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Clic para abrir)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Último Volcado: <color:#FF0000>Error al subir: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Te has quitado la vida.",
+  "trash.gui.title": "<#444444>Papelera",
+  "trash.opened": "<color:#AAAAAA>Suelta objetos aquí para descartarlos permanentemente.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Ese objeto no puede ser descartado.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Uso: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

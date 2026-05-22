@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>最終ダンプ: <color:#00C200>ダンプを正常にアップロードしました！</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>（クリックして開く）</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>最終ダンプ: <color:#FF0000>アップロード失敗: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>自ら命を絶ちました。",
+  "trash.gui.title": "<#444444>ゴミ箱",
+  "trash.opened": "<color:#AAAAAA>アイテムを入れて永久に削除します。</color>",
+  "trash.error.blacklisted": "<color:#FF0000>そのアイテムは捨てられません。</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>使用法: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>使い方: /suicide"
 }

@@ -991,5 +991,9 @@
   "dump.upload.success": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#00C200>Dump erfollegräich eropgelueden!</color> <click:open_url:'<url>'><color:#FFF200><underlined><url></underlined></color></click> <gray>(Klick fir opzemaachen)</gray>",
   "dump.upload.error": "<prefix> <color:#AAAAAA>Leschte Dump: <color:#FF0000>Eroplueden feelgeschloen: <color:#FFFFFF><error></color></color>",
   "suicide.success": "<prefix><color:#FFF200>Du hues dir d'Liewe geholl.",
+  "trash.gui.title": "<#444444>Drecksak",
+  "trash.opened": "<color:#AAAAAA>Läit Elementer eran, fir se permanent ze läschen.</color>",
+  "trash.error.blacklisted": "<color:#FF0000>Dat Element kann net ewechgehäit ginn.</color>",
+  "command.usage.trash": "<prefix> <color:#FF0000>Benotzung: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Notzung: /suicide"
 }

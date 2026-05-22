@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 2
+config-version: 3
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -468,3 +468,9 @@ dback:
   enabled: true
   priority: normal
   aliases: []
+
+trash:
+  enabled: true
+  priority: normal
+  aliases:
+    - disposal
