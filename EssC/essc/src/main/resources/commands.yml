@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 3
+config-version: 4
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -43,6 +43,14 @@ config-version: 3
 #       aliases:
 #         - ci
 #         - clearinv
+#
+# cooldown
+#   Time in seconds a player must wait between uses of this command.
+#   Set to 0 or omit to disable. Console senders are never gated.
+#
+# cooldown-bypass
+#   Permission node that lets a player skip the cooldown defined above.
+#   Omit if you don't need a bypass for this command.
 
 
 # Player commands
@@ -147,6 +155,9 @@ tpa:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under tpa.cooldown in config.yml.
+  # The bypass permission below matches the one checked in TPAManager.
+  cooldown-bypass: essentialsc.tpa.bypass.cooldown
 
 tpahere:
   enabled: true
@@ -197,11 +208,17 @@ back:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under back.cooldown in config.yml.
+  # essentialsc.back.admin bypasses both the cooldown and warmup.
+  cooldown-bypass: essentialsc.back.admin
 
 spawn:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under spawn.cooldown in config.yml.
+  # essentialsc.spawn.admin bypasses both the cooldown and warmup.
+  cooldown-bypass: essentialsc.spawn.admin
 
 setspawn:
   enabled: true
@@ -212,6 +229,9 @@ rtp:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under rtp.cooldown in config.yml.
+  # The bypass permission below matches the one checked in RTPManager.
+  cooldown-bypass: essentialsc.rtp.bypass.cooldown
 
 top:
   enabled: true
@@ -222,6 +242,9 @@ home:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under home.cooldown in config.yml.
+  # essentialsc.home.admin bypasses both the cooldown and warmup.
+  cooldown-bypass: essentialsc.home.admin
 
 sethome:
   enabled: true
@@ -242,6 +265,9 @@ warp:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under warp.cooldown in config.yml.
+  # The bypass permission below matches the one checked in WarpCommand.
+  cooldown-bypass: essentialsc.warp.bypass.cooldown
 
 setwarp:
   enabled: true
@@ -278,6 +304,8 @@ kit:
   enabled: true
   priority: normal
   aliases: []
+  # Kit cooldowns are configured per-kit in kits.yml and are DB-backed.
+  # Bypass permissions: essentialsc.kits.cooldown.bypass or essentialsc.kits.cooldown.bypass.<kitname>
 
 kits:
   enabled: true
@@ -468,6 +496,9 @@ dback:
   enabled: true
   priority: normal
   aliases: []
+  # Cooldown is configured under back.cooldown in config.yml (shared with /back).
+  # essentialsc.dback.admin bypasses both the cooldown and warmup.
+  cooldown-bypass: essentialsc.dback.admin
 
 trash:
   enabled: true

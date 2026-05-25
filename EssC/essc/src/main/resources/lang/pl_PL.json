@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Tę komendę mogą używać tylko gracze.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Nie masz uprawnień do użycia tego.</color>",
   "error.internal": "<prefix> <color:#FF0000>Wystąpił błąd wewnętrzny. Sprawdź konsolę.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Musisz odczekać <color:#FFFFFF><seconds>s</color>, zanim ponownie użyjesz /<command>.</color>",
   "error.missing_key": "<color:#FF0000>Brakujący klucz wiadomości: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Podano nieprawidłową kwotę.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> nie jest prawidłową liczbą.</color>",

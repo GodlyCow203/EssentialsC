@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>यह कमांड केवल खिलाड़ियों द्वारा उपयोग किया जा सकता है।</color>",
   "error.no_permission": "<prefix> <color:#FF0000>आपके पास इसका उपयोग करने की अनुमति नहीं है।</color>",
   "error.internal": "<prefix> <color:#FF0000>एक आंतरिक त्रुटि हुई। कंसोल जांचें।</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> का दोबारा उपयोग करने से पहले आपको <color:#FFFFFF><seconds>सेकंड</color> प्रतीक्षा करनी होगी।</color>",
   "error.missing_key": "<color:#FF0000>संदेश कुंजी गायब: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>अमान्य राशि निर्दिष्ट।</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> एक मान्य संख्या नहीं है।</color>",

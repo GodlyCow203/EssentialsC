@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Command implements CommandExecutor, TabCompleter {
     protected final EssentialsC plugin;
@@ -71,6 +72,27 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         if (args.length < minArgs) {
             sendUsage(sender);
             return true;
+        }
+
+        if (sender instanceof Player player) {
+            long cooldownSeconds = plugin.getCommandsConfig().getCooldown(name);
+            if (cooldownSeconds > 0) {
+                String bypassPermission = plugin.getCommandsConfig().getCooldownBypassPermission(name);
+                boolean hasBypass = bypassPermission != null && player.hasPermission(bypassPermission);
+
+                if (!hasBypass) {
+                    CommandCooldownManager cooldownManager = plugin.getCommandCooldownManager();
+                    long remaining = cooldownManager.getRemainingSeconds(player.getUniqueId(), name);
+
+                    if (remaining > 0) {
+                        sender.sendMessage(lang.get(sender, "error.command_cooldown",
+                                Map.of("seconds", String.valueOf(remaining), "command", name)));
+                        return true;
+                    }
+
+                    cooldownManager.setCooldown(player.getUniqueId(), name, cooldownSeconds);
+                }
+            }
         }
 
         try {

@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Dëse Kommando kann nëmme vu Spiller benotzt ginn.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Du hues keng Erlaabnis fir dëst ze benotzen.</color>",
   "error.internal": "<prefix> <color:#FF0000>En interne Feeler ass geschitt. Kuck d'Console.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Du muss <color:#FFFFFF><seconds>s</color> waarde ier de /<command> erëm benotze kanns.</color>",
   "error.missing_key": "<color:#FF0000>Feelende Message Schlëssel: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Ongülteg Betrag uginn.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> ass keng gülteg Zuel.</color>",

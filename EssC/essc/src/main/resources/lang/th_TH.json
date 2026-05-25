@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>คำสั่งนี้ใช้ได้เฉพาะผู้เล่นเท่านั้น</color>",
   "error.no_permission": "<prefix> <color:#FF0000>คุณไม่มีสิทธิ์ใช้งานสิ่งนี้</color>",
   "error.internal": "<prefix> <color:#FF0000>เกิดข้อผิดพลาดภายใน กรุณาตรวจสอบคอนโซล</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>คุณต้องรออีก <color:#FFFFFF><seconds>วินาที</color> ก่อนที่จะใช้ /<command> อีกครั้ง</color>",
   "error.missing_key": "<color:#FF0000>ขาดคีย์ข้อความ: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>จำนวนที่ระบุไม่ถูกต้อง</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> ไม่ใช่ตัวเลขที่ถูกต้อง</color>",

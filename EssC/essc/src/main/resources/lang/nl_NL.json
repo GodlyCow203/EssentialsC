@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Dit commando kan alleen door spelers worden gebruikt.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Je hebt geen toestemming om dit te gebruiken.</color>",
   "error.internal": "<prefix> <color:#FF0000>Er is een interne fout opgetreden. Controleer de console.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Je moet <color:#FFFFFF><seconds>s</color> wachten voordat je /<command> weer kunt gebruiken.</color>",
   "error.missing_key": "<color:#FF0000>Ontbrekende berichtsleutel: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Ongeldig bedrag opgegeven.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> is geen geldig nummer.</color>",

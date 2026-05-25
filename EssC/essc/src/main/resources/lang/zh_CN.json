@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>此命令只能由玩家使用。</color>",
   "error.no_permission": "<prefix> <color:#FF0000>你没有权限使用此功能。</color>",
   "error.internal": "<prefix> <color:#FF0000>发生内部错误。请检查控制台。</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>你必须等待 <color:#FFFFFF><seconds>秒</color> 才能再次使用 /<command>。</color>",
   "error.missing_key": "<color:#FF0000>缺少消息键: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>指定的数量无效。</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> 不是有效的数字。</color>",

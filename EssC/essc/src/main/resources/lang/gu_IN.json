@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>આ કમાન્ડ માત્ર રમનારાઓ દ્વારા વપરાઈ શકે.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>તમને આ વાપરવાની પરવાનગી નથી.</color>",
   "error.internal": "<prefix> <color:#FF0000>એક આંતરિક ભૂલ થઈ. કન્સોલ તપાસો.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> નો ફરીથી ઉપયોગ કરતા પહેલા તમારે <color:#FFFFFF><seconds>સેકન્ડ</color> રાહ જોવી પડશે.</color>",
   "error.missing_key": "<color:#FF0000>સંદેશ કી ગાયબ: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>અમાન્ય રકમ નિર્દિષ્ટ.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> એક માન્ય સંખ્યા નથી.</color>",

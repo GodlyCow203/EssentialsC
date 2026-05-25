@@ -50,6 +50,14 @@ public class CommandsConfig {
         return config.getStringList(command + ".aliases");
     }
 
+    public long getCooldown(String command) {
+        return config.getLong(command + ".cooldown", 0L);
+    }
+
+    public String getCooldownBypassPermission(String command) {
+        return config.getString(command + ".cooldown-bypass", null);
+    }
+
     public FileConfiguration getConfig() {
         return config;
     }

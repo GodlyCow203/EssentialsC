@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Perintah ini hanya dapat digunakan oleh pemain.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Anda tidak memiliki izin untuk menggunakan ini.</color>",
   "error.internal": "<prefix> <color:#FF0000>Terjadi kesalahan internal. Periksa konsol.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Kamu harus menunggu <color:#FFFFFF><seconds>detik</color> sebelum menggunakan /<command> lagi.</color>",
   "error.missing_key": "<color:#FF0000>Kunci pesan hilang: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Jumlah yang ditentukan tidak valid.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> bukan angka yang valid.</color>",

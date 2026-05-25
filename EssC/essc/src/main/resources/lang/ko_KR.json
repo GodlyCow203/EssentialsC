@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>이 명령어는 플레이어만 사용할 수 있습니다.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>이것을 사용할 권한이 없습니다.</color>",
   "error.internal": "<prefix> <color:#FF0000>내부 오류가 발생했습니다. 콘솔을 확인하세요.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command>을(를) 다시 사용하려면 <color:#FFFFFF><seconds>초</color> 기다려야 합니다.</color>",
   "error.missing_key": "<color:#FF0000>누락된 메시지 키: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>잘못된 금액이 지정되었습니다.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color>은(는) 유효한 숫자가 아닙니다.</color>",

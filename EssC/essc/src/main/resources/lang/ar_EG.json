@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>هذا الأمر يمكن استخدامه من قبل اللاعبين فقط.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>ليس لديك إذن لاستخدام هذا.</color>",
   "error.internal": "<prefix> <color:#FF0000>حدث خطأ داخلي. تحقق من وحدة التحكم.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>لازم تستنى <color:#FFFFFF><seconds>ثانية</color> قبل ما تستخدم /<command> تاني.</color>",
   "error.missing_key": "<color:#FF0000>مفتاح الرسالة مفقود: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>المبلغ المحدد غير صالح.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> ليس رقماً صالحاً.</color>",

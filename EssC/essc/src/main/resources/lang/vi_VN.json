@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Lệnh này chỉ có thể được sử dụng bởi người chơi.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Bạn không có quyền sử dụng điều này.</color>",
   "error.internal": "<prefix> <color:#FF0000>Đã xảy ra lỗi nội bộ. Kiểm tra console.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Bạn phải đợi <color:#FFFFFF><seconds>giây</color> trước khi sử dụng lại /<command>.</color>",
   "error.missing_key": "<color:#FF0000>Thiếu khóa tin nhắn: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Số lượng đã chỉ định không hợp lệ.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> không phải là số hợp lệ.</color>",

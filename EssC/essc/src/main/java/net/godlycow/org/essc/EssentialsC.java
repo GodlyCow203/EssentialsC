@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.command.CommandCooldownManager;
 import net.godlycow.org.essc.modules.afk.AFKManager;
 import net.godlycow.org.essc.api.impl.EssentialsCAPIImpl;
 import net.godlycow.org.essc.modules.auction.AuctionManager;
@@ -103,6 +104,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     public JoinLeaveListener joinLeaveListener;
     private RenameCommand renameCommand;
     private GuiFramework guiFramework;
+    private CommandCooldownManager commandCooldownManager;
 
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
@@ -117,6 +119,8 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
         commandsConfig = new CommandsConfig(this);
         commandsConfig.load();
+
+        commandCooldownManager = new CommandCooldownManager();
 
 
         if (essConfig.isEconomyEnabled()) {
@@ -499,6 +503,10 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setGuiFramework(GuiFramework guiFramework) {
         this.guiFramework = guiFramework;
+    }
+
+    public CommandCooldownManager getCommandCooldownManager() {
+        return commandCooldownManager;
     }
 
 }

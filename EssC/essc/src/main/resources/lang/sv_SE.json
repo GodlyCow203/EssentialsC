@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Detta kommando kan endast användas av spelare.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Du har inte tillåtelse att använda detta.</color>",
   "error.internal": "<prefix> <color:#FF0000>Ett internt fel inträffade. Kontrollera konsolen.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Du måste vänta <color:#FFFFFF><seconds>s</color> innan du använder /<command> igen.</color>",
   "error.missing_key": "<color:#FF0000>Saknat meddelandenyckel: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Ogiltigt belopp angivet.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> är inte ett giltigt nummer.</color>",

@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Ang utos na ito ay maaari lamang gamitin ng mga manlalaro.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Wala kang pahintulot na gamitin ito.</color>",
   "error.internal": "<prefix> <color:#FF0000>May naganap na internal na error. Suriin ang console.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Kailangan mong maghintay ng <color:#FFFFFF><seconds>segundo</color> bago gamitin ulit ang /<command>.</color>",
   "error.missing_key": "<color:#FF0000>Nawawalang susi ng mensahe: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Di-wastong halaga ang tinukoy.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> ay hindi isang wastong numero.</color>",

@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>یہ کمانڈ صرف کھلاڑی استعمال کر سکتے ہیں۔</color>",
   "error.no_permission": "<prefix> <color:#FF0000>آپ کو اسے استعمال کرنے کی اجازت نہیں ہے۔</color>",
   "error.internal": "<prefix> <color:#FF0000>ایک اندرونی خرابی پیش آئی۔ کنسول چیک کریں۔</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> دوبارہ استعمال کرنے سے پہلے آپ کو <color:#FFFFFF><seconds>سیکنڈ</color> انتظار کرنا ہوگا۔</color>",
   "error.missing_key": "<color:#FF0000>غائب پیغام کلید: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>غلط رقم درج کی گئی۔</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> ایک درست نمبر نہیں ہے۔</color>",

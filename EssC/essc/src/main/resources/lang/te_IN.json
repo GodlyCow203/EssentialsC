@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>ఈ ఆదేశాన్ని కేవలం ఆటగాళ్లు మాత్రమే ఉపయోగించగలరు.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>దీన్ని ఉపయోగించడానికి మీకు అనుమతి లేదు.</color>",
   "error.internal": "<prefix> <color:#FF0000>అంతర్గత లోపం సంభవించింది. కన్సోల్‌ను తనిఖీ చేయండి.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command>ని మళ్ళీ ఉపయోగించే ముందు మీరు <color:#FFFFFF><seconds>సెకన్లు</color> వేచి ఉండాలి.</color>",
   "error.missing_key": "<color:#FF0000>సందేశ కీ కనుగొనబడలేదు: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>చెల్లని మొత్తం పేర్కొనబడింది.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> సరైన సంఖ్య కాదు.</color>",

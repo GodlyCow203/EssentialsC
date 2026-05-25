@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>இந்த கட்டளையை விளையாட்டாளர்கள் மட்டுமே பயன்படுத்த முடியும்.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>இதைப் பயன்படுத்த உங்களுக்கு அனுமதி இல்லை.</color>",
   "error.internal": "<prefix> <color:#FF0000>உள் பிழை ஏற்பட்டது. கன்சோலைச் சரிபார்க்கவும்.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command>ஐ மீண்டும் பயன்படுத்துவதற்கு முன்பு நீங்கள் <color:#FFFFFF><seconds>நொடிகள்</color> காத்திருக்க வேண்டும்.</color>",
   "error.missing_key": "<color:#FF0000>செய்தி விசை காணவில்லை: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>தவறான தொகை குறிப்பிடப்பட்டுள்ளது.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> சரியான எண் அல்ல.</color>",

@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Bu komut sadece oyuncular tarafından kullanılabilir.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Bunu kullanma izniniz yok.</color>",
   "error.internal": "<prefix> <color:#FF0000>Bir iç hata oluştu. Konsolu kontrol edin.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> komutunu tekrar kullanmadan önce <color:#FFFFFF><seconds>saniye</color> beklemelisin.</color>",
   "error.missing_key": "<color:#FF0000>Eksik mesaj anahtarı: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Geçersiz miktar belirtildi.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> geçerli bir sayı değil.</color>",

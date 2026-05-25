@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Este comando só pode ser usado por jogadores.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>Você não tem permissão para usar isto.</color>",
   "error.internal": "<prefix> <color:#FF0000>Ocorreu um erro interno. Verifique o console.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Você deve esperar <color:#FFFFFF><seconds>s</color> antes de usar /<command> novamente.</color>",
   "error.missing_key": "<color:#FF0000>Chave de mensagem ausente: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Quantia inválida especificada.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> não é um número válido.</color>",

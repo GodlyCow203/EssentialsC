@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>हे आदेश फक्त खेळाडूंसाठी आहे.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>हे वापरण्याची तुम्हाला परवानगी नाही.</color>",
   "error.internal": "<prefix> <color:#FF0000>अंतर्गत त्रुटी आली. कन्सोल तपासा.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> पुन्हा वापरण्यापूर्वी तुम्हाला <color:#FFFFFF><seconds>सेकंद</color> थांबावे लागेल.</color>",
   "error.missing_key": "<color:#FF0000>संदेश की गहाळ: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>अवैध रक्कम निर्दिष्ट केली.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> हा वैध संख्या नाही.</color>",

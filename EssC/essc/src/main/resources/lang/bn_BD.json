@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>এই কমান্ড শুধুমাত্র খেলোয়াড়দের দ্বারা ব্যবহার করা যেতে পারে।</color>",
   "error.no_permission": "<prefix> <color:#FF0000>আপনার এইটি ব্যবহারের অনুমতি নেই।</color>",
   "error.internal": "<prefix> <color:#FF0000>একটি অভ্যন্তরীণ ত্রুটি ঘটেছে। কনসোল চেক করুন।</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> পুনরায় ব্যবহার করার আগে আপনাকে <color:#FFFFFF><seconds>সেকেন্ড</color> অপেক্ষা করতে হবে।</color>",
   "error.missing_key": "<color:#FF0000>বার্তা কী অনুপস্থিত: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>অবৈধ পরিমাণ নির্ধারিত।</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> একটি বৈধ সংখ্যা নয়।</color>",

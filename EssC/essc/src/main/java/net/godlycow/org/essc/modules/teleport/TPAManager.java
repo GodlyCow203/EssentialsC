@@ -446,6 +446,7 @@ public class TPAManager implements Listener {
     }
 
     private boolean hasCooldown(Player player) {
+        if (player.hasPermission("essentialsc.tpa.bypass.cooldown")) return false;
         Long expiry = cooldowns.get(player.getUniqueId());
         return expiry != null && expiry > System.currentTimeMillis();
     }

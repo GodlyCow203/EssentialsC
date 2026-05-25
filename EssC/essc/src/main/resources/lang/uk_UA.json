@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>Цю команду можуть використовувати лише гравці.</color>",
   "error.no_permission": "<prefix> <color:#FF0000>У вас немає дозволу на використання цього.</color>",
   "error.internal": "<prefix> <color:#FF0000>Сталася внутрішня помилка. Перевірте консоль.</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>Ви повинні почекати <color:#FFFFFF><seconds>с</color>, перш ніж знову використовувати /<command>.</color>",
   "error.missing_key": "<color:#FF0000>Відсутній ключ повідомлення: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>Вказана недійсна сума.</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> не є дійсним числом.</color>",

@@ -17,6 +17,7 @@
   "error.player_only": "<prefix> <color:#FF0000>このコマンドはプレイヤーのみ使用できます。</color>",
   "error.no_permission": "<prefix> <color:#FF0000>これを使用する権限がありません。</color>",
   "error.internal": "<prefix> <color:#FF0000>内部エラーが発生しました。コンソールを確認してください。</color>",
+  "error.command_cooldown": "<prefix> <color:#FF0000>/<command> を再使用するには <color:#FFFFFF><seconds>秒</color> 待つ必要があります。</color>",
   "error.missing_key": "<color:#FF0000>メッセージキーが見つかりません: <color:#FFFFFF><key></color></color>",
   "error.invalid_amount": "<prefix> <color:#FF0000>無効な金額が指定されました。</color>",
   "error.invalid_number": "<prefix> <color:#FF0000><color:#FFFFFF><input></color> は有効な数字ではありません。</color>",
