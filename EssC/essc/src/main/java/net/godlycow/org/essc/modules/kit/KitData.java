@@ -202,7 +202,7 @@ public class KitData {
                             (old, newData) -> new PlayerKitData(timestamp, old.claimCount + 1));
 
             int newCount = getClaimCount(uuid, kitName);
-            KitImpl apiKit = new KitImpl(new Kit(kitName, kitName, "", 0, false, false, 0, new java.util.ArrayList<>(), "", false));
+            KitImpl apiKit = new KitImpl(new Kit(kitName, kitName, "", 0, false, false, 0, new java.util.ArrayList<>(), "", false, -1, null));
             KitDataSaveEvent saveEvent = new KitDataSaveEvent(uuid, apiKit, timestamp, newCount);
             Bukkit.getPluginManager().callEvent(saveEvent);
         });

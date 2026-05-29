@@ -2,10 +2,12 @@ kits:
   starter:
     display-name: "<#2791F5>Starter Kit"
     description: "Basic items"
-    cooldown: 86400 # 24 hours
+    cooldown: 86400
     one-time: false
     first-join: true
     max-claims: 10
+    gui-slot: 10
+    gui-icon: "CHEST"
     items:
       - type: STONE_SWORD
         amount: 1
@@ -61,7 +63,7 @@ kits:
         amount: 4
         name: "<b><#2791F5>Kit Starter"
         lore: []
-        enchantments: { }
+        enchantments: {}
         unbreakable: false
         flags: []
         custom-model-data: 0
@@ -100,10 +102,12 @@ kits:
   tools:
     display-name: "<#FF5D00>Tools Kit"
     description: "Basic tools for gathering resources"
-    cooldown: 43200 # 12 hours
+    cooldown: 43200
     one-time: false
     first-join: false
     max-claims: 0
+    gui-slot: 11
+    gui-icon: "IRON_PICKAXE"
     items:
       - type: IRON_PICKAXE
         amount: 1
@@ -178,10 +182,12 @@ kits:
   member:
     display-name: "<#FFD400>Member Kit"
     description: "Rewards for server members"
-    cooldown: 604800 # 7 days
+    cooldown: 604800
     one-time: false
     first-join: false
     max-claims: 0
+    gui-slot: 12
+    gui-icon: "GOLD_INGOT"
     items:
       - type: GOLDEN_SWORD
         amount: 1
@@ -232,5 +238,3 @@ kits:
         flags: []
         custom-model-data: 0
         nbt: {}
-
-

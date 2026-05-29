@@ -14,10 +14,13 @@ public class Kit {
     private final List<ItemStack> items;
     private final String description;
     private final boolean networkSync;
+    private final int guiSlot;
+    private final String guiIcon;
 
     public Kit(String name, String displayName, String permission, long cooldown,
                boolean oneTime, boolean firstJoin, int maxClaims,
-               List<ItemStack> items, String description, boolean networkSync) {
+               List<ItemStack> items, String description, boolean networkSync,
+               int guiSlot, String guiIcon) {
         this.name = name;
         this.displayName = displayName;
         this.permission = permission;
@@ -28,36 +31,55 @@ public class Kit {
         this.items = items;
         this.description = description;
         this.networkSync = networkSync;
+        this.guiSlot = guiSlot;
+        this.guiIcon = guiIcon;
     }
 
     public String getName() {
         return name;
     }
+
     public String getDisplayName() {
         return displayName;
     }
+
     public String getPermission() {
         return permission;
     }
+
     public long getCooldown() {
         return cooldown;
     }
+
     public boolean isOneTime() {
         return oneTime;
     }
+
     public boolean isFirstJoin() {
         return firstJoin;
     }
+
     public int getMaxClaims() {
         return maxClaims;
     }
+
     public List<ItemStack> getItems() {
         return items;
     }
+
     public String getDescription() {
         return description;
     }
+
     public boolean isNetworkSync() {
         return networkSync;
+    }
+
+    public int getGuiSlot() {
+        return guiSlot;
+    }
+
+    public String getGuiIcon() {
+        return guiIcon;
     }
 }

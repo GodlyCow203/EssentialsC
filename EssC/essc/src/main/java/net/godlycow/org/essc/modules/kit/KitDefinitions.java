@@ -70,6 +70,8 @@ public class KitDefinitions {
                 int maxClaims = kitSection.getInt("max-claims", 0);
                 String description = kitSection.getString("description", "");
                 boolean networkSync = kitSection.getBoolean("network-sync", false);
+                int guiSlot = kitSection.getInt("gui-slot", -1);
+                String guiIcon = kitSection.getString("gui-icon", null);
 
                 List<ItemStack> items = new ArrayList<>();
                 List<Map<?, ?>> itemsList = kitSection.getMapList("items");
@@ -82,7 +84,8 @@ public class KitDefinitions {
                 }
 
                 Kit kit = new Kit(kitName.toLowerCase(), displayName, permission, cooldown,
-                        oneTime, firstJoin, maxClaims, items, description, networkSync);
+                        oneTime, firstJoin, maxClaims, items, description, networkSync,
+                        guiSlot, guiIcon);
                 kits.put(kitName.toLowerCase(), kit);
 
                 registerPermission(permission);
@@ -254,16 +257,9 @@ public class KitDefinitions {
         return count;
     }
 
-    public boolean hasKit(String name) {
-        boolean contains = kits.containsKey(name.toLowerCase());
-        return contains;
-    }
 
     public void clear() {
         kits.clear();
     }
 
-    public File getKitsFile() {
-        return kitsFile;
-    }
 }

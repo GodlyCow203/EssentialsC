@@ -184,10 +184,15 @@ public final class PluginLoader {
         }
 
         GuiFramework guiFramework = null;
-        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled() || plugin.getConfigManager().isTrashEnabled()) {
+        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled()
+                || plugin.getConfigManager().isTrashEnabled() || plugin.getConfigManager().isKitGuiMode()) {
             guiFramework = new GuiFramework(plugin);
             guiFramework.loadTemplates();
             plugin.setGuiFramework(guiFramework);
+        }
+
+        if (plugin.getConfigManager().isKitGuiMode() && guiFramework != null) {
+            plugin.setKitGuiManager(new net.godlycow.org.essc.modules.kit.gui.KitGuiManager(plugin, guiFramework));
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {

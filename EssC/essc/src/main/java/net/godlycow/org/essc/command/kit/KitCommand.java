@@ -22,7 +22,11 @@ public class KitCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            showKitsList(player);
+            if (plugin.getConfigManager().isKitGuiMode() && plugin.getKitGuiManager() != null) {
+                plugin.getKitGuiManager().openKitList(player, 1);
+            } else {
+                showKitsList(player);
+            }
             return true;
         }
 

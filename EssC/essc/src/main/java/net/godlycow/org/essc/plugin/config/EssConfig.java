@@ -140,6 +140,18 @@ public class EssConfig {
         return getHomeMode().equals("gui");
     }
 
+    public String getKitMode() {
+        return config.getString("kits.mode", "command").toLowerCase();
+    }
+
+    public boolean isKitGuiMode() {
+        return getKitMode().equals("gui");
+    }
+
+    public boolean isKitGuiSoundsEnabled() {
+        return config.getBoolean("kits.sounds", true);
+    }
+
     public boolean isBedHomeCountsInLimit() {
         return config.getBoolean("home.bed-counts-in-limit", true);
     }

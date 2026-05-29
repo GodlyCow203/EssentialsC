@@ -425,6 +425,18 @@ home:
     - world_example_blocked
 
 
+# Kits
+
+kits:
+  # How players interact with the kit list.
+  # "command" — players type /kits to see a chat list.
+  # "gui"     — /kits opens an inventory GUI showing all available kits.
+  mode: gui
+
+  # Play sounds when opening, claiming, turning pages, or closing the GUI.
+  sounds: true
+
+
 # Spawn
 
 spawn:
@@ -847,4 +859,3 @@ afk:
   # How to sort the /afklist output.
   # Options: time (longest AFK first), name (alphabetical), world
   list-sort-by: "time"
-

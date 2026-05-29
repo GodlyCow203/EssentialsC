@@ -43,6 +43,12 @@ public class KitsCommand extends Command {
     }
 
     private void showList(CommandSender sender) {
+        if (plugin.getConfigManager().isKitGuiMode() && sender instanceof Player player
+                && plugin.getKitGuiManager() != null) {
+            plugin.getKitGuiManager().openKitList(player, 1);
+            return;
+        }
+
         var kits = plugin.getKitManager().getKits();
 
         if (kits.isEmpty()) {

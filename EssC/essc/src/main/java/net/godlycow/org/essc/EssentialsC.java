@@ -75,6 +75,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private SpawnManager spawnManager;
     private BackManager backManager;
     private KitManager kitManager;
+    private net.godlycow.org.essc.modules.kit.gui.KitGuiManager kitGuiManager;
     private VanishManager vanishManager;
     private ScoreboardManager scoreboardManager;
     private EconomyRegistrar economyRegistrar;
@@ -285,6 +286,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setKitManager(KitManager kitManager) {
         this.kitManager = kitManager;
+    }
+
+    public net.godlycow.org.essc.modules.kit.gui.KitGuiManager getKitGuiManager() {
+        return kitGuiManager;
+    }
+
+    public void setKitGuiManager(net.godlycow.org.essc.modules.kit.gui.KitGuiManager kitGuiManager) {
+        this.kitGuiManager = kitGuiManager;
     }
 
     public VanishManager getVanishManager() {
