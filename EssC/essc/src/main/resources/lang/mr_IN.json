@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>तयार होईल: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>दावा करण्यासाठी क्लिक करा!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>दावे: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>वापर: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>वापर: /ah sell <किंमत></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>वापर: /ah cancel <id></color>",

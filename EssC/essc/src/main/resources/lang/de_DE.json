@@ -506,6 +506,7 @@
   "kits.help.reload": " <color:#FFFFFF>/kits reload</color> <color:#AAAAAA>- Kits neu laden</color>",
   "kits.help.debug": " <color:#FFFFFF>/kit debug <Kit></color> <color:#AAAAAA>- Kit debuggen</color>",
   "kits.error.unknown": "<prefix> <color:#FF0000>Unbekannter Unterbefehl. Versuche /kits help</color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "kit.gui.title": "<color:#404040>Kits <color:#AAAAAA>(<color:#FFFFFF><page></color>/<color:#FFFFFF><total></color>)</color>",
   "kit.gui.item.nav.prev.name": "<color:#FFF200>Vorherige Seite</color>",
   "kit.gui.item.nav.next.name": "<color:#FFF200>Nächste Seite</color>",

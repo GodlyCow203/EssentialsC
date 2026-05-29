@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Gotowe za: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Kliknij, aby odebrać!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Odebrane: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>Użycie: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>Użycie: /ah sell <cena></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>Użycie: /ah cancel <id></color>",

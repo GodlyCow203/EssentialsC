@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>தயாராக: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>பெற கிளிக் செய்யவும்!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>பெறப்பட்டது: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>பயன்பாடு: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>பயன்பாடு: /ah sell <price></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>பயன்பாடு: /ah cancel <id></color>",

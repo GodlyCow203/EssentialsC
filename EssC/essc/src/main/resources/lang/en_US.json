@@ -1011,5 +1011,6 @@
   "kit.gui.item.kit.lore.cooldown": "<color:#AAAAAA>Cooldown: <color:#FFFFFF><time></color></color>",
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Ready in: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Click to claim!</color>",
-  "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Claims: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>"
+  "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Claims: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>"
 }

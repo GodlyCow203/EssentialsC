@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Готово через: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Натисніть, щоб отримати!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Отримано: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>Використання: /ah [сторінка|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>Використання: /ah sell <ціна></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>Використання: /ah cancel <id></color>",

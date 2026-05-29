@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Hazır olma: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Almak için tıkla!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Alım: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>Kullanım: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>Kullanım: /ah sell <fiyat></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>Kullanım: /ah cancel <id></color>",

@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>พร้อมใน: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>คลิกเพื่อรับ!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>ได้รับ: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>การใช้งาน: /ah [หน้า|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>การใช้งาน: /ah sell <ราคา></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>การใช้งาน: /ah cancel <id></color>",

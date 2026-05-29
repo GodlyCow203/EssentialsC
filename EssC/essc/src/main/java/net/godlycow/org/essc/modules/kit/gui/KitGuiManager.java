@@ -7,7 +7,6 @@ import net.godlycow.org.essc.plugin.gui.GuiTemplate;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.util.ComponentHelper;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -35,14 +34,12 @@ public class KitGuiManager {
 
     private final EssentialsC plugin;
     private final GuiFramework guiFramework;
-    private final MiniMessage mm;
     private final KitSoundManager sounds;
     private final Map<UUID, Integer> activeSessions = new ConcurrentHashMap<>();
 
     public KitGuiManager(EssentialsC plugin, GuiFramework guiFramework) {
         this.plugin = plugin;
         this.guiFramework = guiFramework;
-        this.mm = plugin.getMiniMessage();
         this.sounds = new KitSoundManager(plugin);
 
         plugin.getServer().getPluginManager().registerEvents(
@@ -227,7 +224,9 @@ public class KitGuiManager {
         List<Component> lore = new ArrayList<>();
 
         if (!kit.getDescription().isEmpty()) {
-            lore.add(ComponentHelper.noItalic(mm.deserialize(kit.getDescription())));
+            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player,
+                    "kit.gui.item.kit.lore.description",
+                    Map.of("description", kit.getDescription()))));
             lore.add(ComponentHelper.noItalic(Component.empty()));
         }
 

@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Bereet an: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Klick fir ze kréien!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Claims: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>Benotzung: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>Benotzung: /ah sell <Präis></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>Benotzung: /ah cancel <id></color>",

@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>준비 완료: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>클릭하여 수령!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>수령 횟수: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>사용법: /ah [page|sell|cancel|expired|listings]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>사용법: /ah sell <가격></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>사용법: /ah cancel <id></color>",

@@ -519,6 +519,7 @@
   "kit.gui.item.kit.lore.ready_in": "<color:#AAAAAA>Sẵn sàng trong: <color:#FFF200><time></color></color>",
   "kit.gui.item.kit.lore.click_to_claim": "<color:#57F527>Nhấp để nhận!</color>",
   "kit.gui.item.kit.lore.claims": "<color:#AAAAAA>Lượt nhận: <color:#FFFFFF><count></color>/<color:#FFFFFF><max></color></color>",
+  "kit.gui.item.kit.lore.description": "<color:#FF55FF><description></color>",
   "command.usage.ah": "<prefix> <color:#FF0000>Cách dùng: /ah [trang|bán|hủy|hết_hạn|danh_sách]</color>",
   "command.usage.ah_sell": "<prefix> <color:#FF0000>Cách dùng: /ah sell <giá></color>",
   "command.usage.ah_cancel": "<prefix> <color:#FF0000>Cách dùng: /ah cancel <id></color>",
