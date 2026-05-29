@@ -58,13 +58,11 @@ public class ShopManager {
 
     private void loadShop() {
         shopFolder = new File(plugin.getDataFolder(), "shop");
-        boolean firstSetup = !shopFolder.exists();
-
-        if (firstSetup) {
+        if (!shopFolder.exists()) {
             shopFolder.mkdirs();
-            saveResourceFiles();
-            createDefaultFiles();
         }
+
+        saveResourceFiles();
 
         File mainFile = new File(shopFolder, "main.yml");
         if (!mainFile.exists()) {
@@ -245,13 +243,6 @@ public class ShopManager {
         return slots;
     }
 
-    private void createDefaultFiles() {
-        File mainFile = new File(shopFolder, "main.yml");
-        createDefaultMainFile(mainFile);
-        File farmingFile = new File(shopFolder, "farming.yml");
-        createExampleCategoryFile(farmingFile, "farming");
-    }
-
     private void createDefaultMainFile(File file) {
         YamlConfiguration config = new YamlConfiguration();
 
@@ -268,40 +259,10 @@ public class ShopManager {
                 "<color:#FFE66D>Click to open"
         ));
 
-        ConfigurationSection mining = categories.createSection("mining");
-        mining.set("name", "<color:#FFE66D>Mining");
-        mining.set("material", "DIAMOND_PICKAXE");
-        mining.set("slot", 22);
-        mining.set("file", "mining.yml");
-
         try {
             config.save(file);
         } catch (IOException e) {
             plugin.getLogger().severe("Failed to create default shop files");
-        }
-    }
-
-    private void createExampleCategoryFile(File file, String name) {
-        YamlConfiguration config = new YamlConfiguration();
-        ConfigurationSection items = config.createSection("items");
-
-        ConfigurationSection wheat = items.createSection("wheat");
-        wheat.set("material", "WHEAT");
-        wheat.set("name", "<color:#FFE66D>Wheat");
-        wheat.set("lore", Arrays.asList(
-                "<color:#AAAAAA>Basic farming crop",
-                "",
-                "<color:#06FFA5>Good for bread!"
-        ));
-        wheat.set("buy-price", 10);
-        wheat.set("sell-price", 5);
-        wheat.set("slot", 10);
-        wheat.set("page", 1);
-
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            plugin.getLogger().severe("Failed to create category file");
         }
     }
 

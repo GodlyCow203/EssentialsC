@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop.sell;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.ComponentHelper;
 import net.godlycow.org.essc.util.FormatUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -119,7 +120,7 @@ public class SellGUI {
         ItemMeta confirmMeta = confirmButton.getItemMeta();
 
         if (hasItems) {
-            confirmMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.confirm.name"));
+            confirmMeta.displayName(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "sell.gui.confirm.name")));
             String currency = totalWorth == 1.0 ?
                     plugin.getConfigManager().getShopCurrencySingular() :
                     plugin.getConfigManager().getShopCurrencyPlural();
@@ -135,13 +136,13 @@ public class SellGUI {
             lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.worth", placeholders));
             lore.add(Component.empty());
             lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.action"));
-            confirmMeta.lore(lore);
+            confirmMeta.lore(ComponentHelper.noItalic(lore));
         } else {
-            confirmMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.confirm.name"));
+            confirmMeta.displayName(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "sell.gui.confirm.name")));
             List<Component> lore = new ArrayList<>();
             lore.add(Component.empty());
             lore.add(plugin.getLanguageManager().get(player, "sell.gui.confirm.lore.empty"));
-            confirmMeta.lore(lore);
+            confirmMeta.lore(ComponentHelper.noItalic(lore));
         }
 
         confirmButton.setItemMeta(confirmMeta);
@@ -149,12 +150,12 @@ public class SellGUI {
 
         ItemStack cancelButton = new ItemStack(Material.RED_DYE);
         ItemMeta cancelMeta = cancelButton.getItemMeta();
-        cancelMeta.displayName(plugin.getLanguageManager().get(player, "sell.gui.cancel.name"));
+        cancelMeta.displayName(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "sell.gui.cancel.name")));
 
         List<Component> cancelLore = new ArrayList<>();
         cancelLore.add(Component.empty());
         cancelLore.add(plugin.getLanguageManager().get(player, "sell.gui.cancel.lore.action"));
-        cancelMeta.lore(cancelLore);
+        cancelMeta.lore(ComponentHelper.noItalic(cancelLore));
 
         cancelButton.setItemMeta(cancelMeta);
         inv.setItem(CANCEL_SLOT, cancelButton);
