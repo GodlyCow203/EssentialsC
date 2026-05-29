@@ -89,7 +89,11 @@ public class VaultHook {
                 ps.setDouble(1, amount.doubleValue());
                 ps.setString(2, uuid.toString());
                 ps.setDouble(3, amount.doubleValue());
-                return ps.executeUpdate() > 0;
+                boolean success = ps.executeUpdate() > 0;
+                if (success) {
+                    economyManager.invalidateCache(uuid);
+                }
+                return success;
             }
         } catch (SQLException e) {
             economyManager.getPlugin().getLogger().severe("Vault sync withdraw error: " + e.getMessage());
@@ -106,6 +110,7 @@ public class VaultHook {
                 ps.setDouble(1, amount.doubleValue());
                 ps.setString(2, uuid.toString());
                 if (ps.executeUpdate() > 0) {
+                    economyManager.invalidateCache(uuid);
                     return true;
                 }
             }
@@ -119,7 +124,11 @@ public class VaultHook {
                 ps.setString(1, uuid.toString());
                 ps.setString(2, name);
                 ps.setDouble(3, amount.doubleValue());
-                return ps.executeUpdate() > 0;
+                boolean success = ps.executeUpdate() > 0;
+                if (success) {
+                    economyManager.invalidateCache(uuid);
+                }
+                return success;
             }
         } catch (SQLException e) {
             economyManager.getPlugin().getLogger().severe("Vault sync deposit error: " + e.getMessage());

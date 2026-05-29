@@ -323,6 +323,10 @@ public class EconomyManager implements EconomyService, Listener {
         return maxBalance != null;
     }
 
+    public void invalidateCache(UUID uuid) {
+        cache.remove(uuid);
+    }
+
     public void shutdown() {
         database.disconnect();
     }
