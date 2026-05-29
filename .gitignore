@@ -115,3 +115,5 @@ run/
 run-server/plugins/DiscordSRV/config.yml
 
 run-server/
+
+src/main/resources/lang/e.py
