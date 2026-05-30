@@ -8,7 +8,7 @@
   <parent>
     <groupId>net.godlycow.org</groupId>
     <artifactId>EssentialsC-parent</artifactId>
-    <version>4.1.9</version>
+    <version>4.2.0</version>
   </parent>
 
   <artifactId>EssentialsC-api</artifactId>

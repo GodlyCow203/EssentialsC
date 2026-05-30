@@ -25,7 +25,6 @@ import net.godlycow.org.essc.plugin.config.CommandsConfig;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.migration.MigrationCommand;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
-import net.godlycow.org.essc.modules.schedule.SchedulesCommand;
 import net.godlycow.org.essc.CommandRegistration;
 import org.bukkit.command.PluginCommand;
 
@@ -84,7 +83,6 @@ public class CommandRegistrar {
         register("tpoffline",      new TpOfflineCommand(plugin, plugin.getUserManager()));
         register("banlist",        new BanListCommand(plugin, punishmentManager));
         register("clearinventory", new ClearInventoryCommand(plugin));
-        register("schedules",      new SchedulesCommand(plugin));
         register("enderchest",     new EnderChestCommand(plugin));
         register("endersee",       new EnderSeeCommand(plugin));
         register("speed",          new SpeedCommand(plugin));

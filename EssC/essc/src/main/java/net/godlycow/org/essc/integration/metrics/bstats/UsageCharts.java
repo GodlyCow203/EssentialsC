@@ -15,7 +15,6 @@ public class UsageCharts {
 
     public static void register(EssentialsC plugin, Metrics metrics) {
         registerDefaultLanguageChart(plugin, metrics);
-        registerSchedulesUsageChart(plugin, metrics);
         registerDisabledCommandsChart(plugin, metrics);
         registerLuckPermsIntegrationChart(plugin, metrics);
         registerHomeModeChart(plugin, metrics);
@@ -29,14 +28,7 @@ public class UsageCharts {
         }));
     }
 
-    private static void registerSchedulesUsageChart(EssentialsC plugin, Metrics metrics) {
-        metrics.addCustomChart(new SimplePie("schedules_used", () -> {
-            if (plugin.getScheduleManager() == null) {
-                return "Not used";
-            }
-            return plugin.getScheduleManager().getSchedules().isEmpty() ? "Not used" : "Used";
-        }));
-    }
+
 
     private static void registerDisabledCommandsChart(EssentialsC plugin, Metrics metrics) {
         metrics.addCustomChart(new SimplePie("disabled_commands_count", () -> {

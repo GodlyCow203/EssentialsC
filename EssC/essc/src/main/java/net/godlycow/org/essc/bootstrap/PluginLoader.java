@@ -40,7 +40,6 @@ import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.modules.rtp.RTPGuiManager;
 import net.godlycow.org.essc.modules.rtp.RTPManager;
 import net.godlycow.org.essc.modules.RulesManager;
-import net.godlycow.org.essc.modules.schedule.ScheduleManager;
 import net.godlycow.org.essc.modules.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.modules.shop.ShopGuiManager;
 import net.godlycow.org.essc.modules.shop.ShopListener;
@@ -80,8 +79,6 @@ public final class PluginLoader {
         timer.mark("banner");
         loadLanguages();
         timer.mark("languages");
-        loadScheduler();
-        timer.mark("scheduler");
         registerAPI();
         timer.mark("api");
         startPlugin();
@@ -107,11 +104,6 @@ public final class PluginLoader {
         plugin.setHelpManager(helpManager);
     }
 
-    private void loadScheduler() {
-        ScheduleManager scheduleManager = new ScheduleManager(plugin);
-        scheduleManager.load();
-        plugin.setScheduleManager(scheduleManager);
-    }
 
     private void registerAPI() {
         EssentialsCAPIImpl apiImpl = new EssentialsCAPIImpl(plugin);

@@ -486,6 +486,8 @@ worth:
   enabled: true
   priority: normal
   aliases: []
+  cooldown: 10 # 10 Seconds
+  cooldown-bypass: essentialsc.worth.bypass-cooldown
 
 quicksell:
   enabled: true

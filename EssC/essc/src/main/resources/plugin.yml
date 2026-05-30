@@ -1,5 +1,5 @@
 name: EssentialsC
-version: '4.1.9'
+version: '4.2.0'
 main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
 folia-supported: true
@@ -14,8 +14,6 @@ softdepend:
   - Floodgate
   - TAB
   - SkinRestorer
-
-
 
 commands:
   essc:
@@ -407,11 +405,6 @@ commands:
     description: Spawn entities at your location
     usage: /spawnentity <entity> [amount]
     permission: essentialsc.spawnentity
-
-  schedules:
-    description: Manage schedules
-    usage: /schedules <list|info|run|pause|resume> [name]
-    permission: essentialsc.schedules
 
   ban-ip:
     description: Ban an IP address or player's IP from the server

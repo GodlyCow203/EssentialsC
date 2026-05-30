@@ -37,7 +37,6 @@ import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.modules.rtp.RTPGuiManager;
 import net.godlycow.org.essc.modules.rtp.RTPManager;
 import net.godlycow.org.essc.modules.RulesManager;
-import net.godlycow.org.essc.modules.schedule.ScheduleManager;
 import net.godlycow.org.essc.modules.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.modules.shop.ShopManager;
 import net.godlycow.org.essc.modules.shop.sell.SellManager;
@@ -94,7 +93,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private FlyManager flyManager;
     private BedrockUtil bedrockUtil;
     private RulesManager rulesManager;
-    private ScheduleManager scheduleManager;
     private MOTDManager motdManager;
     private BackupManager backupManager;
     private UserManager userManager;
@@ -436,14 +434,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setRulesManager(RulesManager rulesManager) {
         this.rulesManager = rulesManager;
-    }
-
-    public ScheduleManager getScheduleManager() {
-        return scheduleManager;
-    }
-
-    public void setScheduleManager(ScheduleManager scheduleManager) {
-        this.scheduleManager = scheduleManager;
     }
 
     public MOTDManager getMotdManager() {
