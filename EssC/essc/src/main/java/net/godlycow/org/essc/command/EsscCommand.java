@@ -168,10 +168,6 @@ public class EsscCommand extends Command {
                     plugin.debug("Rules reloaded");
                 }
 
-                if (plugin.getScheduleManager() != null) {
-                    plugin.getScheduleManager().reload();
-                    plugin.debug("Schedules reloaded");
-                }
 
                 if (plugin.getMotdManager() != null) {
                     plugin.getMotdManager().reload();
