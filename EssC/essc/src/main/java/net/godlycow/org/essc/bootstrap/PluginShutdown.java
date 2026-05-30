@@ -58,9 +58,6 @@ public final class PluginShutdown {
         if (plugin.getRtpGuiManager() != null) {
             plugin.getRtpGuiManager().shutdown();
         }
-        if (plugin.getScheduleManager() != null) {
-            plugin.getScheduleManager().shutdown();
-        }
         if (plugin.getWarpManager() != null) {
             plugin.getWarpManager().shutdown();
         }

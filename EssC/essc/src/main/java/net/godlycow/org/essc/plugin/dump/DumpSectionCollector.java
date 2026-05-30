@@ -355,7 +355,6 @@ public class DumpSectionCollector {
         mgr.put("tab", plugin.getTabManager() != null);
         mgr.put("shop", plugin.getShopManager() != null);
         mgr.put("auction", plugin.getAuctionManager() != null);
-        mgr.put("schedule", plugin.getScheduleManager() != null);
         mgr.put("backup", plugin.getBackupManager() != null);
         mgr.put("discord", plugin.getDiscordSRVHook() != null);
         mgr.put("fly", plugin.getFlyManager() != null);
