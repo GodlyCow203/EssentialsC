@@ -429,6 +429,10 @@ public class AFKManager implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
+        if (afkStatus.getOrDefault(uuid, false)) {
+            player.clearTitle();
+        }
+
         lastActivity.remove(uuid);
         afkStatus.remove(uuid);
         afkStartTime.remove(uuid);
