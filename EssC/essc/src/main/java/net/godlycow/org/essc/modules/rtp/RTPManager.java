@@ -155,7 +155,7 @@ public class RTPManager {
     }
 
     public boolean hasWorldPermission(Player player, String worldName) {
-        String worldKey = worldName.toLowerCase().replace("world_", "");
+        String worldKey = worldName.toLowerCase().replace(" ", "_").replace("world_", "");
         return player.hasPermission("essentialsc.rtp.world." + worldKey) ||
                 player.hasPermission("essentialsc.rtp.world.*");
     }
