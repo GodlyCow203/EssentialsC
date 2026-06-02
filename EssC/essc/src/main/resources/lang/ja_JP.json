@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>手にアイテムを持っている必要があります。</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>エンチャント '<color:#FFFFFF><enchantment></color>' が見つかりません。</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>無効なレベルです。</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> の最大レベルは <color:#FFFFFF><level></color> です。</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>使い方: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>すべてのエンチャントを削除しました！</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> を削除しました！</color>",

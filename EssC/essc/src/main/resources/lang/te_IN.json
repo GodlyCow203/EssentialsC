@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>మీరు చేతిలో ఒక వస్తువును పట్టుకోవాలి.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>ఎన్‌చాంట్‌మెంట్ '<color:#FFFFFF><enchantment></color>' కనుగొనబడలేదు.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>చెల్లని స్థాయి.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> కోసం గరిష్ట స్థాయి <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>వినియోగం: /enchant <ఎన్‌చాంట్‌మెంట్> [స్థాయి]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>అన్ని ఎన్‌చాంట్‌మెంట్‌లు తొలగించబడ్డాయి!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> తొలగించబడింది!</color>",

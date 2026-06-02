@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Je moet een voorwerp in je hand houden.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Betovering '<color:#FFFFFF><enchantment></color>' niet gevonden.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Ongeldig niveau.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Het maximale niveau voor <color:#FFFFFF><enchantment></color> is <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Gebruik: /enchant <betovering> [niveau]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Alle betoveringen verwijderd!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> verwijderd!</color>",

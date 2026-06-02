@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>你必须手持物品。</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>附魔 '<color:#FFFFFF><enchantment></color>' 未找到。</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>无效等级。</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> 的最大等级是 <color:#FFFFFF><level></color>。</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>用法: /enchant <附魔> [等级]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>所有附魔已移除!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>已移除 <color:#FFFFFF><enchantment></color>!</color>",

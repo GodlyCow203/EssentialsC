@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Anda harus memegang item di tangan Anda.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Enchant '<color:#FFFFFF><enchantment></color>' tidak ditemukan.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Level tidak valid.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Level maksimal untuk <color:#FFFFFF><enchantment></color> adalah <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Penggunaan: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Semua enchant dihapus!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Menghapus <color:#FFFFFF><enchantment></color>!</color>",

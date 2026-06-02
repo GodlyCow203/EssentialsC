@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Dapat kang may hawak na item sa iyong kamay.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Hindi natagpuan ang enchantment '<color:#FFFFFF><enchantment></color>'.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Di-wastong antas.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Ang maximum level para sa <color:#FFFFFF><enchantment></color> ay <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Paggamit: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Naalis ang lahat ng enchantment!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Naalis ang <color:#FFFFFF><enchantment></color>!</color>",

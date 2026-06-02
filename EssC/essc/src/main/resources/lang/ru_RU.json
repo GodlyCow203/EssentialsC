@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Нужно держать предмет в руке.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Зачарование '<color:#FFFFFF><enchantment></color>' не найдено.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Неверный уровень.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Максимальный уровень для <color:#FFFFFF><enchantment></color> — <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Использование: /enchant <зачарование> [уровень]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Все зачарования удалены!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Удалено <color:#FFFFFF><enchantment></color>!</color>",

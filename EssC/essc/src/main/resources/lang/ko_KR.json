@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>손에 아이템을 들고 있어야 합니다.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>'<color:#FFFFFF><enchantment></color>' 인챈트를 찾을 수 없습니다.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>잘못된 레벨입니다.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color>의 최대 레벨은 <color:#FFFFFF><level></color>입니다.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>사용법: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>모든 인챈트가 제거되었습니다!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color>이(가) 제거되었습니다!</color>",

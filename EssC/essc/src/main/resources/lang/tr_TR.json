@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Elinizde bir eşya tutmanız gerekir.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>'<color:#FFFFFF><enchantment></color>' büyüsü bulunamadı.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Geçersiz seviye.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> için maksimum seviye <color:#FFFFFF><level></color>'dir.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Kullanım: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Tüm büyüler kaldırıldı!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> kaldırıldı!</color>",

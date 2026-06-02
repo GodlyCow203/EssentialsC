@@ -1228,4 +1228,8 @@ permissions:
     description: Allows using your bed/respawn anchor as a home waypoint.
     default: false
 
+  essentialsc.enchant.unsafe:
+    description: Allows bypassing the vanilla enchant limit ( config option ignored )
+    default: op
+
 

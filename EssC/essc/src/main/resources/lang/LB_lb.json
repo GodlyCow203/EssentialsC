@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Du muss en Objet an dengem Hand halen.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Verzauberung '<color:#FFFFFF><enchantment></color>' net fonnt.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Ongülteg Niveau.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Dat maximalt Level fir <color:#FFFFFF><enchantment></color> ass <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Benotzung: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>All Verzauberungen ewechgeholl!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> ewechgeholl!</color>",

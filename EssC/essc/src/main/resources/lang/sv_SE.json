@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Du måste hålla ett föremål i handen.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Förtrollning '<color:#FFFFFF><enchantment></color>' hittades inte.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Ogiltig nivå.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Maximal nivå för <color:#FFFFFF><enchantment></color> är <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Användning: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Alla förtrollningar borttagna!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Tog bort <color:#FFFFFF><enchantment></color>!</color>",

@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 4
+config-version: 5
 
 # General settings
 
@@ -66,6 +66,14 @@ fly:
 
   # Whether to disable fly mode when the player joins the server.
   disable-on-join: false
+
+# Enchant
+#
+# Settings for the /enchant command.
+
+enchant:
+  # Should the /enchant command be able bypass the vanilla limit ?
+  allow-unsafe: false
 
 # Broadcast
 #

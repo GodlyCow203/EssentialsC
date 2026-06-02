@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class EnchantCommand extends Command {
+
 
     public EnchantCommand(EssentialsC plugin) {
         super(plugin, "enchant", "essentialsc.enchant", true, 1, "command.usage.enchant");
@@ -32,7 +34,7 @@ public class EnchantCommand extends Command {
             return true;
         }
 
-        Enchantment enchantment = getEnchantment(args[0]);
+        Enchantment enchantment = resolveEnchantment(args[0]);
         if (enchantment == null) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("enchantment", args[0]);
@@ -58,6 +60,19 @@ public class EnchantCommand extends Command {
             return true;
         }
 
+        boolean allowUnsafe = plugin.getConfigManager().isEnchantAllowUnsafe();
+        boolean hasUnsafeBypass = player.hasPermission("essentialsc.enchant.unsafe");
+        int maxLevel = enchantment.getMaxLevel();
+
+        if (!allowUnsafe && !hasUnsafeBypass && level > maxLevel) {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("enchantment", getEnchantmentName(enchantment));
+            placeholders.put("level", String.valueOf(maxLevel));
+            player.sendMessage(lang.get(player, "enchant.level_too_high", placeholders));
+            plugin.debug("Enchant failed: " + player.getName() + " tried level " + level + " on " + getEnchantmentName(enchantment) + " (max " + maxLevel + ")");
+            return true;
+        }
+
         item.addUnsafeEnchantment(enchantment, level);
         plugin.debug("Enchanted " + item.getType() + " for " + player.getName() +
                 " with " + getEnchantmentName(enchantment) + " level " + level);
@@ -79,15 +94,25 @@ public class EnchantCommand extends Command {
                     .collect(Collectors.toList());
         }
         if (args.length == 2) {
-            return Arrays.asList("1", "2", "3", "4", "5");
+            Enchantment enchantment = resolveEnchantment(args[0]);
+            if (enchantment == null) {
+                return Collections.emptyList();
+            }
+            boolean allowUnsafe = plugin.getConfigManager().isEnchantAllowUnsafe();
+            boolean hasUnsafeBypass = sender instanceof Player && ((Player) sender).hasPermission("essentialsc.enchant.unsafe");
+            int maxLevel = (allowUnsafe || hasUnsafeBypass) ? 255 : enchantment.getMaxLevel();
+            return IntStream.rangeClosed(1, maxLevel)
+                    .mapToObj(Integer::toString)
+                    .collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
 
-    private Enchantment getEnchantment(String name) {
+    private Enchantment resolveEnchantment(String name) {
         Enchantment byKey = Enchantment.getByKey(NamespacedKey.minecraft(name.toLowerCase()));
-        if (byKey != null) return byKey;
-
+        if (byKey != null) {
+            return byKey;
+        }
         for (Enchantment e : Enchantment.values()) {
             if (getEnchantmentName(e).equalsIgnoreCase(name) ||
                     e.getKey().getKey().equalsIgnoreCase(name)) {

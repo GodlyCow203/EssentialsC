@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Du musst einen Gegenstand in der Hand halten.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Verzauberung '<color:#FFFFFF><enchantment></color>' nicht gefunden.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Ungültige Stufe.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Das maximale Level für <color:#FFFFFF><enchantment></color> ist <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Verwendung: /enchant <Verzauberung> [Stufe]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Alle Verzauberungen entfernt!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> entfernt!</color>",

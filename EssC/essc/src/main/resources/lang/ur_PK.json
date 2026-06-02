@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>آپ کو ہاتھ میں ایک آئٹم پکڑنا ہوگا۔</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>جادو '<color:#FFFFFF><enchantment></color>' نہیں ملا۔</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>غلط لیول۔</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> کے لیے زیادہ سے زیادہ لیول <color:#FFFFFF><level></color> ہے۔</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>استعمال: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>تمام جادو ہٹا دیے گئے!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> ہٹا دیا گیا!</color>",

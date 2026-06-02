@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Debes sostener un objeto en tu mano.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Encantamiento '<color:#FFFFFF><enchantment></color>' no encontrado.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Nivel inválido.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>El nivel máximo para <color:#FFFFFF><enchantment></color> es <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Uso: /enchant <encantamiento> [nivel]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>¡Todos los encantamientos eliminados!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>¡Eliminado <color:#FFFFFF><enchantment></color>!</color>",

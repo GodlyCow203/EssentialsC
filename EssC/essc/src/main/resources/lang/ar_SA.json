@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>يجب أن تحمل عنصراً في يدك.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>التطوير '<color:#FFFFFF><enchantment></color>' غير موجود.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>مستوى غير صالح.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>المستوى الأقصى لـ <color:#FFFFFF><enchantment></color> هو <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>الاستخدام: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>تمت إزالة جميع التطويرات!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>تمت إزالة <color:#FFFFFF><enchantment></color>!</color>",

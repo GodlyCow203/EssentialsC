@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>আপনাকে একটি আইটেম হাতে ধরতে হবে।</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>এনচ্যান্টমেন্ট '<color:#FFFFFF><enchantment></color>' পাওয়া যায়নি।</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>অবৈধ লেভেল।</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color>-এর সর্বোচ্চ লেভেল হলো <color:#FFFFFF><level></color>।</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>ব্যবহার: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>সব এনচ্যান্টমেন্ট সরানো হয়েছে!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> সরানো হয়েছে!</color>",

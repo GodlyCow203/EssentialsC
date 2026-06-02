@@ -777,4 +777,8 @@ public class EssConfig {
     public boolean isTrashLogDisposals() {
         return config.getBoolean("trash.log-disposals", false);
     }
+
+    public boolean isEnchantAllowUnsafe() {
+        return config.getBoolean("enchant.allow-unsafe", false);
+    }
 }

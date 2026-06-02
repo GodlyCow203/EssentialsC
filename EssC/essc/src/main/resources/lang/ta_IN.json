@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>கையில் ஒரு பொருளை வைத்திருக்க வேண்டும்.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>மந்திரம் '<color:#FFFFFF><enchantment></color>' கிடைக்கவில்லை.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>தவறான நிலை.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> க்கான அதிகபட்ச நிலை <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>பயன்பாடு: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>அனைத்து மந்திரங்களும் அகற்றப்பட்டன!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> அகற்றப்பட்டது!</color>",

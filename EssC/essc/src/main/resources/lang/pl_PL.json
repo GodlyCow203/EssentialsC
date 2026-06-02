@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Musisz trzymać przedmiot w ręce.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Zaklęcie '<color:#FFFFFF><enchantment></color>' nie znalezione.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Nieprawidłowy poziom.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Maksymalny poziom dla <color:#FFFFFF><enchantment></color> to <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Użycie: /enchant <zaklęcie> [poziom]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Wszystkie zaklęcia usunięte!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Usunięto <color:#FFFFFF><enchantment></color>!</color>",

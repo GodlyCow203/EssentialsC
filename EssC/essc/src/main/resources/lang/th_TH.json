@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>คุณต้องถือไอเทมในมือ</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>ไม่พบการร่ายมนตร์ '<color:#FFFFFF><enchantment></color>'</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>ระดับไม่ถูกต้อง</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>เลเวลสูงสุดสำหรับ <color:#FFFFFF><enchantment></color> คือ <color:#FFFFFF><level></color></color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>วิธีใช้: /enchant <การร่ายมนตร์> [ระดับ]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>ลบการร่ายมนตร์ทั้งหมดแล้ว!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>ลบ <color:#FFFFFF><enchantment></color>!</color>",

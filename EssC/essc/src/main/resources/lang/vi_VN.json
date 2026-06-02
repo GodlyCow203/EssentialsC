@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>Bạn phải cầm vật phẩm trên tay.</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>Không tìm thấy phù phép '<color:#FFFFFF><enchantment></color>'.</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>Cấp độ không hợp lệ.</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000>Cấp độ tối đa cho <color:#FFFFFF><enchantment></color> là <color:#FFFFFF><level></color>.</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>Cách dùng: /enchant <phù phép> [cấp độ]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>Tất cả phù phép đã được gỡ bỏ!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200>Đã gỡ bỏ <color:#FFFFFF><enchantment></color>!</color>",

@@ -85,6 +85,7 @@
   "enchant.no_item": "<prefix> <color:#FF0000>आपको अपने हाथ में एक वस्तु रखनी होगी।</color>",
   "enchant.invalid": "<prefix> <color:#FF0000>एन्चांटमेंट '<color:#FFFFFF><enchantment></color>' नहीं मिला।</color>",
   "enchant.invalid_level": "<prefix> <color:#FF0000>अमान्य स्तर।</color>",
+  "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> के लिए अधिकतम स्तर <color:#FFFFFF><level></color> है।</color>",
   "command.usage.enchant": "<prefix> <color:#FF0000>उपयोग: /enchant <enchantment> [level]</color>",
   "unenchant.success.all": "<prefix> <color:#FFF200>सभी एन्चांटमेंट हटा दिए गए!</color>",
   "unenchant.success.single": "<prefix> <color:#FFF200><color:#FFFFFF><enchantment></color> हटा दिया गया!</color>",
