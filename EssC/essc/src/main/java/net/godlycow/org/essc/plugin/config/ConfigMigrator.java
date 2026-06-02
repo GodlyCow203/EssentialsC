@@ -40,6 +40,9 @@ public class ConfigMigrator {
             if (key.equals("config-version")) {
                 continue;
             }
+            if (key.startsWith("rtp.worlds.")) {
+                continue;
+            }
             if (!defaults.isConfigurationSection(key) && !config.isSet(key)) {
                 config.set(key, defaults.get(key));
                 plugin.debug("[EssentialsC] config.yml — added missing key: " + key);
