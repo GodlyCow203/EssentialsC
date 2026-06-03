@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>कचरापेटी",
   "trash.opened": "<color:#AAAAAA>वस्तू कायमच्या काढून टाकण्यासाठी येथे टाका.</color>",
   "trash.error.blacklisted": "<color:#FF0000>ही वस्तू कचऱ्यात टाकता येणार नाही.</color>",
+  "trash.confirm.title": "<#FF4444><b>हटवण्याची पुष्टी करा</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>पुष्टी करा</b>",
+  "trash.confirm.confirm.lore": "<#888888>आयटम कायमचे हटवण्यासाठी क्लिक करा.",
+  "trash.confirm.cancel.name": "<#FF4444><b>रद्द करा</b>",
+  "trash.confirm.cancel.lore": "<#888888>तुमचे आयटम परत मिळवण्यासाठी क्लिक करा.",
   "command.usage.trash": "<prefix> <color:#FF0000>वापर: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>वापर: /suicide"
 }

@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>કચરાપેટી",
   "trash.opened": "<color:#AAAAAA>વસ્તુઓને કાયમી ધોરણે કાઢી નાખવા માટે અહીં મૂકો.</color>",
   "trash.error.blacklisted": "<color:#FF0000>આ વસ્તુને કચરાપેટીમાં નાખી શકાતી નથી.</color>",
+  "trash.confirm.title": "<#FF4444><b>નિકાલની પુષ્ટિ કરો</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>પુષ્ટિ કરો</b>",
+  "trash.confirm.confirm.lore": "<#888888>આઇટમ્સ કાયમી ધોરણે કાઢી નાખવા માટે ક્લિક કરો.",
+  "trash.confirm.cancel.name": "<#FF4444><b>રદ કરો</b>",
+  "trash.confirm.cancel.lore": "<#888888>તમારી આઇટમ્સ પાછી મેળવવા માટે ક્લિક કરો.",
   "command.usage.trash": "<prefix> <color:#FF0000>ઉપયોગ: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>વપરાશ: /suicide"
 }

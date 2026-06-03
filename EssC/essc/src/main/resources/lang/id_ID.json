@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Tempat Sampah",
   "trash.opened": "<color:#AAAAAA>Masukkan item untuk membuangnya secara permanen.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Item ini tidak bisa dibuang.</color>",
+  "trash.confirm.title": "<#FF4444><b>Konfirmasi Pembuangan</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Konfirmasi</b>",
+  "trash.confirm.confirm.lore": "<#888888>Klik untuk menghapus item secara permanen.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Batal</b>",
+  "trash.confirm.cancel.lore": "<#888888>Klik untuk mengambil kembali item Anda.",
   "command.usage.trash": "<prefix> <color:#FF0000>Penggunaan: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Penggunaan: /suicide"
 }

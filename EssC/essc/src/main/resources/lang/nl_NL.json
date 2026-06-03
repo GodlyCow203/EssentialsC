@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Prullenbak",
   "trash.opened": "<color:#AAAAAA>Gooi items hierin om ze definitief te verwijderen.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Dit item kan niet weggegooid worden.</color>",
+  "trash.confirm.title": "<#FF4444><b>Bevestig Verwijdering</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Bevestig</b>",
+  "trash.confirm.confirm.lore": "<#888888>Klik om items permanent te verwijderen.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Annuleren</b>",
+  "trash.confirm.cancel.lore": "<#888888>Klik om je items terug te nemen.",
   "command.usage.trash": "<prefix> <color:#FF0000>Gebruik: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Gebruik: /suicide"
 }

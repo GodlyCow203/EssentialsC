@@ -1,101 +1,225 @@
 import json
 from pathlib import Path
 
-INSERT_AFTER = '  "enchant.invalid_level"'
+INSERT_AFTER = '  "trash.error.blacklisted"'
 
 NEW_TRANSLATIONS = {
     "en_us": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>The maximum level for <color:#FFFFFF><enchantment></color> is <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Confirm Disposal</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Confirm</b>",
+        "trash.confirm.confirm.lore": "<#888888>Click to permanently delete items.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Cancel</b>",
+        "trash.confirm.cancel.lore": "<#888888>Click to take your items back."
     },
     "zh_cn": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> 的最大等级是 <color:#FFFFFF><level></color>。</color>"
+        "trash.confirm.title": "<#FF4444><b>确认删除</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>确认</b>",
+        "trash.confirm.confirm.lore": "<#888888>点击以永久删除物品。",
+        "trash.confirm.cancel.name": "<#FF4444><b>取消</b>",
+        "trash.confirm.cancel.lore": "<#888888>点击以找回您的物品。"
     },
     "vi_vn": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Cấp độ tối đa cho <color:#FFFFFF><enchantment></color> là <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Xác nhận hủy bỏ</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Xác nhận</b>",
+        "trash.confirm.confirm.lore": "<#888888>Nhấp để xóa vĩnh viễn các mục.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Hủy bỏ</b>",
+        "trash.confirm.cancel.lore": "<#888888>Nhấp để lấy lại các mục của bạn."
     },
     "ur_pk": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> کے لیے زیادہ سے زیادہ لیول <color:#FFFFFF><level></color> ہے۔</color>"
+        "trash.confirm.title": "<#FF4444><b>تلف کرنے کی تصدیق کریں</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>تصدیق کریں</b>",
+        "trash.confirm.confirm.lore": "<#888888>آئٹمز کو مستقل طور پر حذف کرنے کے لیے کلک کریں۔",
+        "trash.confirm.cancel.name": "<#FF4444><b>منسوخ کریں</b>",
+        "trash.confirm.cancel.lore": "<#888888>اپنے آئٹمز واپس لینے کے لیے کلک کریں۔"
     },
     "uk_ua": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Максимальний рівень для <color:#FFFFFF><enchantment></color> — <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Підтвердити видалення</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Підтвердити</b>",
+        "trash.confirm.confirm.lore": "<#888888>Натисніть, щоб видалити предмети назавжди.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Скасувати</b>",
+        "trash.confirm.cancel.lore": "<#888888>Натисніть, щоб повернути предмети назад."
     },
     "tr_tr": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> için maksimum seviye <color:#FFFFFF><level></color>'dir.</color>"
+        "trash.confirm.title": "<#FF4444><b>İmha İşlemini Onayla</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Onayla</b>",
+        "trash.confirm.confirm.lore": "<#888888>Öğeleri kalıcı olarak silmek için tıklayın.",
+        "trash.confirm.cancel.name": "<#FF4444><b>İptal</b>",
+        "trash.confirm.cancel.lore": "<#888888>Öğelerinizi geri almak için tıklayın."
     },
     "th_th": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>เลเวลสูงสุดสำหรับ <color:#FFFFFF><enchantment></color> คือ <color:#FFFFFF><level></color></color>"
+        "trash.confirm.title": "<#FF4444><b>ยืนยันการทำลาย</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>ยืนยัน</b>",
+        "trash.confirm.confirm.lore": "<#888888>คลิกเพื่อลบรายการอย่างถาวร",
+        "trash.confirm.cancel.name": "<#FF4444><b>ยกเลิก</b>",
+        "trash.confirm.cancel.lore": "<#888888>คลิกเพื่อรับรายการของคุณกลับคืน"
     },
     "te_in": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> కోసం గరిష్ట స్థాయి <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>తొలగింపును నిర్ధారించండి</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>నిర్ధారించు</b>",
+        "trash.confirm.confirm.lore": "<#888888>అంశాలను శాశ్వతంగా తొలగించడానికి క్లిక్ చేయండి.",
+        "trash.confirm.cancel.name": "<#FF4444><b>రద్దు చేయి</b>",
+        "trash.confirm.cancel.lore": "<#888888>మీ అంశాలను తిరిగి పొందడానికి క్లిక్ చేయండి."
     },
     "ta_in": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> க்கான அதிகபட்ச நிலை <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>நீக்குதலை உறுதிப்படுத்தவும்</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>உறுதிப்படுத்தவும்</b>",
+        "trash.confirm.confirm.lore": "<#888888>பொருட்களை நிரந்தரமாக நீக்க கிளிக் செய்யவும்.",
+        "trash.confirm.cancel.name": "<#FF4444><b>ரத்துசெய்</b>",
+        "trash.confirm.cancel.lore": "<#888888>உங்கள் பொருட்களைத் திரும்பப் பெற கிளிக் செய்யவும்."
     },
     "sv_se": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Maximal nivå för <color:#FFFFFF><enchantment></color> är <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Bekräfta borttagning</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Bekräfta</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klicka för att radera föremål permanent.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Avbryt</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klicka för att få tillbaka dina föremål."
     },
     "ru_ru": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Максимальный уровень для <color:#FFFFFF><enchantment></color> — <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Подтвердить удаление</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Подтвердить</b>",
+        "trash.confirm.confirm.lore": "<#888888>Нажмите, чтобы безвозвратно удалить предметы.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Отмена</b>",
+        "trash.confirm.cancel.lore": "<#888888>Нажмите, чтобы вернуть предметы назад."
     },
     "pt_br": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>O nível máximo para <color:#FFFFFF><enchantment></color> é <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Confirmar Descarte</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Confirmar</b>",
+        "trash.confirm.confirm.lore": "<#888888>Clique para excluir itens permanentemente.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Cancelar</b>",
+        "trash.confirm.cancel.lore": "<#888888>Clique para recuperar seus itens."
     },
     "pl_pl": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Maksymalny poziom dla <color:#FFFFFF><enchantment></color> to <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Potwierdź usunięcie</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Potwierdź</b>",
+        "trash.confirm.confirm.lore": "<#888888>Kliknij, aby trwale usunąć przedmioty.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Anuluj</b>",
+        "trash.confirm.cancel.lore": "<#888888>Kliknij, aby odzyskać swoje przedmioty."
     },
     "nl_nl": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Het maximale niveau voor <color:#FFFFFF><enchantment></color> is <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Bevestig verwijdering</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Bevestigen</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klik om items permanent te verwijderen.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Annuleren</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klik om uw items terug te nemen."
     },
     "mr_in": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> साठी कमाल पातळी <color:#FFFFFF><level></color> आहे.</color>"
+        "trash.confirm.title": "<#FF4444><b>हटवण्याची पुष्टी करा</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>पुष्टी करा</b>",
+        "trash.confirm.confirm.lore": "<#888888>आयटम कायमचे हटवण्यासाठी क्लिक करा.",
+        "trash.confirm.cancel.name": "<#FF4444><b>रद्द करा</b>",
+        "trash.confirm.cancel.lore": "<#888888>तुमचे आयटम परत मिळवण्यासाठी क्लिक करा."
     },
     "ko_kr": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color>의 최대 레벨은 <color:#FFFFFF><level></color>입니다.</color>"
+        "trash.confirm.title": "<#FF4444><b>삭제 확인</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>확인</b>",
+        "trash.confirm.confirm.lore": "<#888888>클릭하여 아이템을 영구적으로 삭제합니다.",
+        "trash.confirm.cancel.name": "<#FF4444><b>취소</b>",
+        "trash.confirm.cancel.lore": "<#888888>클릭하여 아이템을 되돌립니다."
     },
     "ja_jp": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> の最大レベルは <color:#FFFFFF><level></color> です。</color>"
+        "trash.confirm.title": "<#FF4444><b>破棄の確認</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>確認</b>",
+        "trash.confirm.confirm.lore": "<#888888>クリックしてアイテムを完全に削除します。",
+        "trash.confirm.cancel.name": "<#FF4444><b>キャンセル</b>",
+        "trash.confirm.cancel.lore": "<#888888>クリックしてアイテムを取り戻します。"
     },
     "it_it": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Il livello massimo per <color:#FFFFFF><enchantment></color> è <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Conferma smaltimento</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Conferma</b>",
+        "trash.confirm.confirm.lore": "<#888888>Clicca per eliminare definitivamente gli oggetti.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Annulla</b>",
+        "trash.confirm.cancel.lore": "<#888888>Clicca per recuperare i tuoi oggetti."
     },
     "id_id": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Level maksimal untuk <color:#FFFFFF><enchantment></color> adalah <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Konfirmasi Pembuangan</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Konfirmasi</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klik untuk menghapus item secara permanen.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Batal</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klik untuk mengambil kembali item Anda."
     },
     "hi_in": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> के लिए अधिकतम स्तर <color:#FFFFFF><level></color> है।</color>"
+        "trash.confirm.title": "<#FF4444><b>निपटान की पुष्टि करें</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>पुष्टि करें</b>",
+        "trash.confirm.confirm.lore": "<#888888>आइटम को स्थायी रूप से हटाने के लिए क्लिक करें।",
+        "trash.confirm.cancel.name": "<#FF4444><b>रद्द करें</b>",
+        "trash.confirm.cancel.lore": "<#888888>अपने आइटम वापस लेने के लिए क्लिक करें।"
     },
     "gu_in": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color> માટે મહત્તમ સ્તર <color:#FFFFFF><level></color> છે.</color>"
+        "trash.confirm.title": "<#FF4444><b>નિકાલની પુષ્ટિ કરો</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>પુષ્ટિ કરો</b>",
+        "trash.confirm.confirm.lore": "<#888888>આઇટમ્સ કાયમી ધોરણે કાઢી નાખવા માટે ક્લિક કરો.",
+        "trash.confirm.cancel.name": "<#FF4444><b>રદ કરો</b>",
+        "trash.confirm.cancel.lore": "<#888888>તમારી આઇટમ્સ પાછી મેળવવા માટે ક્લિક કરો."
     },
     "fr_fr": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Le niveau maximum pour <color:#FFFFFF><enchantment></color> est <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Confirmer la suppression</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Confirmer</b>",
+        "trash.confirm.confirm.lore": "<#888888>Cliquez pour supprimer définitivement les objets.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Annuler</b>",
+        "trash.confirm.cancel.lore": "<#888888>Cliquez pour récupérer vos objets."
     },
     "fil_ph": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Ang maximum level para sa <color:#FFFFFF><enchantment></color> ay <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Kumpirmahin ang Pagtatapon</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Kumpirmahin</b>",
+        "trash.confirm.confirm.lore": "<#888888>I-click para permanenteng burahin ang mga item.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Kanselahin</b>",
+        "trash.confirm.cancel.lore": "<#888888>I-click para bawiin ang iyong mga item."
     },
     "es_es": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>El nivel máximo para <color:#FFFFFF><enchantment></color> es <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Confirmar eliminación</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Confirmar</b>",
+        "trash.confirm.confirm.lore": "<#888888>Haz clic para eliminar los objetos permanentemente.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Cancelar</b>",
+        "trash.confirm.cancel.lore": "<#888888>Haz clic para recuperar tus objetos."
     },
     "en_gb": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>The maximum level for <color:#FFFFFF><enchantment></color> is <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Confirm Disposal</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Confirm</b>",
+        "trash.confirm.confirm.lore": "<#888888>Click to permanently delete items.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Cancel</b>",
+        "trash.confirm.cancel.lore": "<#888888>Click to take your items back."
     },
     "de_de": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Das maximale Level für <color:#FFFFFF><enchantment></color> ist <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Löschen bestätigen</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Bestätigen</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klicke, um Gegenstände dauerhaft zu löschen.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Abbrechen</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klicke, um deine Gegenstände zurückzunehmen."
     },
     "de_ch": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>S maximale Level für <color:#FFFFFF><enchantment></color> isch <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Löschen bestätigen</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Bestätigen</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klicke, um Gegenstände dauerhaft zu löschen.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Abbrechen</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klicke, um deine Gegenstände zurückzunehmen."
     },
     "bn_bd": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000><color:#FFFFFF><enchantment></color>-এর সর্বোচ্চ লেভেল হলো <color:#FFFFFF><level></color>।</color>"
+        "trash.confirm.title": "<#FF4444><b>মুছে ফেলার বিষয়টি নিশ্চিত করুন</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>নিশ্চিত করুন</b>",
+        "trash.confirm.confirm.lore": "<#888888>আইটেমগুলি স্থায়ীভাবে মুছতে ক্লিক করুন।",
+        "trash.confirm.cancel.name": "<#FF4444><b>বাতিল করুন</b>",
+        "trash.confirm.cancel.lore": "<#888888>আপনার আইটেমগুলি ফিরে পেতে ক্লিক করুন।"
     },
     "ar_sa": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>المستوى الأقصى لـ <color:#FFFFFF><enchantment></color> هو <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>تأكيد التخلص</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>تأكيد</b>",
+        "trash.confirm.confirm.lore": "<#888888>انقر لحذف العناصر بشكل دائم.",
+        "trash.confirm.cancel.name": "<#FF4444><b>إلغاء</b>",
+        "trash.confirm.cancel.lore": "<#888888>انقر لاستعادة عناصرك."
     },
     "ar_eg": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>أقصى مستوى لـ <color:#FFFFFF><enchantment></color> هو <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>تأكيد التخلص</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>تأكيد</b>",
+        "trash.confirm.confirm.lore": "<#888888>انقر لحذف العناصر بشكل دائم.",
+        "trash.confirm.cancel.name": "<#FF4444><b>إلغاء</b>",
+        "trash.confirm.cancel.lore": "<#888888>انقر لاستعادة عناصرك."
     },
     "lb_lu": {
-        "enchant.level_too_high": "<prefix> <color:#FF0000>Dat maximalt Level fir <color:#FFFFFF><enchantment></color> ass <color:#FFFFFF><level></color>.</color>"
+        "trash.confirm.title": "<#FF4444><b>Läschen bestätegen</b>",
+        "trash.confirm.confirm.name": "<#57F527><b>Bestätegen</b>",
+        "trash.confirm.confirm.lore": "<#888888>Klickt hei fir d'Elementer definitiv ze läschen.",
+        "trash.confirm.cancel.name": "<#FF4444><b>Ofbriechen</b>",
+        "trash.confirm.cancel.lore": "<#888888>Klickt hei fir är Elementer zréckzehuelen."
     }
 }
 

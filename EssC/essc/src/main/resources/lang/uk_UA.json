@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Смітник",
   "trash.opened": "<color:#AAAAAA>Покладіть предмети, щоб назавжди їх видалити.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Цей предмет не можна викинути.</color>",
+  "trash.confirm.title": "<#FF4444><b>Підтвердити видалення</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Підтвердити</b>",
+  "trash.confirm.confirm.lore": "<#888888>Натисніть, щоб видалити предмети назавжди.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Скасувати</b>",
+  "trash.confirm.cancel.lore": "<#888888>Натисніть, щоб повернути предмети назад.",
   "command.usage.trash": "<prefix> <color:#FF0000>Використання: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Використання: /suicide"
 }

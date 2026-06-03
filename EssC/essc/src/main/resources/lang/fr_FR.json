@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Corbeille",
   "trash.opened": "<color:#AAAAAA>Déposez des objets pour les supprimer définitivement.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Cet objet ne peut pas être jeté.</color>",
+  "trash.confirm.title": "<#FF4444><b>Confirmer la suppression</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Confirmer</b>",
+  "trash.confirm.confirm.lore": "<#888888>Cliquez pour supprimer définitivement les objets.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Annuler</b>",
+  "trash.confirm.cancel.lore": "<#888888>Cliquez pour récupérer vos objets.",
   "command.usage.trash": "<prefix> <color:#FF0000>Utilisation : /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Utilisation : /suicide"
 }

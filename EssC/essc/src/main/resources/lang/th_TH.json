@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>ถังขยะ",
   "trash.opened": "<color:#AAAAAA>วางไอเทมลงไปเพื่อทิ้งอย่างถาวร</color>",
   "trash.error.blacklisted": "<color:#FF0000>ไม่สามารถทิ้งไอเทมนี้ได้</color>",
+  "trash.confirm.title": "<#FF4444><b>ยืนยันการทิ้ง</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>ยืนยัน</b>",
+  "trash.confirm.confirm.lore": "<#888888>คลิกเพื่อลบไอเทมอย่างถาวร",
+  "trash.confirm.cancel.name": "<#FF4444><b>ยกเลิก</b>",
+  "trash.confirm.cancel.lore": "<#888888>คลิกเพื่อนำไอเทมของคุณกลับคืน",
   "command.usage.trash": "<prefix> <color:#FF0000>การใช้งาน: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>วิธีใช้: /suicide"
 }

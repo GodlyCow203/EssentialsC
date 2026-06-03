@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Drecksak",
   "trash.opened": "<color:#AAAAAA>Läit Elementer eran, fir se permanent ze läschen.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Dat Element kann net ewechgehäit ginn.</color>",
+  "trash.confirm.title": "<#FF4444><b>Läschen bestätegen</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Bestätegen</b>",
+  "trash.confirm.confirm.lore": "<#888888>Klickt hei fir d'Elementer definitiv ze läschen.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Ofbriechen</b>",
+  "trash.confirm.cancel.lore": "<#888888>Klickt hei fir är Elementer zréckzehuelen.",
   "command.usage.trash": "<prefix> <color:#FF0000>Benotzung: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Notzung: /suicide"
 }

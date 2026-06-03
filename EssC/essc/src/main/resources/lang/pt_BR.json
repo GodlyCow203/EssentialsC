@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Lixeira",
   "trash.opened": "<color:#AAAAAA>Jogue itens aqui para descartá-los permanentemente.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Este item não pode ser descartado.</color>",
+  "trash.confirm.title": "<#FF4444><b>Confirmar Descarte</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Confirmar</b>",
+  "trash.confirm.confirm.lore": "<#888888>Clique para excluir itens permanentemente.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Cancelar</b>",
+  "trash.confirm.cancel.lore": "<#888888>Clique para pegar seus itens de volta.",
   "command.usage.trash": "<prefix> <color:#FF0000>Uso: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Thùng rác",
   "trash.opened": "<color:#AAAAAA>Thả vật phẩm vào để xóa vĩnh viễn.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Vật phẩm này không thể xóa.</color>",
+  "trash.confirm.title": "<#FF4444><b>Xác nhận hủy</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Xác nhận</b>",
+  "trash.confirm.confirm.lore": "<#888888>Nhấn để xóa vĩnh viễn vật phẩm.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Hủy bỏ</b>",
+  "trash.confirm.cancel.lore": "<#888888>Nhấn để lấy lại vật phẩm của bạn.",
   "command.usage.trash": "<prefix> <color:#FF0000>Cách dùng: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Cách dùng: /suicide"
 }

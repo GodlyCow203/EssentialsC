@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Çöp Kutusu",
   "trash.opened": "<color:#AAAAAA>Eşyaları kalıcı olarak silmek için buraya at.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Bu eşya çöpe atılamaz.</color>",
+  "trash.confirm.title": "<#FF4444><b>İmha İşlemini Onayla</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Onayla</b>",
+  "trash.confirm.confirm.lore": "<#888888>Eşyaları kalıcı olarak silmek için tıkla.",
+  "trash.confirm.cancel.name": "<#FF4444><b>İptal</b>",
+  "trash.confirm.cancel.lore": "<#888888>Eşyalarını geri almak için tıkla.",
   "command.usage.trash": "<prefix> <color:#FF0000>Kullanım: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Kullanım: /suicide"
 }

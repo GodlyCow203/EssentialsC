@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>쓰레기통",
   "trash.opened": "<color:#AAAAAA>아이템을 넣어 영구적으로 삭제하세요.</color>",
   "trash.error.blacklisted": "<color:#FF0000>이 아이템은 버릴 수 없습니다.</color>",
+  "trash.confirm.title": "<#FF4444><b>삭제 확인</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>확인</b>",
+  "trash.confirm.confirm.lore": "<#888888>클릭하여 아이템을 영구 삭제합니다.",
+  "trash.confirm.cancel.name": "<#FF4444><b>취소</b>",
+  "trash.confirm.cancel.lore": "<#888888>클릭하여 아이템을 다시 가져옵니다.",
   "command.usage.trash": "<prefix> <color:#FF0000>사용법: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>사용법: /suicide"
 }

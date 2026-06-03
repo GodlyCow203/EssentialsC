@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Mülleimer",
   "trash.opened": "<color:#AAAAAA>Lege Items hinein, um sie dauerhaft zu löschen.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Dieser Gegenstand kann nicht gelöscht werden.</color>",
+  "trash.confirm.title": "<#FF4444><b>Entsorgung bestätigen</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Bestätigen</b>",
+  "trash.confirm.confirm.lore": "<#888888>Klicken, um Items dauerhaft zu löschen.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Abbrechen</b>",
+  "trash.confirm.cancel.lore": "<#888888>Klicken, um deine Items zurückzunehmen.",
   "command.usage.trash": "<prefix> <color:#FF0000>Benutzung: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Benutzung: /suicide"
 }

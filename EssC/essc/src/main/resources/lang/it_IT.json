@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Cestino",
   "trash.opened": "<color:#AAAAAA>Trascina gli oggetti qui per eliminarli definitivamente.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Questo oggetto non può essere eliminato.</color>",
+  "trash.confirm.title": "<#FF4444><b>Conferma Eliminazione</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Conferma</b>",
+  "trash.confirm.confirm.lore": "<#888888>Clicca per eliminare permanentemente gli oggetti.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Annulla</b>",
+  "trash.confirm.cancel.lore": "<#888888>Clicca per riprendere i tuoi oggetti.",
   "command.usage.trash": "<prefix> <color:#FF0000>Utilizzo: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Uso: /suicide"
 }

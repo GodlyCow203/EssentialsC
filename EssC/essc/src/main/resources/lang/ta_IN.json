@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>குப்பை",
   "trash.opened": "<color:#AAAAAA>பொருட்களை நிரந்தரமாக அழிக்க இங்கே போடவும்.</color>",
   "trash.error.blacklisted": "<color:#FF0000>இந்தப் பொருளை குப்பையில் போட முடியாது.</color>",
+  "trash.confirm.title": "<#FF4444><b>நீக்குதலை உறுதிப்படுத்தவும்</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>உறுதிப்படுத்தவும்</b>",
+  "trash.confirm.confirm.lore": "<#888888>பொருட்களை நிரந்தரமாக நீக்க கிளிக் செய்யவும்.",
+  "trash.confirm.cancel.name": "<#FF4444><b>ரத்துசெய்</b>",
+  "trash.confirm.cancel.lore": "<#888888>உங்கள் பொருட்களைத் திரும்பப் பெற கிளிக் செய்யவும்.",
   "command.usage.trash": "<prefix> <color:#FF0000>பயன்பாடு: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>பயன்பாடு: /suicide"
 }

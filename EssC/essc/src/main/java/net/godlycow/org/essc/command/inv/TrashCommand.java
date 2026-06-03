@@ -5,6 +5,7 @@ import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
+import net.godlycow.org.essc.util.ComponentHelper;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -37,12 +39,9 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TrashCommand extends Command implements Listener {
-
-    private static final String TEMPLATE_ID = "trash";
-    private static final DateTimeFormatter LOG_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
     private final GuiFramework guiFramework;
     private final Set<UUID> openTrash = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private final Set<UUID> openConfirm = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final File logFile;
 
     public TrashCommand(EssentialsC plugin, GuiFramework guiFramework) {
@@ -56,7 +55,7 @@ public class TrashCommand extends Command implements Listener {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        GuiTemplate template = guiFramework.getTemplate(TEMPLATE_ID);
+        GuiTemplate template = guiFramework.getTemplate("trash");
         if (template == null) {
             plugin.getLogger().warning("[Trash] Missing GUI template: trash.yml");
             player.sendMessage(lang.get(player, "error.internal"));
@@ -68,7 +67,7 @@ public class TrashCommand extends Command implements Listener {
         Component title = template.resolveTitle(player, plugin);
         Inventory inv = Bukkit.createInventory(new TrashHolder(player.getUniqueId(), borderSlots), template.getSize(), title);
 
-        guiFramework.fillStaticItems(inv, TEMPLATE_ID, player);
+        guiFramework.fillStaticItems(inv, "trash", player);
 
         openTrash.add(player.getUniqueId());
         player.openInventory(inv);
@@ -87,10 +86,47 @@ public class TrashCommand extends Command implements Listener {
         return slots;
     }
 
+    private void openConfirmGui(Player player, List<ItemStack> items) {
+        Component title = lang.get(player, "trash.confirm.title");
+        Inventory inv = Bukkit.createInventory(new TrashConfirmHolder(player.getUniqueId(), items), 27, title);
+
+        ItemStack confirmItem = buildConfirmItem(player);
+        ItemStack cancelItem = buildCancelItem(player);
+
+        inv.setItem(11, confirmItem);
+        inv.setItem(15, cancelItem);
+
+        openConfirm.add(player.getUniqueId());
+        player.openInventory(inv);
+    }
+
+    private ItemStack buildConfirmItem(Player player) {
+        Component name = ComponentHelper.noItalic(lang.get(player, "trash.confirm.confirm.name"));
+        Component loreLine = ComponentHelper.noItalic(lang.get(player, "trash.confirm.confirm.lore"));
+        return guiFramework.getItemBuilder().buildSimple(Material.LIME_STAINED_GLASS_PANE, name, List.of(loreLine), true);
+    }
+
+    private ItemStack buildCancelItem(Player player) {
+        Component name = ComponentHelper.noItalic(lang.get(player, "trash.confirm.cancel.name"));
+        Component loreLine = ComponentHelper.noItalic(lang.get(player, "trash.confirm.cancel.lore"));
+        return guiFramework.getItemBuilder().buildSimple(Material.RED_STAINED_GLASS_PANE, name, List.of(loreLine), true);
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!(event.getInventory().getHolder() instanceof TrashHolder holder)) return;
+
+        if (event.getInventory().getHolder() instanceof TrashHolder holder) {
+            handleTrashClick(event, player, holder);
+            return;
+        }
+
+        if (event.getInventory().getHolder() instanceof TrashConfirmHolder holder) {
+            handleConfirmClick(event, player, holder);
+        }
+    }
+
+    private void handleTrashClick(InventoryClickEvent event, Player player, TrashHolder holder) {
         if (!holder.getOwner().equals(player.getUniqueId())) return;
 
         Inventory topInv = event.getInventory();
@@ -136,33 +172,88 @@ public class TrashCommand extends Command implements Listener {
         }
     }
 
+    private void handleConfirmClick(InventoryClickEvent event, Player player, TrashConfirmHolder holder) {
+        event.setCancelled(true);
+
+        if (!holder.getOwner().equals(player.getUniqueId())) return;
+
+        int slot = event.getRawSlot();
+
+        if (slot == 11) {
+            openConfirm.remove(player.getUniqueId());
+            player.closeInventory();
+            discardItems(player, holder.getItems());
+            playSound(player, "close");
+            plugin.debug(player.getName() + " confirmed trash disposal");
+        } else if (slot == 15) {
+            openConfirm.remove(player.getUniqueId());
+            player.closeInventory();
+            returnItems(player, holder.getItems());
+            playSound(player, "open");
+            plugin.debug(player.getName() + " cancelled trash disposal — items returned");
+        }
+    }
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
-        if (!(event.getInventory().getHolder() instanceof TrashHolder holder)) return;
-        if (!holder.getOwner().equals(player.getUniqueId())) return;
 
+        if (event.getInventory().getHolder() instanceof TrashHolder holder) {
+            handleTrashClose(event, player, holder);
+            return;
+        }
+
+        if (event.getInventory().getHolder() instanceof TrashConfirmHolder holder) {
+            handleConfirmClose(player, holder);
+        }
+    }
+
+    private void handleTrashClose(InventoryCloseEvent event, Player player, TrashHolder holder) {
+        if (!holder.getOwner().equals(player.getUniqueId())) return;
         if (!openTrash.remove(player.getUniqueId())) return;
 
         Inventory inv = event.getInventory();
-        boolean logEnabled = plugin.getConfig().getBoolean("trash.log-disposals", false);
 
+        List<ItemStack> pendingItems = new ArrayList<>();
         for (int i = 0; i < inv.getSize(); i++) {
             if (holder.isBorderSlot(i)) continue;
-
             ItemStack item = inv.getItem(i);
             if (item == null || item.getType().isAir()) continue;
             if (isBlacklisted(item.getType())) continue;
-
-            if (logEnabled) {
-                logDisposal(player, item);
-            }
-
-            plugin.debug(player.getName() + " trashed " + item.getAmount() + "x " + item.getType());
+            pendingItems.add(item.clone());
         }
 
         inv.clear();
-        playSound(player, "close");
+
+        if (pendingItems.isEmpty()) return;
+
+        plugin.getEssScheduler().runForEntity(player, () -> openConfirmGui(player, pendingItems));
+    }
+
+    private void handleConfirmClose(Player player, TrashConfirmHolder holder) {
+        if (!holder.getOwner().equals(player.getUniqueId())) return;
+        if (!openConfirm.remove(player.getUniqueId())) return;
+
+        returnItems(player, holder.getItems());
+        plugin.debug(player.getName() + " closed confirm GUI without choosing — items returned");
+    }
+
+    private void discardItems(Player player, List<ItemStack> items) {
+        boolean logEnabled = plugin.getConfigManager().isTrashLogDisposals();
+        for (ItemStack item : items) {
+            if (logEnabled) {
+                logDisposal(player, item);
+            }
+            plugin.debug(player.getName() + " trashed " + item.getAmount() + "x " + item.getType());
+        }
+    }
+
+    private void returnItems(Player player, List<ItemStack> items) {
+        for (ItemStack item : items) {
+            for (ItemStack overflow : player.getInventory().addItem(item).values()) {
+                player.getWorld().dropItemNaturally(player.getLocation(), overflow);
+            }
+        }
     }
 
     private boolean isBlacklisted(Material material) {
@@ -212,7 +303,7 @@ public class TrashCommand extends Command implements Listener {
     private void logDisposal(Player player, ItemStack item) {
         plugin.getEssScheduler().runAsync(() -> {
             try (PrintWriter writer = new PrintWriter(new FileWriter(logFile, true))) {
-                String timestamp = LocalDateTime.now().format(LOG_FORMAT);
+                String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 writer.println("[" + timestamp + "] " + player.getName()
                         + " (" + player.getUniqueId() + ") trashed "
                         + item.getAmount() + "x " + item.getType().name());
@@ -243,6 +334,30 @@ public class TrashCommand extends Command implements Listener {
 
         public boolean isBorderSlot(int slot) {
             return borderSlots.contains(slot);
+        }
+
+        @Override
+        public Inventory getInventory() {
+            return null;
+        }
+    }
+
+    public static final class TrashConfirmHolder implements InventoryHolder {
+
+        private final UUID owner;
+        private final List<ItemStack> items;
+
+        public TrashConfirmHolder(UUID owner, List<ItemStack> items) {
+            this.owner = owner;
+            this.items = items;
+        }
+
+        public UUID getOwner() {
+            return owner;
+        }
+
+        public List<ItemStack> getItems() {
+            return items;
         }
 
         @Override

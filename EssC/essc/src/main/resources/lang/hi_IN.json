@@ -974,6 +974,11 @@
   "trash.gui.title": "<#444444>ट्रैश",
   "trash.opened": "<color:#AAAAAA>वस्तुओं को स्थायी रूप से हटाने के लिए यहाँ डालें。</color>",
   "trash.error.blacklisted": "<color:#FF0000>इस वस्तु को ट्रैश नहीं किया जा सकता。</color>",
+  "trash.confirm.title": "<#FF4444><b>निपटान की पुष्टि करें</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>पुष्टि करें</b>",
+  "trash.confirm.confirm.lore": "<#888888>आइटम को स्थायी रूप से हटाने के लिए क्लिक करें।",
+  "trash.confirm.cancel.name": "<#FF4444><b>रद्द करें</b>",
+  "trash.confirm.cancel.lore": "<#888888>अपने आइटम वापस लेने के लिए क्लिक करें।",
   "command.usage.trash": "<prefix> <color:#FF0000>उपयोग: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>उपयोग: /suicide"
 }

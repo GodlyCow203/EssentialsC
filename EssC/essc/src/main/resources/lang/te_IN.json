@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>ట్రాష్",
   "trash.opened": "<color:#AAAAAA>ఐటమ్‌లను శాశ్వతంగా తొలగించడానికి ఇక్కడ వేయండి.</color>",
   "trash.error.blacklisted": "<color:#FF0000>ఆ ఐటమ్‌ను ట్రాష్ చేయలేము.</color>",
+  "trash.confirm.title": "<#FF4444><b>తొలగింపును నిర్ధారించండి</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>నిర్ధారించు</b>",
+  "trash.confirm.confirm.lore": "<#888888>అంశాలను శాశ్వతంగా తొలగించడానికి క్లిక్ చేయండి.",
+  "trash.confirm.cancel.name": "<#FF4444><b>రద్దు చేయి</b>",
+  "trash.confirm.cancel.lore": "<#888888>మీ అంశాలను తిరిగి పొందడానికి క్లిక్ చేయండి.",
   "command.usage.trash": "<prefix> <color:#FF0000>వాడకం: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>వినియోగం: /suicide"
 }

@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>Мусорка",
   "trash.opened": "<color:#AAAAAA>Положите предметы, чтобы удалить их навсегда.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Этот предмет нельзя выбросить.</color>",
+  "trash.confirm.title": "<#FF4444><b>Подтвердить удаление</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Подтвердить</b>",
+  "trash.confirm.confirm.lore": "<#888888>Нажмите, чтобы удалить предметы навсегда.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Отмена</b>",
+  "trash.confirm.cancel.lore": "<#888888>Нажмите, чтобы забрать предметы обратно.",
   "command.usage.trash": "<prefix> <color:#FF0000>Использование: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Использование: /suicide"
 }

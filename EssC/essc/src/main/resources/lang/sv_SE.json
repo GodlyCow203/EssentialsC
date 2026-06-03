@@ -974,6 +974,11 @@
   "trash.gui.title": "<#444444>Papperskorg",
   "trash.opened": "<color:#AAAAAA>Släpp föremål här för att ta bort dem permanent.</color>",
   "trash.error.blacklisted": "<color:#FF0000>Det föremålet kan inte slängas.</color>",
+  "trash.confirm.title": "<#FF4444><b>Bekräfta borttagning</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>Bekräfta</b>",
+  "trash.confirm.confirm.lore": "<#888888>Klicka för att radera föremål permanent.",
+  "trash.confirm.cancel.name": "<#FF4444><b>Avbryt</b>",
+  "trash.confirm.cancel.lore": "<#888888>Klicka för att ta tillbaka dina föremål.",
   "command.usage.trash": "<prefix> <color:#FF0000>Användning: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>Användning: /suicide"
 }

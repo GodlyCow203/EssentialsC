@@ -973,6 +973,11 @@
   "trash.gui.title": "<#444444>کوڑا دان",
   "trash.opened": "<color:#AAAAAA>چیزوں کو مستقل طور پر ضائع کرنے کے لیے یہاں ڈالیں۔</color>",
   "trash.error.blacklisted": "<color:#FF0000>یہ چیز ضائع نہیں کی جا سکتی۔</color>",
+  "trash.confirm.title": "<#FF4444><b>تلف کرنے کی تصدیق کریں</b>",
+  "trash.confirm.confirm.name": "<#57F527><b>تصدیق کریں</b>",
+  "trash.confirm.confirm.lore": "<#888888>آئٹمز کو مستقل طور پر حذف کرنے کے لیے کلک کریں۔",
+  "trash.confirm.cancel.name": "<#FF4444><b>منسوخ کریں</b>",
+  "trash.confirm.cancel.lore": "<#888888>اپنے آئٹمز واپس لینے کے لیے کلک کریں۔",
   "command.usage.trash": "<prefix> <color:#FF0000>استعمال: /trash</color>",
   "command.usage.suicide": "<prefix><color:#FF0000>طریقہ استعمال: /suicide"
 }
