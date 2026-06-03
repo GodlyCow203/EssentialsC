@@ -580,12 +580,8 @@ public class EssConfig {
         return config.getBoolean("motd.enabled", true);
     }
 
-    public int getMotdMaxLineWidth() {
-        return config.getInt("motd.max-line-width", 50);
-    }
-
-    public String getMotdFileName() {
-        return config.getString("motd.file", "motd.txt");
+    public List<String> getMotdLines() {
+        return config.getStringList("motd.lines");
     }
 
     public boolean isBackupEnabled() {

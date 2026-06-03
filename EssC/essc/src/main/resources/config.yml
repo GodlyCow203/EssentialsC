@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 5
+config-version: 6
 
 # General settings
 
@@ -105,19 +105,19 @@ heal:
 
 # MOTD
 #
-# Displays a message of the day to players when they join.
-# The content is read from the file specified below (default: motd.txt).
-# MiniMessage formatting is supported inside the file.
+# Sends a message of the day to players when they join the server.
+# Each line is sent as a separate chat message.
+# MiniMessage formatting and the <player> placeholder are supported.
 
 motd:
   # Set to false to disable the MOTD entirely.
   enabled: true
 
-  # The file (inside the EssentialsC plugin folder) to read the MOTD from.
-  file: motd.txt
+  # Lines sent to the player on join. Supports MiniMessage and <player>.
+  lines:
+    - "<gray>You can customize this message in config.yml."
+    - "<gray>Set <white>motd.enabled</white><gray> to <red>false</red><gray> to disable it completely."
 
-  # Maximum width of each line in characters before it wraps.
-  max-line-width: 50
 
 
 # LuckPerms Integration
