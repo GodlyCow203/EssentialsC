@@ -479,8 +479,8 @@ spawn:
 # Supports MiniMessage formatting and PlaceholderAPI placeholders (if installed).
 
 join-leave-messages:
-  # Set to false to disable custom join and leave messages entirely,
-  # falling back to Minecraft's default messages.
+  # Set to false to disable join and leave messages entirely.
+  # Both custom and vanilla messages will be suppressed.
   enabled: true
 
   # The message broadcast when a player joins.

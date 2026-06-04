@@ -24,6 +24,7 @@ public class JoinLeaveListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (!plugin.getConfigManager().isJoinLeaveEnabled()) {
+            event.setJoinMessage(null);
             return;
         }
 
@@ -59,6 +60,7 @@ public class JoinLeaveListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (!plugin.getConfigManager().isJoinLeaveEnabled()) {
+            event.setQuitMessage(null);
             return;
         }
 
@@ -86,7 +88,7 @@ public class JoinLeaveListener implements Listener {
     }
     private Component formatMessage(String message, Player player) {
         String formattedMessage = message;
-        
+
         if (placeholderAPIEnabled) {
             try {
                 formattedMessage = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, formattedMessage);
@@ -94,9 +96,9 @@ public class JoinLeaveListener implements Listener {
                 plugin.debug("PlaceholderAPI processing failed for " + player.getName() + ": " + e.getMessage());
             }
         }
-        
+
         formattedMessage = formattedMessage.replace("<player>", player.getName());
-        
+
         return miniMessage.deserialize(formattedMessage);
     }
 
