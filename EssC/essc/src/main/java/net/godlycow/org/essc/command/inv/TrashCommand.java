@@ -151,12 +151,6 @@ public class TrashCommand extends Command implements Listener {
                 return;
             }
 
-            ItemStack current = event.getCurrentItem();
-            boolean takingFromTrash = current != null && !current.getType().isAir();
-
-            if (takingFromTrash && (cursor == null || cursor.getType().isAir())) {
-                event.setCancelled(true);
-            }
         } else {
             if (event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 ItemStack shifted = event.getCurrentItem();
