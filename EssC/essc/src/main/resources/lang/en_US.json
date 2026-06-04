@@ -887,7 +887,7 @@
   "essc.backup.create.failed": "<prefix> <color:#FF0000>Backup failed: <color:#FFFFFF><error></color></color>",
   "essc.backup.list.header": "<prefix> <color:#FFF200><bold>Backups</bold></color> <color:#AAAAAA>(<count> found):</color>",
   "essc.backup.list.empty": "<prefix> <color:#FF0000>No backups found.</color>",
-  "essc.backup.list.entry": "<prefix> <color:#AAAAAA>  » </color><color:#FFFFFF><name></color> <color:#AAAAAA>— <size> — <date></color>",
+  "essc.backup.list.entry": "<prefix> <color:#AAAAAA> » </color><color:#FFFFFF><name></color> <color:#AAAAAA>— <size> — <date></color>",
   "essc.backup.delete.usage": "<prefix> <color:#FF0000>Usage: /essc backup delete <filename></color>",
   "essc.backup.delete.success": "<prefix> <color:#FFF200>Backup <color:#FFFFFF><name></color> deleted.</color>",
   "essc.backup.delete.not_found": "<prefix> <color:#FF0000>Backup <color:#FFFFFF><name></color> not found.</color>",
