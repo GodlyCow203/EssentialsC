@@ -5,7 +5,12 @@ import net.godlycow.org.essc.server.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.AbstractHorse;
+import org.bukkit.entity.ChestedHorse;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Strider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -104,6 +109,13 @@ public class TeleportHandler implements Listener {
         }
     }
 
+    private boolean isTeleportableMount(Entity entity) {
+        return entity instanceof AbstractHorse
+                || entity instanceof ChestedHorse
+                || entity instanceof Pig
+                || entity instanceof Strider;
+    }
+
     private void completeTeleport(Player player, Home home) {
         pendingTeleports.remove(player.getUniqueId());
         pendingDestination.remove(player.getUniqueId());
@@ -111,12 +123,31 @@ public class TeleportHandler implements Listener {
         Location loc = home.toLocation(plugin.getServer());
         if (loc == null) return;
 
+        boolean hasMount = player.hasPermission("essentialsc.home.mount")
+                && player.getVehicle() != null
+                && isTeleportableMount(player.getVehicle());
+
+        Entity mount = hasMount ? player.getVehicle() : null;
+
+        if (mount != null) {
+            mount.eject();
+        }
+
         plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.success",
                     Map.of("name", home.getName())));
+
+            if (mount != null) {
+                Entity finalMount = mount;
+                plugin.getEssScheduler().runForEntity(finalMount, () -> {
+                    finalMount.teleport(loc);
+                    finalMount.addPassenger(player);
+                    plugin.debug("Teleported mount " + finalMount.getType() + " for " + player.getName());
+                });
+            }
 
             if (plugin.getConfigManager().isHomeParticles()) {
                 loc.getWorld().spawnParticle(Particle.PORTAL, loc, 50, 0.5, 1, 0.5);

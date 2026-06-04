@@ -1228,8 +1228,10 @@ permissions:
     description: Allows using your bed/respawn anchor as a home waypoint.
     default: false
 
+  essentialsc.home.mount:
+    description: Teleports your mounted entity (horse, mule, donkey, pig, strider, etc.) with you when using /home
+    default: false
+
   essentialsc.enchant.unsafe:
     description: Allows bypassing the vanilla enchant limit ( config option ignored )
     default: op
-
-
