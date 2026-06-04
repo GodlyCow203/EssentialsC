@@ -182,7 +182,7 @@ kits:
   member:
     display-name: "<#FFD400>Member Kit"
     description: "Rewards for server members"
-    cooldown: 604800
+    cooldown: 64800
     one-time: false
     first-join: false
     max-claims: 0
