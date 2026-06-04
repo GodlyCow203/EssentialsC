@@ -128,9 +128,15 @@ public class EssConfig {
         return config.getStringList("home.blocked-worlds");
     }
 
+
     public String getDefaultHomeName() {
         return config.getString("home.default-name", "home");
     }
+
+    public String getDefaultTeleportHomeName() {
+        return config.getString("home.default-teleport-name", "");
+    }
+
 
     public String getHomeMode() {
         return config.getString("home.mode", "command").toLowerCase();

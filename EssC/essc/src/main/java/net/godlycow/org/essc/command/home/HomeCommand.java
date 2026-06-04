@@ -26,6 +26,11 @@ public class HomeCommand extends Command {
         boolean guiMode = plugin.getConfigManager().getHomeMode().equals("gui");
 
         if (args.length == 0) {
+            String defaultHome = plugin.getConfigManager().getDefaultTeleportHomeName();
+            if (!defaultHome.isEmpty()) {
+                teleportToHome(player, player.getUniqueId(), defaultHome.toLowerCase(), null);
+                return true;
+            }
             if (guiMode) {
                 plugin.getHomeGuiManager().openHomeList(player);
             } else {
@@ -73,7 +78,12 @@ public class HomeCommand extends Command {
         plugin.getHomeManager().getHome(targetUuid, name).whenComplete((home, err) -> {
             plugin.getEssScheduler().runForEntity(player, () -> {
                 if (home == null) {
-                    player.sendMessage(lang.get(player, "home.teleport.not_found", Map.of("name", name)));
+                    String defaultHome = plugin.getConfigManager().getDefaultTeleportHomeName();
+                    if (targetName == null && name.equalsIgnoreCase(defaultHome) && !defaultHome.isEmpty()) {
+                        player.sendMessage(lang.get(player, "home.teleport.default_not_found", Map.of("name", name)));
+                    } else {
+                        player.sendMessage(lang.get(player, "home.teleport.not_found", Map.of("name", name)));
+                    }
                     return;
                 }
 
@@ -110,26 +120,30 @@ public class HomeCommand extends Command {
                 player.sendMessage(lang.get(player, "home.list.header",
                         Map.of("used", String.valueOf(used), "limit", maxStr)));
 
+                StringBuilder sb = new StringBuilder();
+
                 if (hasBed) {
-                    Location bedLoc = player.getBedSpawnLocation();
-                    player.sendMessage(lang.get(player, "home.list.entry",
-                            Map.of("name", "bed",
-                                    "world", bedLoc.getWorld() != null ? bedLoc.getWorld().getName() : "?",
-                                    "x", String.valueOf((int) bedLoc.getX()),
-                                    "y", String.valueOf((int) bedLoc.getY()),
-                                    "z", String.valueOf((int) bedLoc.getZ()))));
+                    sb.append("<click:run_command:/home bed><color:#FFF200>bed</color></click>");
+                    if (homes != null && !homes.isEmpty()) {
+                        sb.append("<color:#666666>, </color>");
+                    }
                 }
 
                 if (homes != null) {
-                    for (Home home : homes) {
-                        player.sendMessage(lang.get(player, "home.list.entry",
-                                Map.of("name", home.getName(),
-                                        "world", home.getWorld(),
-                                        "x", String.valueOf((int) home.getX()),
-                                        "y", String.valueOf((int) home.getY()),
-                                        "z", String.valueOf((int) home.getZ()))));
+                    for (int i = 0; i < homes.size(); i++) {
+                        Home home = homes.get(i);
+                        sb.append("<click:run_command:/home ").append(home.getName()).append(">")
+                                .append("<color:#FFF200>").append(home.getName()).append("</color>")
+                                .append("</click>");
+
+                        if (i < homes.size() - 1) {
+                            sb.append("<color:#666666>, </color>");
+                        }
                     }
                 }
+
+                player.sendMessage(lang.get(player, "home.list.entries",
+                        Map.of("homes", sb.toString())));
             });
         });
     }

@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.home.Home;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,42 +57,40 @@ public class HomesCommand extends Command {
                 boolean hasBed = player.hasPermission("essentialsc.home.bed")
                         && player.getBedSpawnLocation() != null;
 
-                int max = plugin.getHomeManager().getMaxHomes(player);
-                int usedCount = homes.size() + (hasBed && plugin.getConfigManager().isBedHomeCountsInLimit() ? 1 : 0);
-                String used = String.valueOf(usedCount);
-                String limit = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
-
-                player.sendMessage(lang.get(player, "home.list.header",
-                        Map.of("used", used, "limit", limit)));
-
                 if (homes.isEmpty() && !hasBed) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
                     return;
                 }
 
-                StringBuilder sb = new StringBuilder();
+                int max = plugin.getHomeManager().getMaxHomes(player);
+                int usedCount = homes.size() + (hasBed && plugin.getConfigManager().isBedHomeCountsInLimit() ? 1 : 0);
+                String limit = max == Integer.MAX_VALUE ? "∞" : String.valueOf(max);
+
+                player.sendMessage(lang.get(player, "homes.list.header",
+                        Map.of("used", String.valueOf(usedCount), "limit", limit)));
+                player.sendMessage(lang.get(player, "homes.list.separator"));
 
                 if (hasBed) {
-                    sb.append("<click:run_command:/home bed>")
-                            .append("<yellow>bed</yellow>")
-                            .append("</click>");
-                    if (!homes.isEmpty()) {
-                        sb.append("<gray>, </gray>");
-                    }
+                    Location bedLoc = player.getBedSpawnLocation();
+                    player.sendMessage(lang.get(player, "homes.list.entry",
+                            Map.of("name", "bed",
+                                    "world", bedLoc.getWorld() != null ? bedLoc.getWorld().getName() : "?",
+                                    "x", String.valueOf((int) bedLoc.getX()),
+                                    "y", String.valueOf((int) bedLoc.getY()),
+                                    "z", String.valueOf((int) bedLoc.getZ()))));
                 }
 
-                for (int i = 0; i < homes.size(); i++) {
-                    Home home = homes.get(i);
-                    sb.append("<click:run_command:/home ").append(home.getName()).append(">")
-                            .append("<yellow>").append(home.getName()).append("</yellow>")
-                            .append("</click>");
-
-                    if (i < homes.size() - 1) {
-                        sb.append("<gray>, </gray>");
-                    }
+                for (Home home : homes) {
+                    player.sendMessage(lang.get(player, "homes.list.entry",
+                            Map.of("name", home.getName(),
+                                    "world", home.getWorld(),
+                                    "x", String.valueOf((int) home.getX()),
+                                    "y", String.valueOf((int) home.getY()),
+                                    "z", String.valueOf((int) home.getZ()))));
                 }
 
-                player.sendMessage(lang.get(player, "home.list.entries", Map.of("homes", sb.toString())));
+                player.sendMessage(lang.get(player, "homes.list.footer",
+                        Map.of("count", String.valueOf(homes.size()))));
             });
         });
 

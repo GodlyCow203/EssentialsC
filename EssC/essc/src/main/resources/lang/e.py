@@ -1,225 +1,287 @@
 import json
 from pathlib import Path
 
-INSERT_AFTER = '  "trash.error.blacklisted"'
+INSERT_AFTER = '  "home.list.entry"'
 
 NEW_TRANSLATIONS = {
     "en_us": {
-        "trash.confirm.title": "<#FF4444><b>Confirm Disposal</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Confirm</b>",
-        "trash.confirm.confirm.lore": "<#888888>Click to permanently delete items.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Cancel</b>",
-        "trash.confirm.cancel.lore": "<#888888>Click to take your items back."
+        "home.list.header": "<prefix> <color:#FFFFFF>Your Homes <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Your Homes</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Your default home <color:#FFFFFF><name></color> does not exist. Use <color:#FFF200>/homes</color> to see your homes.</color>"
     },
     "zh_cn": {
-        "trash.confirm.title": "<#FF4444><b>确认删除</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>确认</b>",
-        "trash.confirm.confirm.lore": "<#888888>点击以永久删除物品。",
-        "trash.confirm.cancel.name": "<#FF4444><b>取消</b>",
-        "trash.confirm.cancel.lore": "<#888888>点击以找回您的物品。"
+        "home.list.header": "<prefix> <color:#FFFFFF>你的家 <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>你的家</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>位于 <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>你的默认家 <color:#FFFFFF><name></color> 不存在。使用 <color:#FFF200>/homes</color> 查看你的家。</color>"
     },
     "vi_vn": {
-        "trash.confirm.title": "<#FF4444><b>Xác nhận hủy bỏ</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Xác nhận</b>",
-        "trash.confirm.confirm.lore": "<#888888>Nhấp để xóa vĩnh viễn các mục.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Hủy bỏ</b>",
-        "trash.confirm.cancel.lore": "<#888888>Nhấp để lấy lại các mục của bạn."
+        "home.list.header": "<prefix> <color:#FFFFFF>Nhà của bạn <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Nhà của bạn</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>tại <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Nhà mặc định <color:#FFFFFF><name></color> của bạn không tồn tại. Sử dụng <color:#FFF200>/homes</color> để xem các nhà của bạn.</color>"
     },
     "ur_pk": {
-        "trash.confirm.title": "<#FF4444><b>تلف کرنے کی تصدیق کریں</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>تصدیق کریں</b>",
-        "trash.confirm.confirm.lore": "<#888888>آئٹمز کو مستقل طور پر حذف کرنے کے لیے کلک کریں۔",
-        "trash.confirm.cancel.name": "<#FF4444><b>منسوخ کریں</b>",
-        "trash.confirm.cancel.lore": "<#888888>اپنے آئٹمز واپس لینے کے لیے کلک کریں۔"
+        "home.list.header": "<prefix> <color:#FFFFFF>آپ کے گھر <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>آپ کے گھر</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>بمقام <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>آپ کا ڈیفالٹ گھر <color:#FFFFFF><name></color> موجود نہیں ہے۔ اپنے گھر دیکھنے کے لیے <color:#FFF200>/homes</color> استعمال کریں۔</color>"
     },
     "uk_ua": {
-        "trash.confirm.title": "<#FF4444><b>Підтвердити видалення</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Підтвердити</b>",
-        "trash.confirm.confirm.lore": "<#888888>Натисніть, щоб видалити предмети назавжди.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Скасувати</b>",
-        "trash.confirm.cancel.lore": "<#888888>Натисніть, щоб повернути предмети назад."
+        "home.list.header": "<prefix> <color:#FFFFFF>Ваші будинки <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Ваші будинки</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>у <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ваш домашній будинок за замовчуванням <color:#FFFFFF><name></color> не існує. Використовуйте <color:#FFF200>/homes</color>, щоб переглянути ваші будинки.</color>"
     },
     "tr_tr": {
-        "trash.confirm.title": "<#FF4444><b>İmha İşlemini Onayla</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Onayla</b>",
-        "trash.confirm.confirm.lore": "<#888888>Öğeleri kalıcı olarak silmek için tıklayın.",
-        "trash.confirm.cancel.name": "<#FF4444><b>İptal</b>",
-        "trash.confirm.cancel.lore": "<#888888>Öğelerinizi geri almak için tıklayın."
+        "home.list.header": "<prefix> <color:#FFFFFF>Evleriniz <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Evleriniz</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>konumunda <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Varsayılan eviniz <color:#FFFFFF><name></color> mevcut değil. Evlerinizi görmek için <color:#FFF200>/homes</color> komutunu kullanın.</color>"
     },
     "th_th": {
-        "trash.confirm.title": "<#FF4444><b>ยืนยันการทำลาย</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>ยืนยัน</b>",
-        "trash.confirm.confirm.lore": "<#888888>คลิกเพื่อลบรายการอย่างถาวร",
-        "trash.confirm.cancel.name": "<#FF4444><b>ยกเลิก</b>",
-        "trash.confirm.cancel.lore": "<#888888>คลิกเพื่อรับรายการของคุณกลับคืน"
+        "home.list.header": "<prefix> <color:#FFFFFF>บ้านของคุณ <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>บ้านของคุณ</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>ใน <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>บ้านเริ่มต้น <color:#FFFFFF><name></color> ของคุณไม่มีอยู่จริง ใช้ <color:#FFF200>/homes</color> เพื่อดูบ้านของคุณ</color>"
     },
     "te_in": {
-        "trash.confirm.title": "<#FF4444><b>తొలగింపును నిర్ధారించండి</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>నిర్ధారించు</b>",
-        "trash.confirm.confirm.lore": "<#888888>అంశాలను శాశ్వతంగా తొలగించడానికి క్లిక్ చేయండి.",
-        "trash.confirm.cancel.name": "<#FF4444><b>రద్దు చేయి</b>",
-        "trash.confirm.cancel.lore": "<#888888>మీ అంశాలను తిరిగి పొందడానికి క్లిక్ చేయండి."
+        "home.list.header": "<prefix> <color:#FFFFFF>మీ ఇళ్లు <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>మీ ఇళ్లు</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>ఇక్కడ <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>మీ డిఫాల్ట్ ఇల్లు <color:#FFFFFF><name></color> ఉనికిలో లేదు. మీ ఇళ్లను చూడటానికి <color:#FFF200>/homes</color> ఉపయోగించండి.</color>"
     },
     "ta_in": {
-        "trash.confirm.title": "<#FF4444><b>நீக்குதலை உறுதிப்படுத்தவும்</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>உறுதிப்படுத்தவும்</b>",
-        "trash.confirm.confirm.lore": "<#888888>பொருட்களை நிரந்தரமாக நீக்க கிளிக் செய்யவும்.",
-        "trash.confirm.cancel.name": "<#FF4444><b>ரத்துசெய்</b>",
-        "trash.confirm.cancel.lore": "<#888888>உங்கள் பொருட்களைத் திரும்பப் பெற கிளிக் செய்யவும்."
+        "home.list.header": "<prefix> <color:#FFFFFF>உங்கள் வீடுகள் <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>உங்கள் வீடுகள்</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>இங்கு <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>உங்கள் இயல்புநிலை வீடு <color:#FFFFFF><name></color> இல்லை. உங்கள் வீடுகளைப் பார்க்க <color:#FFF200>/homes</color> பயன்படுத்தவும்.</color>"
     },
     "sv_se": {
-        "trash.confirm.title": "<#FF4444><b>Bekräfta borttagning</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Bekräfta</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klicka för att radera föremål permanent.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Avbryt</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klicka för att få tillbaka dina föremål."
+        "home.list.header": "<prefix> <color:#FFFFFF>Dina hem <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Dina hem</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>i <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ditt förvalda hem <color:#FFFFFF><name></color> finns inte. Använd <color:#FFF200>/homes</color> för att se dina hem.</color>"
     },
     "ru_ru": {
-        "trash.confirm.title": "<#FF4444><b>Подтвердить удаление</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Подтвердить</b>",
-        "trash.confirm.confirm.lore": "<#888888>Нажмите, чтобы безвозвратно удалить предметы.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Отмена</b>",
-        "trash.confirm.cancel.lore": "<#888888>Нажмите, чтобы вернуть предметы назад."
+        "home.list.header": "<prefix> <color:#FFFFFF>Ваши дома <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Ваши дома</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>в <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ваш дом по умолчанию <color:#FFFFFF><name></color> не существует. Используйте <color:#FFF200>/homes</color>, чтобы посмотреть свои дома.</color>"
     },
     "pt_br": {
-        "trash.confirm.title": "<#FF4444><b>Confirmar Descarte</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Confirmar</b>",
-        "trash.confirm.confirm.lore": "<#888888>Clique para excluir itens permanentemente.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Cancelar</b>",
-        "trash.confirm.cancel.lore": "<#888888>Clique para recuperar seus itens."
+        "home.list.header": "<prefix> <color:#FFFFFF>Seus lares <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Seus lares</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>em <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Seu lar padrão <color:#FFFFFF><name></color> não existe. Use <color:#FFF200>/homes</color> para ver seus lares.</color>"
     },
     "pl_pl": {
-        "trash.confirm.title": "<#FF4444><b>Potwierdź usunięcie</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Potwierdź</b>",
-        "trash.confirm.confirm.lore": "<#888888>Kliknij, aby trwale usunąć przedmioty.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Anuluj</b>",
-        "trash.confirm.cancel.lore": "<#888888>Kliknij, aby odzyskać swoje przedmioty."
+        "home.list.header": "<prefix> <color:#FFFFFF>Twoje domy <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Twoje domy</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>w <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Twój dom domyślny <color:#FFFFFF><name></color> nie istnieje. Użyj <color:#FFF200>/homes</color>, aby zobaczyć swoje domy.</color>"
     },
     "nl_nl": {
-        "trash.confirm.title": "<#FF4444><b>Bevestig verwijdering</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Bevestigen</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klik om items permanent te verwijderen.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Annuleren</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klik om uw items terug te nemen."
+        "home.list.header": "<prefix> <color:#FFFFFF>Jouw huizen <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Jouw huizen</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Jouw standaard huis <color:#FFFFFF><name></color> bestaat niet. Gebruik <color:#FFF200>/homes</color> om jouw huizen te zien.</color>"
     },
     "mr_in": {
-        "trash.confirm.title": "<#FF4444><b>हटवण्याची पुष्टी करा</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>पुष्टी करा</b>",
-        "trash.confirm.confirm.lore": "<#888888>आयटम कायमचे हटवण्यासाठी क्लिक करा.",
-        "trash.confirm.cancel.name": "<#FF4444><b>रद्द करा</b>",
-        "trash.confirm.cancel.lore": "<#888888>तुमचे आयटम परत मिळवण्यासाठी क्लिक करा."
+        "home.list.header": "<prefix> <color:#FFFFFF>तुमची घरे <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>तुमची घरे</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>येथे <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>तुमचे डीफॉल्ट घर <color:#FFFFFF><name></color> अस्तित्वात नाही. तुमची घरे पाहण्यासाठी <color:#FFF200>/homes</color> वापरा.</color>"
     },
     "ko_kr": {
-        "trash.confirm.title": "<#FF4444><b>삭제 확인</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>확인</b>",
-        "trash.confirm.confirm.lore": "<#888888>클릭하여 아이템을 영구적으로 삭제합니다.",
-        "trash.confirm.cancel.name": "<#FF4444><b>취소</b>",
-        "trash.confirm.cancel.lore": "<#888888>클릭하여 아이템을 되돌립니다."
+        "home.list.header": "<prefix> <color:#FFFFFF>당신의 집 <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>당신의 집</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>위치 <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>기본 집 <color:#FFFFFF><name></color>이(가) 존재하지 않습니다. <color:#FFF200>/homes</color>를 사용하여 집 목록을 확인하세요.</color>"
     },
     "ja_jp": {
-        "trash.confirm.title": "<#FF4444><b>破棄の確認</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>確認</b>",
-        "trash.confirm.confirm.lore": "<#888888>クリックしてアイテムを完全に削除します。",
-        "trash.confirm.cancel.name": "<#FF4444><b>キャンセル</b>",
-        "trash.confirm.cancel.lore": "<#888888>クリックしてアイテムを取り戻します。"
+        "home.list.header": "<prefix> <color:#FFFFFF>あなたのホーム <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>あなたのホーム</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA><color:#FFFFFF><world></color> にある <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>デフォルトホーム <color:#FFFFFF><name></color> は存在しません。<color:#FFF200>/homes</color> を使用してホームを確認してください。</color>"
     },
     "it_it": {
-        "trash.confirm.title": "<#FF4444><b>Conferma smaltimento</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Conferma</b>",
-        "trash.confirm.confirm.lore": "<#888888>Clicca per eliminare definitivamente gli oggetti.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Annulla</b>",
-        "trash.confirm.cancel.lore": "<#888888>Clicca per recuperare i tuoi oggetti."
+        "home.list.header": "<prefix> <color:#FFFFFF>Le tue case <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Le tue case</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>nel <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>La tua casa predefinita <color:#FFFFFF><name></color> non esiste. Usa <color:#FFF200>/homes</color> per vedere le tue case.</color>"
     },
     "id_id": {
-        "trash.confirm.title": "<#FF4444><b>Konfirmasi Pembuangan</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Konfirmasi</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klik untuk menghapus item secara permanen.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Batal</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klik untuk mengambil kembali item Anda."
+        "home.list.header": "<prefix> <color:#FFFFFF>Rumah Anda <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Rumah Anda</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>di <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Rumah default Anda <color:#FFFFFF><name></color> tidak ada. Gunakan <color:#FFF200>/homes</color> untuk melihat rumah Anda.</color>"
     },
     "hi_in": {
-        "trash.confirm.title": "<#FF4444><b>निपटान की पुष्टि करें</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>पुष्टि करें</b>",
-        "trash.confirm.confirm.lore": "<#888888>आइटम को स्थायी रूप से हटाने के लिए क्लिक करें।",
-        "trash.confirm.cancel.name": "<#FF4444><b>रद्द करें</b>",
-        "trash.confirm.cancel.lore": "<#888888>अपने आइटम वापस लेने के लिए क्लिक करें।"
+        "home.list.header": "<prefix> <color:#FFFFFF>आपके घर <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>आपके घर</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>में <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>आपका डिफ़ॉल्ट घर <color:#FFFFFF><name></color> मौजूद नहीं है। अपने घर देखने के लिए <color:#FFF200>/homes</color> का उपयोग करें।</color>"
     },
     "gu_in": {
-        "trash.confirm.title": "<#FF4444><b>નિકાલની પુષ્ટિ કરો</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>પુષ્ટિ કરો</b>",
-        "trash.confirm.confirm.lore": "<#888888>આઇટમ્સ કાયમી ધોરણે કાઢી નાખવા માટે ક્લિક કરો.",
-        "trash.confirm.cancel.name": "<#FF4444><b>રદ કરો</b>",
-        "trash.confirm.cancel.lore": "<#888888>તમારી આઇટમ્સ પાછી મેળવવા માટે ક્લિક કરો."
+        "home.list.header": "<prefix> <color:#FFFFFF>તમારા ઘરો <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>તમારા ઘરો</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>માં <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>તમારું ડિફોલ્ટ ઘર <color:#FFFFFF><name></color> અસ્તિત્વમાં નથી. તમારા ઘરો જોવા માટે <color:#FFF200>/homes</color> નો ઉપયોગ કરો.</color>"
     },
     "fr_fr": {
-        "trash.confirm.title": "<#FF4444><b>Confirmer la suppression</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Confirmer</b>",
-        "trash.confirm.confirm.lore": "<#888888>Cliquez pour supprimer définitivement les objets.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Annuler</b>",
-        "trash.confirm.cancel.lore": "<#888888>Cliquez pour récupérer vos objets."
+        "home.list.header": "<prefix> <color:#FFFFFF>Vos maisons <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Vos maisons</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>dans <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Votre maison par défaut <color:#FFFFFF><name></color> n'existe pas. Utilisez <color:#FFF200>/homes</color> pour voir vos maisons.</color>"
     },
     "fil_ph": {
-        "trash.confirm.title": "<#FF4444><b>Kumpirmahin ang Pagtatapon</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Kumpirmahin</b>",
-        "trash.confirm.confirm.lore": "<#888888>I-click para permanenteng burahin ang mga item.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Kanselahin</b>",
-        "trash.confirm.cancel.lore": "<#888888>I-click para bawiin ang iyong mga item."
+        "home.list.header": "<prefix> <color:#FFFFFF>Iyong mga bahay <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Iyong mga bahay</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>sa <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ang iyong default na bahay <color:#FFFFFF><name></color> ay hindi umiiral. Gamitin ang <color:#FFF200>/homes</color> para makita ang iyong mga bahay.</color>"
     },
     "es_es": {
-        "trash.confirm.title": "<#FF4444><b>Confirmar eliminación</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Confirmar</b>",
-        "trash.confirm.confirm.lore": "<#888888>Haz clic para eliminar los objetos permanentemente.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Cancelar</b>",
-        "trash.confirm.cancel.lore": "<#888888>Haz clic para recuperar tus objetos."
+        "home.list.header": "<prefix> <color:#FFFFFF>Tus casas <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Tus casas</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>en <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Tu casa predeterminada <color:#FFFFFF><name></color> no existe. Usa <color:#FFF200>/homes</color> para ver tus casas.</color>"
     },
     "en_gb": {
-        "trash.confirm.title": "<#FF4444><b>Confirm Disposal</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Confirm</b>",
-        "trash.confirm.confirm.lore": "<#888888>Click to permanently delete items.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Cancel</b>",
-        "trash.confirm.cancel.lore": "<#888888>Click to take your items back."
+        "home.list.header": "<prefix> <color:#FFFFFF>Your Homes <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Your Homes</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Your default home <color:#FFFFFF><name></color> does not exist. Use <color:#FFF200>/homes</color> to see your homes.</color>"
     },
     "de_de": {
-        "trash.confirm.title": "<#FF4444><b>Löschen bestätigen</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Bestätigen</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klicke, um Gegenstände dauerhaft zu löschen.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Abbrechen</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klicke, um deine Gegenstände zurückzunehmen."
+        "home.list.header": "<prefix> <color:#FFFFFF>Deine Zuhause <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Deine Zuhause</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Dein Standard-Zuhause <color:#FFFFFF><name></color> existiert nicht. Nutze <color:#FFF200>/homes</color>, um deine Zuhause zu sehen.</color>"
     },
     "de_ch": {
-        "trash.confirm.title": "<#FF4444><b>Löschen bestätigen</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Bestätigen</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klicke, um Gegenstände dauerhaft zu löschen.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Abbrechen</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klicke, um deine Gegenstände zurückzunehmen."
+        "home.list.header": "<prefix> <color:#FFFFFF>Deine Zuhause <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Deine Zuhause</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Dein Standard-Zuhause <color:#FFFFFF><name></color> existiert nicht. Nutze <color:#FFF200>/homes</color>, um deine Zuhause zu sehen.</color>"
     },
     "bn_bd": {
-        "trash.confirm.title": "<#FF4444><b>মুছে ফেলার বিষয়টি নিশ্চিত করুন</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>নিশ্চিত করুন</b>",
-        "trash.confirm.confirm.lore": "<#888888>আইটেমগুলি স্থায়ীভাবে মুছতে ক্লিক করুন।",
-        "trash.confirm.cancel.name": "<#FF4444><b>বাতিল করুন</b>",
-        "trash.confirm.cancel.lore": "<#888888>আপনার আইটেমগুলি ফিরে পেতে ক্লিক করুন।"
+        "home.list.header": "<prefix> <color:#FFFFFF>আপনার ঘর <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>আপনার ঘর</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA><color:#FFFFFF><world></color>-এ <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>আপনার ডিফল্ট ঘর <color:#FFFFFF><name></color> বিদ্যমান নেই। আপনার ঘরগুলো দেখতে <color:#FFF200>/homes</color> ব্যবহার করুন।</color>"
     },
     "ar_sa": {
-        "trash.confirm.title": "<#FF4444><b>تأكيد التخلص</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>تأكيد</b>",
-        "trash.confirm.confirm.lore": "<#888888>انقر لحذف العناصر بشكل دائم.",
-        "trash.confirm.cancel.name": "<#FF4444><b>إلغاء</b>",
-        "trash.confirm.cancel.lore": "<#888888>انقر لاستعادة عناصرك."
+        "home.list.header": "<prefix> <color:#FFFFFF>منازلك <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>منازلك</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>في <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>منزلك الافتراضي <color:#FFFFFF><name></color> غير موجود. استخدم <color:#FFF200>/homes</color> لعرض منازلك.</color>"
     },
     "ar_eg": {
-        "trash.confirm.title": "<#FF4444><b>تأكيد التخلص</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>تأكيد</b>",
-        "trash.confirm.confirm.lore": "<#888888>انقر لحذف العناصر بشكل دائم.",
-        "trash.confirm.cancel.name": "<#FF4444><b>إلغاء</b>",
-        "trash.confirm.cancel.lore": "<#888888>انقر لاستعادة عناصرك."
+        "home.list.header": "<prefix> <color:#FFFFFF>منازلك <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>منازلك</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>في <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>منزلك الافتراضي <color:#FFFFFF><name></color> غير موجود. استخدم <color:#FFF200>/homes</color> لعرض منازلك.</color>"
     },
     "lb_lu": {
-        "trash.confirm.title": "<#FF4444><b>Läschen bestätegen</b>",
-        "trash.confirm.confirm.name": "<#57F527><b>Bestätegen</b>",
-        "trash.confirm.confirm.lore": "<#888888>Klickt hei fir d'Elementer definitiv ze läschen.",
-        "trash.confirm.cancel.name": "<#FF4444><b>Ofbriechen</b>",
-        "trash.confirm.cancel.lore": "<#888888>Klickt hei fir är Elementer zréckzehuelen."
+        "home.list.header": "<prefix> <color:#FFFFFF>Är Heemechten <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
+        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
+        "homes.list.header": "<prefix> <color:#FFF200><b>Är Heemechten</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
+        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
+        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>an <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
+        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
+        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ärt Standard-Heem <color:#FFFFFF><name></color> existéiert net. Benotzt <color:#FFF200>/homes</color> fir är Heemechten ze gesinn.</color>"
     }
 }
 
@@ -253,9 +315,16 @@ for lang_code, translations in NEW_TRANSLATIONS.items():
 
     for key, value in translations.items():
 
+        # Check if key already exists - if so, remove the old line
         if f'"{key}"' in existing_content:
-            print(f"[EXISTS] {key} already exists in {file_path.name}")
-            continue
+            print(f"[OVERWRITE] {key} already exists in {file_path.name}, replacing...")
+            # Find and remove the old line containing this key
+            lines = [line for line in lines if f'"{key}"' not in line]
+            # After removal, we need to re-find insert position
+            for j, line in enumerate(lines):
+                if INSERT_AFTER in line:
+                    insert_index = j + 1
+                    break
 
         escaped_value = value.replace('"', '\\"')
 
