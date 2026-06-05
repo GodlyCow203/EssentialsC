@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-INSERT_AFTER = '  "home.list.entry"'
+INSERT_AFTER = '  "spawnentity.success"'
 
 NEW_TRANSLATIONS = {
     "en_us": {
