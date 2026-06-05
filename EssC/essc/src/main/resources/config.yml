@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 7
+config-version: 8
 
 # General settings
 
@@ -23,17 +23,23 @@ default-language: en_US
 fallback-language: en_US
 
 # Help
-# The help menu that shows for every command
+#
+# Colors used in the /command help output.
+# Accepts any MiniMessage color tag, e.g. <white>, <gray>, <color:#RRGGBB>
 help:
-  # Whether a sound should play when the help menu is shown.
-  play-sound: true
-
-  # Whether the help menu should be animated.
-  animated: true
-
-  # Delay (in ticks) between each animation step in the help menu.
-  animation-delay-ticks: 3
-
+  colors:
+    # Color for section labels (Usage, Arguments, Permission)
+    label: "<color:#FFF200>"
+    # Color for the command name header
+    header: "<color:#FFF200>"
+    # Color for descriptive / body text
+    body: "<gray>"
+    # Color for the divider lines
+    divider: "<dark_gray>"
+    # Color for required argument tokens  e.g. <player>
+    arg-required: "<white>"
+    # Color for optional argument tokens  e.g. [player]
+    arg-optional: "<gray>"
 
 # Backup
 #

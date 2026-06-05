@@ -28,6 +28,7 @@ public class PlayerListCommand extends Command {
         int total = onlinePlayers.size();
         int max = Bukkit.getMaxPlayers();
 
+
         if (total == 0) {
             sender.sendMessage(lang.get(sender, "playerlist.empty"));
             return true;

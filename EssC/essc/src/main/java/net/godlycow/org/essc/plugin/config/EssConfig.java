@@ -29,6 +29,30 @@ public class EssConfig {
         return config.getString("default-language", "en_US");
     }
 
+    public String getHelpColorLabel() {
+        return config.getString("help.colors.label", "<color:#FFF200>");
+    }
+
+    public String getHelpColorHeader() {
+        return config.getString("help.colors.header", "<color:#FFF200>");
+    }
+
+    public String getHelpColorBody() {
+        return config.getString("help.colors.body", "<gray>");
+    }
+
+    public String getHelpColorDivider() {
+        return config.getString("help.colors.divider", "<dark_gray>");
+    }
+
+    public String getHelpColorArgRequired() {
+        return config.getString("help.colors.arg-required", "<white>");
+    }
+
+    public String getHelpColorArgOptional() {
+        return config.getString("help.colors.arg-optional", "<gray>");
+    }
+
     public boolean isDebug() {
         return config.getBoolean("debug", false);
     }
@@ -754,18 +778,6 @@ public class EssConfig {
 
     public boolean isDiscordNickShowRealname() {
         return config.getBoolean("nickname.discord-show-realname", true);
-    }
-
-    public boolean isHelpSoundEnabled() {
-        return config.getBoolean("help.play-sound", true);
-    }
-
-    public boolean isHelpAnimated() {
-        return config.getBoolean("help.animated", true);
-    }
-
-    public long getHelpAnimationDelay() {
-        return config.getLong("help.animation-delay-ticks", 3);
     }
 
     public boolean isCurrencyBeforeAmount() {
