@@ -5,286 +5,254 @@ INSERT_AFTER = '  "home.list.entry"'
 
 NEW_TRANSLATIONS = {
     "en_us": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Your Homes <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Your Homes</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Your default home <color:#FFFFFF><name></color> does not exist. Use <color:#FFF200>/homes</color> to see your homes.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist [page]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Online Players [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Prev<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Next <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "zh_cn": {
-        "home.list.header": "<prefix> <color:#FFFFFF>你的家 <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>你的家</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>位于 <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>你的默认家 <color:#FFFFFF><name></color> 不存在。使用 <color:#FFF200>/homes</color> 查看你的家。</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist [页码]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= 在线玩家 [<online><gray>/</gray><max>] - 第 [<page><gray>/</gray><total_pages>] 页 =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>当前没有玩家在线</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>无效的页码。</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>上一页<#FFF200>]</color></click> <color:#FFFFFF>第 <prev_page>/<total_pages> 页</color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>下一页 <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "vi_vn": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Nhà của bạn <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Nhà của bạn</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>tại <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Nhà mặc định <color:#FFFFFF><name></color> của bạn không tồn tại. Sử dụng <color:#FFF200>/homes</color> để xem các nhà của bạn.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Cách dùng: /playerlist [trang]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Người chơi trực tuyến [<online><gray>/</gray><max>] - Trang [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Không có người chơi trực tuyến</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Số trang không hợp lệ.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Trước<#FFF200>]</color></click> <color:#FFFFFF>Trang <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Tiếp <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ur_pk": {
-        "home.list.header": "<prefix> <color:#FFFFFF>آپ کے گھر <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>آپ کے گھر</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>بمقام <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>آپ کا ڈیفالٹ گھر <color:#FFFFFF><name></color> موجود نہیں ہے۔ اپنے گھر دیکھنے کے لیے <color:#FFF200>/homes</color> استعمال کریں۔</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>استعمال: /playerlist [صفحہ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= آن لائن کھلاڑی [<online><gray>/</gray><max>] - صفحہ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>کوئی کھلاڑی آن لائن نہیں ہے</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>غلط صفحہ نمبر۔</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>پیچھے<#FFF200>]</color></click> <color:#FFFFFF>صفحہ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>آگے <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "uk_ua": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Ваші будинки <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Ваші будинки</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>у <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ваш домашній будинок за замовчуванням <color:#FFFFFF><name></color> не існує. Використовуйте <color:#FFF200>/homes</color>, щоб переглянути ваші будинки.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Використання: /playerlist [сторінка]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Гравці онлайн [<online><gray>/</gray><max>] - Сторінка [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Гравців немає онлайн</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Неправильний номер сторінки.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Назад<#FFF200>]</color></click> <color:#FFFFFF>Сторінка <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Вперед <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "tr_tr": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Evleriniz <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Evleriniz</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>konumunda <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Varsayılan eviniz <color:#FFFFFF><name></color> mevcut değil. Evlerinizi görmek için <color:#FFF200>/homes</color> komutunu kullanın.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Kullanım: /playerlist [sayfa]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Çevrimiçi Oyuncular [<online><gray>/</gray><max>] - Sayfa [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Çevrimiçi oyuncu yok</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Geçersiz sayfa numarası.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Önceki<#FFF200>]</color></click> <color:#FFFFFF>Sayfa <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Sonraki <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "th_th": {
-        "home.list.header": "<prefix> <color:#FFFFFF>บ้านของคุณ <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>บ้านของคุณ</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>ใน <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>บ้านเริ่มต้น <color:#FFFFFF><name></color> ของคุณไม่มีอยู่จริง ใช้ <color:#FFF200>/homes</color> เพื่อดูบ้านของคุณ</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>วิธีใช้: /playerlist [หน้า]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ผู้เล่นออนไลน์ [<online><gray>/</gray><max>] - หน้า [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>ไม่มีผู้เล่นออนไลน์</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>หมายเลขหน้าไม่ถูกต้อง</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>ย้อนกลับ<#FFF200>]</color></click> <color:#FFFFFF>หน้า <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>ถัดไป <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "te_in": {
-        "home.list.header": "<prefix> <color:#FFFFFF>మీ ఇళ్లు <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>మీ ఇళ్లు</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>ఇక్కడ <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>మీ డిఫాల్ట్ ఇల్లు <color:#FFFFFF><name></color> ఉనికిలో లేదు. మీ ఇళ్లను చూడటానికి <color:#FFF200>/homes</color> ఉపయోగించండి.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>విధానం: /playerlist [పేజీ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ఆన్‌లైన్ ఆటగాళ్లు [<online><gray>/</gray><max>] - పేజీ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>ఆన్‌లైన్‌లో ఎవరూ లేరు</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>చెల్లని పేజీ సంఖ్య.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>గత<#FFF200>]</color></click> <color:#FFFFFF>పేజీ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>తదుపరి <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ta_in": {
-        "home.list.header": "<prefix> <color:#FFFFFF>உங்கள் வீடுகள் <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>உங்கள் வீடுகள்</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>இங்கு <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>உங்கள் இயல்புநிலை வீடு <color:#FFFFFF><name></color> இல்லை. உங்கள் வீடுகளைப் பார்க்க <color:#FFF200>/homes</color> பயன்படுத்தவும்.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>பயன்பாடு: /playerlist [பக்கம்]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ஆன்லைன் வீரர்கள் [<online><gray>/</gray><max>] - பக்கம் [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>ஆன்லைனில் வீரர்கள் இல்லை</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>தவறான பக்க எண்.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>முந்தைய<#FFF200>]</color></click> <color:#FFFFFF>பக்கம் <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>அடுத்தது <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "sv_se": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Dina hem <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Dina hem</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>i <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ditt förvalda hem <color:#FFFFFF><name></color> finns inte. Använd <color:#FFF200>/homes</color> för att se dina hem.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Användning: /playerlist [sida]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Spelare online [<online><gray>/</gray><max>] - Sida [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Inga spelare online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ogiltigt sidnummer.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Föregående<#FFF200>]</color></click> <color:#FFFFFF>Sida <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Nästa <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ru_ru": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Ваши дома <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Ваши дома</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>в <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ваш дом по умолчанию <color:#FFFFFF><name></color> не существует. Используйте <color:#FFF200>/homes</color>, чтобы посмотреть свои дома.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Использование: /playerlist [страница]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Игроки онлайн [<online><gray>/</gray><max>] - Страница [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Нет игроков онлайн</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Неверный номер страницы.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Назад<#FFF200>]</color></click> <color:#FFFFFF>Страница <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Вперед <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "pt_br": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Seus lares <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Seus lares</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>em <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Seu lar padrão <color:#FFFFFF><name></color> não existe. Use <color:#FFF200>/homes</color> para ver seus lares.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [página]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Jogadores online [<online><gray>/</gray><max>] - Página [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Nenhum jogador online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Número de página inválido.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Anterior<#FFF200>]</color></click> <color:#FFFFFF>Página <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Próximo <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "pl_pl": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Twoje domy <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Twoje domy</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>w <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Twój dom domyślny <color:#FFFFFF><name></color> nie istnieje. Użyj <color:#FFF200>/homes</color>, aby zobaczyć swoje domy.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Użycie: /playerlist [strona]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Gracze online [<online><gray>/</gray><max>] - Strona [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Brak graczy online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Nieprawidłowy numer strony.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Poprzednia<#FFF200>]</color></click> <color:#FFFFFF>Strona <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Następna <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "nl_nl": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Jouw huizen <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Jouw huizen</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Jouw standaard huis <color:#FFFFFF><name></color> bestaat niet. Gebruik <color:#FFF200>/homes</color> om jouw huizen te zien.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Gebruik: /playerlist [pagina]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Spelers online [<online><gray>/</gray><max>] - Pagina [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Geen spelers online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ongeldig paginanummer.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Vorige<#FFF200>]</color></click> <color:#FFFFFF>Pagina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Volgende <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "mr_in": {
-        "home.list.header": "<prefix> <color:#FFFFFF>तुमची घरे <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>तुमची घरे</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>येथे <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>तुमचे डीफॉल्ट घर <color:#FFFFFF><name></color> अस्तित्वात नाही. तुमची घरे पाहण्यासाठी <color:#FFF200>/homes</color> वापरा.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>वापर: /playerlist [पृष्ठ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ऑनलाइन खेळाडू [<online><gray>/</gray><max>] - पृष्ठ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>कोणीही खेळाडू ऑनलाइन नाही</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>अवैध पृष्ठ क्रमांक.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>मागील<#FFF200>]</color></click> <color:#FFFFFF>पृष्ठ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>पुढील <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ko_kr": {
-        "home.list.header": "<prefix> <color:#FFFFFF>당신의 집 <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>당신의 집</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>위치 <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>기본 집 <color:#FFFFFF><name></color>이(가) 존재하지 않습니다. <color:#FFF200>/homes</color>를 사용하여 집 목록을 확인하세요.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist [페이지]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= 접속 중인 플레이어 [<online><gray>/</gray><max>] - 페이지 [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>접속 중인 플레이어가 없습니다</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>잘못된 페이지 번호입니다.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>이전<#FFF200>]</color></click> <color:#FFFFFF>페이지 <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>다음 <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ja_jp": {
-        "home.list.header": "<prefix> <color:#FFFFFF>あなたのホーム <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>あなたのホーム</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA><color:#FFFFFF><world></color> にある <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>デフォルトホーム <color:#FFFFFF><name></color> は存在しません。<color:#FFF200>/homes</color> を使用してホームを確認してください。</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>使用法: /playerlist [ページ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= オンラインプレイヤー [<online><gray>/</gray><max>] - ページ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>オンラインのプレイヤーはいません</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>無効なページ番号です。</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>前へ<#FFF200>]</color></click> <color:#FFFFFF>ページ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>次へ <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "it_it": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Le tue case <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Le tue case</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>nel <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>La tua casa predefinita <color:#FFFFFF><name></color> non esiste. Usa <color:#FFF200>/homes</color> per vedere le tue case.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [pagina]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Giocatori online [<online><gray>/</gray><max>] - Pagina [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Nessun giocatore online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Numero di pagina non valido.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Indietro<#FFF200>]</color></click> <color:#FFFFFF>Pagina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Avanti <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "id_id": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Rumah Anda <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Rumah Anda</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>di <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Rumah default Anda <color:#FFFFFF><name></color> tidak ada. Gunakan <color:#FFF200>/homes</color> untuk melihat rumah Anda.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Penggunaan: /playerlist [halaman]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Pemain online [<online><gray>/</gray><max>] - Halaman [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Tidak ada pemain online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Nomor halaman tidak valid.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Sebelumnya<#FFF200>]</color></click> <color:#FFFFFF>Halaman <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Selanjutnya <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "hi_in": {
-        "home.list.header": "<prefix> <color:#FFFFFF>आपके घर <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>आपके घर</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>में <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>आपका डिफ़ॉल्ट घर <color:#FFFFFF><name></color> मौजूद नहीं है। अपने घर देखने के लिए <color:#FFF200>/homes</color> का उपयोग करें।</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>उपयोग: /playerlist [पृष्ठ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ऑनलाइन खिलाड़ी [<online><gray>/</gray><max>] - पृष्ठ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>कोई खिलाड़ी ऑनलाइन नहीं है</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>अमान्य पृष्ठ संख्या।</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>पिछला<#FFF200>]</color></click> <color:#FFFFFF>पृष्ठ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>अगला <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "gu_in": {
-        "home.list.header": "<prefix> <color:#FFFFFF>તમારા ઘરો <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>તમારા ઘરો</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>માં <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>તમારું ડિફોલ્ટ ઘર <color:#FFFFFF><name></color> અસ્તિત્વમાં નથી. તમારા ઘરો જોવા માટે <color:#FFF200>/homes</color> નો ઉપયોગ કરો.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>ઉપયોગ: /playerlist [પૃષ્ઠ]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= ઓનલાઇન ખેલાડીઓ [<online><gray>/</gray><max>] - પૃષ્ઠ [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>કોઈ ખેલાડી ઓનલાઇન નથી</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>અમાન્ય પૃષ્ઠ નંબર.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>પાછળ<#FFF200>]</color></click> <color:#FFFFFF>પૃષ્ઠ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>આગળ <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "fr_fr": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Vos maisons <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Vos maisons</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>dans <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Votre maison par défaut <color:#FFFFFF><name></color> n'existe pas. Utilisez <color:#FFF200>/homes</color> pour voir vos maisons.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Utilisation: /playerlist [page]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Joueurs en ligne [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Aucun joueur en ligne</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Numéro de page invalide.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Précédent<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Suivant <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "fil_ph": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Iyong mga bahay <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Iyong mga bahay</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>sa <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ang iyong default na bahay <color:#FFFFFF><name></color> ay hindi umiiral. Gamitin ang <color:#FFF200>/homes</color> para makita ang iyong mga bahay.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Paggamit: /playerlist [pahina]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Mga manlalaro online [<online><gray>/</gray><max>] - Pahina [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Walang manlalaro online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Maling numero ng pahina.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Nakaraan<#FFF200>]</color></click> <color:#FFFFFF>Pahina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Susunod <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "es_es": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Tus casas <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Tus casas</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>en <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Tu casa predeterminada <color:#FFFFFF><name></color> no existe. Usa <color:#FFF200>/homes</color> para ver tus casas.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [página]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Jugadores en línea [<online><gray>/</gray><max>] - Página [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>No hay jugadores en línea</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Número de página no válido.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Anterior<#FFF200>]</color></click> <color:#FFFFFF>Página <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Siguiente <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "en_gb": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Your Homes <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Your Homes</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Your default home <color:#FFFFFF><name></color> does not exist. Use <color:#FFF200>/homes</color> to see your homes.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist [page]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Online Players [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Prev<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Next <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "de_de": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Deine Zuhause <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Deine Zuhause</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Dein Standard-Zuhause <color:#FFFFFF><name></color> existiert nicht. Nutze <color:#FFF200>/homes</color>, um deine Zuhause zu sehen.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Nutzung: /playerlist [Seite]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Online-Spieler [<online><gray>/</gray><max>] - Seite [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Keine Spieler online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ungültige Seitennummer.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zurück<#FFF200>]</color></click> <color:#FFFFFF>Seite <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Vor<dark_gray> →<#FFF200>]</color></click></color>"
     },
     "de_ch": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Deine Zuhause <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Deine Zuhause</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>in <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Dein Standard-Zuhause <color:#FFFFFF><name></color> existiert nicht. Nutze <color:#FFF200>/homes</color>, um deine Zuhause zu sehen.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Nutzung: /playerlist [Seite]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Online-Spieler [<online><gray>/</gray><max>] - Seite [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Keine Spieler online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ungültige Seitennummer.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zurück<#FFF200>]</color></click> <color:#FFFFFF>Seite <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Vor<dark_gray> →<#FFF200>]</color></click></color>"
     },
     "bn_bd": {
-        "home.list.header": "<prefix> <color:#FFFFFF>আপনার ঘর <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>আপনার ঘর</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA><color:#FFFFFF><world></color>-এ <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>আপনার ডিফল্ট ঘর <color:#FFFFFF><name></color> বিদ্যমান নেই। আপনার ঘরগুলো দেখতে <color:#FFF200>/homes</color> ব্যবহার করুন।</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>ব্যবহার: /playerlist [পৃষ্ঠা]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= অনলাইন খেলোয়াড় [<online><gray>/</gray><max>] - পৃষ্ঠা [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>কোন খেলোয়াড় অনলাইনে নেই</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>অবৈধ পৃষ্ঠা নম্বর।</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>পূর্ববর্তী<#FFF200>]</color></click> <color:#FFFFFF>পৃষ্ঠা <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>পরবর্তী <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ar_sa": {
-        "home.list.header": "<prefix> <color:#FFFFFF>منازلك <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>منازلك</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>في <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>منزلك الافتراضي <color:#FFFFFF><name></color> غير موجود. استخدم <color:#FFF200>/homes</color> لعرض منازلك.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist [صفحة]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= اللاعبون المتصلون [<online><gray>/</gray><max>] - صفحة [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>لا يوجد لاعبون متصلون</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>رقم صفحة غير صالح.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>السابق<#FFF200>]</color></click> <color:#FFFFFF>صفحة <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>التالي <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "ar_eg": {
-        "home.list.header": "<prefix> <color:#FFFFFF>منازلك <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>منازلك</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>في <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>منزلك الافتراضي <color:#FFFFFF><name></color> غير موجود. استخدم <color:#FFF200>/homes</color> لعرض منازلك.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist [صفحة]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= اللاعبون المتصلون [<online><gray>/</gray><max>] - صفحة [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>لا يوجد لاعبون متصلون</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>رقم صفحة غير صالح.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>السابق<#FFF200>]</color></click> <color:#FFFFFF>صفحة <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>التالي <dark_gray>→<#FFF200>]</color></click></color>"
     },
     "lb_lu": {
-        "home.list.header": "<prefix> <color:#FFFFFF>Är Heemechten <color:#AAAAAA>(<color:#FFF200><used></color>/<color:#FFF200><limit></color>):</color></color>",
-        "home.list.entries": "<color:#AAAAAA>  <color:#FFFFFF><homes></color></color>",
-        "homes.list.header": "<prefix> <color:#FFF200><b>Är Heemechten</b></color> <color:#AAAAAA>[<color:#FFF200><used></color>/<color:#FFF200><limit></color>]</color>",
-        "homes.list.separator": "<color:#666666>  ═══════════════════════</color>",
-        "homes.list.entry": "<color:#AAAAAA>  <color:#FFF200>●</color> <click:run_command:/home <name>><color:#FFFFFF><name></color></click> <color:#AAAAAA>an <color:#FFFFFF><world></color> <color:#666666>(<color:#AAAAAA><x></color>, <color:#AAAAAA><y></color>, <color:#AAAAAA><z></color>)</color></color>",
-        "homes.list.footer": "<color:#666666>  ═══════════════════════</color>",
-        "home.teleport.default_not_found": "<prefix> <color:#FF0000>Ärt Standard-Heem <color:#FFFFFF><name></color> existéiert net. Benotzt <color:#FFF200>/homes</color> fir är Heemechten ze gesinn.</color>"
+        "command.usage.playerlist": "<prefix> <color:#FF0000>Benotzung: /playerlist [Säit]</color>",
+        "playerlist.header": "<prefix> <color:#FFF200>= Spiller online [<online><gray>/</gray><max>] - Säit [<page><gray>/</gray><total_pages>] =</color>",
+        "playerlist.empty": "<prefix> <color:#AAAAAA>Keng Spiller online</color>",
+        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
+        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ongëlteg Säitennummer.</color>",
+        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zeréck<#FFF200>]</color></click> <color:#FFFFFF>Säit <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Weider <dark_gray>→<#FFF200>]</color></click></color>"
     }
 }
-
 current_folder = Path(".")
 
 for lang_code, translations in NEW_TRANSLATIONS.items():
