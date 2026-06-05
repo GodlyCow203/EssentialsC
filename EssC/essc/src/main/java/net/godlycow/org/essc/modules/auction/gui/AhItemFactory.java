@@ -10,6 +10,8 @@ import net.godlycow.org.essc.util.ComponentHelper;
 import net.godlycow.org.essc.util.SkullTextureUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -54,7 +56,7 @@ public class AhItemFactory {
 
         List<Component> lore = createBaseLore(viewer);
 
-        String priceStr = plugin.getEconomyManager().format(auction.getPrice());
+        String priceStr = formatAmount(auction.getPrice());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price", Map.of("price", priceStr))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller", Map.of("seller", auction.getSellerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left", Map.of("time", formatTime(auction.getTimeRemaining())))));
@@ -87,7 +89,7 @@ public class AhItemFactory {
 
         List<Component> lore = createBaseLore(viewer);
 
-        String priceStr = plugin.getEconomyManager().format(auction.getPrice());
+        String priceStr = formatAmount(auction.getPrice());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price", Map.of("price", priceStr))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left", Map.of("time", formatTime(auction.getTimeRemaining())))));
         lore.add(Component.empty());
@@ -109,7 +111,7 @@ public class AhItemFactory {
         if (meta == null) return display;
 
         List<Component> lore = createBaseLore(viewer);
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.sold_for", Map.of("price", plugin.getEconomyManager().format(entry.getPrice())))));
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.sold_for", Map.of("price", formatAmount(entry.getPrice())))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.buyer", Map.of("buyer", entry.getBuyerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when", Map.of("time", formatTimeAgo(entry.getTimestamp())))));
         lore.add(Component.empty());
@@ -126,7 +128,7 @@ public class AhItemFactory {
         if (meta == null) return display;
 
         List<Component> lore = createBaseLore(viewer);
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.bought_for", Map.of("price", plugin.getEconomyManager().format(entry.getPrice())))));
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.bought_for", Map.of("price", formatAmount(entry.getPrice())))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller_name", Map.of("seller", entry.getSellerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when", Map.of("time", formatTimeAgo(entry.getTimestamp())))));
         lore.add(Component.empty());
@@ -281,7 +283,7 @@ public class AhItemFactory {
 
         List<Component> lore = new ArrayList<>();
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_sales", Map.of("count", String.valueOf(history.size())))));
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_earnings", Map.of("amount", plugin.getEconomyManager().format(totalEarnings)))));
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_earnings", Map.of("amount", formatAmount(totalEarnings)))));
         lore.add(Component.empty());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
@@ -305,7 +307,7 @@ public class AhItemFactory {
 
         List<Component> lore = new ArrayList<>();
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_purchases", Map.of("count", String.valueOf(history.size())))));
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_spent", Map.of("amount", plugin.getEconomyManager().format(totalSpent)))));
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_spent", Map.of("amount", formatAmount(totalSpent)))));
         lore.add(Component.empty());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
@@ -361,6 +363,17 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator_top")));
         lore.add(Component.empty());
         return lore;
+    }
+
+    private String formatAmount(BigDecimal amount) {
+        if (plugin.getEconomyManager() != null) {
+            return plugin.getEconomyManager().format(amount);
+        }
+        Economy vaultEconomy = Bukkit.getServicesManager().load(Economy.class);
+        if (vaultEconomy != null) {
+            return vaultEconomy.format(amount.doubleValue());
+        }
+        return amount.toPlainString();
     }
 
     private String formatTime(long millis) {
