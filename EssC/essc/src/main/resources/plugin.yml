@@ -446,11 +446,6 @@ commands:
     usage: /user <player> [profile|states|punishments|locations|cooldowns|all]
     permission: essentialsc.
 
-  dump:
-    description: Generate a server dump
-    usage: /essc dump [sections...]
-    permission: essc.dump
-
   suicide:
     description: Kill yourself
     usage: /suicide
