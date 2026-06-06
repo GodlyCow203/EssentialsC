@@ -303,18 +303,32 @@ public class AFKManager implements Listener {
 
         if (to == null) return;
 
-        if (from.getBlockX() == to.getBlockX()
-                && from.getBlockY() == to.getBlockY()
-                && from.getBlockZ() == to.getBlockZ()) {
-            return;
-        }
+        boolean positionChanged = from.getBlockX() != to.getBlockX()
+                || from.getBlockY() != to.getBlockY()
+                || from.getBlockZ() != to.getBlockZ();
+
+        boolean lookChanged = Double.compare(from.getYaw(), to.getYaw()) != 0
+                || Double.compare(from.getPitch(), to.getPitch()) != 0;
+
+        if (!positionChanged && !lookChanged) return;
 
         if (isAFK(player) && config.isAfkFreezePlayer()) {
             Location afkLoc = afkLocations.get(player.getUniqueId());
             if (afkLoc != null) {
+                if (positionChanged) {
+                    updateActivity(player);
+                    return;
+                }
                 event.setTo(afkLoc);
                 return;
             }
+        }
+
+        if (positionChanged && !config.isAfkFreezePlayer()) {
+            if (lookChanged) {
+                updateActivity(player);
+            }
+            return;
         }
 
         updateActivity(player);
