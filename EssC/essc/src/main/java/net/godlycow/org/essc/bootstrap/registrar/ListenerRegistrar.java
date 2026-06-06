@@ -7,14 +7,19 @@ import net.godlycow.org.essc.plugin.listener.JoinLeaveListener;
 import net.godlycow.org.essc.plugin.listener.MuteListener;
 import net.godlycow.org.essc.util.VersionCheckUtil;
 
-
 public class ListenerRegistrar {
+
     public ListenerRegistrar(EssentialsC plugin) {
-        plugin.getServer().getPluginManager().registerEvents(new JoinLeaveListener(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new InvseeListener(plugin), plugin);
+        InvseeListener invseeListener = new InvseeListener(plugin);
+        plugin.setInvseeListener(invseeListener);
+        plugin.getServer().getPluginManager().registerEvents(invseeListener, plugin);
+
+        JoinLeaveListener joinLeaveListener = new JoinLeaveListener(plugin);
+        plugin.joinLeaveListener = joinLeaveListener;
+        plugin.getServer().getPluginManager().registerEvents(joinLeaveListener, plugin);
+
         plugin.getServer().getPluginManager().registerEvents(new EnderSeeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VersionCheckUtil(plugin), plugin);
     }
-
 }

@@ -1,14 +1,17 @@
 package net.godlycow.org.essc.plugin.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventorySerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class JoinLeaveListener implements Listener {
 
@@ -21,8 +24,30 @@ public class JoinLeaveListener implements Listener {
         this.placeholderAPIEnabled = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
+        Player joiningPlayer = event.getPlayer();
+
+        if (plugin.getUserManager() != null) {
+            InvseeListener invseeListener = plugin.getInvseeListener();
+
+            if (invseeListener != null && invseeListener.hasOpenOfflineSession(joiningPlayer.getUniqueId())) {
+                invseeListener.closeSessionsForPlayer(joiningPlayer.getUniqueId(), joiningPlayer);
+            } else {
+                plugin.getUserManager().loadInventory(joiningPlayer.getUniqueId()).thenAccept(base64 -> {
+                    if (base64 == null) return;
+                    plugin.getEssScheduler().runGlobal(() -> {
+                        if (!joiningPlayer.isOnline()) return;
+                        ItemStack[] slots = InventorySerializer.deserialize(base64);
+                        InventorySerializer.applyToInventory(slots, joiningPlayer.getInventory());
+                        joiningPlayer.updateInventory();
+                        plugin.debug("Restored modified offline inventory for " + joiningPlayer.getName());
+                    });
+                    plugin.getUserManager().deleteInventory(joiningPlayer.getUniqueId());
+                });
+            }
+        }
+
         if (!plugin.getConfigManager().isJoinLeaveEnabled()) {
             event.setJoinMessage(null);
             return;
@@ -59,6 +84,13 @@ public class JoinLeaveListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        Player quittingPlayer = event.getPlayer();
+
+        if (plugin.getUserManager() != null) {
+            String base64 = InventorySerializer.serialize(quittingPlayer.getInventory());
+            plugin.getUserManager().saveInventory(quittingPlayer.getUniqueId(), base64);
+        }
+
         if (!plugin.getConfigManager().isJoinLeaveEnabled()) {
             event.setQuitMessage(null);
             return;
@@ -84,8 +116,8 @@ public class JoinLeaveListener implements Listener {
 
         Bukkit.getConsoleSender().sendMessage(componentMessage);
         plugin.debug("Custom leave message sent for " + event.getPlayer().getName());
-
     }
+
     private Component formatMessage(String message, Player player) {
         String formattedMessage = message;
 

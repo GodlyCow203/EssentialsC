@@ -104,4 +104,16 @@ public class UserManager {
     public UserCooldownManager getCooldownManager() {
         return cooldownManager;
     }
+
+    public java.util.concurrent.CompletableFuture<Boolean> saveInventory(java.util.UUID uuid, String base64) {
+        return repository.saveInventory(uuid, base64);
+    }
+
+    public java.util.concurrent.CompletableFuture<String> loadInventory(java.util.UUID uuid) {
+        return repository.loadInventory(uuid);
+    }
+
+    public java.util.concurrent.CompletableFuture<Boolean> deleteInventory(java.util.UUID uuid) {
+        return repository.deleteInventory(uuid);
+    }
 }

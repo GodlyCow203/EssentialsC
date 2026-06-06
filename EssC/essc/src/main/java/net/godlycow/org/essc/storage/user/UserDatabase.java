@@ -72,6 +72,14 @@ public class UserDatabase implements UserRepo {
             );
             """;
 
+    private static final String CREATE_INVENTORY_TABLE = """
+            CREATE TABLE IF NOT EXISTS user_inventories (
+                uuid TEXT PRIMARY KEY,
+                inventory_data TEXT NOT NULL,
+                saved_at INTEGER DEFAULT (strftime('%s','now'))
+            );
+            """;
+
     public UserDatabase(EssentialsC plugin) {
         this.database = new Database(plugin, "users.db");
         initialize();
@@ -86,6 +94,7 @@ public class UserDatabase implements UserRepo {
             statement.execute(CREATE_USERS_TABLE);
             statement.execute(CREATE_IGNORED_TABLE);
             statement.execute(CREATE_IP_HISTORY_TABLE);
+            statement.execute(CREATE_INVENTORY_TABLE);
         } catch (SQLException e) {
             throw new RuntimeException("Failed to initialize user database", e);
         }
@@ -306,5 +315,42 @@ public class UserDatabase implements UserRepo {
         profile.setCreatedAt(row.getLong("created_at"));
         profile.setUpdatedAt(row.getLong("updated_at"));
         return profile;
+    }
+
+    public java.util.concurrent.CompletableFuture<Boolean> saveInventory(UUID uuid, String base64) {
+        return database.async(connection -> {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO user_inventories (uuid, inventory_data, saved_at) VALUES (?, ?, strftime('%s','now')) " +
+                            "ON CONFLICT(uuid) DO UPDATE SET inventory_data = excluded.inventory_data, saved_at = excluded.saved_at")) {
+                statement.setString(1, uuid.toString());
+                statement.setString(2, base64);
+                return statement.executeUpdate() > 0;
+            }
+        });
+    }
+
+    public java.util.concurrent.CompletableFuture<String> loadInventory(UUID uuid) {
+        return database.async(connection -> {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT inventory_data FROM user_inventories WHERE uuid = ?")) {
+                statement.setString(1, uuid.toString());
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("inventory_data");
+                    }
+                    return null;
+                }
+            }
+        });
+    }
+
+    public java.util.concurrent.CompletableFuture<Boolean> deleteInventory(UUID uuid) {
+        return database.async(connection -> {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM user_inventories WHERE uuid = ?")) {
+                statement.setString(1, uuid.toString());
+                return statement.executeUpdate() > 0;
+            }
+        });
     }
 }
