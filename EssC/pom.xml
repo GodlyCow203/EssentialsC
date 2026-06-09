@@ -9,7 +9,8 @@
     <parent>
         <groupId>net.godlycow.org</groupId>
         <artifactId>EssentialsC-parent</artifactId>
-        <version>4.2.1</version>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>EssentialsC-aggregator</artifactId>

@@ -1,5 +1,5 @@
 name: EssentialsC-MySQLExpansion
-version: 4.1.3
+version: '${project.version}'
 main: net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion
 api-version: "1.21"
 authors: [_GodlyCow]
