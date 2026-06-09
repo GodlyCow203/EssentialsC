@@ -113,13 +113,13 @@ heal:
 #
 # Sends a message of the day to players when they join the server.
 # Each line is sent as a separate chat message.
-# MiniMessage formatting and the <player> placeholder are supported.
+# MiniMessage formatting and placeholders like <player>, {PLAYER}, and {ONLINE} are supported.
 
 motd:
   # Set to false to disable the MOTD entirely.
   enabled: true
 
-  # Lines sent to the player on join. Supports MiniMessage and <player>.
+  # Lines sent to the player on join. Supports MiniMessage, <player>, {PLAYER}, and {ONLINE}.
   lines:
     - "<gray>You can customize this message in config.yml."
     - "<gray>Set <white>motd.enabled</white><gray> to <red>false</red><gray> to disable it completely."

@@ -55,7 +55,11 @@ public class MOTDManager implements Listener {
     }
 
     private Component parseLine(String line, Player player) {
-        String processed = line.replace("<player>", player.getName());
+        String processed = line.replace("<player>", player.getName())
+                .replace("{PLAYER}", player.getName())
+                .replace("{player}", player.getName())
+                .replace("{ONLINE}", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()));
         processed = LegacyColorConverter.toMiniMessage(processed);
         try {
             return miniMessage.deserialize(processed);
