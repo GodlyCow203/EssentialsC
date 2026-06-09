@@ -25,15 +25,6 @@ jobs:
       - name: Build everything
         run: mvn -B install -DskipTests
 
-      - name: Build main plugin
-        run: mvn -B package -DskipTests -f EssC/essc/pom.xml
-
-      - name: Build MySQL expansion
-        run: mvn -B package -DskipTests -f expansions/mysqldatabaseexpansion/pom.xml
-
-      - name: Build Profile expansion
-        run: mvn -B package -DskipTests -f expansions/EssentialsCProfiles/pom.xml
-
       - name: Get plugin version
         id: get_version
         run: |
