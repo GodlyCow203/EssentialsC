@@ -8,12 +8,11 @@
   <parent>
     <groupId>net.godlycow.org</groupId>
     <artifactId>EssentialsC-parent</artifactId>
-    <version>4.2.1</version>
+    <version>${revision}</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>MySQLDatabaseExpansion</artifactId>
-  <version>1.0.0</version>
   <name>EssentialsC MySQL Database Expansion</name>
   <description>MySQL database expansion for EssentialsC</description>
   <packaging>jar</packaging>

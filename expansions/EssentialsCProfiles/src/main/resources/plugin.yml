@@ -1,5 +1,5 @@
 name: EssentialsCProfiles
-version: 2.0.0
+version: '${project.version}'
 main: net.godlycow.org.expansions.profiles.EssentialsCProfiles
 api-version: '1.21'
 author: _GodlyCow

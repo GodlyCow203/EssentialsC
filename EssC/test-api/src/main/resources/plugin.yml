@@ -1,5 +1,5 @@
 name: EssentialsCAPITest
-version: 1.0.0
+version: '${project.version}'
 main: net.godlycow.org.api.test.Main
 api-version: '1.21'
 depend: [EssentialsC]

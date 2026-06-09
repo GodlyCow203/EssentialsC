@@ -1,5 +1,5 @@
 name: EssentialsC
-version: '4.2.1'
+version: '${project.version}'
 main: net.godlycow.org.essc.EssentialsC
 api-version: '1.21'
 folia-supported: true
