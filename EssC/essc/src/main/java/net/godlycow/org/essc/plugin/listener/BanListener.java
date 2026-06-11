@@ -73,7 +73,9 @@ public class BanListener implements Listener {
 
         if (player.getAddress() != null) {
             String ip = player.getAddress().getAddress().getHostAddress();
-            punishmentManager.recordIp(player.getUniqueId(), player.getName(), ip);
+            if (plugin.getUserManager() != null) {
+                plugin.getUserManager().recordIp(player.getUniqueId(), ip);
+            }
         }
 
         if (punishmentManager.isMuted(player.getUniqueId())
@@ -98,7 +100,9 @@ public class BanListener implements Listener {
         Player player = event.getPlayer();
         if (player.getAddress() != null) {
             String ip = player.getAddress().getAddress().getHostAddress();
-            punishmentManager.recordIp(player.getUniqueId(), player.getName(), ip);
+            if (plugin.getUserManager() != null) {
+                plugin.getUserManager().recordIp(player.getUniqueId(), ip);
+            }
         }
     }
 

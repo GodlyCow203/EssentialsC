@@ -105,6 +105,22 @@ public class UserManager {
         return cooldownManager;
     }
 
+    public CompletableFuture<Boolean> recordIp(UUID uuid, String ip) {
+        UserProfile cached = cache.get(uuid);
+        if (cached != null) {
+            cached.setLastIp(ip);
+        }
+        return repository.recordIp(uuid, ip);
+    }
+
+    public String getLastIp(UUID uuid) {
+        UserProfile cached = cache.get(uuid);
+        if (cached != null) {
+            return cached.getLastIp();
+        }
+        return null;
+    }
+
     public java.util.concurrent.CompletableFuture<Boolean> saveInventory(java.util.UUID uuid, String base64) {
         return repository.saveInventory(uuid, base64);
     }

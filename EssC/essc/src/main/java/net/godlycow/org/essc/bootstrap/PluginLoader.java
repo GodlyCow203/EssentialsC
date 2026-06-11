@@ -21,6 +21,8 @@ import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
+import net.godlycow.org.essc.modules.fly.FlyMigration;
+import net.godlycow.org.essc.modules.punishment.IpHistoryMigration;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.modules.home.HomeManager;
 import net.godlycow.org.essc.modules.home.HomeNotificationManager;
@@ -137,6 +139,8 @@ public final class PluginLoader {
         }
         plugin.setUserManager(new UserManager(plugin));
         plugin.setFlyManager(new FlyManager(plugin));
+        new FlyMigration(plugin).runIfNeeded();
+        new IpHistoryMigration(plugin).runIfNeeded();
 
         RulesManager rulesManager = new RulesManager(plugin);
         rulesManager.load();

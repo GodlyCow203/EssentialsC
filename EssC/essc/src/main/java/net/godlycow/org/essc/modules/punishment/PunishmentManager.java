@@ -13,19 +13,15 @@ public class PunishmentManager {
     private final EssentialsC plugin;
     private final File banFile;
     private final File muteFile;
-    private final File ipHistoryFile;
     private FileConfiguration banConfig;
     private FileConfiguration muteConfig;
-    private FileConfiguration ipHistoryConfig;
     private NetworkPunishmentHook networkHook = null;
 
     public PunishmentManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.banFile = new File(plugin.getDataFolder(), "bans.yml");
         this.muteFile = new File(plugin.getDataFolder(), "mutes.yml");
-        this.ipHistoryFile = new File(plugin.getDataFolder(), "ip-history.yml");
         loadFiles();
-        loadIpHistory();
     }
 
     public void setNetworkHook(NetworkPunishmentHook hook) {
@@ -66,33 +62,6 @@ public class PunishmentManager {
             try { muteConfig.save(muteFile); }
             catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
         });
-    }
-
-    private void loadIpHistory() {
-        if (!ipHistoryFile.exists()) {
-            try { ipHistoryFile.createNewFile(); }
-            catch (IOException e) { plugin.getLogger().severe("Failed to create ip-history.yml"); }
-        }
-        ipHistoryConfig = YamlConfiguration.loadConfiguration(ipHistoryFile);
-    }
-
-    private void saveIpHistory() {
-        plugin.getEssScheduler().runAsync(() -> {
-            try { ipHistoryConfig.save(ipHistoryFile); }
-            catch (IOException e) { plugin.getLogger().severe("Failed to save ip-history.yml"); }
-        });
-    }
-
-    public void recordIp(UUID uuid, String name, String ip) {
-        String path = "players." + uuid;
-        ipHistoryConfig.set(path + ".name", name);
-        ipHistoryConfig.set(path + ".ip", ip);
-        ipHistoryConfig.set(path + ".time", System.currentTimeMillis());
-        saveIpHistory();
-    }
-
-    public String getLastIp(UUID uuid) {
-        return ipHistoryConfig.getString("players." + uuid + ".ip");
     }
 
     public void banPlayer(UUID uuid, String name, String reason, String banner, long expires) {
@@ -326,8 +295,7 @@ public class PunishmentManager {
     private void saveBansSync() {
         try {
             banConfig.save(banFile);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             plugin.getLogger().severe("Failed to save bans.yml");
         }
     }
@@ -335,25 +303,14 @@ public class PunishmentManager {
     private void saveMutesSync() {
         try {
             muteConfig.save(muteFile);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             plugin.getLogger().severe("Failed to save mutes.yml");
-        }
-    }
-
-    private void saveIpHistorySync() {
-        try {
-            ipHistoryConfig.save(ipHistoryFile);
-        }
-        catch (IOException e) {
-            plugin.getLogger().severe("Failed to save ip-history.yml");
         }
     }
 
     public void shutdown() {
         saveBansSync();
         saveMutesSync();
-        saveIpHistorySync();
         networkHook = null;
         plugin.debug("Shutting down the Punishment Manager");
     }

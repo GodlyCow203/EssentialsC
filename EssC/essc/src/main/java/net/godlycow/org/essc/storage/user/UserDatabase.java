@@ -317,6 +317,18 @@ public class UserDatabase implements UserRepo {
         return profile;
     }
 
+    public java.util.concurrent.CompletableFuture<Boolean> updateFlyEnabled(UUID uuid, boolean flyEnabled) {
+        return database.async(connection -> {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE users SET fly_enabled = ?, updated_at = ? WHERE uuid = ?")) {
+                statement.setBoolean(1, flyEnabled);
+                statement.setLong(2, Instant.now().getEpochSecond());
+                statement.setString(3, uuid.toString());
+                return statement.executeUpdate() > 0;
+            }
+        });
+    }
+
     public java.util.concurrent.CompletableFuture<Boolean> saveInventory(UUID uuid, String base64) {
         return database.async(connection -> {
             try (PreparedStatement statement = connection.prepareStatement(

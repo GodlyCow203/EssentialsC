@@ -56,7 +56,9 @@ public class CheckpunishCommand extends Command {
             sender.sendMessage(lang.get(sender, "checkpunish.mute.none"));
         }
 
-        String lastIp = punishmentManager.getLastIp(target.getUniqueId());
+        String lastIp = plugin.getUserManager() != null
+                ? plugin.getUserManager().getLastIp(target.getUniqueId())
+                : null;
         if (lastIp != null && punishmentManager.isIpBanned(lastIp)) {
             var entry = punishmentManager.getIpBanEntry(lastIp);
             sender.sendMessage(lang.get(sender, "checkpunish.ipban.active", Map.of(

@@ -40,7 +40,9 @@ public class BanIpCommand extends Command {
             } else {
                 OfflinePlayer offlineTarget = plugin.getServer().getOfflinePlayer(target);
                 if (offlineTarget.hasPlayedBefore()) {
-                    String storedIp = punishmentManager.getLastIp(offlineTarget.getUniqueId());
+                    String storedIp = plugin.getUserManager() != null
+                            ? plugin.getUserManager().getLastIp(offlineTarget.getUniqueId())
+                            : null;
                     if (storedIp != null) {
                         ip = storedIp;
                         targetName = offlineTarget.getName();
