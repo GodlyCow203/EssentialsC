@@ -125,6 +125,7 @@ public class CommandRegistrar {
         register("migration",      new MigrationCommand(plugin));
         register("user",           new UserCommand(plugin));
         register("suicide",        new SuicideCommand(plugin));
+        register("smite",          new SmiteCommand(plugin));
 
 
 

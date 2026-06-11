@@ -986,5 +986,9 @@
   "trash.confirm.cancel.name": "<#FF4444><b>Ofbriechen</b>",
   "trash.confirm.cancel.lore": "<#888888>Klickt hei fir är Elementer zréckzehuelen.",
   "command.usage.trash": "<prefix> <color:#FF0000>Benotzung: /trash</color>",
-  "command.usage.suicide": "<prefix><color:#FF0000>Notzung: /suicide"
+  "command.usage.suicide": "<prefix><color:#FF0000>Notzung: /suicide",
+  "smite.success": "<prefix> <color:#FFF200>Huet <color:#FFFFFF><target></color> mam Blëtz getraff.</color>",
+  "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kanns dech net selwer bestrofen.</color>",
+  "smite.exempt": "<prefix> <color:#FF0000>Dee Spiller ass vun /smite ausgemaach.</color>",
+  "command.usage.smite": "<prefix> <color:#FF0000>Benotzung: /smite <spiller></color>"
 }

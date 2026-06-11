@@ -1,256 +1,194 @@
 import json
 from pathlib import Path
 
-INSERT_AFTER = '  "spawnentity.success"'
+INSERT_AFTER = '  "kit.gui.item.kit.lore.description"'  # Change this to an existing key in your target files
 
 NEW_TRANSLATIONS = {
     "en_us": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist [page]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Online Players [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Prev<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Next <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Struck <color:#FFFFFF><target></color> with lightning.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>You cannot smite yourself.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>That player is exempt from /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Usage: /smite <player></color>"
     },
     "zh_cn": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist [页码]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= 在线玩家 [<online><gray>/</gray><max>] - 第 [<page><gray>/</gray><total_pages>] 页 =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>当前没有玩家在线</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>无效的页码。</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>上一页<#FFF200>]</color></click> <color:#FFFFFF>第 <prev_page>/<total_pages> 页</color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>下一页 <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>已用闪电击中 <color:#FFFFFF><target></color>。</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>你不能惩戒你自己。</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>该玩家免疫 /smite。</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>用法: /smite <玩家></color>"
     },
     "vi_vn": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Cách dùng: /playerlist [trang]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Người chơi trực tuyến [<online><gray>/</gray><max>] - Trang [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Không có người chơi trực tuyến</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Số trang không hợp lệ.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Trước<#FFF200>]</color></click> <color:#FFFFFF>Trang <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Tiếp <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Đã đánh <color:#FFFFFF><target></color> bằng sét.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Bạn không thể tự trừng phạt chính mình.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Người chơi đó được miễn trừ khỏi /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Cách dùng: /smite <người_chơi></color>"
     },
     "ur_pk": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>استعمال: /playerlist [صفحہ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= آن لائن کھلاڑی [<online><gray>/</gray><max>] - صفحہ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>کوئی کھلاڑی آن لائن نہیں ہے</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>غلط صفحہ نمبر۔</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>پیچھے<#FFF200>]</color></click> <color:#FFFFFF>صفحہ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>آگے <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>بجلی گرا کر <color:#FFFFFF><target></color> کو نشانہ بنایا۔</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>آپ خود کو نہیں مار سکتے۔</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>وہ کھلاڑی /smite سے مستثنیٰ ہے۔</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>استعمال: /smite <کھلاڑی></color>"
     },
     "uk_ua": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Використання: /playerlist [сторінка]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Гравці онлайн [<online><gray>/</gray><max>] - Сторінка [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Гравців немає онлайн</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Неправильний номер сторінки.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Назад<#FFF200>]</color></click> <color:#FFFFFF>Сторінка <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Вперед <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Вразив <color:#FFFFFF><target></color> блискавкою.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Ви не можете вдарити себе блискавкою.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Цей гравець захищений від /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Використання: /smite <гравець></color>"
     },
     "tr_tr": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Kullanım: /playerlist [sayfa]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Çevrimiçi Oyuncular [<online><gray>/</gray><max>] - Sayfa [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Çevrimiçi oyuncu yok</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Geçersiz sayfa numarası.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Önceki<#FFF200>]</color></click> <color:#FFFFFF>Sayfa <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Sonraki <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> kişisini şimşekle vurdun.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Kendini cezalandıramazsın.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Bu oyuncu /smite komutundan muaftır.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Kullanım: /smite <oyuncu></color>"
     },
     "th_th": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>วิธีใช้: /playerlist [หน้า]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ผู้เล่นออนไลน์ [<online><gray>/</gray><max>] - หน้า [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>ไม่มีผู้เล่นออนไลน์</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>หมายเลขหน้าไม่ถูกต้อง</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>ย้อนกลับ<#FFF200>]</color></click> <color:#FFFFFF>หน้า <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>ถัดไป <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>สายฟ้าฟาดใส่ <color:#FFFFFF><target></color> แล้ว</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>คุณไม่สามารถลงโทษตัวเองได้</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>ผู้เล่นนี้ได้รับยกเว้นจากการใช้ /smite</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>วิธีใช้: /smite <ผู้เล่น></color>"
     },
     "te_in": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>విధానం: /playerlist [పేజీ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ఆన్‌లైన్ ఆటగాళ్లు [<online><gray>/</gray><max>] - పేజీ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>ఆన్‌లైన్‌లో ఎవరూ లేరు</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>చెల్లని పేజీ సంఖ్య.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>గత<#FFF200>]</color></click> <color:#FFFFFF>పేజీ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>తదుపరి <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> ని మెరుపుతో కొట్టారు.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>మీరు మిమ్మల్ని మీరు కొట్టుకోలేరు.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>ఆ ఆటగాడు /smite నుండి మినహాయించబడ్డారు.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>విధానం: /smite <ఆటగాడు></color>"
     },
     "ta_in": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>பயன்பாடு: /playerlist [பக்கம்]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ஆன்லைன் வீரர்கள் [<online><gray>/</gray><max>] - பக்கம் [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>ஆன்லைனில் வீரர்கள் இல்லை</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>தவறான பக்க எண்.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>முந்தைய<#FFF200>]</color></click> <color:#FFFFFF>பக்கம் <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>அடுத்தது <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> மின்னல் தாக்கியது.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>நீங்கள் உங்களையே தண்டிக்க முடியாது.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>அந்த வீரர் /smite இலிருந்து விலக்கப்பட்டுள்ளார்.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>பயன்பாடு: /smite <வீரர்></color>"
     },
     "sv_se": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Användning: /playerlist [sida]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Spelare online [<online><gray>/</gray><max>] - Sida [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Inga spelare online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ogiltigt sidnummer.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Föregående<#FFF200>]</color></click> <color:#FFFFFF>Sida <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Nästa <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Träffade <color:#FFFFFF><target></color> med blixten.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kan inte slå dig själv.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Den spelaren är undantagen från /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Användning: /smite <spelare></color>"
     },
     "ru_ru": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Использование: /playerlist [страница]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Игроки онлайн [<online><gray>/</gray><max>] - Страница [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Нет игроков онлайн</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Неверный номер страницы.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Назад<#FFF200>]</color></click> <color:#FFFFFF>Страница <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Вперед <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Ударил <color:#FFFFFF><target></color> молнией.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Вы не можете ударить самого себя.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Этот игрок защищен от /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Использование: /smite <игрок></color>"
     },
     "pt_br": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [página]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Jogadores online [<online><gray>/</gray><max>] - Página [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Nenhum jogador online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Número de página inválido.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Anterior<#FFF200>]</color></click> <color:#FFFFFF>Página <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Próximo <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Atingiu <color:#FFFFFF><target></color> com um raio.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Você não pode castigar a si mesmo.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Esse jogador está isento do /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Uso: /smite <jogador></color>"
     },
     "pl_pl": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Użycie: /playerlist [strona]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Gracze online [<online><gray>/</gray><max>] - Strona [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Brak graczy online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Nieprawidłowy numer strony.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Poprzednia<#FFF200>]</color></click> <color:#FFFFFF>Strona <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Następna <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Uderzono <color:#FFFFFF><target></color> piorunem.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Nie możesz uderzyć samego siebie.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Ten gracz jest zwolniony z /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Użycie: /smite <gracz></color>"
     },
     "nl_nl": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Gebruik: /playerlist [pagina]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Spelers online [<online><gray>/</gray><max>] - Pagina [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Geen spelers online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ongeldig paginanummer.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Vorige<#FFF200>]</color></click> <color:#FFFFFF>Pagina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Volgende <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> geraakt door bliksem.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Je kunt jezelf niet slaan.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Die speler is vrijgesteld van /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Gebruik: /smite <speler></color>"
     },
     "mr_in": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>वापर: /playerlist [पृष्ठ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ऑनलाइन खेळाडू [<online><gray>/</gray><max>] - पृष्ठ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>कोणीही खेळाडू ऑनलाइन नाही</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>अवैध पृष्ठ क्रमांक.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>मागील<#FFF200>]</color></click> <color:#FFFFFF>पृष्ठ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>पुढील <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> ला विजेने मारले.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>तुम्ही स्वतःला मारू शकत नाही.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>तो खेळाडू /smite पासून मुक्त आहे.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>वापर: /smite <खेळाडू></color>"
     },
     "ko_kr": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist [페이지]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= 접속 중인 플레이어 [<online><gray>/</gray><max>] - 페이지 [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>접속 중인 플레이어가 없습니다</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>잘못된 페이지 번호입니다.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>이전<#FFF200>]</color></click> <color:#FFFFFF>페이지 <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>다음 <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color>에게 벼락을 내렸습니다.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>자기 자신은 벼락을 내릴 수 없습니다.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>해당 플레이어는 /smite 대상에서 제외되었습니다.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>사용법: /smite <플레이어></color>"
     },
     "ja_jp": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>使用法: /playerlist [ページ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= オンラインプレイヤー [<online><gray>/</gray><max>] - ページ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>オンラインのプレイヤーはいません</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>無効なページ番号です。</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>前へ<#FFF200>]</color></click> <color:#FFFFFF>ページ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>次へ <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> に落雷させました。</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>自分自身に落雷させることはできません。</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>そのプレイヤーは /smite の対象外です。</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>使用法: /smite <プレイヤー></color>"
     },
     "it_it": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [pagina]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Giocatori online [<online><gray>/</gray><max>] - Pagina [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Nessun giocatore online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Numero di pagina non valido.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Indietro<#FFF200>]</color></click> <color:#FFFFFF>Pagina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Avanti <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Colpito <color:#FFFFFF><target></color> con un fulmine.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Non puoi colpire te stesso.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Quel giocatore è esente da /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Uso: /smite <giocatore></color>"
     },
     "id_id": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Penggunaan: /playerlist [halaman]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Pemain online [<online><gray>/</gray><max>] - Halaman [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Tidak ada pemain online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Nomor halaman tidak valid.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Sebelumnya<#FFF200>]</color></click> <color:#FFFFFF>Halaman <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Selanjutnya <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Menyambar <color:#FFFFFF><target></color> dengan petir.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Anda tidak bisa menyambar diri sendiri.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Pemain itu kebal dari /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Penggunaan: /smite <pemain></color>"
     },
     "hi_in": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>उपयोग: /playerlist [पृष्ठ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ऑनलाइन खिलाड़ी [<online><gray>/</gray><max>] - पृष्ठ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>कोई खिलाड़ी ऑनलाइन नहीं है</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>अमान्य पृष्ठ संख्या।</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>पिछला<#FFF200>]</color></click> <color:#FFFFFF>पृष्ठ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>अगला <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> को बिजली से मारा।</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>आप खुद को नहीं मार सकते।</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>वह खिलाड़ी /smite से मुक्त है।</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>उपयोग: /smite <खिलाड़ी></color>"
     },
     "gu_in": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>ઉપયોગ: /playerlist [પૃષ્ઠ]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= ઓનલાઇન ખેલાડીઓ [<online><gray>/</gray><max>] - પૃષ્ઠ [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>કોઈ ખેલાડી ઓનલાઇન નથી</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>અમાન્ય પૃષ્ઠ નંબર.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>પાછળ<#FFF200>]</color></click> <color:#FFFFFF>પૃષ્ઠ <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>આગળ <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> પર વીજળી પાડી.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>તમે તમારી જાતને મારી શકતા નથી.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>તે ખેલાડી /smite થી મુક્ત છે.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>ઉપયોગ: /smite <ખેલાડી></color>"
     },
     "fr_fr": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Utilisation: /playerlist [page]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Joueurs en ligne [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Aucun joueur en ligne</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Numéro de page invalide.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Précédent<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Suivant <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>A frappé <color:#FFFFFF><target></color> avec la foudre.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Vous ne pouvez pas vous frapper vous-même.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Ce joueur est exempté de /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Utilisation: /smite <joueur></color>"
     },
     "fil_ph": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Paggamit: /playerlist [pahina]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Mga manlalaro online [<online><gray>/</gray><max>] - Pahina [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Walang manlalaro online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Maling numero ng pahina.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Nakaraan<#FFF200>]</color></click> <color:#FFFFFF>Pahina <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Susunod <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Tinamaan ng kidlat si <color:#FFFFFF><target></color>.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Hindi mo pwedeng parusahan ang iyong sarili.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Ang manlalaro na iyon ay exempt sa /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Paggamit: /smite <manlalaro></color>"
     },
     "es_es": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [página]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Jugadores en línea [<online><gray>/</gray><max>] - Página [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>No hay jugadores en línea</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Número de página no válido.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Anterior<#FFF200>]</color></click> <color:#FFFFFF>Página <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Siguiente <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Golpeaste a <color:#FFFFFF><target></color> con un rayo.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>No puedes golpearte a ti mismo.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Ese jugador está exento de /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Uso: /smite <jugador></color>"
     },
     "en_gb": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist [page]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Online Players [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Prev<#FFF200>]</color></click> <color:#FFFFFF>Page <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Next <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Struck <color:#FFFFFF><target></color> with lightning.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>You cannot smite yourself.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>That player is exempt from /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Usage: /smite <player></color>"
     },
     "de_de": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Nutzung: /playerlist [Seite]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Online-Spieler [<online><gray>/</gray><max>] - Seite [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Keine Spieler online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ungültige Seitennummer.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zurück<#FFF200>]</color></click> <color:#FFFFFF>Seite <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Vor<dark_gray> →<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> vom Blitz getroffen.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kannst dich nicht selbst bestrafen.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Dieser Spieler ist von /smite ausgenommen.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Nutzung: /smite <spieler></color>"
     },
     "de_ch": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Nutzung: /playerlist [Seite]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Online-Spieler [<online><gray>/</gray><max>] - Seite [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Keine Spieler online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ungültige Seitennummer.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zurück<#FFF200>]</color></click> <color:#FFFFFF>Seite <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Vor<dark_gray> →<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> vom Blitz getroffen.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kannst dich nicht selbst bestrafen.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Dieser Spieler ist von /smite ausgenommen.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Nutzung: /smite <spieler></color>"
     },
     "bn_bd": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>ব্যবহার: /playerlist [পৃষ্ঠা]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= অনলাইন খেলোয়াড় [<online><gray>/</gray><max>] - পৃষ্ঠা [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>কোন খেলোয়াড় অনলাইনে নেই</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>অবৈধ পৃষ্ঠা নম্বর।</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>পূর্ববর্তী<#FFF200>]</color></click> <color:#FFFFFF>পৃষ্ঠা <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>পরবর্তী <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>বজ্রপাত দিয়ে <color:#FFFFFF><target></color>-কে আঘাত করা হয়েছে।</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>আপনি নিজেকে আঘাত করতে পারবেন না।</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>ঐ খেলোয়াড় /smite থেকে মুক্ত।</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>ব্যবহার: /smite <খেলোয়াড়></color>"
     },
     "ar_sa": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist [صفحة]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= اللاعبون المتصلون [<online><gray>/</gray><max>] - صفحة [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>لا يوجد لاعبون متصلون</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>رقم صفحة غير صالح.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>السابق<#FFF200>]</color></click> <color:#FFFFFF>صفحة <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>التالي <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>تم ضرب <color:#FFFFFF><target></color> بالبرق.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>لا يمكنك ضرب نفسك.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>هذا اللاعب معفى من /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>الاستخدام: /smite <لاعب></color>"
     },
     "ar_eg": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>الاستخدام: /playerlist [صفحة]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= اللاعبون المتصلون [<online><gray>/</gray><max>] - صفحة [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>لا يوجد لاعبون متصلون</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>رقم صفحة غير صالح.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>السابق<#FFF200>]</color></click> <color:#FFFFFF>صفحة <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>التالي <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>تم ضرب <color:#FFFFFF><target></color> بالبرق.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>لا يمكنك ضرب نفسك.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>هذا اللاعب معفى من /smite.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>الاستخدام: /smite <لاعب></color>"
     },
     "lb_lu": {
-        "command.usage.playerlist": "<prefix> <color:#FF0000>Benotzung: /playerlist [Säit]</color>",
-        "playerlist.header": "<prefix> <color:#FFF200>= Spiller online [<online><gray>/</gray><max>] - Säit [<page><gray>/</gray><total_pages>] =</color>",
-        "playerlist.empty": "<prefix> <color:#AAAAAA>Keng Spiller online</color>",
-        "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
-        "playerlist.invalid_page": "<prefix> <color:#FF0000>Ongëlteg Säitennummer.</color>",
-        "playerlist.navigation": "<prefix> <color:#AAAAAA><click:run_command:/playerlist <prev_page>><color:#FFF200>[<dark_gray>← <gray>Zeréck<#FFF200>]</color></click> <color:#FFFFFF>Säit <prev_page>/<total_pages></color> <click:run_command:/playerlist <next_page>><color:#FFF200>[<gray>Weider <dark_gray>→<#FFF200>]</color></click></color>"
+        "smite.success": "<prefix> <color:#FFF200>Huet <color:#FFFFFF><target></color> mam Blëtz getraff.</color>",
+        "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kanns dech net selwer bestrofen.</color>",
+        "smite.exempt": "<prefix> <color:#FF0000>Dee Spiller ass vun /smite ausgemaach.</color>",
+        "command.usage.smite": "<prefix> <color:#FF0000>Benotzung: /smite <spiller></color>"
     }
 }
 current_folder = Path(".")

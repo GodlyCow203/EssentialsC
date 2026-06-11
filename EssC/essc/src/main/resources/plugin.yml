@@ -266,6 +266,11 @@ commands:
     usage: /sudo <player> <command/message>
     permission: essentialsc.sudo
 
+  smite:
+    description: Strike a player with lightning
+    usage: /smite <player>
+    permission: essentialsc.smite
+
   kick:
     description: Kick a Player
     usage: /kick <player>
@@ -737,6 +742,18 @@ permissions:
 
   essentialsc.sudo.override:
     description: Allows sudoing exempt players
+    default: false
+
+  essentialsc.smite:
+    description: Allows striking players with lightning
+    default: op
+
+  essentialsc.smite.exempt:
+    description: Prevents the player from being struck by /smite
+    default: false
+
+  essentialsc.smite.exempt.bypass:
+    description: Allows smiting exempt players
     default: false
 
   essentialsc.kick:

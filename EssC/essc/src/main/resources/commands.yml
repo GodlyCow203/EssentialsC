@@ -383,6 +383,11 @@ endersee:
   priority: normal
   aliases: []
 
+smite:
+  enabled: true
+  priority: normal
+  aliases: []
+
 kick:
   enabled: true
   priority: normal
