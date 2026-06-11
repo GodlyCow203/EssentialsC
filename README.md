@@ -14,90 +14,59 @@
 [![Online players](https://img.shields.io/endpoint?url=https%3A%2F%2Ffaststats.dev%2Fapi%2Fshields%2Fessentialsc%3Fmetric%3Donline_players&style=flat)](https://faststats.dev/project/essentialsc)
 [![Events (30d)](https://img.shields.io/endpoint?url=https%3A%2F%2Ffaststats.dev%2Fapi%2Fshields%2Fessentialsc%3Fmetric%3Devents_30d&style=flat)](https://faststats.dev/project/essentialsc)
 
-## Description
-
-EssentialsC is a powerful and optimized Minecraft Bukkit plugin designed for modern servers. It adds a wide range of features including Kits, Homes, Warps, Shops, Wild Teleports, and much more, providing server owners with flexible tools to enhance gameplay.
-
-The plugin is fully compatible with Minecraft versions `1.17–1.21+` and supports multiple server softwares, including [Purpur](https://purpurmc.org/download/purpur), [Paper](https://papermc.io/downloads/paper), [CraftBukkit](https://getbukkit.org/download/craftbukkit), and [Spigot](https://hub.spigotmc.org/jenkins/job/BuildTools/). Other forks such are also supported, provided they do not modify the Bukkit API. ( Example Forks: [Leaf](https://www.leafmc.one/download), [Leaves](https://leavesmc.org/downloads/leaves) and [Youer](https://mohistmc.com/downloadSoftware?project=youer&projectVersion=1.21.1) )
-
-EssentialsC comes with over **70** fully configurable commands, each manageable through ``commands.yml``. It seamlessly integrates with popular plugins such as [TAB](https://www.spigotmc.org/resources/tab.57806/), [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/), [Floodgate](https://geysermc.org/download/?project=floodgate), [LuckPerms](https://luckperms.net/download), [Vault](https://www.spigotmc.org/resources/vault.34315/), and [DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/), giving you extended functionality out-of-the-box.
-
-For server migrations, EssentialsC includes a migration tool: `/migration essentialsx <flags>`, allowing easy transition from EssentialsX.
-
-Actively maintained and regularly updated, I release weekly updates on Modrinth, ensuring you always have access to the latest features and improvements.
+A modern, actively maintained alternative to EssentialsX — built for servers that can't afford to be left behind.
 
 ---
 
-# A public API for integrating with the EssentialsC Minecraft plugin.
+## Overview
 
-## Documentation
+EssentialsC is a high-performance Bukkit plugin designed for modern Minecraft servers. It covers all the essentials — Kits, Homes, Warps, Shops, Wild Teleports, and much more — while staying current with every new Minecraft release, something EssentialsX has long struggled with.
 
-You can visit the whole [EssentialsCAPI documentation](https://api.godlycow.org/essc/index.html) at https://api.godlycow.org/essc/index.html
+Full compatibility with **Minecraft 1.17–1.21+** across all major server platforms.
 
 ---
 
-## Repository Setup
+## Support Development
 
-### Maven
+If EssentialsC helps your server and you would like to support its continued development, consider making a donation.
 
-Add the JitPack repository to your `pom.xml`:
+**Donate:** [Paypal](https://paypal.me/GodlyCow)
+            [Ko-Fi](https://ko-fi.com/godlycow)
 
-```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-Add the Dependency to your `pom.xml`:
+Every contribution helps support development, testing, documentation, and future updates.
 
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.github.GodlyCow203</groupId>
-        <artifactId>EssentialsC</artifactId>
-        <version>v0.0.6</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
-```
+Thank you for supporting EssentialsC!
 
-### Gradle
+---
 
-Add the JitPack repository to your `build.gradle`:
+## Features
 
-```gradle
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-```
-Add the Dependency to your `build.gradle`:
+- **70+ fully configurable commands** — every command is manageable via `commands.yml`
+- **Rich plugin integrations** — works out of the box with [TAB](https://www.spigotmc.org/resources/tab.57806/), [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/), [LuckPerms](https://luckperms.net/download), [Vault](https://www.spigotmc.org/resources/vault.34315/), [Floodgate](https://geysermc.org/download/?project=floodgate), and [DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/)
+- **EssentialsX migration tool** — run `/migration essentialsx <flags>` to migrate your existing data
+- **Weekly updates** — new releases every week on Modrinth
 
-```gradle
-dependencies {
-    compileOnly 'com.github.GodlyCow203:EssentialsC:v0.0.6'
-}
-```
+---
 
-### Gradle Kotlin DSL
+## Supported Platforms
 
-Add the JitPack repository to your `build.gradle.kts`:
+| Platform | Status |
+|---|---|
+| [Paper](https://papermc.io/downloads/paper) | Supported |
+| [Purpur](https://purpurmc.org/download/purpur) |  Supported |
+| [Folia](https://papermc.io/downloads/folia) | Supported |
+| Other forks (Leaf, Leaves, Youer, etc.) | Supported* |
 
-```kotlin
-repositories {
-    maven("https://jitpack.io")
-}
-```
-Add the Dependency to your `build.gradle.kts`:
+*Forks that do not modify the core Bukkit API are supported.
 
-```kotlin
-dependencies {
-    compileOnly("com.github.GodlyCow203:EssentialsC:v0.0.6")
-}
-```
+---
 
+## Getting Started
 
+Download the latest release from [Modrinth](https://modrinth.com/plugin/essentialsc), drop the jar into your `plugins/` folder, and restart your server. Full documentation is available at [wiki.godlycow.org/essc](https://wiki.godlycow.org/essc).
 
+---
 
+## Contributing
 
+Pull requests are welcome. Please open an issue first to discuss any significant changes.
