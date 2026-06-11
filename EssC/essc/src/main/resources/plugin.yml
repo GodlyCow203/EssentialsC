@@ -461,6 +461,31 @@ commands:
     usage: /trash
     permission: essentialsc.trash
 
+  gm:
+    description: Change your gamemode
+    usage: /gm <survival|creative|adventure|spectator> [player]
+    permission: essentialsc.gamemode
+
+  gms:
+    description: Switch to Survival mode
+    usage: /gms [player]
+    permission: essentialsc.gamemode
+
+  gmc:
+    description: Switch to Creative mode
+    usage: /gmc [player]
+    permission: essentialsc.gamemode
+
+  gmsp:
+    description: Switch to Spectator mode
+    usage: /gmsp [player]
+    permission: essentialsc.gamemode
+
+  gma:
+    description: Switch to Adventure mode
+    usage: /gma [player]
+    permission: essentialsc.gamemode
+
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1246,4 +1271,44 @@ permissions:
 
   essentialsc.enchant.unsafe:
     description: Allows bypassing the vanilla enchant limit ( config option ignored )
+    default: op
+
+  essentialsc.gamemode:
+    description: Change own gamemode via /gm
+    default: op
+
+  essentialsc.gamemode.others:
+    description: Change another players gamemode via /gm
+    default: op
+
+  essentialsc.gamemode.survival:
+    description: Switch to Survival via /gms
+    default: op
+
+  essentialsc.gamemode.survival.others:
+    description: Switch another player to Survival via /gms
+    default: op
+
+  essentialsc.gamemode.creative:
+    description: Switch to Creative via /gmc
+    default: op
+
+  essentialsc.gamemode.creative.others:
+    description: Switch another player to Creative via /gmc
+    default: op
+
+  essentialsc.gamemode.spectator:
+    description: Switch to Spectator via /gmsp
+    default: op
+
+  essentialsc.gamemode.spectator.others:
+    description: Switch another player to Spectator via /gmsp
+    default: op
+
+  essentialsc.gamemode.adventure:
+    description: Switch to Adventure via /gma
+    default: op
+
+  essentialsc.gamemode.adventure.others:
+    description: Switch another player to Adventure via /gma
     default: op

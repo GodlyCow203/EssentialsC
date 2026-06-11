@@ -1,31 +1,37 @@
 package net.godlycow.org.essc.bootstrap.registrar;
 
+import net.godlycow.org.essc.CommandRegistration;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.modules.auction.gui.AhGuiManager;
-import net.godlycow.org.essc.command.*;
+import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.command.EsscCommand;
 import net.godlycow.org.essc.command.admin.*;
 import net.godlycow.org.essc.command.afk.AFKCommand;
 import net.godlycow.org.essc.command.afk.AFKListCommand;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.command.entity.SpawnEntityCommand;
-import net.godlycow.org.essc.command.home.*;
+import net.godlycow.org.essc.command.home.DelHomeCommand;
+import net.godlycow.org.essc.command.home.HomeCommand;
+import net.godlycow.org.essc.command.home.HomesCommand;
+import net.godlycow.org.essc.command.home.SetHomeCommand;
 import net.godlycow.org.essc.command.inv.*;
 import net.godlycow.org.essc.command.item.EnchantCommand;
 import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.item.ItemIdCommand;
 import net.godlycow.org.essc.command.item.UnenchantCommand;
-import net.godlycow.org.essc.command.kit.*;
+import net.godlycow.org.essc.command.kit.KitCommand;
+import net.godlycow.org.essc.command.kit.KitsCommand;
 import net.godlycow.org.essc.command.player.*;
 import net.godlycow.org.essc.command.server.BroadcastCommand;
 import net.godlycow.org.essc.command.server.UptimeCommand;
-import net.godlycow.org.essc.command.spawn.*;
+import net.godlycow.org.essc.command.spawn.SetSpawnCommand;
+import net.godlycow.org.essc.command.spawn.SpawnCommand;
 import net.godlycow.org.essc.command.tpa.*;
 import net.godlycow.org.essc.command.warp.*;
-import net.godlycow.org.essc.plugin.config.CommandsConfig;
 import net.godlycow.org.essc.language.LanguageCommand;
 import net.godlycow.org.essc.migration.MigrationCommand;
+import net.godlycow.org.essc.modules.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
-import net.godlycow.org.essc.CommandRegistration;
+import net.godlycow.org.essc.plugin.config.CommandsConfig;
 import org.bukkit.command.PluginCommand;
 
 import java.util.List;
@@ -126,6 +132,12 @@ public class CommandRegistrar {
         register("user",           new UserCommand(plugin));
         register("suicide",        new SuicideCommand(plugin));
         register("smite",          new SmiteCommand(plugin));
+        register("gm",             new GamemodeCommand(plugin, "gm"));
+        register("gms",            new GamemodeCommand(plugin, "gms"));
+        register("gmc",            new GamemodeCommand(plugin, "gmc"));
+        register("gmsp",           new GamemodeCommand(plugin, "gmsp"));
+        register("gma",            new GamemodeCommand(plugin, "gma"));
+
 
 
 

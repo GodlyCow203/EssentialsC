@@ -990,5 +990,14 @@
   "smite.success": "<prefix> <color:#FFF200>Struck <color:#FFFFFF><target></color> with lightning.</color>",
   "smite.cannot_smite_self": "<prefix> <color:#FF0000>You cannot smite yourself.</color>",
   "smite.exempt": "<prefix> <color:#FF0000>That player is exempt from /smite.</color>",
-  "command.usage.smite": "<prefix> <color:#FF0000>Usage: /smite <player></color>"
+  "command.usage.smite": "<prefix> <color:#FF0000>Usage: /smite <player></color>",
+  "gamemode.changed": "<prefix> <color:#FFF200>Gamemode changed to <color:#FFFFFF><mode></color></color>",
+  "gamemode.changed.other": "<prefix> <color:#FFF200>Set <color:#FFFFFF><target></color>'s gamemode to <color:#FFFFFF><mode></color></color>",
+  "gamemode.changed.by": "<prefix> <color:#FFF200>Your gamemode was set to <color:#FFFFFF><mode></color> by <color:#FFFFFF><player></color></color>",
+  "gamemode.invalid": "<prefix> <color:#FF0000>Unknown gamemode: <color:#FFFFFF><input></color></color>",
+  "command.usage.gm": "<prefix> <color:#FF0000>Usage: /gm <survival|creative|adventure|spectator> [player]</color>",
+  "command.usage.gms": "<prefix> <color:#FF0000>Usage: /gms [player]</color>",
+  "command.usage.gmc": "<prefix> <color:#FF0000>Usage: /gmc [player]</color>",
+  "command.usage.gmsp": "<prefix> <color:#FF0000>Usage: /gmsp [player]</color>",
+  "command.usage.gma": "<prefix> <color:#FF0000>Usage: /gma [player]</color>"
 }

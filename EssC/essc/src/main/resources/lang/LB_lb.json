@@ -990,5 +990,14 @@
   "smite.success": "<prefix> <color:#FFF200>Huet <color:#FFFFFF><target></color> mam Blëtz getraff.</color>",
   "smite.cannot_smite_self": "<prefix> <color:#FF0000>Du kanns dech net selwer bestrofen.</color>",
   "smite.exempt": "<prefix> <color:#FF0000>Dee Spiller ass vun /smite ausgemaach.</color>",
-  "command.usage.smite": "<prefix> <color:#FF0000>Benotzung: /smite <spiller></color>"
+  "command.usage.smite": "<prefix> <color:#FF0000>Benotzung: /smite <spiller></color>",
+  "gamemode.changed": "<prefix> <color:#FFF200>Spillmodus geännert op <color:#FFFFFF><mode></color></color>",
+  "gamemode.changed.other": "<prefix> <color:#FFF200>Spillmodus vum <color:#FFFFFF><target></color> op <color:#FFFFFF><mode></color> gesat</color>",
+  "gamemode.changed.by": "<prefix> <color:#FFF200>Äre Spillmodus gouf vum <color:#FFFFFF><player></color> op <color:#FFFFFF><mode></color> gesat</color>",
+  "gamemode.invalid": "<prefix> <color:#FF0000>Onbekannte Spillmodus: <color:#FFFFFF><input></color></color>",
+  "command.usage.gm": "<prefix> <color:#FF0000>Benotzung: /gm <survival|creative|adventure|spectator> [spiller]</color>",
+  "command.usage.gms": "<prefix> <color:#FF0000>Benotzung: /gms [spiller]</color>",
+  "command.usage.gmc": "<prefix> <color:#FF0000>Benotzung: /gmc [spiller]</color>",
+  "command.usage.gmsp": "<prefix> <color:#FF0000>Benotzung: /gmsp [spiller]</color>",
+  "command.usage.gma": "<prefix> <color:#FF0000>Benotzung: /gma [spiller]</color>"
 }
