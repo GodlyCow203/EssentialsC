@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 4
+config-version: 5
 
 
 # Controls which commands EssentialsC registers and how they compete for their
