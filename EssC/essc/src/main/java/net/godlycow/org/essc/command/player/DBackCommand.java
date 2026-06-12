@@ -18,14 +18,19 @@ public class DBackCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        plugin.debug("DBack command executed by " + player.getName());
-        plugin.getBackManager().teleportDeathBack(player);
+        boolean confirm = args.length > 0 && args[0].equalsIgnoreCase("confirm");
+
+        plugin.debug("DBack command executed by " + player.getName() + (confirm ? " (confirm)" : ""));
+        plugin.getBackManager().teleportDeathBack(player, confirm);
 
         return true;
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (args.length == 1) {
+            return Collections.singletonList("confirm");
+        }
         return Collections.emptyList();
     }
 }
