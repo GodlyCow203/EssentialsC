@@ -5,6 +5,7 @@ import net.godlycow.org.essc.plugin.listener.EnderSeeListener;
 import net.godlycow.org.essc.plugin.listener.InvseeListener;
 import net.godlycow.org.essc.plugin.listener.JoinLeaveListener;
 import net.godlycow.org.essc.plugin.listener.MuteListener;
+import net.godlycow.org.essc.plugin.listener.ServerListPingListener;
 import net.godlycow.org.essc.util.VersionCheckUtil;
 
 public class ListenerRegistrar {
@@ -21,5 +22,9 @@ public class ListenerRegistrar {
         plugin.getServer().getPluginManager().registerEvents(new EnderSeeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VersionCheckUtil(plugin), plugin);
+
+        if (plugin.getConfigManager().isVanishHideFromServerList()) {
+            plugin.getServer().getPluginManager().registerEvents(new ServerListPingListener(plugin), plugin);
+        }
     }
 }

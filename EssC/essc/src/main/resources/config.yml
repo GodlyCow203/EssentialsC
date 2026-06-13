@@ -617,6 +617,9 @@ vanish:
   # Disable collisions for vanished players so they can pass through other entities.
   disable-collisions: true
 
+  # Hides vanished players from the external server list player count
+  hide-from-server-list: true
+
 
 # Nicknames
 #

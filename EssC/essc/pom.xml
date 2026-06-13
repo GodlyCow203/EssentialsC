@@ -127,7 +127,7 @@
         <dependency>
             <groupId>dev.faststats.metrics</groupId>
             <artifactId>bukkit</artifactId>
-            <version>0.25.2</version>
+            <version>0.26.1</version>
         </dependency>
         <dependency>
             <groupId>net.luckperms</groupId>

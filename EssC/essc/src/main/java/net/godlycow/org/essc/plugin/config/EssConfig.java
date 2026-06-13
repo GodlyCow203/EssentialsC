@@ -289,6 +289,10 @@ public class EssConfig {
         return config.getBoolean("vanish.disable-collisions", true);
     }
 
+    public boolean isVanishHideFromServerList() {
+        return config.getBoolean("vanish.hide-from-server-list", true);
+    }
+
     public boolean isNickEnabled() {
         return config.getBoolean("nickname.enabled", true);
     }
