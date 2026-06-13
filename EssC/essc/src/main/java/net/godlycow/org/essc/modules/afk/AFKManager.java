@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.event.vehicle.VehicleMoveEvent;
 
 import java.time.Duration;
 import java.util.*;
@@ -35,6 +36,7 @@ public class AFKManager implements Listener {
     private final Map<UUID, Boolean> afkStatus = new ConcurrentHashMap<>();
     private final Map<UUID, Long> afkStartTime = new ConcurrentHashMap<>();
     private final Map<UUID, Location> afkLocations = new ConcurrentHashMap<>();
+    private final Set<UUID> knockbackImmunity = ConcurrentHashMap.newKeySet();
 
     private SchedulerTask checkTask;
     private SchedulerTask kickTask;
@@ -73,6 +75,7 @@ public class AFKManager implements Listener {
         afkStatus.clear();
         afkStartTime.clear();
         afkLocations.clear();
+        knockbackImmunity.clear();
     }
 
     public void reload() {
@@ -295,43 +298,73 @@ public class AFKManager implements Listener {
         Bukkit.broadcast(message);
     }
 
+    private boolean hasPositionChanged(Location from, Location to) {
+        return Double.compare(from.getX(), to.getX()) != 0
+                || Double.compare(from.getY(), to.getY()) != 0
+                || Double.compare(from.getZ(), to.getZ()) != 0;
+    }
+
+    private boolean hasLookChanged(Location from, Location to) {
+        return Double.compare(from.getYaw(), to.getYaw()) != 0
+                || Double.compare(from.getPitch(), to.getPitch()) != 0;
+    }
+
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+
+        if (player.isInsideVehicle()) return;
+
         Location from = event.getFrom();
         Location to = event.getTo();
 
         if (to == null) return;
 
-        boolean positionChanged = from.getBlockX() != to.getBlockX()
-                || from.getBlockY() != to.getBlockY()
-                || from.getBlockZ() != to.getBlockZ();
-
-        boolean lookChanged = Double.compare(from.getYaw(), to.getYaw()) != 0
-                || Double.compare(from.getPitch(), to.getPitch()) != 0;
+        boolean positionChanged = hasPositionChanged(from, to);
+        boolean lookChanged = hasLookChanged(from, to);
 
         if (!positionChanged && !lookChanged) return;
 
+        UUID uuid = player.getUniqueId();
+
         if (isAFK(player) && config.isAfkFreezePlayer()) {
-            Location afkLoc = afkLocations.get(player.getUniqueId());
+            Location afkLoc = afkLocations.get(uuid);
             if (afkLoc != null) {
-                if (positionChanged) {
+                if (positionChanged && !knockbackImmunity.contains(uuid)) {
                     updateActivity(player);
                     return;
                 }
-                event.setTo(afkLoc);
+                Location frozen = afkLoc.clone();
+                frozen.setYaw(to.getYaw());
+                frozen.setPitch(to.getPitch());
+                event.setTo(frozen);
                 return;
             }
         }
 
-        if (positionChanged && !config.isAfkFreezePlayer()) {
-            if (lookChanged) {
-                updateActivity(player);
-            }
-            return;
-        }
+        if (!positionChanged && !lookChanged) return;
+
+        if (positionChanged && !config.isAfkFreezePlayer() && knockbackImmunity.contains(uuid)) return;
 
         updateActivity(player);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onVehicleMove(VehicleMoveEvent event) {
+        if (!(event.getVehicle().getPassengers().stream().anyMatch(e -> e instanceof Player))) return;
+
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        boolean positionChanged = hasPositionChanged(from, to);
+        boolean lookChanged = hasLookChanged(from, to);
+
+        if (!positionChanged && !lookChanged) return;
+
+        for (var passenger : event.getVehicle().getPassengers()) {
+            if (!(passenger instanceof Player player)) continue;
+            updateActivity(player);
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -406,7 +439,9 @@ public class AFKManager implements Listener {
             return;
         }
 
-        updateActivity(player);
+        UUID uuid = player.getUniqueId();
+        knockbackImmunity.add(uuid);
+        plugin.getEssScheduler().runForEntityLater(player, () -> knockbackImmunity.remove(uuid), 10L);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -451,6 +486,7 @@ public class AFKManager implements Listener {
         afkStatus.remove(uuid);
         afkStartTime.remove(uuid);
         afkLocations.remove(uuid);
+        knockbackImmunity.remove(uuid);
     }
 
     public boolean isAFK(Player player) {
