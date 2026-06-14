@@ -38,31 +38,31 @@ public final class EnvironmentProfile {
         }
     }
 
-    public ServerSoftware getSoftware() {
-        return software;
-    }
-
-    public String getSoftwareSummary() {
-        return softwareSummary;
-    }
-
-    public boolean isFoliaCompatibilityMode() {
-        return foliaCompatibilityMode;
-    }
-
-    public boolean hasPaperApi() {
-        return paperApi;
-    }
-
-    public boolean supportsFeature(String featureName) {
-        return switch (featureName.toLowerCase()) {
-            case "scoreboard" -> FeatureFlags.supportsScoreboard();
-            case "async_chat" -> FeatureFlags.supportsAsyncPlayerChatEvent();
-            case "paper_chat" -> FeatureFlags.supportsPaperChatEvent();
-            case "region_scheduler" -> FeatureFlags.supportsRegionScheduler();
-            case "entity_scheduler" -> FeatureFlags.supportsEntityScheduler();
-            case "async_teleport" -> FeatureFlags.supportsNativeAsyncTeleport();
-            default -> false;
-        };
-    }
+//    public ServerSoftware getSoftware() {
+//        return software;
+//    }
+//
+//    public String getSoftwareSummary() {
+//        return softwareSummary;
+//    }
+//
+//    public boolean isFoliaCompatibilityMode() {
+//        return foliaCompatibilityMode;
+//    }
+//
+//    public boolean hasPaperApi() {
+//        return paperApi;
+//    }
+//
+//    public boolean supportsFeature(String featureName) {
+//        return switch (featureName.toLowerCase()) {
+//            case "scoreboard" -> FeatureFlags.supportsScoreboard();
+//            case "async_chat" -> FeatureFlags.supportsAsyncPlayerChatEvent();
+//            case "paper_chat" -> FeatureFlags.supportsPaperChatEvent();
+//            case "region_scheduler" -> FeatureFlags.supportsRegionScheduler();
+//            case "entity_scheduler" -> FeatureFlags.supportsEntityScheduler();
+//            case "async_teleport" -> FeatureFlags.supportsNativeAsyncTeleport();
+//            default -> false;
+//        };
+//    }
 }
