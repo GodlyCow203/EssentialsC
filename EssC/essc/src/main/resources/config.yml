@@ -304,10 +304,10 @@ rtp:
   max-attempts: 10
 
   # The minimum Y level a player can be teleported to.
-  min-y: 64
+  min-y: 35
 
   # The maximum Y level a player can be teleported to.
-  max-y: 100
+  max-y: 122
 
   # Restrict RTP to within the world border if one is set.
   use-world-border: true
@@ -336,14 +336,14 @@ rtp:
         - river
 
     world_nether:
-      enabled: false
+      enabled: true
       display-name: "<#FF7A52><b>Nether"
       min-radius: 500
       max-radius: 5000
       blocked-biomes: []
 
     world_the_end:
-      enabled: true
+      enabled: false
       display-name: "<#FFE152><b>The End"
       min-radius: 500
       max-radius: 3000

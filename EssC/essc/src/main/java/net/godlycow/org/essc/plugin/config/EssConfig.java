@@ -799,4 +799,49 @@ public class EssConfig {
     public boolean isEnchantAllowUnsafe() {
         return config.getBoolean("enchant.allow-unsafe", false);
     }
+
+    public long getRTPCooldown() {
+        return config.getLong("rtp.cooldown", 60);
+    }
+
+    public long getRTPWarmup() {
+        return config.getLong("rtp.warmup", 5);
+    }
+
+    public boolean isRTPCancelOnMovement() {
+        return config.getBoolean("rtp.cancel-on-movement", true);
+    }
+
+    public boolean isRTPParticles() {
+        return config.getBoolean("rtp.particles", true);
+    }
+
+    public int getRTPMaxAttempts() {
+        return config.getInt("rtp.max-attempts", 10);
+    }
+
+    public int getRTPMinY() {
+        return config.getInt("rtp.min-y", 64);
+    }
+
+    public int getRTPMaxY() {
+        return config.getInt("rtp.max-y", 128);
+    }
+
+    public boolean isRTPUseWorldBorder() {
+        return config.getBoolean("rtp.use-world-border", true);
+    }
+
+    public int getRTPGMinRadius(){
+        return config.getInt("rtp.global.min-radius", 1000);
+    }
+
+    public int getRTPGMaxRadius(){
+        return config.getInt("rtp.global.max-radius", 10000);
+    }
+
+    public List<String> getGlobalBlockedBiomes (){
+        return  config.getStringList("rtp.global.blocked-biomes");
+    }
+
 }
