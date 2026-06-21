@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 5
+config-version: 6
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -491,7 +491,6 @@ worth:
   enabled: true
   priority: normal
   aliases: []
-  cooldown: 10 # 10 Seconds
   cooldown-bypass: essentialsc.worth.bypass-cooldown
 
 quicksell:
@@ -512,3 +511,13 @@ trash:
   priority: normal
   aliases:
     - disposal
+
+stonecutter:
+  enabled: true
+  priority: normal
+  aliases: []
+
+unban-ip:
+  enabled: true
+  priority: normal
+  aliases: []

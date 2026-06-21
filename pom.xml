@@ -21,7 +21,7 @@
 
     <properties>
         <!-- Change this version number to update the other poms -->
-        <revision>4.2.3</revision>
+        <revision>4.2.2</revision>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
