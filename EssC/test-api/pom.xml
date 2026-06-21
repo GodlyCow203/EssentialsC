@@ -50,15 +50,15 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
-                        <configuration>
-                            <target>
-                                <echo message="Cleaning old Test-API and deploying new jar..."/>
-                                <delete file="${project.basedir}/../../run-server/plugins/EssentialsC-test-api-${project.version}.jar"/>
+                        <configuration> <!--not in use -->
+<!--                            <target>-->
+<!--                                <echo message="Cleaning old Test-API and deploying new jar..."/>-->
+<!--                                <delete file="${project.basedir}/../../run-server/plugins/EssentialsC-test-api-${project.version}.jar"/>-->
 
-                                <copy file="${project.build.directory}/EssentialsC-test-api-${project.version}.jar"
-                                      todir="${project.basedir}/../../run-server/plugins"
-                                      overwrite="true"/>
-                            </target>
+<!--                                <copy file="${project.build.directory}/EssentialsC-test-api-${project.version}.jar"-->
+<!--                                      todir="${project.basedir}/../../run-server/plugins"-->
+<!--                                      overwrite="true"/>-->
+<!--                            </target>-->
                         </configuration>
                     </execution>
                 </executions>
