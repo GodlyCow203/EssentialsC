@@ -486,6 +486,20 @@ commands:
     usage: /gma [player]
     permission: essentialsc.gamemode
 
+  stonecutter:
+    description: Open a virtual stonecutter
+    usage: /stonecutter
+    permission: essentialsc.stonecutter
+
+  unban-ip:
+    description: Unban an IP address
+    usage: /unban-ip <ip>
+    permission: essentialsc.unbanip
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ # ------------------------------------------------- PERMISSIONS ---------------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 permissions:
   essentialsc.heal:
     description: Heal command
@@ -1311,4 +1325,8 @@ permissions:
 
   essentialsc.gamemode.adventure.others:
     description: Switch another player to Adventure via /gma
+    default: op
+
+  essentialsc.unbanip:
+    description: Unban IP addresses
     default: op

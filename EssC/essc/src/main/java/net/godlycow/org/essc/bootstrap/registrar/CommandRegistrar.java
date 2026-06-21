@@ -137,6 +137,8 @@ public class CommandRegistrar {
         register("gmc",            new GamemodeCommand(plugin, "gmc"));
         register("gmsp",           new GamemodeCommand(plugin, "gmsp"));
         register("gma",            new GamemodeCommand(plugin, "gma"));
+        register("stonecutter",    new StonecutterCommand(plugin));
+        register("unban-ip",       new UnbanIpCommand(plugin, punishmentManager));
 
 
 
