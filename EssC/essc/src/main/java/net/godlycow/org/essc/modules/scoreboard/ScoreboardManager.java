@@ -125,7 +125,7 @@ public class ScoreboardManager implements Listener {
     }
 
     public void loadConfig() {
-        this.config = new ScoreboardConfig(plugin.getConfig().getConfigurationSection("scoreboard"));
+        this.config = new ScoreboardConfig(plugin);
     }
 
     public void reload() {

@@ -1,16 +1,15 @@
 package net.godlycow.org.essc.modules.scoreboard;
 
+import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ScoreboardConfig {
-    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     private final boolean enabled;
     private final int updateInterval;
@@ -19,16 +18,20 @@ public class ScoreboardConfig {
     private final String titleRaw;
     private final List<String> lines;
     private final List<String[]> lineTemplates;
+    private final EssentialsC plugin;
 
-    public ScoreboardConfig(ConfigurationSection config) {
-        this.enabled = config.getBoolean("enabled", true);
-        this.updateInterval = Math.max(1, config.getInt("update-interval", 20));
-        this.persistent = config.getBoolean("persistent", true);
+    public ScoreboardConfig(EssentialsC plugin) {
 
-        this.titleRaw = LegacyColorConverter.toMiniMessage(config.getString("title", "<gold><bold>MyServer</bold></gold>"));
-        this.title = MINI_MESSAGE.deserialize(titleRaw);
+        this.plugin = plugin;
+        //use getConfigManager
+        this.enabled = plugin.getConfigManager().isScoreboardEnabled();
+        this.updateInterval = Math.max(1, plugin.getConfigManager().getScoreboardUpdateInterval());
+        this.persistent = plugin.getConfigManager().isScoreboardPersistenceEnabled();
+        this.titleRaw = plugin.getConfigManager().getRawScoreboardTitle();
 
-        List<String> rawLines = config.getStringList("lines");
+        this.title = MiniMessage.miniMessage().deserialize(titleRaw);
+        List<String> rawLines = plugin.getConfigManager().getScoreboardstringList();
+
         if (rawLines.isEmpty()) {
             rawLines = List.of("", "", "", "");
         }

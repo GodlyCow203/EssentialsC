@@ -840,8 +840,24 @@ public class EssConfig {
         return config.getInt("rtp.global.max-radius", 10000);
     }
 
+    public int getScoreboardUpdateInterval(){
+        return config.getInt("update-interval", 20);
+    }
+
     public List<String> getGlobalBlockedBiomes (){
         return  config.getStringList("rtp.global.blocked-biomes");
+    }
+
+    public boolean isScoreboardPersistenceEnabled(){
+        return config.getBoolean("persistent", true);
+    }
+
+    public String getRawScoreboardTitle(){
+        return config.getString("title", "<gold><bold>MyServer</bold></gold>");
+    }
+
+    public List<String> getScoreboardstringList(){
+        return config.getStringList("lines");
     }
 
 }
