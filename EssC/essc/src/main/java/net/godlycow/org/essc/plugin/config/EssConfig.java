@@ -841,7 +841,7 @@ public class EssConfig {
     }
 
     public int getScoreboardUpdateInterval(){
-        return config.getInt("update-interval", 20);
+        return config.getInt("scoreboard.update-interval", 20);
     }
 
     public List<String> getGlobalBlockedBiomes (){
@@ -849,15 +849,15 @@ public class EssConfig {
     }
 
     public boolean isScoreboardPersistenceEnabled(){
-        return config.getBoolean("persistent", true);
+        return config.getBoolean("scoreboard.persistent", true);
     }
 
     public String getRawScoreboardTitle(){
-        return config.getString("title", "<gold><bold>MyServer</bold></gold>");
+        return config.getString("scoreboard.title", "<gold><bold>MyServer</bold></gold>");
     }
 
     public List<String> getScoreboardstringList(){
-        return config.getStringList("lines");
+        return config.getStringList("scoreboard.lines");
     }
 
 }
