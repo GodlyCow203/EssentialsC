@@ -466,25 +466,30 @@ commands:
     usage: /gm <survival|creative|adventure|spectator> [player]
     permission: essentialsc.gamemode
 
+  gamemode:
+    description: Change your gamemode
+    usage: /gamemode <survival|creative|adventure|spectator> [player]
+    permission: essentialsc.gamemode
+
   gms:
     description: Switch to Survival mode
     usage: /gms [player]
-    permission: essentialsc.gamemode
+    permission: essentialsc.gamemode.survival
 
   gmc:
     description: Switch to Creative mode
     usage: /gmc [player]
-    permission: essentialsc.gamemode
+    permission: essentialsc.gamemode.creative
 
   gmsp:
     description: Switch to Spectator mode
     usage: /gmsp [player]
-    permission: essentialsc.gamemode
+    permission: essentialsc.gamemode.spectator
 
   gma:
     description: Switch to Adventure mode
     usage: /gma [player]
-    permission: essentialsc.gamemode
+    permission: essentialsc.gamemode.adventure
 
   stonecutter:
     description: Open a virtual stonecutter

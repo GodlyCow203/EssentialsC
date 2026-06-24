@@ -13,39 +13,27 @@ import java.util.List;
 import java.util.Map;
 
 public class GamemodeCommand extends Command {
-
-    private static final Map<String, GameMode> NAME_TO_MODE = Map.of(
-            "gms",  GameMode.SURVIVAL,
-            "gmc",  GameMode.CREATIVE,
-            "gmsp", GameMode.SPECTATOR,
-            "gma",  GameMode.ADVENTURE
-    );
-
-    private static final Map<String, String> NAME_TO_PERMISSION = Map.of(
-            "gm",   "essentialsc.gamemode",
-            "gms",  "essentialsc.gamemode.survival",
-            "gmc",  "essentialsc.gamemode.creative",
-            "gmsp", "essentialsc.gamemode.spectator",
-            "gma",  "essentialsc.gamemode.adventure"
-    );
-
-    private final GameMode fixedMode;
-
-    public GamemodeCommand(EssentialsC plugin, String name) {
-        super(plugin, name, NAME_TO_PERMISSION.get(name), true, 0, "command.usage." + name);
-        this.fixedMode = NAME_TO_MODE.get(name);
+    
+    public GamemodeCommand(EssentialsC plugin) {
+        super(plugin, "gamemode", null, true, 0, "command.usage.gm");
     }
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+        return execute(sender, "gamemode", args);
+    }
 
+    @Override
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        Player player = (Player) sender;
         GameMode targetMode;
         Player target;
+        int targetArgIndex;
 
-        if (fixedMode != null) {
-            targetMode = fixedMode;
-            target = resolveTarget(player, args, 0);
+        targetMode = getModeFromLabel(label);
+
+        if (targetMode != null) {
+            targetArgIndex = 0;
         } else {
             if (args.length < 1) {
                 sendUsage(sender);
@@ -56,14 +44,21 @@ public class GamemodeCommand extends Command {
                 player.sendMessage(lang.get(player, "gamemode.invalid", Map.of("input", args[0])));
                 return true;
             }
-            target = resolveTarget(player, args, 1);
+            targetArgIndex = 1;
         }
 
+        String modePermission = "essentialsc.gamemode." + targetMode.name().toLowerCase();
+        if (!player.hasPermission(modePermission) && !player.hasPermission("essentialsc.gamemode")) {
+            player.sendMessage(lang.get(player, "error.no_permission"));
+            return true;
+        }
+
+        target = resolveTarget(player, args, targetArgIndex);
         if (target == null) {
             return true;
         }
 
-        if (target != player && !player.hasPermission(getPermission() + ".others")) {
+        if (target != player && !player.hasPermission(modePermission + ".others") && !player.hasPermission("essentialsc.gamemode.others")) {
             player.sendMessage(lang.get(player, "error.no_permission"));
             return true;
         }
@@ -87,6 +82,16 @@ public class GamemodeCommand extends Command {
 
         plugin.debug(player.getName() + " set gamemode of " + target.getName() + " to " + targetMode.name());
         return true;
+    }
+
+    private GameMode getModeFromLabel(String label) {
+        return switch (label.toLowerCase()) {
+            case "gms" -> GameMode.SURVIVAL;
+            case "gmc" -> GameMode.CREATIVE;
+            case "gmsp" -> GameMode.SPECTATOR;
+            case "gma" -> GameMode.ADVENTURE;
+            default -> null;
+        };
     }
 
     private Player resolveTarget(Player sender, String[] args, int argIndex) {
@@ -122,12 +127,22 @@ public class GamemodeCommand extends Command {
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
-        if (fixedMode != null) {
-            if (args.length == 1 && sender.hasPermission(getPermission() + ".others")) {
-                return plugin.getServer().getOnlinePlayers().stream()
-                        .map(Player::getName)
-                        .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                        .toList();
+        return tabComplete(sender, "gamemode", args);
+    }
+
+    @Override
+    public List<String> tabComplete(CommandSender sender, String label, String[] args) {
+        GameMode mode = getModeFromLabel(label);
+
+        if (mode != null) {
+            if (args.length == 1) {
+                String modePermission = "essentialsc.gamemode." + mode.name().toLowerCase();
+                if (sender.hasPermission(modePermission + ".others") || sender.hasPermission("essentialsc.gamemode.others")) {
+                    return plugin.getServer().getOnlinePlayers().stream()
+                            .map(Player::getName)
+                            .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
+                            .toList();
+                }
             }
             return Collections.emptyList();
         }
@@ -136,14 +151,21 @@ public class GamemodeCommand extends Command {
             List<String> modes = Arrays.asList("survival", "creative", "adventure", "spectator");
             return modes.stream()
                     .filter(m -> m.startsWith(args[0].toLowerCase()))
+                    .filter(m -> sender.hasPermission("essentialsc.gamemode." + m) || sender.hasPermission("essentialsc.gamemode"))
                     .toList();
         }
 
-        if (args.length == 2 && sender.hasPermission(getPermission() + ".others")) {
-            return plugin.getServer().getOnlinePlayers().stream()
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
-                    .toList();
+        if (args.length == 2) {
+            GameMode targetMode = parseGameMode(args[0]);
+            if (targetMode != null) {
+                String modePermission = "essentialsc.gamemode." + targetMode.name().toLowerCase();
+                if (sender.hasPermission(modePermission + ".others") || sender.hasPermission("essentialsc.gamemode.others")) {
+                    return plugin.getServer().getOnlinePlayers().stream()
+                            .map(Player::getName)
+                            .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
+                            .toList();
+                }
+            }
         }
 
         return Collections.emptyList();
