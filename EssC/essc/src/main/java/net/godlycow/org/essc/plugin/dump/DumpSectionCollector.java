@@ -125,7 +125,6 @@ public class DumpSectionCollector {
         hooks.put("discordSRV", plugin.getDiscordSRVHook() != null);
         hooks.put("floodgate", plugin.getBedrockUtil() != null);
         hooks.put("tab", Bukkit.getPluginManager().getPlugin("TAB") != null);
-        hooks.put("skinRestorer", Bukkit.getPluginManager().getPlugin("SkinsRestorer") != null);
 
         if (!plugin.isVaultHooked()) {
             boolean vaultPresent = Bukkit.getPluginManager().getPlugin("Vault") != null;

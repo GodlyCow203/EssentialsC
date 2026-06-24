@@ -13,7 +13,6 @@ softdepend:
   - DiscordSRV
   - Floodgate
   - TAB
-  - SkinRestorer
 
 commands:
   essc:
