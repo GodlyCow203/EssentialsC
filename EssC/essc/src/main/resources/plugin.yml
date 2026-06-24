@@ -17,7 +17,7 @@ softdepend:
 commands:
   essc:
     description: Main plugin command
-    usage: /essc <reload|version|debug|help>
+    usage: /essc <dump|reload|backup|version|debug|placeholders|help>
     permission: essentialsc.admin
 
   playerlist:
