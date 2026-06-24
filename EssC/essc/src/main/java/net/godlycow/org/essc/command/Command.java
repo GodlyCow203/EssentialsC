@@ -96,7 +96,7 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         }
 
         try {
-            return execute(sender, args);
+            return execute(sender, label, args);
         } catch (Exception e) {
             sender.sendMessage(lang.get(sender, "error.internal"));
             plugin.debug("Exception in " + name + ": " + e.getMessage());
@@ -107,6 +107,10 @@ public abstract class Command implements CommandExecutor, TabCompleter {
 
     public abstract boolean execute(CommandSender sender, String[] args);
 
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        return execute(sender, args);
+    }
+
     @Override
     public List<String> onTabComplete(org.bukkit.command.CommandSender sender, org.bukkit.command.Command command,
                                       String alias, String[] args) {
@@ -115,7 +119,7 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            List<String> base = tabComplete(sender, args);
+            List<String> base = tabComplete(sender, alias, args);
             if (base == null) return null;
 
             String partial = args[0].toLowerCase();
@@ -127,11 +131,15 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             return base;
         }
 
-        return tabComplete(sender, args);
+        return tabComplete(sender, alias, args);
     }
 
     public List<String> tabComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
+    }
+
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+        return tabComplete(sender, args);
     }
 
     protected void sendHelp(CommandSender sender, String[] args) {

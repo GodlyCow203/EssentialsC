@@ -132,11 +132,13 @@ public class CommandRegistrar {
         register("user",           new UserCommand(plugin));
         register("suicide",        new SuicideCommand(plugin));
         register("smite",          new SmiteCommand(plugin));
-        register("gm",             new GamemodeCommand(plugin, "gm"));
-        register("gms",            new GamemodeCommand(plugin, "gms"));
-        register("gmc",            new GamemodeCommand(plugin, "gmc"));
-        register("gmsp",           new GamemodeCommand(plugin, "gmsp"));
-        register("gma",            new GamemodeCommand(plugin, "gma"));
+        GamemodeCommand gamemodeCommand = new GamemodeCommand(plugin);
+        register("gm",             gamemodeCommand);
+        register("gamemode",       gamemodeCommand);
+        register("gms",            gamemodeCommand);
+        register("gmc",            gamemodeCommand);
+        register("gmsp",           gamemodeCommand);
+        register("gma",            gamemodeCommand);
         register("stonecutter",    new StonecutterCommand(plugin));
         register("unban-ip",       new UnbanIpCommand(plugin, punishmentManager));
 

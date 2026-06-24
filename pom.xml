@@ -21,10 +21,8 @@
 
     <properties>
         <!-- Change this version number to update the other poms -->
-        <revision>4.2.2</revision>
-        <java.version>21</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <revision>4.2.3</revision>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <server.dir>${project.basedir}/run-server</server.dir>
@@ -132,8 +130,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <release>${maven.compiler.release}</release>
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>

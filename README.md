@@ -1,7 +1,7 @@
 # EssentialsC
 
 [![Modrinth](https://img.shields.io/modrinth/dt/essentialsc?label=Modrinth&logo=modrinth&color=1B9100)](https://modrinth.com/plugin/essentialsc)
-[![JitPack](https://img.shields.io/jitpack/version/GodlyCow203/EssentialsC?label=JitPack&logo=jitpack)](https://jitpack.io/#GodlyCow203/EssentialsC/)
+[![](https://jitpack.io/v/GodlyCow203/EssentialsC.svg)](https://jitpack.io/#GodlyCow203/EssentialsC)
 ![License](https://img.shields.io/github/license/GodlyCow203/EssentialsC?color=F54927)
 ![Discord](https://img.shields.io/discord/1348765054983737467?label=Discord&logo=discord&color=276CF5)
 ![Last Commit](https://img.shields.io/github/last-commit/GodlyCow203/EssentialsC?color=white)
