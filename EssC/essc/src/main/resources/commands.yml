@@ -517,6 +517,36 @@ stonecutter:
   priority: normal
   aliases: []
 
+gm:
+  enabled: true
+  priority: normal
+  aliases: []
+
+gamemode:
+  enabled: true
+  priority: normal
+  aliases: []
+
+gms:
+  enabled: true
+  priority: normal
+  aliases: []
+
+gmc:
+  enabled: true
+  priority: normal
+  aliases: []
+
+gmsp:
+  enabled: true
+  priority: normal
+  aliases: []
+
+gma:
+  enabled: true
+  priority: normal
+  aliases: []
+
 unban-ip:
   enabled: true
   priority: normal
