@@ -175,7 +175,7 @@ public class VaultHook {
 
         @Override
         public boolean hasAccount(String playerName) {
-            return false;
+            return hasAccount(Bukkit.getOfflinePlayer(playerName));
         }
 
         @Override
@@ -195,7 +195,7 @@ public class VaultHook {
 
         @Override
         public double getBalance(String playerName) {
-            return 0;
+            return getBalance(Bukkit.getOfflinePlayer(playerName));
         }
 
         @Override
@@ -215,7 +215,7 @@ public class VaultHook {
 
         @Override
         public boolean has(String playerName, double amount) {
-            return false;
+            return has(Bukkit.getOfflinePlayer(playerName), amount);
         }
 
         @Override
@@ -235,7 +235,7 @@ public class VaultHook {
 
         @Override
         public EconomyResponse withdrawPlayer(String playerName, double amount) {
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.NOT_IMPLEMENTED, "Deprecated");
+            return withdrawPlayer(Bukkit.getOfflinePlayer(playerName), amount);
         }
 
         @Override
@@ -263,7 +263,7 @@ public class VaultHook {
 
         @Override
         public EconomyResponse depositPlayer(String playerName, double amount) {
-            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.NOT_IMPLEMENTED, "Deprecated");
+            return depositPlayer(Bukkit.getOfflinePlayer(playerName), amount);
         }
 
         @Override
@@ -349,7 +349,7 @@ public class VaultHook {
 
         @Override
         public boolean createPlayerAccount(String playerName) {
-            return false;
+            return createPlayerAccount(Bukkit.getOfflinePlayer(playerName));
         }
 
         @Override
