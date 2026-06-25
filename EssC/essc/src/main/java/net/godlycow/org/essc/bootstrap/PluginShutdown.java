@@ -77,6 +77,10 @@ public final class PluginShutdown {
             plugin.getSpawnManager().shutdown();
         }
 
+        if (plugin.getFastStatsManager() != null) {
+            plugin.getFastStatsManager().shutdown();
+        }
+
         plugin.debug("All managers shut down.");
     }
 

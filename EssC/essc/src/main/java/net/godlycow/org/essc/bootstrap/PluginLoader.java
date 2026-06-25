@@ -260,6 +260,7 @@ public final class PluginLoader {
 
         FastStatsManager fastStats = new FastStatsManager();
         fastStats.init(plugin);
+        plugin.setFastStatsManager(fastStats);
     }
 
     private void registerPlaceholderAPI() {

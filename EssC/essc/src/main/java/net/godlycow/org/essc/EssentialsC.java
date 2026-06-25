@@ -9,6 +9,7 @@ import net.godlycow.org.essc.command.item.HatCommand;
 import net.godlycow.org.essc.command.player.RenameCommand;
 import net.godlycow.org.essc.integration.bedrock.BedrockUtil;
 import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
+import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.modules.*;
@@ -59,6 +60,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private static EssentialsC instance;
 
     private EssScheduler essScheduler;
+    private FastStatsManager fastStatsManager;
     private EssConfig essConfig;
     private CommandsConfig commandsConfig;
     private LanguageManager languageManager;
@@ -183,6 +185,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public EssScheduler getEssScheduler() {
         return essScheduler;
+    }
+
+    public FastStatsManager getFastStatsManager() {
+        return fastStatsManager;
+    }
+
+    public void setFastStatsManager(FastStatsManager fastStatsManager) {
+        this.fastStatsManager = fastStatsManager;
     }
 
     public EssConfig getConfigManager() {

@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
@@ -28,6 +29,8 @@ public final class CrashHandler {
         plugin.getLogger().severe("  " + ex.getClass().getSimpleName() + ": " + ex.getMessage());
         plugin.getLogger().severe("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         ex.printStackTrace();
+
+        FastStatsManager.getErrorTracker().trackError(ex).attributes(dev.faststats.Attributes.empty().put("phase", "startup")).handled(false);
 
         notifyOnlinePlayers();
         registerJoinNotifier();
