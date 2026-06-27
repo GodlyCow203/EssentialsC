@@ -551,3 +551,8 @@ unban-ip:
   enabled: true
   priority: normal
   aliases: []
+
+discord:
+  enabled: true
+  priority: normal
+  aliases: []
