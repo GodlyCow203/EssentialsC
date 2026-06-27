@@ -78,31 +78,6 @@ public class ShopManager {
             }
         }
 
-        File[] files = shopFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.equals("main.yml"));
-        if (files != null) {
-            for (File file : files) {
-                String fileName = file.getName();
-                String categoryId = fileName.substring(0, fileName.length() - 4);
-
-                if (!categories.containsKey(categoryId)) {
-                    YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-
-                    ShopCategory category = new ShopCategory(categoryId);
-                    category.setDisplayName(config.getString("name", categoryId));
-                    category.setIcon(Material.valueOf(config.getString("material", "CHEST")));
-                    category.setTextureUrl(config.getString("texture"));
-                    category.setLore(config.getStringList("lore"));
-                    category.setSlot(config.getInt("slot", 0));
-                    category.setFileName(fileName);
-                    category.setPermission(config.getString("permission"));
-                    category.setEnabled(config.getBoolean("enabled", true));
-
-                    loadItems(category, config);
-                    categories.put(categoryId, category);
-                }
-            }
-        }
-
         plugin.debug("Loaded " + categories.size() + " shop categories");
     }
 
@@ -608,30 +583,6 @@ public class ShopManager {
         if (catsSection != null) {
             for (String key : catsSection.getKeys(false)) {
                 loadCategory(key, catsSection.getConfigurationSection(key));
-            }
-        }
-
-        File[] files = shopFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.equals("main.yml"));
-        if (files != null) {
-            for (File file : files) {
-                String fileName = file.getName();
-                String categoryId = fileName.substring(0, fileName.length() - 4);
-
-                if (!categories.containsKey(categoryId)) {
-                    YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-                    ShopCategory category = new ShopCategory(categoryId);
-                    category.setDisplayName(config.getString("name", categoryId));
-                    category.setIcon(Material.valueOf(config.getString("material", "CHEST")));
-                    category.setTextureUrl(config.getString("texture"));
-                    category.setLore(config.getStringList("lore"));
-                    category.setSlot(config.getInt("slot", 0));
-                    category.setFileName(fileName);
-                    category.setPermission(config.getString("permission"));
-                    category.setEnabled(config.getBoolean("enabled", true));
-
-                    loadItems(category, config);
-                    categories.put(categoryId, category);
-                }
             }
         }
 
