@@ -125,6 +125,22 @@ motd:
     - "<gray>Set <white>motd.enabled</white><gray> to <red>false</red><gray> to disable it completely."
 
 
+# DISCORD
+#
+# Discord Command related Config Option
+
+discord:
+  # The message(s) sent when a player runs /discord.
+  # Supports MiniMessage formatting.
+  message:
+    - "<#5865F2><bold>DISCORD</bold> <#444444>┃ <white>Stay Connected</white>"
+    - ""
+    - "<gray>Join our community server to stay updated with</gray>"
+    - "<gray>announcements, participate in events, and chat</gray>"
+    - "<gray>with other players in real-time.</gray>"
+    - ""
+    - "<#5865F2>➜ <click:open_url:'https://discord.gg/example'><hover:show_text:'<gray>Click to open invite'><white><underlined>https://discord.gg/example</underlined></white></hover></click>"
+
 
 # LuckPerms Integration
 #

@@ -500,6 +500,11 @@ commands:
     usage: /unban-ip <ip>
     permission: essentialsc.unbanip
 
+  discord:
+    description: Use /discord
+    usage: /discord
+    permission: essentialsc.discord
+
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  # ------------------------------------------------- PERMISSIONS ---------------------------------------------------------------------------------------------------------------------------
@@ -1334,3 +1339,4 @@ permissions:
   essentialsc.unbanip:
     description: Unban IP addresses
     default: op
+

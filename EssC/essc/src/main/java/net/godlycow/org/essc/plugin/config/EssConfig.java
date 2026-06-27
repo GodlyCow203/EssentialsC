@@ -341,6 +341,14 @@ public class EssConfig {
         return config.getBoolean("shop.enabled", true);
     }
 
+    public boolean isDiscordEnabled() {
+        return config.getBoolean("discord.enabled", true);
+    }
+
+    public List<String> getDiscordMessage() {
+        return config.getStringList("discord.message");
+    }
+
     public String getShopCurrencySingular() {
         return config.getString("shop.currency.singular", "Dollar");
     }

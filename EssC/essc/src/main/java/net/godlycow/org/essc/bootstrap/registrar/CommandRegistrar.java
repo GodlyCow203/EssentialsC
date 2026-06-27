@@ -43,6 +43,7 @@ public class CommandRegistrar {
     private final CommandsConfig commandsConfig;
     private final AhGuiManager ahGuiManager;
 
+
     public CommandRegistrar(EssentialsC plugin) {
         this.plugin = plugin;
         this.punishmentManager = plugin.getPunishmentManager();
@@ -56,6 +57,8 @@ public class CommandRegistrar {
     }
 
     private void registerCommands() {
+        GamemodeCommand gamemodeCommand = new GamemodeCommand(plugin);
+
         register("heal",           new HealCommand(plugin));
         register("essc",           new EsscCommand(plugin));
         register("feed",           new FeedCommand(plugin));
@@ -132,7 +135,6 @@ public class CommandRegistrar {
         register("user",           new UserCommand(plugin));
         register("suicide",        new SuicideCommand(plugin));
         register("smite",          new SmiteCommand(plugin));
-        GamemodeCommand gamemodeCommand = new GamemodeCommand(plugin);
         register("gm",             gamemodeCommand);
         register("gamemode",       gamemodeCommand);
         register("gms",            gamemodeCommand);
@@ -141,6 +143,7 @@ public class CommandRegistrar {
         register("gma",            gamemodeCommand);
         register("stonecutter",    new StonecutterCommand(plugin));
         register("unban-ip",       new UnbanIpCommand(plugin, punishmentManager));
+        register("discord",        new DiscordCommand(plugin));
 
 
 
