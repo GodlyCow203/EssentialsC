@@ -71,7 +71,7 @@ public final class PluginLoader {
         try {
             load();
         } catch (Exception ex) {
-            new CrashHandler(plugin).handle(ex);
+            CrashHandler.handle(plugin, ex);
         }
     }
 
