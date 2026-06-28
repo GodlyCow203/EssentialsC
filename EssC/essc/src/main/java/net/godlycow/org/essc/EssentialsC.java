@@ -60,7 +60,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private static EssentialsC instance;
 
     private EssScheduler essScheduler;
-    private FastStatsManager fastStatsManager;
     private EssConfig essConfig;
     private CommandsConfig commandsConfig;
     private LanguageManager languageManager;
@@ -106,6 +105,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private CommandCooldownManager commandCooldownManager;
     private InvseeListener invseeListener;
 
+    private final FastStatsManager fastStatsManager = new FastStatsManager(this);
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
@@ -189,10 +189,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public FastStatsManager getFastStatsManager() {
         return fastStatsManager;
-    }
-
-    public void setFastStatsManager(FastStatsManager fastStatsManager) {
-        this.fastStatsManager = fastStatsManager;
     }
 
     public EssConfig getConfigManager() {

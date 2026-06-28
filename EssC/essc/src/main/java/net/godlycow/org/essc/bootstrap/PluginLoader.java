@@ -71,7 +71,7 @@ public final class PluginLoader {
         try {
             load();
         } catch (Exception ex) {
-            new CrashHandler(plugin).handle(ex);
+            CrashHandler.handle(plugin, ex);
         }
     }
 
@@ -258,9 +258,7 @@ public final class PluginLoader {
 
         UsageCharts.register(plugin, metrics);
 
-        FastStatsManager fastStats = new FastStatsManager();
-        fastStats.init(plugin);
-        plugin.setFastStatsManager(fastStats);
+        plugin.getFastStatsManager().ready();
     }
 
     private void registerPlaceholderAPI() {
