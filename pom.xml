@@ -40,7 +40,7 @@
         </repository>
         <repository>
             <id>faststats</id>
-            <url>https://repo.faststats.dev.net/releases</url>
+            <url>https://repo.faststats.dev/releases</url>
         </repository>
     </repositories>
 
