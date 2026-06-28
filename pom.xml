@@ -39,8 +39,8 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
-            <id>thenextlvl</id>
-            <url>https://repo.thenextlvl.net/releases</url>
+            <id>faststats</id>
+            <url>https://repo.faststats.dev.net/releases</url>
         </repository>
     </repositories>
 
