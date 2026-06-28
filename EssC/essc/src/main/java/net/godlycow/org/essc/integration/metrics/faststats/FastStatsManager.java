@@ -5,33 +5,30 @@ import dev.faststats.Metrics;
 import dev.faststats.bukkit.BukkitContext;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class FastStatsManager {
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
+public final class FastStatsManager {
+    public static final ErrorTracker ERROR_TRACKER = ErrorTracker.contextAware()
+            .ignoreError(InvocationTargetException.class)
+            .ignoreError(IOException.class, "Broken pipe");  //ignore IT + IO Exceptions
+    private final BukkitContext context;
 
-    private BukkitContext context;
-
-    public void init(JavaPlugin plugin) {
-        ErrorTracker.contextAware().ignoreError(java.lang.reflect.InvocationTargetException.class).ignoreError(java.io.IOException.class, "Broken pipe").getAttributes()  //ignore IT + IO Exceptions
-                .put("plugin_version", plugin.getDescription().getVersion())
-                .put("server_version", plugin.getServer().getVersion());
-
-        context = new BukkitContext.Factory(plugin, "753b5c694c676a97c8966eee8a159012")
-                .errorTrackerService(ErrorTracker.contextAware().ignoreError(java.lang.reflect.InvocationTargetException.class).ignoreError(java.io.IOException.class, "Broken pipe"))
+    public FastStatsManager(JavaPlugin plugin) {
+        this.context = new BukkitContext.Factory(plugin, "753b5c694c676a97c8966eee8a159012")
+                .errorTrackerService(ERROR_TRACKER)
                 .metrics(Metrics.Factory::create)
                 .create();
-
-        context.ready();
-
-        plugin.getLogger().info("Enabled FastStats Metrics and Error Tracking");
-    }
-
-    public void shutdown() {
-        if (context != null) {
-            context.shutdown();
+        if (context.getConfig().enabled()) {
+            plugin.getLogger().info("Enabled FastStats Metrics and Error Tracking");
         }
     }
 
-    public static ErrorTracker getErrorTracker() {
-        return ErrorTracker.contextAware().ignoreError(java.lang.reflect.InvocationTargetException.class).ignoreError(java.io.IOException.class, "Broken pipe");
+    public void ready() {
+        context.ready();
+    }
+
+    public void shutdown() {
+        context.shutdown();
     }
 }

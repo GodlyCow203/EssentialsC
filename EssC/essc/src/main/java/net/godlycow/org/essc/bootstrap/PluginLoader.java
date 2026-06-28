@@ -258,9 +258,7 @@ public final class PluginLoader {
 
         UsageCharts.register(plugin, metrics);
 
-        FastStatsManager fastStats = new FastStatsManager();
-        fastStats.init(plugin);
-        plugin.setFastStatsManager(fastStats);
+        plugin.getFastStatsManager().ready();
     }
 
     private void registerPlaceholderAPI() {

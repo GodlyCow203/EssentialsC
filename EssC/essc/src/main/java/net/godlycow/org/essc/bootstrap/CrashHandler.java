@@ -30,7 +30,10 @@ public final class CrashHandler {
         plugin.getLogger().severe("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         ex.printStackTrace();
 
-        FastStatsManager.getErrorTracker().trackError(ex).attributes(dev.faststats.Attributes.empty().put("phase", "startup")).handled(false);
+        FastStatsManager.ERROR_TRACKER.trackError(ex)
+                .attributes(Attributes.empty()
+                        .put("phase", "startup"))
+                .handled(false);
 
         notifyOnlinePlayers();
         registerJoinNotifier();
