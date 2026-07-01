@@ -3,7 +3,6 @@ package net.godlycow.org.essc.plugin.dump;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
-import net.godlycow.org.essc.server.FeatureFlags;
 import net.godlycow.org.essc.server.software.ServerSoftware;
 import net.godlycow.org.essc.storage.user.UserDatabase;
 import org.bukkit.Bukkit;
@@ -110,8 +109,6 @@ public class DumpSectionCollector {
 
         env.put("folia", ServerSoftware.isFolia());
         env.put("paper", ServerSoftware.isPaper());
-        env.put("nativeAsyncTeleport", FeatureFlags.supportsNativeAsyncTeleport());
-        env.put("paperChatEvent", FeatureFlags.supportsPaperChatEvent());
 
         return env;
     }

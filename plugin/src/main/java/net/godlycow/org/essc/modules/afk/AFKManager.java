@@ -4,7 +4,6 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.plugin.config.EssConfig;
-import net.godlycow.org.essc.server.FeatureFlags;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
@@ -19,11 +18,22 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AFKManager implements Listener {
@@ -369,13 +379,6 @@ public class AFKManager implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPaperChat(AsyncChatEvent event) {
-        if (!FeatureFlags.supportsPaperChatEvent()) return;
-        updateActivity(event.getPlayer());
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onLegacyChat(AsyncPlayerChatEvent event) {
-        if (FeatureFlags.supportsPaperChatEvent()) return;
         updateActivity(event.getPlayer());
     }
 
