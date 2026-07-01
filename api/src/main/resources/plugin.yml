@@ -1,4 +1,0 @@
-name: api
-version: '${project.version}'
-main: net.godlycow.org.essc.api.EsscAPI
-api-version: '1.21'
