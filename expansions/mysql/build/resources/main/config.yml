@@ -1,0 +1,27 @@
+# EssentialsC MySQL Database Expansion
+# Cross-server economy synchronization
+
+
+# Unique identifier for this server instance
+# IMPORTANT: Each server in your network must have a different server-id
+server-id: "server-2"
+
+
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "essc_test"
+  username: "root"
+  password: "minecraft"
+  # Connection pool size
+  # For aggressive 1-second sync mode, use 10-20 for best performance
+  # Minimum recommended: 10
+  pool-size: 10
+
+network-kits:
+  enabled: true
+
+network-nicknames:
+  enabled: true
+  # How often to pull nicknames from MySQL for all online players (in ticks, 20 = 1s)
+  poll-interval-ticks: 40
