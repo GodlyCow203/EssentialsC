@@ -36,7 +36,7 @@ public class JoinLeaveListener implements Listener {
             } else {
                 plugin.getUserManager().loadInventory(joiningPlayer.getUniqueId()).thenAccept(base64 -> {
                     if (base64 == null) return;
-                    plugin.getEssScheduler().runGlobal(() -> {
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                         if (!joiningPlayer.isOnline()) return;
                         ItemStack[] slots = InventorySerializer.deserialize(base64);
                         InventorySerializer.applyToInventory(slots, joiningPlayer.getInventory());

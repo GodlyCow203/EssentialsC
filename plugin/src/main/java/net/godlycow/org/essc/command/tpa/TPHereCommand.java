@@ -51,7 +51,7 @@ public class TPHereCommand extends Command {
         plugin.getBackManager().setBackLocation(target, target.getLocation());
 
         Location dest = player.getLocation();
-        plugin.getEssScheduler().teleportAsync(target, dest).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(target, dest).thenAccept(success -> {
             if (!success) return;
 
             Map<String, String> senderPlaceholders = new HashMap<>();

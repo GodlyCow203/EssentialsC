@@ -61,10 +61,10 @@ public class HomeCommand extends Command {
                 player.sendMessage(lang.get(player, "home.bed.no_bed"));
                 return true;
             }
-            plugin.getEssScheduler().teleportAsync(player, bedLoc).thenAccept(success -> {
+            plugin.teleportHelper().teleportAsync(player, bedLoc).thenAccept(success -> {
                 if (success) {
-                    plugin.getEssScheduler().runForEntity(player, () ->
-                            player.sendMessage(lang.get(player, "home.bed.teleported")));
+                    player.getScheduler().run(plugin, task ->
+                            player.sendMessage(lang.get(player, "home.bed.teleported")), null);
                 }
             });
             return true;
@@ -76,7 +76,7 @@ public class HomeCommand extends Command {
 
     private void teleportToHome(Player player, UUID targetUuid, String name, String targetName) {
         plugin.getHomeManager().getHome(targetUuid, name).whenComplete((home, err) -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (home == null) {
                     String defaultHome = plugin.getConfigManager().getDefaultTeleportHomeName();
                     if (targetName == null && name.equalsIgnoreCase(defaultHome) && !defaultHome.isEmpty()) {
@@ -90,7 +90,7 @@ public class HomeCommand extends Command {
                 if (targetName != null) {
                     Location loc = home.toLocation(plugin.getServer());
                     if (loc != null) {
-                        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+                        plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
                             if (success) player.sendMessage(lang.get(player, "home.admin.teleported_to_other",
                                     Map.of("player", targetName, "name", name)));
                         });
@@ -98,13 +98,13 @@ public class HomeCommand extends Command {
                 } else {
                     plugin.getHomeManager().startTeleport(player, home);
                 }
-            });
+            }, null);
         });
     }
 
     private void showHomeList(Player player) {
         plugin.getHomeManager().getHomes(player.getUniqueId()).whenComplete((homes, err) -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 boolean hasBed = player.hasPermission("essentialsc.home.bed")
                         && player.getBedSpawnLocation() != null;
 
@@ -144,7 +144,7 @@ public class HomeCommand extends Command {
 
                 player.sendMessage(lang.get(player, "home.list.entries",
                         Map.of("homes", sb.toString())));
-            });
+            }, null);
         });
     }
 
@@ -180,8 +180,7 @@ public class HomeCommand extends Command {
             }
 
             return completions;
-        }
-        else if (args.length == 2 && player.hasPermission("essentialsc.home.admin")) {
+        } else if (args.length == 2 && player.hasPermission("essentialsc.home.admin")) {
             String targetName = args[0];
             String partial = args[1].toLowerCase();
             Player target = plugin.getServer().getPlayer(targetName);

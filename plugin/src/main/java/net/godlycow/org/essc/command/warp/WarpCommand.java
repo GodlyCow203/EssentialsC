@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.command.warp;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.warp.Warp;
 import net.godlycow.org.essc.modules.warp.WarpManager;
@@ -11,9 +11,12 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class WarpCommand extends Command {
@@ -77,7 +80,7 @@ public class WarpCommand extends Command {
         double cost = warp.getCost();
         if (cost > 0 && plugin.isVaultHooked() && !player.hasPermission("essentialsc.warp.free")) {
             plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     if (balance.doubleValue() < cost) {
                         Map<String, String> placeholders = new HashMap<>();
                         placeholders.put("cost", String.format("%.2f", cost));
@@ -90,7 +93,7 @@ public class WarpCommand extends Command {
                     } else {
                         executeWarp(player, warp, cost);
                     }
-                });
+                }, null);
             });
             return true;
         }
@@ -128,56 +131,51 @@ public class WarpCommand extends Command {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
         }
 
-        SchedulerTask[] taskHolder = new SchedulerTask[1];
+        ScheduledTask[] taskHolder = new ScheduledTask[1];
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
-            long remaining = seconds;
+        AtomicLong remaining = new AtomicLong(seconds);
+        ScheduledTask task = player.getScheduler().runAtFixedRate(plugin, task1 -> {
+            if (!player.isOnline()) {
+                warpManager.cancelWarmupTask(player.getUniqueId());
+                warpManager.removePendingWarp(player.getUniqueId());
+                warpManager.clearMovementTrack(player.getUniqueId());
+                return;
+            }
 
-            @Override
-            public void run() {
-                if (!player.isOnline()) {
+            if (!warpManager.hasPendingWarp(player.getUniqueId())) {
+                warpManager.cancelWarmupTask(player.getUniqueId());
+                return;
+            }
+
+            Warp pending = warpManager.getPendingWarp(player.getUniqueId());
+            if (pending == null || !pending.getName().equalsIgnoreCase(warp.getName())) {
+                warpManager.cancelWarmupTask(player.getUniqueId());
+                return;
+            }
+
+            if (plugin.getConfigManager().isWarpCancelOnMovement()) {
+                Location original = warpManager.getTrackedLocation(player.getUniqueId());
+                if (original != null && player.getLocation().distanceSquared(original) > 0.1) {
                     warpManager.cancelWarmupTask(player.getUniqueId());
                     warpManager.removePendingWarp(player.getUniqueId());
                     warpManager.clearMovementTrack(player.getUniqueId());
+                    player.sendMessage(lang.get(player, "warp.cancelled_movement"));
                     return;
-                }
-
-                if (!warpManager.hasPendingWarp(player.getUniqueId())) {
-                    warpManager.cancelWarmupTask(player.getUniqueId());
-                    return;
-                }
-
-                Warp pending = warpManager.getPendingWarp(player.getUniqueId());
-                if (pending == null || !pending.getName().equalsIgnoreCase(warp.getName())) {
-                    warpManager.cancelWarmupTask(player.getUniqueId());
-                    return;
-                }
-
-                if (plugin.getConfigManager().isWarpCancelOnMovement()) {
-                    Location original = warpManager.getTrackedLocation(player.getUniqueId());
-                    if (original != null && player.getLocation().distanceSquared(original) > 0.1) {
-                        warpManager.cancelWarmupTask(player.getUniqueId());
-                        warpManager.removePendingWarp(player.getUniqueId());
-                        warpManager.clearMovementTrack(player.getUniqueId());
-                        player.sendMessage(lang.get(player, "warp.cancelled_movement"));
-                        return;
-                    }
-                }
-
-                remaining--;
-
-                if (remaining <= 0) {
-                    warpManager.removePendingWarp(player.getUniqueId());
-                    warpManager.clearMovementTrack(player.getUniqueId());
-                    warpManager.cancelWarmupTask(player.getUniqueId());
-                    executeWarp(player, warp, cost);
-                } else {
-                    if (plugin.getConfigManager().isWarpSounds() && remaining <= 3) {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.8f + (0.1f * (3 - remaining)));
-                    }
                 }
             }
-        }, 20L, 20L);
+
+            var l = remaining.decrementAndGet();
+            if (l <= 0) {
+                warpManager.removePendingWarp(player.getUniqueId());
+                warpManager.clearMovementTrack(player.getUniqueId());
+                warpManager.cancelWarmupTask(player.getUniqueId());
+                executeWarp(player, warp, cost);
+            } else {
+                if (plugin.getConfigManager().isWarpSounds() && l <= 3) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.8f + (0.1f * (3 - l)));
+                }
+            }
+        }, null, 20L, 20L);
 
         warpManager.setWarmupTask(player.getUniqueId(), task);
     }
@@ -194,7 +192,7 @@ public class WarpCommand extends Command {
         }
 
         Location dest = warp.getLocation();
-        plugin.getEssScheduler().teleportAsync(player, dest).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, dest).thenAccept(success -> {
             if (!success) return;
 
             if (plugin.getConfigManager().isWarpParticles()) {

@@ -49,10 +49,10 @@ public class Nick {
 
                     Player onlinePlayer = plugin.getServer().getPlayer(data.uuid());
                     if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                        plugin.getEssScheduler().runForEntity(onlinePlayer, () -> {
+                        onlinePlayer.getScheduler().run(plugin, task -> {
                             plugin.getNickManager().applyNickname(onlinePlayer);
                             plugin.debug("Applied migrated nickname to online player: " + onlinePlayer.getName());
-                        });
+                        }, null);
                     } else {
                         plugin.debug("Nickname saved for offline player " + data.uuid() + " - will apply on next join");
                     }

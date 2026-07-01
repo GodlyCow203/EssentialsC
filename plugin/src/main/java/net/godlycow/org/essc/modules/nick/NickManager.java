@@ -170,7 +170,7 @@ public class NickManager implements Listener {
         if (!plugin.getConfigManager().isNickEnabled()) return;
 
         getNickname(player.getUniqueId()).thenAccept(opt -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (opt.isPresent()) {
                     String nick = opt.get();
 
@@ -188,7 +188,7 @@ public class NickManager implements Listener {
                 if (plugin.getTabManager() != null) {
                     plugin.getTabManager().updatePlayerTab(player);
                 }
-            });
+            }, null);
         });
     }
 

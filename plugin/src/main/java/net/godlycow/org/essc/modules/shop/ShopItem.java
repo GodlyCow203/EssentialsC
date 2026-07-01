@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.modules.shop;
 
+import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.SkullTextureUtil;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
@@ -109,7 +110,7 @@ public class ShopItem {
         if (!nbtData.isEmpty()) {
             for (Map.Entry<String, String> entry : nbtData.entrySet()) {
                 NamespacedKey key = new NamespacedKey(
-                        JavaPlugin.getProvidingPlugin(getClass()),
+                        JavaPlugin.getPlugin(EssentialsC.class),
                         entry.getKey()
                 );
                 meta.getPersistentDataContainer().set(
@@ -155,7 +156,7 @@ public class ShopItem {
             } else {
                 String textureValue = textureUrl != null ? textureUrl : base64Texture;
                 SkullTextureUtil.applyTexture(skullMeta, textureValue,
-                        JavaPlugin.getProvidingPlugin(getClass()).getLogger());
+                        JavaPlugin.getPlugin(EssentialsC.class).getLogger());
             }
         }
 
@@ -187,7 +188,7 @@ public class ShopItem {
                 }
                 blockMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
                 NamespacedKey spawnerKey = new NamespacedKey(
-                        JavaPlugin.getProvidingPlugin(getClass()), "essc_spawner_type"
+                        JavaPlugin.getPlugin(EssentialsC.class), "essc_spawner_type"
                 );
                 blockMeta.getPersistentDataContainer().set(
                         spawnerKey, PersistentDataType.STRING, spawnerType.toUpperCase()

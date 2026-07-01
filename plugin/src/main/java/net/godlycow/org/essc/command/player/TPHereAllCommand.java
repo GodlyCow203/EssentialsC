@@ -52,7 +52,7 @@ public class TPHereAllCommand extends Command {
             }
 
             targets.add(target);
-            futures.add(plugin.getEssScheduler().teleportAsync(target, targetLocation));
+            futures.add(plugin.teleportHelper().teleportAsync(target, targetLocation));
         }
 
         final int skipped = skippedCount;
@@ -68,7 +68,8 @@ public class TPHereAllCommand extends Command {
                                 targetPlaceholders.put("player", player.getName());
                                 target.sendMessage(lang.get(target, "tphereall.teleported", targetPlaceholders));
                             }
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {
+                        }
                     }
 
                     Map<String, String> senderPlaceholders = new HashMap<>();

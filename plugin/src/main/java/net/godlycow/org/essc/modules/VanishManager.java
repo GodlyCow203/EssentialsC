@@ -123,7 +123,7 @@ public class VanishManager implements Listener {
 
         if (vanishedPlayers.contains(joining.getUniqueId())) {
             joining.setMetadata("vanished", new FixedMetadataValue(plugin, true));
-            plugin.getEssScheduler().runForEntityLater(joining, () -> vanish(joining), 2L);
+            joining.getScheduler().runDelayed(plugin, task -> vanish(joining), null, 2L);
         }
 
         for (UUID vanishedId : vanishedPlayers) {

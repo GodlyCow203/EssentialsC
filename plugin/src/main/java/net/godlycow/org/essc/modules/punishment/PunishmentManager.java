@@ -51,14 +51,14 @@ public class PunishmentManager {
     }
 
     public void saveBans() {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try { banConfig.save(banFile); }
             catch (IOException e) { plugin.getLogger().severe("Failed to save bans.yml"); }
         });
     }
 
     public void saveMutes() {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try { muteConfig.save(muteFile); }
             catch (IOException e) { plugin.getLogger().severe("Failed to save mutes.yml"); }
         });

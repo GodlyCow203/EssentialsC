@@ -123,14 +123,14 @@ public class KitManagerImpl implements KitManager {
         var impl = (KitImpl) kit;
         CompletableFuture<Void> future = new CompletableFuture<>();
 
-        plugin.getEssScheduler().runForEntity(player, () -> {
+        player.getScheduler().run(plugin, task -> {
             try {
                 plugin.getKitManager().giveKit(player, impl.getInternalKit());
                 future.complete(null);
             } catch (Exception ex) {
                 future.completeExceptionally(ex);
             }
-        });
+        }, null);
 
         return future;
     }

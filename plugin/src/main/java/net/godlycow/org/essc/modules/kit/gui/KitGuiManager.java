@@ -109,12 +109,12 @@ public class KitGuiManager {
                 ? guiFramework.getItemBuilder().build(navNext, player) : buildFillerPane());
 
         activeSessions.put(player.getUniqueId(), safePage);
-        plugin.getEssScheduler().runForEntity(player, () -> {
+        player.getScheduler().run(plugin, task -> {
             if (player.isOnline()) {
                 player.openInventory(gui);
                 sounds.playOpen(player);
             }
-        });
+        }, null);
     }
 
     public void handleKitClick(Player player, String kitName) {
@@ -129,7 +129,7 @@ public class KitGuiManager {
         }
 
         plugin.getKitManager().getCooldownRemainingAsync(player, kit).thenAccept(cooldown -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (!player.isOnline()) return;
 
                 if (!plugin.getKitManager().canClaim(player, kit)) {
@@ -168,7 +168,7 @@ public class KitGuiManager {
 
                 sounds.playClaim(player);
                 plugin.getKitManager().giveKit(player, kit);
-            });
+            }, null);
         });
     }
 

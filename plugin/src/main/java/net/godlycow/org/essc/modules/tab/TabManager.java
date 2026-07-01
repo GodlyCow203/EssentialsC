@@ -68,12 +68,12 @@ public class TabManager implements Listener {
     }
 
     private void startRefreshTask() {
-        plugin.getEssScheduler().runGlobalTimer(this::refreshAll, 100L, 100L);
+        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> refreshAll(), 100L, 100L);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        plugin.getEssScheduler().runForEntityLater(event.getPlayer(), () -> updatePlayerTab(event.getPlayer()), 5L);
+        event.getPlayer().getScheduler().runDelayed(plugin, task -> updatePlayerTab(event.getPlayer()), null, 5L);
     }
 
     @EventHandler

@@ -9,7 +9,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TpOfflineCommand extends Command {
@@ -45,11 +50,11 @@ public class TpOfflineCommand extends Command {
             if (profile == null) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", targetName);
-                plugin.getEssScheduler().runGlobal(() ->
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
                         player.sendMessage(lang.get(player, "tpoffline.no_location", placeholders)));
                 return;
             }
-            plugin.getEssScheduler().runGlobal(() -> teleportToProfile(player, profile));
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> teleportToProfile(player, profile));
         });
 
         return true;
@@ -72,7 +77,7 @@ public class TpOfflineCommand extends Command {
         placeholders.put("y", String.format("%.1f", loc.getY()));
         placeholders.put("z", String.format("%.1f", loc.getZ()));
 
-        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
             player.sendMessage(lang.get(player, "tpoffline.success", placeholders));
             plugin.debug(player.getName() + " teleported to " + profile.getUsername() + "'s logout location");

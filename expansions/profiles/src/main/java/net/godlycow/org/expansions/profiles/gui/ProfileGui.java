@@ -50,7 +50,7 @@ public class ProfileGui implements Listener {
         viewer.openInventory(loading);
 
         ProfileData.load(target, essc).thenAccept(data ->
-                Bukkit.getScheduler().runTask(plugin, () -> {
+                plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> {
                     if (!viewer.isOnline()) return;
                     viewer.openInventory(build(data));
                 })

@@ -68,9 +68,8 @@ public class ShopListener implements Listener {
             return;
         }
 
-        org.bukkit.Location blockLocation = event.getBlock().getLocation();
-        plugin.getEssScheduler().runForLocation(blockLocation, () -> {
-            org.bukkit.block.BlockState state = blockLocation.getBlock().getState();
+        plugin.getServer().getRegionScheduler().run(plugin, event.getBlock().getLocation(), task -> {
+            org.bukkit.block.BlockState state = event.getBlock().getState();
             if (state instanceof CreatureSpawner cs) {
                 cs.setSpawnedType(entityType);
                 cs.update(true, false);
@@ -209,12 +208,12 @@ public class ShopListener implements Listener {
         Inventory inv = event.getInventory();
         if (!(inv.getHolder() instanceof ShopHolder)) return;
 
-        plugin.getEssScheduler().runForEntity(player, () -> {
+        player.getScheduler().run(plugin, task -> {
             Inventory current = player.getOpenInventory().getTopInventory();
             if (!(current.getHolder() instanceof ShopHolder)) {
                 removeSession(player);
             }
-        });
+        }, null);
     }
 
     public ShopSession getSession(Player player) {

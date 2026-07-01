@@ -43,7 +43,7 @@ public class KitManager implements Listener {
     }
 
     private void startCooldownNotificationTask() {
-        plugin.getEssScheduler().runGlobalTimer(() -> {
+        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 for (Kit kit : definitions.getKits()) {
                     if (kit.getCooldown() > 0 && data.hasClaimed(player.getUniqueId(), kit.getName())) {
@@ -76,7 +76,7 @@ public class KitManager implements Listener {
         CompletableFuture<Void> notifFuture = cooldowns.loadNotificationsEnabled(player.getUniqueId());
 
         CompletableFuture.allOf(dataFuture, notifFuture).thenRun(() -> {
-            plugin.getEssScheduler().runGlobal(() -> {
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 if (!player.isOnline()) return;
 
                 if (!player.hasPlayedBefore()) {

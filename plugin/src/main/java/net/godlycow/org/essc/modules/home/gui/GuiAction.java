@@ -198,7 +198,7 @@ public class GuiAction {
                         if (loc != null) {
                             String targetName = Bukkit.getOfflinePlayer(targetUuid).getName() != null
                                     ? Bukkit.getOfflinePlayer(targetUuid).getName() : targetUuid.toString();
-                            plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+                            plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
                                 if (!success) return;
                                 player.sendMessage(lang(player, "home.admin.teleported_to_other",
                                         Map.of("player", targetName, "name", homeName)));
@@ -236,6 +236,6 @@ public class GuiAction {
     }
 
     private void sync(Player player, Runnable task) {
-        plugin.getEssScheduler().runForEntity(player, task);
+        player.getScheduler().run(plugin, task1 -> task.run(), null);
     }
 }

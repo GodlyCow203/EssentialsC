@@ -62,11 +62,11 @@ public class HomeGuiListener implements Listener {
     public void onClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
         if (event.getInventory().getHolder() instanceof GuiManager.HomeHolder) {
-            plugin.getEssScheduler().runForEntityLater(player, () -> {
+            player.getScheduler().runDelayed(plugin, task -> {
                 if (player.getOpenInventory().getTopInventory().getHolder()
                         instanceof GuiManager.HomeHolder) return;
                 manager.clearState(player);
-            }, 1L);
+            }, null, 1L);
         }
     }
 
@@ -91,7 +91,7 @@ public class HomeGuiListener implements Listener {
             case "home" -> {
                 plugin.getHomeManager().getHome(player.getUniqueId(), data).whenComplete((home, err) -> {
                     if (home != null) {
-                        plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, player.getUniqueId()));
+                        player.getScheduler().run(plugin, task -> manager.openHomeDetails(player, home, player.getUniqueId()), null);
                     }
                 });
             }
@@ -100,7 +100,7 @@ public class HomeGuiListener implements Listener {
                 if (adminTarget != null) {
                     plugin.getHomeManager().getHome(adminTarget, data).whenComplete((home, err) -> {
                         if (home != null) {
-                            plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, adminTarget));
+                            player.getScheduler().run(plugin, task -> manager.openHomeDetails(player, home, adminTarget), null);
                         }
                     });
                 }
@@ -144,15 +144,15 @@ public class HomeGuiListener implements Listener {
                 final UUID backTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(backTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        plugin.getEssScheduler().runForEntity(player, () -> manager.openHomeDetails(player, home, backTarget));
+                        player.getScheduler().run(plugin, task -> manager.openHomeDetails(player, home, backTarget), null);
                     } else {
-                        plugin.getEssScheduler().runForEntity(player, () -> {
+                        player.getScheduler().run(plugin, task -> {
                             if (backTarget.equals(player.getUniqueId())) {
                                 manager.openHomeList(player);
                             } else {
                                 manager.openPlayerHomes(player, backTarget, Bukkit.getOfflinePlayer(backTarget).getName());
                             }
-                        });
+                        }, null);
                     }
                 });
             }
@@ -175,7 +175,7 @@ public class HomeGuiListener implements Listener {
                 final UUID updateTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(updateTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        plugin.getEssScheduler().runForEntity(player, () -> manager.openConfirmUpdate(player, home, updateTarget));
+                        player.getScheduler().run(plugin, task -> manager.openConfirmUpdate(player, home, updateTarget), null);
                     }
                 });
             }
@@ -183,7 +183,7 @@ public class HomeGuiListener implements Listener {
                 final UUID deleteTarget = finalTargetUuid;
                 plugin.getHomeManager().getHome(deleteTarget, data).whenComplete((home, err) -> {
                     if (home != null) {
-                        plugin.getEssScheduler().runForEntity(player, () -> manager.openConfirmDelete(player, home, deleteTarget));
+                        player.getScheduler().run(plugin, task -> manager.openConfirmDelete(player, home, deleteTarget), null);
                     }
                 });
             }

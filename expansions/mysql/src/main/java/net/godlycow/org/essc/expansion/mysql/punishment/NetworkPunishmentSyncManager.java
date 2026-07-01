@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.expansion.mysql.punishment;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
@@ -9,7 +10,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,7 +26,7 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
     private final SyncConfig config;
     private final NetworkPunishmentDatabase db;
 
-    private BukkitTask pollTask;
+    private ScheduledTask pollTask;
     private long lastPollTime = 0;
 
     private final Set<Long> appliedIds = ConcurrentHashMap.newKeySet();
@@ -44,7 +44,7 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
 
     public void start() {
         lastPollTime = System.currentTimeMillis();
-        pollTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::pollCycle, 40L, 40L);
+        pollTask = plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> pollCycle(), 2L, 2L, TimeUnit.SECONDS);
         plugin.getLogger().info("[NetworkPunishments] Poll loop started (2s interval).");
     }
 
@@ -132,7 +132,7 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
         Player online = Bukkit.getPlayer(uuid);
         if (online != null) {
             Component msg = buildBanKick(p.reason(), p.punisher(), p.expires());
-            Bukkit.getScheduler().runTask(plugin, () -> online.kick(msg));
+            plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> online.kick(msg));
             plugin.getLogger().info("[NetworkPunishments] Kicked " + online.getName()
                     + " (network ban from " + p.serverId() + ")");
         }
@@ -148,7 +148,7 @@ public class NetworkPunishmentSyncManager implements NetworkPunishmentHook {
             if (pl.getAddress() != null
                     && pl.getAddress().getAddress().getHostAddress().equals(ip)) {
                 Component msg = buildBanKick(p.reason(), p.punisher(), p.expires());
-                Bukkit.getScheduler().runTask(plugin, () -> pl.kick(msg));
+                plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> pl.kick(msg));
                 plugin.getLogger().info("[NetworkPunishments] Kicked " + pl.getName()
                         + " (network IP ban from " + p.serverId() + ")");
             }

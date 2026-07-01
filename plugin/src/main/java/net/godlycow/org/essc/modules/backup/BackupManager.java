@@ -31,7 +31,7 @@ public class BackupManager {
 
     public void createAsync(java.util.function.Consumer<String> onSuccess,
                             java.util.function.Consumer<String> onFailure) {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try {
                 String fileName = "backup-" + LocalDateTime.now().format(TIMESTAMP_FORMAT) + ".zip";
                 File zipFile = new File(backupFolder, fileName);
@@ -40,9 +40,9 @@ public class BackupManager {
 
                 pruneOldBackups();
 
-                plugin.getEssScheduler().runGlobal(() -> onSuccess.accept(fileName));
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> onSuccess.accept(fileName));
             } catch (IOException e) {
-                plugin.getEssScheduler().runGlobal(() -> onFailure.accept(e.getMessage()));
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> onFailure.accept(e.getMessage()));
             }
         });
     }

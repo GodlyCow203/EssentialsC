@@ -1,16 +1,39 @@
 package net.godlycow.org.essc.modules.rtp;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.api.rtp.event.*;
-import net.godlycow.org.essc.server.SchedulerTask;
-import org.bukkit.*;
+import net.godlycow.org.essc.api.rtp.event.RtpCooldownExpireEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpFailEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpPostTeleportEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpRequestEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpSearchCompleteEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpSearchStartEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpTeleportEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpWarmupCancelEvent;
+import net.godlycow.org.essc.api.rtp.event.RtpWarmupStartEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.block.Biome;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class RTPManager {
@@ -18,7 +41,7 @@ public class RTPManager {
     private final EssentialsC plugin;
     private final Random random = new Random();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> pendingTeleports = new ConcurrentHashMap<>();
     private final Set<UUID> rtpInProgress = ConcurrentHashMap.newKeySet();
     private final Map<String, WorldRTPSettings> worldSettings = new ConcurrentHashMap<>();
 
@@ -148,11 +171,13 @@ public class RTPManager {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(SchedulerTask::cancel);
+        pendingTeleports.values().forEach(ScheduledTask::cancel);
         pendingTeleports.clear();
     }
 
-    public boolean isEnabled() { return enabled; }
+    public boolean isEnabled() {
+        return enabled;
+    }
 
     public boolean isWorldEnabled(String worldName) {
         WorldRTPSettings settings = worldSettings.get(worldName);
@@ -295,50 +320,44 @@ public class RTPManager {
 
         long resolvedWarmup = warmupEvent.getWarmupSeconds();
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityTimer(player, new Runnable() {
-            int seconds = (int) resolvedWarmup;
+        AtomicLong seconds = new AtomicLong(resolvedWarmup);
+        ScheduledTask task = player.getScheduler().runAtFixedRate(plugin, task1 -> {
+            if (!player.isOnline()) {
+                cleanupWarmup(player);
+                Bukkit.getPluginManager().callEvent(new RtpWarmupCancelEvent(player, world, RtpWarmupCancelEvent.CancelReason.PLAYER_OFFLINE));
+                Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.WARMUP_CANCELLED));
 
-            @Override
-            public void run() {
-                if (!player.isOnline()) {
-                    cleanupWarmup(player);
-                    Bukkit.getPluginManager().callEvent(new RtpWarmupCancelEvent(player, world, RtpWarmupCancelEvent.CancelReason.PLAYER_OFFLINE));
-                    Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.WARMUP_CANCELLED));
-
-                    return;
-                }
-
-                if (cancelOnMovement && !hasBypassPermission(player, "movement") && hasMoved(initialLocation, player.getLocation())) {
-                    cleanupWarmup(player);
-                    player.sendMessage(plugin.getLanguageManager().get(player, "rtp.warmup.cancelled"));
-                    Bukkit.getPluginManager().callEvent(new RtpWarmupCancelEvent(player, world, RtpWarmupCancelEvent.CancelReason.PLAYER_MOVED));
-                    Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.WARMUP_CANCELLED));
-
-
-                    return;
-                }
-
-                seconds--;
-
-                if (seconds <= 0) {
-                    SchedulerTask t = pendingTeleports.remove(player.getUniqueId());
-                    if (t != null) t.cancel();
-                    executeRTP(player, world);
-                } else {
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 0.5f, 1.0f);
-                    Map<String, String> ph = new HashMap<>();
-                    ph.put("time", String.valueOf(seconds));
-                    player.sendActionBar(plugin.getLanguageManager().get(player, "rtp.warmup.actionbar", ph));
-                }
+                return;
             }
-        }, 20L, 20L);
+
+            if (cancelOnMovement && !hasBypassPermission(player, "movement") && hasMoved(initialLocation, player.getLocation())) {
+                cleanupWarmup(player);
+                player.sendMessage(plugin.getLanguageManager().get(player, "rtp.warmup.cancelled"));
+                Bukkit.getPluginManager().callEvent(new RtpWarmupCancelEvent(player, world, RtpWarmupCancelEvent.CancelReason.PLAYER_MOVED));
+                Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.WARMUP_CANCELLED));
+
+
+                return;
+            }
+
+            if (seconds.decrementAndGet() <= 0) {
+                ScheduledTask t = pendingTeleports.remove(player.getUniqueId());
+                if (t != null) t.cancel();
+                executeRTP(player, world);
+            } else {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 0.5f, 1.0f);
+                Map<String, String> ph = new HashMap<>();
+                ph.put("time", String.valueOf(seconds));
+                player.sendActionBar(plugin.getLanguageManager().get(player, "rtp.warmup.actionbar", ph));
+            }
+        }, null, 20L, 20L);
 
         pendingTeleports.put(player.getUniqueId(), task);
     }
 
     private void cleanupWarmup(Player player) {
         rtpInProgress.remove(player.getUniqueId());
-        SchedulerTask t = pendingTeleports.remove(player.getUniqueId());
+        ScheduledTask t = pendingTeleports.remove(player.getUniqueId());
 
         if (t != null) t.cancel();
     }
@@ -361,7 +380,7 @@ public class RTPManager {
         }
 
         findSafeLocation(world).thenAccept(searchResult ->
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     if (!player.isOnline()) {
                         rtpInProgress.remove(player.getUniqueId());
 
@@ -396,7 +415,7 @@ public class RTPManager {
 
                     Location destination = teleportEvent.getDestination();
 
-                    plugin.getEssScheduler().teleportAsync(player, destination).thenAccept(success -> {
+                    plugin.teleportHelper().teleportAsync(player, destination).thenAccept(success -> {
                         if (!success) {
                             rtpInProgress.remove(player.getUniqueId());
                             Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.TELEPORT_FAILED));
@@ -426,7 +445,7 @@ public class RTPManager {
 
                         world.playSound(destination, Sound.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
                     });
-                })
+                }, null)
         );
     }
 
@@ -466,7 +485,7 @@ public class RTPManager {
 
         int x = spawn.getBlockX() + (int) (Math.cos(angle) * spread);
 
-        int z =  spawn.getBlockZ() + (int) (Math.sin(angle) * spread);
+        int z = spawn.getBlockZ() + (int) (Math.sin(angle) * spread);
 
         if (useBorder && isOutsideBorder(world, x, z)) {
             attemptNext(world, settings, spawn, totalAttempts, attempt + 1, result);
@@ -637,7 +656,6 @@ public class RTPManager {
         boolean passableHead = isPassable(head);
 
 
-
         return passableFeet && passableHead;
 
     }
@@ -697,9 +715,11 @@ public class RTPManager {
         return maxY;
     }
 
-    public record WorldRTPSettings(int minRadius, int maxRadius, List<String> blockedBiomes, boolean enabled, String displayName) {
+    public record WorldRTPSettings(int minRadius, int maxRadius, List<String> blockedBiomes, boolean enabled,
+                                   String displayName) {
         //
     }
+
     public record SearchResult(Location location, int attempts) {
         //
     }

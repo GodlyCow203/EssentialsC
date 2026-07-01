@@ -1,8 +1,8 @@
 package net.godlycow.org.essc.modules.warp;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
-import net.godlycow.org.essc.server.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -21,7 +21,7 @@ public class WarpManager {
     private final Map<UUID, Warp> pendingWarps = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
     private final Map<UUID, Location> movementTracker = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> warmupTasks = new ConcurrentHashMap<>();
 
     public WarpManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -67,15 +67,15 @@ public class WarpManager {
         });
     }
 
-    public void setWarmupTask(UUID uuid, SchedulerTask task) {
-        SchedulerTask existing = warmupTasks.put(uuid, task);
+    public void setWarmupTask(UUID uuid, ScheduledTask task) {
+        ScheduledTask existing = warmupTasks.put(uuid, task);
         if (existing != null && !existing.isCancelled()) {
             existing.cancel();
         }
     }
 
     public void cancelWarmupTask(UUID uuid) {
-        SchedulerTask task = warmupTasks.remove(uuid);
+        ScheduledTask task = warmupTasks.remove(uuid);
         if (task != null && !task.isCancelled()) {
             task.cancel();
         }
@@ -84,7 +84,7 @@ public class WarpManager {
     public void reload() {
         plugin.debug("Reloading warp system...");
 
-        for (SchedulerTask task : warmupTasks.values()) {
+        for (ScheduledTask task : warmupTasks.values()) {
             if (!task.isCancelled()) {
                 task.cancel();
             }
@@ -352,7 +352,7 @@ public class WarpManager {
     }
 
     public void shutdown() {
-        for (SchedulerTask task : warmupTasks.values()) {
+        for (ScheduledTask task : warmupTasks.values()) {
             if (!task.isCancelled()) {
                 task.cancel();
             }

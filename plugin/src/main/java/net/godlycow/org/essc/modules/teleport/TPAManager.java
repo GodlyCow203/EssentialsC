@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.teleport;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,7 +14,13 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TPAManager implements Listener {
@@ -26,7 +32,7 @@ public class TPAManager implements Listener {
     private final Set<UUID> blockedPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Map<UUID, Set<UUID>> ignoredPlayers = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> warmupTasks = new ConcurrentHashMap<>();
     private long cooldownDuration;
     private long warmupDuration;
     private long timeoutDuration;
@@ -247,31 +253,26 @@ public class TPAManager implements Listener {
 
         teleporting.add(teleporter.getUniqueId());
 
-        SchedulerTask particleTask = null;
+        ScheduledTask particleTask = null;
         if (useParticles) {
-            particleTask = plugin.getEssScheduler().runForEntityTimer(teleporter, new Runnable() {
-                int ticks = 0;
-                @Override
-                public void run() {
-                    if (!teleporter.isOnline() || !teleporting.contains(teleporter.getUniqueId())) {
-                        warmupTasks.remove(teleporter.getUniqueId());
-                        return;
-                    }
-                    teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation().add(0, 1, 0), 10);
-                    ticks++;
+            particleTask = teleporter.getScheduler().runAtFixedRate(plugin, task -> {
+                if (!teleporter.isOnline() || !teleporting.contains(teleporter.getUniqueId())) {
+                    warmupTasks.remove(teleporter.getUniqueId());
+                    return;
                 }
-            }, 1L, 1L);
+                teleporter.getWorld().spawnParticle(Particle.PORTAL, teleporter.getLocation().add(0, 1, 0), 10);
+            }, null, 1L, 1L);
         }
 
-        final SchedulerTask finalParticleTask = particleTask;
+        final ScheduledTask finalParticleTask = particleTask;
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(teleporter, () -> {
+        ScheduledTask task = teleporter.getScheduler().runDelayed(plugin, task1 -> {
             if (teleporting.contains(teleporter.getUniqueId())) {
                 executeTeleport(teleporter, destination);
             }
             warmupTasks.remove(teleporter.getUniqueId());
             if (finalParticleTask != null) finalParticleTask.cancel();
-        }, warmupDuration);
+        }, null, warmupDuration);
 
         warmupTasks.put(teleporter.getUniqueId(), task);
     }
@@ -288,7 +289,7 @@ public class TPAManager implements Listener {
             plugin.getBackManager().setBackLocation(teleporter, from);
         }
 
-        plugin.getEssScheduler().teleportAsync(teleporter, dest).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(teleporter, dest).thenAccept(success -> {
             if (!success) return;
 
             if (useSounds) {
@@ -308,10 +309,10 @@ public class TPAManager implements Listener {
         if (!teleporting.contains(player.getUniqueId())) return;
 
         teleporting.remove(player.getUniqueId());
-        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
+        ScheduledTask task = warmupTasks.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
-        String msgKey = switch(reason) {
+        String msgKey = switch (reason) {
             case "move" -> "tpa.teleport.cancelled.move";
             case "damage" -> "tpa.teleport.cancelled.damage";
             default -> "tpa.teleport.cancelled";
@@ -394,7 +395,7 @@ public class TPAManager implements Listener {
     }
 
     private void startCleanupTask() {
-        plugin.getEssScheduler().runGlobalTimer(() -> {
+        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             long now = System.currentTimeMillis();
 
             List<TPARequest> toRemove = new ArrayList<>();

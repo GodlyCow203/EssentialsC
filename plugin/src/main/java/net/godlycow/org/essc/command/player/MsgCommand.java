@@ -57,7 +57,7 @@ public class MsgCommand extends Command {
         plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
                 .thenCompose(targetIgnored -> {
                     if (targetIgnored.contains(finalSenderPlayer.getUniqueId())) {
-                        plugin.getEssScheduler().runGlobal(() ->
+                        plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
                                 sender.sendMessage(lang.get(sender, "msg.ignored_by_target"))
                         );
                         return null;
@@ -69,18 +69,18 @@ public class MsgCommand extends Command {
                         return;
                     }
                     if (senderIgnored.contains(target.getUniqueId())) {
-                        plugin.getEssScheduler().runGlobal(() ->
+                        plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
                                 sender.sendMessage(lang.get(sender, "msg.ignoring_target"))
                         );
                         return;
                     }
-                    plugin.getEssScheduler().runGlobal(() ->
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
                             deliverMessage(sender, finalSenderPlayer, target, message)
                     );
                 })
                 .exceptionally(ex -> {
                     plugin.getLogger().warning("Failed to check ignore status for msg: " + ex.getMessage());
-                    plugin.getEssScheduler().runGlobal(() ->
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
                             deliverMessage(sender, finalSenderPlayer, target, message)
                     );
                     return null;

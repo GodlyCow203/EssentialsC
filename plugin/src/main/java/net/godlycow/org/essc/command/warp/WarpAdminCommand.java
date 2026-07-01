@@ -67,9 +67,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("perm", perm != null ? perm : "none");
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, langKey, placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, langKey, placeholders)), null)
         );
     }
 
@@ -101,9 +100,8 @@ public class WarpAdminCommand extends Command {
             placeholders.put("cost", String.format("%.2f", cost));
 
             plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                    plugin.getEssScheduler().runForEntity(player, () ->
-                            player.sendMessage(lang.get(player, "warpadmin.cost_set", placeholders))
-                    )
+            player.getScheduler().run(plugin, task ->
+                            player.sendMessage(lang.get(player, "warpadmin.cost_set", placeholders)), null)
             );
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get(player, "warpadmin.invalid_number"));
@@ -126,9 +124,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("warp", warp.getName());
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, "warpadmin.desc_set", placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, "warpadmin.desc_set", placeholders)), null)
         );
     }
 
@@ -148,9 +145,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("category", args[2]);
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, "warpadmin.category_set", placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, "warpadmin.category_set", placeholders)), null)
         );
     }
 
@@ -169,9 +165,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("warp", warp.getName());
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, "warpadmin.hidden", placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, "warpadmin.hidden", placeholders)), null)
         );
     }
 
@@ -190,9 +185,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("warp", warp.getName());
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, "warpadmin.unhidden", placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, "warpadmin.unhidden", placeholders)), null)
         );
     }
 
@@ -211,9 +205,8 @@ public class WarpAdminCommand extends Command {
         placeholders.put("warp", warp.getName());
 
         plugin.getWarpManager().updateWarp(warp).thenAccept(success ->
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.sendMessage(lang.get(player, "warpadmin.moved", placeholders))
-                )
+        player.getScheduler().run(plugin, task ->
+                        player.sendMessage(lang.get(player, "warpadmin.moved", placeholders)), null)
         );
     }
 

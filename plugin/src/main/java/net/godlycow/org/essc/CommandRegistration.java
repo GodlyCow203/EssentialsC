@@ -81,8 +81,8 @@ public class CommandRegistration {
     }
 
     public static void syncCommands() {
-        EssentialsC plugin = (EssentialsC) JavaPlugin.getProvidingPlugin(CommandRegistration.class);
-        plugin.getEssScheduler().runGlobalLater(() -> {
+        EssentialsC plugin = JavaPlugin.getPlugin(EssentialsC.class);
+        plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, ignored -> {
             try {
                 Bukkit.getServer().getClass().getMethod("syncCommands").invoke(Bukkit.getServer());
             } catch (Exception e) {

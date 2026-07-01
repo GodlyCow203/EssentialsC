@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class AuctionManager implements Listener {
     private final EssentialsC plugin;
@@ -77,7 +78,7 @@ public class AuctionManager implements Listener {
     private void deliverPendingSaleNotifications(Player player) {
         storage.loadAndClearSaleNotifications(player.getUniqueId()).thenAccept(notifications -> {
             if (notifications.isEmpty()) return;
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (!player.isOnline()) return;
                 for (AuctionStorage.SaleNotification n : notifications) {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.sold", Map.of(
@@ -86,7 +87,7 @@ public class AuctionManager implements Listener {
                             "buyer", n.buyerName()
                     )));
                 }
-            });
+            }, null);
         });
     }
 
@@ -208,7 +209,7 @@ public class AuctionManager implements Listener {
     }
 
     private void startExpiryTask() {
-        plugin.getEssScheduler().runAsyncTimer(() -> {
+        plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> {
             List<Auction> expired = activeAuctions.values().stream()
                     .filter(Auction::isExpired)
                     .toList();
@@ -229,7 +230,7 @@ public class AuctionManager implements Listener {
                             }
                         });
             }
-        }, 1200L, 1200L);
+        }, 1, 1, TimeUnit.MINUTES);
     }
 
     private void notifySeller(Auction auction, String buyerName) {
@@ -242,13 +243,13 @@ public class AuctionManager implements Listener {
         String itemName = auction.getItem().getType().toString();
 
         if (seller != null && seller.isOnline()) {
-            plugin.getEssScheduler().runForEntity(seller, () -> {
+            seller.getScheduler().run(plugin, task -> {
                 seller.sendMessage(plugin.getLanguageManager().get(seller, "ah.sold", Map.of(
                         "item", itemName,
                         "price", plugin.getEconomyManager().format(auction.getPrice()),
                         "buyer", buyerName
                 )));
-            });
+            }, null);
         } else {
             storage.saveSaleNotification(auction.getSellerUuid(), itemName,
                     auction.getPrice().doubleValue(), buyerName);
@@ -285,7 +286,7 @@ public class AuctionManager implements Listener {
     }
 
     public void reload() {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             activeAuctions.clear();
             expiredItems.clear();
             sellHistory.clear();

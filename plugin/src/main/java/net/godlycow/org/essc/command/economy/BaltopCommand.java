@@ -31,12 +31,12 @@ public class BaltopCommand extends Command {
         final int finalPage = page;
         sender.sendMessage(lang.get(sender, "baltop.loading"));
 
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try {
                 Map<UUID, BigDecimal> top = plugin.getEconomyManager()
                         .getTopBalances(PER_PAGE * finalPage).get();
 
-                plugin.getEssScheduler().runGlobal(() ->
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 ->
                         displayTop(sender, new ArrayList<>(top.entrySet()), finalPage));
 
             } catch (InterruptedException | ExecutionException e) {

@@ -1,18 +1,23 @@
 package net.godlycow.org.essc.command.home;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public class DelHomeCommand extends Command {
 
     private final Map<UUID, String> pendingDeletions = new HashMap<>();
-    private final Map<UUID, SchedulerTask> pendingTasks = new HashMap<>();
+    private final Map<UUID, ScheduledTask> pendingTasks = new HashMap<>();
 
     public DelHomeCommand(EssentialsC plugin) {
         super(plugin, "delhome", "essentialsc.delhome", true, 0, "command.usage.delhome");
@@ -36,13 +41,13 @@ public class DelHomeCommand extends Command {
 
         if (guiMode) {
             plugin.getHomeManager().getHome(player.getUniqueId(), name).whenComplete((home, err) -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     if (home == null) {
                         player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", name)));
                         return;
                     }
                     plugin.getHomeGuiManager().openConfirmDelete(player, home, player.getUniqueId());
-                });
+                }, null);
             });
         } else {
             String pending = pendingDeletions.get(player.getUniqueId());
@@ -67,16 +72,16 @@ public class DelHomeCommand extends Command {
         Player p = plugin.getServer().getPlayer(uuid);
         if (p == null) return;
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(p, () -> {
+        ScheduledTask task = p.getScheduler().runDelayed(plugin, task1 -> {
             pendingDeletions.remove(uuid);
             pendingTasks.remove(uuid);
-        }, 15 * 20L);
+        }, null, 15 * 20L);
 
         pendingTasks.put(uuid, task);
     }
 
     private void cancelPending(UUID uuid) {
-        SchedulerTask task = pendingTasks.remove(uuid);
+        ScheduledTask task = pendingTasks.remove(uuid);
         if (task != null) {
             task.cancel();
         }
@@ -85,13 +90,13 @@ public class DelHomeCommand extends Command {
 
     private void deleteHome(Player player, String name) {
         plugin.getHomeManager().deleteHome(player.getUniqueId(), name).whenComplete((success, err) -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (success) {
                     player.sendMessage(lang.get(player, "home.delete.success", Map.of("name", name)));
                 } else {
                     player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", name)));
                 }
-            });
+            }, null);
         });
     }
 

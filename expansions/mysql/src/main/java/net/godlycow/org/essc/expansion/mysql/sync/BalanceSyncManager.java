@@ -1,12 +1,12 @@
 package net.godlycow.org.essc.expansion.mysql.sync;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
 import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class BalanceSyncManager {
@@ -22,8 +23,8 @@ public class BalanceSyncManager {
     private final EssentialsC essc;
     private final SyncConfig config;
     private final SyncDatabase db;
-    private BukkitTask pushTask;
-    private BukkitTask pullTask;
+    private ScheduledTask pushTask;
+    private ScheduledTask pullTask;
     private long lastPullTime = 0;
     private long lastOfflineCheck = 0;
     private final Map<UUID, BigDecimal> lastKnownBalances = new ConcurrentHashMap<>();
@@ -41,8 +42,8 @@ public class BalanceSyncManager {
         db.connect();
         lastPullTime = System.currentTimeMillis();
         lastOfflineCheck = (System.currentTimeMillis() / 1000) - 5;
-        pushTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::pushCycle, 20L, 20L);
-        pullTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::pullCycle, 20L, 20L);
+        pushTask = plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> pushCycle(), 1L, 1L, TimeUnit.SECONDS);
+        pullTask = plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> pullCycle(), 1L, 1L, TimeUnit.SECONDS);
 
         plugin.getLogger().info("[MySQLExpansion] Sync started - 1 second intervals");
     }
@@ -107,7 +108,7 @@ public class BalanceSyncManager {
     }
 
     public void pushNow(UUID uuid) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> doPush(uuid, false));
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> doPush(uuid, false));
     }
 
     private void pushCycle() {

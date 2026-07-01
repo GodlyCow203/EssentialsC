@@ -106,8 +106,8 @@ public class KitCommand extends Command {
                 return;
             }
 
-            plugin.getEssScheduler().runForEntity(player, () ->
-                    plugin.getKitManager().giveKit(player, kit));
+            player.getScheduler().run(plugin, task ->
+                    plugin.getKitManager().giveKit(player, kit), null);
         });
     }
 

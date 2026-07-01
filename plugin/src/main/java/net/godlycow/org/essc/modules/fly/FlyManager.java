@@ -46,7 +46,7 @@ public class FlyManager implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        plugin.getEssScheduler().runForEntityLater(player, () -> {
+        player.getScheduler().runDelayed(plugin, task -> {
             if (!player.isOnline()) return;
 
             if (disableOnJoin || player.hasPermission("essentialsc.fly.disable-on-join")) {
@@ -61,7 +61,7 @@ public class FlyManager implements Listener {
                 player.setFlying(true);
                 plugin.debug("Restored fly mode for " + player.getName());
             }
-        }, 2L);
+        }, null, 2L);
     }
 
     public boolean isFlying(Player player) {

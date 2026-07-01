@@ -96,11 +96,11 @@ public class NickCommand extends Command {
 
     private boolean handleSelfReset(Player player) {
         plugin.getNickManager().removeNickname(player.getUniqueId()).thenRun(() -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 plugin.getNickManager().clearNickname(player);
                 player.sendMessage(lang.get(player, "nick.success.reset.self"));
                 plugin.debug(player.getName() + " reset own nickname");
-            });
+            }, null);
         });
         return true;
     }
@@ -113,7 +113,7 @@ public class NickCommand extends Command {
         }
 
         plugin.getNickManager().removeNickname(target.getUniqueId()).thenRun(() -> {
-            plugin.getEssScheduler().runForEntity(admin, () -> {
+            admin.getScheduler().run(plugin, task -> {
                 plugin.getNickManager().clearNickname(target);
 
                 Map<String, String> adminPlaceholders = new HashMap<>();
@@ -125,7 +125,7 @@ public class NickCommand extends Command {
                 target.sendMessage(lang.get(target, "nick.success.reset.by", targetPlaceholders));
 
                 plugin.debug(admin.getName() + " reset " + target.getName() + "'s nickname");
-            });
+            }, null);
         });
         return true;
     }
@@ -169,13 +169,13 @@ public class NickCommand extends Command {
     private void checkAndSet(Player sender, UUID targetUuid, Player targetPlayer, String nickname, boolean self) {
         if (plugin.getConfigManager().isNickUnique()) {
             plugin.getNickManager().isNicknameTaken(nickname, targetUuid).thenAccept(taken -> {
-                plugin.getEssScheduler().runForEntity(sender, () -> {
+                sender.getScheduler().run(plugin, task -> {
                     if (taken) {
                         sender.sendMessage(lang.get(sender, "nick.error.exists"));
                         return;
                     }
                     doSetNickname(sender, targetUuid, targetPlayer, nickname, self);
-                });
+                }, null);
             });
         } else {
             doSetNickname(sender, targetUuid, targetPlayer, nickname, self);
@@ -184,7 +184,7 @@ public class NickCommand extends Command {
 
     private void doSetNickname(Player sender, UUID targetUuid, Player targetPlayer, String nickname, boolean self) {
         plugin.getNickManager().setNickname(targetUuid, nickname).thenRun(() -> {
-            plugin.getEssScheduler().runForEntity(sender, () -> {
+            sender.getScheduler().run(plugin, task -> {
                 plugin.getNickManager().applyNickname(targetPlayer);
                 String plainNick = PlainTextComponentSerializer.plainText().serialize(plugin.getMiniMessage().deserialize(nickname));
 
@@ -206,7 +206,7 @@ public class NickCommand extends Command {
 
                     plugin.debug(sender.getName() + " set " + targetPlayer.getName() + "'s nickname to: " + nickname);
                 }
-            });
+            }, null);
         });
     }
 

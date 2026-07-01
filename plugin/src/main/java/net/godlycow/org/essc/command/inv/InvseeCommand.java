@@ -58,7 +58,7 @@ public class InvseeCommand extends Command {
             }
 
             plugin.getUserManager().loadInventory(offlineTarget.getUniqueId()).thenAccept(base64 -> {
-                plugin.getEssScheduler().runGlobal(() -> {
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                     if (!player.isOnline()) return;
 
                     Player nowOnline = plugin.getServer().getPlayer(offlineTarget.getUniqueId());

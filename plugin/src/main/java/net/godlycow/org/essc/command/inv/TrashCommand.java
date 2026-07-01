@@ -221,7 +221,7 @@ public class TrashCommand extends Command implements Listener {
 
         if (pendingItems.isEmpty()) return;
 
-        plugin.getEssScheduler().runForEntity(player, () -> openConfirmGui(player, pendingItems));
+        player.getScheduler().run(plugin, task -> openConfirmGui(player, pendingItems), null);
     }
 
     private void handleConfirmClose(Player player, TrashConfirmHolder holder) {
@@ -266,7 +266,7 @@ public class TrashCommand extends Command implements Listener {
         File file = new File(plugin.getDataFolder(), "guis/trash.yml");
         if (!file.exists()) return;
 
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try {
                 YamlConfiguration raw = YamlConfiguration.loadConfiguration(file);
                 ConfigurationSection section = raw.getConfigurationSection("sounds." + soundKey);
@@ -285,9 +285,8 @@ public class TrashCommand extends Command implements Listener {
                     return;
                 }
 
-                plugin.getEssScheduler().runForEntity(player, () ->
-                        player.playSound(player.getLocation(), sound, volume, pitch)
-                );
+                player.getScheduler().run(plugin, task1 ->
+                        player.playSound(player.getLocation(), sound, volume, pitch), null);
             } catch (Exception e) {
                 plugin.debug("[Trash] Sound playback error: " + e.getMessage());
             }
@@ -295,7 +294,7 @@ public class TrashCommand extends Command implements Listener {
     }
 
     private void logDisposal(Player player, ItemStack item) {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try (PrintWriter writer = new PrintWriter(new FileWriter(logFile, true))) {
                 String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 writer.println("[" + timestamp + "] " + player.getName()

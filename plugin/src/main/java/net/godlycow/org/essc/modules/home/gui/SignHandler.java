@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.home.gui;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +22,7 @@ public class SignHandler {
     private final GuiManager manager;
 
     private final Map<UUID, PendingInput> pending = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> timeouts = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> timeouts = new ConcurrentHashMap<>();
     private final Map<UUID, Location> originalBlocks = new ConcurrentHashMap<>();
 
     public SignHandler(EssentialsC plugin, GuiManager manager) {
@@ -88,13 +88,13 @@ public class SignHandler {
 
             player.openSign(sign, Side.FRONT);
 
-            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
+            ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
                 if (pending.remove(player.getUniqueId()) != null) {
                     restoreBlock(player);
                     player.sendMessage(plugin.getLanguageManager().get(player, "home.gui.input_timeout"));
                     returnToPrevious(player, type, targetUuid);
                 }
-            }, 600L);
+            }, null, 600L);
 
             timeouts.put(player.getUniqueId(), task);
         }
@@ -102,7 +102,7 @@ public class SignHandler {
 
     private void handleInput(Player player, String[] lines) {
         PendingInput input = pending.remove(player.getUniqueId());
-        SchedulerTask task = timeouts.remove(player.getUniqueId());
+        ScheduledTask task = timeouts.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
         restoreBlock(player);
@@ -162,7 +162,7 @@ public class SignHandler {
 
     public void cancel(Player player) {
         PendingInput input = pending.remove(player.getUniqueId());
-        SchedulerTask task = timeouts.remove(player.getUniqueId());
+        ScheduledTask task = timeouts.remove(player.getUniqueId());
         if (task != null) task.cancel();
         restoreBlock(player);
     }

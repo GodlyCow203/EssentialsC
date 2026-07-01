@@ -40,7 +40,7 @@ public class RealNameCommand extends Command {
         }
 
         plugin.getNickManager().getUUIDByNickname(query).thenAccept(opt -> {
-            plugin.getEssScheduler().runGlobal(() -> {
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 if (opt.isPresent()) {
                     UUID uuid = opt.get();
                     String name = plugin.getServer().getOfflinePlayer(uuid).getName();

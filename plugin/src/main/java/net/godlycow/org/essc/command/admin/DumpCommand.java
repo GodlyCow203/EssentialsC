@@ -80,11 +80,11 @@ public class DumpCommand extends Command {
 
         sender.sendMessage(lang.get(sender, "dump.upload.starting"));
 
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             try {
                 String viewerUrl = PasteUploadClient.upload(dumpFile);
 
-                plugin.getEssScheduler().runGlobal(() -> {
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> {
                     sender.sendMessage(
                             lang.get(sender, "dump.upload.success", Map.of("url", viewerUrl))
                     );
@@ -98,7 +98,7 @@ public class DumpCommand extends Command {
                                 ? e.getMessage()
                                 : "Unknown error";
 
-                plugin.getEssScheduler().runGlobal(() ->
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 ->
                         sender.sendMessage(
                                 lang.get(sender, "dump.upload.error", Map.of("error", error))
                         )

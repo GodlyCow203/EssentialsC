@@ -97,7 +97,7 @@ public class GuiManager {
                 return;
             }
 
-            plugin.getEssScheduler().runAsync(() -> {
+            plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
                 List<OfflinePlayer> players = new ArrayList<>();
                 for (UUID uuid : uuids) {
                     OfflinePlayer p = Bukkit.getOfflinePlayer(uuid);
@@ -298,11 +298,11 @@ public class GuiManager {
     }
 
     private void runSync(Player player, Runnable task) {
-        plugin.getEssScheduler().runForEntity(player, task);
+        player.getScheduler().run(plugin, task1 -> task.run(), null);
     }
 
     private void startCleanupTask() {
-        plugin.getEssScheduler().runGlobalTimer(() -> {
+        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             long now = System.currentTimeMillis();
             playerStates.entrySet().removeIf(entry -> {
                 if (entry.getValue().isExpired(now)) {

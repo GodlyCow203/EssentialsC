@@ -111,7 +111,7 @@ public class AhCommand extends Command {
 
         plugin.getAuctionManager().createAuction(player, item, price, duration, failReason)
                 .thenAccept(success -> {
-                    plugin.getEssScheduler().runForEntity(player, () -> {
+                    player.getScheduler().run(plugin, task -> {
                         if (success) {
                             player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                             player.sendMessage(lang.get(player, "ah.listed", Map.of(
@@ -130,7 +130,7 @@ public class AhCommand extends Command {
                             player.sendMessage(lang.get(player, messageKey));
                             soundManager.playError(player);
                         }
-                    });
+                    }, null);
                 });
     }
 
@@ -188,7 +188,7 @@ public class AhCommand extends Command {
         }
 
         plugin.getAuctionManager().cancelAuction(player, id).thenAccept(success -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (success) {
                     player.sendMessage(lang.get(player, "ah.cancelled"));
                     soundManager.playCancel(player);
@@ -196,7 +196,7 @@ public class AhCommand extends Command {
                     player.sendMessage(lang.get(player, "ah.not_your_auction"));
                     soundManager.playError(player);
                 }
-            });
+            }, null);
         });
     }
 

@@ -51,7 +51,7 @@ public class SetWarpCommand extends Command {
             Warp existing = plugin.getWarpManager().getWarp(warpName);
             existing.setLocation(player.getLocation());
             plugin.getWarpManager().updateWarp(existing).thenAccept(success -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     Map<String, String> placeholders = new HashMap<>();
                     placeholders.put("warp", warpName);
                     if (success) {
@@ -60,7 +60,7 @@ public class SetWarpCommand extends Command {
                     } else {
                         player.sendMessage(lang.get(player, "error.internal"));
                     }
-                });
+                }, null);
             });
             return true;
         }
@@ -81,7 +81,7 @@ public class SetWarpCommand extends Command {
 
         Location loc = player.getLocation();
         plugin.getWarpManager().createWarp(warpName, loc).thenAccept(success -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (success) {
                     Map<String, String> placeholders = new HashMap<>();
                     placeholders.put("warp", warpName);
@@ -94,7 +94,7 @@ public class SetWarpCommand extends Command {
                 } else {
                     player.sendMessage(lang.get(player, "error.internal"));
                 }
-            });
+            }, null);
         });
 
         return true;

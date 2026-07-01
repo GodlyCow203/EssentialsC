@@ -57,7 +57,7 @@ public class InvseeListener implements Listener {
             openOfflineSessions.remove(targetUuid);
             viewer.closeInventory();
 
-            plugin.getEssScheduler().runGlobal(() -> {
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 if (!rejoiningPlayer.isOnline()) return;
 
                 InventorySerializer.applyToInventory(slots, rejoiningPlayer.getInventory());
@@ -79,7 +79,7 @@ public class InvseeListener implements Listener {
         Inventory gui = onlineSessionGuis.get(target.getUniqueId());
         if (gui == null) return;
 
-        plugin.getEssScheduler().runGlobal(() -> syncLivePlayerToGui(target, gui));
+        plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> syncLivePlayerToGui(target, gui));
     }
 
     @EventHandler
@@ -113,7 +113,7 @@ public class InvseeListener implements Listener {
                 return;
             }
 
-            plugin.getEssScheduler().runGlobal(() -> syncGuiToLivePlayer(holder.getInventory(), target));
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> syncGuiToLivePlayer(holder.getInventory(), target));
         }
     }
 
@@ -147,7 +147,7 @@ public class InvseeListener implements Listener {
                 return;
             }
 
-            plugin.getEssScheduler().runGlobal(() -> syncGuiToLivePlayer(holder.getInventory(), target));
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> syncGuiToLivePlayer(holder.getInventory(), target));
         }
     }
 

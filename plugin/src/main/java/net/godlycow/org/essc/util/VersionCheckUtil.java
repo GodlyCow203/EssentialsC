@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,7 +29,7 @@ public class VersionCheckUtil implements Listener {
     }
 
     private void checkVersion(EssentialsC plugin) {
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             HttpURLConnection conn = null;
             try {
                 URL url = new URL(MODRINTH_API_URL);
@@ -60,13 +61,13 @@ public class VersionCheckUtil implements Listener {
                     String currentVersion = plugin.getDescription().getVersion();
                     updateAvailable = !currentVersion.equalsIgnoreCase(latestVersion);
 
-                    plugin.getEssScheduler().runGlobal(() -> logVersionStatus(plugin, currentVersion));
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> logVersionStatus(plugin, currentVersion));
                 } else {
                     throw new Exception("Could not parse version from response");
                 }
 
             } catch (Exception e) {
-                plugin.getEssScheduler().runGlobal(() -> {
+                plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> {
                     plugin.getLogger().warning("================================");
                     plugin.getLogger().warning("Could not check for updates: " + e.getMessage());
                     plugin.getLogger().warning("================================");
@@ -104,17 +105,18 @@ public class VersionCheckUtil implements Listener {
         if (!updateAvailable) return;
         if (!player.hasPermission("essentialsc.version.notify") && !player.isOp()) return;
 
-        EssentialsC.getInstance().getEssScheduler().runForEntityLater(player, () -> {
+        EssentialsC plugin = JavaPlugin.getPlugin(EssentialsC.class);
+        player.getScheduler().runDelayed(plugin, task -> {
             if (!player.isOnline()) return;
 
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
             player.sendMessage(MINI.deserialize("<color:#FFF200>EssentialsC Update Available</color>"));
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>Current: <color:#FF0000>" + EssentialsC.getInstance().getDescription().getVersion() + "</color></color>"));
+            player.sendMessage(MINI.deserialize("<color:#AAAAAA>Current: <color:#FF0000>" + plugin.getDescription().getVersion() + "</color></color>"));
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>Latest: <color:#00AA00>" + latestVersion + "</color></color>"));
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>Download: <color:#66AAFF><click:open_url:'https://modrinth.com/plugin/essentialsc'><hover:show_text:'<color:#AAAAAA>Click to open Modrinth'>https://modrinth.com/plugin/essentialsc</hover></click></color></color>"));
             player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
-        }, 20L);
+        }, null, 20L);
     }
 
     public static String getLatestVersion() {

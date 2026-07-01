@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -73,7 +74,8 @@ public class RTPCommand extends Command {
             knownCommands.remove("rtp");
             knownCommands.remove("essentialsc:rtp");
 
-            EssentialsC.getInstance().getLogger().info("[EssentialsC] Successfully unregistered /rtp command.");
+            EssentialsC plugin = JavaPlugin.getPlugin(EssentialsC.class);
+            plugin.getLogger().info("[EssentialsC] Successfully unregistered /rtp command.");
 
         } catch (IllegalAccessException e) {
             Bukkit.getLogger().warning("[EssentialsC] Failed to unregister /rtp command: " + e.getMessage());

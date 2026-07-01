@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -41,7 +42,7 @@ public class EconomyCharts {
     }
 
     private static void startCacheUpdater(EssentialsC plugin) {
-        plugin.getEssScheduler().runAsyncTimer(() -> {
+        plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> {
             EconomyManager em = plugin.getEconomyManager();
             if (em == null) {
                 cachedOnlineBalances.set(0);
@@ -73,7 +74,7 @@ public class EconomyCharts {
                 cachedOnlineBalances.set(total.get());
                 cachedActiveAccounts.set(count.get());
             });
-        }, 20L, 6000L);
+        }, 1, 300, TimeUnit.SECONDS);
     }
 
     private static void registerOnlineBalancesChart(Metrics metrics) {

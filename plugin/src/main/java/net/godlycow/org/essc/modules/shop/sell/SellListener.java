@@ -65,12 +65,12 @@ public class SellListener implements Listener {
             }
         }
 
-        plugin.getEssScheduler().runForEntityLater(player, () -> {
+        player.getScheduler().runDelayed(plugin, task -> {
             SellGUI currentGUI = sellManager != null ? sellManager.getActiveGUI(player) : null;
             if (currentGUI != null) {
                 currentGUI.updateButtons();
             }
-        }, 1L);
+        }, null, 1L);
     }
 
     @EventHandler
@@ -95,7 +95,7 @@ public class SellListener implements Listener {
             }
         }
 
-        plugin.getEssScheduler().runForEntityLater(player, gui::updateButtons, 1L);
+        player.getScheduler().runDelayed(plugin, task -> gui.updateButtons(), null, 1L);
     }
 
     @EventHandler

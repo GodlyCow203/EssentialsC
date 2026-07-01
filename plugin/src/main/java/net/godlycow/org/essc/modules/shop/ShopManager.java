@@ -262,9 +262,9 @@ public class ShopManager {
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_main");
-            });
+            }, null);
         });
     }
 
@@ -295,9 +295,9 @@ public class ShopManager {
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_category");
-            });
+            }, null);
         });
     }
 
@@ -345,22 +345,22 @@ public class ShopManager {
 
         plugin.getEconomyManager().has(player.getUniqueId(), price).thenAccept(hasEnough -> {
             if (!hasEnough) {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     shopListener.getSounds().playInsufficientFunds(player);
                     player.sendMessage(plugin.getLanguageManager().get(player, "shop.not-enough-money"));
-                });
+                }, null);
                 return;
             }
 
             plugin.getEconomyManager().withdraw(player.getUniqueId(), price).thenAccept(success -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     if (!success) {
                         shopListener.getSounds().playError(player);
                         player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
                         return;
                     }
                     completePurchase(player, item, amount, totalPrice, giveItem, price);
-                });
+                }, null);
             });
         });
     }
@@ -437,7 +437,7 @@ public class ShopManager {
             BigDecimal price = BigDecimal.valueOf(totalPrice);
 
             plugin.getEconomyManager().deposit(player.getUniqueId(), price).thenAccept(deposited -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     if (!deposited) {
                         shopListener.getSounds().playError(player);
                         player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
@@ -445,7 +445,7 @@ public class ShopManager {
                     }
                     removeMatchingItems(player, checkItem, totalItemsRequired);
                     completeSale(player, item, amount, totalPrice);
-                });
+                }, null);
             });
         } else {
             removeMatchingItems(player, checkItem, totalItemsRequired);
@@ -534,7 +534,7 @@ public class ShopManager {
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 org.bukkit.inventory.Inventory open = player.getOpenInventory().getTopInventory();
                 if (open == null || !(open.getHolder() instanceof ShopHolder holder)) {
                     return;
@@ -554,7 +554,7 @@ public class ShopManager {
                     }
                     shopGuiManager.refreshCategoryItems(open, player, category, session.getPage(), balance.doubleValue());
                 }
-            });
+            }, null);
         });
     }
 

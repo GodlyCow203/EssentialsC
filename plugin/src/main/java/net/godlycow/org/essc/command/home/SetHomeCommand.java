@@ -56,21 +56,21 @@ public class SetHomeCommand extends Command {
                 int max = plugin.getHomeManager().getMaxHomes(player);
 
                 if (!alreadyExists && count >= max) {
-                    plugin.getEssScheduler().runForEntity(player, () ->
+                    player.getScheduler().run(plugin, task ->
                             player.sendMessage(lang.get(player, "home.set.limit_reached",
-                                    Map.of("limit", String.valueOf(max)))));
+                                    Map.of("limit", String.valueOf(max)))), null);
                     return;
                 }
 
                 plugin.getHomeManager().setHome(player, name, player.getLocation()).whenComplete((success, err3) -> {
-                    plugin.getEssScheduler().runForEntity(player, () -> {
+                    player.getScheduler().run(plugin, task -> {
                         if (success) {
                             String key = alreadyExists ? "home.set.updated" : "home.set.success";
                             player.sendMessage(lang.get(player, key, Map.of("name", name)));
                         } else {
                             player.sendMessage(lang.get(player, "home.set.failed", Map.of("name", name)));
                         }
-                    });
+                    }, null);
                 });
             });
         });

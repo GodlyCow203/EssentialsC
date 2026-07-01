@@ -266,7 +266,7 @@ public class EssMigrator {
                 Player onlinePlayer = plugin.getServer().getPlayer(data.uuid());
 
                 if (onlinePlayer != null) {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> {
                         plugin.getBackManager().setBackLocation(onlinePlayer, backData.location());
                     });
                     plugin.debug("Migrated back location for online player: " + data.lastAccountName());

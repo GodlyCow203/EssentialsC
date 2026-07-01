@@ -71,7 +71,7 @@ public class MigrationCommand extends Command {
 
         currentMigrator.migrate(options)
                 .thenAccept(result -> {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                         sender.sendMessage(lang.get(sender, "migration.essentialsx.complete"));
                         sender.sendMessage(lang.get(sender, "migration.stats", Map.ofEntries(
                                 Map.entry("users", String.valueOf(result.usersMigrated())),
@@ -105,7 +105,7 @@ public class MigrationCommand extends Command {
                     });
                 })
                 .exceptionally(ex -> {
-                    plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                         String msg = ex.getCause() != null ? ex.getCause().getMessage() : ex.getMessage();
                         sender.sendMessage(lang.get(sender, "migration.error", Map.of("error", msg)));
                         plugin.debug("Migration failed: " + msg);

@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.scoreboard;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public class ScoreboardManager implements Listener {
     private final Set<UUID> disabledPlayers = ConcurrentHashMap.newKeySet();
 
     private ScoreboardConfig config;
-    private SchedulerTask updateTask;
+    private ScheduledTask updateTask;
     private final AtomicBoolean reloading = new AtomicBoolean(false);
     private final Object lock = new Object();
 
@@ -172,7 +172,7 @@ public class ScoreboardManager implements Listener {
 
     private void start() {
         Bukkit.getOnlinePlayers().forEach(this::addPlayer);
-        updateTask = plugin.getEssScheduler().runGlobalTimer(this::updateAll,
+        updateTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> updateAll(),
                 10L, config.getUpdateInterval());
     }
 
@@ -180,7 +180,7 @@ public class ScoreboardManager implements Listener {
         if (disabledPlayers.contains(player.getUniqueId())) return;
         if (!player.isOnline()) return;
 
-        plugin.getEssScheduler().runForLocation(player.getLocation(), () -> {
+        player.getScheduler().run(plugin, task -> {
             if (!player.isOnline()) return;
             try {
                 PlayerScoreboard existing;
@@ -200,7 +200,7 @@ public class ScoreboardManager implements Listener {
             } catch (Exception e) {
                 plugin.getLogger().log(Level.WARNING, "Failed to add scoreboard for " + player.getName(), e);
             }
-        });
+        }, null);
     }
 
     public void stop() {
@@ -255,7 +255,7 @@ public class ScoreboardManager implements Listener {
         }
 
         if (!cached.isEmpty()) {
-            plugin.getEssScheduler().runGlobal(() -> {
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 for (Object[] entry : cached) {
                     Player player = (Player) entry[0];
                     PlayerScoreboard board = (PlayerScoreboard) entry[1];
@@ -268,7 +268,7 @@ public class ScoreboardManager implements Listener {
 
         if (stale.isEmpty()) return;
 
-        plugin.getEssScheduler().runAsync(() -> {
+        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
             List<ProcessedResult> results = new ArrayList<>(stale.size());
 
             for (Player player : stale) {
@@ -297,7 +297,7 @@ public class ScoreboardManager implements Listener {
                         new ProcessedData(result.title(), result.lines(), applyTime));
             }
 
-            plugin.getEssScheduler().runGlobal(() -> {
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> {
                 for (ProcessedResult result : results) {
                     Player player = Bukkit.getPlayer(result.uuid());
                     if (player == null || !player.isOnline()) continue;
@@ -377,11 +377,11 @@ public class ScoreboardManager implements Listener {
             }
         }
 
-        plugin.getEssScheduler().runForLocationLater(joining.getLocation(), () -> {
+        joining.getScheduler().runDelayed(plugin, task -> {
             if (joining.isOnline() && !reloading.get()) {
                 addPlayer(joining);
             }
-        }, 10L);
+        }, null, 10L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.back;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.godlycow.org.essc.util.SafeLocationFinder;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -14,7 +14,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.*;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BackManager implements Listener {
@@ -24,8 +25,8 @@ public class BackManager implements Listener {
     private final Map<UUID, Location> deathLocations = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
     private final Map<UUID, Long> deathCooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> warmupTasks = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> deathWarmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> deathWarmupTasks = new ConcurrentHashMap<>();
     private final Map<UUID, Location> pendingUnsafeBack = new ConcurrentHashMap<>();
     private final Map<UUID, Location> pendingUnsafeDeathBack = new ConcurrentHashMap<>();
 
@@ -123,9 +124,9 @@ public class BackManager implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "back.pending",
                 Map.of("seconds", String.valueOf(warmup))));
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
+        ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
             completeTeleport(player, target, false);
-        }, warmup * 20L);
+        }, null, warmup * 20L);
 
         warmupTasks.put(player.getUniqueId(), task);
     }
@@ -177,9 +178,9 @@ public class BackManager implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "dback.pending",
                 Map.of("seconds", String.valueOf(warmup))));
 
-        SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
+        ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
             completeTeleport(player, target, true);
-        }, warmup * 20L);
+        }, null, warmup * 20L);
 
         deathWarmupTasks.put(player.getUniqueId(), task);
     }
@@ -210,7 +211,7 @@ public class BackManager implements Listener {
         boolean adjusted = !safeLocation.getBlock().equals(location.getBlock());
         Location preBackLocation = player.getLocation().clone();
 
-        plugin.getEssScheduler().teleportAsync(player, safeLocation, false).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, safeLocation, false).thenAccept(success -> {
             if (!success) return;
 
             if (isDeath) {
@@ -242,7 +243,7 @@ public class BackManager implements Listener {
     private void completeUnsafeTeleport(Player player, Location location, boolean isDeath) {
         Location preBackLocation = player.getLocation().clone();
 
-        plugin.getEssScheduler().teleportAsync(player, location, false).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, location, false).thenAccept(success -> {
             if (!success) return;
 
             if (isDeath) {
@@ -272,8 +273,8 @@ public class BackManager implements Listener {
     public void cancelTeleport(Player player, String reason) {
         String msgKey;
 
-        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
-        SchedulerTask deathTask = deathWarmupTasks.remove(player.getUniqueId());
+        ScheduledTask task = warmupTasks.remove(player.getUniqueId());
+        ScheduledTask deathTask = deathWarmupTasks.remove(player.getUniqueId());
 
         if (task != null) task.cancel();
         if (deathTask != null) deathTask.cancel();
@@ -418,10 +419,10 @@ public class BackManager implements Listener {
             plugin.getUserManager().getLocationManager().setLogoutLocation(player.getUniqueId(), player.getLocation());
         }
 
-        SchedulerTask task = warmupTasks.remove(player.getUniqueId());
+        ScheduledTask task = warmupTasks.remove(player.getUniqueId());
         if (task != null) task.cancel();
 
-        SchedulerTask deathTask = deathWarmupTasks.remove(player.getUniqueId());
+        ScheduledTask deathTask = deathWarmupTasks.remove(player.getUniqueId());
         if (deathTask != null) deathTask.cancel();
 
         backLocations.remove(player.getUniqueId());
@@ -435,8 +436,8 @@ public class BackManager implements Listener {
     }
 
     public void shutdown() {
-        warmupTasks.values().forEach(SchedulerTask::cancel);
-        deathWarmupTasks.values().forEach(SchedulerTask::cancel);
+        warmupTasks.values().forEach(ScheduledTask::cancel);
+        deathWarmupTasks.values().forEach(ScheduledTask::cancel);
         warmupTasks.clear();
         deathWarmupTasks.clear();
         backLocations.clear();

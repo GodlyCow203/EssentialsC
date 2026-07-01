@@ -1,10 +1,12 @@
 package net.godlycow.org.essc.plugin.economy;
 
+import net.godlycow.org.essc.EssentialsC;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -37,7 +39,7 @@ public class VaultHook {
         Bukkit.getServicesManager().register(
                 Economy.class,
                 vaultEconomy,
-                net.godlycow.org.essc.EssentialsC.getInstance(),
+                JavaPlugin.getPlugin(EssentialsC.class),
                 ServicePriority.High
         );
         hooked = true;

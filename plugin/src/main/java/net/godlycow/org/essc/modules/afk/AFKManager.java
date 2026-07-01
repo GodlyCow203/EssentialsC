@@ -1,10 +1,10 @@
 package net.godlycow.org.essc.modules.afk;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.plugin.config.EssConfig;
 import net.godlycow.org.essc.server.FeatureFlags;
-import net.godlycow.org.essc.server.SchedulerTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
@@ -38,8 +38,8 @@ public class AFKManager implements Listener {
     private final Map<UUID, Location> afkLocations = new ConcurrentHashMap<>();
     private final Set<UUID> knockbackImmunity = ConcurrentHashMap.newKeySet();
 
-    private SchedulerTask checkTask;
-    private SchedulerTask kickTask;
+    private ScheduledTask checkTask;
+    private ScheduledTask kickTask;
 
     public AFKManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -87,10 +87,10 @@ public class AFKManager implements Listener {
     }
 
     private void startTasks() {
-        checkTask = plugin.getEssScheduler().runGlobalTimer(this::checkAFKStatus, 100L, 100L);
+        checkTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> checkAFKStatus(), 100L, 100L);
 
         if (config.isAfkKickEnabled()) {
-            kickTask = plugin.getEssScheduler().runGlobalTimer(this::checkAFKKick, 1200L, 1200L);
+            kickTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> checkAFKKick(), 1200L, 1200L);
         }
     }
 
@@ -441,7 +441,7 @@ public class AFKManager implements Listener {
 
         UUID uuid = player.getUniqueId();
         knockbackImmunity.add(uuid);
-        plugin.getEssScheduler().runForEntityLater(player, () -> knockbackImmunity.remove(uuid), 10L);
+        player.getScheduler().runDelayed(plugin, task -> knockbackImmunity.remove(uuid), null, 10L);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -466,11 +466,11 @@ public class AFKManager implements Listener {
         lastActivity.put(player.getUniqueId(), System.currentTimeMillis());
         afkStatus.put(player.getUniqueId(), false);
 
-        plugin.getEssScheduler().runForEntityLater(player, () -> {
+        player.getScheduler().runDelayed(plugin, task -> {
             if (player.isOnline()) {
                 updatePlayerListName(player);
             }
-        }, 10L);
+        }, null, 10L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

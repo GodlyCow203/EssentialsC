@@ -43,9 +43,9 @@ public class HomesCommand extends Command {
             plugin.debug("Listing homes for " + target.getName() + " (requested by " + player.getName() + ")");
 
             plugin.getHomeManager().getHomes(target.getUniqueId()).thenAccept(homes -> {
-                plugin.getEssScheduler().runForEntity(player, () -> {
+                player.getScheduler().run(plugin, task -> {
                     sendHomeList(player, homes, target.getName());
-                });
+                }, null);
             });
             return true;
         }
@@ -53,7 +53,7 @@ public class HomesCommand extends Command {
         plugin.debug("Listing homes for " + player.getName());
 
         plugin.getHomeManager().getHomes(player.getUniqueId()).thenAccept(homes -> {
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 boolean hasBed = player.hasPermission("essentialsc.home.bed")
                         && player.getBedSpawnLocation() != null;
 
@@ -91,7 +91,7 @@ public class HomesCommand extends Command {
 
                 player.sendMessage(lang.get(player, "homes.list.footer",
                         Map.of("count", String.valueOf(homes.size()))));
-            });
+            }, null);
         });
 
         return true;

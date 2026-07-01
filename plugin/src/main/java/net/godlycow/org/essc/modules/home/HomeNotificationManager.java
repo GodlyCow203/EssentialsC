@@ -73,10 +73,10 @@ public class HomeNotificationManager {
 
     private void deliverLive(Player target, NotificationType type,
                              String homeName, String extra, String adminName) {
-        plugin.getEssScheduler().runForEntity(target, () -> {
+        target.getScheduler().run(plugin, task -> {
             if (!target.isOnline()) return;
             target.sendMessage(buildMessage(target, type, homeName, extra, adminName));
-        });
+        }, null);
     }
 
     private void queueOffline(UUID targetUuid, NotificationType type,
@@ -118,12 +118,12 @@ public class HomeNotificationManager {
             return pending;
         }).thenAccept(pending -> {
             if (pending.isEmpty()) return;
-            plugin.getEssScheduler().runForEntity(player, () -> {
+            player.getScheduler().run(plugin, task -> {
                 if (!player.isOnline()) return;
                 for (PendingNotification n : pending) {
                     player.sendMessage(buildMessage(player, n.type(), n.homeName(), n.extra(), n.adminName()));
                 }
-            });
+            }, null);
             clearPending(player.getUniqueId());
         });
 

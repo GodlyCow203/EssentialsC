@@ -64,7 +64,7 @@ public class FirstRunHandler implements Listener {
 
         String[] expansions = {"Vault", "Player", "Server", "Statistic", "LuckPerms"};
 
-        plugin.getEssScheduler().runGlobalLater(() -> {
+        plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, task -> {
             plugin.getLogger().info("Running PlaceholderAPI expansion installs...");
             for (String expansion : expansions) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download " + expansion);

@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.home;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -28,7 +28,7 @@ public class TeleportHandler implements Listener {
     private final HomeDatabase repository;
 
     private final Map<UUID, Long> teleportCooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> pendingTeleports = new ConcurrentHashMap<>();
     private final Map<UUID, Home> pendingDestination = new ConcurrentHashMap<>();
 
     public TeleportHandler(EssentialsC plugin, HomeDatabase repository) {
@@ -60,7 +60,7 @@ public class TeleportHandler implements Listener {
     }
 
     public void cancelTeleport(Player player) {
-        SchedulerTask task = pendingTeleports.remove(player.getUniqueId());
+        ScheduledTask task = pendingTeleports.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
             pendingDestination.remove(player.getUniqueId());
@@ -100,8 +100,8 @@ public class TeleportHandler implements Listener {
 
             plugin.debug("Starting warmup for " + player.getName() + " to home '" + home.getName() + "' (" + warmup + "s)");
 
-            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () ->
-                    completeTeleport(player, home), warmup * 20L);
+            ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 ->
+                    completeTeleport(player, home), null, warmup * 20L);
 
             pendingTeleports.put(player.getUniqueId(), task);
         } else {
@@ -133,7 +133,7 @@ public class TeleportHandler implements Listener {
             mount.eject();
         }
 
-        plugin.getEssScheduler().teleportAsync(player, loc).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
@@ -142,11 +142,11 @@ public class TeleportHandler implements Listener {
 
             if (mount != null) {
                 Entity finalMount = mount;
-                plugin.getEssScheduler().runForEntity(finalMount, () -> {
+                finalMount.getScheduler().run(plugin, task -> {
                     finalMount.teleport(loc);
                     finalMount.addPassenger(player);
                     plugin.debug("Teleported mount " + finalMount.getType() + " for " + player.getName());
-                });
+                }, null);
             }
 
             if (plugin.getConfigManager().isHomeParticles()) {
@@ -188,7 +188,7 @@ public class TeleportHandler implements Listener {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(SchedulerTask::cancel);
+        pendingTeleports.values().forEach(ScheduledTask::cancel);
         pendingTeleports.clear();
         plugin.debug("HomeTeleportHandler shutdown complete.");
     }

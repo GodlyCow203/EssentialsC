@@ -12,7 +12,11 @@ import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
-import net.godlycow.org.essc.modules.*;
+import net.godlycow.org.essc.modules.MOTDManager;
+import net.godlycow.org.essc.modules.ReplyManager;
+import net.godlycow.org.essc.modules.RulesManager;
+import net.godlycow.org.essc.modules.SpawnManager;
+import net.godlycow.org.essc.modules.VanishManager;
 import net.godlycow.org.essc.modules.afk.AFKManager;
 import net.godlycow.org.essc.modules.auction.AuctionManager;
 import net.godlycow.org.essc.modules.auction.gui.AhGuiManager;
@@ -42,9 +46,9 @@ import net.godlycow.org.essc.plugin.economy.VaultHook;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.listener.InvseeListener;
 import net.godlycow.org.essc.plugin.listener.JoinLeaveListener;
-import net.godlycow.org.essc.server.EssScheduler;
 import net.godlycow.org.essc.storage.user.UserManager;
 import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.util.TeleportHelper;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,10 +60,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.UUID;
 
 public final class EssentialsC extends JavaPlugin implements Listener {
-
-    private static EssentialsC instance;
-
-    private EssScheduler essScheduler;
+    private final TeleportHelper teleportHelper = new TeleportHelper(this);
     private EssConfig essConfig;
     private CommandsConfig commandsConfig;
     private LanguageManager languageManager;
@@ -110,8 +111,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     @Override
     public void onLoad() {
-        instance = this;
-        essScheduler = new EssScheduler(this);
         saveDefaultConfig();
 
         essConfig = new EssConfig(this);
@@ -179,12 +178,8 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         }
     }
 
-    public static EssentialsC getInstance() {
-        return instance;
-    }
-
-    public EssScheduler getEssScheduler() {
-        return essScheduler;
+    public TeleportHelper teleportHelper() {
+        return teleportHelper;
     }
 
     public FastStatsManager getFastStatsManager() {
@@ -344,7 +339,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     }
 
 
-
     public ReplyManager getReplyManager() {
         return replyManager;
     }
@@ -489,15 +483,15 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         this.apiImplementation = apiImplementation;
     }
 
-    public  HatCommand getHatCommand(){
+    public HatCommand getHatCommand() {
         return hatCommand;
     }
 
-    public JoinLeaveListener getJoinLeaveListener(){
+    public JoinLeaveListener getJoinLeaveListener() {
         return joinLeaveListener;
     }
 
-    public RenameCommand getRenameCommand(){
+    public RenameCommand getRenameCommand() {
         return renameCommand;
     }
 
@@ -513,7 +507,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         return commandCooldownManager;
     }
 
-    public InvseeListener getInvseeListener(){
+    public InvseeListener getInvseeListener() {
         return invseeListener;
     }
 

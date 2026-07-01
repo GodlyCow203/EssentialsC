@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.expansion.mysql.nickname;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.SyncConfig;
@@ -7,10 +8,10 @@ import net.godlycow.org.essc.expansion.mysql.database.SyncDatabase;
 import net.godlycow.org.essc.modules.nick.NicknameSyncHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class NetworkNicknameSyncManager implements NicknameSyncHook {
@@ -20,7 +21,7 @@ public class NetworkNicknameSyncManager implements NicknameSyncHook {
     private final SyncConfig config;
     private final NetworkNicknameDatabase db;
 
-    private BukkitTask pollTask;
+    private ScheduledTask pollTask;
 
     public NetworkNicknameSyncManager(MySQLDatabaseExpansion plugin,
                                       EssentialsC essc,
@@ -34,9 +35,8 @@ public class NetworkNicknameSyncManager implements NicknameSyncHook {
     }
 
     public void start() {
-        long intervalTicks = config.getNicknamePollIntervalTicks();
-        pollTask = Bukkit.getScheduler().runTaskTimerAsynchronously(
-                plugin, this::pollOnlinePlayers, intervalTicks, intervalTicks);
+        long intervalMillis = config.getNicknamePollIntervalTicks() * 50;
+        pollTask = plugin.getServer().getAsyncScheduler().runAtFixedRate(plugin, task -> pollOnlinePlayers(), intervalMillis, intervalMillis, TimeUnit.MILLISECONDS);
         plugin.getLogger().info("[NetworkNicknames] Poll loop started.");
     }
 
@@ -67,7 +67,7 @@ public class NetworkNicknameSyncManager implements NicknameSyncHook {
 
             if (networkNick == null) {
                 essc.getNickManager().removeNickname(uuid).thenRun(() ->
-                        Bukkit.getScheduler().runTask(plugin, () -> {
+                        plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> {
                             if (player.isOnline()) {
                                 essc.getNickManager().clearNickname(player);
                             }
@@ -76,7 +76,7 @@ public class NetworkNicknameSyncManager implements NicknameSyncHook {
             } else {
                 String nick = networkNick;
                 essc.getNickManager().setNickname(uuid, nick).thenRun(() ->
-                        Bukkit.getScheduler().runTask(plugin, () -> {
+                        plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> {
                             if (player.isOnline()) {
                                 essc.getNickManager().applyNickname(player);
                             }

@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.server.SchedulerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -30,7 +30,7 @@ public class SpawnManager implements Listener {
     private Location spawnLocation;
 
     private final Map<UUID, Long> teleportCooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, SchedulerTask> pendingTeleports = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> pendingTeleports = new ConcurrentHashMap<>();
 
     public SpawnManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -145,9 +145,9 @@ public class SpawnManager implements Listener {
                     Map.of("seconds", String.valueOf(warmup))));
             plugin.debug("Starting spawn warmup for " + player.getName() + " (" + warmup + "s)");
 
-            SchedulerTask task = plugin.getEssScheduler().runForEntityLater(player, () -> {
+            ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
                 completeTeleport(player, spawn);
-            }, warmup * 20L);
+            }, null, warmup * 20L);
 
             pendingTeleports.put(player.getUniqueId(), task);
         } else {
@@ -158,7 +158,7 @@ public class SpawnManager implements Listener {
     private void completeTeleport(Player player, Location location) {
         pendingTeleports.remove(player.getUniqueId());
 
-        plugin.getEssScheduler().teleportAsync(player, location).thenAccept(success -> {
+        plugin.teleportHelper().teleportAsync(player, location).thenAccept(success -> {
             if (!success) return;
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
@@ -180,7 +180,7 @@ public class SpawnManager implements Listener {
     }
 
     public void cancelTeleport(Player player) {
-        SchedulerTask task = pendingTeleports.remove(player.getUniqueId());
+        ScheduledTask task = pendingTeleports.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
             plugin.debug("Cancelled spawn teleport for " + player.getName());
@@ -198,11 +198,11 @@ public class SpawnManager implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore() && isSpawnSet()) {
             plugin.debug("First join teleport for " + player.getName());
-            plugin.getEssScheduler().runForEntityLater(player, () -> {
+            player.getScheduler().runDelayed(plugin, task -> {
                 if (player.isOnline()) {
-                    plugin.getEssScheduler().teleportAsync(player, getSpawn());
+                    plugin.teleportHelper().teleportAsync(player, getSpawn());
                 }
-            }, 1L);
+            }, null, 1L);
         }
     }
 
@@ -257,7 +257,7 @@ public class SpawnManager implements Listener {
     }
 
     public void shutdown() {
-        pendingTeleports.values().forEach(SchedulerTask::cancel);
+        pendingTeleports.values().forEach(ScheduledTask::cancel);
         pendingTeleports.clear();
         teleportCooldowns.clear();
         HandlerList.unregisterAll(this);
