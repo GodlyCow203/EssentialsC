@@ -30,6 +30,9 @@ out/
 *.tar.gz
 *.rar
 
+!server.jar
+!**/server.jar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
@@ -114,16 +117,15 @@ buildNumber.properties
 .flattened-pom.xml
 
 # Common working directory
-run/
+run/*
+!run/server.jar
+!run/eula.txt
 
-run-server/plugins/DiscordSRV/config.yml
+run-server/*
+!run-server/server.jar
+!run-server/eula.txt
 
-run-server/
-
-# server related stuff, keep server.jar
-
-```
-# server related stuff, keep server.jar
+# server related stuff, keep server.jar and eula.txt
 
 # FOLIA
 servers/folia-26.1.2/cache
@@ -189,5 +191,3 @@ servers/paper-1.21.1/spigot.yml
 servers/paper-1.21.1/usercache.json
 servers/paper-1.21.1/version_history.json
 servers/paper-1.21.1/whitelist.json
-
-
