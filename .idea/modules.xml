@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/expansions/essentialsc.expansions.main.iml" filepath="$PROJECT_DIR$/.idea/modules/expansions/essentialsc.expansions.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/expansions/mysql/essentialsc.expansions.mysql.main.iml" filepath="$PROJECT_DIR$/.idea/modules/expansions/mysql/essentialsc.expansions.mysql.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/expansions/profiles/essentialsc.expansions.profiles.main.iml" filepath="$PROJECT_DIR$/.idea/modules/expansions/profiles/essentialsc.expansions.profiles.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/essentialsc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/essentialsc.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/essentialsc.plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/essentialsc.plugin.main.iml" />
     </modules>
   </component>
