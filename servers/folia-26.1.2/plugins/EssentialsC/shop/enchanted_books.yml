@@ -1,0 +1,1501 @@
+items:
+  protection-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      protection: 1
+    name: "<color:#1E90FF><bold>Protection I"
+    lore:
+      - "<color:#888888>Reduces damage"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 10
+    page: 1
+
+  protection-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      protection: 2
+    name: "<color:#1E90FF><bold>Protection II"
+    lore:
+      - "<color:#888888>Reduces damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 11
+    page: 1
+
+  protection-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      protection: 3
+    name: "<color:#1E90FF><bold>Protection III"
+    lore:
+      - "<color:#888888>Reduces damage"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 12
+    page: 1
+
+  protection-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      protection: 4
+    name: "<color:#1E90FF><bold>Protection IV"
+    lore:
+      - "<color:#888888>Reduces damage"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 13
+    page: 1
+
+  fire-protection-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_protection: 1
+    name: "<color:#FF4500><bold>Fire Protection I"
+    lore:
+      - "<color:#888888>Reduces fire damage"
+    buy-price: 4000
+    sell-price: 800
+    slot: 14
+    page: 1
+
+  fire-protection-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_protection: 2
+    name: "<color:#FF4500><bold>Fire Protection II"
+    lore:
+      - "<color:#888888>Reduces fire damage"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 15
+    page: 1
+
+  fire-protection-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_protection: 3
+    name: "<color:#FF4500><bold>Fire Protection III"
+    lore:
+      - "<color:#888888>Reduces fire damage"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 16
+    page: 1
+
+  fire-protection-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_protection: 4
+    name: "<color:#FF4500><bold>Fire Protection IV"
+    lore:
+      - "<color:#888888>Reduces fire damage"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 19
+    page: 1
+
+  blast-protection-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      blast_protection: 1
+    name: "<color:#8B0000><bold>Blast Protection I"
+    lore:
+      - "<color:#888888>Reduces explosion damage"
+    buy-price: 4000
+    sell-price: 800
+    slot: 20
+    page: 1
+
+  blast-protection-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      blast_protection: 2
+    name: "<color:#8B0000><bold>Blast Protection II"
+    lore:
+      - "<color:#888888>Reduces explosion damage"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 21
+    page: 1
+
+  blast-protection-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      blast_protection: 3
+    name: "<color:#8B0000><bold>Blast Protection III"
+    lore:
+      - "<color:#888888>Reduces explosion damage"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 22
+    page: 1
+
+  blast-protection-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      blast_protection: 4
+    name: "<color:#8B0000><bold>Blast Protection IV"
+    lore:
+      - "<color:#888888>Reduces explosion damage"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 23
+    page: 1
+
+  projectile-protection-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      projectile_protection: 1
+    name: "<color:#2F4F4F><bold>Projectile Protection I"
+    lore:
+      - "<color:#888888>Reduces projectile damage"
+    buy-price: 4000
+    sell-price: 800
+    slot: 24
+    page: 1
+
+  projectile-protection-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      projectile_protection: 2
+    name: "<color:#2F4F4F><bold>Projectile Protection II"
+    lore:
+      - "<color:#888888>Reduces projectile damage"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 25
+    page: 1
+
+  projectile-protection-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      projectile_protection: 3
+    name: "<color:#2F4F4F><bold>Projectile Protection III"
+    lore:
+      - "<color:#888888>Reduces projectile damage"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 28
+    page: 1
+
+  projectile-protection-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      projectile_protection: 4
+    name: "<color:#2F4F4F><bold>Projectile Protection IV"
+    lore:
+      - "<color:#888888>Reduces projectile damage"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 29
+    page: 1
+
+  thorns-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      thorns: 1
+    name: "<color:#8B008B><bold>Thorns I"
+    lore:
+      - "<color:#888888>Damages attackers"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 30
+    page: 1
+
+  thorns-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      thorns: 2
+    name: "<color:#8B008B><bold>Thorns II"
+    lore:
+      - "<color:#888888>Damages attackers"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 31
+    page: 1
+
+  thorns-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      thorns: 3
+    name: "<color:#8B008B><bold>Thorns III"
+    lore:
+      - "<color:#888888>Damages attackers"
+    buy-price: 16000
+    sell-price: 3200
+    slot: 32
+    page: 1
+
+  respiration-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      respiration: 1
+    name: "<color:#00CED1><bold>Respiration I"
+    lore:
+      - "<color:#888888>Extended underwater breathing"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 33
+    page: 1
+
+  respiration-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      respiration: 2
+    name: "<color:#00CED1><bold>Respiration II"
+    lore:
+      - "<color:#888888>Extended underwater breathing"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 34
+    page: 1
+
+  respiration-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      respiration: 3
+    name: "<color:#00CED1><bold>Respiration III"
+    lore:
+      - "<color:#888888>Extended underwater breathing"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 37
+    page: 1
+
+  aqua-affinity:
+    enchanted-book: true
+    enchanted-book-enchants:
+      aqua_affinity: 1
+    name: "<color:#4682B4><bold>Aqua Affinity"
+    lore:
+      - "<color:#888888>Faster underwater mining"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 38
+    page: 1
+
+  feather-falling-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      feather_falling: 1
+    name: "<color:#DDA0DD><bold>Feather Falling I"
+    lore:
+      - "<color:#888888>Reduces fall damage"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 39
+    page: 1
+
+  feather-falling-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      feather_falling: 2
+    name: "<color:#DDA0DD><bold>Feather Falling II"
+    lore:
+      - "<color:#888888>Reduces fall damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 40
+    page: 1
+
+  feather-falling-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      feather_falling: 3
+    name: "<color:#DDA0DD><bold>Feather Falling III"
+    lore:
+      - "<color:#888888>Reduces fall damage"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 41
+    page: 1
+
+  feather-falling-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      feather_falling: 4
+    name: "<color:#DDA0DD><bold>Feather Falling IV"
+    lore:
+      - "<color:#888888>Reduces fall damage"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 42
+    page: 1
+
+  depth-strider-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      depth_strider: 1
+    name: "<color:#00FFFF><bold>Depth Strider I"
+    lore:
+      - "<color:#888888>Faster underwater movement"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 43
+    page: 1
+
+  depth-strider-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      depth_strider: 2
+    name: "<color:#00FFFF><bold>Depth Strider II"
+    lore:
+      - "<color:#888888>Faster underwater movement"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 21
+    page: 5
+
+
+  depth-strider-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      depth_strider: 3
+    name: "<color:#00FFFF><bold>Depth Strider III"
+    lore:
+      - "<color:#888888>Faster underwater movement"
+    buy-price: 16000
+    sell-price: 3200
+    slot: 10
+    page: 2
+
+  frost-walker-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      frost_walker: 1
+    name: "<color:#E0FFFF><bold>Frost Walker I"
+    lore:
+      - "<color:#888888>Freezes water under feet"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 11
+    page: 2
+
+  frost-walker-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      frost_walker: 2
+    name: "<color:#E0FFFF><bold>Frost Walker II"
+    lore:
+      - "<color:#888888>Freezes water under feet"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 12
+    page: 2
+
+  soul-speed-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      soul_speed: 1
+    name: "<color:#4B0082><bold>Soul Speed I"
+    lore:
+      - "<color:#888888>Faster on soul sand"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 13
+    page: 2
+
+  soul-speed-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      soul_speed: 2
+    name: "<color:#4B0082><bold>Soul Speed II"
+    lore:
+      - "<color:#888888>Faster on soul sand"
+    buy-price: 13000
+    sell-price: 2600
+    slot: 14
+    page: 2
+
+  soul-speed-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      soul_speed: 3
+    name: "<color:#4B0082><bold>Soul Speed III"
+    lore:
+      - "<color:#888888>Faster on soul sand"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 15
+    page: 2
+
+  swift-sneak-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      swift_sneak: 1
+    name: "<color:#2F2F2F><bold>Swift Sneak I"
+    lore:
+      - "<color:#888888>Faster sneaking"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 16
+    page: 2
+
+  swift-sneak-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      swift_sneak: 2
+    name: "<color:#2F2F2F><bold>Swift Sneak II"
+    lore:
+      - "<color:#888888>Faster sneaking"
+    buy-price: 25000
+    sell-price: 5000
+    slot: 19
+    page: 2
+
+  swift-sneak-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      swift_sneak: 3
+    name: "<color:#2F2F2F><bold>Swift Sneak III"
+    lore:
+      - "<color:#888888>Faster sneaking"
+    buy-price: 40000
+    sell-price: 8000
+    slot: 20
+    page: 2
+
+  sharpness-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sharpness: 1
+    name: "<color:#DC143C><bold>Sharpness I"
+    lore:
+      - "<color:#888888>Increases damage"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 21
+    page: 2
+
+  sharpness-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sharpness: 2
+    name: "<color:#DC143C><bold>Sharpness II"
+    lore:
+      - "<color:#888888>Increases damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 22
+    page: 2
+
+  sharpness-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sharpness: 3
+    name: "<color:#DC143C><bold>Sharpness III"
+    lore:
+      - "<color:#888888>Increases damage"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 23
+    page: 2
+
+  sharpness-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sharpness: 4
+    name: "<color:#DC143C><bold>Sharpness IV"
+    lore:
+      - "<color:#888888>Increases damage"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 24
+    page: 2
+
+  sharpness-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sharpness: 5
+    name: "<color:#DC143C><bold>Sharpness V"
+    lore:
+      - "<color:#888888>Increases damage"
+    buy-price: 30000
+    sell-price: 6000
+    slot: 25
+    page: 2
+
+  smite-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      smite: 1
+    name: "<color:#FFD700><bold>Smite I"
+    lore:
+      - "<color:#888888>Damage to undead"
+    buy-price: 4000
+    sell-price: 800
+    slot: 28
+    page: 2
+
+  smite-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      smite: 2
+    name: "<color:#FFD700><bold>Smite II"
+    lore:
+      - "<color:#888888>Damage to undead"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 29
+    page: 2
+
+  smite-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      smite: 3
+    name: "<color:#FFD700><bold>Smite III"
+    lore:
+      - "<color:#888888>Damage to undead"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 30
+    page: 2
+
+  smite-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      smite: 4
+    name: "<color:#FFD700><bold>Smite IV"
+    lore:
+      - "<color:#888888>Damage to undead"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 31
+    page: 2
+
+  smite-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      smite: 5
+    name: "<color:#FFD700><bold>Smite V"
+    lore:
+      - "<color:#888888>Damage to undead"
+    buy-price: 22000
+    sell-price: 4400
+    slot: 32
+    page: 2
+
+  bane-of-arthropods-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      bane_of_arthropods: 1
+    name: "<color:#556B2F><bold>Bane of Arthropods I"
+    lore:
+      - "<color:#888888>Damage to spiders"
+    buy-price: 4000
+    sell-price: 800
+    slot: 33
+    page: 2
+
+  bane-of-arthropods-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      bane_of_arthropods: 2
+    name: "<color:#556B2F><bold>Bane of Arthropods II"
+    lore:
+      - "<color:#888888>Damage to spiders"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 34
+    page: 2
+
+  bane-of-arthropods-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      bane_of_arthropods: 3
+    name: "<color:#556B2F><bold>Bane of Arthropods III"
+    lore:
+      - "<color:#888888>Damage to spiders"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 37
+    page: 2
+
+  bane-of-arthropods-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      bane_of_arthropods: 4
+    name: "<color:#556B2F><bold>Bane of Arthropods IV"
+    lore:
+      - "<color:#888888>Damage to spiders"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 38
+    page: 2
+
+  bane-of-arthropods-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      bane_of_arthropods: 5
+    name: "<color:#556B2F><bold>Bane of Arthropods V"
+    lore:
+      - "<color:#888888>Damage to spiders"
+    buy-price: 22000
+    sell-price: 4400
+    slot: 39
+    page: 2
+
+  knockback-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      knockback: 1
+    name: "<color:#D2691E><bold>Knockback I"
+    lore:
+      - "<color:#888888>Knocks enemies back"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 40
+    page: 2
+
+  knockback-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      knockback: 2
+    name: "<color:#D2691E><bold>Knockback II"
+    lore:
+      - "<color:#888888>Knocks enemies back"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 41
+    page: 2
+
+  fire-aspect-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_aspect: 1
+    name: "<color:#FF4500><bold>Fire Aspect I"
+    lore:
+      - "<color:#888888>Sets target on fire"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 42
+    page: 2
+
+  fire-aspect-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fire_aspect: 2
+    name: "<color:#FF4500><bold>Fire Aspect II"
+    lore:
+      - "<color:#888888>Sets target on fire"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 43
+    page: 2
+
+  looting-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      looting: 1
+    name: "<color:#32CD32><bold>Looting I"
+    lore:
+      - "<color:#888888>More mob drops"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 22
+    page: 5
+
+  looting-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      looting: 2
+    name: "<color:#32CD32><bold>Looting II"
+    lore:
+      - "<color:#888888>More mob drops"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 10
+    page: 3
+
+  looting-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      looting: 3
+    name: "<color:#32CD32><bold>Looting III"
+    lore:
+      - "<color:#888888>More mob drops"
+    buy-price: 35000
+    sell-price: 7000
+    slot: 11
+    page: 3
+
+  sweeping-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sweeping: 1
+    name: "<color:#B22222><bold>Sweeping Edge I"
+    lore:
+      - "<color:#888888>Increases sweeping damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 12
+    page: 3
+
+  sweeping-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sweeping: 2
+    name: "<color:#B22222><bold>Sweeping Edge II"
+    lore:
+      - "<color:#888888>Increases sweeping damage"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 13
+    page: 3
+
+  sweeping-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      sweeping: 3
+    name: "<color:#B22222><bold>Sweeping Edge III"
+    lore:
+      - "<color:#888888>Increases sweeping damage"
+    buy-price: 25000
+    sell-price: 5000
+    slot: 14
+    page: 3
+
+  efficiency-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      efficiency: 1
+    name: "<color:#FFD700><bold>Efficiency I"
+    lore:
+      - "<color:#888888>Faster mining"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 15
+    page: 3
+
+  efficiency-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      efficiency: 2
+    name: "<color:#FFD700><bold>Efficiency II"
+    lore:
+      - "<color:#888888>Faster mining"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 16
+    page: 3
+
+  efficiency-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      efficiency: 3
+    name: "<color:#FFD700><bold>Efficiency III"
+    lore:
+      - "<color:#888888>Faster mining"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 19
+    page: 3
+
+  efficiency-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      efficiency: 4
+    name: "<color:#FFD700><bold>Efficiency IV"
+    lore:
+      - "<color:#888888>Faster mining"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 20
+    page: 3
+
+  efficiency-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      efficiency: 5
+    name: "<color:#FFD700><bold>Efficiency V"
+    lore:
+      - "<color:#888888>Faster mining"
+    buy-price: 30000
+    sell-price: 6000
+    slot: 21
+    page: 3
+
+  silk-touch:
+    enchanted-book: true
+    enchanted-book-enchants:
+      silk_touch: 1
+    name: "<color:#E0FFFF><bold>Silk Touch"
+    lore:
+      - "<color:#888888>Mined blocks drop themselves"
+    buy-price: 50000
+    sell-price: 10000
+    slot: 22
+    page: 3
+
+  unbreaking-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      unbreaking: 1
+    name: "<color:#4169E1><bold>Unbreaking I"
+    lore:
+      - "<color:#888888>Increases durability"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 23
+    page: 3
+
+  unbreaking-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      unbreaking: 2
+    name: "<color:#4169E1><bold>Unbreaking II"
+    lore:
+      - "<color:#888888>Increases durability"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 24
+    page: 3
+
+  unbreaking-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      unbreaking: 3
+    name: "<color:#4169E1><bold>Unbreaking III"
+    lore:
+      - "<color:#888888>Increases durability"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 25
+    page: 3
+
+  fortune-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fortune: 1
+    name: "<color:#32CD32><bold>Fortune I"
+    lore:
+      - "<color:#888888>More ore drops"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 28
+    page: 3
+
+  fortune-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fortune: 2
+    name: "<color:#32CD32><bold>Fortune II"
+    lore:
+      - "<color:#888888>More ore drops"
+    buy-price: 22000
+    sell-price: 4400
+    slot: 29
+    page: 3
+
+  fortune-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      fortune: 3
+    name: "<color:#32CD32><bold>Fortune III"
+    lore:
+      - "<color:#888888>More ore drops"
+    buy-price: 45000
+    sell-price: 9000
+    slot: 30
+    page: 3
+
+  mending:
+    enchanted-book: true
+    enchanted-book-enchants:
+      mending: 1
+    name: "<color:#00FF7F><bold>Mending"
+    lore:
+      - "<color:#888888>Repairs with XP"
+    buy-price: 60000
+    sell-price: 12000
+    slot: 31
+    page: 3
+
+  power-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      power: 1
+    name: "<color:#FF6347><bold>Power I"
+    lore:
+      - "<color:#888888>Increases arrow damage"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 32
+    page: 3
+
+  power-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      power: 2
+    name: "<color:#FF6347><bold>Power II"
+    lore:
+      - "<color:#888888>Increases arrow damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 33
+    page: 3
+
+  power-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      power: 3
+    name: "<color:#FF6347><bold>Power III"
+    lore:
+      - "<color:#888888>Increases arrow damage"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 34
+    page: 3
+
+  power-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      power: 4
+    name: "<color:#FF6347><bold>Power IV"
+    lore:
+      - "<color:#888888>Increases arrow damage"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 37
+    page: 3
+
+  power-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      power: 5
+    name: "<color:#FF6347><bold>Power V"
+    lore:
+      - "<color:#888888>Increases arrow damage"
+    buy-price: 30000
+    sell-price: 6000
+    slot: 38
+    page: 3
+
+  punch-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      punch: 1
+    name: "<color:#FF8C00><bold>Punch I"
+    lore:
+      - "<color:#888888>Knocks targets back"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 39
+    page: 3
+
+  punch-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      punch: 2
+    name: "<color:#FF8C00><bold>Punch II"
+    lore:
+      - "<color:#888888>Knocks targets back"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 40
+    page: 3
+
+  flame:
+    enchanted-book: true
+    enchanted-book-enchants:
+      flame: 1
+    name: "<color:#FF4500><bold>Flame"
+    lore:
+      - "<color:#888888>Arrows set fire"
+    buy-price: 25000
+    sell-price: 5000
+    slot: 41
+    page: 3
+
+  infinity:
+    enchanted-book: true
+    enchanted-book-enchants:
+      infinity: 1
+    name: "<color:#191970><bold>Infinity"
+    lore:
+      - "<color:#888888>Infinite normal arrows"
+    buy-price: 40000
+    sell-price: 8000
+    slot: 42
+    page: 3
+
+  loyalty-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      loyalty: 1
+    name: "<color:#4169E1><bold>Loyalty I"
+    lore:
+      - "<color:#888888>Trident returns"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 43
+    page: 3
+
+  loyalty-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      loyalty: 2
+    name: "<color:#4169E1><bold>Loyalty II"
+    lore:
+      - "<color:#888888>Trident returns faster"
+    buy-price: 16000
+    sell-price: 3200
+    slot: 23
+    page: 5
+
+  loyalty-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      loyalty: 3
+    name: "<color:#4169E1><bold>Loyalty III"
+    lore:
+      - "<color:#888888>Trident returns instantly"
+    buy-price: 26000
+    sell-price: 5200
+    slot: 10
+    page: 4
+
+  impaling-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      impaling: 1
+    name: "<color:#1E90FF><bold>Impaling I"
+    lore:
+      - "<color:#888888>Damage to aquatic mobs"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 11
+    page: 4
+
+  impaling-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      impaling: 2
+    name: "<color:#1E90FF><bold>Impaling II"
+    lore:
+      - "<color:#888888>Damage to aquatic mobs"
+    buy-price: 9000
+    sell-price: 1800
+    slot: 12
+    page: 4
+
+  impaling-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      impaling: 3
+    name: "<color:#1E90FF><bold>Impaling III"
+    lore:
+      - "<color:#888888>Damage to aquatic mobs"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 13
+    page: 4
+
+  impaling-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      impaling: 4
+    name: "<color:#1E90FF><bold>Impaling IV"
+    lore:
+      - "<color:#888888>Damage to aquatic mobs"
+    buy-price: 22000
+    sell-price: 4400
+    slot: 14
+    page: 4
+
+  impaling-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      impaling: 5
+    name: "<color:#1E90FF><bold>Impaling V"
+    lore:
+      - "<color:#888888>Damage to aquatic mobs"
+    buy-price: 35000
+    sell-price: 7000
+    slot: 15
+    page: 4
+
+  riptide-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      riptide: 1
+    name: "<color:#4682B4><bold>Riptide I"
+    lore:
+      - "<color:#888888>Launch when throwing"
+    buy-price: 15000
+    sell-price: 3000
+    slot: 16
+    page: 4
+
+  riptide-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      riptide: 2
+    name: "<color:#4682B4><bold>Riptide II"
+    lore:
+      - "<color:#888888>Launch when throwing"
+    buy-price: 24000
+    sell-price: 4800
+    slot: 19
+    page: 4
+
+  riptide-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      riptide: 3
+    name: "<color:#4682B4><bold>Riptide III"
+    lore:
+      - "<color:#888888>Launch when throwing"
+    buy-price: 38000
+    sell-price: 7600
+    slot: 20
+    page: 4
+
+  channeling:
+    enchanted-book: true
+    enchanted-book-enchants:
+      channeling: 1
+    name: "<color:#87CEEB><bold>Channeling"
+    lore:
+      - "<color:#888888>Summons lightning"
+    buy-price: 45000
+    sell-price: 9000
+    slot: 21
+    page: 4
+
+  multishot:
+    enchanted-book: true
+    enchanted-book-enchants:
+      multishot: 1
+    name: "<color:#DAA520><bold>Multishot"
+    lore:
+      - "<color:#888888>Shoot 3 arrows"
+    buy-price: 35000
+    sell-price: 7000
+    slot: 22
+    page: 4
+
+  quick-charge-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      quick_charge: 1
+    name: "<color:#CD853F><bold>Quick Charge I"
+    lore:
+      - "<color:#888888>Faster crossbow loading"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 23
+    page: 4
+
+  quick-charge-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      quick_charge: 2
+    name: "<color:#CD853F><bold>Quick Charge II"
+    lore:
+      - "<color:#888888>Faster crossbow loading"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 24
+    page: 4
+
+  quick-charge-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      quick_charge: 3
+    name: "<color:#CD853F><bold>Quick Charge III"
+    lore:
+      - "<color:#888888>Faster crossbow loading"
+    buy-price: 25000
+    sell-price: 5000
+    slot: 25
+    page: 4
+
+  piercing-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      piercing: 1
+    name: "<color:#708090><bold>Piercing I"
+    lore:
+      - "<color:#888888>Arrows pierce mobs"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 28
+    page: 4
+
+  piercing-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      piercing: 2
+    name: "<color:#708090><bold>Piercing II"
+    lore:
+      - "<color:#888888>Arrows pierce mobs"
+    buy-price: 13000
+    sell-price: 2600
+    slot: 29
+    page: 4
+
+  piercing-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      piercing: 3
+    name: "<color:#708090><bold>Piercing III"
+    lore:
+      - "<color:#888888>Arrows pierce mobs"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 30
+    page: 4
+
+  piercing-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      piercing: 4
+    name: "<color:#708090><bold>Piercing IV"
+    lore:
+      - "<color:#888888>Arrows pierce mobs"
+    buy-price: 32000
+    sell-price: 6400
+    slot: 31
+    page: 4
+
+  luck-of-the-sea-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      luck_of_the_sea: 1
+    name: "<color:#00FA9A><bold>Luck of the Sea I"
+    lore:
+      - "<color:#888888>Better fishing loot"
+    buy-price: 6000
+    sell-price: 1200
+    slot: 32
+    page: 4
+
+  luck-of-the-sea-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      luck_of_the_sea: 2
+    name: "<color:#00FA9A><bold>Luck of the Sea II"
+    lore:
+      - "<color:#888888>Better fishing loot"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 33
+    page: 4
+
+  luck-of-the-sea-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      luck_of_the_sea: 3
+    name: "<color:#00FA9A><bold>Luck of the Sea III"
+    lore:
+      - "<color:#888888>Better fishing loot"
+    buy-price: 18000
+    sell-price: 3600
+    slot: 34
+    page: 4
+
+  lure-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      lure: 1
+    name: "<color:#87CEFA><bold>Lure I"
+    lore:
+      - "<color:#888888>Faster fishing"
+    buy-price: 5000
+    sell-price: 1000
+    slot: 37
+    page: 4
+
+  lure-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      lure: 2
+    name: "<color:#87CEFA><bold>Lure II"
+    lore:
+      - "<color:#888888>Faster fishing"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 38
+    page: 4
+
+  lure-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      lure: 3
+    name: "<color:#87CEFA><bold>Lure III"
+    lore:
+      - "<color:#888888>Faster fishing"
+    buy-price: 14000
+    sell-price: 2800
+    slot: 39
+    page: 4
+
+  binding-curse:
+    enchanted-book: true
+    enchanted-book-enchants:
+      binding_curse: 1
+    name: "<color:#800080><bold>Curse of Binding"
+    lore:
+      - "<color:#888888>Cannot remove armor"
+    buy-price: 1000
+    sell-price: 200
+    slot: 40
+    page: 4
+
+  vanishing-curse:
+    enchanted-book: true
+    enchanted-book-enchants:
+      vanishing_curse: 1
+    name: "<color:#800080><bold>Curse of Vanishing"
+    lore:
+      - "<color:#888888>Item disappears on death"
+    buy-price: 1000
+    sell-price: 200
+    slot: 41
+    page: 4
+
+  density-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      density: 1
+    name: "<color:#A9A9A9><bold>Density I"
+    lore:
+      - "<color:#888888>Increased mace damage"
+    buy-price: 8000
+    sell-price: 1600
+    slot: 42
+    page: 4
+
+  density-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      density: 2
+    name: "<color:#A9A9A9><bold>Density II"
+    lore:
+      - "<color:#888888>Increased mace damage"
+    buy-price: 13000
+    sell-price: 2600
+    slot: 43
+    page: 4
+
+  density-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      density: 3
+    name: "<color:#A9A9A9><bold>Density III"
+    lore:
+      - "<color:#888888>Increased mace damage"
+    buy-price: 21000
+    sell-price: 4200
+    slot: 24
+    page: 5
+
+  density-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      density: 4
+    name: "<color:#A9A9A9><bold>Density IV"
+    lore:
+      - "<color:#888888>Increased mace damage"
+    buy-price: 34000
+    sell-price: 6800
+    slot: 10
+    page: 5
+
+  density-5:
+    enchanted-book: true
+    enchanted-book-enchants:
+      density: 5
+    name: "<color:#A9A9A9><bold>Density V"
+    lore:
+      - "<color:#888888>Increased mace damage"
+    buy-price: 55000
+    sell-price: 11000
+    slot: 11
+    page: 5
+
+  breach-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      breach: 1
+    name: "<color:#CD5C5C><bold>Breach I"
+    lore:
+      - "<color:#888888>Ignores armor"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 12
+    page: 5
+
+  breach-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      breach: 2
+    name: "<color:#CD5C5C><bold>Breach II"
+    lore:
+      - "<color:#888888>Ignores armor"
+    buy-price: 16000
+    sell-price: 3200
+    slot: 13
+    page: 5
+
+  breach-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      breach: 3
+    name: "<color:#CD5C5C><bold>Breach III"
+    lore:
+      - "<color:#888888>Ignores armor"
+    buy-price: 26000
+    sell-price: 5200
+    slot: 14
+    page: 5
+
+  breach-4:
+    enchanted-book: true
+    enchanted-book-enchants:
+      breach: 4
+    name: "<color:#CD5C5C><bold>Breach IV"
+    lore:
+      - "<color:#888888>Ignores armor"
+    buy-price: 42000
+    sell-price: 8400
+    slot: 15
+    page: 5
+
+  wind-burst-1:
+    enchanted-book: true
+    enchanted-book-enchants:
+      wind_burst: 1
+    name: "<color:#B0E0E6><bold>Wind Burst I"
+    lore:
+      - "<color:#888888>Launch after smash attack"
+    buy-price: 12000
+    sell-price: 2400
+    slot: 16
+    page: 5
+
+  wind-burst-2:
+    enchanted-book: true
+    enchanted-book-enchants:
+      wind_burst: 2
+    name: "<color:#B0E0E6><bold>Wind Burst II"
+    lore:
+      - "<color:#888888>Launch after smash attack"
+    buy-price: 20000
+    sell-price: 4000
+    slot: 19
+    page: 5
+
+  wind-burst-3:
+    enchanted-book: true
+    enchanted-book-enchants:
+      wind_burst: 3
+    name: "<color:#B0E0E6><bold>Wind Burst III"
+    lore:
+      - "<color:#888888>Launch after smash attack"
+    buy-price: 35000
+    sell-price: 7000
+    slot: 20
+    page: 5

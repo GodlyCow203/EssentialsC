@@ -1,0 +1,384 @@
+items:
+  redstone_torch:
+    material: REDSTONE_TORCH
+    name: "<color:#FF0000>Redstone Torch"
+    buy-price: 50
+    sell-price: 15
+    slot: 10
+    page: 1
+
+  redstone_block:
+    material: REDSTONE_BLOCK
+    name: "<color:#FF0000>Redstone Block"
+    buy-price: 450
+    sell-price: 150
+    slot: 11
+    page: 1
+
+  lever:
+    material: LEVER
+    name: "<color:#8B4513>Lever"
+    buy-price: 30
+    sell-price: 10
+    slot: 12
+    page: 1
+
+  stone_button:
+    material: STONE_BUTTON
+    name: "<color:#808080>Stone Button"
+    buy-price: 20
+    sell-price: 6
+    slot: 14
+    page: 1
+
+  wooden_button:
+    material: OAK_BUTTON
+    name: "<color:#8B4513>Wooden Button"
+    buy-price: 15
+    sell-price: 5
+    slot: 15
+    page: 1
+
+  tripwire_hook:
+    material: TRIPWIRE_HOOK
+    name: "<color:#D2691E>Tripwire Hook"
+    buy-price: 80
+    sell-price: 25
+    slot: 16
+    page: 1
+
+  stone_pressure_plate:
+    material: STONE_PRESSURE_PLATE
+    name: "<color:#808080>Stone Pressure Plate"
+    buy-price: 40
+    sell-price: 12
+    slot: 19
+    page: 1
+
+  wooden_pressure_plate:
+    material: OAK_PRESSURE_PLATE
+    name: "<color:#8B4513>Wooden Pressure Plate"
+    buy-price: 30
+    sell-price: 10
+    slot: 20
+    page: 1
+
+  light_weighted_pressure_plate:
+    material: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: "<color:#FFD700>Light Weighted Pressure Plate"
+    buy-price: 800
+    sell-price: 250
+    slot: 21
+    page: 1
+
+  heavy_weighted_pressure_plate:
+    material: HEAVY_WEIGHTED_PRESSURE_PLATE
+    name: "<color:#C0C0C0>Heavy Weighted Pressure Plate"
+    buy-price: 600
+    sell-price: 200
+    slot: 23
+    page: 1
+
+  polished_blackstone_pressure_plate:
+    material: POLISHED_BLACKSTONE_PRESSURE_PLATE
+    name: "<color:#2F2F2F>Polished Blackstone Pressure Plate"
+    buy-price: 50
+    sell-price: 15
+    slot: 24
+    page: 1
+
+  target:
+    material: TARGET
+    name: "<color:#F5DEB3>Target"
+    buy-price: 300
+    sell-price: 100
+    slot: 25
+    page: 1
+
+  piston:
+    material: PISTON
+    name: "<color:#DEB887>Piston"
+    buy-price: 250
+    sell-price: 80
+    slot: 28
+    page: 1
+
+  sticky_piston:
+    material: STICKY_PISTON
+    name: "<color:#90EE90>Sticky Piston"
+    buy-price: 450
+    sell-price: 150
+    slot: 29
+    page: 1
+
+  slime_block:
+    material: SLIME_BLOCK
+    name: "<color:#90EE90>Slime Block"
+    buy-price: 350
+    sell-price: 110
+    slot: 30
+    page: 1
+
+  honey_block:
+    material: HONEY_BLOCK
+    name: "<color:#FFA500>Honey Block"
+    buy-price: 400
+    sell-price: 130
+    slot: 32
+    page: 1
+
+  observer:
+    material: OBSERVER
+    name: "<color:#696969>Observer"
+    buy-price: 350
+    sell-price: 110
+    slot: 33
+    page: 1
+
+  daylight_detector:
+    material: DAYLIGHT_DETECTOR
+    name: "<color:#F5DEB3>Daylight Detector"
+    buy-price: 500
+    sell-price: 160
+    slot: 34
+    page: 1
+
+  redstone_repeater:
+    material: REPEATER
+    name: "<color:#FF0000>Redstone Repeater"
+    buy-price: 150
+    sell-price: 50
+    slot: 37
+    page: 1
+
+  redstone_comparator:
+    material: COMPARATOR
+    name: "<color:#FF0000>Redstone Comparator"
+    buy-price: 300
+    sell-price: 100
+    slot: 38
+    page: 1
+
+  redstone_dust:
+    material: REDSTONE
+    name: "<color:#FF0000>Redstone Dust"
+    buy-price: 20
+    sell-price: 6
+    slot: 39
+    page: 1
+
+  redstone_lamp:
+    material: REDSTONE_LAMP
+    name: "<color:#FFD700>Redstone Lamp"
+    buy-price: 400
+    sell-price: 130
+    slot: 41
+    page: 1
+
+  note_block:
+    material: NOTE_BLOCK
+    name: "<color:#8B4513>Note Block"
+    buy-price: 200
+    sell-price: 65
+    slot: 42
+    page: 1
+
+  jukebox:
+    material: JUKEBOX
+    name: "<color:#8B4513>Jukebox"
+    buy-price: 2500
+    sell-price: 800
+    slot: 43
+    page: 1
+
+  dropper:
+    material: DROPPER
+    name: "<color:#808080>Dropper"
+    buy-price: 150
+    sell-price: 50
+    slot: 10
+    page: 2
+
+  dispenser:
+    material: DISPENSER
+    name: "<color:#808080>Dispenser"
+    buy-price: 300
+    sell-price: 100
+    slot: 11
+    page: 2
+
+  hopper:
+    material: HOPPER
+    name: "<color:#696969>Hopper"
+    buy-price: 800
+    sell-price: 250
+    slot: 12
+    page: 2
+
+  chest:
+    material: CHEST
+    name: "<color:#8B4513>Chest"
+    buy-price: 80
+    sell-price: 25
+    slot: 14
+    page: 2
+
+  trapped_chest:
+    material: TRAPPED_CHEST
+    name: "<color:#8B4513>Trapped Chest"
+    buy-price: 150
+    sell-price: 50
+    slot: 15
+    page: 2
+
+  barrel:
+    material: BARREL
+    name: "<color:#8B4513>Barrel"
+    buy-price: 90
+    sell-price: 30
+    slot: 16
+    page: 2
+
+  iron_door:
+    material: IRON_DOOR
+    name: "<color:#C0C0C0>Iron Door"
+    buy-price: 600
+    sell-price: 200
+    slot: 19
+    page: 2
+
+  iron_trapdoor:
+    material: IRON_TRAPDOOR
+    name: "<color:#C0C0C0>Iron Trapdoor"
+    buy-price: 700
+    sell-price: 230
+    slot: 20
+    page: 2
+
+  oak_door:
+    material: OAK_DOOR
+    name: "<color:#8B4513>Oak Door"
+    buy-price: 40
+    sell-price: 12
+    slot: 21
+    page: 2
+
+  oak_trapdoor:
+    material: OAK_TRAPDOOR
+    name: "<color:#8B4513>Oak Trapdoor"
+    buy-price: 50
+    sell-price: 15
+    slot: 23
+    page: 2
+
+  fence_gate:
+    material: OAK_FENCE_GATE
+    name: "<color:#8B4513>Fence Gate"
+    buy-price: 45
+    sell-price: 14
+    slot: 24
+    page: 2
+
+  lectern:
+    material: LECTERN
+    name: "<color:#8B4513>Lectern"
+    buy-price: 350
+    sell-price: 110
+    slot: 25
+    page: 2
+
+  sculk_sensor:
+    material: SCULK_SENSOR
+    name: "<color:#00CED1>Sculk Sensor"
+    buy-price: 2000
+    sell-price: 650
+    slot: 28
+    page: 2
+
+  calibrated_sculk_sensor:
+    material: CALIBRATED_SCULK_SENSOR
+    name: "<color:#00CED1>Calibrated Sculk Sensor"
+    buy-price: 3500
+    sell-price: 1100
+    slot: 29
+    page: 2
+
+  crafter:
+    material: CRAFTER
+    name: "<color:#FF8C00>Crafter"
+    buy-price: 5000
+    sell-price: 1600
+    slot: 30
+    page: 2
+
+  chiseled_bookshelf:
+    material: CHISELED_BOOKSHELF
+    name: "<color:#8B4513>Chiseled Bookshelf"
+    buy-price: 300
+    sell-price: 100
+    slot: 32
+    page: 2
+
+  lightning_rod:
+    material: LIGHTNING_ROD
+    name: "<color:#B87333>Lightning Rod"
+    buy-price: 400
+    sell-price: 130
+    slot: 33
+    page: 2
+
+  copper_bulb:
+    material: COPPER_BULB
+    name: "<color:#B87333>Copper Bulb"
+    buy-price: 600
+    sell-price: 200
+    slot: 34
+    page: 2
+
+  tnt:
+    material: TNT
+    name: "<color:#FF4500>TNT"
+    buy-price: 500
+    sell-price: 160
+    slot: 37
+    page: 2
+
+  composter:
+    material: COMPOSTER
+    name: "<color:#8B4513>Composter"
+    buy-price: 120
+    sell-price: 40
+    slot: 38
+    page: 2
+
+  cauldron:
+    material: CAULDRON
+    name: "<color:#708090>Cauldron"
+    buy-price: 700
+    sell-price: 230
+    slot: 39
+    page: 2
+
+  decorated_pot:
+    material: DECORATED_POT
+    name: "<color:#D2691E>Decorated Pot"
+    buy-price: 200
+    sell-price: 65
+    slot: 41
+    page: 2
+
+  rail:
+    material: RAIL
+    name: "<color:#808080>Rail"
+    buy-price: 150
+    sell-price: 50
+    slot: 42
+    page: 2
+
+  detector_rail:
+    material: DETECTOR_RAIL
+    name: "<color:#FF0000>Detector Rail"
+    buy-price: 300
+    sell-price: 100
+    slot: 43
+    page: 2
