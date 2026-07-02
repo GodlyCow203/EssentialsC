@@ -3,3 +3,25 @@
 
 *.class
 
+
+# server related stuff, keep server.jar
+
+servers/*/cache
+servers/*/config
+servers/*/libraries
+servers/*/logs
+servers/*/plugins
+servers/*/versions
+servers/*/world
+servers/*/banned-ips.json
+servers/*/banned-players.json
+servers/*/bukkit.yml
+servers/*/commands.yml
+servers/*/help.yml
+servers/*/ops.json
+servers/*/permissions.yml
+servers/*/server.properties
+servers/*/spigot.yml
+servers/*/usercache.json
+servers/*/version_history.json
+servers/*/whitelist.json
