@@ -1,0 +1,115 @@
+title: lang:ah.gui.title.main
+size: 54
+
+items:
+  border:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 9
+    - 17
+    - 18
+    - 26
+    - 27
+    - 35
+    - 36
+    - 44
+    - 46
+    - 47
+    - 51
+    - 52
+    hide-attributes: true
+  
+  corner:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+    - 0
+    - 8
+    - 45
+    - 53
+    hide-attributes: true
+  
+  nav-prev:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.nav.prev.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0=
+    slot: 48
+    action: page_prev
+    hide-attributes: true
+  
+  nav-next:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.nav.next.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=
+    slot: 50
+    action: page_next
+    hide-attributes: true
+  
+  listings:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.listings.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Q2MjhkYTk2NjY2ZjZjYTdlNjdiMTJjZjU1ODlhODgxZmE2ZWEzNTVmMTJhYmU2NTJmMmM2Mjc5NGExZGQ3In19fQ==
+    slot: 45
+    lore:
+    - lang:ah.gui.item.listings.lore1
+    - lang:ah.gui.item.listings.lore2
+    action: listings
+    hide-attributes: true
+  
+  expired:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.expired.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmUwZmQxMDE5OWU4ZTRmY2RhYmNhZTRmODVjODU5MTgxMjdhN2M1NTUzYWQyMzVmMDFjNTZkMThiYjk0NzBkMyJ9fX0=
+    slot: 46
+    lore:
+    - lang:ah.gui.item.expired.lore1
+    - lang:ah.gui.item.expired.lore_waiting
+    action: expired
+    glow: true
+    hide-attributes: true
+  
+  refresh:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.refresh.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzg0M2RiZTkxOGY0MGNlYTQ3MGY4YjMzMGE1YWVlOWM1ZDczYjg0MzBlZTk3NDY4MDA4YWRlZWRhNzNhY2FkYiJ9fX0=
+    slot: 52
+    lore:
+    - lang:ah.gui.item.refresh.lore1
+    - lang:ah.gui.item.refresh.lore2
+    action: refresh
+    hide-attributes: true
+  
+  history:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.history.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGZkYzRiYjAzNGQ4ZjQzMTdhYzRmZTNhNDBjNDNkNjIzNGE4ZjUxODkyZGVjNjYzNDBhMTJkYTg3Y2NmNTkxNyJ9fX0=
+    slot: 53
+    lore:
+    - lang:ah.gui.item.history.lore1
+    - lang:ah.gui.item.history.lore2
+    action: history
+    hide-attributes: true
+  
+  info:
+    material: PLAYER_HEAD
+    slot: 49
+    name: lang:ah.gui.item.info.name
+    hide-attributes: true
+  
+  empty:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.empty.auction.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTViZjVlZTJjZTQ1ZWEyZTg1MWQ1YTZiMDY0M2JhYzc2ZWVlODE0YjA5NzBmMDBkNDNkZjQ1YjdjNDQyN2E5MiJ9fX0=
+    lore:
+    - lang:ah.gui.item.empty.auction.lore1
+    - lang:ah.gui.item.empty.auction.lore2
+    - lang:ah.gui.item.empty.auction.help
+    hide-attributes: true

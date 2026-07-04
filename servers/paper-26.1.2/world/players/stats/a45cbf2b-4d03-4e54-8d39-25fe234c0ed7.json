@@ -1,0 +1,31 @@
+{
+  "stats": {
+    "minecraft:dropped": {
+      "minecraft:sugar_cane": 1
+    },
+    "minecraft:mined": {
+      "minecraft:sugar_cane": 2
+    },
+    "minecraft:used": {
+      "minecraft:anvil": 1
+    },
+    "minecraft:picked_up": {
+      "minecraft:sugar_cane": 1
+    },
+    "minecraft:custom": {
+      "minecraft:sprint_one_cm": 2854,
+      "minecraft:time_since_rest": 6000,
+      "minecraft:fall_one_cm": 900,
+      "minecraft:walk_one_cm": 510,
+      "minecraft:total_world_time": 6000,
+      "minecraft:fly_one_cm": 4723,
+      "minecraft:interact_with_anvil": 1,
+      "minecraft:sneak_time": 2,
+      "minecraft:play_time": 6000,
+      "minecraft:jump": 20,
+      "minecraft:time_since_death": 6000,
+      "minecraft:drop": 1
+    }
+  },
+  "DataVersion": 4790
+}

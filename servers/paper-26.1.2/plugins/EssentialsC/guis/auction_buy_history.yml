@@ -1,0 +1,95 @@
+title: lang:ah.gui.title.history.buy
+size: 54
+
+items:
+  border:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 17
+    - 18
+    - 26
+    - 27
+    - 35
+    - 36
+    - 44
+    - 46
+    - 47
+    - 48
+    - 50
+    - 51
+    - 52
+    - 53
+    hide-attributes: true
+  
+  corner:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+    - 0
+    - 8
+    - 45
+    - 53
+    hide-attributes: true
+  
+  nav-prev:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.nav.prev.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0=
+    slot: 48
+    action: page_prev
+    hide-attributes: true
+  
+  nav-next:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.nav.next.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=
+    slot: 50
+    action: page_next
+    hide-attributes: true
+  
+  back:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.back_history.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJlZWVmZDk4NmFkMTA2NDM0YzY0ZmFjNjY5ZjcwZWY4OGRjNmJiNmM4MmNiZDdmYThkNjY0MzY5NzNkYjFhZCJ9fX0=
+    slot: 45
+    action: back_history
+    hide-attributes: true
+  
+  close:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.close.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWZkMjQwMDAwMmFkOWZiYmJkMDA2Njk0MWViNWIxYTM4NGFiOWIwZTQ4YTE3OGVlOTZlNGQxMjlhNTIwODY1NCJ9fX0=
+    slot: 53
+    action: close
+    hide-attributes: true
+  
+  stats:
+    material: DIAMOND
+    slot: 49
+    name: lang:ah.gui.item.buy_stats.name
+    hide-attributes: true
+  
+  empty:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.empty_history.buy.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTViZjVlZTJjZTQ1ZWEyZTg1MWQ1YTZiMDY0M2JhYzc2ZWVlODE0YjA5NzBmMDBkNDNkZjQ1YjdjNDQyN2E5MiJ9fX0=
+    lore:
+    - lang:ah.gui.item.empty_history.buy.lore1
+    - lang:ah.gui.item.empty_history.buy.lore2
+    hide-attributes: true
+  
+  filler:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    hide-attributes: true

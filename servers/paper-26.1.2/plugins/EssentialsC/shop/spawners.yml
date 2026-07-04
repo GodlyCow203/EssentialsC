@@ -1,0 +1,216 @@
+items:
+  zombie-spawner:
+    spawner: true
+    spawner-type: ZOMBIE
+    name: "<color:#4A7C59><bold>Zombie Spawner"
+    buy-price: 8000
+    sell-price: 1500
+    slot: 10
+    page: 1
+
+  skeleton-spawner:
+    spawner: true
+    spawner-type: SKELETON
+    name: "<color:#E3E3E3><bold>Skeleton Spawner"
+    buy-price: 10000
+    sell-price: 2000
+    slot: 11
+    page: 1
+
+  spider-spawner:
+    spawner: true
+    spawner-type: SPIDER
+    name: "<color:#8B4513><bold>Spider Spawner"
+    buy-price: 12000
+    sell-price: 2500
+    slot: 12
+    page: 1
+
+  creeper-spawner:
+    spawner: true
+    spawner-type: CREEPER
+    name: "<color:#228B22><bold>Creeper Spawner"
+    buy-price: 20000
+    sell-price: 5000
+    slot: 14
+    page: 1
+
+  silverfish-spawner:
+    spawner: true
+    spawner-type: SILVERFISH
+    name: "<color:#A9A9A9><bold>Silverfish Spawner"
+    buy-price: 15000
+    sell-price: 4000
+    slot: 15
+    page: 1
+
+  slime-spawner:
+    spawner: true
+    spawner-type: SLIME
+    name: "<color:#7FFF00><bold>Slime Spawner"
+    buy-price: 35000
+    sell-price: 10000
+    slot: 16
+    page: 1
+
+  phantom-spawner:
+    spawner: true
+    spawner-type: PHANTOM
+    name: "<color:#4B0082><bold>Phantom Spawner"
+    buy-price: 18000
+    sell-price: 4500
+    slot: 19
+    page: 1
+
+  drowned-spawner:
+    spawner: true
+    spawner-type: DROWNED
+    name: "<color:#4682B4><bold>Drowned Spawner"
+    buy-price: 14000
+    sell-price: 3500
+    slot: 20
+    page: 1
+
+  husk-spawner:
+    spawner: true
+    spawner-type: HUSK
+    name: "<color:#D2B48C><bold>Husk Spawner"
+    buy-price: 13000
+    sell-price: 3200
+    slot: 21
+    page: 1
+
+  stray-spawner:
+    spawner: true
+    spawner-type: STRAY
+    name: "<color:#B0C4DE><bold>Stray Spawner"
+    buy-price: 16000
+    sell-price: 4000
+    slot: 23
+    page: 1
+
+  zombified-piglin-spawner:
+    spawner: true
+    spawner-type: ZOMBIFIED_PIGLIN
+    name: "<color:#FF6B6B><bold>Zombified Piglin Spawner"
+    buy-price: 28000
+    sell-price: 7000
+    slot: 24
+    page: 1
+
+  piglin-spawner:
+    spawner: true
+    spawner-type: PIGLIN
+    name: "<color:#F4A460><bold>Piglin Spawner"
+    buy-price: 32000
+    sell-price: 8000
+    slot: 25
+    page: 1
+
+  enderman-spawner:
+    spawner: true
+    spawner-type: ENDERMAN
+    name: "<color:#9932CC><bold>Enderman Spawner"
+    buy-price: 50000
+    sell-price: 15000
+    slot: 28
+    page: 1
+
+  blaze-spawner:
+    spawner: true
+    spawner-type: BLAZE
+    name: "<color:#FF8C00><bold>Blaze Spawner"
+    buy-price: 45000
+    sell-price: 12000
+    slot: 29
+    page: 1
+
+  magma-cube-spawner:
+    spawner: true
+    spawner-type: MAGMA_CUBE
+    name: "<color:#DC143C><bold>Magma Cube Spawner"
+    buy-price: 48000
+    sell-price: 14000
+    slot: 30
+    page: 1
+
+  witch-spawner:
+    spawner: true
+    spawner-type: WITCH
+    name: "<color:#BA55D3><bold>Witch Spawner"
+    buy-price: 55000
+    sell-price: 18000
+    slot: 32
+    page: 1
+
+  ghast-spawner:
+    spawner: true
+    spawner-type: GHAST
+    name: "<color:#F0E68C><bold>Ghast Spawner"
+    buy-price: 85000
+    sell-price: 22000
+    slot: 33
+    page: 1
+
+  wither-skeleton-spawner:
+    spawner: true
+    spawner-type: WITHER_SKELETON
+    name: "<color:#2F4F4F><bold>Wither Skeleton Spawner"
+    buy-price: 95000
+    sell-price: 25000
+    slot: 34
+    page: 1
+
+  hoglin-spawner:
+    spawner: true
+    spawner-type: HOGLIN
+    name: "<color:#CD853F><bold>Hoglin Spawner"
+    buy-price: 42000
+    sell-price: 11000
+    slot: 37
+    page: 1
+
+  piglin-brute-spawner:
+    spawner: true
+    spawner-type: PIGLIN_BRUTE
+    name: "<color:#8B4513><bold>Piglin Brute Spawner"
+    buy-price: 60000
+    sell-price: 16000
+    slot: 38
+    page: 1
+
+  shulker-spawner:
+    spawner: true
+    spawner-type: SHULKER
+    name: "<color:#D8BFD8><bold>Shulker Spawner"
+    buy-price: 75000
+    sell-price: 20000
+    slot: 39
+    page: 1
+
+  guardian-spawner:
+    spawner: true
+    spawner-type: GUARDIAN
+    name: "<color:#5F9EA0><bold>Guardian Spawner"
+    buy-price: 70000
+    sell-price: 19000
+    slot: 41
+    page: 1
+
+  elder-guardian-spawner:
+    spawner: true
+    spawner-type: ELDER_GUARDIAN
+    name: "<color:#2F4F4F><bold>Elder Guardian Spawner"
+    buy-price: 150000
+    sell-price: 40000
+    slot: 42
+    page: 1
+
+  warden-spawner:
+    spawner: true
+    spawner-type: WARDEN
+    name: "<color:#00008B><bold>Warden Spawner"
+    buy-price: 500000
+    sell-price: 120000
+    slot: 43
+    page: 1
