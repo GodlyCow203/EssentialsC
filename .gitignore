@@ -167,27 +167,27 @@ servers/paper-1.20.4/permissions.yml
 servers/paper-1.20.4/server.properties
 servers/paper-1.20.4/spigot.yml
 servers/paper-1.20.4/usercache.json
-servers/paper-1.20.4/version_history.json
+servers/paper-1.20/version_history.json
 servers/paper-1.20.4/whitelist.json
 
 # PAPER 2
 
-servers/paper-1.21.1/cache
-servers/paper-1.21.1/config
-servers/paper-1.21.1/libraries
-servers/paper-1.21.1/logs
-servers/paper-1.21.1/plugins
-servers/paper-1.21.1/versions
-servers/paper-1.21.1/world
-servers/paper-1.21.1/banned-ips.json
-servers/paper-1.21.1/banned-players.json
-servers/paper-1.21.1/bukkit.yml
-servers/paper-1.21.1/commands.yml
-servers/paper-1.21.1/help.yml
-servers/paper-1.21.1/ops.json
-servers/paper-1.21.1permissions.yml
-servers/paper-1.21.1/server.properties
-servers/paper-1.21.1/spigot.yml
-servers/paper-1.21.1/usercache.json
-servers/paper-1.21.1/version_history.json
-servers/paper-1.21.1/whitelist.json
+servers/paper-26.1.2/cache
+servers/paper-26.1.2/config
+servers/paper-26.1.2/libraries
+servers/paper-26.1.2/logs
+servers/paper-26.1.2/plugins
+servers/paper-26.1.2/versions
+servers/paper-26.1.2/world
+servers/paper-26.1.2/banned-ips.json
+servers/paper-26.1.2/banned-players.json
+servers/paper-26.1.2/bukkit.yml
+servers/paper-26.1.2/commands.yml
+servers/paper-26.1.2/help.yml
+servers/paper-26.1.2/ops.json
+servers/paper-26.1.2permissions.yml
+servers/paper-26.1.2/server.properties
+servers/paper-26.1.2/spigot.yml
+servers/paper-26.1.2/usercache.json
+servers/paper-26.1.2/version_history.json
+servers/paper-26.1.2/whitelist.json
