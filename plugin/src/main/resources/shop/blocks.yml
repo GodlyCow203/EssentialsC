@@ -2584,26 +2584,10 @@ items:
     slot: 39
     page: 12
 
-  chiseled_red_sandstone:
-    material: CHISELED_RED_SANDSTONE
-    name: "<color:#C48B6B><bold>Chiseled Red Sandstone"
-    buy-price: 5
-    sell-price: 1.0
-    slot: 40
-    page: 12
-
-  chiseled_sandstone:
-    material: CHISELED_SANDSTONE
-    name: "<color:#D6CFA6><bold>Chiseled Sandstone"
-    buy-price: 5
-    sell-price: 1.0
-    slot: 41
-    page: 12
-
   smooth_stone_slab:
     material: SMOOTH_STONE_SLAB
     name: "<color:#9E9E9E><bold>Smooth Stone Slab"
     buy-price: 2
     sell-price: 0.4
-    slot: 42
+    slot: 40
     page: 12
