@@ -723,7 +723,7 @@ items:
   sweeping-1:
     enchanted-book: true
     enchanted-book-enchants:
-      sweeping: 1
+      sweeping_edge: 1
     name: "<color:#B22222><bold>Sweeping Edge I"
     lore:
       - "<color:#888888>Increases sweeping damage"
@@ -735,7 +735,7 @@ items:
   sweeping-2:
     enchanted-book: true
     enchanted-book-enchants:
-      sweeping: 2
+      sweeping_edge: 2
     name: "<color:#B22222><bold>Sweeping Edge II"
     lore:
       - "<color:#888888>Increases sweeping damage"
@@ -747,7 +747,7 @@ items:
   sweeping-3:
     enchanted-book: true
     enchanted-book-enchants:
-      sweeping: 3
+      sweeping_edge: 3
     name: "<color:#B22222><bold>Sweeping Edge III"
     lore:
       - "<color:#888888>Increases sweeping damage"
