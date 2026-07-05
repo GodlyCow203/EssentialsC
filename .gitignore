@@ -191,3 +191,9 @@ servers/paper-26.1.2/spigot.yml
 servers/paper-26.1.2/usercache.json
 servers/paper-26.1.2/version_history.json
 servers/paper-26.1.2/whitelist.json
+
+# Gradle build folders
+api/build
+expansions/build
+expansions/profiles/build
+plugin/build
