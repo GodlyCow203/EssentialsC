@@ -188,7 +188,7 @@ public class EsscCommand extends Command {
                         "version", plugin.getDescription().getVersion()
                 )));
 
-                Bukkit.getLogger().info("Reload completed by " + sender.getName());
+                plugin.getLogger().info("Reload completed by " + sender.getName());
             }
 
             case "backup" -> executeBackup(sender, args);
