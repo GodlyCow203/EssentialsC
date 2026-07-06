@@ -26,7 +26,6 @@ import net.godlycow.org.essc.modules.punishment.IpHistoryMigration;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.modules.home.HomeManager;
 import net.godlycow.org.essc.modules.home.HomeNotificationManager;
-import net.godlycow.org.essc.modules.home.gui.GuiManager;
 import net.godlycow.org.essc.storage.user.UserManager;
 import net.godlycow.org.essc.modules.kit.KitManager;
 import net.godlycow.org.essc.language.HelpManager;
@@ -125,7 +124,6 @@ public final class PluginLoader {
         plugin.setTpaManager(new TPAManager(plugin));
         plugin.setHomeManager(new HomeManager(plugin));
         plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
-        plugin.setHomeGuiManager(new GuiManager(plugin));
         plugin.setSpawnManager(new SpawnManager(plugin));
         plugin.setBackManager(new BackManager(plugin));
         plugin.setKitManager(new KitManager(plugin));

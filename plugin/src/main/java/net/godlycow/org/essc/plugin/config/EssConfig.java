@@ -152,22 +152,12 @@ public class EssConfig {
         return config.getStringList("home.blocked-worlds");
     }
 
-
     public String getDefaultHomeName() {
         return config.getString("home.default-name", "home");
     }
 
     public String getDefaultTeleportHomeName() {
         return config.getString("home.default-teleport-name", "");
-    }
-
-
-    public String getHomeMode() {
-        return config.getString("home.mode", "command").toLowerCase();
-    }
-
-    public boolean isHomeGuiMode() {
-        return getHomeMode().equals("gui");
     }
 
     public String getKitMode() {
@@ -305,14 +295,6 @@ public class EssConfig {
         return config.getInt("nickname.max-length", 16);
     }
 
-    public boolean isNickColorsAllowed() {
-        return config.getBoolean("nickname.allow-colors", true);
-    }
-
-    public boolean isNickFormatAllowed() {
-        return config.getBoolean("nickname.allow-formats", true);
-    }
-
     public boolean isNickBlacklistEnabled() {
         return config.getBoolean("nickname.blacklist-enabled", true);
     }
@@ -339,10 +321,6 @@ public class EssConfig {
 
     public boolean isShopEnabled() {
         return config.getBoolean("shop.enabled", true);
-    }
-
-    public boolean isDiscordEnabled() {
-        return config.getBoolean("discord.enabled", true);
     }
 
     public List<String> getDiscordMessage() {
@@ -614,10 +592,6 @@ public class EssConfig {
         return config.getBoolean("playerlist.show-luckperms-prefix", true);
     }
 
-    public int getPlayerListPerLine() {
-        return config.getInt("playerlist.players-per-line", 10);
-    }
-
     public boolean isMotdEnabled() {
         return config.getBoolean("motd.enabled", true);
     }
@@ -672,36 +646,6 @@ public class EssConfig {
 
     public boolean isSellGUISounds() {
         return config.getBoolean("sell.gui.sounds", true);
-    }
-
-    public Material getAHGuiMaterial(String path, Material defaultMat) {
-        String matName = config.getString("auction-house.gui.items." + path + ".material", defaultMat.name());
-        try {
-            return Material.valueOf(matName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            plugin.getLogger().warning("Invalid material in config: " + matName + " for path " + path);
-            return defaultMat;
-        }
-    }
-
-    public boolean getAHGuiGlow(String path, boolean defaultGlow) {
-        return config.getBoolean("auction-house.gui.items." + path + ".glow", defaultGlow);
-    }
-
-    public List<String> getAHGuiLore(String path, List<String> defaultLore) {
-        return config.getStringList("auction-house.gui.items." + path + ".lore");
-    }
-
-    public String getAHGuiName(String path, String defaultName) {
-        return config.getString("auction-house.gui.items." + path + ".name", defaultName);
-    }
-
-    public String getAHGuiTexture(String path, String defaultTexture) {
-        String value = config.getString("auction-house.gui.items." + path + ".texture", defaultTexture);
-        if (value == null || value.isBlank()) {
-            return null;
-        }
-        return value;
     }
 
     public String getFallbackLanguage() {

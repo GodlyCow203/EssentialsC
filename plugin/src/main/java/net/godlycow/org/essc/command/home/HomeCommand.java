@@ -23,7 +23,6 @@ public class HomeCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        boolean guiMode = plugin.getConfigManager().getHomeMode().equals("gui");
 
         if (args.length == 0) {
             String defaultHome = plugin.getConfigManager().getDefaultTeleportHomeName();
@@ -31,11 +30,7 @@ public class HomeCommand extends Command {
                 teleportToHome(player, player.getUniqueId(), defaultHome.toLowerCase(), null);
                 return true;
             }
-            if (guiMode) {
-                plugin.getHomeGuiManager().openHomeList(player);
-            } else {
-                showHomeList(player);
-            }
+            showHomeList(player);
             return true;
         }
 

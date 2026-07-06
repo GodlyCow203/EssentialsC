@@ -26,39 +26,22 @@ public class DelHomeCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        boolean guiMode = plugin.getConfigManager().getHomeMode().equals("gui");
 
         if (args.length == 0) {
-            if (guiMode) {
-                plugin.getHomeGuiManager().openHomeList(player);
-            } else {
-                player.sendMessage(lang.get(player, "home.delete.no_name_provided"));
-            }
+            player.sendMessage(lang.get(player, "home.delete.no_name_provided"));
             return true;
         }
 
         String name = args[0].toLowerCase();
 
-        if (guiMode) {
-            plugin.getHomeManager().getHome(player.getUniqueId(), name).whenComplete((home, err) -> {
-                player.getScheduler().run(plugin, task -> {
-                    if (home == null) {
-                        player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", name)));
-                        return;
-                    }
-                    plugin.getHomeGuiManager().openConfirmDelete(player, home, player.getUniqueId());
-                }, null);
-            });
-        } else {
-            String pending = pendingDeletions.get(player.getUniqueId());
+        String pending = pendingDeletions.get(player.getUniqueId());
 
-            if (pending != null && pending.equals(name)) {
-                cancelPending(player.getUniqueId());
-                deleteHome(player, name);
-            } else {
-                setPendingDeletion(player.getUniqueId(), name);
-                player.sendMessage(lang.get(player, "home.delete.confirm", Map.of("name", name)));
-            }
+        if (pending != null && pending.equals(name)) {
+            cancelPending(player.getUniqueId());
+            deleteHome(player, name);
+        } else {
+            setPendingDeletion(player.getUniqueId(), name);
+            player.sendMessage(lang.get(player, "home.delete.confirm", Map.of("name", name)));
         }
 
         return true;

@@ -17,7 +17,6 @@ public class UsageCharts {
         registerDefaultLanguageChart(plugin, metrics);
         registerDisabledCommandsChart(plugin, metrics);
         registerLuckPermsIntegrationChart(plugin, metrics);
-        registerHomeModeChart(plugin, metrics);
         registerDiscordSRVChart(plugin, metrics);
     }
 
@@ -59,11 +58,6 @@ public class UsageCharts {
         }));
     }
 
-    private static void registerHomeModeChart(EssentialsC plugin, Metrics metrics) {
-        metrics.addCustomChart(new SimplePie("home_mode", () -> {
-            return plugin.getConfigManager().isHomeGuiMode() ? "GUI" : "Command";
-        }));
-    }
 
     private static void registerDiscordSRVChart(EssentialsC plugin, Metrics metrics) {
         metrics.addCustomChart(new SimplePie("discordsrv_enabled", () -> {

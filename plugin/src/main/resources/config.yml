@@ -170,8 +170,6 @@ luckperms:
 # Controls which EssentialsC events are relayed to Discord.
 
 discordsrv:
-  # Set to false to disable all DiscordSRV integration.
-  enabled: true
 
   # Channel configuration.
   # The name value must match a channel key defined in DiscordSRV's config.yml.
@@ -290,9 +288,6 @@ playerlist:
   # Show the player's LuckPerms prefix next to their name in the list.
   show-luckperms-prefix: true
 
-  # How many player names to show per line.
-  players-per-line: 10
-
 # Random Teleport (RTP)
 
 rtp:
@@ -410,11 +405,6 @@ tpa:
 # Homes
 
 home:
-  # How players interact with their homes.
-  # "command" — players type /home <name> directly.
-  # "gui"     — all home interactions go through an inventory GUI.
-  mode: command
-
   # The home name used when no name argument is given in command mode,
   # and for the quick-create button in GUI mode.
   default-name: home
@@ -650,12 +640,6 @@ nickname:
 
   # Maximum number of characters allowed in a nickname.
   max-length: 16
-
-  # Allow players with essentialsc.nick.colors to use color codes in nicknames.
-  allow-colors: true
-
-  # Allow players with essentialsc.nick.formats to use formatting (bold, italic, etc.).
-  allow-formats: true
 
   # Enable the nickname blacklist check.
   blacklist-enabled: true

@@ -26,7 +26,6 @@ import net.godlycow.org.essc.modules.chat.ChatManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
 import net.godlycow.org.essc.modules.home.HomeManager;
 import net.godlycow.org.essc.modules.home.HomeNotificationManager;
-import net.godlycow.org.essc.modules.home.gui.GuiManager;
 import net.godlycow.org.essc.modules.kit.KitManager;
 import net.godlycow.org.essc.modules.kit.gui.KitGuiManager;
 import net.godlycow.org.essc.modules.nick.NickManager;
@@ -70,7 +69,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private TPAManager tpaManager;
     private HomeManager homeManager;
     private HomeNotificationManager homeNotificationManager;
-    private GuiManager homeGuiManager;
     private SpawnManager spawnManager;
     private BackManager backManager;
     private KitManager kitManager;
@@ -252,14 +250,6 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setHomeNotificationManager(HomeNotificationManager homeNotificationManager) {
         this.homeNotificationManager = homeNotificationManager;
-    }
-
-    public GuiManager getHomeGuiManager() {
-        return homeGuiManager;
-    }
-
-    public void setHomeGuiManager(GuiManager homeGuiManager) {
-        this.homeGuiManager = homeGuiManager;
     }
 
     public SpawnManager getSpawnManager() {

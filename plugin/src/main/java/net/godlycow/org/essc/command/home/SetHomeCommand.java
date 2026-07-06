@@ -18,14 +18,9 @@ public class SetHomeCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        boolean guiMode = plugin.getConfigManager().getHomeMode().equals("gui");
 
         if (args.length == 0) {
-            if (guiMode) {
-                plugin.getHomeGuiManager().openCreateGui(player);
-            } else {
-                setHome(player, plugin.getConfigManager().getDefaultHomeName());
-            }
+            setHome(player, plugin.getConfigManager().getDefaultHomeName());
             return true;
         }
 

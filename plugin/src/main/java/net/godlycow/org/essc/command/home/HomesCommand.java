@@ -28,11 +28,6 @@ public class HomesCommand extends Command {
             return true;
         }
 
-        if (plugin.getConfigManager().isHomeGuiMode()) {
-            plugin.getHomeGuiManager().openHomeList(player);
-            return true;
-        }
-
         if (args.length > 0 && player.hasPermission("essentialsc.home.admin")) {
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
