@@ -42,7 +42,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     }
 }
 
@@ -73,7 +73,7 @@ data class MinecraftServerDefinition(
 //folia and paper are on 26.+ so they require java 25
 val minecraftServerDefinitions = listOf(
     MinecraftServerDefinition("paper-26.1.2", MinecraftServerType.PAPER, java25Path),
-    MinecraftServerDefinition("paper-1.20.4", MinecraftServerType.PAPER, java21Path),
+    MinecraftServerDefinition("paper-1.20.6", MinecraftServerType.PAPER, java21Path),
     MinecraftServerDefinition("folia-26.1.2", MinecraftServerType.FOLIA, java25Path)
 )
 

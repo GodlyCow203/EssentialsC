@@ -8,7 +8,7 @@ tasks.shadowJar {
 }
 
 tasks.runServer {
-    minecraftVersion("1.20")
+    minecraftVersion("1.20.6")
     jvmArgs("-Xms1G", "-Xmx1G")
 }
 
@@ -31,7 +31,9 @@ dependencies {
     api(project(":api"))
 
     compileOnly("com.discordsrv:discordsrv:1.26.0")
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
+        exclude("org.bukkit", "bukkit")
+    }
     compileOnly("com.github.NEZNAMY:TAB-API:5.5.0")
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("net.luckperms:api:5.5")

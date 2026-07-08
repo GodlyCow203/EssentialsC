@@ -150,25 +150,25 @@ servers/folia-26.1.2/whitelist.json
 
 # PAPER 1
 
-servers/paper-1.20.4/cache
-servers/paper-1.20.4/config
-servers/paper-1.20.4/libraries
-servers/paper-1.20.4/logs
-servers/paper-1.20.4/plugins
-servers/paper-1.20.4/versions
-servers/paper-1.20.4/world
-servers/paper-1.20.4/banned-ips.json
-servers/paper-1.20.4/banned-players.json
-servers/paper-1.20.4/bukkit.yml
-servers/paper-1.20.4/commands.yml
-servers/paper-1.20.4/help.yml
-servers/paper-1.20.4/ops.json
-servers/paper-1.20.4/permissions.yml
-servers/paper-1.20.4/server.properties
-servers/paper-1.20.4/spigot.yml
-servers/paper-1.20.4/usercache.json
-servers/paper-1.20/version_history.json
-servers/paper-1.20.4/whitelist.json
+servers/paper-1.20.6/cache
+servers/paper-1.20.6/config
+servers/paper-1.20.6/libraries
+servers/paper-1.20.6/logs
+servers/paper-1.20.6/plugins
+servers/paper-1.20.6/versions
+servers/paper-1.20.6/world
+servers/paper-1.20.6/banned-ips.json
+servers/paper-1.20.6/banned-players.json
+servers/paper-1.20.6/bukkit.yml
+servers/paper-1.20.6/commands.yml
+servers/paper-1.20.6/help.yml
+servers/paper-1.20.6/ops.json
+servers/paper-1.20.6/permissions.yml
+servers/paper-1.20.6/server.properties
+servers/paper-1.20.6/spigot.yml
+servers/paper-1.20.6/usercache.json
+servers/paper-1.20.6/version_history.json
+servers/paper-1.20.6/whitelist.json
 
 # PAPER 2
 
