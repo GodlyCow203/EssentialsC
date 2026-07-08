@@ -8,7 +8,7 @@ tasks.shadowJar {
 }
 
 tasks.runServer {
-    minecraftVersion("1.21.1")
+    minecraftVersion("1.20")
     jvmArgs("-Xms1G", "-Xmx1G")
 }
 

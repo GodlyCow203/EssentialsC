@@ -1,7 +1,7 @@
 name: EssentialsC-MySQLExpansion
 version: '${project.version}'
 main: net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion
-api-version: "1.21"
+api-version: "1.20"
 authors: [_GodlyCow]
 description: Cross-server economy sync expansion for EssentialsC using MySQL.
 website: https://wiki.godlycow.org/essc/expansions/landingpage

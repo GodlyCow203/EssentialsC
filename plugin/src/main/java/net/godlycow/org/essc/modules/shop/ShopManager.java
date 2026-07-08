@@ -2,6 +2,7 @@ package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -154,8 +155,7 @@ public class ShopManager {
             if (storedEnchants != null) {
                 for (String enchKey : storedEnchants.getKeys(false)) {
                     try {
-                        Enchantment ench = org.bukkit.Registry.ENCHANTMENT
-                                .get(org.bukkit.NamespacedKey.minecraft(enchKey.toLowerCase()));
+                        Enchantment ench = Enchantment.getByKey(NamespacedKey.minecraft(enchKey.toLowerCase()));
                         if (ench != null) {
                             item.addStoredEnchantment(ench, storedEnchants.getInt(enchKey));
                         }
@@ -167,8 +167,7 @@ public class ShopManager {
             if (enchants != null) {
                 for (String enchKey : enchants.getKeys(false)) {
                     try {
-                        Enchantment ench = org.bukkit.Registry.ENCHANTMENT
-                                .get(org.bukkit.NamespacedKey.minecraft(enchKey.toLowerCase()));
+                        Enchantment ench = Enchantment.getByKey(NamespacedKey.minecraft(enchKey.toLowerCase()));
                         if (ench != null) {
                             item.addEnchantment(ench, enchants.getInt(enchKey));
                         }

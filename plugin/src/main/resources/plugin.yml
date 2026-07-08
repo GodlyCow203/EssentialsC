@@ -1,7 +1,7 @@
 name: EssentialsC
 version: '${project.version}'
 main: net.godlycow.org.essc.EssentialsC
-api-version: '1.21'
+api-version: '1.20'
 folia-supported: true
 description: A lightweight yet powerful Minecraft plugin inspired by EssentialsX
 author: _GodlyCow

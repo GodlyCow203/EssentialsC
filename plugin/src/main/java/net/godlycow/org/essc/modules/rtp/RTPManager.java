@@ -669,7 +669,7 @@ public class RTPManager {
             double offsetZ = (random.nextDouble() - 0.5) * 2;
             world.spawnParticle(Particle.PORTAL, loc.clone().add(offsetX, offsetY, offsetZ), 1, 0, 0, 0, 0.1);
         }
-        world.spawnParticle(Particle.EXPLOSION, loc, 1);
+        world.spawnParticle(Particle.EXPLOSION_LARGE, loc, 1);
     }
 
     // how many ppl in world
