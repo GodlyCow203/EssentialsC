@@ -11,7 +11,6 @@
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/expansions" />
             <option value="$PROJECT_DIR$/expansions/mysql" />
-            <option value="$PROJECT_DIR$/expansions/profiles" />
             <option value="$PROJECT_DIR$/plugin" />
           </set>
         </option>

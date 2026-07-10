@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public final class FastStatsManager {
+
     public static final ErrorTracker ERROR_TRACKER = ErrorTracker.contextAware()
             .ignoreError(InvocationTargetException.class)
             .ignoreError(IOException.class, "Broken pipe");  //ignore IT + IO Exceptions
