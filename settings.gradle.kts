@@ -5,5 +5,4 @@ plugins {
 rootProject.name = "essentialsc"
 include("api")
 include("expansions:mysql")
-include("expansions:profiles")
 include("plugin")
