@@ -123,11 +123,17 @@ public final class EssentialsC extends JavaPlugin implements Listener {
         if (essConfig.isEconomyEnabled()) {
             debug("Economy is enabled, initializing EconomyManager...");
             economyManager = new EconomyManager(this);
-            vaultHook = new VaultHook(economyManager);
-            if (vaultHook.hook()) {
-                getLogger().info("Successfully hooked into Vault.");
-            } else {
-                getLogger().warning("Vault not found, skipping Vault economy registration.");
+            try {
+                Class.forName("net.milkbowl.vault.economy.Economy");
+                vaultHook = new VaultHook(economyManager);
+                if (vaultHook.hook()) {
+                    getLogger().info("Successfully hooked into Vault.");
+                } else {
+                    getLogger().info("Vault not found, skipping Vault economy registration.");
+                }
+            } catch (ClassNotFoundException e) {
+                getLogger().info("Vault not found, skipping Vault economy registration.");
+                vaultHook = null;
             }
         } else {
             debug("Economy is disabled, skipping initialization.");
