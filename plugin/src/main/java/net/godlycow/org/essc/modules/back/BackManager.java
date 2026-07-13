@@ -73,10 +73,6 @@ public class BackManager implements Listener {
         return backLocations.containsKey(player.getUniqueId());
     }
 
-    public void removeBackLocation(Player player) {
-        backLocations.remove(player.getUniqueId());
-    }
-
     public void teleportBack(Player player, boolean confirm) {
         if (warmupTasks.containsKey(player.getUniqueId())) {
             player.sendMessage(plugin.getLanguageManager().get(player, "back.already_pending"));
@@ -192,9 +188,18 @@ public class BackManager implements Listener {
             warmupTasks.remove(player.getUniqueId());
         }
 
-        if (!player.isOnline()) return;
+        if (!player.isOnline())
+            return;
 
-        Location safeLocation = SafeLocationFinder.findSafe(location);
+        plugin.getServer().getRegionScheduler().run(plugin, location, scheduledTask -> {
+            Location safeLocation = SafeLocationFinder.findSafe(location);
+            resolveSafeTeleport(player, location, safeLocation, isDeath);
+        });
+    }
+
+    private void resolveSafeTeleport(Player player, Location location, Location safeLocation, boolean isDeath) {
+        if (!player.isOnline())
+            return;
 
         if (safeLocation == null) {
             String key = isDeath ? "dback.unsafe_location" : "back.unsafe_location";
@@ -205,6 +210,7 @@ public class BackManager implements Listener {
             }
             player.sendMessage(plugin.getLanguageManager().get(player, key));
             plugin.debug("No safe location found for " + player.getName() + " near stored location");
+
             return;
         }
 
@@ -212,7 +218,8 @@ public class BackManager implements Listener {
         Location preBackLocation = player.getLocation().clone();
 
         plugin.teleportHelper().teleportAsync(player, safeLocation, false).thenAccept(success -> {
-            if (!success) return;
+            if (!success)
+                return;
 
             if (isDeath) {
                 if (cooldown > 0) {
@@ -244,7 +251,8 @@ public class BackManager implements Listener {
         Location preBackLocation = player.getLocation().clone();
 
         plugin.teleportHelper().teleportAsync(player, location, false).thenAccept(success -> {
-            if (!success) return;
+            if (!success)
+                return;
 
             if (isDeath) {
                 if (cooldown > 0) {
@@ -276,10 +284,13 @@ public class BackManager implements Listener {
         ScheduledTask task = warmupTasks.remove(player.getUniqueId());
         ScheduledTask deathTask = deathWarmupTasks.remove(player.getUniqueId());
 
-        if (task != null) task.cancel();
-        if (deathTask != null) deathTask.cancel();
+        if (task != null)
+            task.cancel();
+        if (deathTask != null)
+            deathTask.cancel();
 
-        if (task == null && deathTask == null) return;
+        if (task == null && deathTask == null)
+            return;
 
         msgKey = switch (reason) {
             case "move" -> "back.cancelled.move";
@@ -291,10 +302,14 @@ public class BackManager implements Listener {
     }
 
     private boolean isOnCooldown(Player player) {
-        if (player.hasPermission("essentialsc.back.admin")) return false;
-        if (cooldown <= 0) return false;
+        if (player.hasPermission("essentialsc.back.admin"))
+            return false;
+        if (cooldown <= 0)
+            return false;
         Long last = cooldowns.get(player.getUniqueId());
-        if (last == null) return false;
+        if (last == null)
+
+            return false;
         return System.currentTimeMillis() - last < (cooldown * 1000);
     }
 
@@ -304,10 +319,13 @@ public class BackManager implements Listener {
     }
 
     private boolean isOnDeathCooldown(Player player) {
-        if (player.hasPermission("essentialsc.dback.admin")) return false;
-        if (cooldown <= 0) return false;
+        if (player.hasPermission("essentialsc.dback.admin"))
+            return false;
+        if (cooldown <= 0)
+            return false;
         Long last = deathCooldowns.get(player.getUniqueId());
-        if (last == null) return false;
+        if (last == null)
+            return false;
         return System.currentTimeMillis() - last < (cooldown * 1000);
     }
 
@@ -316,64 +334,6 @@ public class BackManager implements Listener {
         return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
     }
 
-//    public boolean hasBackLocation(UUID uuid) {
-//        return backLocations.containsKey(uuid);
-//    }
-//
-//    public boolean hasDeathLocation(UUID uuid) {
-//        return deathLocations.containsKey(uuid);
-//    }
-//
-//    public Optional<Location> getBackLocation(UUID uuid) {
-//        Location loc = backLocations.get(uuid);
-//        return Optional.ofNullable(loc != null ? loc.clone() : null);
-//    }
-//
-//    public Optional<Location> getDeathLocation(UUID uuid) {
-//        Location loc = deathLocations.get(uuid);
-//        return Optional.ofNullable(loc != null ? loc.clone() : null);
-//    }
-//
-//    public boolean hasPendingTeleport(UUID uuid) {
-//        return warmupTasks.containsKey(uuid) || deathWarmupTasks.containsKey(uuid);
-//    }
-//
-//    public boolean isOnCooldown(UUID uuid) {
-//        Player player = plugin.getServer().getPlayer(uuid);
-//        if (player != null && player.hasPermission("essentialsc.back.admin")) return false;
-//        if (cooldown <= 0) return false;
-//        Long last = cooldowns.get(uuid);
-//        if (last == null) return false;
-//        return System.currentTimeMillis() - last < (cooldown * 1000);
-//    }
-//
-//    public long getRemainingCooldown(UUID uuid) {
-//        Player player = plugin.getServer().getPlayer(uuid);
-//        if (player != null && player.hasPermission("essentialsc.back.admin")) return 0;
-//        if (cooldown <= 0) return 0;
-//        long last = cooldowns.getOrDefault(uuid, 0L);
-//        return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
-//    }
-//
-//    public long getWarmupSeconds() {
-//        return warmup;
-//    }
-//
-//    public long getCooldownSeconds() {
-//        return cooldown;
-//    }
-//
-//    public boolean isParticlesEnabled() {
-//        return particles;
-//    }
-//
-//    public boolean isSoundsEnabled() {
-//        return sounds;
-//    }
-//
-//    public boolean isCancelOnMovementEnabled() {
-//        return cancelOnMovement;
-//    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
@@ -391,17 +351,21 @@ public class BackManager implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!cancelOnMovement) return;
+        if (!cancelOnMovement)
+            return;
 
         Player player = event.getPlayer();
         boolean hasBack = warmupTasks.containsKey(player.getUniqueId());
         boolean hasDBack = deathWarmupTasks.containsKey(player.getUniqueId());
-        if (!hasBack && !hasDBack) return;
+
+        if (!hasBack && !hasDBack)
+            return;
 
         Location from = event.getFrom();
         Location to = event.getTo();
 
-        if (to == null) return;
+        if (to == null)
+            return;
         if (from.getBlockX() == to.getBlockX() &&
                 from.getBlockY() == to.getBlockY() &&
                 from.getBlockZ() == to.getBlockZ()) {
