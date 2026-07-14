@@ -29,6 +29,12 @@ public class AuctionEconomy {
             return CompletableFuture.completedFuture(false);
         }
 
+        if (plugin.getEconomyManager() == null) {
+            unlockAuction(auction.getId());
+            plugin.getLogger().severe("Economy manager not available, cannot process auction purchase");
+            return CompletableFuture.completedFuture(false);
+        }
+
         return plugin.getEconomyManager().has(buyer.getUniqueId(), auction.getPrice())
                 .thenCompose(has -> {
                     if (!has) {
