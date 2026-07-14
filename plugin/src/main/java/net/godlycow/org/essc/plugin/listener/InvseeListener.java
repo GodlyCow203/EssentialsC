@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.plugin.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.command.inv.InvseeHolder;
 import net.godlycow.org.essc.util.InventorySerializer;
 import org.bukkit.Material;
@@ -47,7 +48,7 @@ public class InvseeListener implements Listener {
 
     public void closeSessionsForPlayer(UUID targetUuid, Player rejoiningPlayer) {
         for (Player viewer : plugin.getServer().getOnlinePlayers()) {
-            Inventory open = viewer.getOpenInventory().getTopInventory();
+            Inventory open = InventoryViewCompat.getTopInventory(viewer);
 
             if (!(open.getHolder() instanceof InvseeHolder holder)) continue;
             if (!holder.isOffline()) continue;

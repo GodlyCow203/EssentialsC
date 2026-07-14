@@ -10,6 +10,8 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import net.godlycow.org.essc.util.InventoryViewCompat;
+
 public class SellListener implements Listener {
     private final EssentialsC plugin;
     private SellManager sellManager;
@@ -29,7 +31,7 @@ public class SellListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        Inventory topInv = player.getOpenInventory().getTopInventory();
+        Inventory topInv = InventoryViewCompat.getTopInventory(player);
         if (topInv == null) return;
 
         InventoryHolder holder = topInv.getHolder();
@@ -77,7 +79,7 @@ public class SellListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        Inventory topInv = player.getOpenInventory().getTopInventory();
+        Inventory topInv = InventoryViewCompat.getTopInventory(player);
         if (topInv == null) return;
 
         InventoryHolder holder = topInv.getHolder();

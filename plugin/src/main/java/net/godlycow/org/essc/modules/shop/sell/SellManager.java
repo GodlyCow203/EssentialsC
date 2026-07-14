@@ -1,10 +1,12 @@
 package net.godlycow.org.essc.modules.shop.sell;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.modules.shop.ShopCategory;
 import net.godlycow.org.essc.modules.shop.ShopItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -47,7 +49,7 @@ public class SellManager {
 
             gui.onClose();
 
-            if (player.getOpenInventory().getTopInventory().getHolder() instanceof SellHolder) {
+            if (InventoryViewCompat.getTopInventory(player)instanceof Inventory inv && inv.getHolder() instanceof SellHolder) {
                 player.closeInventory();
             }
 

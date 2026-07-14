@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -534,7 +535,7 @@ public class ShopManager {
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             player.getScheduler().run(plugin, task -> {
-                org.bukkit.inventory.Inventory open = player.getOpenInventory().getTopInventory();
+                org.bukkit.inventory.Inventory open = InventoryViewCompat.getTopInventory(player);
                 if (open == null || !(open.getHolder() instanceof ShopHolder holder)) {
                     return;
                 }

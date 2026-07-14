@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -190,7 +191,7 @@ public class ShopListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        Inventory topInv = player.getOpenInventory().getTopInventory();
+        Inventory topInv = InventoryViewCompat.getTopInventory(player);
         if (topInv == null || !(topInv.getHolder() instanceof ShopHolder)) return;
 
         for (int slot : event.getRawSlots()) {
@@ -209,7 +210,7 @@ public class ShopListener implements Listener {
         if (!(inv.getHolder() instanceof ShopHolder)) return;
 
         player.getScheduler().run(plugin, task -> {
-            Inventory current = player.getOpenInventory().getTopInventory();
+            Inventory current = InventoryViewCompat.getTopInventory(player);
             if (!(current.getHolder() instanceof ShopHolder)) {
                 removeSession(player);
             }

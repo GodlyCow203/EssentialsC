@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
@@ -368,7 +369,7 @@ public class ShopGuiManager {
     }
 
     public void updateBalanceSlot(Player player, double balance, String templateId) {
-        org.bukkit.inventory.Inventory open = player.getOpenInventory().getTopInventory();
+        org.bukkit.inventory.Inventory open = InventoryViewCompat.getTopInventory(player);
         if (open == null || !(open.getHolder() instanceof ShopHolder)) {
             return;
         }
