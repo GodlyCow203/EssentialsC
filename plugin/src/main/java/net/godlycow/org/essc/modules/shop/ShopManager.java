@@ -399,7 +399,8 @@ public class ShopManager {
         for (String cmd : item.getCommands()) {
             String formatted = cmd.replace("%player%", player.getName())
                     .replace("%amount%", String.valueOf(totalItems));
-            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), formatted);
+            plugin.getServer().getGlobalRegionScheduler().execute(plugin, () ->
+                    plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), formatted));
         }
 
         shopListener.getSounds().playPurchase(player);
