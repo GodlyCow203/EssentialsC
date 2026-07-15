@@ -17,6 +17,10 @@ public class TABHook {
     }
 
     public void updateNick(Player player, String nickname) {
+        if (TabAPI.getInstance() == null) {
+            plugin.debug("TABHook: TabAPI not available yet");
+            return;
+        }
         TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(player.getUniqueId());
         if (tabPlayer == null) {
             plugin.debug("TABHook: TabPlayer not found for " + player.getName());
