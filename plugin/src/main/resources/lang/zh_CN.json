@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>此玩家不能被封禁。</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>被</color> <color:#FFFFFF><banner></color> <color:#FF0000>永久封禁，原因:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>被封禁 <color:#FFFFFF><duration></color>，封禁者</color> <color:#FFFFFF><banner></color> <color:#FF0000>，原因:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>你已被封禁此服务器！</color>\n\n<color:#FFFFFF>原因:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>封禁者:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>时长:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>你已被封禁此服务器！</color>\n\n<color:#AAAAAA>原因:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>封禁者:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>时长:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "违反服务器规则",
   "command.usage.ban": "<prefix> <color:#FF0000>用法: /ban <玩家> [-t:时长] [原因]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> 已被封禁。<count> 名玩家被踢出</color>",

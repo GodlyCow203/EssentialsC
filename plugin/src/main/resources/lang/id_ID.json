@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Pemain ini tidak dapat dibanned.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>dibanned permanen oleh</color> <color:#FFFFFF><banner></color> <color:#FF0000>karena:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>dibanned selama <color:#FFFFFF><duration></color> oleh</color> <color:#FFFFFF><banner></color> <color:#FF0000>karena:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Anda dibanned dari server ini!</color>\n\n<color:#FFFFFF>Alasan:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Dibanned oleh:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Durasi:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Anda dibanned dari server ini!</color>\n\n<color:#AAAAAA>Alasan:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Dibanned oleh:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Durasi:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Melanggar aturan server",
   "command.usage.ban": "<prefix> <color:#FF0000>Penggunaan: /ban <pemain> [-t:durata] [alasan]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> telah dibanned. <count> pemain dikick</color>",

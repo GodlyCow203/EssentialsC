@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>اس کھلاڑی کو بین نہیں کیا جا سکتا۔</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>کو</color> <color:#FFFFFF><banner></color> <color:#FF0000>نے ہمیشہ کے لیے اس وجہ سے بین کیا:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>کو</color> <color:#FFFFFF><duration></color> <color:#FF0000>کے لیے</color> <color:#FFFFFF><banner></color> <color:#FF0000>نے اس وجہ سے بین کیا:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>آپ کو اس سرور سے بین کیا گیا ہے!</color>\n\n<color:#FFFFFF>وجہ:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>بین کرنے والا:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>مدت:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>آپ کو اس سرور سے بین کیا گیا ہے!</color>\n\n<color:#AAAAAA>وجہ:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>بین کرنے والا:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>مدت:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "سرور کے قوانین کی خلاف ورزی",
   "command.usage.ban": "<prefix> <color:#FF0000>استعمال: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>آئی پی <color:#FFFFFF><ip></color> کو بین کر دیا گیا۔ <count> کھلاڑی(وں) کو نکالا گیا</color>",

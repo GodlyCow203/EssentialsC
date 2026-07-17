@@ -161,7 +161,7 @@ public class LanguageManager {
         if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
         if (prefix != null) raw = raw.replace("<prefix>", prefix);
 
-        if (!(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
+        if (sender != null && !(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
             Component component = miniMessage.deserialize(raw);
             String plain = PlainTextComponentSerializer.plainText().serialize(component);
             return Component.text(plain);

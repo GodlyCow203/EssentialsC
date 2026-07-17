@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Hindi maaaring i-ban ang player na ito.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ay permanenteng na-ban ni</color> <color:#FFFFFF><banner></color> <color:#FF0000>dahil sa:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ay na-ban sa loob ng <color:#FFFFFF><duration></color> ni</color> <color:#FFFFFF><banner></color> <color:#FF0000>dahil sa:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Na-ban ka mula sa server na ito!</color>\n\n<color:#FFFFFF>Dahilan:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Nag-ban:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Tagal:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Na-ban ka mula sa server na ito!</color>\n\n<color:#AAAAAA>Dahilan:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Nag-ban:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Tagal:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Paglabag sa mga patakaran ng server",
   "command.usage.ban": "<prefix> <color:#FF0000>Paggamit: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>Na-ban ang IP <color:#FFFFFF><ip></color>. <count> player(s) ang na-kick</color>",

@@ -542,7 +542,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Dëse Spiller kann net gebannt ginn.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ass permanent gebannt ginn vum</color> <color:#FFFFFF><banner></color> <color:#FF0000>aus dësem Grond:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ass fir <color:#FFFFFF><duration></color> gebannt ginn vum</color> <color:#FFFFFF><banner></color> <color:#FF0000>aus dësem Grond:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Du bass vun dësem Server gebannt!</color>\n\n<color:#FFFFFF>Grond:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Gebannt vum:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Dauer:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Du bass vun dësem Server gebannt!</color>\n\n<color:#AAAAAA>Grond:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Gebannt vum:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Dauer:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Serverreegelen gebrach",
   "command.usage.ban": "<prefix> <color:#FF0000>Benotzung: /ban <Spiller> [-t:Dauer] [Grond]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> ass gebannt ginn. <count> Spiller(en) gekickt</color>",

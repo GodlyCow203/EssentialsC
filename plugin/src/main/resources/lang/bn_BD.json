@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>এই খেলোয়াড়কে ব্যান করা যাবে না।</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>কে</color> <color:#FFFFFF><banner></color> <color:#FF0000>স্থায়ীভাবে ব্যান করেছেন কারণ:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>কে <color:#FFFFFF><duration></color> এর জন্য</color> <color:#FFFFFF><banner></color> <color:#FF0000>ব্যান করেছেন কারণ:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>আপনি এই সার্ভার থেকে ব্যান!</color>\n\n<color:#FFFFFF>কারণ:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>ব্যান করেছেন:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>সময়কাল:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>আপনি এই সার্ভার থেকে ব্যান!</color>\n\n<color:#AAAAAA>কারণ:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>ব্যান করেছেন:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>সময়কাল:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "সার্ভারের নিয়ম ভঙ্গ",
   "command.usage.ban": "<prefix> <color:#FF0000>ব্যবহার: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>আইপি <color:#FFFFFF><ip></color> ব্যান করা হয়েছে। <count> জন খেলোয়াড় কিক করা হয়েছে</color>",

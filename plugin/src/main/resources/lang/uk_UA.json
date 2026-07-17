@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Цього гравця не можна заблокувати.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>був назавжди заблокований гравцем</color> <color:#FFFFFF><banner></color> <color:#FF0000>за:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>був заблокований на <color:#FFFFFF><duration></color> гравцем</color> <color:#FFFFFF><banner></color> <color:#FF0000>за:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Ви заблоковані на цьому сервері!</color>\n\n<color:#FFFFFF>Причина:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Заблокував:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Тривалість:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Ви заблоковані на цьому сервері!</color>\n\n<color:#AAAAAA>Причина:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Заблокував:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Тривалість:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Порушення правил сервера",
   "command.usage.ban": "<prefix> <color:#FF0000>Використання: /ban <гравець> [-t:тривалість] [причина]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> заблоковано. Вигнано <count> гравця(ів)</color>",

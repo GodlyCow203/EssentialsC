@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>ఈ ప్లేయర్‌ను బ్యాన్ చేయలేరు.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ను శాశ్వతంగా</color> <color:#FFFFFF><banner></color> <color:#FF0000>బ్యాన్ చేశారు, కారణం:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ను <color:#FFFFFF><duration></color> కు</color> <color:#FFFFFF><banner></color> <color:#FF0000>బ్యాన్ చేశారు, కారణం:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>మీరు ఈ సర్వర్ నుండి బ్యాన్ చేయబడ్డారు!</color>\n\n<color:#FFFFFF>కారణం:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>బ్యాన్ చేసినది:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>వ్యవధి:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>మీరు ఈ సర్వర్ నుండి బ్యాన్ చేయబడ్డారు!</color>\n\n<color:#AAAAAA>కారణం:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>బ్యాన్ చేసినది:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>వ్యవధి:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "సర్వర్ నియమాలను ఉల్లంఘించడం",
   "command.usage.ban": "<prefix> <color:#FF0000>వినియోగం: /ban <ప్లేయర్> [-t:వ్యవధి] [కారణం]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> బ్యాన్ చేయబడింది. <count> ప్లేయర్(లు) కిక్ చేయబడ్డారు</color>",

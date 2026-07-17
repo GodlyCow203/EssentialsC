@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>இந்த வீரரை தடை செய்ய முடியாது.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ஆல் நிரந்தரமாக தடை செய்யப்பட்டார்</color> <color:#FFFFFF><banner></color> <color:#FF0000>காரணம்:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000><color:#FFFFFF><duration></color> காலத்திற்கு தடை செய்யப்பட்டார்</color> <color:#FFFFFF><banner></color> <color:#FF0000>காரணம்:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>நீங்கள் இந்த சர்வரிலிருந்து தடை செய்யப்பட்டுள்ளீர்கள்!</color>\n\n<color:#FFFFFF>காரணம்:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>தடை செய்தவர்:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>காலம்:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>நீங்கள் இந்த சர்வரிலிருந்து தடை செய்யப்பட்டுள்ளீர்கள்!</color>\n\n<color:#AAAAAA>காரணம்:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>தடை செய்தவர்:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>காலம்:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "சர்வர் விதிகளை மீறுதல்",
   "command.usage.ban": "<prefix> <color:#FF0000>பயன்பாடு: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> தடை செய்யப்பட்டுள்ளது. <count> வீரர்(கள்) வெளியேற்றப்பட்டனர்</color>",

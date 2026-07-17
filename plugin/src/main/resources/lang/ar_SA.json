@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>لا يمكن حظر هذا اللاعب.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>تم حظره نهائياً بواسطة</color> <color:#FFFFFF><banner></color> <color:#FF0000>بسبب:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>تم حظره لمدة <color:#FFFFFF><duration></color> بواسطة</color> <color:#FFFFFF><banner></color> <color:#FF0000>بسبب:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>أنت محظور من هذا السيرفر!</color>\n\n<color:#FFFFFF>السبب:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>حظرك:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>المدة:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>أنت محظور من هذا السيرفر!</color>\n\n<color:#AAAAAA>السبب:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>حظرك:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>المدة:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "مخالفة قواعد السيرفر",
   "command.usage.ban": "<prefix> <color:#FF0000>الاستخدام: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>تم حظر IP <color:#FFFFFF><ip></color>. تم طرد <count> لاعب (لاعبين)</color>",

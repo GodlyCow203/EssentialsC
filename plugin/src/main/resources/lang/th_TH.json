@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>ไม่สามารถแบนผู้เล่นนี้ได้</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ถูกแบนถาวรโดย</color> <color:#FFFFFF><banner></color> <color:#FF0000>ด้วยเหตุผล:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ถูกแบนเป็นเวลา <color:#FFFFFF><duration></color> โดย</color> <color:#FFFFFF><banner></color> <color:#FF0000>ด้วยเหตุผล:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>คุณถูกแบนจากเซิร์ฟเวอร์นี้!</color>\n\n<color:#FFFFFF>เหตุผล:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>แบนโดย:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>ระยะเวลา:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>คุณถูกแบนจากเซิร์ฟเวอร์นี้!</color>\n\n<color:#AAAAAA>เหตุผล:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>แบนโดย:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>ระยะเวลา:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "ละเมิดกฎของเซิร์ฟเวอร์",
   "command.usage.ban": "<prefix> <color:#FF0000>การใช้งาน: /ban <ผู้เล่น> [-t:ระยะเวลา] [เหตุผล]</color>",
   "banip.success": "<prefix> <color:#FFF200>แบน IP <color:#FFFFFF><ip></color> แล้ว เตะ <count> ผู้เล่น</color>",

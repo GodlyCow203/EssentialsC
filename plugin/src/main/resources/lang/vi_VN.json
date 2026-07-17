@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Người chơi này không thể bị cấm.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>đã bị cấm vĩnh viễn bởi</color> <color:#FFFFFF><banner></color> <color:#FF0000>với lý do:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>đã bị cấm <color:#FFFFFF><duration></color> bởi</color> <color:#FFFFFF><banner></color> <color:#FF0000>với lý do:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Bạn đã bị cấm khỏi máy chủ này!</color>\n\n<color:#FFFFFF>Lý do:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Người cấm:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Thời hạn:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Bạn đã bị cấm khỏi máy chủ này!</color>\n\n<color:#AAAAAA>Lý do:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Người cấm:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Thời hạn:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Vi phạm quy tắc máy chủ",
   "command.usage.ban": "<prefix> <color:#FF0000>Cách dùng: /ban <người_chơi> [-t:thời_hạn] [lý_do]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> đã bị cấm. <count> người chơi bị đuổi</color>",

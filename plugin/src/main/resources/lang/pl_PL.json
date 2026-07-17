@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Tego gracza nie można zbanować.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>został zbanowany na stałe przez</color> <color:#FFFFFF><banner></color> <color:#FF0000>z powodu:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>został zbanowany na <color:#FFFFFF><duration></color> przez</color> <color:#FFFFFF><banner></color> <color:#FF0000>z powodu:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Jesteś zbanowany na tym serwerze!</color>\n\n<color:#FFFFFF>Powód:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Zbanowany przez:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Czas trwania:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Jesteś zbanowany na tym serwerze!</color>\n\n<color:#AAAAAA>Powód:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Zbanowany przez:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Czas trwania:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Łamanie regulaminu serwera",
   "command.usage.ban": "<prefix> <color:#FF0000>Użycie: /ban <gracz> [-t:czas] [powód]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> zostało zbanowane. Wyrzucono <count> graczy</color>",

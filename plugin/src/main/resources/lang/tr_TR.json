@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Bu oyuncu yasaklanamaz.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>tarafından</color> <color:#FFFFFF><banner></color> <color:#FF0000>şu sebeple kalıcı olarak yasaklandı:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000><color:#FFFFFF><duration></color> süreyle</color> <color:#FFFFFF><banner></color> <color:#FF0000>tarafından şu sebeple yasaklandı:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Bu sunucudan yasaklandın!</color>\n\n<color:#FFFFFF>Sebep:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Yasaklayan:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Süre:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Bu sunucudan yasaklandın!</color>\n\n<color:#AAAAAA>Sebep:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Yasaklayan:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Süre:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Sunucu kurallarını ihlal",
   "command.usage.ban": "<prefix> <color:#FF0000>Kullanım: /ban <oyuncu> [-t:süre] [sebep]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> yasaklandı. <count> oyuncu atıldı</color>",

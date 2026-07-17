@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Этого игрока нельзя забанить.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>был навсегда забанен</color> <color:#FFFFFF><banner></color> <color:#FF0000>причина:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>был забанен на <color:#FFFFFF><duration></color></color> <color:#FFFFFF><banner></color> <color:#FF0000>причина:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Вы забанены на этом сервере!</color>\n\n<color:#FFFFFF>Причина:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Забанил:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Срок:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Вы забанены на этом сервере!</color>\n\n<color:#AAAAAA>Причина:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Забанил:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Срок:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Нарушение правил сервера",
   "command.usage.ban": "<prefix> <color:#FF0000>Использование: /ban <игрок> [-t:срок] [причина]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> забанено. Выгнано <count> игроков</color>",

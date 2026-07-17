@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>이 플레이어는 차단할 수 없습니다.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>이(가)</color> <color:#FFFFFF><banner></color> <color:#FF0000>에 의해 영구 차단되었습니다. 사유:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>이(가)</color> <color:#FFFFFF><duration></color> <color:#FF0000>동안</color> <color:#FFFFFF><banner></color> <color:#FF0000>에 의해 차단되었습니다. 사유:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>이 서버에서 차단되었습니다!</color>\n\n<color:#FFFFFF>사유:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>차단자:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>기간:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>이 서버에서 차단되었습니다!</color>\n\n<color:#AAAAAA>사유:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>차단자:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>기간:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "서버 규칙 위반",
   "command.usage.ban": "<prefix> <color:#FF0000>사용법: /ban <플레이어> [-t:기간] [사유]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color>이(가) 차단되었습니다. <count>명의 플레이어가 추방되었습니다</color>",

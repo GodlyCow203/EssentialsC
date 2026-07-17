@@ -556,7 +556,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Denna spelare kan inte bannas.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>bannades permanent av</color> <color:#FFFFFF><banner></color> <color:#FF0000>för:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>bannades i <color:#FFFFFF><duration></color> av</color> <color:#FFFFFF><banner></color> <color:#FF0000>för:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Du är bannad från denna server!</color>\n\n<color:#FFFFFF>Anledning:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Bannad av:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Varaktighet:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Du är bannad från denna server!</color>\n\n<color:#AAAAAA>Anledning:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Bannad av:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Varaktighet:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Bryter mot serverregler",
   "command.usage.ban": "<prefix> <color:#FF0000>Användning: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> har bannats. <count> spelare kickade</color>",

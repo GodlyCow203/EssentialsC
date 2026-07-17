@@ -528,7 +528,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>This player cannot be banned.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>was permanently banned by</color> <color:#FFFFFF><banner></color> <color:#FF0000>for:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>was banned for <color:#FFFFFF><duration></color> by</color> <color:#FFFFFF><banner></color> <color:#FF0000>for:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>You are banned from this server!</color>\n\n<color:#FFFFFF>Reason:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Banned by:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Duration:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>You are banned from this server!</color>\n\n<color:#AAAAAA>Reason:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Banned by:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Duration:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Breaking server rules",
   "command.usage.ban": "<prefix> <color:#FF0000>Usage: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> has been banned. <count> player(s) kicked</color>",

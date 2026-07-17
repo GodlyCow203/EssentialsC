@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>このプレイヤーは BAN できません。</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>が</color> <color:#FFFFFF><banner></color> <color:#FF0000>によって永久 BAN されました。理由:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>が <color:#FFFFFF><duration></color> 間</color> <color:#FFFFFF><banner></color> <color:#FF0000>によって BAN されました。理由:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>このサーバーから BAN されています！</color>\n\n<color:#FFFFFF>理由:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>BAN した人:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>期間:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>このサーバーから BAN されています！</color>\n\n<color:#AAAAAA>理由:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>BAN した人:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>期間:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "サーバールール違反",
   "command.usage.ban": "<prefix> <color:#FF0000>使い方: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> を BAN しました。<count> 人のプレイヤーをキック</color>",

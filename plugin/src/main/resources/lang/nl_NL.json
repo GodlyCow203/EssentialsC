@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Deze speler kan niet worden verbannen.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>is permanent verbannen door</color> <color:#FFFFFF><banner></color> <color:#FF0000>vanwege:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>is verbannen voor <color:#FFFFFF><duration></color> door</color> <color:#FFFFFF><banner></color> <color:#FF0000>vanwege:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Je bent van deze server verbannen!</color>\n\n<color:#FFFFFF>Reden:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>Verbannen door:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>Duur:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>Je bent van deze server verbannen!</color>\n\n<color:#AAAAAA>Reden:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Verbannen door:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Duur:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "Serverregels overtreden",
   "command.usage.ban": "<prefix> <color:#FF0000>Gebruik: /ban <speler> [-t:duur] [reden]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> is verbannen. <count> speler(s) geschopt</color>",

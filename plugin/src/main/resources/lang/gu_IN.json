@@ -555,7 +555,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>આ ખેલાડીને બેન નથી કરી શકાતો.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ને</color> <color:#FFFFFF><banner></color> <color:#FF0000>એ કાયમી રીતે બેન કર્યું:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>ને <color:#FFFFFF><duration></color> માટે</color> <color:#FFFFFF><banner></color> <color:#FF0000>એ બેન કર્યું:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>તમે આ સર્વરમાંથી બેન છો!</color>\n\n<color:#FFFFFF>કારણ:</color> <color:#FFFFFF><reason></white>\n<color:#FFFFFF>બેન કરનાર:</color> <color:#FFFFFF><banner></white>\n<color:#FFFFFF>અવધિ:</color> <color:#FFFFFF><duration></white>",
+  "ban.screen_message": "<color:#FF0000>તમે આ સર્વરમાંથી બેન છો!</color>\n\n<color:#AAAAAA>કારણ:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>બેન કરનાર:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>અવધિ:</color> <color:#FFF200><duration></color>",
   "ban.default_reason": "સર્વર નિયમો તોડવા",
   "command.usage.ban": "<prefix> <color:#FF0000>વપરાશ: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>આઈપી <color:#FFFFFF><ip></color> બેન કરવામાં આવી. <count> ખેલાડી(ઓ) કિક કર્યા</color>",
