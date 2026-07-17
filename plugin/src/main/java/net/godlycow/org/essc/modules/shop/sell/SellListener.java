@@ -10,8 +10,6 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
-import net.godlycow.org.essc.util.InventoryViewCompat;
-
 public class SellListener implements Listener {
     private final EssentialsC plugin;
     private SellManager sellManager;
@@ -31,19 +29,19 @@ public class SellListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        Inventory topInv = InventoryViewCompat.getTopInventory(player);
-        if (topInv == null) return;
-
-        InventoryHolder holder = topInv.getHolder();
+        InventoryHolder holder = event.getInventory().getHolder();
         if (!(holder instanceof SellHolder)) return;
 
         SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
         if (gui == null) return;
 
         Inventory clickedInv = event.getClickedInventory();
-        int slot = event.getSlot();
+        if (clickedInv == null) return;
 
-        if (clickedInv == topInv) {
+        if (clickedInv.getHolder() instanceof SellHolder) {
+            int slot = event.getRawSlot();
+            if (slot < 0 || slot >= event.getInventory().getSize()) return;
+
             if (gui.isConfirmSlot(slot)) {
                 event.setCancelled(true);
                 gui.processSale();
@@ -56,15 +54,13 @@ public class SellListener implements Listener {
                 return;
             }
 
-            if (gui.isBorderSlot(slot)) {
+            if (gui.isBorderSlot(slot) || !gui.isInputSlot(slot)) {
                 event.setCancelled(true);
                 return;
             }
-
-            if (!gui.isInputSlot(slot)) {
-                event.setCancelled(true);
-                return;
-            }
+        } else if (event.isShiftClick()) {
+            event.setCancelled(true);
+            return;
         }
 
         player.getScheduler().runDelayed(plugin, task -> {
@@ -79,14 +75,13 @@ public class SellListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        Inventory topInv = InventoryViewCompat.getTopInventory(player);
-        if (topInv == null) return;
-
-        InventoryHolder holder = topInv.getHolder();
+        InventoryHolder holder = event.getView().getTopInventory().getHolder();
         if (!(holder instanceof SellHolder)) return;
 
         SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
         if (gui == null) return;
+
+        Inventory topInv = event.getView().getTopInventory();
 
         for (int slot : event.getRawSlots()) {
             if (slot < topInv.getSize()) {
@@ -97,7 +92,12 @@ public class SellListener implements Listener {
             }
         }
 
-        player.getScheduler().runDelayed(plugin, task -> gui.updateButtons(), null, 1L);
+        player.getScheduler().runDelayed(plugin, task -> {
+            SellGUI currentGUI = sellManager != null ? sellManager.getActiveGUI(player) : null;
+            if (currentGUI != null) {
+                currentGUI.updateButtons();
+            }
+        }, null, 1L);
     }
 
     @EventHandler

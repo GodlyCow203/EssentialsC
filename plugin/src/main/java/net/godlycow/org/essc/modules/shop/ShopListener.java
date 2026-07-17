@@ -211,7 +211,7 @@ public class ShopListener implements Listener {
 
         player.getScheduler().run(plugin, task -> {
             Inventory current = InventoryViewCompat.getTopInventory(player);
-            if (!(current.getHolder() instanceof ShopHolder)) {
+            if (current == null || !(current.getHolder() instanceof ShopHolder)) {
                 removeSession(player);
             }
         }, null);
