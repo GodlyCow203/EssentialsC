@@ -22,6 +22,9 @@ default-language: en_US
 # Must match a file in the lang/ folder (e.g. en_US -> lang/en_US.json).
 fallback-language: en_US
 
+# Whether to strip MiniMessage color formatting from console output.
+strip-colors-from-console: true
+
 # Help
 #
 # Colors used in the /command help output.
@@ -266,9 +269,6 @@ chat:
   # Caps lock prevention - converts messages with too many uppercase letters to lowercase.
   # Threshold is the ratio of uppercase letters (0.0 to 1.0, e.g. 0.7 = 70%).
   capslock-threshold: 0.7
-
-  # Whether to strip MiniMessage color formatting from console output.
-  strip-colors-from-console: true
 
   mention:
     # Whether player mentions in chat are enabled.

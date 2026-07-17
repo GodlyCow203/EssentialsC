@@ -701,7 +701,7 @@ public class EssConfig {
     }
 
     public boolean isChatStripColorsFromConsole() {
-        return config.getBoolean("chat.strip-colors-from-console", true);
+        return config.getBoolean("strip-colors-from-console", true);
     }
 
     public boolean isNickShowRealnameOnHover() {
