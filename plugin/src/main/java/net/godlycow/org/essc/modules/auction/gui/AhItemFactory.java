@@ -157,6 +157,23 @@ public class AhItemFactory {
         return item;
     }
 
+    public ItemStack createExpiredButtonItem(Player player, GuiButton config) {
+        ItemStack item = guiItemBuilder.build(config, player);
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return item;
+
+        boolean hasExpired = plugin.getAuctionManager().hasExpiredItems(player.getUniqueId());
+        String loreKey = hasExpired ? "ah.gui.item.expired.lore_waiting" : "ah.gui.item.expired.lore_empty";
+
+        List<Component> lore = new ArrayList<>();
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.expired.lore1")));
+        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, loreKey)));
+        meta.lore(lore);
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public ItemStack createNavItem(GuiButton config, int targetPage, String navType, Player viewer) {
         ItemStack item = config != null
                 ? guiItemBuilder.build(config, viewer)

@@ -65,6 +65,11 @@ public class AhGuiManager {
 
         guiFramework.fillStaticItems(gui, "auction_main", player);
 
+        GuiButton expiredConfig = template.getItem("expired");
+        if (expiredConfig != null) {
+            gui.setItem(46, itemFactory.createExpiredButtonItem(player, expiredConfig));
+        }
+
         if (auctions.isEmpty()) {
             GuiButton emptyConfig = template.getItem("empty");
             gui.setItem(31, emptyConfig != null
