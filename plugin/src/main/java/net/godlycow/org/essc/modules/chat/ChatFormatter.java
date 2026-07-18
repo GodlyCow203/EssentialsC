@@ -7,19 +7,20 @@ import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChatFormatter {
-
-    private static final Pattern URL_PATTERN = Pattern.compile(
-            "https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]+");
 
     private final EssentialsC plugin;
     private final EssConfig config;
@@ -39,23 +40,32 @@ public class ChatFormatter {
         this.luckPermsEnabled = luckPermsEnabled;
     }
 
-    public Component formatMessage(Player player, String raw) {
-        raw = applyFormatPermissions(player, raw);
-        Component message = buildComponent(player, raw);
-        message = processLinks(player, message, raw);
-        return message;
+    public boolean isLuckPermsEnabled() {
+        return luckPermsEnabled;
     }
 
-    private static final Pattern BOLD_PATTERN =
-            Pattern.compile("(?i)[&§]l|</?(?:bold|b)>");
-    private static final Pattern ITALIC_PATTERN =
-            Pattern.compile("(?i)[&§]o|</?(?:italic|i|em)>");
-    private static final Pattern UNDERLINE_PATTERN =
-            Pattern.compile("(?i)[&§]n|</?(?:underlined|underline|u)>");
-    private static final Pattern STRIKETHROUGH_PATTERN =
-            Pattern.compile("(?i)[&§]m|</?(?:strikethrough|st)>");
-    private static final Pattern OBFUSCATED_PATTERN =
-            Pattern.compile("(?i)[&§]k|</?(?:obfuscated|obf)>");
+
+    public Component formatMessage(Player player, String raw) {
+
+        raw = applyFormatPermissions(player, raw);
+
+        List<String> urls = new ArrayList<>();
+        Matcher urlMatcher = Pattern.compile(
+                "https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]+").matcher(raw);
+        while (urlMatcher.find()) {
+            urls.add(urlMatcher.group());
+        }
+
+        String placeholderRaw = raw;
+        for (int i = 0; i < urls.size(); i++) {
+            placeholderRaw = placeholderRaw.replace(urls.get(i), "\u0000LINK_" + i + "\u0000");
+        }
+
+        Component message = buildComponent(player, placeholderRaw);
+        message = processLinks(player, message, urls);
+
+        return message;
+    }
 
     private String applyFormatPermissions(Player player, String input) {
         if (!player.hasPermission("essentialsc.chat.color")) {
@@ -63,19 +73,19 @@ public class ChatFormatter {
         }
 
         if (!player.hasPermission("essentialsc.chat.format.bold")) {
-            input = BOLD_PATTERN.matcher(input).replaceAll("");
+            input = Pattern.compile("(?i)[&§]l|</?(?:bold|b)>").matcher(input).replaceAll("");
         }
         if (!player.hasPermission("essentialsc.chat.format.italic")) {
-            input = ITALIC_PATTERN.matcher(input).replaceAll("");
+            input = Pattern.compile("(?i)[&§]o|</?(?:italic|i|em)>").matcher(input).replaceAll("");
         }
         if (!player.hasPermission("essentialsc.chat.format.underline")) {
-            input = UNDERLINE_PATTERN.matcher(input).replaceAll("");
+            input = Pattern.compile("(?i)[&§]n|</?(?:underlined|underline|u)>").matcher(input).replaceAll("");
         }
         if (!player.hasPermission("essentialsc.chat.format.strikethrough")) {
-            input = STRIKETHROUGH_PATTERN.matcher(input).replaceAll("");
+            input = Pattern.compile("(?i)[&§]m|</?(?:strikethrough|st)>").matcher(input).replaceAll("");
         }
         if (!player.hasPermission("essentialsc.chat.format.obfuscated")) {
-            input = OBFUSCATED_PATTERN.matcher(input).replaceAll("");
+            input = Pattern.compile("(?i)[&§]k|</?(?:obfuscated|obf)>").matcher(input).replaceAll("");
         }
 
         return input;
@@ -88,68 +98,59 @@ public class ChatFormatter {
         return input;
     }
 
-    private Component processLinks(Player player, Component message, String raw) {
-        Matcher m = URL_PATTERN.matcher(raw);
-        if (!m.find()) return message;
-
-        java.util.List<String> whitelist = config.getChatLinkWhitelist();
-        Component removalComponent = miniMessage.deserialize(config.getChatLinkRemovalMessage());
-
-        m.reset();
-        while (m.find()) {
-            String url = m.group();
-            if (player.hasPermission("essentialsc.chat.links")) {
-                Component linked = Component.text(url)
-                        .clickEvent(ClickEvent.openUrl(url))
-                        .color(net.kyori.adventure.text.format.NamedTextColor.AQUA)
-                        .decorate(net.kyori.adventure.text.format.TextDecoration.UNDERLINED);
-                message = message.replaceText(b -> b.matchLiteral(url).replacement(linked));
-            } else {
-                boolean whitelisted = whitelist.stream().anyMatch(url::contains);
-                if (!whitelisted) {
-                    message = message.replaceText(b -> b.matchLiteral(url).replacement(removalComponent));
-                }
-            }
-        }
-
-        return message;
-    }
-
     private Component buildComponent(Player player, String raw) {
-        boolean canMiniMessage = player.hasPermission("essentialsc.chat.minimessage");
-        boolean canRgb = player.hasPermission("essentialsc.chat.rgbcodes");
-        boolean canLegacy = player.hasPermission("essentialsc.chat.legacycodes");
-
         if (!player.hasPermission("essentialsc.chat.color")) {
             return Component.text(raw);
         }
 
-        if (canMiniMessage) {
-            if (canRgb || canLegacy) {
-                return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
-            }
-            return miniMessage.deserialize(raw);
-        }
+        boolean canMiniMessage = player.hasPermission("essentialsc.chat.minimessage");
+        boolean canRgb = player.hasPermission("essentialsc.chat.rgbcodes");
+        boolean canLegacy = player.hasPermission("essentialsc.chat.legacycodes");
 
-        if (canRgb && canLegacy) {
+        if (canMiniMessage && (canRgb || canLegacy)) {
             return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
         }
 
-        if (canRgb) {
-            return miniMessage.deserialize(
-                    LegacyColorConverter.convertHexAmpersand(
-                            LegacyColorConverter.convertHexBukkit(raw)));
+        if (canMiniMessage) {
+            return miniMessage.deserialize(raw);
         }
 
-        if (canLegacy) {
-            return miniMessage.deserialize(LegacyColorConverter.convertAmpersand(raw));
+        if (canRgb || canLegacy) {
+            return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
         }
 
         return Component.text(raw);
     }
 
-    public boolean isLuckPermsEnabled() {
-        return luckPermsEnabled;
+
+    private Component processLinks(Player player, Component message, List<String> urls) {
+        if (urls.isEmpty())
+
+            return message;
+
+        List<String> whitelist = config.getChatLinkWhitelist();
+        Component removalComponent = miniMessage.deserialize(config.getChatLinkRemovalMessage());
+
+        for (int i = 0; i < urls.size(); i++) {
+            String url = urls.get(i);
+            String token = "\u0000LINK_" + i + "\u0000";
+            if (player.hasPermission("essentialsc.chat.links")) {
+                Component linked = Component.text(url)
+                        .clickEvent(ClickEvent.openUrl(url))
+                        .color(NamedTextColor.AQUA)
+                        .decorate(TextDecoration.UNDERLINED);
+                message = message.replaceText(b -> b.matchLiteral(token).replacement(linked));
+            } else {
+                boolean whitelisted = whitelist.stream().anyMatch(url::contains);
+                if (!whitelisted) {
+                    message = message.replaceText(b -> b.matchLiteral(token).replacement(removalComponent));
+                } else {
+                    message = message.replaceText(b -> b.matchLiteral(token).replacement(Component.text(url)));
+                }
+            }
+        }
+
+        return message;
     }
 
     public Component buildChatLine(Player player, Component message) {
@@ -159,37 +160,55 @@ public class ChatFormatter {
                 "luckperms.group-formats." + meta.getPrimaryGroup());
         if (format == null) {
             format = plugin.getConfig().getString(
-                    "luckperms.chat-format", "<DISPLAYNAME> <gray>»</gray> <white><MESSAGE></white>");
+                    "luckperms.chat-format", "<DISPLAYNAME> &7&raquo; &f<MESSAGE>");
         }
 
         if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             format = PlaceholderAPI.setPlaceholders(player, format);
         }
 
-        String prefix = meta.getPrefix() != null ? meta.getPrefix() : "";
-        String suffix = meta.getSuffix() != null ? meta.getSuffix() : "";
+        //build all components placeholders before format processing
+        String lpPrefix = meta.getPrefix() != null ?
+                meta.getPrefix() : "";
+        String lpSuffix = meta.getSuffix() != null ?
+                meta.getSuffix() : "";
 
-        format = format
-                .replace("<PREFIX>", miniMessage.escapeTags(LegacyColorConverter.toMiniMessage(prefix)))
-                .replace("<SUFFIX>", miniMessage.escapeTags(LegacyColorConverter.toMiniMessage(suffix)))
-                .replace("<USERNAME>", miniMessage.escapeTags(player.getName()))
-                .replace("<GROUP>", miniMessage.escapeTags(meta.getPrimaryGroup()));
-
+        Component prefixComp = lpPrefix.isEmpty()
+                ? Component.empty()
+                : LegacyColorConverter.toComponent(lpPrefix);
+        Component suffixComp = lpSuffix.isEmpty()
+                ? Component.empty()
+                : LegacyColorConverter.toComponent(lpSuffix);
         Component displayName = buildDisplayName(player, meta);
 
-        return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(format))
-                .replaceText(b -> b.matchLiteral("<DISPLAYNAME>").replacement(displayName))
-                .replaceText(b -> b.matchLiteral("<MESSAGE>").replacement(message));
+        format = format
+                .replace("<PREFIX>", "\u0000PREFIX\u0000")
+                .replace("<SUFFIX>", "\u0000SUFFIX\u0000")
+                .replace("<USERNAME>", miniMessage.escapeTags(player.getName()))
+                .replace("<GROUP>", miniMessage.escapeTags(meta.getPrimaryGroup()))
+                .replace("<DISPLAYNAME>", "\u0000DISPLAYNAME\u0000")
+                .replace("<MESSAGE>", "\u0000MESSAGE\u0000");
+
+        //deserialize
+        Component result = miniMessage.deserialize(LegacyColorConverter.toMiniMessage(format));
+
+        result = result.replaceText(b -> b.matchLiteral("\u0000PREFIX\u0000").replacement(prefixComp));
+        result = result.replaceText(b -> b.matchLiteral("\u0000SUFFIX\u0000").replacement(suffixComp));
+        result = result.replaceText(b -> b.matchLiteral("\u0000DISPLAYNAME\u0000").replacement(displayName));
+        result = result.replaceText(b -> b.matchLiteral("\u0000MESSAGE\u0000").replacement(message));
+
+        return result;
     }
 
     private Component buildDisplayName(Player player, CachedMetaData meta) {
-        String prefix = meta.getPrefix() != null ? meta.getPrefix() : "";
-        String suffix = meta.getSuffix() != null ? meta.getSuffix() : "";
+        String lpPrefix = meta.getPrefix() != null ? meta.getPrefix() : "";
+        String lpSuffix = meta.getSuffix() != null ? meta.getSuffix() : "";
 
         String cachedNick = plugin.getNickManager() != null
                 ? plugin.getNickManager().getCachedNickname(player.getUniqueId())
                 : null;
 
+        //build name component
         Component nameComponent;
         if (cachedNick != null && !cachedNick.isEmpty()) {
             Component nickComponent = miniMessage.deserialize(cachedNick);
@@ -202,10 +221,13 @@ public class ChatFormatter {
             nameComponent = Component.text(player.getName());
         }
 
-        Component prefixComponent = prefix.isEmpty() ? Component.empty()
-                : miniMessage.deserialize(LegacyColorConverter.toMiniMessage(prefix));
-        Component suffixComponent = suffix.isEmpty() ? Component.empty()
-                : miniMessage.deserialize(LegacyColorConverter.toMiniMessage(suffix));
+        Component prefixComponent = lpPrefix.isEmpty()
+                ? Component.empty()
+                : LegacyColorConverter.toComponent(lpPrefix);
+
+        Component suffixComponent = lpSuffix.isEmpty()
+                ? Component.empty()
+                : LegacyColorConverter.toComponent(lpSuffix);
 
         Component displayName = prefixComponent.append(nameComponent).append(suffixComponent);
 
@@ -215,12 +237,13 @@ public class ChatFormatter {
             String hoverText = config.getNickHoverFormat()
                     .replace("<realname>", miniMessage.escapeTags(player.getName()))
                     .replace("<nick>", miniMessage.escapeTags(plainNick))
-                    .replace("<prefix>", miniMessage.escapeTags(prefix))
-                    .replace("<suffix>", miniMessage.escapeTags(suffix));
+                    .replace("<prefix>", miniMessage.escapeTags(lpPrefix))
+                    .replace("<suffix>", miniMessage.escapeTags(lpSuffix));
             displayName = displayName.hoverEvent(
                     HoverEvent.showText(miniMessage.deserialize(hoverText)));
         }
 
+        //suggest msg command
         if (config.isNickClickSuggestMsg()) {
             displayName = displayName.clickEvent(
                     ClickEvent.suggestCommand("/msg " + player.getName() + " "));

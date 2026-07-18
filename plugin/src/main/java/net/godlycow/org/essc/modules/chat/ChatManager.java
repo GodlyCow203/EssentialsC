@@ -50,33 +50,35 @@ public class ChatManager implements Listener {
         }
     }
 
+
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerChat(AsyncChatEvent event) {
         Player player = event.getPlayer();
 
-        if (!handleSlowMode(player, event)) return;
+        if (!handleSlowMode(player, event))
+            return;
 
         String raw = PlainTextComponentSerializer.plainText().serialize(event.message());
         raw = handleCapsLock(player, raw);
-
         Component message = formatter.formatMessage(player, raw);
 
-        if (config.isChatMentionEnabled()) {
+        if (config.isChatMentionEnabled()) {//mentions
             message = mentionHandler.applyMentions(player, message);
         }
-
         event.message(message);
 
         if (formatter.isLuckPermsEnabled()) {
-            final Component finalMessage = message;
             event.renderer((source, sourceDisplayName, msg, viewer) ->
-                    formatter.buildChatLine(source, finalMessage));
+                    formatter.buildChatLine(source, msg));
         }
     }
 
+
     private boolean handleSlowMode(Player player, AsyncChatEvent event) {
-        if (!config.isChatSlowModeEnabled()) return true;
-        if (player.hasPermission("essentialsc.chat.slowmode.bypass")) return true;
+        if (!config.isChatSlowModeEnabled())
+            return true;
+        if (player.hasPermission("essentialsc.chat.slowmode.bypass"))
+            return true;
 
         long now = System.currentTimeMillis();
         long last = slowModeCooldowns.getOrDefault(player.getUniqueId(), 0L);
@@ -87,6 +89,7 @@ public class ChatManager implements Listener {
             player.sendMessage(plugin.getLanguageManager().get(player, "chat.slowmode.wait",
                     Map.of("seconds", String.valueOf((remaining / 1000) + 1))));
             event.setCancelled(true);
+
             return false;
         }
 
@@ -94,11 +97,18 @@ public class ChatManager implements Listener {
         return true;
     }
 
+
     private String handleCapsLock(Player player, String message) {
         double threshold = config.getChatCapslockThreshold();
-        if (threshold <= 0 || threshold > 1.0) return message;
-        if (player.hasPermission("essentialsc.chat.caps.bypass")) return message;
-        if (message.length() < 3) return message;
+
+        if (threshold <= 0 || threshold > 1.0)
+            return message;
+
+        if (player.hasPermission("essentialsc.chat.caps.bypass"))
+            return message;
+
+        if (message.length() < 3)
+            return message;
 
         int letters = 0;
         int upper = 0;
@@ -110,11 +120,14 @@ public class ChatManager implements Listener {
         }
 
         if (letters > 0 && (double) upper / letters >= threshold) {
+
             return message.toLowerCase();
         }
 
         return message;
     }
+
+    // ── Lifecycle ───────────────────────────────────────────────────
 
     public void shutdown() {
         HandlerList.unregisterAll(this);

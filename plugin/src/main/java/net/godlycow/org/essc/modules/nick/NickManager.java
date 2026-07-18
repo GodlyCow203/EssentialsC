@@ -3,7 +3,6 @@ package net.godlycow.org.essc.modules.nick;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,11 +12,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 public class NickManager implements Listener {
 
@@ -37,7 +36,7 @@ public class NickManager implements Listener {
             plugin.getLogger().severe("Failed to initialize nick database: " + e.getMessage());
         }
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        plugin.debug("NickManager initialized with nicks.db");
+        plugin.debug("NickManager initialized");
     }
 
     private void createTables() throws SQLException {
@@ -62,23 +61,23 @@ public class NickManager implements Listener {
     }
 
     public CompletableFuture<Optional<String>> getNickname(UUID uuid) {
-        if (nickCache.containsKey(uuid)) {
-            return CompletableFuture.completedFuture(Optional.ofNullable(nickCache.get(uuid)));
+        String cached = nickCache.get(uuid);//cached
+        if (cached != null) {
+            return CompletableFuture.completedFuture(Optional.of(cached));
         }
 
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT nickname FROM nicknames WHERE uuid = ?"
-            )) {
+                    "SELECT nickname FROM nicknames WHERE uuid = ?")) {
                 stmt.setString(1, uuid.toString());
                 ResultSet rs = stmt.executeQuery();
-
                 if (rs.next()) {
                     String nick = rs.getString("nickname");
                     nickCache.put(uuid, nick);
+
                     return Optional.of(nick);
                 }
-                return Optional.<String>empty();
+                return Optional.empty();
             }
         });
     }
@@ -88,8 +87,6 @@ public class NickManager implements Listener {
     }
 
     public CompletableFuture<Boolean> setNickname(UUID uuid, String nickname) {
-        plugin.debug("Setting nickname for " + uuid + " to: " + nickname);
-
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("""
                 INSERT INTO nicknames (uuid, nickname, updated_at)
@@ -108,6 +105,8 @@ public class NickManager implements Listener {
                     networkHook.onNicknameSet(uuid, nickname);
                 }
 
+                plugin.debug("Set nickname for " + uuid + ": " + nickname);
+
                 return true;
             } catch (SQLException e) {
                 plugin.getLogger().severe("Failed to set nickname: " + e.getMessage());
@@ -117,21 +116,18 @@ public class NickManager implements Listener {
     }
 
     public CompletableFuture<Boolean> removeNickname(UUID uuid) {
-        plugin.debug("Removing nickname for " + uuid);
-
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "DELETE FROM nicknames WHERE uuid = ?"
-            )) {
+                    "DELETE FROM nicknames WHERE uuid = ?")) {
                 stmt.setString(1, uuid.toString());
                 boolean removed = stmt.executeUpdate() > 0;
                 if (removed) {
                     nickCache.remove(uuid);
-
                     if (networkHook != null) {
                         networkHook.onNicknameCleared(uuid);
                     }
                 }
+                plugin.debug("Removed nickname for " + uuid);
                 return removed;
             }
         });
@@ -140,15 +136,13 @@ public class NickManager implements Listener {
     public CompletableFuture<Optional<UUID>> getUUIDByNickname(String nickname) {
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT uuid FROM nicknames WHERE nickname = ? COLLATE NOCASE"
-            )) {
+                    "SELECT uuid FROM nicknames WHERE nickname = ? COLLATE NOCASE")) {
                 stmt.setString(1, nickname);
                 ResultSet rs = stmt.executeQuery();
-
                 if (rs.next()) {
                     return Optional.of(UUID.fromString(rs.getString("uuid")));
                 }
-                return Optional.<UUID>empty();
+                return Optional.empty();
             }
         });
     }
@@ -156,8 +150,7 @@ public class NickManager implements Listener {
     public CompletableFuture<Boolean> isNicknameTaken(String nickname, UUID excludeUuid) {
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT 1 FROM nicknames WHERE nickname = ? AND uuid != ?"
-            )) {
+                    "SELECT 1 FROM nicknames WHERE nickname = ? AND uuid != ?")) {
                 stmt.setString(1, nickname);
                 stmt.setString(2, excludeUuid.toString());
                 ResultSet rs = stmt.executeQuery();
@@ -166,25 +159,20 @@ public class NickManager implements Listener {
         });
     }
 
+
     public void applyNickname(Player player) {
-        if (!plugin.getConfigManager().isNickEnabled()) return;
+        if (!plugin.getConfigManager().isNickEnabled())
+            return;
 
         getNickname(player.getUniqueId()).thenAccept(opt -> {
             player.getScheduler().run(plugin, task -> {
                 if (opt.isPresent()) {
                     String nick = opt.get();
-
                     Component nickComponent = plugin.getMiniMessage().deserialize(nick);
                     player.displayName(nickComponent);
-
-                    if (plugin.getConfigManager().isDiscordNickShowRealname()) {
-                        String plainNick = PlainTextComponentSerializer.plainText().serialize(nickComponent);
-                        String discordName = plainNick + " (" + player.getName() + ")";
-                        player.setDisplayName(discordName);
-                    }
-
                     plugin.debug("Applied nickname to " + player.getName() + ": " + nick);
                 }
+
                 if (plugin.getTabManager() != null) {
                     plugin.getTabManager().updatePlayerTab(player);
                 }
@@ -193,9 +181,8 @@ public class NickManager implements Listener {
     }
 
     public void clearNickname(Player player) {
-        player.displayName(Component.text(player.getName()));
-        player.setDisplayName(player.getName());
         nickCache.remove(player.getUniqueId());
+        player.displayName(Component.text(player.getName()));
 
         if (plugin.getTabManager() != null) {
             plugin.getTabManager().updatePlayerTab(player);
@@ -223,7 +210,10 @@ public class NickManager implements Listener {
 
     public void reload() {
         nickCache.clear();
-        plugin.debug("NickManager reloaded, cache cleared");
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            applyNickname(player);
+        }
+        plugin.debug("NickManager reloaded");
     }
 
     public void shutdown() {

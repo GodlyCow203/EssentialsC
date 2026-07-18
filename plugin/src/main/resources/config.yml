@@ -247,7 +247,7 @@ economy:
 
 chat:
 
-  # Should the chat system even be enabled ?
+  # Should the (EssentialsC) chat system even be enabled ?
   enabled: true
 
   # the message that will be displayed instead of the link
@@ -257,7 +257,6 @@ chat:
   link-whitelist:
     - "youtube.com"
     - "modrinth.com"
-    - "net.godlycow.org/essc/landingpage"
 
   slow-mode:
     # Whether chat slow mode is enabled.

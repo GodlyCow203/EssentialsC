@@ -26,14 +26,19 @@ public class MentionHandler {
         }
 
         String plainMessage = PlainTextComponentSerializer.plainText().serialize(message);
+        String plainLower = plainMessage.toLowerCase();
         String mentionFormat = config.getChatMentionFormat();
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
-            if (online.equals(sender)) continue;
-            if (online.hasPermission("essentialsc.chat.mention.bypass")) continue;
+            if (online.equals(sender))
+                continue;
 
-            String matched = findMention(online, plainMessage);
-            if (matched == null) continue;
+            if (online.hasPermission("essentialsc.chat.mention.bypass"))
+                continue;
+
+            String matched = findMention(online, plainMessage, plainLower);
+            if (matched == null)
+                continue;
 
             online.playSound(online.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.5f);
 
@@ -46,9 +51,11 @@ public class MentionHandler {
         return message;
     }
 
-    private String findMention(Player player, String plainMessage) {
-        if (plainMessage.contains(player.getName())) {
-            return player.getName();
+    private String findMention(Player player, String plainMessage, String plainLower) {
+        String realName = player.getName();
+        if (plainLower.contains(realName.toLowerCase())) {
+            return realName;
+
         }
 
         String cachedNick = plugin.getNickManager() != null
@@ -58,7 +65,9 @@ public class MentionHandler {
         if (cachedNick != null && !cachedNick.isEmpty()) {
             String plainNick = PlainTextComponentSerializer.plainText().serialize(
                     miniMessage.deserialize(cachedNick));
-            if (plainMessage.contains(plainNick)) {
+
+            if (plainLower.contains(plainNick.toLowerCase())) {
+
                 return plainNick;
             }
         }
