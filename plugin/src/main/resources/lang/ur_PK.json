@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>کوئی کھلاڑی آن لائن نہیں ہے۔</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>کھلاڑی <color:#FFFFFF><target></color> آف لائن ہے اور اس کے پاس محفوظ شدہ انوینٹری نہیں ہے۔</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>غلط مدت کا فارمیٹ",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI تنصیب نہیں ہے۔ اس خصوصیت کو اس کی ضرورت ہے.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord اطلاعات غیر فعال ہیں۔ DiscordSRV تنصیب نہیں ہے۔</color>",
   "heal.success": "<prefix> <color:#FFF200>آپ مکمل طور پر صحت یاب ہو گئے ہیں!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>آپ کو <color:#FFFFFF><healer></color> نے صحت یاب کیا ہے</color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> کو کامیابی سے صحت یاب کیا</color>",

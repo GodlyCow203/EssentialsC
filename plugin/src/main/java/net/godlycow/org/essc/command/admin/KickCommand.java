@@ -74,13 +74,17 @@ public class KickCommand extends Command {
         senderPlaceholders.put("target", target.getName());
         sender.sendMessage(lang.get(sender, "kick.success", senderPlaceholders));
 
-        if (plugin.getDiscordSRVHook() != null) {
-            plugin.getDiscordSRVHook().sendKickEmbed(
-                    target.getUniqueId(),
-                    target.getName(),
-                    reason,
-                    sender.getName()
-            );
+        if (plugin.getConfigManager().isDiscordSRVEnabled()) {
+            if (plugin.getDiscordSRVHook() != null && plugin.getDiscordSRVHook().isHooked()) {
+                plugin.getDiscordSRVHook().sendKickEmbed(
+                        target.getUniqueId(),
+                        target.getName(),
+                        reason,
+                        sender.getName()
+                );
+            } else {
+                sender.sendMessage(lang.get(sender, "error.missing_plugin.discordsrv"));
+            }
         }
 
         return true;

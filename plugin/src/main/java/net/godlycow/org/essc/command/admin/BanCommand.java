@@ -92,10 +92,14 @@ public class BanCommand extends Command {
                 "duration", durationStr
         )));
 
-        if (plugin.getDiscordSRVHook() != null) {
-            plugin.getDiscordSRVHook().sendBanEmbed(
-                    target.getUniqueId(), target.getName(), reason, sender.getName(),
-                    expires > 0 ? expires : -1);
+        if (plugin.getConfigManager().isDiscordSRVEnabled()) {
+            if (plugin.getDiscordSRVHook() != null && plugin.getDiscordSRVHook().isHooked()) {
+                plugin.getDiscordSRVHook().sendBanEmbed(
+                        target.getUniqueId(), target.getName(), reason, sender.getName(),
+                        expires > 0 ? expires : -1);
+            } else {
+                sender.sendMessage(lang.get(sender, "error.missing_plugin.discordsrv"));
+            }
         }
 
         return true;

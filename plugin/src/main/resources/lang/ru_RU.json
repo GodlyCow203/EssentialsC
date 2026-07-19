@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>В сети нет игроков.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Игрок <color:#FFFFFF><target></color> не в сети и у него нет сохранённого инвентаря.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Неверный формат длительности",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI не установлен. Эта функция требует его.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Уведомления Discord отключены. DiscordSRV не установлен.</color>",
   "heal.success": "<prefix> <color:#FFF200>Вы полностью исцелены!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Вас исцелил <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Игрок <color:#FFFFFF><player></color> успешно исцелён</color>",

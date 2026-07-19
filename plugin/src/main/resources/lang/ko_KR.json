@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>온라인인 플레이어가 없습니다.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000><color:#FFFFFF><target></color> 플레이어가 오프라인이며 저장된 인벤토리가 없습니다.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>잘못된 기간 형식",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI가 설치되어 있지 않습니다. 이 기능에 필요합니다.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord 알림이 비활성화되어 있습니다. DiscordSRV가 설치되어 있지 않습니다.</color>",
   "heal.success": "<prefix> <color:#FFF200>완전히 치유되었습니다!</color>",
   "heal.success.by": "<prefix> <color:#FFF200><color:#FFFFFF><healer></color>님이 당신을 치유했습니다</color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color>님을 성공적으로 치유했습니다</color>",

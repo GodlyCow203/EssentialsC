@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Walang mga manlalaro na online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Ang manlalarong <color:#FFFFFF><target></color> ay offline at walang naka-save na imbentaryo.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Di-wastong format ng tagal",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>Hindi naka-install ang PlaceholderAPI. Kailangan ng feature na ito.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Ang mga abiso sa Discord ay naka-disable. Hindi naka-install ang DiscordSRV.</color>",
   "heal.success": "<prefix> <color:#FFF200>Ganap kang na-heal!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Ikaw ay na-heal ni <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Matagumpay na na-heal si <color:#FFFFFF><player></color></color>",

@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>لا يوجد لاعبون متصلون.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>اللاعب <color:#FFFFFF><target></color> غير متصل وليس لديه مخزون محفوظ.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>تنسيق المدة غير صالح",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI غير مثبت. هذه الميزة تتطلبه.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>إشعارات Discord معطلة. DiscordSRV غير مثبت.</color>",
   "heal.success": "<prefix> <color:#FFF200>تم شفاؤك بالكامل!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>تم شفاؤك بواسطة <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>تم شفاء <color:#FFFFFF><player></color> بنجاح</color>",

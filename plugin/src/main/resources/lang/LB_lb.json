@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Et si keng Spiller online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Spiller <color:#FFFFFF><target></color> ass offline an huet keng gespäichert Inventaire.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Ongülteg Dauer Format",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI isch nid installet. Di Frotioni brücht's.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord Notifikatioune sinn deaktivéiert. DiscordSRV ass net installéiert.</color>",
   "heal.success": "<prefix> <color:#FFF200>Du bass komplett geheelt!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Du bass vun <color:#FFFFFF><healer></color> geheelt ginn</color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> erfollegräich geheelt</color>",

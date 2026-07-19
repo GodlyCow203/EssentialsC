@@ -113,9 +113,13 @@ public class BanIpCommand extends Command {
                 "count",    String.valueOf(kickedCount)
         )));
 
-        if (plugin.getDiscordSRVHook() != null) {
-            plugin.getDiscordSRVHook().sendBanIpEmbed(ip, targetName, reason, sender.getName(),
-                    expires > 0 ? expires : -1);
+        if (plugin.getConfigManager().isDiscordSRVEnabled()) {
+            if (plugin.getDiscordSRVHook() != null && plugin.getDiscordSRVHook().isHooked()) {
+                plugin.getDiscordSRVHook().sendBanIpEmbed(ip, targetName, reason, sender.getName(),
+                        expires > 0 ? expires : -1);
+            } else {
+                sender.sendMessage(lang.get(sender, "error.missing_plugin.discordsrv"));
+            }
         }
 
         return true;

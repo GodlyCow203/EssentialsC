@@ -77,7 +77,7 @@ public class KitClaims {
         player.sendMessage(plugin.getLanguageManager().get(player, "kit.claim.success",
                 Map.of("kit", kit.getDisplayName())));
 
-        if (plugin.getDiscordSRVHook() != null) {
+        if (plugin.getDiscordSRVHook() != null && plugin.getDiscordSRVHook().isHooked()) {
             plugin.getDiscordSRVHook().sendKitClaimEmbed(
                     player.getUniqueId(),
                     player.getName(),

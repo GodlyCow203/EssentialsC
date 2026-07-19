@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Tidak ada pemain online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Pemain <color:#FFFFFF><target></color> offline dan tidak memiliki inventori tersimpan.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Format durasi tidak valid",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI tidak terinstal. Fitur ini memerlukannya.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Notifikasi Discord dinonaktifkan. DiscordSRV tidak terinstal.</color>",
   "heal.success": "<prefix> <color:#FFF200>Anda telah disembuhkan sepenuhnya!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Anda telah disembuhkan oleh <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Berhasil menyembuhkan <color:#FFFFFF><player></color></color>",

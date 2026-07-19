@@ -211,6 +211,11 @@ public class EsscCommand extends Command {
             }
 
             case "placeholders" -> {
+
+                if (plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null){
+                    sender.sendMessage(lang.get(sender, "error.missing_plugin.papi"));
+                    return true;
+                }
                 int page = 1;
                 if (args.length >= 2) {
                     try {
@@ -360,6 +365,9 @@ public class EsscCommand extends Command {
             return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders", "dump"), args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("placeholders")) {
+            if (plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
+                return List.of();
+            }
             int totalPages = new PaginatedList<>(PlaceholderHook.getAllPlaceholders(), PLACEHOLDERS_PER_PAGE).getTotalPages();
             return java.util.stream.IntStream.rangeClosed(1, totalPages)
                     .mapToObj(String::valueOf)

@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>No hay jugadores en línea.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>El jugador <color:#FFFFFF><target></color> está desconectado y no tiene inventario guardado.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Formato de duración inválido",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI no está instalado. Esta característica lo requiere.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Las notificaciones de Discord están deshabilitadas. DiscordSRV no está instalado.</color>",
   "heal.success": "<prefix> <color:#FFF200>¡Has sido curado completamente!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Has sido curado por <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> curado exitosamente</color>",

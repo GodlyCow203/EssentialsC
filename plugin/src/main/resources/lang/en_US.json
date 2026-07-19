@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>There are no players online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Player <color:#FFFFFF><target></color> is offline and has no saved inventory.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Invalid duration format",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI is not installed. This feature requires it.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord notifications are disabled. DiscordSRV is not installed.</color>",
   "heal.success": "<prefix> <color:#FFF200>You have been fully healed!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>You have been healed by <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Successfully healed <color:#FFFFFF><player></color></color>",

@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>当前没有玩家在线。</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>玩家 <color:#FFFFFF><target></color> 已离线且没有保存的背包。</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>无效的时间格式",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI未安装。此功能需要它。</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord通知已禁用。DiscordSRV未安装。</color>",
   "heal.success": "<prefix> <color:#FFF200>你已完全恢复生命值!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>你被 <color:#FFFFFF><healer></color> 治愈了</color>",
   "heal.success.others": "<prefix> <color:#FFF200>成功治愈 <color:#FFFFFF><player></color></color>",

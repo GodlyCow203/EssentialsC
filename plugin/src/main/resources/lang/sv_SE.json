@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Det finns inga spelare online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Spelaren <color:#FFFFFF><target></color> är offline och har ingen sparad inventering.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Ogiltigt tidsformat",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI är inte installerat. Denna funktion kräver det.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord-aviserningar är inaktiverade. DiscordSRV är inte installerat.</color>",
   "heal.success": "<prefix> <color:#FFF200>Du har blivit fullständigt läkt!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Du har blivit läkt av <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Lyckades läka <color:#FFFFFF><player></color></color>",

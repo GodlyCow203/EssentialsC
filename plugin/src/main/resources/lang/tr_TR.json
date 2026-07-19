@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Çevrimiçi oyuncu yok.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000><color:#FFFFFF><target></color> oyuncusu çevrimdışı ve kaydedilmiş envanteri yok.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Geçersiz süre formatı",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI yüklü değil. Bu özellik onu gerektirir.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord bildirimleri devre dışı. DiscordSRV yüklü değil.</color>",
   "heal.success": "<prefix> <color:#FFF200>Tamamen iyileştirildiniz!</color>",
   "heal.success.by": "<prefix> <color:#FFF200><color:#FFFFFF><healer></color> tarafından iyileştirildiniz</color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color> başarıyla iyileştirildi</color>",

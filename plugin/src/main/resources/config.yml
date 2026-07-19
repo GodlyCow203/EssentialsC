@@ -173,6 +173,9 @@ luckperms:
 # Controls which EssentialsC events are relayed to Discord.
 
 discordsrv:
+  # Set to false to disable DiscordSRV integration entirely.
+  # When false, no Discord notifications will be sent and no "missing plugin" warnings shown.
+  enabled: false
 
   # Channel configuration.
   # The name value must match a channel key defined in DiscordSRV's config.yml.

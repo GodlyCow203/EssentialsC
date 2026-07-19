@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Немає гравців в мережі.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Гравець <color:#FFFFFF><target></color> не в мережі та не має збереженого інвентарю.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Недійсний формат тривалості",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI не встановлено. Ця функція потребує його.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Сповіщення Discord вимкнено. DiscordSRV не встановлено.</color>",
   "heal.success": "<prefix> <color:#FFF200>Вас повністю вилікувано!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Вас вилікував <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Успішно вилікувано <color:#FFFFFF><player></color></color>",

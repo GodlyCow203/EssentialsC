@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>ఆన్‌లైన్‌లో ఆటగాళ్లు ఎవరూ లేరు.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>ఆటగాడు <color:#FFFFFF><target></color> ఆఫ్‌లైన్‌లో ఉన్నారు మరియు సేవ్ చేసిన ఇన్వెంటరీ లేదు.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>చెల్లని వ్యవధి ఫార్మాట్",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI ఇన్‌స్టాల్ చేయబడలేదు. ఈ ఫీచర్‌కు దీని అవసరం ఉంది.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord నోటిఫికేషన్‌లు నిలిపివేయబడ్డాయి. DiscordSRV ఇన్‌స్టాల్ చేయబడలేదు.</color>",
   "heal.success": "<prefix> <color:#FFF200>మీరు పూర్తిగా నయం చేయబడ్డారు!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>మీరు <color:#FFFFFF><healer></color> ద్వారా నయం చేయబడ్డారు</color>",
   "heal.success.others": "<prefix> <color:#FFF200><color:#FFFFFF><player></color>ను విజయవంతంగా నయం చేశారు</color>",

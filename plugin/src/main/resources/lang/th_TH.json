@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>ไม่มีผู้เล่นออนไลน์</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>ผู้เล่น <color:#FFFFFF><target></color> ออฟไลน์และไม่มีอินเวนทอรีที่บันทึกไว้</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>รูปแบบระยะเวลาไม่ถูกต้อง",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI ไม่ได้ติดตั้ง ฟีเจอร์นี้ต้องการมัน</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>การแจ้งเตือน Discord ถูกปิดใช้งาน DiscordSRV ไม่ได้ติดตั้ง</color>",
   "heal.success": "<prefix> <color:#FFF200>คุณได้รับการรักษาอย่างเต็มที่!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>คุณได้รับการรักษาโดย <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>รักษา <color:#FFFFFF><player></color> สำเร็จแล้ว</color>",

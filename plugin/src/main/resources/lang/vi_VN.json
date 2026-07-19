@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Không có người chơi nào trực tuyến.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Người chơi <color:#FFFFFF><target></color> đã ngoại tuyến và không có túi đồ đã lưu.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Định dạng thời lượng không hợp lệ",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI chưa được cài đặt. Tính năng này yêu cầu nó.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Thông báo Discord đã bị tắt. DiscordSRV chưa được cài đặt.</color>",
   "heal.success": "<prefix> <color:#FFF200>Bạn đã được hồi phục hoàn toàn!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Bạn đã được chữa lành bởi <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Đã chữa lành thành công <color:#FFFFFF><player></color></color>",

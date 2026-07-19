@@ -30,6 +30,8 @@
   "error.no_players_online": "<prefix> <color:#FF0000>Er zijn geen spelers online.</color>",
   "error.player_offline_no_inventory": "<prefix> <color:#FF0000>Speler <color:#FFFFFF><target></color> is offline en heeft geen opgeslagen inventaris.</color>",
   "error.invalid_duration": "<prefix> <color:#FF0000>Ongeldige duurformaat",
+  "error.missing_plugin.papi": "<prefix> <color:#FF0000>PlaceholderAPI is niet geïnstalleerd. Deze functie vereist het.</color>",
+  "error.missing_plugin.discordsrv": "<prefix> <color:#FF0000>Discord-meldingen zijn uitgeschakeld. DiscordSRV is niet geïnstalleerd.</color>",
   "heal.success": "<prefix> <color:#FFF200>Je bent volledig genezen!</color>",
   "heal.success.by": "<prefix> <color:#FFF200>Je bent genezen door <color:#FFFFFF><healer></color></color>",
   "heal.success.others": "<prefix> <color:#FFF200>Succesvol <color:#FFFFFF><player></color> genezen</color>",
