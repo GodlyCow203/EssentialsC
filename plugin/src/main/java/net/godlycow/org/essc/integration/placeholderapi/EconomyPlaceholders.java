@@ -39,7 +39,7 @@ public class EconomyPlaceholders {
 
         return switch (identifier.toLowerCase()) {
             case "eco_balance" -> manager.formatPlain(balance);
-            case "eco_balance_formatted" -> manager.format(balance);
+            case "eco_balance_formatted" -> manager.formatAbbreviated(balance);
             case "eco_currency_singular" -> manager.currencyNameSingular();
             case "eco_currency_plural" -> manager.currencyNamePlural();
             case "eco_max_balance" -> manager.hasMaxBalance()
@@ -82,7 +82,7 @@ public class EconomyPlaceholders {
     public static List<String> getPlaceholderList() {
         return List.of(
                 "%essc_eco_balance%            — raw balance as plain number",
-                "%essc_eco_balance_formatted%  — formatted balance with currency name",
+                "%essc_eco_balance_formatted%  — abbreviated balance (e.g. 1.1k, 2.5M)",
                 "%essc_eco_currency_singular%  — singular currency name",
                 "%essc_eco_currency_plural%    — plural currency name",
                 "%essc_eco_max_balance%        — server max balance (∞ if unlimited)",

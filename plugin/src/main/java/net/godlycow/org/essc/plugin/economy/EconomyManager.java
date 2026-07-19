@@ -296,6 +296,33 @@ public class EconomyManager implements EconomyService, Listener {
         return decimalFormat.format(amount);
     }
 
+    public String formatAbbreviated(BigDecimal amount) {
+        double value = amount.doubleValue();
+        String suffix;
+        double divisor;
+
+        if (Math.abs(value) >= 1_000_000_000) {
+            suffix = "B";
+            divisor = 1_000_000_000;
+        } else if (Math.abs(value) >= 1_000_000) {
+            suffix = "M";
+            divisor = 1_000_000;
+        } else if (Math.abs(value) >= 1_000) {
+            suffix = "k";
+            divisor = 1_000;
+        } else {
+            String formattedAmount = decimalFormat.format(amount);
+            String currency = amount.compareTo(BigDecimal.ONE) == 0 ? currencySingular : currencyPlural;
+            return plugin.getConfigManager().isCurrencyBeforeAmount()
+                    ? currency + " " + formattedAmount
+                    : formattedAmount + " " + currency;
+        }
+
+        String abbreviated = new java.text.DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US))
+                .format(value / divisor);
+        return abbreviated + suffix;
+    }
+
     @Override
     public String currencyNameSingular() {
         return currencySingular;
