@@ -39,6 +39,14 @@ public class UserManager {
                     return created;
                 });
             }
+            UserProfile cached = cache.get(uuid);
+            if (cached != null) {
+                profile.setVanished(cached.isVanished());
+                profile.setFlyEnabled(cached.isFlyEnabled());
+                profile.setTpaBlocked(cached.isTpaBlocked());
+                profile.setScoreboardDisabled(cached.isScoreboardDisabled());
+                profile.setRulesAccepted(cached.isRulesAccepted());
+            }
             if (!username.equals(profile.getUsername())) {
                 profile.setLastKnownName(profile.getUsername());
                 profile.setUsername(username);
