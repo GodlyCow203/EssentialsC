@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import net.godlycow.org.essc.util.TabCompletionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -118,6 +120,8 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             return Collections.emptyList();
         }
 
+        List<String> result;
+
         if (args.length == 1) {
             List<String> base = tabComplete(sender, alias, args);
             if (base == null) return null;
@@ -126,12 +130,15 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             if ("help".startsWith(partial)) {
                 List<String> merged = new ArrayList<>(base);
                 if (!merged.contains("help")) merged.add(0, "help");
-                return merged;
+                result = merged;
+            } else {
+                result = base;
             }
-            return base;
+        } else {
+            result = tabComplete(sender, alias, args);
         }
 
-        return tabComplete(sender, alias, args);
+        return TabCompletionUtils.filterCompletions(plugin, sender, result);
     }
 
     public List<String> tabComplete(CommandSender sender, String[] args) {
