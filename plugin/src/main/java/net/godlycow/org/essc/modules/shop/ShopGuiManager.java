@@ -234,9 +234,16 @@ public class ShopGuiManager {
     }
 
     private ItemStack createBalanceItem(Player player, GuiButton config, double balance) {
-        ItemStack item = buildButton(config, player);
+        ItemStack item = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
+        if (skullMeta == null)
+            return item;
+        skullMeta.setOwnerProfile(player.getPlayerProfile());
+        item.setItemMeta(skullMeta);
+
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) return item;
+        if (meta == null)
+            return item;
 
         String formattedBalance = String.format("%.2f", balance);
         String currency = balance == 1.0 ?
@@ -256,6 +263,16 @@ public class ShopGuiManager {
         lore.add(plugin.getLanguageManager().get(player, "shop.gui.main.balance-refresh-hint").decoration(TextDecoration.ITALIC, false));
 
         meta.lore(lore);
+
+        String action = config.getAction();
+        if (action != null && !action.isEmpty()) {
+            meta.getPersistentDataContainer().set(
+                    new NamespacedKey(plugin, "gui_action"),
+                    PersistentDataType.STRING,
+                    action
+            );
+        }
+
         item.setItemMeta(meta);
         return item;
     }

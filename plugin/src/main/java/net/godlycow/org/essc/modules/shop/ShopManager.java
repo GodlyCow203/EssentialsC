@@ -252,18 +252,20 @@ public class ShopManager {
             return;
         }
 
-        shopGuiManager.openMainShop(player, 0.0);
-        if (shopListener != null) {
-            shopListener.setSession(player, new ShopSession(null, 1));
-        }
-
         if (plugin.getEconomyManager() == null) {
+            shopGuiManager.openMainShop(player, 0.0);
+            if (shopListener != null) {
+                shopListener.setSession(player, new ShopSession(null, 1));
+            }
             return;
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             player.getScheduler().run(plugin, task -> {
-                shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_main");
+                shopGuiManager.openMainShop(player, balance.doubleValue());
+                if (shopListener != null) {
+                    shopListener.setSession(player, new ShopSession(null, 1));
+                }
             }, null);
         });
     }
@@ -285,18 +287,20 @@ public class ShopManager {
             return;
         }
 
-        shopGuiManager.openCategory(player, category, page, 0.0);
-        if (shopListener != null) {
-            shopListener.setSession(player, new ShopSession(categoryId, page));
-        }
-
         if (plugin.getEconomyManager() == null) {
+            shopGuiManager.openCategory(player, category, page, 0.0);
+            if (shopListener != null) {
+                shopListener.setSession(player, new ShopSession(categoryId, page));
+            }
             return;
         }
 
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             player.getScheduler().run(plugin, task -> {
-                shopGuiManager.updateBalanceSlot(player, balance.doubleValue(), "shop_category");
+                shopGuiManager.openCategory(player, category, page, balance.doubleValue());
+                if (shopListener != null) {
+                    shopListener.setSession(player, new ShopSession(categoryId, page));
+                }
             }, null);
         });
     }
