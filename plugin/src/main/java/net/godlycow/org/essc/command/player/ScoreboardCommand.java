@@ -34,6 +34,11 @@ public class ScoreboardCommand extends Command {
                     return true;
                 }
 
+                if (plugin.getScoreboardManager() == null) {
+                    sender.sendMessage(lang.get(sender, "scoreboard.disabled"));
+                    return true;
+                }
+
                 plugin.getScoreboardManager().toggle(player);
             }
 

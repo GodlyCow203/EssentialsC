@@ -3,7 +3,9 @@ package net.godlycow.org.essc.command.home;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.home.Home;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -38,8 +40,8 @@ public class HomeCommand extends Command {
             String targetName = args[0];
             String homeName = args[1];
 
-            Player target = plugin.getServer().getPlayer(targetName);
-            if (target == null) {
+            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            if (!target.hasPlayedBefore() && !target.isOnline()) {
                 player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
                 return true;
             }
