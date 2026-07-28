@@ -4,6 +4,7 @@ import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,6 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.jspecify.annotations.NonNull;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -36,18 +38,21 @@ public class ScoreboardManager implements Listener {
 
     public ScoreboardManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.processor = new PlaceholderProcessor();
+        this.processor = new PlaceholderProcessor(plugin);
 
         loadConfig();
 
         if (config.isEnabled()) {
             start();
+            logPlaceholderStatus();
         }
         Bukkit.getPluginManager().registerEvents(this, plugin);
 
         migrateOldScoreboardData();
     }
 
+    @Deprecated(forRemoval = true, since = "4.2.6")
+    // planned to be removed for 4.3.0+
     private void migrateOldScoreboardData() {
         File scoreboardsDir = new File(plugin.getDataFolder(), "scoreboards");
         if (!scoreboardsDir.exists()) return;
@@ -57,8 +62,8 @@ public class ScoreboardManager implements Listener {
         File dataFile = new File(scoreboardsDir, "data.yml");
         if (dataFile.exists()) {
             try {
-                org.bukkit.configuration.file.YamlConfiguration dataConfig =
-                        org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(dataFile);
+                YamlConfiguration dataConfig =
+                        YamlConfiguration.loadConfiguration(dataFile);
                 List<String> uuidList = dataConfig.getStringList("disabled-players");
                 for (String uuidStr : uuidList) {
                     try {
@@ -73,7 +78,7 @@ public class ScoreboardManager implements Listener {
         File oldTxtFile = new File(scoreboardsDir, "disabled.txt");
         if (oldTxtFile.exists()) {
             try {
-                java.nio.file.Files.readAllLines(oldTxtFile.toPath()).forEach(line -> {
+                Files.readAllLines(oldTxtFile.toPath()).forEach(line -> {
                     try {
                         toDisable.add(UUID.fromString(line.trim()));
                     } catch (IllegalArgumentException ignored) {}
@@ -105,6 +110,19 @@ public class ScoreboardManager implements Listener {
         cleanupOldScoreboardFiles(scoreboardsDir);
     }
 
+    //new to log if papi was found or not and log ofc
+    private void logPlaceholderStatus() {
+        if (processor.isPapiEnabled()) {
+            plugin.getLogger().info("Scoreboard: PlaceholderAPI detected - external placeholders are enabled.");
+        } else {
+            plugin.getLogger().info("Scoreboard: PlaceholderAPI not detected - using built-in placeholders.");
+            plugin.getLogger().info("Scoreboard: For full placeholder support, install PlaceholderAPI.");
+            plugin.getLogger().info("Scoreboard: See https://wiki.godlycow.org/essc/scoreboard-placeholders.html for built-in placeholders.");
+        }
+    }
+
+    @Deprecated(forRemoval = true, since = "4.2.6")
+    //also marked for removal as it is only used in migrateOldScoreboardData
     private void cleanupOldScoreboardFiles(File scoreboardsDir) {
         File dataFile = new File(scoreboardsDir, "data.yml");
         if (dataFile.exists()) {
@@ -343,6 +361,10 @@ public class ScoreboardManager implements Listener {
 
     public boolean isEnabled(Player player) {
         return !disabledPlayers.contains(player.getUniqueId());
+    }
+
+    public boolean isPlaceholderApiEnabled() {
+        return processor.isPapiEnabled();
     }
 
     private void removePlayer(Player player) {

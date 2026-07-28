@@ -544,6 +544,8 @@ back:
 #
 # A per-player sidebar scoreboard updated on a fixed interval.
 # Supports PlaceholderAPI placeholders (%placeholder%) and MiniMessage formatting.
+# When PlaceholderAPI is not installed, built-in placeholders are used instead.
+# See https://wiki.godlycow.org/essc/scoreboard-placeholders.html for built-in placeholders.
 
 scoreboard:
   # Set to false to disable the scoreboard entirely.

@@ -56,6 +56,19 @@ public class ScoreboardCommand extends Command {
                 sender.sendMessage(lang.get(sender, "scoreboard.reloaded"));
             }
 
+            case "status" -> {
+                if (plugin.getScoreboardManager() == null) {
+                    sender.sendMessage(lang.get(sender, "scoreboard.disabled"));
+                    return true;
+                }
+
+                if (plugin.getScoreboardManager().isPlaceholderApiEnabled()) {
+                    sender.sendMessage(lang.get(sender, "scoreboard.placeholderapi.enabled"));
+                } else {
+                    sender.sendMessage(lang.get(sender, "scoreboard.placeholderapi.disabled"));
+                }
+            }
+
             default -> showUsage(sender);
         }
 
@@ -70,6 +83,7 @@ public class ScoreboardCommand extends Command {
         if (sender.hasPermission("essentialsc.scoreboard.reload")) {
             sender.sendMessage(lang.get(sender, "scoreboard.help_reload"));
         }
+        sender.sendMessage(lang.get(sender, "scoreboard.help_status"));
     }
 
     @Override
@@ -82,6 +96,7 @@ public class ScoreboardCommand extends Command {
             if (sender.hasPermission("essentialsc.scoreboard.reload")) {
                 subs.add("reload");
             }
+            subs.add("status");
             return subs.stream()
                     .filter(s -> s.toLowerCase().startsWith(args[0].toLowerCase()))
                     .toList();

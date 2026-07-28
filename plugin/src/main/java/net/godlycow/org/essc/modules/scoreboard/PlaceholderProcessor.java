@@ -1,25 +1,32 @@
 package net.godlycow.org.essc.modules.scoreboard;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.cacheddata.CachedMetaData;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.regex.Pattern;
 
 public class PlaceholderProcessor {
 
-    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
-    private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
     private final boolean papiEnabled;
+    private final EssentialsC plugin;
 
-    public PlaceholderProcessor() {
+    public PlaceholderProcessor(EssentialsC plugin) {
+        this.plugin = plugin;
         this.papiEnabled = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
 
-    public Component process(Player player, Component base) {
-        return base;
+    public boolean isPapiEnabled() {
+        return papiEnabled;
     }
 
     public String processString(Player player, String text) {
@@ -28,11 +35,19 @@ public class PlaceholderProcessor {
         String processed = text;
         if (papiEnabled) {
             try {
-                processed = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, processed);
+                processed = PlaceholderAPI.setPlaceholders(player, processed);
             } catch (Exception e) {
                 Bukkit.getLogger().warning("PAPI failed for " + player.getName() + ": " + e.getMessage());
             }
         }
+
+        processed = processBuiltInPlaceholders(player, processed);
+
+        return LegacyColorConverter.toMiniMessage(processed);
+    }
+
+    private String processBuiltInPlaceholders(Player player, String text) {
+        String processed = text;
 
         processed = processed
                 .replace("%player_name%",        player.getName())
@@ -44,8 +59,85 @@ public class PlaceholderProcessor {
                 .replace("%y%",                  String.valueOf(player.getLocation().getBlockY()))
                 .replace("%z%",                  String.valueOf(player.getLocation().getBlockZ()))
                 .replace("%ping%",               String.valueOf(player.getPing()))
+                .replace("%player_ping%",        String.valueOf(player.getPing()))
                 .replace("%level%",              String.valueOf(player.getLevel()));
 
-        return LegacyColorConverter.toMiniMessage(processed);
+        processed = processed  //more fallback placeholders to complete missing papi ones
+                .replace("%statistic_player_kills%", String.valueOf(player.getStatistic(org.bukkit.Statistic.PLAYER_KILLS)))
+                .replace("%statistic_deaths%",       String.valueOf(player.getStatistic(org.bukkit.Statistic.DEATHS)));
+
+        processed = processed
+                .replace("%server_tps_1%",     String.format("%.1f", Bukkit.getServer().getTPS()[0]))
+                .replace("%server_tps_5%",     String.format("%.1f", Bukkit.getServer().getTPS()[1]))
+                .replace("%server_tps_15%",    String.format("%.1f", Bukkit.getServer().getTPS()[2]))
+                .replace("%server_version%",   Bukkit.getBukkitVersion());
+
+        if (processed.contains("%luckperms_prefix%") || processed.contains("%luckperms_suffix%")) {
+            String luckpermsPrefix = getLuckPermsPrefix(player);
+            String luckpermsSuffix = getLuckPermsSuffix(player);
+            processed = processed
+                    .replace("%luckperms_prefix%", luckpermsPrefix)
+                    .replace("%luckperms_suffix%", luckpermsSuffix);
+        }
+
+        if (processed.contains("%vault_eco_balance%") || processed.contains("%vault_eco_balance_formatted%")) {
+            String balance = getVaultBalance(player);
+            processed = processed
+                    .replace("%vault_eco_balance%", balance)
+                    .replace("%vault_eco_balance_formatted%", balance);
+        }
+
+        return processed;
+    }
+    private String getLuckPermsPrefix(Player player) {
+        try {
+            //return empty prefix as fallback if luckp is null
+            if (Bukkit.getPluginManager().getPlugin("LuckPerms") == null) {
+                return "";
+            }
+
+            //get players metadata from luckp
+            LuckPerms api = LuckPermsProvider.get();
+            CachedMetaData metaData = api.getPlayerAdapter(Player.class).getMetaData(player);
+
+            return metaData.getPrefix() != null ? metaData.getPrefix() : "";
+
+        } catch (Exception ignored) {
+            // Silent falback
+        }
+
+        return "";
+    }
+
+
+    //same thing but for suffix
+    private String getLuckPermsSuffix(Player player) {
+        try {
+            if (Bukkit.getPluginManager().getPlugin("LuckPerms") == null) {
+                return "";
+            }
+            LuckPerms api = LuckPermsProvider.get();
+            CachedMetaData metaData = api.getPlayerAdapter(Player.class).getMetaData(player);
+
+            return metaData.getSuffix() != null ? metaData.getSuffix() : "";
+        } catch (Exception ignored) {
+            // silent fallback
+        }
+        return "";
+    }
+
+    private String getVaultBalance(Player player) { // for vault placeholder
+        try {
+            RegisteredServiceProvider<Economy> rsp =
+                    Bukkit.getServicesManager().getRegistration(Economy.class);
+            if (rsp != null) {
+                Economy eco = rsp.getProvider();
+
+                return eco.format(eco.getBalance(player));
+            }
+        } catch (Exception ignored) {
+
+        }
+        return "0.00";
     }
 }
