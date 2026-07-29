@@ -8,10 +8,9 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.regex.Pattern;
 
@@ -126,17 +125,21 @@ public class PlaceholderProcessor {
         return "";
     }
 
-    private String getVaultBalance(Player player) { // for vault placeholder
+    private String getVaultBalance(Player player) {
+        //use reflection nd isVaultHooked check to avoid
+        //NoClassDefFoundError when Vault is null
         try {
-            RegisteredServiceProvider<Economy> rsp =
-                    Bukkit.getServicesManager().getRegistration(Economy.class);
-            if (rsp != null) {
-                Economy eco = rsp.getProvider();
+            if (!plugin.isVaultHooked())
+                return "0.00";
 
-                return eco.format(eco.getBalance(player));
+            Class<?> economyClass = Class.forName("net.milkbowl.vault.economy.Economy");
+            var rsp = Bukkit.getServicesManager().getRegistration(economyClass);
+            if (rsp != null) {
+                Object eco = rsp.getProvider();
+                double balance = (double) eco.getClass().getMethod("getBalance", OfflinePlayer.class).invoke(eco, player);
+                return (String) eco.getClass().getMethod("format", double.class).invoke(eco, balance);
             }
         } catch (Exception ignored) {
-
         }
         return "0.00";
     }
