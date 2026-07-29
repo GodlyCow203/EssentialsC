@@ -188,8 +188,9 @@ public class BackManager implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "dback.pending",
                 Map.of("seconds", String.valueOf(warmup))));
 
+        Location finalTarget = target;
         ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
-            completeTeleport(player, target, true);
+            completeTeleport(player, finalTarget, true);
         }, null, warmup * 20L);
 
         deathWarmupTasks.put(player.getUniqueId(), task);
