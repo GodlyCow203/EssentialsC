@@ -119,6 +119,7 @@ afklist:
   enabled: true
   priority: normal
   aliases: []
+  cooldown: 60
 
 sudo:
   enabled: true
