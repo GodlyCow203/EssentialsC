@@ -5,7 +5,7 @@ import net.godlycow.org.essc.integration.bedrock.TeamNameUtil;
 import net.godlycow.org.essc.server.software.ServerSoftware;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.ComponentBuilder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -146,7 +146,7 @@ public class TabManager implements Listener {
             return;
         stateCache.put(player.getUniqueId(), current);
 
-        TextComponent.Builder builder = Component.text();
+        ComponentBuilder<?, ?> builder = Component.text(); //use ComponentBuilder
 
 
         if (afk) {
