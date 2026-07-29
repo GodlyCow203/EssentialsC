@@ -2,10 +2,7 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.storage.user.UserCooldownManager;
 import net.godlycow.org.essc.storage.user.UserProfile;
-import net.godlycow.org.essc.storage.user.UserPunishmentManager;
-import net.godlycow.org.essc.storage.user.UserStateManager;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -130,29 +127,27 @@ public class UserCommand extends Command {
     }
 
     private void sendStatesSection(CommandSender sender, UserProfile profile, UUID targetUuid) {
-        UserStateManager stateManager = plugin.getUserManager().getStateManager();
-
         sender.sendMessage(lang.get(sender, "user.section.states"));
 
         sender.sendMessage(lang.get(sender, "user.states.summary",
-                Map.of("summary", stateManager.getStatesSummary(targetUuid))));
+                Map.of("summary", plugin.getUserManager().getStatesSummary(targetUuid))));
 
         sender.sendMessage(lang.get(sender, "user.states.fly",
-                Map.of("value", booleanKey(stateManager.isFlyEnabled(targetUuid)))));
+                Map.of("value", booleanKey(plugin.getUserManager().isFlyEnabled(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.vanished",
-                Map.of("value", booleanKey(stateManager.isVanished(targetUuid)))));
+                Map.of("value", booleanKey(plugin.getUserManager().isVanished(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.tpa_blocked",
-                Map.of("value", booleanKey(stateManager.isTpaBlocked(targetUuid)))));
+                Map.of("value", booleanKey(plugin.getUserManager().isTpaBlocked(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.scoreboard_disabled",
-                Map.of("value", booleanKey(stateManager.isScoreboardDisabled(targetUuid)))));
+                Map.of("value", booleanKey(plugin.getUserManager().isScoreboardDisabled(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.rules_accepted",
-                Map.of("value", booleanKey(stateManager.hasAcceptedRules(targetUuid)))));
+                Map.of("value", booleanKey(plugin.getUserManager().hasAcceptedRules(targetUuid)))));
 
-        UUID lastReplyTarget = stateManager.getLastReplyTarget(targetUuid);
+        UUID lastReplyTarget = plugin.getUserManager().getLastReplyTarget(targetUuid);
         if (lastReplyTarget != null) {
             OfflinePlayer replyTarget = plugin.getServer().getOfflinePlayer(lastReplyTarget);
             String replyName = replyTarget.getName() != null ? replyTarget.getName() : lastReplyTarget.toString();
@@ -164,16 +159,14 @@ public class UserCommand extends Command {
     }
 
     private void sendPunishmentsSection(CommandSender sender, UserProfile profile, UUID targetUuid) {
-        UserPunishmentManager punishmentManager = plugin.getUserManager().getPunishmentManager();
-
         sender.sendMessage(lang.get(sender, "user.section.punishments"));
 
-        boolean banned = punishmentManager.isBanned(targetUuid);
-        boolean muted = punishmentManager.isMuted(targetUuid);
+        boolean banned = plugin.getUserManager().isBanned(targetUuid);
+        boolean muted = plugin.getUserManager().isMuted(targetUuid);
 
         if (banned) {
             Map<String, String> p = new HashMap<>();
-            p.put("reason", punishmentManager.getBanReason(targetUuid) != null ? punishmentManager.getBanReason(targetUuid) : "-");
+            p.put("reason", plugin.getUserManager().getBanReason(targetUuid) != null ? plugin.getUserManager().getBanReason(targetUuid) : "-");
             p.put("banner", profile.getBanBanner() != null ? profile.getBanBanner() : "-");
             p.put("time", profile.getBanTime() > 0 ? formatTimestamp(profile.getBanTime()) : "-");
             p.put("expires", profile.getBanExpires() == 0 ? "Never" : formatTimestamp(profile.getBanExpires()));
@@ -184,11 +177,11 @@ public class UserCommand extends Command {
 
         if (muted) {
             Map<String, String> p = new HashMap<>();
-            p.put("reason", punishmentManager.getMuteReason(targetUuid) != null ? punishmentManager.getMuteReason(targetUuid) : "-");
+            p.put("reason", plugin.getUserManager().getMuteReason(targetUuid) != null ? plugin.getUserManager().getMuteReason(targetUuid) : "-");
             p.put("muter", profile.getMuteMuter() != null ? profile.getMuteMuter() : "-");
             p.put("time", profile.getMuteTime() > 0 ? formatTimestamp(profile.getMuteTime()) : "-");
             p.put("expires", profile.getMuteExpires() == 0 ? "Never" : formatTimestamp(profile.getMuteExpires()));
-            p.put("offline_notification", booleanKey(punishmentManager.isMuteOfflineNotification(targetUuid)));
+            p.put("offline_notification", booleanKey(plugin.getUserManager().isMuteOfflineNotification(targetUuid)));
             sender.sendMessage(lang.get(sender, "user.punishments.muted", p));
         } else {
             sender.sendMessage(lang.get(sender, "user.punishments.not_muted"));
@@ -223,18 +216,16 @@ public class UserCommand extends Command {
     }
 
     private void sendCooldownsSection(CommandSender sender, UUID targetUuid) {
-        UserCooldownManager cooldownManager = plugin.getUserManager().getCooldownManager();
-
         sender.sendMessage(lang.get(sender, "user.section.cooldowns"));
 
-        long rtpLastUsed = cooldownManager.getRtpLastUsed(targetUuid);
+        long rtpLastUsed = plugin.getUserManager().getRtpLastUsed(targetUuid);
         if (rtpLastUsed > 0) {
             sender.sendMessage(lang.get(sender, "user.cooldowns.rtp", Map.of("time", formatTimestamp(rtpLastUsed))));
         } else {
             sender.sendMessage(lang.get(sender, "user.cooldowns.rtp_never"));
         }
 
-        long spawnLastTeleport = cooldownManager.getSpawnLastTeleport(targetUuid);
+        long spawnLastTeleport = plugin.getUserManager().getSpawnLastTeleport(targetUuid);
         if (spawnLastTeleport > 0) {
             sender.sendMessage(lang.get(sender, "user.cooldowns.spawn", Map.of("time", formatTimestamp(spawnLastTeleport))));
         } else {

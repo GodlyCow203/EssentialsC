@@ -62,7 +62,7 @@ public class BackManager implements Listener {
         backLocations.put(player.getUniqueId(), location.clone());
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getLocationManager().setBackLocation(player.getUniqueId(), location);
+            plugin.getUserManager().setBackLocation(player.getUniqueId(), location);
         }
 
         plugin.debug("Set back location for " + player.getName() + ": " +
@@ -70,7 +70,14 @@ public class BackManager implements Listener {
     }
 
     public boolean hasBackLocation(Player player) {
-        return backLocations.containsKey(player.getUniqueId());
+        if (backLocations.containsKey(player.getUniqueId())) return true;
+        if (plugin.getUserManager() == null) return false;
+        net.godlycow.org.essc.storage.user.UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+        if (profile != null && profile.getBackLocation() != null) {
+            backLocations.put(player.getUniqueId(), profile.getBackLocation());
+            return true;
+        }
+        return false;
     }
 
     public void teleportBack(Player player, boolean confirm) {
@@ -150,6 +157,13 @@ public class BackManager implements Listener {
         }
 
         Location target = deathLocations.get(player.getUniqueId());
+        if (target == null && plugin.getUserManager() != null) {
+            net.godlycow.org.essc.storage.user.UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+            if (profile != null && profile.getDeathLocation() != null) {
+                target = profile.getDeathLocation();
+                deathLocations.put(player.getUniqueId(), target);
+            }
+        }
         if (target == null) {
             player.sendMessage(plugin.getLanguageManager().get(player, "dback.no_location"));
             return;
@@ -343,7 +357,7 @@ public class BackManager implements Listener {
         setBackLocation(player, deathLoc);
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getLocationManager().setDeathLocation(player.getUniqueId(), deathLoc);
+            plugin.getUserManager().setDeathLocation(player.getUniqueId(), deathLoc);
         }
 
         plugin.debug("Stored death location for " + player.getName());
@@ -380,7 +394,7 @@ public class BackManager implements Listener {
         Player player = event.getPlayer();
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getLocationManager().setLogoutLocation(player.getUniqueId(), player.getLocation());
+            plugin.getUserManager().setLogoutLocation(player.getUniqueId(), player.getLocation());
         }
 
         ScheduledTask task = warmupTasks.remove(player.getUniqueId());

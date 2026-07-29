@@ -38,7 +38,7 @@ public class FlyManager implements Listener {
         Player player = event.getPlayer();
         boolean flying = player.isFlying() || player.getAllowFlight();
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getStateManager().setFlyEnabled(player.getUniqueId(), flying);
+            plugin.getUserManager().setFlyEnabled(player.getUniqueId(), flying);
         }
     }
 
@@ -53,7 +53,7 @@ public class FlyManager implements Listener {
                 player.setFlying(false);
                 player.setAllowFlight(false);
                 if (persistent && plugin.getUserManager() != null) {
-                    plugin.getUserManager().getStateManager().setFlyEnabled(player.getUniqueId(), false);
+                    plugin.getUserManager().setFlyEnabled(player.getUniqueId(), false);
                 }
                 plugin.debug("Disabled fly for " + player.getName() + " (disable-on-join)");
             } else if (persistent && restoreOnJoin && hasPersistentFly(player.getUniqueId())) {
@@ -73,18 +73,18 @@ public class FlyManager implements Listener {
         player.setFlying(flying);
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getStateManager().setFlyEnabled(player.getUniqueId(), flying);
+            plugin.getUserManager().setFlyEnabled(player.getUniqueId(), flying);
         }
     }
 
     public boolean hasPersistentFly(UUID uuid) {
         if (!persistent || plugin.getUserManager() == null) return false;
-        return plugin.getUserManager().getStateManager().isFlyEnabled(uuid);
+        return plugin.getUserManager().isFlyEnabled(uuid);
     }
 
     public void setPersistentFly(UUID uuid, boolean enabled) {
         if (!this.persistent || plugin.getUserManager() == null) return;
-        plugin.getUserManager().getStateManager().setFlyEnabled(uuid, enabled);
+        plugin.getUserManager().setFlyEnabled(uuid, enabled);
     }
 
     public void shutdown() {

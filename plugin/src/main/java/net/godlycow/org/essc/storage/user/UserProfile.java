@@ -53,6 +53,7 @@ public class UserProfile {
         return profile;
     }
 
+    //ALOT of getters
     public UUID getUuid() {
         return uuid;
     }
@@ -60,6 +61,7 @@ public class UserProfile {
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -109,24 +111,24 @@ public class UserProfile {
         return logoutLocation;
     }
 
-    void setRawLogoutLocation(String rawLogoutLocation) {
-        this.logoutLocation = rawLogoutLocation;
+    void setRawLogoutLocation(String  raw) {
+        this.logoutLocation = raw;
     }
 
     public long getLogoutTime() {
         return logoutTime;
     }
-
     public void setLogoutTime(long logoutTime) {
         this.logoutTime = logoutTime;
     }
 
     public String getLanguageCode() {
         return languageCode;
+
     }
 
     public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
+         this.languageCode = languageCode;
     }
 
     public Location getBackLocation() {
@@ -138,15 +140,15 @@ public class UserProfile {
     }
 
     String getRawBackLocation() {
-        return backLocation;
+        return  backLocation;
     }
 
-    void setRawBackLocation(String rawBackLocation) {
-        this.backLocation = rawBackLocation;
+    void setRawBackLocation(String raw) {
+         this.backLocation = raw;
     }
 
     public Location getDeathLocation() {
-        return UserUtils.parseLocation(deathLocation);
+        return  UserUtils.parseLocation( deathLocation );
     }
 
     public void setDeathLocation(Location location) {
@@ -154,18 +156,18 @@ public class UserProfile {
     }
 
     String getRawDeathLocation() {
-        return deathLocation;
+          return deathLocation;
     }
 
-    void setRawDeathLocation(String rawDeathLocation) {
-        this.deathLocation = rawDeathLocation;
+
+    void setRawDeathLocation( String raw) {
+        this.deathLocation = raw;
     }
 
     public boolean isFlyEnabled() {
         return flyEnabled;
     }
-
-    public void setFlyEnabled(boolean flyEnabled) {
+    public void setFlyEnabled(boolean    flyEnabled) {
         this.flyEnabled = flyEnabled;
     }
 
@@ -180,32 +182,26 @@ public class UserProfile {
     public boolean isTpaBlocked() {
         return tpaBlocked;
     }
-
-    public void setTpaBlocked(boolean tpaBlocked) {
-        this.tpaBlocked = tpaBlocked;
-    }
+    public void setTpaBlocked(boolean tpaBlocked) { this.tpaBlocked = tpaBlocked; }
 
     public UUID getLastReplyTarget() {
-        if (lastReplyTarget == null || lastReplyTarget.isBlank()) {
+        if (lastReplyTarget == null || lastReplyTarget.isBlank())
             return null;
-        }
+
         try {
             return UUID.fromString(lastReplyTarget);
-        } catch (IllegalArgumentException ex) {
+        }
+
+        catch (IllegalArgumentException ex) {
             return null;
         }
     }
-
-    public void setLastReplyTarget(UUID lastReplyTarget) {
-        this.lastReplyTarget = lastReplyTarget == null ? null : lastReplyTarget.toString();
-    }
-
     String getRawLastReplyTarget() {
         return lastReplyTarget;
     }
 
-    void setRawLastReplyTarget(String rawLastReplyTarget) {
-        this.lastReplyTarget = rawLastReplyTarget;
+    void setRawLastReplyTarget(String  raw) {
+        this.lastReplyTarget = raw;
     }
 
     public long getRtpLastUsed() {
@@ -252,8 +248,10 @@ public class UserProfile {
         return banExpires;
     }
 
+
     public void setBanExpires(long banExpires) {
         this.banExpires = banExpires;
+
     }
 
     public String getMuteReason() {
@@ -272,11 +270,11 @@ public class UserProfile {
         this.muteMuter = muteMuter;
     }
 
-    public long getMuteTime() {
+    public long getMuteTime(){
         return muteTime;
     }
 
-    public void setMuteTime(long muteTime) {
+    public void setMuteTime( long muteTime) {
         this.muteTime = muteTime;
     }
 
@@ -325,6 +323,27 @@ public class UserProfile {
     }
 
     public void setUpdatedAt(long updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updatedAt =  updatedAt;
+    }
+
+    public String getStatesSummary() {
+        StringBuilder sb = new StringBuilder();
+
+        if (flyEnabled)
+            sb.append("Fly ");
+        if (vanished)
+            sb.append("Vanished ");
+        if (tpaBlocked)
+            sb.append("TPA-Blocked ");
+        if (scoreboardDisabled)
+            sb.append("NoScoreboard ");
+        if (!rulesAccepted)
+            sb.append("UnreadyRules ");
+
+
+        String s = sb.toString().trim();
+
+
+        return s.isEmpty() ? "Normal" : s;
     }
 }

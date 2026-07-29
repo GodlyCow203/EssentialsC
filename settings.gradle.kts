@@ -6,3 +6,4 @@ rootProject.name = "essentialsc"
 include("api")
 include("expansions:mysql")
 include("plugin")
+include("test-migration")

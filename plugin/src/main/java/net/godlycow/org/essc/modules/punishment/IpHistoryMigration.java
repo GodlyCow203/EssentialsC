@@ -2,7 +2,6 @@ package net.godlycow.org.essc.modules.punishment;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.user.UserProfile;
-import net.godlycow.org.essc.storage.user.UserDatabase;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -48,10 +47,8 @@ public class IpHistoryMigration {
 
         plugin.getLogger().info("[IpHistoryMigration] Migrating " + entries.size() + " IP record(s) to the user database...");
 
-        UserDatabase userDatabase = (UserDatabase) plugin.getUserManager().getRepository();
-
         CompletableFuture<?>[] futures = entries.stream()
-                .map(entry -> migrateEntry(userDatabase, entry))
+                .map(entry -> migrateEntry(entry))
                 .toArray(CompletableFuture[]::new);
 
         CompletableFuture.allOf(futures).thenRun(() -> {
@@ -63,7 +60,7 @@ public class IpHistoryMigration {
         });
     }
 
-    private CompletableFuture<Void> migrateEntry(UserDatabase userDatabase, IpEntry entry) {
+    private CompletableFuture<Void> migrateEntry(IpEntry entry) {
         UserProfile cached = plugin.getUserManager().getCachedProfile(entry.uuid());
         if (cached != null) {
             if (cached.getLastIp() == null) {
@@ -73,7 +70,7 @@ public class IpHistoryMigration {
                     .thenApply(r -> null);
         }
 
-        return userDatabase.recordIp(entry.uuid(), entry.ip()).thenApply(r -> null);
+        return plugin.getUserManager().recordIp(entry.uuid(), entry.ip()).thenApply(r -> null);
     }
 
     private void markMigrated() {

@@ -1,0 +1,12 @@
+name: EssentialsCMigrationTest
+version: 1.0
+main: net.godlycow.org.testmigration.TestMigrationPlugin
+api-version: 1.20
+description: Temporary tool to verify EssentialsC user data migration (we (who is "WE" ? ) dont want data loss !!!)
+author: _GodlyCow
+commands:
+  migration:
+    description: nonn
+    usage: /migration test save <old|new> or /migraion statszuzs
+    default: op
+

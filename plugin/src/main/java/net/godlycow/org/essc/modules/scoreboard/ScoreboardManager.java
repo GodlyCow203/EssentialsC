@@ -95,7 +95,7 @@ public class ScoreboardManager implements Listener {
 
         int migrated = 0;
         for (UUID uuid : toDisable) {
-            plugin.getUserManager().getRepository().findByUuid(uuid).thenAccept(profile -> {
+            plugin.getUserManager().findProfile(uuid).thenAccept(profile -> {
                 if (profile != null) {
                     profile.setScoreboardDisabled(true);
                     profile.setUpdatedAt(System.currentTimeMillis() / 1000L);
@@ -342,12 +342,12 @@ public class ScoreboardManager implements Listener {
 
         if (currentlyDisabled) {
             disabledPlayers.remove(uuid);
-            plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, false);
+            plugin.getUserManager().setScoreboardDisabled(uuid, false);
             addPlayer(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.enabled"));
         } else {
             disabledPlayers.add(uuid);
-            plugin.getUserManager().getStateManager().setScoreboardDisabled(uuid, true);
+            plugin.getUserManager().setScoreboardDisabled(uuid, true);
             removePlayer(player);
             placeholderCache.remove(uuid);
             try {
@@ -391,7 +391,7 @@ public class ScoreboardManager implements Listener {
         UUID uuid = joining.getUniqueId();
 
         if (plugin.getUserManager() != null) {
-            boolean dbDisabled = plugin.getUserManager().getStateManager().isScoreboardDisabled(uuid);
+            boolean dbDisabled = plugin.getUserManager().isScoreboardDisabled(uuid);
             if (dbDisabled) {
                 disabledPlayers.add(uuid);
             } else {

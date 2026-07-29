@@ -19,16 +19,17 @@ public class IgnoreCommand extends Command {
         UUID playerUuid = player.getUniqueId();
 
         if (args.length == 0) {
-            plugin.getUserManager().getRepository().getIgnoredPlayers(playerUuid).thenAccept(ignored -> {
+            plugin.getUserManager().getIgnoredPlayersWithNames(playerUuid).thenAccept(ignored -> {
                 if (ignored.isEmpty()) {
                     player.sendMessage(lang.get(player, "ignore.list_empty"));
                     return;
                 }
 
                 player.sendMessage(lang.get(player, "ignore.list_header"));
-                for (UUID uuid : ignored) {
-                    Player ignoredPlayer = plugin.getServer().getPlayer(uuid);
-                    String name = ignoredPlayer != null ? ignoredPlayer.getName() : "Unknown";
+                for (Map.Entry<UUID, String> entry : ignored.entrySet()) {
+                    String name = entry.getValue();
+                    Player online = plugin.getServer().getPlayer(entry.getKey());
+                    if (online != null) name = online.getName();
 
                     Map<String, String> placeholders = new HashMap<>();
                     placeholders.put("player", name);
@@ -60,11 +61,11 @@ public class IgnoreCommand extends Command {
         }
 
         UUID targetUuid = target.getUniqueId();
-        plugin.getUserManager().getRepository().getIgnoredPlayers(playerUuid).thenAccept(ignored -> {
+        plugin.getUserManager().getIgnoredPlayers(playerUuid).thenAccept(ignored -> {
             boolean isIgnoring = ignored.contains(targetUuid);
 
             if (isIgnoring) {
-                plugin.getUserManager().getRepository().removeIgnoredPlayer(playerUuid, targetUuid)
+                plugin.getUserManager().removeIgnoredPlayer(playerUuid, targetUuid)
                         .thenRun(() -> {
                             Map<String, String> placeholders = new HashMap<>();
                             placeholders.put("player", target.getName());
@@ -72,7 +73,7 @@ public class IgnoreCommand extends Command {
                             plugin.debug(player.getName() + " unignored " + target.getName());
                         });
             } else {
-                plugin.getUserManager().getRepository().addIgnoredPlayer(playerUuid, targetUuid, target.getName())
+                plugin.getUserManager().addIgnoredPlayer(playerUuid, targetUuid, target.getName())
                         .thenRun(() -> {
                             Map<String, String> placeholders = new HashMap<>();
                             placeholders.put("player", target.getName());

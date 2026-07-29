@@ -42,7 +42,7 @@ public class VanishManager implements Listener {
         player.setMetadata("vanished", new FixedMetadataValue(plugin, true));
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getStateManager().setVanished(player.getUniqueId(), true);
+            plugin.getUserManager().setVanished(player.getUniqueId(), true);
         }
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
@@ -74,7 +74,7 @@ public class VanishManager implements Listener {
         player.removeMetadata("vanished", plugin);
 
         if (plugin.getUserManager() != null) {
-            plugin.getUserManager().getStateManager().setVanished(player.getUniqueId(), false);
+            plugin.getUserManager().setVanished(player.getUniqueId(), false);
         }
 
         for (Player online : plugin.getServer().getOnlinePlayers()) {
@@ -117,7 +117,7 @@ public class VanishManager implements Listener {
             vanishedPlayers.add(joining.getUniqueId());
         }
 
-        if (plugin.getUserManager() != null && plugin.getUserManager().getStateManager().isVanished(joining.getUniqueId())) {
+        if (plugin.getUserManager() != null && plugin.getUserManager().isVanished(joining.getUniqueId())) {
             vanishedPlayers.add(joining.getUniqueId());
         }
 

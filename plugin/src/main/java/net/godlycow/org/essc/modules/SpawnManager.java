@@ -163,7 +163,7 @@ public class SpawnManager implements Listener {
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
             if (plugin.getUserManager() != null) {
-                plugin.getUserManager().getCooldownManager().setSpawnLastTeleport(player.getUniqueId(), System.currentTimeMillis() / 1000L);
+                plugin.getUserManager().setSpawnLastTeleport(player.getUniqueId(), System.currentTimeMillis() / 1000L);
             }
 
             player.sendMessage(plugin.getLanguageManager().get(player, "spawn.success"));

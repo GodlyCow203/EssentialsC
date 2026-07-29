@@ -482,7 +482,7 @@ public class DumpSectionCollector {
             entry.put("muted", muted);
 
             if (plugin.getUserManager() != null) {
-                entry.put("tpaBlocked", plugin.getUserManager().getStateManager().isTpaBlocked(player.getUniqueId()));
+                entry.put("tpaBlocked", plugin.getUserManager().isTpaBlocked(player.getUniqueId()));
             }
 
             playerEntries.add(entry);

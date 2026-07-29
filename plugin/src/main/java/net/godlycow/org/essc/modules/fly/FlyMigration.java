@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.modules.fly;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.storage.user.UserDatabase;
 import net.godlycow.org.essc.storage.user.UserProfile;
 
 import java.io.BufferedReader;
@@ -35,10 +34,8 @@ public class FlyMigration {
 
         plugin.getLogger().info("[FlyMigration] Migrating " + uuids.size() + " flying player(s) to the user database...");
 
-        UserDatabase userDatabase = (UserDatabase) plugin.getUserManager().getRepository();
-
         CompletableFuture<?>[] futures = uuids.stream()
-                .map(uuid -> migratePlayer(userDatabase, uuid))
+                .map(uuid -> migratePlayer(uuid))
                 .toArray(CompletableFuture[]::new);
 
         CompletableFuture.allOf(futures).thenRun(() -> {
@@ -50,17 +47,20 @@ public class FlyMigration {
         });
     }
 
-    private CompletableFuture<Void> migratePlayer(UserDatabase userDatabase, UUID uuid) {
+    private CompletableFuture<Void> migratePlayer(UUID uuid) {
         UserProfile cached = plugin.getUserManager().getCachedProfile(uuid);
         if (cached != null) {
             cached.setFlyEnabled(true);
             return plugin.getUserManager().saveAsync(cached).thenApply(r -> null);
         }
 
-        return userDatabase.updateFlyEnabled(uuid, true).thenCompose(updated -> {
-            if (!updated) {
-                plugin.debug("[FlyMigration] No user row found for " + uuid + ", skipping.");
+        return plugin.getUserManager().findProfile(uuid).thenCompose(profile -> {
+            if (profile != null) {
+                profile.setFlyEnabled(true);
+                profile.setUpdatedAt(System.currentTimeMillis() / 1000L);
+                return plugin.getUserManager().saveAsync(profile).thenApply(r -> null);
             }
+            plugin.debug("[FlyMigration] No user row found for " + uuid + ", skipping.");
             return CompletableFuture.completedFuture(null);
         });
     }

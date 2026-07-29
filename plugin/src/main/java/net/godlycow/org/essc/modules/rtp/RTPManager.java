@@ -427,7 +427,7 @@ public class RTPManager {
                         rtpInProgress.remove(player.getUniqueId());
 
                         if (plugin.getUserManager() != null) {
-                            plugin.getUserManager().getCooldownManager()
+                            plugin.getUserManager()
                                     .setRtpLastUsed(player.getUniqueId(), System.currentTimeMillis() / 1000L);
                         }
 

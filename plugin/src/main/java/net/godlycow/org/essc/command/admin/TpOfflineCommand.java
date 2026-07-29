@@ -46,7 +46,7 @@ public class TpOfflineCommand extends Command {
             return true;
         }
 
-        userManager.getRepository().findByUuid(target.getUniqueId()).thenAccept(profile -> {
+        userManager.findProfile(target.getUniqueId()).thenAccept(profile -> {
             if (profile == null) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", targetName);

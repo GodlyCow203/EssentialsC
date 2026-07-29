@@ -46,7 +46,7 @@ public class ReplyCommand extends Command {
             return true;
         }
 
-        plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
+        plugin.getUserManager().getIgnoredPlayers(target.getUniqueId())
                 .thenCompose(targetIgnored -> {
                     if (targetIgnored.contains(playerSender.getUniqueId())) {
                         plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
@@ -54,7 +54,7 @@ public class ReplyCommand extends Command {
                         );
                         return null;
                     }
-                    return plugin.getUserManager().getRepository().getIgnoredPlayers(playerSender.getUniqueId());
+                    return plugin.getUserManager().getIgnoredPlayers(playerSender.getUniqueId());
                 })
                 .thenAccept(senderIgnored -> {
                     if (senderIgnored == null) {

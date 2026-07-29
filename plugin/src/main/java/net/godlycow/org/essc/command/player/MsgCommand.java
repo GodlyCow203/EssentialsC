@@ -54,7 +54,7 @@ public class MsgCommand extends Command {
         }
 
         Player finalSenderPlayer = senderPlayer;
-        plugin.getUserManager().getRepository().getIgnoredPlayers(target.getUniqueId())
+        plugin.getUserManager().getIgnoredPlayers(target.getUniqueId())
                 .thenCompose(targetIgnored -> {
                     if (targetIgnored.contains(finalSenderPlayer.getUniqueId())) {
                         plugin.getServer().getGlobalRegionScheduler().run(plugin, task ->
@@ -62,7 +62,7 @@ public class MsgCommand extends Command {
                         );
                         return null;
                     }
-                    return plugin.getUserManager().getRepository().getIgnoredPlayers(finalSenderPlayer.getUniqueId());
+                    return plugin.getUserManager().getIgnoredPlayers(finalSenderPlayer.getUniqueId());
                 })
                 .thenAccept(senderIgnored -> {
                     if (senderIgnored == null) {
