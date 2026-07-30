@@ -59,6 +59,15 @@ public class HomeDatabase {
         plugin.debug("Home database tables initialized.");
     }
 
+    public CompletableFuture<Integer> getTotalHomeCount() {
+        return database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM homes")) {
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        });
+    }
+
     public CompletableFuture<Integer> getHomeCount(UUID uuid) {
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(

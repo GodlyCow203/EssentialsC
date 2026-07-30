@@ -43,7 +43,12 @@ public class EconomyManager implements EconomyService, Listener {
         try {
             database.connect();
             createTables();
-            plugin.debug("EconomyManager initialized");
+            database.async(conn -> {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM economy")) {
+                    ResultSet rs = stmt.executeQuery();
+                    return rs.next() ? rs.getInt(1) : 0;
+                }
+            }).thenAccept(count -> plugin.debug("EconomyManager initialized (" + count + " accounts)"));
         } catch (Exception e) {
             plugin.getLogger().severe("Failed to initialize economy database: " + e.getMessage());
         }

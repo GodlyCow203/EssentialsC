@@ -20,7 +20,7 @@ public class HomeManager {
         this.plugin = plugin;
         this.repository = new HomeDatabase(plugin);
         this.teleportHandler = new TeleportHandler(plugin, repository);
-        plugin.debug("HomeManager initialized.");
+        repository.getTotalHomeCount().thenAccept(count -> plugin.debug("HomeManager initialized (" + count + " homes)"));
     }
 
     public int getMaxHomes(Player player) {

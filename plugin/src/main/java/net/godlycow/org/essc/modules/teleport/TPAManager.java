@@ -49,6 +49,7 @@ public class TPAManager implements Listener {
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         startCleanupTask();
+        plugin.debug("TPA Manager initialized");
     }
 
     public void reload() {

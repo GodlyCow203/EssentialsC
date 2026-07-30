@@ -57,7 +57,12 @@ public class NickManager implements Listener {
              )) {
             stmt.execute();
         }
-        plugin.debug("Nick database tables initialized");
+        database.async(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM nicknames")) {
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }).thenAccept(count -> plugin.debug("Nick database tables initialized (" + count + " nicknames)"));
     }
 
     public CompletableFuture<Optional<String>> getNickname(UUID uuid) {

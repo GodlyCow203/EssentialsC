@@ -22,6 +22,7 @@ public class PunishmentManager {
         this.banFile = new File(plugin.getDataFolder(), "bans.yml");
         this.muteFile = new File(plugin.getDataFolder(), "mutes.yml");
         loadFiles();
+        plugin.debug("PunishmentManager initialized (" + getActiveBans().size() + " active bans, " + getActiveIpBans().size() + " IP bans, " + getAllMutes().size() + " total mutes)");
     }
 
     public void setNetworkHook(NetworkPunishmentHook hook) {

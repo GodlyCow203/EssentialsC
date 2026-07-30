@@ -22,6 +22,7 @@ public class FlyManager implements Listener {
         this.restoreOnJoin = plugin.getConfigManager().isFlyRestoreOnJoin();
         this.disableOnJoin = plugin.getConfigManager().isFlyDisableOnJoin();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        plugin.debug("Fly Manager initialized");
     }
 
     public void reload() {

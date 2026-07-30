@@ -153,8 +153,13 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (getUserManager() != null) {
-            getUserManager().loadProfile(player.getUniqueId(), player.getName());
+        if (getUserManager() != null) { //Set player language
+            getUserManager().loadProfile(player.getUniqueId(), player.getName()).thenAccept(profile -> {
+                String lang = profile.getLanguageCode();
+                if (lang != null && !lang.isEmpty()) {
+                    getLanguageManager().setPlayerLanguage(player.getUniqueId(), lang);
+                }
+            });
         }
         getHomeManager().getHomes(player.getUniqueId());
         if (homeNotificationManager != null) {

@@ -28,6 +28,7 @@ public class VanishManager implements Listener {
         this.vanishedPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
         loadConfig();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        plugin.debug("Vanish Manager initialized");
     }
 
     public void loadConfig() {

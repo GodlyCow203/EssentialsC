@@ -2,6 +2,7 @@ package net.godlycow.org.essc.language;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.storage.user.UserProfile;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -80,12 +81,26 @@ public class LanguageCommand extends Command {
         }
 
         plugin.getLanguageManager().setPlayerLanguage(player.getUniqueId(), langCode);
+
+        UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+        if (profile != null) {
+            profile.setLanguageCode(langCode);
+            plugin.getUserManager().saveAsync(profile); //save language to db
+        }
+
         player.sendMessage(lang.get(player, "language.set.success", Map.of("language", langCode)));
         plugin.debug("Player " + player.getName() + " set language to: " + langCode);
     }
 
     private void resetLanguage(Player player) {
         plugin.getLanguageManager().removePlayerLanguage(player.getUniqueId());
+
+        UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+        if (profile != null) {
+            profile.setLanguageCode(null);
+            plugin.getUserManager().saveAsync(profile);// same thing here
+        }
+
         player.sendMessage(lang.get(player, "language.reset.success", Map.of("language", player.locale().toString())));
         plugin.debug("Player " + player.getName() + " reset language to auto");
     }

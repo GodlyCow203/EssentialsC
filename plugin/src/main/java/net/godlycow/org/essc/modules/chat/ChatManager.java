@@ -32,6 +32,7 @@ public class ChatManager implements Listener {
         this.mentionHandler = new MentionHandler(plugin);
         reload();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        plugin.debug("Chat Manager initialized");
     }
 
     public void reload() {
