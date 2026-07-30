@@ -92,9 +92,12 @@ public class UserStore {
         this.database = new Database(plugin, "users.db");
         initialize();
         UserDataMigration migration = new UserDataMigration(plugin, this);
-        migration.backupDatabase();
-        runMigration();
         UserDataMigration.MigrationStatus status = migration.checkStatus();
+        if (status.needsMigration() && status.hasData()) {
+            migration.backupDatabase();
+        }
+        runMigration();
+        status = migration.checkStatus();
         plugin.debug("[UserStore] DB v" + status.schemaVersion() + ", " + status.userCount() + " users, "
                 + status.ignoredCount() + " ignored, " + status.ipCount() + " ip history entries.");
     }
