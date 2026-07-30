@@ -128,7 +128,6 @@ public final class PluginLoader {
         plugin.setBackManager(new BackManager(plugin));
         plugin.setKitManager(new KitManager(plugin));
         plugin.setVanishManager(new VanishManager(plugin));
-        plugin.setPunishmentManager(new PunishmentManager(plugin));
         plugin.setReplyManager(new ReplyManager());
         if (plugin.getConfigManager().isChatSystemEnabled()) {
             plugin.setChatManager(new ChatManager(plugin));
@@ -136,6 +135,7 @@ public final class PluginLoader {
             plugin.getLogger().info("Chat system is disabled in config.");
         }
         plugin.setUserManager(new UserManager(plugin));
+        plugin.setPunishmentManager(new PunishmentManager(plugin));
         plugin.setFlyManager(new FlyManager(plugin));
         new FlyMigration(plugin).runIfNeeded();
         new IpHistoryMigration(plugin).runIfNeeded();

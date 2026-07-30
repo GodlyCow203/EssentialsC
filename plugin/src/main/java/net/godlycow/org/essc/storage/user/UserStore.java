@@ -3,13 +3,20 @@ package net.godlycow.org.essc.storage.user;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 public class UserStore {
     private final Database database;
@@ -81,6 +88,39 @@ public class UserStore {
             );
             """;
 
+    private static final String CREATE_PUNISHMENT_BANS_TABLE = """
+            CREATE TABLE IF NOT EXISTS punishment_bans (
+                uuid TEXT PRIMARY KEY,
+                name TEXT,
+                reason TEXT,
+                banner TEXT,
+                time INTEGER DEFAULT 0,
+                expires INTEGER DEFAULT 0
+            );
+            """;
+
+    private static final String CREATE_PUNISHMENT_IP_BANS_TABLE = """
+            CREATE TABLE IF NOT EXISTS punishment_ip_bans (
+                ip TEXT PRIMARY KEY,
+                reason TEXT,
+                banner TEXT,
+                time INTEGER DEFAULT 0,
+                expires INTEGER DEFAULT 0
+            );
+            """;
+
+    private static final String CREATE_PUNISHMENT_MUTES_TABLE = """
+            CREATE TABLE IF NOT EXISTS punishment_mutes (
+                uuid TEXT PRIMARY KEY,
+                name TEXT,
+                reason TEXT,
+                muter TEXT,
+                time INTEGER DEFAULT 0,
+                expires INTEGER DEFAULT 0,
+                offline_notification BOOLEAN DEFAULT 0
+            );
+            """;
+
     private static final String CREATE_SCHEMA_VERSION_TABLE = """
             CREATE TABLE IF NOT EXISTS _schema_version (
                 version INTEGER PRIMARY KEY
@@ -113,6 +153,9 @@ public class UserStore {
             stmt.execute(CREATE_IGNORED_TABLE);
             stmt.execute(CREATE_IP_HISTORY_TABLE);
             stmt.execute(CREATE_INVENTORY_TABLE);
+            stmt.execute(CREATE_PUNISHMENT_BANS_TABLE);
+            stmt.execute(CREATE_PUNISHMENT_IP_BANS_TABLE);
+            stmt.execute(CREATE_PUNISHMENT_MUTES_TABLE);
         } catch (SQLException e) {
             throw new RuntimeException("Failed to initialize user database", e);
         }
@@ -134,12 +177,113 @@ public class UserStore {
 
     private void migrate(Connection conn, int fromVersion) throws SQLException {
         if (fromVersion < 1) {
+
             try (Statement stmt = conn.createStatement()) {
                 stmt.execute(CREATE_USERS_TABLE);
                 stmt.execute(CREATE_IGNORED_TABLE);
                 stmt.execute(CREATE_IP_HISTORY_TABLE);
                 stmt.execute(CREATE_INVENTORY_TABLE);
+                stmt.execute(CREATE_PUNISHMENT_BANS_TABLE);
+                stmt.execute(CREATE_PUNISHMENT_IP_BANS_TABLE);
+                stmt.execute(CREATE_PUNISHMENT_MUTES_TABLE);
             }
+
+            migrateYamlPunishments(conn);
+        }
+    }
+
+    private void migrateYamlPunishments(Connection conn) throws SQLException {
+        File banFile = new File(plugin.getDataFolder(), "bans.yml");
+        File muteFile = new File(plugin.getDataFolder(), "mutes.yml");
+
+        int banCount = 0, ipBanCount = 0, muteCount = 0;
+        try {
+            if (banFile.exists()) {
+                FileConfiguration banConfig = YamlConfiguration.loadConfiguration(banFile);
+                if (banConfig.contains("players")) {
+                    for (String key : banConfig.getConfigurationSection("players").getKeys(false)) {
+                        try {
+
+                            UUID uuid = UUID.fromString(key);
+                            String path = "players." + key; //get bans
+                            try (PreparedStatement stmt = conn.prepareStatement(
+                                    "INSERT OR IGNORE INTO punishment_bans (uuid, name, reason, banner, time, expires) VALUES (?, ?, ?, ?, ?, ?)")) {
+                                stmt.setString(1, uuid.toString());
+                                stmt.setString(2, banConfig.getString(path + ".name"));
+                                stmt.setString(3, banConfig.getString(path + ".reason"));
+                                stmt.setString(4, banConfig.getString(path + ".banner"));
+                                stmt.setLong(5, banConfig.getLong(path + ".time"));
+                                stmt.setLong(6, banConfig.getLong(path + ".expires"));
+                                banCount += stmt.executeUpdate();
+                            }
+
+                        } catch (IllegalArgumentException ignored) {
+
+                        }
+                    }
+                }
+                if (banConfig.contains("ips")) {
+
+                    for (String key : banConfig.getConfigurationSection("ips").getKeys(false)) {
+                        String path = "ips." + key; // ips
+                        String originalIp = banConfig.getString(path + ".ip", key.replace('_', '.'));
+                        try (PreparedStatement stmt = conn.prepareStatement(
+                                "INSERT OR IGNORE INTO punishment_ip_bans (ip, reason, banner, time, expires) VALUES (?, ?, ?, ?, ?)")) {
+                            stmt.setString(1, originalIp);
+                            stmt.setString(2, banConfig.getString(path + ".reason"));
+                            stmt.setString(3, banConfig.getString(path + ".banner"));
+                            stmt.setLong(4, banConfig.getLong(path + ".time"));
+                            stmt.setLong(5, banConfig.getLong(path + ".expires"));
+
+                            ipBanCount += stmt.executeUpdate(); //update bd
+                        }
+                    }
+                }
+            }
+            if (muteFile.exists()) {
+                FileConfiguration muteConfig = YamlConfiguration.loadConfiguration(muteFile);
+
+                for (String key : muteConfig.getKeys(false )) {
+                    try {
+                        UUID uuid = UUID.fromString(key);
+                        try (PreparedStatement stmt = conn.prepareStatement(
+                                "INSERT OR IGNORE INTO punishment_mutes (uuid, name, reason, muter, time, expires, offline_notification) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                            stmt.setString(1, uuid.toString());
+                            stmt.setString(2, muteConfig.getString(key + ".name"));
+                            stmt.setString(3, muteConfig.getString(key + ".reason"));
+                            stmt.setString(4, muteConfig.getString(key + ".muter"));
+                            stmt.setLong(5, muteConfig.getLong(key + ".time"));
+                            stmt.setLong(6, muteConfig.getLong(key + ".expires"));
+                            stmt.setBoolean(7, muteConfig.getBoolean(key + ".offline_notification", false));
+                            muteCount += stmt.executeUpdate();
+                        }
+                    } catch (IllegalArgumentException ignored) {}
+                }
+            }
+            //, add ".backup" and move to backups folder
+            if (banFile.exists() || muteFile.exists()) {
+
+                String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+                File backupDir = new File(plugin.getDataFolder(), "backups");
+                backupDir.mkdirs();
+
+                if (banFile.exists()) {
+                    File backup = new File(backupDir, "bans-" + timestamp + ".yml.backup");
+                    Files.copy(banFile.toPath(), backup.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    banFile.delete();
+                }
+                if (muteFile.exists()) {
+                    File backup = new File(backupDir, "mutes-" + timestamp + ".yml.backup");
+                    Files.copy(muteFile.toPath(), backup.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    muteFile.delete();
+                }
+            }
+
+        } catch (IOException e) {
+            throw new SQLException("Failed to migrate YAML punishments", e);
+        }
+        if (banCount > 0 || ipBanCount > 0 || muteCount > 0) {
+            plugin.getLogger().info("[UserStore] Migrated " + banCount + " bans, " + ipBanCount + " IP bans, " + muteCount + " mutes from YAML to database");
         }
     }
 
