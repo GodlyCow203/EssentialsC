@@ -22,7 +22,7 @@ public class UserStore {
     private final Database database;
     private final EssentialsC plugin;
 
-    private static final int SCHEMA_VERSION = 1;
+    private static final int SCHEMA_VERSION = 2;
 
 
     // create all tables for the user db
@@ -189,6 +189,33 @@ public class UserStore {
             }
 
             migrateYamlPunishments(conn);
+        }
+        if (fromVersion < 2) {
+            clearLegacyDefaultLanguageCodes(conn);
+        }
+    }
+
+    private void clearLegacyDefaultLanguageCodes(Connection conn) throws SQLException {
+        boolean hasLanguageColumn = false;
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("PRAGMA table_info(users)")) {
+            while (rs.next()) {
+                if ("language_code".equals(rs.getString("name"))) {
+                    hasLanguageColumn = true;
+                    break;
+                }
+            }
+        }
+        if (!hasLanguageColumn) {
+            plugin.getLogger().warning("[UserStore] users table has no language_code column, skipping legacy language cleanup");
+            return;
+        }
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE users SET language_code = NULL WHERE language_code = ?")) {
+            stmt.setString(1, "en_US");
+            int cleared = stmt.executeUpdate();
+            if (cleared > 0) {
+                plugin.getLogger().info("[UserStore] Cleared legacy default language codes for " + cleared + " player(s)");
+            }
         }
     }
 

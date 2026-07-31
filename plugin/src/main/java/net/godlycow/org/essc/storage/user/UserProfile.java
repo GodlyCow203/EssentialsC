@@ -41,7 +41,7 @@ public class UserProfile {
         this.uuid = Objects.requireNonNull(uuid, "uuid");
         this.username = Objects.requireNonNull(username, "username");
         this.lastKnownName = username;
-        this.languageCode = "en_US";
+        this.languageCode = null;
     }
 
     public static UserProfile createDefault(UUID uuid, String username, long timestamp) {
