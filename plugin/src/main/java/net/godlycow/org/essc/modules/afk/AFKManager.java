@@ -188,11 +188,9 @@ public class AFKManager implements Listener {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", player.getName());
 
-                Component message = plugin.getLanguageManager().get(player, "afk.broadcast.enter", placeholders);
-
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (!online.getUniqueId().equals(uuid)) {
-                        online.sendMessage(message);
+                        online.sendMessage(plugin.getLanguageManager().get(online, "afk.broadcast.enter", placeholders));// use the receivers language instead of the afks player language
                     }
                 }
             }
@@ -210,11 +208,9 @@ public class AFKManager implements Listener {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", player.getName());
 
-                Component message = plugin.getLanguageManager().get(player, "afk.broadcast.leave", placeholders);
-
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     if (!online.getUniqueId().equals(uuid)) {
-                        online.sendMessage(message);
+                        online.sendMessage(plugin.getLanguageManager().get(online, "afk.broadcast.leave", placeholders));// same thing as above
                     }
                 }
             }

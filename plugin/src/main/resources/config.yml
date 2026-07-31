@@ -407,13 +407,11 @@ tpa:
 # Homes
 
 home:
-  # The home name used when no name argument is given in command mode,
-  # and for the quick-create button in GUI mode.
+  # The home name used when no name argument is given in command mode
   default-name: home
 
   # The home name to teleport to when typing /home with no arguments.
   # Set to "" (empty) to show the home list instead.
-  # This overrides GUI mode — players will teleport directly.
   default-teleport-name: ""
 
   # The default maximum number of homes a player can set.
