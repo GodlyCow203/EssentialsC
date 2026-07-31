@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.command;
 
+import net.godlycow.org.essc.CommandRegistration;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.modules.backup.BackupManager;
 import net.godlycow.org.essc.command.admin.DumpCommand;
@@ -17,6 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 @SuppressWarnings("ALL")
 public class EsscCommand extends Command {
@@ -229,6 +231,20 @@ public class EsscCommand extends Command {
                 plugin.debug("Placeholders page " + page + " listed by " + sender.getName());
             }
 
+            case "commands" -> {
+                int page = 1;
+                if (args.length >= 2) {
+                    try {
+                        page = Integer.parseInt(args[1]);
+                    } catch (NumberFormatException ignored) {
+                        sender.sendMessage(lang.get(sender, "essc.commands.invalid_page"));
+                        return true;
+                    }
+                }
+                sendCommandPage(sender, page);
+                plugin.debug("Commands page " + page + " listed by " + sender.getName());
+            }
+
             case "help" -> showHelp(sender);
 
 
@@ -350,6 +366,49 @@ public class EsscCommand extends Command {
         }
     }
 
+
+    private void sendCommandPage(CommandSender sender, int requestedPage) {
+        List<String> all = CommandRegistration.getEssentialsCCommands();
+        PaginatedList<String> paginated = new PaginatedList<>(all, 10);
+
+        int page = paginated.clamp(requestedPage);
+
+        if (!paginated.isValidPage(requestedPage)) {
+            sender.sendMessage(lang.get(sender, "essc.commands.invalid_page"));
+            return;
+        }
+
+        sender.sendMessage(lang.get(sender, "essc.commands.header", Map.of(
+                "page", String.valueOf(page),
+                "total_pages", String.valueOf(paginated.getTotalPages())
+        )));
+
+        for (String cmd : paginated.getPage(page)) {
+            sender.sendMessage(MM.deserialize("<color:#AAAAAA>• </color><color:#FFFFFF>/" + cmd + "</color>"));
+        }
+
+        sender.sendMessage(lang.get(sender, "essc.commands.footer", Map.of(
+                "count", String.valueOf(all.size()),
+                "page", String.valueOf(page),
+                "total_pages", String.valueOf(paginated.getTotalPages())
+        )));
+
+        if (sender instanceof Player) {
+            boolean hasPrev = paginated.hasPreviousPage(page);
+            boolean hasNext = paginated.hasNextPage(page);
+
+            if (hasPrev || hasNext) {
+                Map<String, String> navPlaceholders = Map.of(
+                        "prev_page", String.valueOf(page - 1),
+                        "next_page", String.valueOf(page + 1),
+                        "has_prev", String.valueOf(hasPrev),
+                        "has_next", String.valueOf(hasNext)
+                );
+                sender.sendMessage(lang.get(sender, "essc.commands.navigation", navPlaceholders));
+            }
+        }
+    }
+
     private void showHelp(CommandSender sender) {
         sender.sendMessage(lang.get(sender, "essc.help.header"));
         sender.sendMessage(lang.get(sender, "essc.help.reload"));
@@ -357,12 +416,13 @@ public class EsscCommand extends Command {
         sender.sendMessage(lang.get(sender, "essc.help.version"));
         sender.sendMessage(lang.get(sender, "essc.help.debug"));
         sender.sendMessage(lang.get(sender, "essc.help.placeholders"));
+        sender.sendMessage(lang.get(sender, "essc.help.commands"));
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders", "dump"), args[0]);
+            return filter(List.of("reload", "backup", "version", "debug", "help", "placeholders", "commands", "dump"), args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("placeholders")) {
             if (plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
@@ -370,6 +430,13 @@ public class EsscCommand extends Command {
             }
             int totalPages = new PaginatedList<>(PlaceholderHook.getAllPlaceholders(), PLACEHOLDERS_PER_PAGE).getTotalPages();
             return java.util.stream.IntStream.rangeClosed(1, totalPages)
+                    .mapToObj(String::valueOf)
+                    .filter(n -> n.startsWith(args[1]))
+                    .toList();
+        }
+        if (args.length == 2 && args[0].equalsIgnoreCase("commands")) {
+            int totalPages = new PaginatedList<>(CommandRegistration.getEssentialsCCommands(), 10).getTotalPages();
+            return IntStream.rangeClosed(1, totalPages)
                     .mapToObj(String::valueOf)
                     .filter(n -> n.startsWith(args[1]))
                     .toList();

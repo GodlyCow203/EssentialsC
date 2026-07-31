@@ -80,6 +80,17 @@ public class CommandRegistration {
         knownCommands.put(alias.toLowerCase(), command);
     }
 
+    public static List<String> getEssentialsCCommands() {
+        initReflection();
+        if (knownCommands == null) return List.of();
+        return knownCommands.values().stream()
+                .filter(cmd -> cmd instanceof PluginCommand pc && pc.getPlugin() instanceof EssentialsC)
+                .map(Command::getName)
+                .distinct()
+                .sorted()
+                .toList();
+    }
+
     public static void syncCommands() {
         EssentialsC plugin = JavaPlugin.getPlugin(EssentialsC.class);
         plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, ignored -> {

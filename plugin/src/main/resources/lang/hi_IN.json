@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>वर्तमान भाषा: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(स्वचालित पहचान)</color>",
@@ -806,6 +806,11 @@
   "essc.placeholders.invalid_page": "<prefix> <color:#FF0000>अमान्य पृष्ठ संख्या।</color>",
   "essc.placeholders.navigation": "<prefix> <color:#FFF200><click:run_command:/essc placeholders <prev_page>>« पिछला</click></color> <color:#AAAAAA>|</color> <color:#FFF200><click:run_command:/essc placeholders <next_page>>अगला »</click></color>",
   "essc.help.placeholders": "<prefix> <color:#FFF200>/essc placeholders <page> <color:#666666>-</color> <#FFFFFF>सभी उपलब्ध प्लेसहोल्डर्स की सूची",
+  "essc.commands.header": "<prefix> <color:#FFF200>=== EssentialsC Commands ===</color> <color:#AAAAAA>(Page <page>/<total_pages>)</color>",
+  "essc.commands.footer": "<prefix> <color:#AAAAAA>Total: <color:#FFFFFF><count></color> commands — use <color:#FFFFFF>/essc commands <page></color> to navigate</color>",
+  "essc.commands.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",
+  "essc.commands.navigation": "<prefix> <color:#FFF200><click:run_command:/essc commands <prev_page>>« Previous</click></color> <color:#AAAAAA>|</color> <color:#FFF200><click:run_command:/essc commands <next_page>>Next »</click></color>",
+  "essc.help.commands": "<prefix> <color:#FFF200>/essc commands <page> <color:#666666>-</color> <#FFFFFF>List all available commands",
   "essc.backup.create.starting": "<prefix> <color:#FFF200>बैकअप बना रहे हैं, कृपया इंतजार करें...</color>",
   "essc.backup.create.success": "<prefix> <color:#FFF200>बैकअप सफलतापूर्वक बनाया गया: <color:#FFFFFF><name></color></color>",
   "essc.backup.create.failed": "<prefix> <color:#FF0000>बैकअप विफल: <color:#FFFFFF><error></color></color>",
