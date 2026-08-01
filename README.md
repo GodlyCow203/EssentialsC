@@ -22,7 +22,7 @@ A modern, actively maintained alternative to EssentialsX — built for servers t
 
 EssentialsC is a high-performance Bukkit plugin designed for modern Minecraft servers. It covers all the essentials — Kits, Homes, Warps, Shops, Wild Teleports, and much more — while staying current with every new Minecraft release, something EssentialsX has long struggled with.
 
-Full compatibility with **Minecraft 1.17–1.21+** across all major server platforms.
+Full compatibility with **Minecraft 1.20.6–1.21+** across all major server platforms.
 
 ---
 
@@ -41,7 +41,7 @@ Thank you for supporting EssentialsC!
 
 ## Features
 
-- **70+ fully configurable commands** — every command is manageable via `commands.yml`
+- **90+ fully configurable commands** — every command is manageable via `commands.yml`
 - **Rich plugin integrations** — works out of the box with [TAB](https://www.spigotmc.org/resources/tab.57806/), [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/), [LuckPerms](https://luckperms.net/download), [Vault](https://www.spigotmc.org/resources/vault.34315/), [Floodgate](https://geysermc.org/download/?project=floodgate), and [DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/)
 - **EssentialsX migration tool** — run `/migration essentialsx <flags>` to migrate your existing data
 - **Weekly updates** — new releases every week on Modrinth
