@@ -157,6 +157,7 @@ public class ScoreboardManager implements Listener {
                 stop();
 
                 placeholderCache.clear();
+                plugin.getConfigManager().reload();
                 loadConfig();
 
                 Iterator<Map.Entry<UUID, PlayerScoreboard>> it = boards.entrySet().iterator();
