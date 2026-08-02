@@ -12,6 +12,10 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,7 +41,11 @@ public class BanListener implements Listener {
                 Map<String, String> placeholders = Map.of(
                         "reason", banEntry.reason(),
                         "banner", banEntry.banner(),
-                        "duration", formatDuration(banEntry.expires())
+                        "duration", formatDuration(banEntry.expires()),
+                        "player", banEntry.name(),
+                        "date", LocalDateTime.ofInstant(Instant.ofEpochMilli(banEntry.time()), ZoneId.systemDefault())
+                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        "id", banEntry.id()
                 );
                 kickMessage = plugin.getLanguageManager().get(null, "ban.screen_message", placeholders);
             } else {

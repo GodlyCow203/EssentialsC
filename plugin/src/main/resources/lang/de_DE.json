@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Aktuelle Sprache: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(automatisch erkannt)</color>",
@@ -557,7 +557,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>Dieser Spieler kann nicht gebannt werden.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>wurde dauerhaft von</color> <color:#FFFFFF><banner></color> <color:#FF0000>gebannt für:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>wurde für <color:#FFFFFF><duration></color> von</color> <color:#FFFFFF><banner></color> <color:#FF0000>gebannt für:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>Du bist von diesem Server gebannt!</color>\n\n<color:#AAAAAA>Grund:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>Gebannt von:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>Dauer:</color> <color:#FFF200><duration></color>",
+  "ban.screen_message": "<#F54927>Verbindung fehlgeschlagen zu: <#FFFFFF>Server</#FFFFFF>\n<#A3A3A3>»<#595959>»<#A3A3A3>»</#A3A3A3> <#FFFFFF><bold>Netzwerk</bold></#FFFFFF> <#A3A3A3>«<#595959>«<#A3A3A3>«</#A3A3A3>\n<#F54927><italic>Konto gesperrt</italic></#F54927>\n\n<#A3A3A3>Konto</#A3A3A3> <#595959>»</#595959> <#FFFFFF><player></#FFFFFF>\n<#A3A3A3>Gebannt</#A3A3A3> <#595959>»</#595959> <#FFFFFF><date></#FFFFFF>\n<#A3A3A3>Bann-ID</#A3A3A3> <#595959>»</#595959> <#FFFFFF><id></#FFFFFF>\n<#A3A3A3>Grund</#A3A3A3> <#595959>»</#595959> <#FFFFFF><reason></#FFFFFF>\n\n<#F54927>Du bist permanent gebannt!</#F54927>\n<#A3A3A3>Berufung: <#FFFFFF><underlined>discord.gg/yourlink</#FFFFFF>",
   "ban.default_reason": "Verstoß gegen Serverregeln",
   "command.usage.ban": "<prefix> <color:#FF0000>Verwendung: /ban <Spieler> [-t:Dauer] [Grund]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> wurde gebannt. <count> Spieler gekickt</color>",

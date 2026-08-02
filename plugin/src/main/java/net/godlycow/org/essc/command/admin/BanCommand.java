@@ -8,6 +8,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BanCommand extends Command {
@@ -69,13 +71,16 @@ public class BanCommand extends Command {
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
         plugin.debug("Banning " + target.getName() + " by " + sender.getName() + " for: " + reason + " expires: " + expires);
 
-        punishmentManager.banPlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
+        PunishmentManager.BanEntry banEntry = punishmentManager.banPlayer(target.getUniqueId(), target.getName(), reason, sender.getName(), expires);
 
         if (target.isOnline() && target.getPlayer() != null) {
             target.getPlayer().kick(lang.get(target.getPlayer(), "ban.screen_message", Map.of(
                     "reason",   reason,
                     "banner",   sender.getName(),
-                    "duration", DurationParser.format(duration)
+                    "duration", DurationParser.format(duration),
+                    "player",   target.getName(),
+                    "date",     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                    "id",       banEntry.id()
             )));
         }
 

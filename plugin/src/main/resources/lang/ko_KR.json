@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>현재 언어: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(자동 감지)</color>",
@@ -557,7 +557,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>이 플레이어는 차단할 수 없습니다.</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>이(가)</color> <color:#FFFFFF><banner></color> <color:#FF0000>에 의해 영구 차단되었습니다. 사유:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>이(가)</color> <color:#FFFFFF><duration></color> <color:#FF0000>동안</color> <color:#FFFFFF><banner></color> <color:#FF0000>에 의해 차단되었습니다. 사유:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>이 서버에서 차단되었습니다!</color>\n\n<color:#AAAAAA>사유:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>차단자:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>기간:</color> <color:#FFF200><duration></color>",
+  "ban.screen_message": "<#F54927>연결할 수 없음: <#FFFFFF>서버</#FFFFFF>\n<#A3A3A3>»<#595959>»<#A3A3A3>»</#A3A3A3> <#FFFFFF><bold>네트워크</bold></#FFFFFF> <#A3A3A3>«<#595959>«<#A3A3A3>«</#A3A3A3>\n<#F54927><italic>계정 정지</italic></#F54927>\n\n<#A3A3A3>계정</#A3A3A3> <#595959>»</#595959> <#FFFFFF><player></#FFFFFF>\n<#A3A3A3>차단됨</#A3A3A3> <#595959>»</#595959> <#FFFFFF><date></#FFFFFF>\n<#A3A3A3>차단 ID</#A3A3A3> <#595959>»</#595959> <#FFFFFF><id></#FFFFFF>\n<#A3A3A3>사유</#A3A3A3> <#595959>»</#595959> <#FFFFFF><reason></#FFFFFF>\n\n<#F54927>영구 차단되었습니다!</#F54927>\n<#A3A3A3>항소: <#FFFFFF><underlined>discord.gg/yourlink</#FFFFFF>",
   "ban.default_reason": "서버 규칙 위반",
   "command.usage.ban": "<prefix> <color:#FF0000>사용법: /ban <플레이어> [-t:기간] [사유]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color>이(가) 차단되었습니다. <count>명의 플레이어가 추방되었습니다</color>",

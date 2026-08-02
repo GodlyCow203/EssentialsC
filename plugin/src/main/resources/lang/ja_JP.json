@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>現在の言語: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(自動検出)</color>",
@@ -557,7 +557,7 @@
   "ban.exempt": "<prefix> <color:#FF0000>このプレイヤーは BAN できません。</color>",
   "ban.broadcast": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>が</color> <color:#FFFFFF><banner></color> <color:#FF0000>によって永久 BAN されました。理由:</color> <color:#FFFFFF><reason></color>",
   "ban.broadcast_temp": "<prefix> <color:#FFFFFF><target></color> <color:#FF0000>が <color:#FFFFFF><duration></color> 間</color> <color:#FFFFFF><banner></color> <color:#FF0000>によって BAN されました。理由:</color> <color:#FFFFFF><reason></color>",
-  "ban.screen_message": "<color:#FF0000>このサーバーから BAN されています！</color>\n\n<color:#AAAAAA>理由:</color> <color:#FFF200><reason></color>\n<color:#AAAAAA>BAN した人:</color> <color:#FFF200><banner></color>\n<color:#AAAAAA>期間:</color> <color:#FFF200><duration></color>",
+  "ban.screen_message": "<#F54927>接続できません: <#FFFFFF>サーバー</#FFFFFF>\n<#A3A3A3>»<#595959>»<#A3A3A3>»</#A3A3A3> <#FFFFFF><bold>ネットワーク</bold></#FFFFFF> <#A3A3A3>«<#595959>«<#A3A3A3>«</#A3A3A3>\n<#F54927><italic>アカウント停止</italic></#F54927>\n\n<#A3A3A3>アカウント</#A3A3A3> <#595959>»</#595959> <#FFFFFF><player></#FFFFFF>\n<#A3A3A3>BAN済み</#A3A3A3> <#595959>»</#595959> <#FFFFFF><date></#FFFFFF>\n<#A3A3A3>BAN ID</#A3A3A3> <#595959>»</#595959> <#FFFFFF><id></#FFFFFF>\n<#A3A3A3>理由</#A3A3A3> <#595959>»</#595959> <#FFFFFF><reason></#FFFFFF>\n\n<#F54927>あなたは永久BANされています！</#F54927>\n<#A3A3A3>申し立て： <#FFFFFF><underlined>discord.gg/yourlink</#FFFFFF>",
   "ban.default_reason": "サーバールール違反",
   "command.usage.ban": "<prefix> <color:#FF0000>使い方: /ban <player> [-t:duration] [reason]</color>",
   "banip.success": "<prefix> <color:#FFF200>IP <color:#FFFFFF><ip></color> を BAN しました。<count> 人のプレイヤーをキック</color>",

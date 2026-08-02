@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PunishmentManager {
     private final EssentialsC plugin;
@@ -47,12 +48,47 @@ public class PunishmentManager {
 
     private void ensureTables() {//new > create sqlite tables
         try (Connection conn = database.openFreshConnection(); Statement stmt = conn.createStatement()) {
-            stmt.execute("CREATE TABLE IF NOT EXISTS punishment_bans (uuid TEXT PRIMARY KEY, name TEXT, reason TEXT, banner TEXT, time INTEGER DEFAULT 0, expires INTEGER DEFAULT 0)");
+            stmt.execute("CREATE TABLE IF NOT EXISTS punishment_bans (uuid TEXT PRIMARY KEY, id TEXT, name TEXT, reason TEXT, banner TEXT, time INTEGER DEFAULT 0, expires INTEGER DEFAULT 0)");
             stmt.execute("CREATE TABLE IF NOT EXISTS punishment_ip_bans (ip TEXT PRIMARY KEY, reason TEXT, banner TEXT, time INTEGER DEFAULT 0, expires INTEGER DEFAULT 0)");
             stmt.execute("CREATE TABLE IF NOT EXISTS punishment_mutes (uuid TEXT PRIMARY KEY, name TEXT, reason TEXT, muter TEXT, time INTEGER DEFAULT 0, expires INTEGER DEFAULT 0, offline_notification BOOLEAN DEFAULT 0)");
+            migrateBanIdColumn(conn, stmt);
         } catch (SQLException e) {
             plugin.getLogger().severe("Failed to create punishment tables: " + e.getMessage());
         }
+    }
+
+
+    private void migrateBanIdColumn(Connection conn, Statement stmt)
+            throws SQLException {
+
+        //check if id column exists
+        try (ResultSet rs = stmt.executeQuery("PRAGMA table_info(punishment_bans)")) {
+            boolean hasId = false;
+            while (rs.next()) {
+                if ("id".equalsIgnoreCase(rs.getString("name"))) {
+                    hasId = true;
+                    break;
+                }
+            }
+            //if not add column
+            if (!hasId) {
+                stmt.execute("ALTER TABLE punishment_bans ADD COLUMN id TEXT");
+            }
+        }
+        //generate ids for people who dont have one yet
+        try (PreparedStatement upd = conn.prepareStatement("UPDATE punishment_bans SET id = ? WHERE id IS NULL OR id = ''")) {
+            upd.setString(1, generateBanId());
+            upd.executeUpdate();
+        }
+    }
+
+    private String generateBanId() {
+        StringBuilder sb = new StringBuilder("B-");
+        String chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
+        for (int i = 0; i < 6; i++) {
+            sb.append(chars.charAt(ThreadLocalRandom.current().nextInt(chars.length())));
+        }
+        return sb.toString();
     }
 
     private void loadAll() {
@@ -68,7 +104,7 @@ public class PunishmentManager {
                 try {
 
                     UUID uuid = UUID.fromString(rs.getString("uuid"));
-                    bans.put(uuid, new BanEntry(uuid, rs.getString("name"), rs.getString("reason"),
+                    bans.put(uuid, new BanEntry(rs.getString("id"), uuid, rs.getString("name"), rs.getString("reason"),
 
                             rs.getString("banner"), rs.getLong("time"), rs.getLong("expires")));
                 } catch (IllegalArgumentException ignored) {}
@@ -108,19 +144,20 @@ public class PunishmentManager {
         plugin.debug("PunishmentManager initialized (" + bans.size() + " bans, " + ipBans.size() + " IP bans, " + mutes.size() + " mutes)");
     }
 
-    public void banPlayer(UUID uuid, String name, String reason, String banner, long expires) {
+    public BanEntry banPlayer(UUID uuid, String name, String reason, String banner, long expires) {
 
-        BanEntry entry = new BanEntry(uuid, name, reason, banner, System.currentTimeMillis(), expires);
+        BanEntry entry = new BanEntry(generateBanId(), uuid, name, reason, banner, System.currentTimeMillis(), expires);
         bans.put(uuid, entry);
         database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT OR REPLACE INTO punishment_bans (uuid, name, reason, banner, time, expires) VALUES (?, ?, ?, ?, ?, ?)")) {
-                stmt.setString(1, uuid.toString());
-                stmt.setString(2, name);
-                stmt.setString(3, reason);
-                stmt.setString(4, banner);
-                stmt.setLong(5, entry.time());
-                stmt.setLong(6, expires);
+                    "INSERT OR REPLACE INTO punishment_bans (id, uuid, name, reason, banner, time, expires) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                stmt.setString(1, entry.id());
+                stmt.setString(2, uuid.toString());
+                stmt.setString(3, name);
+                stmt.setString(4, reason);
+                stmt.setString(5, banner);
+                stmt.setLong(6, entry.time());
+                stmt.setLong(7, expires);
                 stmt.executeUpdate();
             }
             return null;
@@ -135,6 +172,8 @@ public class PunishmentManager {
         //sync with other servers if available
         if (networkHook != null)
             networkHook.onBan(uuid, name, reason, banner, expires);
+
+        return entry;
     }
 
     public void unbanPlayer(UUID uuid) {
@@ -400,7 +439,7 @@ public class PunishmentManager {
         plugin.debug("Shutting down the Punishment Manager");
     }
 
-    public record BanEntry(UUID uuid, String name, String reason, String banner, long time, long expires) {}
+    public record BanEntry(String id, UUID uuid, String name, String reason, String banner, long time, long expires) {}
     public record IpBanEntry(String ip, String reason, String banner, long time, long expires) {}
     public record MuteEntry(UUID uuid, String name, String reason, String muter, long time, long expires, boolean offlineNotification) {}
 }
