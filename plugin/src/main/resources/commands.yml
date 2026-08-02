@@ -362,7 +362,20 @@ anvil:
 craftingtable:
   enabled: true
   priority: normal
-  aliases: []
+  aliases:
+    - workbench
+
+balance:
+  enabled: true
+  priority: normal
+  aliases:
+    - bal
+
+baltop:
+  enabled: true
+  priority: normal
+  aliases:
+    - balancetop
 
 invsee:
   enabled: true

@@ -75,5 +75,11 @@ public class EconomyRegistrar {
 
         pluginCommand.setExecutor(command);
         pluginCommand.setTabCompleter(command);
+
+        List<String> configAliases = plugin.getCommandsConfig().getAliases(name);
+        for (String alias : configAliases) {
+            CommandRegistration.registerAlias(alias, pluginCommand);
+            plugin.debug("Registered alias '/" + alias + "' -> '" + name + "'");
+        }
     }
 }
