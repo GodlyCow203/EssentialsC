@@ -127,70 +127,13 @@ run-server/*
 
 # server related stuff, keep server.jar and eula.txt
 
-# FOLIA
-servers/folia-26.1.2/cache
-servers/folia-26.1.2/config
-servers/folia-26.1.2/libraries
-servers/folia-26.1.2/logs
-servers/folia-26.1.2/plugins
-servers/folia-26.1.2/versions
-servers/folia-26.1.2/world
-servers/folia-26.1.2/banned-ips.json
-servers/folia-26.1.2/banned-players.json
-servers/folia-26.1.2/bukkit.yml
-servers/folia-26.1.2/commands.yml
-servers/folia-26.1.2/help.yml
-servers/folia-26.1.2/ops.json
-servers/folia-26.1.2/permissions.yml
-servers/folia-26.1.2/server.properties
-servers/folia-26.1.2/spigot.yml
-servers/folia-26.1.2/usercache.json
-servers/folia-26.1.2/version_history.json
-servers/folia-26.1.2/whitelist.json
+# Ignore all server files
+servers/**
 
-# PAPER 1
+# Keep server jars
+!servers/**/server.jar
+!servers/**/eula.txt
 
-servers/paper-1.20.6/cache
-servers/paper-1.20.6/config
-servers/paper-1.20.6/libraries
-servers/paper-1.20.6/logs
-servers/paper-1.20.6/plugins
-servers/paper-1.20.6/versions
-servers/paper-1.20.6/world
-servers/paper-1.20.6/banned-ips.json
-servers/paper-1.20.6/banned-players.json
-servers/paper-1.20.6/bukkit.yml
-servers/paper-1.20.6/commands.yml
-servers/paper-1.20.6/help.yml
-servers/paper-1.20.6/ops.json
-servers/paper-1.20.6/permissions.yml
-servers/paper-1.20.6/server.properties
-servers/paper-1.20.6/spigot.yml
-servers/paper-1.20.6/usercache.json
-servers/paper-1.20.6/version_history.json
-servers/paper-1.20.6/whitelist.json
-
-# PAPER 2
-
-servers/paper-26.2/cache
-servers/paper-26.2/config
-servers/paper-26.2/libraries
-servers/paper-26.2/logs
-servers/paper-26.2/plugins
-servers/paper-26.2/versions
-servers/paper-26.2/world
-servers/paper-26.2/banned-ips.json
-servers/paper-26.2/banned-players.json
-servers/paper-26.2/bukkit.yml
-servers/paper-26.2/commands.yml
-servers/paper-26.2/help.yml
-servers/paper-26.2/ops.json
-servers/paper-26.2/permissions.yml
-servers/paper-26.2/server.properties
-servers/paper-26.2/spigot.yml
-servers/paper-26.2/usercache.json
-servers/paper-26.2/version_history.json
-servers/paper-26.2/whitelist.json
 
 # Gradle build folders
 api/build
