@@ -1,0 +1,55 @@
+{
+  "stats": {
+    "minecraft:killed_by": {
+      "minecraft:zombie": 3
+    },
+    "minecraft:picked_up": {
+      "minecraft:leaf_litter": 1,
+      "minecraft:grass_block": 1,
+      "minecraft:bone": 1,
+      "minecraft:arrow": 1
+    },
+    "minecraft:mined": {
+      "minecraft:short_grass": 1
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 670166,
+      "minecraft:walk_one_cm": 26216,
+      "minecraft:leave_game": 21,
+      "minecraft:mob_kills": 1,
+      "minecraft:damage_taken": 739,
+      "minecraft:damage_dealt": 129,
+      "minecraft:play_time": 738148,
+      "minecraft:jump": 672,
+      "minecraft:time_since_death": 669947,
+      "minecraft:damage_dealt_absorbed": 493,
+      "minecraft:drop": 22,
+      "minecraft:sprint_one_cm": 113013,
+      "minecraft:fall_one_cm": 5160,
+      "minecraft:total_world_time": 738148,
+      "minecraft:fly_one_cm": 233173,
+      "minecraft:crouch_one_cm": 28,
+      "minecraft:sneak_time": 134,
+      "minecraft:deaths": 3
+    },
+    "minecraft:used": {
+      "minecraft:hay_block": 6,
+      "minecraft:grass_block": 37,
+      "minecraft:stone_sword": 2,
+      "minecraft:golden_apple": 1,
+      "minecraft:smooth_stone_slab": 2
+    },
+    "minecraft:dropped": {
+      "minecraft:arrow": 1,
+      "minecraft:short_grass": 1,
+      "minecraft:mossy_cobblestone": 1,
+      "minecraft:grass_block": 4,
+      "minecraft:smooth_stone_slab": 11,
+      "minecraft:leaf_litter": 1,
+      "minecraft:hay_block": 1,
+      "minecraft:bone": 1,
+      "minecraft:golden_apple": 1
+    }
+  },
+  "DataVersion": 4790
+}

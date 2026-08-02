@@ -1,0 +1,31 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+flymode: false
+muted: false
+jailed: false
+ip-address: 127.0.0.1
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1785613986605
+  login: 1785613968241
+money: '0'
+last-account-name: Cow
+logoutlocation:
+  world: 4c51a8f3-2494-43b7-b5ea-4ddb3c76dc8a
+  world-name: world
+  x: 3.03501544122733
+  y: 112.0
+  z: -28.712702809415763
+  yaw: -93.27497863769531
+  pitch: 20.60511016845703

@@ -1,0 +1,66 @@
+title: <gradient:#00E5FF:#FFC857><bold><category></bold></gradient>
+size: 54
+items:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 17
+    - 18
+    - 26
+    - 27
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    - 50
+    - 51
+    - 52
+    - 53
+  prev-page:
+    material: PLAYER_HEAD
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0=
+    name: <color:#474747>Previous Page
+    slot: 45
+  next-page:
+    material: PLAYER_HEAD
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=
+    name: <color:#474747>Next Page
+    slot: 53
+  page-indicator:
+    material: PLAYER_HEAD
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGZkYzRiYjAzNGQ4ZjQzMTdhYzRmZTNhNDBjNDNkNjIzNGE4ZjUxODkyZGVjNjYzNDBhMTJkYTg3Y2NmNTkxNyJ9fX0
+    name: <color:#F5C827>Page <current>/<max>
+    slot: 49
+  back:
+    material: PLAYER_HEAD
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJlZWVmZDk4NmFkMTA2NDM0YzY0ZmFjNjY5ZjcwZWY4OGRjNmJiNmM4MmNiZDdmYThkNjY0MzY5NzNkYjFhZCJ9fX0=
+    name: <color:#F52727>Back to Categories
+    slot: 48
+    action: back
+  balance:
+    material: PLAYER_HEAD
+    name: <color:#F5C827>Your Balance
+    slot: 47
+    action: balance

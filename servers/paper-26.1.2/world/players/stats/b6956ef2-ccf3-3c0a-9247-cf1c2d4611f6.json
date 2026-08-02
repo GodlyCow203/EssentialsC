@@ -1,0 +1,51 @@
+{
+  "stats": {
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 119936,
+      "minecraft:walk_one_cm": 8140,
+      "minecraft:leave_game": 13,
+      "minecraft:mob_kills": 1,
+      "minecraft:damage_taken": 480,
+      "minecraft:damage_dealt": 80,
+      "minecraft:play_time": 144696,
+      "minecraft:damage_absorbed": 1246,
+      "minecraft:jump": 231,
+      "minecraft:time_since_death": 118898,
+      "minecraft:drop": 2,
+      "minecraft:sprint_one_cm": 14439,
+      "minecraft:fall_one_cm": 13231,
+      "minecraft:total_world_time": 144696,
+      "minecraft:fly_one_cm": 50201,
+      "minecraft:crouch_one_cm": 2,
+      "minecraft:sneak_time": 9,
+      "minecraft:deaths": 2
+    },
+    "minecraft:mined": {
+      "minecraft:short_grass": 7,
+      "minecraft:tall_grass": 2,
+      "minecraft:dandelion": 1,
+      "minecraft:grass_block": 1,
+      "minecraft:azure_bluet": 2
+    },
+    "minecraft:picked_up": {
+      "minecraft:white_wool": 1,
+      "minecraft:mutton": 2,
+      "minecraft:azure_bluet": 2
+    },
+    "minecraft:dropped": {
+      "minecraft:mutton": 1,
+      "minecraft:azure_bluet": 2
+    },
+    "minecraft:used": {
+      "minecraft:mutton": 1,
+      "minecraft:white_wool": 1
+    },
+    "minecraft:killed": {
+      "minecraft:sheep": 1
+    },
+    "minecraft:killed_by": {
+      "minecraft:zombie": 2
+    }
+  },
+  "DataVersion": 4790
+}

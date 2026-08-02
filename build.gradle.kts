@@ -72,7 +72,7 @@ data class MinecraftServerDefinition(
 
 //folia and paper are on 26.+ so they require java 25
 val minecraftServerDefinitions = listOf(
-    MinecraftServerDefinition("paper-26.1.2", MinecraftServerType.PAPER, java25Path),
+    MinecraftServerDefinition("paper-26.2", MinecraftServerType.PAPER, java25Path),
     MinecraftServerDefinition("paper-1.20.6", MinecraftServerType.PAPER, java21Path),
     MinecraftServerDefinition("folia-26.1.2", MinecraftServerType.FOLIA, java25Path)
 )
