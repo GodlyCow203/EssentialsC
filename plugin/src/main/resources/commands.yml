@@ -364,7 +364,6 @@ craftingtable:
   priority: normal
   aliases:
     - workbench
-    - crafting
 
 balance:
   enabled: true
