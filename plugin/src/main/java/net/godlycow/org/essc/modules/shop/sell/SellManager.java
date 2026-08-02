@@ -138,7 +138,7 @@ public class SellManager {
         return total;
     }
 
-    private ShopItem findMatchingShopItem(ItemStack item) {
+    public ShopItem findMatchingShopItem(ItemStack item) {
         if (plugin.getShopManager() == null) return null;
 
         Material type = item.getType();

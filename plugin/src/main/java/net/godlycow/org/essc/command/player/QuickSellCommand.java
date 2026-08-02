@@ -37,7 +37,7 @@ public class QuickSellCommand extends Command {
 
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("amount", FormatUtil.formatNumber(result.getAmount()));
-            placeholders.put("worth", FormatUtil.formatNumber(result.getPrice()));
+            placeholders.put("worth", FormatUtil.formatNumberWithDecimals(result.getPrice()));
             placeholders.put("currency", result.getPrice() == 1.0 ?
                     plugin.getConfigManager().getShopCurrencySingular() :
                     plugin.getConfigManager().getShopCurrencyPlural());
@@ -60,7 +60,7 @@ public class QuickSellCommand extends Command {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("amount", FormatUtil.formatNumber(result.getAmount()));
-        placeholders.put("worth", FormatUtil.formatNumber(result.getPrice()));
+        placeholders.put("worth", FormatUtil.formatNumberWithDecimals(result.getPrice()));
         placeholders.put("currency", result.getPrice() == 1.0 ?
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural());

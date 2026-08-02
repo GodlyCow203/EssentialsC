@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.modules.shop.ShopItem;
 import net.godlycow.org.essc.util.FormatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class WorthCommand extends Command {
 
             double worth = plugin.getSellManager().calculateInventoryWorth(player);
             Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("worth", FormatUtil.formatNumber(worth));
+            placeholders.put("worth", FormatUtil.formatNumberWithDecimals(worth));
             placeholders.put("currency", worth == 1.0 ?
                     plugin.getConfigManager().getShopCurrencySingular() :
                     plugin.getConfigManager().getShopCurrencyPlural());
@@ -47,10 +48,15 @@ public class WorthCommand extends Command {
         }
 
         double worth = plugin.getSellManager().getItemWorth(hand);
+        //use the items shop config name
+        ShopItem shopItem = plugin.getSellManager().findMatchingShopItem(hand);
+        String itemName = shopItem != null && shopItem.getDisplayName() != null
+                ? shopItem.getDisplayName()
+                : hand.getType().name().toLowerCase();
         Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("item", hand.getType().name().toLowerCase());
+        placeholders.put("item", itemName);
         placeholders.put("amount", FormatUtil.formatNumber(hand.getAmount()));
-        placeholders.put("worth", FormatUtil.formatNumber(worth));
+        placeholders.put("worth", FormatUtil.formatNumberWithDecimals(worth));
         placeholders.put("currency", worth == 1.0 ?
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural());
