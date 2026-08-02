@@ -124,15 +124,8 @@ run/*
 run-server/*
 !run-server/server.jar
 !run-server/eula.txt
-
-# server related stuff, keep server.jar and eula.txt
-
-# Ignore all server files
-servers/**
-
-# Keep server jars
-!servers/**/server.jar
-!servers/**/eula.txt
+module-test/*
+servers/paper-26.2/
 
 
 # Gradle build folders

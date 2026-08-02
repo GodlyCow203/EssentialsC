@@ -623,11 +623,15 @@ permissions:
     default: op
 
   essentialsc.sethome.admin:
-    description: Bypass home limits and blocked worlds
+    description: Bypass home limits and blocked worlds, set other players homes (including offline players)
     default: op
 
   essentialsc.home.admin:
-    description: Teleport to other players' homes
+    description: Teleport to other players homes (including offline players)
+    default: op
+
+  essentialsc.delhome.admin:
+    description: Delete other players homes (including offline players)
     default: op
 
   essentialsc.home.notifications:

@@ -2,12 +2,16 @@ package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class SetHomeCommand extends Command {
 
@@ -20,59 +24,107 @@ public class SetHomeCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            setHome(player, plugin.getConfigManager().getDefaultHomeName());
+            setHome(player, player.getUniqueId(), plugin.getConfigManager().getDefaultHomeName(), null);
             return true;
         }
 
-        setHome(player, args[0]);
+        if (args.length >= 2 && player.hasPermission("essentialsc.sethome.admin")) {
+            String targetName = args[0];
+            String homeName = args[1];
+
+            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            if (!target.hasPlayedBefore() && !target.isOnline()) {
+                player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
+                return true;
+            }
+
+            setHome(player, target.getUniqueId(), homeName, targetName);
+            return true;
+        }
+
+        setHome(player, player.getUniqueId(), args[0], null);
         return true;
     }
 
-    private void setHome(Player player, String name) {
+    private void setHome(Player executor, UUID targetUuid, String name, String targetName) {
         if (!name.matches("^[a-zA-Z0-9_-]+$")) {
-            player.sendMessage(lang.get(player, "home.set.invalid_name"));
+            executor.sendMessage(lang.get(executor, "home.set.invalid_name"));
             return;
         }
 
         if (name.length() > 16) {
-            player.sendMessage(lang.get(player, "home.set.name_too_long"));
+            executor.sendMessage(lang.get(executor, "home.set.name_too_long"));
             return;
         }
 
-        String worldName = player.getWorld().getName();
+        String worldName = executor.getWorld().getName();
         if (plugin.getConfigManager().getHomeBlockedWorlds().contains(worldName)) {
-            player.sendMessage(lang.get(player, "home.set.blocked_world",
+            executor.sendMessage(lang.get(executor, "home.set.blocked_world",
                     Map.of("world", worldName)));
             return;
         }
 
-        plugin.getHomeManager().homeExists(player.getUniqueId(), name).whenComplete((alreadyExists, err1) -> {
-            plugin.getHomeManager().getEffectiveHomeCount(player).whenComplete((count, err2) -> {
-                int max = plugin.getHomeManager().getMaxHomes(player);
+        boolean isAdmin = targetName != null;
 
-                if (!alreadyExists && count >= max) {
-                    player.getScheduler().run(plugin, task ->
-                            player.sendMessage(lang.get(player, "home.set.limit_reached",
-                                    Map.of("limit", String.valueOf(max)))), null);
-                    return;
-                }
+        plugin.getHomeManager().homeExists(targetUuid, name).whenComplete(( alreadyExists, err1) -> {
+            if (!isAdmin) {
+                plugin.getHomeManager().getEffectiveHomeCount(executor).whenComplete((count, err2) -> {
+                    int max = plugin.getHomeManager().getMaxHomes(executor);
 
-                plugin.getHomeManager().setHome(player, name, player.getLocation()).whenComplete((success, err3) -> {
-                    player.getScheduler().run(plugin, task -> {
-                        if (success) {
-                            String key = alreadyExists ? "home.set.updated" : "home.set.success";
-                            player.sendMessage(lang.get(player, key, Map.of("name", name)));
-                        } else {
-                            player.sendMessage(lang.get(player, "home.set.failed", Map.of("name", name)));
-                        }
-                    }, null);
+                    if (!alreadyExists && count >= max) {
+                        executor.getScheduler().run(plugin, task ->
+                                executor.sendMessage(lang.get(executor, "home.set.limit_reached",
+                                        Map.of("limit", String.valueOf(max)))), null);
+                        return;
+                    }
+
+                    saveHome(executor, targetUuid, name, alreadyExists, isAdmin, targetName);
                 });
-            });
+            } else {
+                saveHome(executor, targetUuid, name, alreadyExists, isAdmin, targetName);
+            }
+        });
+    }
+
+    private void saveHome(Player executor, UUID targetUuid, String name, boolean alreadyExists,  boolean isAdmin, String targetName) {
+        plugin.getHomeManager().setHome(targetUuid, name, executor.getLocation()).whenComplete((success, err3) -> {
+            executor.getScheduler().run(plugin, task -> {
+                if (success) {
+                    if (isAdmin) {
+                        String key = alreadyExists ? "home.admin.set.updated" : "home.admin.set.success";
+                        executor.sendMessage(lang.get(executor, key,
+                                Map.of("player", targetName, "name", name)));
+                    } else {
+                        String key = alreadyExists ? "home.set.updated" : "home.set.success";
+                        executor.sendMessage(lang.get(executor, key, Map.of("name", name)));
+                    }
+                } else {
+                    executor.sendMessage(lang.get(executor, "home.set.failed", Map.of("name", name)));
+                }
+            }, null);
         });
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player player) || !player.hasPermission("essentialsc.sethome.admin")) {
+            return Collections.emptyList();
+        }
+
+        if (args.length == 1) {
+            String partial = args[0].toLowerCase();
+            List<String> completions =  new ArrayList<>();
+
+            for (OfflinePlayer offline : plugin.getServer().getOfflinePlayers()) {
+                String name = offline.getName();
+                if (name != null && name.toLowerCase().startsWith(partial)) {
+                    completions.add(name);
+                }
+            }
+
+            return completions;
+        }
+
         return Collections.emptyList();
     }
 }

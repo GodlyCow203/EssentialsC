@@ -3,6 +3,8 @@ package net.godlycow.org.essc.command.home;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -32,13 +34,28 @@ public class DelHomeCommand extends Command {
             return true;
         }
 
+        if (args.length >= 2 && player.hasPermission("essentialsc.delhome.admin")) {
+            String targetName = args[0];
+            String name = args[1].toLowerCase();
+
+            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            if (!target.hasPlayedBefore()  && !target.isOnline()) {
+                player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
+
+                return true;
+            }
+
+            deleteHome(player, target.getUniqueId(),  name, targetName);
+            return true;
+        }
+
         String name = args[0].toLowerCase();
 
         String pending = pendingDeletions.get(player.getUniqueId());
 
         if (pending != null && pending.equals(name)) {
             cancelPending(player.getUniqueId());
-            deleteHome(player, name);
+            deleteHome(player, player.getUniqueId(), name, null);
         } else {
             setPendingDeletion(player.getUniqueId(), name);
             player.sendMessage(lang.get(player, "home.delete.confirm", Map.of("name", name)));
@@ -71,13 +88,23 @@ public class DelHomeCommand extends Command {
         pendingDeletions.remove(uuid);
     }
 
-    private void deleteHome(Player player, String name) {
-        plugin.getHomeManager().deleteHome(player.getUniqueId(), name).whenComplete((success, err) -> {
+    private void deleteHome(Player player, UUID targetUuid, String name, String targetName) {
+        plugin.getHomeManager().deleteHome(targetUuid, name).whenComplete((success, err) -> {
             player.getScheduler().run(plugin, task -> {
                 if (success) {
-                    player.sendMessage(lang.get(player, "home.delete.success", Map.of("name", name)));
+                    if (targetName != null) {
+                        player.sendMessage(lang.get(player, "home.admin.delete.success",
+                                Map.of("player", targetName, "name", name)));
+                    } else {
+                        player.sendMessage(lang.get(player, "home.delete.success", Map.of("name", name)));
+                    }
                 } else {
-                    player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", name)));
+                    if (targetName != null) {
+                        player.sendMessage(lang.get(player, "home.admin.delete.not_found",
+                                Map.of("player", targetName, "name", name)));
+                    } else {
+                        player.sendMessage(lang.get(player, "home.delete.not_found", Map.of("name", name)));
+                    }
                 }
             }, null);
         });
@@ -100,6 +127,22 @@ public class DelHomeCommand extends Command {
                     completions.add(homeName);
                 }
             }
+
+            return completions;
+        } else if (args.length == 2 && player.hasPermission("essentialsc.delhome.admin")) {
+            String partial = args[1].toLowerCase();
+            List<String> completions = new ArrayList<>();
+
+            OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+            if (target.hasPlayedBefore() || target.isOnline()) {
+                Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(target.getUniqueId());
+                for (String homeName : homeNames) {
+                    if (homeName.startsWith(partial)) {
+                        completions.add(homeName);
+                    }
+                }
+            }
+
             return completions;
         }
 
