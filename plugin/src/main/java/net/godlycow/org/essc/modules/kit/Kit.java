@@ -16,11 +16,20 @@ public class Kit {
     private final boolean networkSync;
     private final int guiSlot;
     private final String guiIcon;
+    private final int guiPage;
 
     public Kit(String name, String displayName, String permission, long cooldown,
                boolean oneTime, boolean firstJoin, int maxClaims,
                List<ItemStack> items, String description, boolean networkSync,
                int guiSlot, String guiIcon) {
+        this(name, displayName, permission, cooldown, oneTime, firstJoin, maxClaims,
+                items, description, networkSync, guiSlot, guiIcon, 1);
+    }
+
+    public Kit(String name, String displayName, String permission, long cooldown,
+               boolean oneTime, boolean firstJoin, int maxClaims,
+               List<ItemStack> items, String description, boolean networkSync,
+               int guiSlot, String guiIcon, int guiPage) {
         this.name = name;
         this.displayName = displayName;
         this.permission = permission;
@@ -33,6 +42,7 @@ public class Kit {
         this.networkSync = networkSync;
         this.guiSlot = guiSlot;
         this.guiIcon = guiIcon;
+        this.guiPage = Math.max(1, guiPage);
     }
 
     public String getName() {
@@ -81,5 +91,9 @@ public class Kit {
 
     public String getGuiIcon() {
         return guiIcon;
+    }
+
+    public int getGuiPage() {
+        return guiPage;
     }
 }

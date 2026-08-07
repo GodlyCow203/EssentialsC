@@ -1,32 +1,65 @@
-title: "lang:kit.gui.title"
-size: 54
+title: lang:kit.gui.title
+size: 27
 
 items:
+  kit-slots:
+    material: AIR
+    slots:
+      - 10
+      - 13
+      - 16
+
+
+
   border:
     material: GRAY_STAINED_GLASS_PANE
-    name: " "
-    slots: [0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,49,50,51,52,53]
+    name: ' '
+    slots:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 11
+      - 12
+      - 14
+      - 15
+      - 17
+      - 18
+      - 19
+      - 20
+      - 22
+      - 24
+      - 25
+      - 26
+
     hide-attributes: true
 
   nav-prev:
     material: PLAYER_HEAD
-    name: "lang:kit.gui.item.nav.prev.name"
-    skull-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0="
-    slot: 48
-    action: "page_prev"
+    name: lang:kit.gui.item.nav.prev.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWYxMzNlOTE5MTlkYjBhY2VmZGMyNzJkNjdmZDg3YjRiZTg4ZGM0NGE5NTg5NTg4MjQ0NzRlMjFlMDZkNTNlNiJ9fX0=
+    slot: 21
+    action: page_prev
     hide-attributes: true
 
   nav-next:
     material: PLAYER_HEAD
-    name: "lang:kit.gui.item.nav.next.name"
-    skull-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0="
-    slot: 50
-    action: "page_next"
+    name: lang:kit.gui.item.nav.next.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=
+    slot: 23
+    action: page_next
     hide-attributes: true
 
   empty:
     material: PAPER
-    name: "lang:kit.gui.item.empty.name"
+    name: lang:kit.gui.item.empty.name
     lore:
-      - "lang:kit.gui.item.empty.lore1"
+      - lang:kit.gui.item.empty.lore1
+    slot: 23
     hide-attributes: true

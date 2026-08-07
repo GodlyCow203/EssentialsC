@@ -10,6 +10,8 @@ import java.util.List;
 public class GuiButton {
     private final String id;
     private final Material material;
+    private final Material availableMaterial;
+    private final Material unavailableMaterial;
     private final String name;
     private final List<String> lore;
     private final List<Integer> slots;
@@ -24,6 +26,8 @@ public class GuiButton {
     public GuiButton(String id, ConfigurationSection section) {
         this.id = id;
         this.material = parseMaterial(section.getString("material", "STONE"), id);
+        this.availableMaterial = parseMaterialOrNull(section.getString("available-material", null), id);
+        this.unavailableMaterial = parseMaterialOrNull(section.getString("unavailable-material", null), id);
         this.name = section.getString("name", " ");
         this.lore = section.getStringList("lore");
         this.slots = parseSlots(section);
@@ -48,6 +52,18 @@ public class GuiButton {
         }
     }
 
+    private static Material parseMaterialOrNull(String name, String buttonId) {
+        if (name == null || name.isBlank()) {
+            return null;
+        }
+        try {
+            return Material.valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.err.println("[EssentialsC] [GUI] Unknown material '" + name + "' for button '" + buttonId + "', ignoring.");
+            return null;
+        }
+    }
+
     private static List<Integer> parseSlots(ConfigurationSection section) {
         List<Integer> list = new ArrayList<>();
         if (section.contains("slot")) {
@@ -67,6 +83,14 @@ public class GuiButton {
 
     public Material getMaterial() {
         return material;
+    }
+
+    public Material getAvailableMaterial() {
+        return availableMaterial;
+    }
+
+    public Material getUnavailableMaterial() {
+        return unavailableMaterial;
     }
 
     public String getName() {

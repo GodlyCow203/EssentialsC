@@ -14,4 +14,6 @@ public interface Kit {
     List<ItemStack> getItemStacks();
     String getKitDescription();
     boolean isSynchronizedAcrossNetwork();
+    int getGuiSlot();
+    int getGuiPage();
 }

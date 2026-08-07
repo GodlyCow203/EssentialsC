@@ -1,17 +1,21 @@
 kits:
   starter:
-    display-name: "<#2791F5>Starter Kit"
-    description: "Basic items"
+    display-name: "<#4A4A4A><b>Starter Kit"
+    description:
+      - "<bold><#4A4A4A>|</bold> <gray>Everything you need to begin"
+      - "<bold><#4A4A4A>|</bold> <gray>Food, tools, and basic supplies"
+
     cooldown: 86400
     one-time: false
     first-join: true
     max-claims: 10
     gui-slot: 10
-    gui-icon: "CHEST"
+    page: 1
+    gui-icon: "IRON_SWORD"
     items:
       - type: STONE_SWORD
         amount: 1
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -21,7 +25,7 @@ kits:
 
       - type: STONE_PICKAXE
         amount: 1
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -31,7 +35,7 @@ kits:
 
       - type: STONE_SHOVEL
         amount: 1
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -41,7 +45,7 @@ kits:
 
       - type: BREAD
         amount: 16
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -51,7 +55,7 @@ kits:
 
       - type: SUGAR_CANE
         amount: 16
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -61,7 +65,7 @@ kits:
 
       - type: CARROT
         amount: 4
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -71,7 +75,7 @@ kits:
 
       - type: POTATO
         amount: 4
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -81,7 +85,7 @@ kits:
 
       - type: GOLDEN_APPLE
         amount: 1
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -91,7 +95,7 @@ kits:
 
       - type: APPLE
         amount: 8
-        name: "<b><#2791F5>Kit Starter"
+        name: "<b><#4A4A4A>Kit Starter"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -100,18 +104,21 @@ kits:
         nbt: {}
 
   tools:
-    display-name: "<#FF5D00>Tools Kit"
-    description: "Basic tools for gathering resources"
+    display-name: "<#FFC400><b>Tools Kit"
+    description:
+      - "<bold><#FFC400>|</bold> <#FFDB59>Essential tools for every task"
+      - "<bold><#FFC400>|</bold> <#FFDB59>Mine, chop, and explore with ease"
     cooldown: 43200
     one-time: false
     first-join: false
     max-claims: 0
-    gui-slot: 11
+    gui-slot: 13
+    page: 1
     gui-icon: "IRON_PICKAXE"
     items:
       - type: IRON_PICKAXE
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -121,7 +128,7 @@ kits:
 
       - type: IRON_AXE
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -131,7 +138,7 @@ kits:
 
       - type: IRON_SHOVEL
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -141,7 +148,7 @@ kits:
 
       - type: IRON_SWORD
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -151,7 +158,7 @@ kits:
 
       - type: IRON_HOE
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -161,7 +168,7 @@ kits:
 
       - type: FLINT_AND_STEEL
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -171,7 +178,7 @@ kits:
 
       - type: FISHING_ROD
         amount: 1
-        name: "<b><#FF5D00>Kit Tools"
+        name: "<b><#FFC400>Kit Tools"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -180,18 +187,21 @@ kits:
         nbt: {}
 
   member:
-    display-name: "<#FFD400>Member Kit"
-    description: "Rewards for server members"
+    display-name: "<#FF0A00><bold>Member Kit"
+    description:
+      - "<bold><#FF0A00>|</bold> <#FF655E>Exclusive rewards for members"
+      - "<bold><#FF0A00>|</bold> <#FF655E>Claim your perks and keep progressing"
     cooldown: 64800
     one-time: false
     first-join: false
     max-claims: 0
-    gui-slot: 12
+    gui-slot: 16
+    page: 1
     gui-icon: "GOLD_INGOT"
     items:
       - type: GOLDEN_SWORD
         amount: 1
-        name: "<b><#FFD400>Kit Member"
+        name: "<b><#FF0A00>Kit Member"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -201,7 +211,7 @@ kits:
 
       - type: GOLDEN_PICKAXE
         amount: 1
-        name: "<b><#FFD400>Kit Member"
+        name: "<b><#FF0A00>Kit Member"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -211,7 +221,7 @@ kits:
 
       - type: COOKED_BEEF
         amount: 32
-        name: "<b><#FFD400>Kit Member"
+        name: "<b><#FF0A00>Kit Member"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -221,7 +231,7 @@ kits:
 
       - type: GOLDEN_APPLE
         amount: 8
-        name: "<b><#FFD400>Kit Member"
+        name: "<b><#FF0A00>Kit Member"
         lore: []
         enchantments: {}
         unbreakable: false
@@ -231,7 +241,130 @@ kits:
 
       - type: OAK_LOG
         amount: 32
-        name: "<b><#FFD400>Kit Member"
+        name: "<b><#FF0A00>Kit Member"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+  vip:
+    display-name: "<#AA00FF><b>VIP Kit"
+    description:
+      - "<bold><#AA00FF>|</bold> <#D19CFF>Exclusive gear for VIP players"
+      - "<bold><#AA00FF>|</bold> <#D19CFF>Diamond tools, armor, and riches"
+    cooldown: 86400
+    one-time: false
+    first-join: false
+    max-claims: 0
+    gui-slot: 10
+    page: 2
+    gui-icon: "DIAMOND"
+    items:
+      - type: DIAMOND_SWORD
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: DIAMOND_PICKAXE
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: DIAMOND_AXE
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_HELMET
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_CHESTPLATE
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_LEGGINGS
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: IRON_BOOTS
+        amount: 1
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: COOKED_BEEF
+        amount: 64
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: GOLDEN_APPLE
+        amount: 16
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: DIAMOND
+        amount: 8
+        name: "<b><#AA00FF>Kit VIP"
+        lore: []
+        enchantments: {}
+        unbreakable: false
+        flags: []
+        custom-model-data: 0
+        nbt: {}
+
+      - type: ENDER_PEARL
+        amount: 8
+        name: "<b><#AA00FF>Kit VIP"
         lore: []
         enchantments: {}
         unbreakable: false

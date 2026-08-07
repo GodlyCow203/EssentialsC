@@ -54,7 +54,8 @@ public class GuiFramework {
                 "shop_main.yml",
                 "shop_category.yml",
                 "trash.yml",
-                "kit_list.yml"
+                "kit_list.yml",
+                "kit_preview.yml"
         };
 
         for (String guiName : defaultGuis) {

@@ -161,6 +161,7 @@ public class KitCommand extends Command {
         player.sendMessage(lang.get(player, "kit.debug.onetime", Map.of("val", String.valueOf(kit.isOneTime()))));
         player.sendMessage(lang.get(player, "kit.debug.firstjoin", Map.of("val", String.valueOf(kit.isFirstJoin()))));
         player.sendMessage(lang.get(player, "kit.debug.networksync", Map.of("val", String.valueOf(kit.isNetworkSync()))));
+        player.sendMessage(lang.get(player, "kit.debug.page", Map.of("page", String.valueOf(kit.getGuiPage()), "slot", String.valueOf(kit.getGuiSlot()))));
 
         if (kit.getMaxClaims() > 0) {
             player.sendMessage(lang.get(player, "kit.debug.maxclaims", Map.of("max", String.valueOf(kit.getMaxClaims()))));

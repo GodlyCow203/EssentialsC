@@ -28,10 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class KitGuiManager {
 
-    private static final int[] KIT_SLOTS = {10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43
-    };
-    private static final int PER_PAGE = KIT_SLOTS.length;
-
     private final EssentialsC plugin;
     private final GuiFramework guiFramework;
     private final KitSoundManager sounds;
@@ -53,19 +49,30 @@ public class KitGuiManager {
             return;
         }
 
-        List<Kit> autoKits = new ArrayList<>();
-        Map<Integer, Kit> pinnedKits = new HashMap<>();
+        List<Integer> kitSlots = templateSlotList(template, "kit-slots");
+        int perPage = Math.max(1, kitSlots.size());
 
-        for (Kit kit : accessibleKits(player)) {
+        List<Kit> accessible = accessibleKits(player);
+
+        List<Kit> autoKits = new ArrayList<>();
+        Map<Integer, Map<Integer, Kit>> pinnedKits = new HashMap<>();
+
+        int maxPage = 1;
+        for (Kit kit : accessible) {
+            maxPage = Math.max(maxPage, kit.getGuiPage());
+        }
+
+        for (Kit kit : accessible) {
             int slot = kit.getGuiSlot();
-            if (slot >= 0 && slot < 54) {
-                pinnedKits.put(slot, kit);
+            if (slot >= 0 && slot < template.getSize()) {
+                pinnedKits.computeIfAbsent(kit.getGuiPage(), p -> new HashMap<>()).put(slot, kit);
             } else {
                 autoKits.add(kit);
             }
         }
 
-        int totalPages = Math.max(1, (int) Math.ceil((double) autoKits.size() / PER_PAGE));
+        int totalPages = Math.max(1, Math.max(maxPage,
+                (int) Math.ceil((double) autoKits.size() / perPage)));
         int safePage = Math.max(1, Math.min(page, totalPages));
 
         Component title = template.resolveTitle(player, plugin, Map.of("page", String.valueOf(safePage), "total", String.valueOf(totalPages)));
@@ -76,23 +83,40 @@ public class KitGuiManager {
 
         guiFramework.fillStaticItems(gui, "kit_list", player);
 
-        for (Map.Entry<Integer, Kit> entry : pinnedKits.entrySet()) {
-            gui.setItem(entry.getKey(), buildKitItem(player, entry.getValue()));
+        GuiButton emptyBtn = template.getItem("empty");
+        if (emptyBtn != null) {
+            for (int slot : emptyBtn.getSlots()) {
+                gui.setItem(slot, new ItemStack(Material.AIR));
+            }
         }
 
-        if (autoKits.isEmpty() && pinnedKits.isEmpty()) {
-            GuiButton emptyBtn = template.getItem("empty");
-            if (emptyBtn != null) {
-                gui.setItem(31, guiFramework.getItemBuilder().build(emptyBtn, player));
+        int start = (safePage - 1) * perPage;
+        int end = Math.min(start + perPage, autoKits.size());
+
+        boolean pageHasKit = false;
+        Map<Integer, Kit> pagePinned = pinnedKits.get(safePage);
+        if (pagePinned != null) {
+            for (Map.Entry<Integer, Kit> entry : pagePinned.entrySet()) {
+                pageHasKit = true;
+                gui.setItem(entry.getKey(), buildKitItem(player, entry.getValue()));
+            }
+        }
+
+        if (end > start) {
+            pageHasKit = true;
+        }
+
+        if (!pageHasKit) {
+            if (emptyBtn != null && !emptyBtn.getSlots().isEmpty()) {
+                gui.setItem(emptyBtn.getSlots().get(0), guiFramework.getItemBuilder().build(emptyBtn, player));
             }
         } else {
-            int start = (safePage - 1) * PER_PAGE;
-            int end = Math.min(start + PER_PAGE, autoKits.size());
             for (int i = start; i < end; i++) {
                 int slotIndex = i - start;
-                if (slotIndex < KIT_SLOTS.length) {
-                    int targetSlot = KIT_SLOTS[slotIndex];
-                    if (!pinnedKits.containsKey(targetSlot)) {
+                if (slotIndex < kitSlots.size()) {
+                    int targetSlot = kitSlots.get(slotIndex);
+                    Kit pinned = pagePinned != null ? pagePinned.get(targetSlot) : null;
+                    if (pinned == null) {
                         gui.setItem(targetSlot, buildKitItem(player, autoKits.get(i)));
                     }
                 }
@@ -102,11 +126,15 @@ public class KitGuiManager {
         GuiButton navPrev = template.getItem("nav-prev");
         GuiButton navNext = template.getItem("nav-next");
 
-        gui.setItem(48, safePage > 1 && navPrev != null
-                ? guiFramework.getItemBuilder().build(navPrev, player) : buildFillerPane());
+        if (navPrev != null && !navPrev.getSlots().isEmpty()) {
+            int slot = navPrev.getSlots().get(0);
+            gui.setItem(slot, guiFramework.getItemBuilder().build(navPrev, player));
+        }
 
-        gui.setItem(50, safePage < totalPages && navNext != null
-                ? guiFramework.getItemBuilder().build(navNext, player) : buildFillerPane());
+        if (navNext != null && !navNext.getSlots().isEmpty()) {
+            int slot = navNext.getSlots().get(0);
+            gui.setItem(slot, guiFramework.getItemBuilder().build(navNext, player));
+        }
 
         activeSessions.put(player.getUniqueId(), safePage);
         player.getScheduler().run(plugin, task -> {
@@ -117,9 +145,118 @@ public class KitGuiManager {
         }, null);
     }
 
-    public void handleKitClick(Player player, String kitName) {
+    public void handleKitClick(Player player, String kitName, int returnPage) {
         Kit kit = plugin.getKitManager().getKit(kitName);
         if (kit == null) return;
+
+        openKitPreview(player, kit, returnPage);
+    }
+
+    public void openKitPreview(Player player, Kit kit, int returnPage) {
+        GuiTemplate template = guiFramework.getTemplate("kit_preview");
+        if (template == null) {
+            plugin.getLogger().warning("[KitGUI] Missing GUI template: kit_preview.yml");
+            return;
+        }
+
+        Component title = template.resolveTitle(player, plugin, Map.of(
+                "kit", kit.getDisplayName(), "name", kit.getName()));
+
+        KitGuiHolder holder = new KitGuiHolder(0, returnPage, kit.getName());
+        Inventory gui = Bukkit.createInventory(holder, template.getSize(), title);
+        holder.setInventory(gui);
+
+        guiFramework.fillStaticItems(gui, "kit_preview", player);
+
+        List<Integer> previewSlots = templateSlotList(template, "preview-slot");
+
+        List<ItemStack> items = kit.getItems();
+        for (int i = 0; i < previewSlots.size() && i < items.size(); i++) {
+            gui.setItem(previewSlots.get(i), items.get(i).clone());
+        }
+
+        GuiButton backBtn = template.getItem("back");
+        if (backBtn != null && !backBtn.getSlots().isEmpty()) {
+            gui.setItem(backBtn.getSlots().get(0), guiFramework.getItemBuilder().build(backBtn, player));
+        }
+
+        GuiButton claimBtn = template.getItem("claim");
+        if (claimBtn != null && !claimBtn.getSlots().isEmpty()) {
+            gui.setItem(claimBtn.getSlots().get(0), buildClaimButton(player, kit, claimBtn));
+        }
+
+        activeSessions.put(player.getUniqueId(), returnPage);
+        player.getScheduler().run(plugin, task -> {
+            if (player.isOnline()) {
+                player.openInventory(gui);
+                sounds.playOpen(player);
+            }
+        }, null);
+    }
+
+    private ItemStack buildClaimButton(Player player, Kit kit, GuiButton config) {
+        boolean canClaim = plugin.getKitManager().canClaim(player, kit);
+        boolean oneTimeUsed = kit.isOneTime() && plugin.getKitManager().hasClaimed(player, kit);
+
+        String nameKey = canClaim
+                ? "kit.preview.item.claim.name"
+                : (oneTimeUsed ? "kit.preview.item.claim.name.used" : "kit.preview.item.claim.name.cooldown");
+
+        List<Component> lore = new ArrayList<>();
+        if (canClaim) {
+            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player,
+                    "kit.preview.item.claim.lore.click")));
+        } else {
+            long remaining = plugin.getKitManager().getCooldownRemaining(player, kit);
+            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player,
+                    "kit.preview.item.claim.lore.ready_in",
+                    Map.of("time", formatTime(Math.max(0, remaining))))));
+        }
+
+        Material material;
+        if (canClaim) {
+            material = config.getAvailableMaterial() != null
+                    ? config.getAvailableMaterial()
+                    : Material.LIME_CONCRETE;
+        } else {
+            material = config.getUnavailableMaterial() != null
+                    ? config.getUnavailableMaterial()
+                    : Material.RED_CONCRETE;
+        }
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return item;
+
+        meta.displayName(ComponentHelper.noItalic(
+                plugin.getLanguageManager().get(player, nameKey, Map.of("kit", kit.getDisplayName()))));
+        meta.lore(ComponentHelper.noItalic(lore));
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        NamespacedKey actionKey = new NamespacedKey(plugin, "gui_action");
+        meta.getPersistentDataContainer().set(actionKey, PersistentDataType.STRING, "kit_preview_claim");
+        NamespacedKey kitKey = new NamespacedKey(plugin, "kit_name");
+        meta.getPersistentDataContainer().set(kitKey, PersistentDataType.STRING, kit.getName());
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public void handlePageTurn(Player player, int newPage) {
+        sounds.playPageTurn(player);
+        openKitList(player, newPage);
+    }
+
+    public void handlePreviewBack(Player player, int returnPage) {
+        sounds.playPageTurn(player);
+        openKitList(player, returnPage);
+    }
+
+    public void handlePreviewClaim(Player player, String kitName, int returnPage) {
+        Kit kit = plugin.getKitManager().getKit(kitName);
+        if (kit == null) {
+            openKitList(player, returnPage);
+            return;
+        }
 
         if (!plugin.getKitManager().hasPermission(player, kit)) {
             sounds.playDenied(player);
@@ -168,13 +305,11 @@ public class KitGuiManager {
 
                 sounds.playClaim(player);
                 plugin.getKitManager().giveKit(player, kit);
+                if (player.isOnline()) {
+                    player.closeInventory();
+                }
             }, null);
         });
-    }
-
-    public void handlePageTurn(Player player, int newPage) {
-        sounds.playPageTurn(player);
-        openKitList(player, newPage);
     }
 
     public void handleClose(Player player) {
@@ -194,6 +329,14 @@ public class KitGuiManager {
             }
         }
         return result;
+    }
+
+    private List<Integer> templateSlotList(GuiTemplate template, String itemId) {
+        GuiButton button = template.getItem(itemId);
+        if (button == null) {
+            return List.of();
+        }
+        return new ArrayList<>(button.getSlots());
     }
 
     private ItemStack buildKitItem(Player player, Kit kit) {
@@ -224,9 +367,15 @@ public class KitGuiManager {
         List<Component> lore = new ArrayList<>();
 
         if (!kit.getDescription().isEmpty()) {
-            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player,
-                    "kit.gui.item.kit.lore.description",
-                    Map.of("description", kit.getDescription()))));
+            for (String line : kit.getDescription().split("\\n", -1)) {
+                if (line.isEmpty()) {
+                    lore.add(ComponentHelper.noItalic(Component.empty()));
+                    continue;
+                }
+                lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player,
+                        "kit.gui.item.kit.lore.description",
+                        Map.of("description", line))));
+            }
             lore.add(ComponentHelper.noItalic(Component.empty()));
         }
 
@@ -280,17 +429,6 @@ public class KitGuiManager {
             plugin.getLogger().warning("[KitGUI] Invalid gui-icon '" + iconStr + "' for kit " + kit.getName() + ", using default.");
         }
         return canClaim ? Material.CHEST : Material.BARREL;
-    }
-
-    private ItemStack buildFillerPane() {
-        ItemStack item = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta meta = item.getItemMeta();
-        if (meta != null) {
-            meta.displayName(Component.empty());
-            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            item.setItemMeta(meta);
-        }
-        return item;
     }
 
     private String formatTime(long seconds) {

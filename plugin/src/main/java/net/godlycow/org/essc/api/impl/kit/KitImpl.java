@@ -74,6 +74,16 @@ public class KitImpl implements Kit {
         return networkSync;
     }
 
+    @Override
+    public int getGuiSlot() {
+        return internalKit.getGuiSlot();
+    }
+
+    @Override
+    public int getGuiPage() {
+        return internalKit.getGuiPage();
+    }
+
     public net.godlycow.org.essc.modules.kit.Kit getInternalKit() {
         return internalKit;
     }

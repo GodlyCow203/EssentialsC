@@ -68,10 +68,11 @@ public class KitDefinitions {
                 boolean oneTime = kitSection.getBoolean("one-time", false);
                 boolean firstJoin = kitSection.getBoolean("first-join", false);
                 int maxClaims = kitSection.getInt("max-claims", 0);
-                String description = kitSection.getString("description", "");
+                String description = loadDescription( kitSection);
                 boolean networkSync = kitSection.getBoolean("network-sync", false);
                 int guiSlot = kitSection.getInt("gui-slot", -1);
                 String guiIcon = kitSection.getString("gui-icon", null);
+                int guiPage = kitSection.getInt("page", 1);
 
                 List<ItemStack> items = new ArrayList<>();
                 List<Map<?, ?>> itemsList = kitSection.getMapList("items");
@@ -85,7 +86,7 @@ public class KitDefinitions {
 
                 Kit kit = new Kit(kitName.toLowerCase(), displayName, permission, cooldown,
                         oneTime, firstJoin, maxClaims, items, description, networkSync,
-                        guiSlot, guiIcon);
+                        guiSlot, guiIcon, guiPage);
                 kits.put(kitName.toLowerCase(), kit);
 
                 registerPermission(permission);
@@ -103,6 +104,15 @@ public class KitDefinitions {
         }
 
         plugin.debug("Loaded " + kits.size() + " kits");
+    }
+
+    private String loadDescription(ConfigurationSection section) {
+        List<String> lines = section.getStringList("description");
+
+        if (!lines.isEmpty()) {
+            return String.join("\n", lines);
+        }
+        return section.getString("description", "");
     }
 
     private void registerPermission(String permission) {

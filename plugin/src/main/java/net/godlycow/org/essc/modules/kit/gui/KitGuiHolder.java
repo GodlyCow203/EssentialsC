@@ -6,10 +6,20 @@ import org.bukkit.inventory.InventoryHolder;
 public class KitGuiHolder implements InventoryHolder {
 
     private final int page;
+    private final int returnPage;
+    private final String kitName;
     private Inventory inventory;
 
     public KitGuiHolder(int page) {
         this.page = page;
+        this.returnPage = page;
+        this.kitName = null;
+    }
+
+    public KitGuiHolder(int page, int returnPage, String kitName) {
+        this.page = page;
+        this.returnPage = returnPage;
+        this.kitName = kitName;
     }
 
     @Override
@@ -23,5 +33,13 @@ public class KitGuiHolder implements InventoryHolder {
 
     public int getPage() {
         return page;
+    }
+
+    public int getReturnPage() {
+        return returnPage;
+    }
+
+    public String getKitName() {
+        return kitName;
     }
 }

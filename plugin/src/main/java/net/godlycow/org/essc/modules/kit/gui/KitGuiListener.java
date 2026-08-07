@@ -41,7 +41,7 @@ public class KitGuiListener implements Listener {
             NamespacedKey kitKey = new NamespacedKey(plugin, "kit_name");
             String kitName = meta.getPersistentDataContainer().get(kitKey, PersistentDataType.STRING);
             if (kitName != null) {
-                guiManager.handleKitClick(player, kitName);
+                guiManager.handleKitClick(player, kitName, holder.getPage());
             }
             return;
         }
@@ -49,6 +49,13 @@ public class KitGuiListener implements Listener {
         switch (action) {
             case "page_prev" -> guiManager.handlePageTurn(player, holder.getPage() - 1);
             case "page_next" -> guiManager.handlePageTurn(player, holder.getPage() + 1);
+            case "kit_preview_back" -> guiManager.handlePreviewBack(player, holder.getReturnPage());
+            case "kit_preview_claim" -> {
+                String kitName = holder.getKitName();
+                if (kitName != null) {
+                    guiManager.handlePreviewClaim(player, kitName, holder.getReturnPage());
+                }
+            }
         }
     }
 
