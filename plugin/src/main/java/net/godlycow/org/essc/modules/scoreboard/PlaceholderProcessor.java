@@ -2,6 +2,7 @@ package net.godlycow.org.essc.modules.scoreboard;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -12,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 public class PlaceholderProcessor {
@@ -80,10 +82,12 @@ public class PlaceholderProcessor {
         }
 
         if (processed.contains("%vault_eco_balance%") || processed.contains("%vault_eco_balance_formatted%")) {
-            String balance = getVaultBalance(player);
+            BigDecimal balance = getBalance(player);
+            String raw = balance != null ? balance.toPlainString() : "0";
+            String formatted = getVaultFormatted(player, balance);
             processed = processed
-                    .replace("%vault_eco_balance%", balance)
-                    .replace("%vault_eco_balance_formatted%", balance);
+                    .replace("%vault_eco_balance%", raw)
+                    .replace("%vault_eco_balance_formatted%", formatted);
         }
 
         return processed;
@@ -125,22 +129,40 @@ public class PlaceholderProcessor {
         return "";
     }
 
-    private String getVaultBalance(Player player) {
-        //use reflection nd isVaultHooked check to avoid
-        //NoClassDefFoundError when Vault is null
+    private BigDecimal getBalance(Player player) {
+        //use essentialscs economy because this is the same
+        // manager Vault is reading from
         try {
-            if (!plugin.isVaultHooked())
-                return "0.00";
-
-            Class<?> economyClass = Class.forName("net.milkbowl.vault.economy.Economy");
-            var rsp = Bukkit.getServicesManager().getRegistration(economyClass);
-            if (rsp != null) {
-                Object eco = rsp.getProvider();
-                double balance = (double) eco.getClass().getMethod("getBalance", OfflinePlayer.class).invoke(eco, player);
-                return (String) eco.getClass().getMethod("format", double.class).invoke(eco, balance);
+            if (plugin.getEconomyManager() != null) {
+                return plugin.getEconomyManager().getCachedBalance(player.getUniqueId());
             }
         } catch (Exception ignored) {
         }
-        return "0.00";
+        return BigDecimal.ZERO;
+    }
+
+    private String getVaultFormatted(Player player, BigDecimal balance) {
+        //Vaults own formatter
+        if (plugin.isVaultHooked()) {
+            try {
+                Class<?> economyClass = Class.forName("net.milkbowl.vault.economy.Economy");
+                var rsp = Bukkit.getServicesManager().getRegistration(economyClass);
+                if (rsp != null) {
+                    Object eco = rsp.getProvider();
+                    return (String) eco.getClass().getMethod("format", double.class).invoke(eco, balance.doubleValue());
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        //fallback, format with essentialscs own currency formatter
+        try {
+            if (plugin.getEconomyManager() != null) {
+                return plugin.getEconomyManager().format(balance);
+            }
+        } catch (Exception ignored)
+        {
+        }
+
+        return balance == null ? "0" : balance.toPlainString();
     }
 }

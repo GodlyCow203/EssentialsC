@@ -105,6 +105,7 @@ public class EconomyManager implements EconomyService, Listener {
         createAccount(player.getUniqueId(), player.getName()).thenAccept(success -> {
             if (success) {
                 plugin.debug("Created/Verified economy account for " + player.getName());
+
             }
         }).exceptionally(ex -> {
             plugin.getLogger().severe("Failed to create account for " + player.getName() + ": " + ex.getMessage());
@@ -158,6 +159,27 @@ public class EconomyManager implements EconomyService, Listener {
                 return BigDecimal.ZERO;
             }
         });
+    }
+
+    public BigDecimal getCachedBalance(UUID uuid) {
+        BigDecimal cached = cache.get(uuid);
+
+        if (cached != null) {
+            return cached;
+        }
+        if (Bukkit.isPrimaryThread()) {
+            return BigDecimal.ZERO;
+        }
+
+        try {
+            return getBalance(uuid).join();
+            
+        } catch (Exception ex) {
+
+
+            BigDecimal refreshed = cache.get(uuid);
+            return refreshed != null ? refreshed : BigDecimal.ZERO;
+        }
     }
 
     @Override
