@@ -1094,7 +1094,7 @@ permissions:
 
   essentialsc.rtp.world.end:
     description: Allows RTP to end
-    default: true
+    default: false
 
   essentialsc.rtp.bypass.cooldown:
     description: Bypass RTP cooldown
