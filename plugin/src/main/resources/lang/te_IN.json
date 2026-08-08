@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>EssentialsC వెర్షన్ <color:#FFFFFF><version></color> నడుస్తోంది</color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>డీబగ్ మోడ్ <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC పరిపాలన</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>డాక్యుమెంటేషన్: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>కాన్ఫిగ్ మరియు భాషలను రీలోడ్ చేయండి</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>ప్లగిన్ వెర్షన్ చూపించండి</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>డీబగ్ మోడ్ టోగుల్ చేయండి</color>",

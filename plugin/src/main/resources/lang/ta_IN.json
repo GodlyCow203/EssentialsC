@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>EssentialsC பதிப்பு <color:#FFFFFF><version></color> இயங்குகிறது</color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>பிழைத்திருத்த முறை <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC நிர்வாகம்</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>ஆவணங்கள்: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>உள்ளமைப்பு மற்றும் மொழிகளை மீள்ஏற்றவும்</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>செருகுநிரல் பதிப்பைக் காட்டு</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>பிழைத்திருத்த முறையை மாற்றவும்</color>",

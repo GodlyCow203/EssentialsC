@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>Работает EssentialsC версии <color:#FFFFFF><version></color></color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>Режим отладки <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>Администрирование EssentialsC</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>Документация: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>Перезагрузить конфигурацию и языки</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>Показать версию плагина</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>Переключить режим отладки</color>",

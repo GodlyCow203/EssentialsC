@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>EssentialsC સંસ્કરણ <color:#FFFFFF><version></color> ચાલી રહ્યું છે</color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>ડીબગ મોડ <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC પ્રશાસન</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>દસ્તાવેજીકરણ: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>કૉન્ફિગ અને ભાષાઓ રિલોડ કરો</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>પ્લગઈન સંસ્કરણ બતાવો</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>ડીબગ મોડ ટોગલ કરો</color>",

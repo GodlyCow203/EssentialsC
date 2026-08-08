@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>EssentialsC সংস্করণ <color:#FFFFFF><version></color> চলছে</color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>ডিবাগ মোড <color:#FFF200><state></color>।</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC প্রশাসন</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>ডকুমেন্টেশন: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>কনফিগ এবং ভাষা রিলোড করুন</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>প্লাগইন সংস্করণ দেখুন</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>ডিবাগ মোড টগল করুন</color>",

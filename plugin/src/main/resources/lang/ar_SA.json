@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>يعمل EssentialsC الإصدار <color:#FFFFFF><version></color></color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>وضع التصحيح <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>إدارة EssentialsC</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>الوثائق: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>إعادة تحميل الإعدادات واللغات</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>عرض إصدار الإضافة</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>تبديل وضع التصحيح</color>",

@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>EssentialsC 버전 <color:#FFFFFF><version></color> 실행 중</color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>디버그 모드 <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC 관리</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>문서: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>설정과 언어 리로드</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>플러그인 버전 표시</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>디버그 모드 전환</color>",

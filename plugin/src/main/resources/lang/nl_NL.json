@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>Draait EssentialsC versie <color:#FFFFFF><version></color></color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>Debugmodus <color:#FFF200><state></color>.</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC Beheer</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>Documentatie: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>Config en talen herladen</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>Pluginversie tonen</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>Debugmodus wisselen</color>",

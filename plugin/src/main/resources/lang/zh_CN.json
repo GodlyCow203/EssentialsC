@@ -808,6 +808,7 @@
   "essc.version": "<prefix> <color:#AAAAAA>运行 EssentialsC 版本 <color:#FFFFFF><version></color></color>",
   "essc.debug.toggled": "<prefix> <color:#AAAAAA>调试模式 <color:#FFF200><state></color>。</color>",
   "essc.help.header": "<prefix> <color:#FFFFFF><u>EssentialsC 管理</color>",
+  "essc.help.wiki": "<prefix> <color:#FFFFFF>文档: </color><click:open_url:'https://wiki.godlycow.org/essc'><color:#FFF200><underlined>wiki.godlycow.org/essc</underlined></color></click>",
   "essc.help.reload": "<prefix> <color:#FFF200>/essc reload</color> <color:#666666>-</color> <color:#FFFFFF>重新加载配置和语言</color>",
   "essc.help.version": "<prefix> <color:#FFF200>/essc version</color> <color:#666666>-</color> <color:#FFFFFF>显示插件版本</color>",
   "essc.help.debug": "<prefix> <color:#FFF200>/essc debug</color> <color:#666666>-</color> <color:#FFFFFF>切换调试模式</color>",

@@ -411,12 +411,12 @@ public class EsscCommand extends Command {
 
     private void showHelp(CommandSender sender) {
         sender.sendMessage(lang.get(sender, "essc.help.header"));
-        sender.sendMessage(lang.get(sender, "essc.help.reload"));
-        sender.sendMessage(lang.get(sender, "essc.help.backup"));
-        sender.sendMessage(lang.get(sender, "essc.help.version"));
-        sender.sendMessage(lang.get(sender, "essc.help.debug"));
-        sender.sendMessage(lang.get(sender, "essc.help.placeholders"));
-        sender.sendMessage(lang.get(sender, "essc.help.commands"));
+        sender.sendMessage(lang.get(sender, "essc.help.wiki"));
+    }
+
+    @Override
+    protected void sendHelp(CommandSender sender, String[] args) {
+        showHelp(sender);
     }
 
     @Override
