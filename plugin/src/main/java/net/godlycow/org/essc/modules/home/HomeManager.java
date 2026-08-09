@@ -1,7 +1,10 @@
 package net.godlycow.org.essc.modules.home;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.api.home.event.HomeDeleteEvent;
+import net.godlycow.org.essc.api.home.event.HomeSetEvent;
 import net.godlycow.org.essc.storage.database.Database;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -58,6 +61,11 @@ public class HomeManager {
     }
 
     public CompletableFuture<Boolean> setHome(Player player, String name, Location location) {
+        HomeSetEvent event = new HomeSetEvent(player, name, location);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return CompletableFuture.completedFuture(false);
+        }
         return repository.save(player.getUniqueId(), name, location).whenComplete((result, err) -> {
             if (result != null && result) {
                 homeNameCache.computeIfAbsent(player.getUniqueId(), k -> ConcurrentHashMap.newKeySet()).add(name.toLowerCase());
@@ -66,6 +74,14 @@ public class HomeManager {
     }
 
     public CompletableFuture<Boolean> setHome(UUID uuid, String name, Location location) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player != null) {
+            HomeSetEvent event = new HomeSetEvent(player, name, location);
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                return CompletableFuture.completedFuture(false);
+            }
+        }
         return repository.save(uuid, name, location).whenComplete((result, err) -> {
             if (result != null && result) {
                 homeNameCache.computeIfAbsent(uuid, k -> ConcurrentHashMap.newKeySet()).add(name.toLowerCase());
@@ -74,6 +90,14 @@ public class HomeManager {
     }
 
     public CompletableFuture<Boolean> deleteHome(UUID uuid, String name) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player != null) {
+            HomeDeleteEvent event = new HomeDeleteEvent(player, name);
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                return CompletableFuture.completedFuture(false);
+            }
+        }
         return repository.delete(uuid, name).whenComplete((result, err) -> {
             Set<String> cached = homeNameCache.get(uuid);
             if (cached != null) {

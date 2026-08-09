@@ -2,6 +2,13 @@ package net.godlycow.org.essc.modules.home;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.api.home.event.HomeCooldownExpireEvent;
+import net.godlycow.org.essc.api.home.event.HomePostTeleportEvent;
+import net.godlycow.org.essc.api.home.event.HomeTeleportEvent;
+import net.godlycow.org.essc.api.home.event.HomeWarmupCancelEvent;
+import net.godlycow.org.essc.api.home.event.HomeWarmupStartEvent;
+import net.godlycow.org.essc.api.impl.home.HomeImpl;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -30,6 +37,7 @@ public class TeleportHandler implements Listener {
     private final Map<UUID, Long> teleportCooldowns = new ConcurrentHashMap<>();
     private final Map<UUID, ScheduledTask> pendingTeleports = new ConcurrentHashMap<>();
     private final Map<UUID, Home> pendingDestination = new ConcurrentHashMap<>();
+    private final Map<UUID, Long> lastCooldownExpireNotified = new ConcurrentHashMap<>();
 
     public TeleportHandler(EssentialsC plugin, HomeDatabase repository) {
         this.plugin = plugin;
@@ -52,7 +60,15 @@ public class TeleportHandler implements Listener {
     public long getRemainingCooldown(Player player) {
         long cooldown = plugin.getConfigManager().getHomeCooldown();
         long last = teleportCooldowns.getOrDefault(player.getUniqueId(), 0L);
-        return Math.max(0, (last + (cooldown * 1000L) - System.currentTimeMillis()) / 1000L);
+        long remaining = Math.max(0, (last + (cooldown * 1000L) - System.currentTimeMillis()) / 1000L);
+        if (remaining == 0 && cooldown > 0 && last > 0) {
+            Long notifiedAt = lastCooldownExpireNotified.get(player.getUniqueId());
+            if (notifiedAt == null || notifiedAt != last) {
+                lastCooldownExpireNotified.put(player.getUniqueId(), last);
+                Bukkit.getPluginManager().callEvent(new HomeCooldownExpireEvent(player, last));
+            }
+        }
+        return remaining;
     }
 
     public boolean hasPendingTeleport(Player player) {
@@ -63,7 +79,11 @@ public class TeleportHandler implements Listener {
         ScheduledTask task = pendingTeleports.remove(player.getUniqueId());
         if (task != null) {
             task.cancel();
-            pendingDestination.remove(player.getUniqueId());
+            Home home = pendingDestination.remove(player.getUniqueId());
+            if (home != null) {
+                Bukkit.getPluginManager().callEvent(new HomeWarmupCancelEvent(
+                        player, new HomeImpl(home), HomeWarmupCancelEvent.CancelReason.EVENT_CANCELLED));
+            }
             plugin.debug("Cancelled pending teleport for " + player.getName());
         }
     }
@@ -84,6 +104,12 @@ public class TeleportHandler implements Listener {
             return;
         }
 
+        HomeTeleportEvent teleportEvent = new HomeTeleportEvent(player, new HomeImpl(home));
+        Bukkit.getPluginManager().callEvent(teleportEvent);
+        if (teleportEvent.isCancelled()) {
+            return;
+        }
+
         Location loc = home.toLocation(plugin.getServer());
         if (loc == null || loc.getWorld() == null) {
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.invalid_world"));
@@ -93,6 +119,13 @@ public class TeleportHandler implements Listener {
         long warmup = plugin.getConfigManager().getHomeWarmup();
 
         if (warmup > 0 && !player.hasPermission("essentialsc.home.admin")) {
+            HomeWarmupStartEvent warmupEvent = new HomeWarmupStartEvent(player, new HomeImpl(home), warmup);
+            Bukkit.getPluginManager().callEvent(warmupEvent);
+            if (warmupEvent.isCancelled()) {
+                return;
+            }
+            warmup = warmupEvent.getWarmupSeconds();
+
             pendingDestination.put(player.getUniqueId(), home);
 
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.pending",
@@ -136,6 +169,9 @@ public class TeleportHandler implements Listener {
         plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+            lastCooldownExpireNotified.remove(player.getUniqueId());
+
+            Bukkit.getPluginManager().callEvent(new HomePostTeleportEvent(player, new HomeImpl(home), loc));
 
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.success",
                     Map.of("name", home.getName())));
@@ -177,14 +213,32 @@ public class TeleportHandler implements Listener {
             return;
         }
 
-        cancelTeleport(player);
+        ScheduledTask task = pendingTeleports.remove(player.getUniqueId());
+        if (task != null) {
+            task.cancel();
+            Home home = pendingDestination.remove(player.getUniqueId());
+            if (home != null) {
+                Bukkit.getPluginManager().callEvent(new HomeWarmupCancelEvent(
+                        player, new HomeImpl(home), HomeWarmupCancelEvent.CancelReason.PLAYER_MOVED));
+            }
+        }
         player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.cancelled"));
         plugin.debug("Cancelled teleport for " + player.getName() + " due to movement");
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        cancelTeleport(event.getPlayer());
+        Player player = event.getPlayer();
+        ScheduledTask task = pendingTeleports.remove(player.getUniqueId());
+        if (task != null) {
+            task.cancel();
+            Home home = pendingDestination.remove(player.getUniqueId());
+            if (home != null) {
+                Bukkit.getPluginManager().callEvent(new HomeWarmupCancelEvent(
+                        player, new HomeImpl(home), HomeWarmupCancelEvent.CancelReason.PLAYER_OFFLINE));
+            }
+        }
+        lastCooldownExpireNotified.remove(player.getUniqueId());
     }
 
     public void shutdown() {
