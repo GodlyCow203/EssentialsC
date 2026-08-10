@@ -37,7 +37,7 @@ public class EconomyManager implements EconomyService, Listener {
 
     public EconomyManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.database = new Database(plugin);
+        this.database = new Database(plugin, "economy.db");
         loadConfig();
 
         try {

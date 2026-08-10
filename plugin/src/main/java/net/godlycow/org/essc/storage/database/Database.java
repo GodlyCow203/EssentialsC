@@ -16,10 +16,6 @@ public class Database {
     private Connection connection;
     private final ExecutorService writeExecutor;
 
-    public Database(EssentialsC plugin) {
-        this(plugin, "economy.db");
-    }
-
     public Database(EssentialsC plugin, String filename) {
         this.plugin = plugin;
 
