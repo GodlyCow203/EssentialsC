@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.permissions.Permission;
@@ -175,6 +176,7 @@ public class KitDefinitions {
 
             Object enchObj = map.get("enchantments");
             if (enchObj instanceof Map<?, ?> enchMap) {
+                EnchantmentStorageMeta bookMeta = meta instanceof EnchantmentStorageMeta storageMeta ? storageMeta : null;
                 for (Map.Entry<?, ?> entry : enchMap.entrySet()) {
                     if (!(entry.getKey() instanceof String key)) {
                         continue;
@@ -184,7 +186,13 @@ public class KitDefinitions {
                     }
 
                     @SuppressWarnings("deprecation") Enchantment enchant = Enchantment.getByName(key.toUpperCase());
-                    if (enchant != null) {
+                    if (enchant == null) {
+                        continue;
+                    }
+
+                    if (bookMeta != null) {
+                        bookMeta.addStoredEnchant(enchant, lvl.intValue(), true);
+                    } else {
                         meta.addEnchant(enchant, lvl.intValue(), true);
                     }
                 }
