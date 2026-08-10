@@ -66,9 +66,19 @@ public class SetHomeCommand extends Command {
 
         boolean isAdmin = targetName != null;
 
-        plugin.getHomeManager().homeExists(targetUuid, name).whenComplete(( alreadyExists, err1) -> {
+        plugin.getHomeManager().homeExists(targetUuid, name).whenComplete((alreadyExists, err1) -> {
+            if (err1 != null) {
+                sendSetFailure(executor, name);
+                return;
+            }
+
             if (!isAdmin) {
                 plugin.getHomeManager().getEffectiveHomeCount(executor).whenComplete((count, err2) -> {
+                    if (err2 != null) {
+                        sendSetFailure(executor, name);
+                        return;
+                    }
+
                     int max = plugin.getHomeManager().getMaxHomes(executor);
 
                     if (!alreadyExists && count >= max) {
@@ -78,31 +88,38 @@ public class SetHomeCommand extends Command {
                         return;
                     }
 
-                    saveHome(executor, targetUuid, name, alreadyExists, isAdmin, targetName);
+                    saveHome(executor, targetUuid, name, alreadyExists, false, null);
                 });
             } else {
-                saveHome(executor, targetUuid, name, alreadyExists, isAdmin, targetName);
+                saveHome(executor, targetUuid, name, alreadyExists, true, targetName);
             }
         });
     }
 
-    private void saveHome(Player executor, UUID targetUuid, String name, boolean alreadyExists,  boolean isAdmin, String targetName) {
-        plugin.getHomeManager().setHome(targetUuid, name, executor.getLocation()).whenComplete((success, err3) -> {
-            executor.getScheduler().run(plugin, task -> {
-                if (success) {
-                    if (isAdmin) {
-                        String key = alreadyExists ? "home.admin.set.updated" : "home.admin.set.success";
-                        executor.sendMessage(lang.get(executor, key,
-                                Map.of("player", targetName, "name", name)));
+    private void saveHome(Player executor, UUID targetUuid, String name, boolean alreadyExists, boolean isAdmin, String targetName) {
+        executor.getScheduler().run(plugin, task -> {
+            plugin.getHomeManager().setHome(targetUuid, name, executor.getLocation()).whenComplete((success, err3) -> {
+                executor.getScheduler().run(plugin, task2 -> {
+                    if (success != null && success) {
+                        if (isAdmin) {
+                            String key = alreadyExists ? "home.admin.set.updated" : "home.admin.set.success";
+                            executor.sendMessage(lang.get(executor, key,
+                                    Map.of("player", targetName, "name", name)));
+                        } else {
+                            String key = alreadyExists ? "home.set.updated" : "home.set.success";
+                            executor.sendMessage(lang.get(executor, key, Map.of("name", name)));
+                        }
                     } else {
-                        String key = alreadyExists ? "home.set.updated" : "home.set.success";
-                        executor.sendMessage(lang.get(executor, key, Map.of("name", name)));
+                        executor.sendMessage(lang.get(executor, "home.set.failed", Map.of("name", name)));
                     }
-                } else {
-                    executor.sendMessage(lang.get(executor, "home.set.failed", Map.of("name", name)));
-                }
-            }, null);
-        });
+                }, null);
+            });
+        }, null);
+    }
+
+    private void sendSetFailure(Player executor, String name) {
+        executor.getScheduler().run(plugin, task ->
+                executor.sendMessage(lang.get(executor, "home.set.failed", Map.of("name", name))), null);
     }
 
     @Override
