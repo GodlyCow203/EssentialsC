@@ -2,7 +2,12 @@ package net.godlycow.org.essc.modules.warp;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.api.impl.warp.WarpImpl;
+import net.godlycow.org.essc.api.warp.event.WarpDeleteEvent;
+import net.godlycow.org.essc.api.warp.event.WarpSetEvent;
+import net.godlycow.org.essc.api.warp.event.WarpUpdateEvent;
 import net.godlycow.org.essc.storage.database.Database;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -153,6 +158,13 @@ public class WarpManager {
             return CompletableFuture.completedFuture(false);
         }
 
+        WarpSetEvent event = new WarpSetEvent(null, name, location);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            plugin.debug("Warp creation cancelled by WarpSetEvent: " + name);
+            return CompletableFuture.completedFuture(false);
+        }
+
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
                     "INSERT INTO warps (name, world, x, y, z, yaw, pitch, permission, cost, hidden, description, category) " +
@@ -188,6 +200,13 @@ public class WarpManager {
             return CompletableFuture.completedFuture(false);
         }
 
+        WarpDeleteEvent event = new WarpDeleteEvent(null, name);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            plugin.debug("Warp deletion cancelled by WarpDeleteEvent: " + name);
+            return CompletableFuture.completedFuture(false);
+        }
+
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM warps WHERE name = ?")) {
                 stmt.setString(1, name);
@@ -204,6 +223,13 @@ public class WarpManager {
     }
 
     public CompletableFuture<Boolean> updateWarp(Warp warp) {
+        WarpUpdateEvent event = new WarpUpdateEvent(null, new WarpImpl(warp));
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            plugin.debug("Warp update cancelled by WarpUpdateEvent: " + warp.getName());
+            return CompletableFuture.completedFuture(false);
+        }
+
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement(
                     "UPDATE warps SET world=?, x=?, y=?, z=?, yaw=?, pitch=?, permission=?, cost=?, hidden=?, description=?, category=? " +

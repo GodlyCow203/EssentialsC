@@ -2,9 +2,15 @@ package net.godlycow.org.essc.command.warp;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.api.impl.warp.WarpImpl;
+import net.godlycow.org.essc.api.warp.event.WarpPostTeleportEvent;
+import net.godlycow.org.essc.api.warp.event.WarpTeleportEvent;
+import net.godlycow.org.essc.api.warp.event.WarpWarmupCancelEvent;
+import net.godlycow.org.essc.api.warp.event.WarpWarmupStartEvent;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.warp.Warp;
 import net.godlycow.org.essc.modules.warp.WarpManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -112,6 +118,14 @@ public class WarpCommand extends Command {
     private void startWarmup(Player player, Warp warp, long seconds, double cost) {
         WarpManager warpManager = plugin.getWarpManager();
 
+        WarpWarmupStartEvent warmupStartEvent = new WarpWarmupStartEvent(player, new WarpImpl(warp), seconds);
+        Bukkit.getPluginManager().callEvent(warmupStartEvent);
+        if (warmupStartEvent.isCancelled()) {
+            plugin.debug("Warp warmup cancelled by WarpWarmupStartEvent for " + player.getName());
+            return;
+        }
+        seconds = warmupStartEvent.getWarmupSeconds();
+
         warpManager.cancelWarmupTask(player.getUniqueId());
         warpManager.removePendingWarp(player.getUniqueId());
         warpManager.clearMovementTrack(player.getUniqueId());
@@ -136,6 +150,8 @@ public class WarpCommand extends Command {
         AtomicLong remaining = new AtomicLong(seconds);
         ScheduledTask task = player.getScheduler().runAtFixedRate(plugin, task1 -> {
             if (!player.isOnline()) {
+                Bukkit.getPluginManager().callEvent(new WarpWarmupCancelEvent(
+                        player, new WarpImpl(warp), WarpWarmupCancelEvent.CancelReason.PLAYER_OFFLINE));
                 warpManager.cancelWarmupTask(player.getUniqueId());
                 warpManager.removePendingWarp(player.getUniqueId());
                 warpManager.clearMovementTrack(player.getUniqueId());
@@ -156,6 +172,8 @@ public class WarpCommand extends Command {
             if (plugin.getConfigManager().isWarpCancelOnMovement()) {
                 Location original = warpManager.getTrackedLocation(player.getUniqueId());
                 if (original != null && player.getLocation().distanceSquared(original) > 0.1) {
+                    Bukkit.getPluginManager().callEvent(new WarpWarmupCancelEvent(
+                            player, new WarpImpl(warp), WarpWarmupCancelEvent.CancelReason.PLAYER_MOVED));
                     warpManager.cancelWarmupTask(player.getUniqueId());
                     warpManager.removePendingWarp(player.getUniqueId());
                     warpManager.clearMovementTrack(player.getUniqueId());
@@ -183,6 +201,13 @@ public class WarpCommand extends Command {
     private void executeWarp(Player player, Warp warp, double cost) {
         WarpManager warpManager = plugin.getWarpManager();
 
+        WarpTeleportEvent teleportEvent = new WarpTeleportEvent(player, new WarpImpl(warp));
+        Bukkit.getPluginManager().callEvent(teleportEvent);
+        if (teleportEvent.isCancelled()) {
+            plugin.debug("Warp teleport cancelled by WarpTeleportEvent for " + player.getName());
+            return;
+        }
+
         if (cost > 0 && plugin.getConfigManager().isEconomyEnabled() && plugin.isVaultHooked()) {
             plugin.getEconomyManager().withdraw(player.getUniqueId(), BigDecimal.valueOf(cost));
 
@@ -194,6 +219,8 @@ public class WarpCommand extends Command {
         Location dest = warp.getLocation();
         plugin.teleportHelper().teleportAsync(player, dest).thenAccept(success -> {
             if (!success) return;
+
+            Bukkit.getPluginManager().callEvent(new WarpPostTeleportEvent(player, new WarpImpl(warp), dest));
 
             if (plugin.getConfigManager().isWarpParticles()) {
                 dest.getWorld().spawnParticle(Particle.PORTAL, dest, 100, 0.5, 1, 0.5);
