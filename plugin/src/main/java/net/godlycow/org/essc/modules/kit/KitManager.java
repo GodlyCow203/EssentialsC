@@ -72,6 +72,8 @@ public class KitManager implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        final boolean isFirstJoin = !player.hasPlayedBefore();
+
         CompletableFuture<Void> dataFuture = data.loadPlayerData(player.getUniqueId());
         CompletableFuture<Void> notifFuture = cooldowns.loadNotificationsEnabled(player.getUniqueId());
 
@@ -79,7 +81,7 @@ public class KitManager implements Listener {
             plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 if (!player.isOnline()) return;
 
-                if (!player.hasPlayedBefore()) {
+                if (isFirstJoin) {
                     plugin.debug("First join detected for " + player.getName() + ", checking first-join kits");
 
                     for (Kit kit : definitions.getKits()) {

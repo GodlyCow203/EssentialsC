@@ -12,6 +12,7 @@ public class KitDataLoadEvent extends Event {
     private final int loadedEntryCount;
 
     public KitDataLoadEvent(UUID playerId, String playerName, int loadedEntryCount) {
+        super(true);
         this.playerId = playerId;
         this.playerName = playerName;
         this.loadedEntryCount = loadedEntryCount;
