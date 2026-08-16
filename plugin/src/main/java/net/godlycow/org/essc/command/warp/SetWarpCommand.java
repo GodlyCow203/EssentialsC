@@ -27,36 +27,42 @@ public class SetWarpCommand extends Command {
 
         String warpName = args[0];
 
+        int maxWarps = getMaxWarps(player);
+
+        String finalWarpName = maxWarps != Integer.MAX_VALUE
+                ? player.getName().toLowerCase() + "_" + warpName
+                : warpName;
+
         int maxLength = plugin.getConfigManager().getWarpMaxNameLength();
-        if (warpName.length() > maxLength) {
+        if (finalWarpName.length() > maxLength) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("max", String.valueOf(maxLength));
             player.sendMessage(lang.get(player, "warp.name_too_long", placeholders));
             return true;
         }
 
-        if (!warpName.matches("^[a-zA-Z0-9_-]+$")) {
+        if (!finalWarpName.matches("^[a-zA-Z0-9_-]+$")) {
             player.sendMessage(lang.get(player, "warp.invalid_name"));
             return true;
         }
 
-        if (plugin.getWarpManager().warpExists(warpName)) {
+        if (plugin.getWarpManager().warpExists(finalWarpName)) {
             if (!player.hasPermission("essentialsc.setwarp.overwrite")) {
                 Map<String, String> placeholders = new HashMap<>();
-                placeholders.put("warp", warpName);
+                placeholders.put("warp", finalWarpName);
                 player.sendMessage(lang.get(player, "warp.already_exists", placeholders));
                 return true;
             }
 
-            Warp existing = plugin.getWarpManager().getWarp(warpName);
+            Warp existing = plugin.getWarpManager().getWarp(finalWarpName);
             existing.setLocation(player.getLocation());
             plugin.getWarpManager().updateWarp(existing).thenAccept(success -> {
                 player.getScheduler().run(plugin, task -> {
                     Map<String, String> placeholders = new HashMap<>();
-                    placeholders.put("warp", warpName);
+                    placeholders.put("warp", finalWarpName);
                     if (success) {
                         player.sendMessage(lang.get(player, "warp.updated", placeholders));
-                        plugin.debug(player.getName() + " updated warp: " + warpName);
+                        plugin.debug(player.getName() + " updated warp: " + finalWarpName);
                     } else {
                         player.sendMessage(lang.get(player, "error.internal"));
                     }
@@ -65,12 +71,11 @@ public class SetWarpCommand extends Command {
             return true;
         }
 
-        if (plugin.getConfigManager().isWarpLimitEnabled() && !player.hasPermission("essentialsc.setwarp.unlimited")) {
+        if (maxWarps != Integer.MAX_VALUE) {
             int playerWarps = (int) plugin.getWarpManager().getAllWarps().stream()
                     .filter(w -> w.getName().startsWith(player.getName().toLowerCase() + "_"))
                     .count();
 
-            int maxWarps = plugin.getConfigManager().getWarpMaxPerPlayer();
             if (playerWarps >= maxWarps) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("max", String.valueOf(maxWarps));
@@ -80,17 +85,17 @@ public class SetWarpCommand extends Command {
         }
 
         Location loc = player.getLocation();
-        plugin.getWarpManager().createWarp(warpName, loc).thenAccept(success -> {
+        plugin.getWarpManager().createWarp(finalWarpName, loc).thenAccept(success -> {
             player.getScheduler().run(plugin, task -> {
                 if (success) {
                     Map<String, String> placeholders = new HashMap<>();
-                    placeholders.put("warp", warpName);
+                    placeholders.put("warp", finalWarpName);
                     placeholders.put("world", loc.getWorld().getName());
                     placeholders.put("x", String.format("%.1f", loc.getX()));
                     placeholders.put("y", String.format("%.1f", loc.getY()));
                     placeholders.put("z", String.format("%.1f", loc.getZ()));
                     player.sendMessage(lang.get(player, "warp.created", placeholders));
-                    plugin.debug(player.getName() + " created warp: " + warpName);
+                    plugin.debug(player.getName() + " created warp: " + finalWarpName);
                 } else {
                     player.sendMessage(lang.get(player, "error.internal"));
                 }
@@ -98,6 +103,24 @@ public class SetWarpCommand extends Command {
         });
 
         return true;
+    }
+
+    private int getMaxWarps(Player player) {
+        if (player.hasPermission("essentialsc.setwarp.unlimited")) {
+            return Integer.MAX_VALUE;
+        }
+
+        for (int i = 100; i >= 1; i--) {
+            if (player.hasPermission("essentialsc.setwarp." + i)) {
+                return i;
+            }
+        }
+
+        if (plugin.getConfigManager().isWarpLimitEnabled()) {
+            return plugin.getConfigManager().getWarpMaxPerPlayer();
+        }
+
+        return Integer.MAX_VALUE;
     }
 
     @Override

@@ -819,6 +819,12 @@ warp:
   max-name-length: 16
 
   # Limit how many warps a single player can create.
+  # Players subject to this limit get their warps auto-prefixed as
+  # <playername>_<name> so they can be counted and managed (delwarp).
+  # Players with unlimited warps create plain-named public warps.
+  # This can be overridden per-player with LuckPerms permissions:
+  #   essentialsc.setwarp.<number>     (e.g. essentialsc.setwarp.10)
+  #   essentialsc.setwarp.unlimited
   limit-per-player:
     enabled: true
     max: 5

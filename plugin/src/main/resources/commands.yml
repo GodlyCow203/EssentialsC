@@ -55,10 +55,6 @@ config-version: 8
 
 # Player commands
 
-heal:
-  enabled: true
-  priority: normal
-  aliases: []
 
 feed:
   enabled: true

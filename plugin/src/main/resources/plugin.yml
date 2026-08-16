@@ -1004,6 +1004,30 @@ permissions:
     description: Create warps
     default: op
 
+  essentialsc.setwarp.1:
+    description: Allow 1 warp
+    default: false
+
+  essentialsc.setwarp.2:
+    description: Allow 2 warps
+    default: false
+
+  essentialsc.setwarp.3:
+    description: Allow 3 warps
+    default: false
+
+  essentialsc.setwarp.5:
+    description: Allow 5 warps
+    default: false
+
+  essentialsc.setwarp.10:
+    description: Allow 10 warps
+    default: false
+
+  essentialsc.setwarp.25:
+    description: Allow 25 warps
+    default: false
+
   essentialsc.setwarp.overwrite:
     description: Overwrite existing warps
     default: op
