@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.home.event.HomeDeleteEvent;
 import net.godlycow.org.essc.api.home.event.HomeSetEvent;
 import net.godlycow.org.essc.storage.database.Database;
+import net.godlycow.org.essc.util.RespawnUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -49,7 +50,7 @@ public class HomeManager {
         return repository.getHomeCount(player.getUniqueId()).thenApply(count -> {
             if (player.hasPermission("essentialsc.home.bed")
                     && plugin.getConfigManager().isBedHomeCountsInLimit()
-                    && player.getBedSpawnLocation() != null) {
+                    && RespawnUtil.getBedSpawnLocation(player) != null) {
                 return count + 1;
             }
             return count;

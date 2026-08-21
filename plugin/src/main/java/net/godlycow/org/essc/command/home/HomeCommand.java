@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command.home;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.home.Home;
+import net.godlycow.org.essc.util.RespawnUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -53,7 +54,7 @@ public class HomeCommand extends Command {
         String name = args[0].toLowerCase();
 
         if (name.equals("bed") && player.hasPermission("essentialsc.home.bed")) {
-            Location bedLoc = player.getBedSpawnLocation();
+            Location bedLoc = RespawnUtil.getBedSpawnLocation(player);
             if (bedLoc == null) {
                 player.sendMessage(lang.get(player, "home.bed.no_bed"));
                 return true;
@@ -103,7 +104,7 @@ public class HomeCommand extends Command {
         plugin.getHomeManager().getHomes(player.getUniqueId()).whenComplete((homes, err) -> {
             player.getScheduler().run(plugin, task -> {
                 boolean hasBed = player.hasPermission("essentialsc.home.bed")
-                        && player.getBedSpawnLocation() != null;
+                        && RespawnUtil.getBedSpawnLocation(player) != null;
 
                 if ((homes == null || homes.isEmpty()) && !hasBed) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
@@ -157,7 +158,7 @@ public class HomeCommand extends Command {
             List<String> completions = new ArrayList<>();
 
             if ("bed".startsWith(partial) && player.hasPermission("essentialsc.home.bed")
-                    && player.getBedSpawnLocation() != null) {
+                    && RespawnUtil.getBedSpawnLocation(player) != null) {
                 completions.add("bed");
             }
 

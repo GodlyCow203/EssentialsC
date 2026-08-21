@@ -213,10 +213,10 @@ public class SpawnManager implements Listener {
         }
 
         Player player = event.getPlayer();
-        Location bedSpawn = event.getPlayer().getBedSpawnLocation();
 
-        if (bedSpawn != null && plugin.getConfigManager().isSpawnAllowBedsToOverride()) {
-            plugin.debug("Player " + player.getName() + " respawning at bed (override enabled)");
+        if (plugin.getConfigManager().isSpawnAllowBedsToOverride()
+                && (event.isBedSpawn() || event.isAnchorSpawn())) {
+            plugin.debug("Player " + player.getName() + " respawning at bed/anchor (override enabled)");
             return;
         }
 

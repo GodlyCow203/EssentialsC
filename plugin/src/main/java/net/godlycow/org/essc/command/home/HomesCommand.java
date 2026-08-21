@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command.home;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.home.Home;
+import net.godlycow.org.essc.util.RespawnUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -49,8 +50,10 @@ public class HomesCommand extends Command {
 
         plugin.getHomeManager().getHomes(player.getUniqueId()).thenAccept(homes -> {
             player.getScheduler().run(plugin, task -> {
-                boolean hasBed = player.hasPermission("essentialsc.home.bed")
-                        && player.getBedSpawnLocation() != null;
+                Location bedLoc = player.hasPermission("essentialsc.home.bed")
+                        ? RespawnUtil.getBedSpawnLocation(player)
+                        : null;
+                boolean hasBed = bedLoc != null;
 
                 if (homes.isEmpty() && !hasBed) {
                     player.sendMessage(lang.get(player, "home.list.empty"));
@@ -66,7 +69,6 @@ public class HomesCommand extends Command {
                 player.sendMessage(lang.get(player, "homes.list.separator"));
 
                 if (hasBed) {
-                    Location bedLoc = player.getBedSpawnLocation();
                     player.sendMessage(lang.get(player, "homes.list.entry",
                             Map.of("name", "bed",
                                     "world", bedLoc.getWorld() != null ? bedLoc.getWorld().getName() : "?",
