@@ -234,16 +234,20 @@ public class ShopGuiManager {
     }
 
     private ItemStack createBalanceItem(Player player, GuiButton config, double balance) {
-        ItemStack item = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-        if (skullMeta == null)
-            return item;
-        skullMeta.setOwnerProfile(player.getPlayerProfile());
-        item.setItemMeta(skullMeta);
-
+        ItemStack item = new ItemStack(config.getMaterial(), config.getAmount());
         ItemMeta meta = item.getItemMeta();
         if (meta == null)
             return item;
+
+        if (config.getMaterial() == Material.PLAYER_HEAD && meta instanceof SkullMeta skullMeta) {
+            if (config.getSkullTexture() != null) {
+                SkullTextureUtil.applyTexture(skullMeta, config.getSkullTexture(), plugin.getLogger());
+            } else {
+                skullMeta.setOwnerProfile(player.getPlayerProfile());
+            }
+            item.setItemMeta(skullMeta);
+            meta = item.getItemMeta();
+        }
 
         String formattedBalance = String.format("%.2f", balance);
         String currency = balance == 1.0 ?

@@ -7,7 +7,7 @@ items:
   # Example:
   # decoration_example:
   #   material: SUNFLOWER
-  #   name: "<gold><b>✦ Fancy Decoration ✦</b></gold>"
+  #   name: "Fancy Decoration"
   #   lore:
   #     - "<gray>This item is pure decoration"
   #   slot: 4
