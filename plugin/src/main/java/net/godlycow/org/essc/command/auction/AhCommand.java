@@ -135,10 +135,28 @@ public class AhCommand extends Command {
     }
 
     private BigDecimal parsePrice(Player player, String input) {
+        String raw = input.trim();
+        BigDecimal multiplier = BigDecimal.ONE;
+
+        if (!raw.isEmpty() && Character.isLetter(raw.charAt(raw.length() - 1))) {
+            switch (Character.toLowerCase(raw.charAt(raw.length() - 1))) {
+                case 'k' -> multiplier = new BigDecimal("1000");
+                case 'm' -> multiplier = new BigDecimal("1000000");
+                case 'b' -> multiplier = new BigDecimal("1000000000");
+                case 't' -> multiplier = new BigDecimal("1000000000000");
+                default -> {
+                    player.sendMessage(lang.get(player, "ah.invalid_price"));
+                    soundManager.playError(player);
+                    return null;
+                }
+            }
+            raw = raw.substring(0, raw.length() - 1);
+        }
+
         try {
-            BigDecimal price = new BigDecimal(input);
+            BigDecimal price = new BigDecimal(raw);
             if (price.compareTo(BigDecimal.ZERO) <= 0) throw new NumberFormatException();
-            return price;
+            return price.multiply(multiplier);
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get(player, "ah.invalid_price"));
             soundManager.playError(player);
