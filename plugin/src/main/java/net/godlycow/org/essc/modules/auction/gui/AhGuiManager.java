@@ -65,12 +65,12 @@ public class AhGuiManager {
 
         GuiButton expiredConfig = template.getItem("expired");
         if (expiredConfig != null) {
-            gui.setItem(46, itemFactory.createExpiredButtonItem(player, expiredConfig));
+            place(gui, expiredConfig, itemFactory.createExpiredButtonItem(player, expiredConfig));
         }
 
         if (auctions.isEmpty()) {
             GuiButton emptyConfig = template.getItem("empty");
-            gui.setItem(31, emptyConfig != null
+            place(gui, emptyConfig, emptyConfig != null
                     ? guiFramework.getItemBuilder().build(emptyConfig, player)
                     : itemFactory.createFiller(null, player));
         } else {
@@ -83,18 +83,17 @@ public class AhGuiManager {
 
         GuiButton navPrev = template.getItem("nav-prev");
         GuiButton navNext = template.getItem("nav-next");
-        GuiButton filler = template.getItem("filler");
 
-        gui.setItem(48, page > 1
+        place(gui, navPrev, page > 1
                 ? itemFactory.createNavItem(navPrev, page - 1, "main", player)
-                : itemFactory.createFiller(filler, player));
+                : null);
 
-        gui.setItem(50, page < totalPages
+        place(gui, navNext, page < totalPages
                 ? itemFactory.createNavItem(navNext, page + 1, "main", player)
-                : itemFactory.createFiller(filler, player));
+                : null);
 
         GuiButton infoConfig = template.getItem("info");
-        gui.setItem(49, itemFactory.createInfoItem(player, infoConfig));
+        place(gui, infoConfig, itemFactory.createInfoItem(player, infoConfig));
 
         openGui(player, gui);
     }
@@ -133,7 +132,7 @@ public class AhGuiManager {
 
         if (history.isEmpty()) {
             GuiButton empty = template.getItem("empty");
-            gui.setItem(31, empty != null ? guiFramework.getItemBuilder().build(empty, player) : itemFactory.createFiller(null, player));
+            place(gui, empty, empty != null ? guiFramework.getItemBuilder().build(empty, player) : itemFactory.createFiller(null, player));
         } else {
             int start = (page - 1) * PER_PAGE;
             int end = Math.min(start + PER_PAGE, history.size());
@@ -144,17 +143,16 @@ public class AhGuiManager {
 
         GuiButton navPrev = template.getItem("nav-prev");
         GuiButton navNext = template.getItem("nav-next");
-        GuiButton filler = template.getItem("filler");
 
-        gui.setItem(48, page > 1
+        place(gui, navPrev, page > 1
                 ? itemFactory.createNavItem(navPrev, page - 1, "sell_history", player)
-                : itemFactory.createFiller(filler, player));
-        gui.setItem(50, page < totalPages
+                : null);
+        place(gui, navNext, page < totalPages
                 ? itemFactory.createNavItem(navNext, page + 1, "sell_history", player)
-                : itemFactory.createFiller(filler, player));
+                : null);
 
         GuiButton statsConfig = template.getItem("stats");
-        gui.setItem(49, itemFactory.createSellHistoryStatsItem(history, player, statsConfig));
+        place(gui, statsConfig, itemFactory.createSellHistoryStatsItem(history, player, statsConfig));
 
         openGui(player, gui);
     }
@@ -178,7 +176,7 @@ public class AhGuiManager {
 
         if (history.isEmpty()) {
             GuiButton empty = template.getItem("empty");
-            gui.setItem(31, empty != null ? guiFramework.getItemBuilder().build(empty, player) : itemFactory.createFiller(null, player));
+            place(gui, empty, empty != null ? guiFramework.getItemBuilder().build(empty, player) : itemFactory.createFiller(null, player));
         } else {
             int start = (page - 1) * PER_PAGE;
             int end = Math.min(start + PER_PAGE, history.size());
@@ -189,22 +187,21 @@ public class AhGuiManager {
 
         GuiButton navPrev = template.getItem("nav-prev");
         GuiButton navNext = template.getItem("nav-next");
-        GuiButton filler = template.getItem("filler");
 
-        gui.setItem(48, page > 1
+        place(gui, navPrev, page > 1
                 ? itemFactory.createNavItem(navPrev, page - 1, "buy_history", player)
-                : itemFactory.createFiller(filler, player));
-        gui.setItem(50, page < totalPages
+                : null);
+        place(gui, navNext, page < totalPages
                 ? itemFactory.createNavItem(navNext, page + 1, "buy_history", player)
-                : itemFactory.createFiller(filler, player));
+                : null);
 
         GuiButton statsConfig = template.getItem("stats");
-        gui.setItem(49, itemFactory.createBuyHistoryStatsItem(history, player, statsConfig));
+        place(gui, statsConfig, itemFactory.createBuyHistoryStatsItem(history, player, statsConfig));
 
         openGui(player, gui);
     }
 
-    public void openExpiredGui(Player player) {
+    public void openExpiredGui(Player player, int page) {
         List<ItemStack> expiredItems = plugin.getAuctionManager().getExpiredItems(player.getUniqueId());
         if (expiredItems.isEmpty()) {
             player.sendMessage(plugin.getLanguageManager().get(player, "ah.no_expired"));
@@ -219,16 +216,31 @@ public class AhGuiManager {
             return;
         }
 
+        int totalPages = Math.max(1, (int) Math.ceil((double) expiredItems.size() / PER_PAGE));
+        page = Math.max(1, Math.min(page, totalPages));
+
         Component title = template.resolveTitle(player, plugin);
-        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), page), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_expired", player);
 
-        for (int i = 0; i < expiredItems.size() && i < AUCTION_SLOTS.length; i++) {
-            gui.setItem(AUCTION_SLOTS[i], itemFactory.createClaimableItem(expiredItems.get(i), i + 1, player));
+        int start = (page - 1) * PER_PAGE;
+        int end = Math.min(start + PER_PAGE, expiredItems.size());
+        for (int i = start; i < end && (i - start) < AUCTION_SLOTS.length; i++) {
+            gui.setItem(AUCTION_SLOTS[i - start], itemFactory.createClaimableItem(expiredItems.get(i), i + 1, player));
         }
 
         GuiButton statsConfig = template.getItem("stats");
-        gui.setItem(49, itemFactory.createStatsItem(expiredItems.size(), player, statsConfig));
+        place(gui, statsConfig, itemFactory.createStatsItem(expiredItems.size(), player, statsConfig));
+
+        GuiButton navPrev = template.getItem("nav-prev");
+        GuiButton navNext = template.getItem("nav-next");
+
+        place(gui, navPrev, page > 1
+                ? itemFactory.createNavItem(navPrev, page - 1, "expired", player)
+                : null);
+        place(gui, navNext, page < totalPages
+                ? itemFactory.createNavItem(navNext, page + 1, "expired", player)
+                : null);
 
         openGui(player, gui);
     }
@@ -266,19 +278,26 @@ public class AhGuiManager {
 
         GuiButton navPrev = template.getItem("nav-prev");
         GuiButton navNext = template.getItem("nav-next");
-        GuiButton filler = template.getItem("filler");
 
-        gui.setItem(48, page > 1
+        place(gui, navPrev, page > 1
                 ? itemFactory.createNavItem(navPrev, page - 1, "listings", player)
-                : itemFactory.createFiller(filler, player));
-        gui.setItem(50, page < totalPages
+                : null);
+        place(gui, navNext, page < totalPages
                 ? itemFactory.createNavItem(navNext, page + 1, "listings", player)
-                : itemFactory.createFiller(filler, player));
+                : null);
 
         GuiButton infoConfig = template.getItem("listings-info");
-        gui.setItem(49, itemFactory.createListingsInfoItem(auctions.size(), player, infoConfig));
+        place(gui, infoConfig, itemFactory.createListingsInfoItem(auctions.size(), player, infoConfig));
 
         openGui(player, gui);
+    }
+
+    private void place(Inventory gui, GuiButton button, ItemStack item) {
+        if (button == null || item == null || button.getSlots().isEmpty()) return;
+        int slot = button.getSlots().get(0);
+        if (slot >= 0 && slot < gui.getSize()) {
+            gui.setItem(slot, item);
+        }
     }
 
     private void openGui(Player player, Inventory gui) {

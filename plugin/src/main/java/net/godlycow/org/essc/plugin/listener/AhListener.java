@@ -82,6 +82,7 @@ public class AhListener implements Listener {
                 case "listings" -> ahCommand.openListingsGui(player, page);
                 case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
                 case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
+                case "expired" -> ahCommand.openExpiredGui(player, page);
             }
             return;
         }
@@ -126,7 +127,7 @@ public class AhListener implements Listener {
             }
             case "expired" -> {
                 soundManager.playClick(player);
-                ahCommand.openExpiredGui(player);
+                ahCommand.openExpiredGui(player, 1);
             }
             case "listings" -> {
                 soundManager.playClick(player);
@@ -185,7 +186,7 @@ public class AhListener implements Listener {
         player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed"));
 
         if (!plugin.getAuctionManager().getExpiredItems(player.getUniqueId()).isEmpty()) {
-            ahCommand.openExpiredGui(player);
+            ahCommand.openExpiredGui(player, 1);
         } else {
             player.closeInventory();
             player.sendMessage(plugin.getLanguageManager().get(player, "ah.all_claimed"));

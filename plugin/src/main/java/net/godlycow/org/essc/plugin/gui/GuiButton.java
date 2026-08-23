@@ -22,6 +22,8 @@ public class GuiButton {
     private final int amount;
     private final Integer customModelData;
     private final String action;
+    private final boolean decoration;
+    private final boolean dynamic;
 
     public GuiButton(String id, ConfigurationSection section) {
         this.id = id;
@@ -38,6 +40,8 @@ public class GuiButton {
         this.amount = Math.max(1, section.getInt("amount", 1));
         this.customModelData = section.contains("model-data") ? section.getInt("model-data") : null;
         this.action = section.getString("action", null);
+        this.decoration = section.getBoolean("decoration", false);
+        this.dynamic = section.getBoolean("dynamic", false);
     }
 
     private static Material parseMaterial(String name, String buttonId) {
@@ -131,5 +135,13 @@ public class GuiButton {
 
     public String getAction() {
         return action;
+    }
+
+    public boolean isDecoration() {
+        return decoration;
+    }
+
+    public boolean isDynamic() {
+        return dynamic;
     }
 }

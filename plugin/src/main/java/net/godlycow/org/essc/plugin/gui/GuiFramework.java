@@ -96,6 +96,7 @@ public class GuiFramework {
         if (template == null) return;
 
         for (GuiButton button : template.getItems().values()) {
+            if (button.isDynamic()) continue;
             ItemStack item = itemBuilder.build(button, player);
             for (int slot : button.getSlots()) {
                 if (slot >= 0 && slot < inv.getSize()) {

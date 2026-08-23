@@ -37,7 +37,7 @@ public class AhCommand extends Command {
         switch (sub) {
             case "sell", "s" -> handleSell(player, args);
             case "cancel", "c" -> handleCancel(player, args);
-            case "expired", "e" -> guiManager.openExpiredGui(player);
+            case "expired", "e" -> guiManager.openExpiredGui(player, 1);
             case "listings", "l", "my" -> guiManager.openListingsGui(player, 1);
             case "notifications", "notif", "notify" -> handleNotifications(player);
             case "reload", "rl" -> handleReload(player);
@@ -241,7 +241,11 @@ public class AhCommand extends Command {
     }
 
     public void openExpiredGui(Player player) {
-        guiManager.openExpiredGui(player);
+        guiManager.openExpiredGui(player, 1);
+    }
+
+    public void openExpiredGui(Player player, int page) {
+        guiManager.openExpiredGui(player, page);
     }
 
     public void openListingsGui(Player player, int page) {
