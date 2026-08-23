@@ -52,17 +52,17 @@ public class KitGuiManager {
         List<Integer> kitSlots = templateSlotList(template, "kit-slots");
         int perPage = Math.max(1, kitSlots.size());
 
-        List<Kit> accessible = accessibleKits(player);
+        List<Kit> allKits = new ArrayList<>(plugin.getKitManager().getKits());
 
         List<Kit> autoKits = new ArrayList<>();
         Map<Integer, Map<Integer, Kit>> pinnedKits = new HashMap<>();
 
         int maxPage = 1;
-        for (Kit kit : accessible) {
+        for (Kit kit : allKits) {
             maxPage = Math.max(maxPage, kit.getGuiPage());
         }
 
-        for (Kit kit : accessible) {
+        for (Kit kit : allKits) {
             int slot = kit.getGuiSlot();
             if (slot >= 0 && slot < template.getSize()) {
                 pinnedKits.computeIfAbsent(kit.getGuiPage(), p -> new HashMap<>()).put(slot, kit);
@@ -84,41 +84,34 @@ public class KitGuiManager {
         guiFramework.fillStaticItems(gui, "kit_list", player);
 
         GuiButton emptyBtn = template.getItem("empty");
-        if (emptyBtn != null) {
-            for (int slot : emptyBtn.getSlots()) {
-                gui.setItem(slot, new ItemStack(Material.AIR));
-            }
-        }
 
         int start = (safePage - 1) * perPage;
         int end = Math.min(start + perPage, autoKits.size());
 
-        boolean pageHasKit = false;
         Map<Integer, Kit> pagePinned = pinnedKits.get(safePage);
         if (pagePinned != null) {
             for (Map.Entry<Integer, Kit> entry : pagePinned.entrySet()) {
-                pageHasKit = true;
-                gui.setItem(entry.getKey(), buildKitItem(player, entry.getValue()));
+                int slot = entry.getKey();
+                Kit kit = entry.getValue();
+                if (plugin.getKitManager().hasPermission(player, kit)) {
+                    gui.setItem(slot, buildKitItem(player, kit));
+                } else if (emptyBtn != null) {
+                    gui.setItem(slot, guiFramework.getItemBuilder().build(emptyBtn, player));
+                }
             }
         }
 
-        if (end > start) {
-            pageHasKit = true;
-        }
-
-        if (!pageHasKit) {
-            if (emptyBtn != null && !emptyBtn.getSlots().isEmpty()) {
-                gui.setItem(emptyBtn.getSlots().get(0), guiFramework.getItemBuilder().build(emptyBtn, player));
-            }
-        } else {
-            for (int i = start; i < end; i++) {
-                int slotIndex = i - start;
-                if (slotIndex < kitSlots.size()) {
-                    int targetSlot = kitSlots.get(slotIndex);
-                    Kit pinned = pagePinned != null ? pagePinned.get(targetSlot) : null;
-                    if (pinned == null) {
-                        gui.setItem(targetSlot, buildKitItem(player, autoKits.get(i)));
-                    }
+        for (int i = start; i < end; i++) {
+            int slotIndex = i - start;
+            if (slotIndex < kitSlots.size()) {
+                int targetSlot = kitSlots.get(slotIndex);
+                Kit pinned = pagePinned != null ? pagePinned.get(targetSlot) : null;
+                if (pinned != null) continue;
+                Kit kit = autoKits.get(i);
+                if (plugin.getKitManager().hasPermission(player, kit)) {
+                    gui.setItem(targetSlot, buildKitItem(player, kit));
+                } else if (emptyBtn != null) {
+                    gui.setItem(targetSlot, guiFramework.getItemBuilder().build(emptyBtn, player));
                 }
             }
         }
@@ -318,17 +311,6 @@ public class KitGuiManager {
 
     public void clearSession(UUID uuid) {
         activeSessions.remove(uuid);
-    }
-
-    private List<Kit> accessibleKits(Player player) {
-        Collection<Kit> all = plugin.getKitManager().getKits();
-        List<Kit> result = new ArrayList<>();
-        for (Kit kit : all) {
-            if (plugin.getKitManager().hasPermission(player, kit)) {
-                result.add(kit);
-            }
-        }
-        return result;
     }
 
     private List<Integer> templateSlotList(GuiTemplate template, String itemId) {
