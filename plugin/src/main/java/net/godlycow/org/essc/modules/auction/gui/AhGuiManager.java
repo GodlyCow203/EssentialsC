@@ -7,7 +7,6 @@ import net.godlycow.org.essc.modules.auction.BuyHistoryEntry;
 import net.godlycow.org.essc.modules.auction.SellHistoryEntry;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
-import net.godlycow.org.essc.plugin.gui.GuiSession;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -15,7 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -61,7 +59,7 @@ public class AhGuiManager {
 
         Component title = template.resolveTitle(player, plugin,
                 Map.of("page", String.valueOf(page), "total", String.valueOf(totalPages)));
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
 
         guiFramework.fillStaticItems(gui, "auction_main", player);
 
@@ -98,7 +96,7 @@ public class AhGuiManager {
         GuiButton infoConfig = template.getItem("info");
         gui.setItem(49, itemFactory.createInfoItem(player, infoConfig));
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_main", page));
+        openGui(player, gui);
     }
 
     public void openHistoryTypeGui(Player player) {
@@ -110,10 +108,10 @@ public class AhGuiManager {
         }
 
         Component title = template.resolveTitle(player, plugin);
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_history_type", player);
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_history_type"));
+        openGui(player, gui);
     }
 
     public void openSellHistoryGui(Player player, int page) {
@@ -130,7 +128,7 @@ public class AhGuiManager {
 
         Component title = template.resolveTitle(player, plugin,
                 Map.of("page", String.valueOf(page), "total", String.valueOf(totalPages)));
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_sell_history", player);
 
         if (history.isEmpty()) {
@@ -158,7 +156,7 @@ public class AhGuiManager {
         GuiButton statsConfig = template.getItem("stats");
         gui.setItem(49, itemFactory.createSellHistoryStatsItem(history, player, statsConfig));
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_sell_history", page));
+        openGui(player, gui);
     }
 
     public void openBuyHistoryGui(Player player, int page) {
@@ -175,7 +173,7 @@ public class AhGuiManager {
 
         Component title = template.resolveTitle(player, plugin,
                 Map.of("page", String.valueOf(page), "total", String.valueOf(totalPages)));
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_buy_history", player);
 
         if (history.isEmpty()) {
@@ -203,7 +201,7 @@ public class AhGuiManager {
         GuiButton statsConfig = template.getItem("stats");
         gui.setItem(49, itemFactory.createBuyHistoryStatsItem(history, player, statsConfig));
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_buy_history", page));
+        openGui(player, gui);
     }
 
     public void openExpiredGui(Player player) {
@@ -222,7 +220,7 @@ public class AhGuiManager {
         }
 
         Component title = template.resolveTitle(player, plugin);
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_expired", player);
 
         for (int i = 0; i < expiredItems.size() && i < AUCTION_SLOTS.length; i++) {
@@ -232,7 +230,7 @@ public class AhGuiManager {
         GuiButton statsConfig = template.getItem("stats");
         gui.setItem(49, itemFactory.createStatsItem(expiredItems.size(), player, statsConfig));
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_expired"));
+        openGui(player, gui);
     }
 
     public void openListingsGui(Player player, int page) {
@@ -257,7 +255,7 @@ public class AhGuiManager {
 
         Component title = template.resolveTitle(player, plugin,
                 Map.of("page", String.valueOf(page), "total", String.valueOf(totalPages)));
-        Inventory gui = Bukkit.createInventory(null, template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), 1), template.getSize(), title);
         guiFramework.fillStaticItems(gui, "auction_listings", player);
 
         int start = (page - 1) * PER_PAGE;
@@ -280,13 +278,11 @@ public class AhGuiManager {
         GuiButton infoConfig = template.getItem("listings-info");
         gui.setItem(49, itemFactory.createListingsInfoItem(auctions.size(), player, infoConfig));
 
-        openGui(player, gui, GuiSession.create(player.getUniqueId(), "auction_listings", page));
+        openGui(player, gui);
     }
 
-    private void openGui(Player player, Inventory gui, GuiSession session) {
-        player.removeMetadata("gui_session", plugin);
+    private void openGui(Player player, Inventory gui) {
         player.openInventory(gui);
-        player.setMetadata("gui_session", new FixedMetadataValue(plugin, session));
     }
 
     public AhItemFactory getItemFactory() {

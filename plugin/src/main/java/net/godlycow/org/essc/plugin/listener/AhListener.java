@@ -4,8 +4,8 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.auction.AhCommand;
 import net.godlycow.org.essc.modules.auction.AhSoundManager;
 import net.godlycow.org.essc.modules.auction.Auction;
+import net.godlycow.org.essc.modules.auction.gui.AhGuiHolder;
 import net.godlycow.org.essc.modules.auction.gui.AhItemFactory;
-import net.godlycow.org.essc.plugin.gui.GuiSession;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -14,7 +14,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -43,13 +42,7 @@ public class AhListener implements Listener {
         if (!plugin.getConfigManager().isAHEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        if (!player.hasMetadata("gui_session")) return;
-
-        GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
-        if (session == null || session.isStale() || !session.getGuiId().startsWith("auction_")) {
-            if (session == null || session.isStale()) player.removeMetadata("gui_session", plugin);
-            return;
-        }
+        if (!(event.getInventory().getHolder() instanceof AhGuiHolder)) return;
 
         event.setCancelled(true);
 
@@ -83,16 +76,13 @@ public class AhListener implements Listener {
             String navType = container.getOrDefault(itemFactory.getNavKey(), PersistentDataType.STRING, "main");
 
             soundManager.playPageTurn(player);
-            player.closeInventory();
 
-            player.getScheduler().runDelayed(plugin, task -> {
-                switch (navType) {
-                    case "main" -> ahCommand.openMainGui(player, page);
-                    case "listings" -> ahCommand.openListingsGui(player, page);
-                    case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
-                    case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
-                }
-            }, null, 1L);
+            switch (navType) {
+                case "main" -> ahCommand.openMainGui(player, page);
+                case "listings" -> ahCommand.openListingsGui(player, page);
+                case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
+                case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
+            }
             return;
         }
 
@@ -116,23 +106,9 @@ public class AhListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onInventoryDrag(InventoryDragEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (player.hasMetadata("gui_session")) {
-            GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
-            if (session != null && session.getGuiId().startsWith("auction_")) {
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent event) {
-        if (!(event.getPlayer() instanceof Player player)) return;
-        if (player.hasMetadata("gui_session")) {
-            GuiSession session = (GuiSession) player.getMetadata("gui_session").get(0).value();
-            if (session != null && session.getGuiId().startsWith("auction_")) {
-                player.removeMetadata("gui_session", plugin);
-            }
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        if (event.getInventory().getHolder() instanceof AhGuiHolder) {
+            event.setCancelled(true);
         }
     }
 
@@ -150,34 +126,28 @@ public class AhListener implements Listener {
             }
             case "expired" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openExpiredGui(player), null, 1L);
+                ahCommand.openExpiredGui(player);
             }
             case "listings" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openListingsGui(player, 1), null, 1L);
+                ahCommand.openListingsGui(player, 1);
             }
             case "claim_all" -> handleClaimAll(player);
             case "refresh", "back_main" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openMainGui(player, 1), null, 1L);
+                ahCommand.openMainGui(player, 1);
             }
             case "history", "history_type", "back_history" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openHistoryTypeGui(player), null, 1L);
+                ahCommand.openHistoryTypeGui(player);
             }
             case "sell_history" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openSellHistoryGui(player, 1), null, 1L);
+                ahCommand.openSellHistoryGui(player, 1);
             }
             case "buy_history" -> {
                 soundManager.playClick(player);
-                player.closeInventory();
-                player.getScheduler().runDelayed(plugin, task -> ahCommand.openBuyHistoryGui(player, 1), null, 1L);
+                ahCommand.openBuyHistoryGui(player, 1);
             }
             case "close" -> {
                 soundManager.playClose(player);
@@ -214,14 +184,12 @@ public class AhListener implements Listener {
         soundManager.playSuccess(player);
         player.sendMessage(plugin.getLanguageManager().get(player, "ah.claimed"));
 
-        player.getScheduler().runDelayed(plugin, scheduledTask -> {
-            if (!plugin.getAuctionManager().getExpiredItems(player.getUniqueId()).isEmpty()) {
-                ahCommand.openExpiredGui(player);
-            } else {
-                player.closeInventory();
-                player.sendMessage(plugin.getLanguageManager().get(player, "ah.all_claimed"));
-            }
-        }, null, 2L);
+        if (!plugin.getAuctionManager().getExpiredItems(player.getUniqueId()).isEmpty()) {
+            ahCommand.openExpiredGui(player);
+        } else {
+            player.closeInventory();
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.all_claimed"));
+        }
     }
 
     private void handleAuctionClick(Player player, int id, boolean isOwn, ClickType click) {
