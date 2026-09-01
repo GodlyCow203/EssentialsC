@@ -1,10 +1,9 @@
 name: EssentialsC-MySQLExpansion
 version: '${project.version}'
-main: net.godlycow.org.essc.expansion.mysql.MySQLDatabaseExpansion
+main: net.godlycow.org.essc.expansion.mysql.MySQLExpansion
 api-version: "1.20"
 authors: [_GodlyCow]
-description: Cross-server economy sync expansion for EssentialsC using MySQL.
-website: https://wiki.godlycow.org/essc/expansions/landingpage
+description: Cross-server network synchronization expansion for EssentialsC backed by MySQL
 
 depend:
   - EssentialsC
@@ -12,12 +11,15 @@ depend:
 softdepend: []
 
 commands:
-  mysqlsync:
-    description: MySQL sync admin commands
-    usage: /mysqlsync <status|forcepush|forcepull|reload>
+  mysql:
+    description: EssentialsC MySQL network sync management command
+    usage: /mysql <status|reload|push|pull|baltop|test|version|help>
     permission: esscmysql.admin
 
 permissions:
   esscmysql.admin:
-    description: Access to /mysqlsync commands
+    description: Full access to the /mysql management commands
     default: op
+  esscmysql.use:
+    description: Access to read-only /mysql commands (status, baltop, version, help)
+    default: true

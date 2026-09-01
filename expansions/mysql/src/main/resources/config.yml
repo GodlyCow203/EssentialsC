@@ -1,27 +1,67 @@
-# EssentialsC MySQL Database Expansion
-# Cross-server economy synchronization
-
-
-# Unique identifier for this server instance
-# IMPORTANT: Each server in your network must have a different server-id
-server-id: "server-2"
-
+# ---------------------------------------------------------------------------
+# EssentialsC - MySQL Network Sync Expansion
+# ---------------------------------------------------------------------------
+# This expansion synchronizes EssentialsC data across a server network using a
+# shared MySQL database. The MySQL database acts as the authoritative network
+# store.
+# ---------------------------------------------------------------------------
 
 mysql:
-  host: "localhost"
+  # JDBC host of your MySQL server.
+  host: localhost
+  # JDBC port (3306 is the MySQL default).
   port: 3306
-  database: "essc_test"
-  username: "root"
-  password: "minecraft"
-  # Connection pool size
-  # For aggressive 1-second sync mode, use 10-20 for best performance
-  # Minimum recommended: 10
-  pool-size: 10
+  # Name of the database EssentialsC will use. It must already exist.
+  database: essc_test_01
+  # Credentials used to connect.
+  username: root
+  password: 'minecraft'
 
-network-kits:
-  enabled: true
+  # Table prefix so multiple networks can share one database safely.
+  table-prefix: 'essc_test_01'
 
-network-nicknames:
-  enabled: true
-  # How often to pull nicknames from MySQL for all online players (in ticks, 20 = 1s)
-  poll-interval-ticks: 40
+  # Connection pool tuning (HikariCP).
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 2
+    connection-timeout-ms: 30000
+    idle-timeout-ms: 600000
+    max-lifetime-ms: 1800000
+    # Extra JDBC properties appended to the connection URL.
+    properties:
+      useSSL: false
+      autoReconnect: true
+      characterEncoding: UTF-8
+
+# Unique identifier for this server inside the network. Leave blank to have one
+# generated automatically and persisted. It is only used for diagnostics.
+server-id: 'survival-01'
+
+# Enable verbose debug logging to the console.
+debug: true
+
+sync:
+  # Economy is the first implemented module.
+  economy:
+    enabled: true
+    # Pull the network balance into the local economy when a player joins.
+    pull-on-join: true
+    # Push the local balance to the network store when a player quits.
+    push-on-quit: true
+    # How often (in seconds) online players' balances are checked and pushed to
+    # the network store whenever they change. EssentialsC does not expose a
+    # balance-change event, so the expansion detects changes by diffing on this
+    # timer; a small value means other servers see earnings almost immediately
+    # without the player having to join them.
+    push-interval-seconds: 2
+    # Keep this server's LOCAL EssentialsC economy mirrored from the network for
+    # players who are not online here. This makes EssentialsC's own /balance and
+    # /baltop commands reflect network balances (e.g. server A earnings) for
+    # players who never joined this server. Disable to only sync the /mysql views.
+    sync-local: true
+    # How often (in seconds) the local<->network mirror runs (push-on-change for
+    # offline players and pull-down of remote changes).
+    mirror-interval-seconds: 5
+    # Number of entries shown per page by /mysql baltop.
+    baltop-page-size: 10
+

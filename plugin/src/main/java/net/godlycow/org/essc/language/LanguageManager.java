@@ -90,6 +90,35 @@ public class LanguageManager {
     }
 
     public @NotNull Component get(CommandSender sender, String key, Map<String, String> placeholders) {
+        String raw = resolve(sender, key, placeholders);
+
+        if (sender != null && !(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
+            Component component = miniMessage.deserialize(raw);
+            String plain = PlainTextComponentSerializer.plainText().serialize(component);
+            return Component.text(plain);
+        }
+
+        return miniMessage.deserialize(raw);
+    }
+
+    public Component get(CommandSender sender, String key) {
+        return get(sender, key, null);
+    }
+
+    /**
+     * Resolves a key to its raw MiniMessage string (placeholders and {@code <prefix>} substituted) without
+     * parsing it into a {@link Component}. Useful when a resolved value must be embedded as a placeholder
+     * inside another message before the combined string is parsed.
+     */
+    public String getRaw(CommandSender sender, String key, Map<String, String> placeholders) {
+        return resolve(sender, key, placeholders);
+    }
+
+    public String getRaw(CommandSender sender, String key) {
+        return resolve(sender, key, null);
+    }
+
+    private String resolve(CommandSender sender, String key, Map<String, String> placeholders) {
         String locale = defaultLang;
 
         if (sender instanceof Player player) {
@@ -119,7 +148,7 @@ public class LanguageManager {
         }
         if (messages == null) {
             plugin.getLogger().severe("[EssentialsC] No language files loaded at all — cannot resolve key '" + key + "'");
-            return miniMessage.deserialize("<red>Missing lang files</red>");
+            return "<red>Missing lang files</red>";
         }
 
         String raw = messages.get(key);
@@ -161,17 +190,7 @@ public class LanguageManager {
         if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
         if (prefix != null) raw = raw.replace("<prefix>", prefix);
 
-        if (sender != null && !(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
-            Component component = miniMessage.deserialize(raw);
-            String plain = PlainTextComponentSerializer.plainText().serialize(component);
-            return Component.text(plain);
-        }
-
-        return miniMessage.deserialize(raw);
-    }
-
-    public Component get(CommandSender sender, String key) {
-        return get(sender, key, null);
+        return raw;
     }
 
     public void setPlayerLanguage(UUID playerUuid, String languageCode) {
