@@ -68,6 +68,18 @@ public final class LegacyColorConverter {
         return sb.toString();
     }
 
+    public static String convertBukkitHexToAmpersandHex(String input) {
+        if (input == null || !input.contains("&x")) return input;
+        Matcher m = HEX_BUKKIT.matcher(input);
+        StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            String hex = m.group().replace("&x", "").replace("&", "");
+            m.appendReplacement(sb, "&#" + hex);
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
     public static String convertHexBukkit(String input) {
         if (input == null || !input.contains("&x")) return input;
         Matcher m = HEX_BUKKIT.matcher(input);

@@ -10,6 +10,7 @@ import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
@@ -107,16 +108,16 @@ public class ChatFormatter {
         boolean canRgb = player.hasPermission("essentialsc.chat.rgbcodes");
         boolean canLegacy = player.hasPermission("essentialsc.chat.legacycodes");
 
-        if (canMiniMessage && (canRgb || canLegacy)) {
-            return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
-        }
-
         if (canMiniMessage) {
+            if (canRgb || canLegacy) {
+                return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
+            }
             return miniMessage.deserialize(raw);
         }
 
         if (canRgb || canLegacy) {
-            return miniMessage.deserialize(LegacyColorConverter.toMiniMessage(raw));
+            String converted = LegacyColorConverter.convertBukkitHexToAmpersandHex(raw);
+            return LegacyComponentSerializer.legacyAmpersand().deserialize(converted);
         }
 
         return Component.text(raw);
