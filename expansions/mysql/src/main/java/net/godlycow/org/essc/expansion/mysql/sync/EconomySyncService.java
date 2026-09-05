@@ -6,6 +6,7 @@ import net.godlycow.org.essc.expansion.mysql.config.ExpansionConfig;
 import net.godlycow.org.essc.expansion.mysql.storage.ConnectionPool;
 import net.godlycow.org.essc.expansion.mysql.storage.SchemaManager;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 
 public class EconomySyncService {
@@ -31,11 +33,11 @@ public class EconomySyncService {
     private final String serverId;
 
     private final Map<UUID,BigDecimal> lastPushed = new ConcurrentHashMap<>();
-    private int pushTaskId = -1;
+    private ScheduledTask pushTask;
 
     private final Map<UUID, BigDecimal> lastNetwork = new ConcurrentHashMap<>();
     private boolean enabled = false;
-    private int mirrorTaskId = -1;
+    private ScheduledTask mirrorTask;
 
     public EconomySyncService( MySQLExpansion plugin, EssentialsC essentialsC,  ConnectionPool pool, SchemaManager schema, ExpansionConfig config, String serverId) {
 
@@ -75,8 +77,8 @@ public class EconomySyncService {
         }
         int pushInterval = Math.max(1, config.getPushIntervalSeconds());
 
-        pushTaskId = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin,
-                this::pushOnline, 20L * pushInterval, 20L * pushInterval).getTaskId();
+        pushTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, task -> pushOnline(),
+                20L * pushInterval, 20L * pushInterval, TimeUnit.MILLISECONDS);
 
         plugin.debug("Scheduled economy push (on change) every " + pushInterval + "s");
 
@@ -84,20 +86,21 @@ public class EconomySyncService {
 
             int mirrorInterval = Math.max(1, config.getMirrorIntervalSeconds());
 
-            mirrorTaskId = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::mirror, 20L * mirrorInterval, 20L * mirrorInterval).getTaskId();
+            mirrorTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, task -> mirror(),
+                    20L * mirrorInterval, 20L * mirrorInterval, TimeUnit.MILLISECONDS);
             plugin.debug("Scheduled local  network mirror every " + mirrorInterval + "s");
         }
     }
 
     public void stop() {
 
-        if (pushTaskId != -1) {
-            Bukkit.getScheduler().cancelTask(pushTaskId);
-            pushTaskId = -1;
+        if (pushTask != null) {
+            pushTask.cancel();
+            pushTask = null;
         }
-        if (mirrorTaskId != -1) {
-            Bukkit.getScheduler().cancelTask(mirrorTaskId);
-            mirrorTaskId = -1;
+        if (mirrorTask != null) {
+            mirrorTask.cancel();
+            mirrorTask = null;
         }
     }
 

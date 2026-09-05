@@ -212,7 +212,7 @@ public class MySQLCommand extends Command {
             return;
         }
         sender.sendMessage(lang.get(sender, "mysql.test.start"));
-        pool.testConnection().whenComplete((latency, error) -> Bukkit.getScheduler().runTask(expansion, () -> {
+        pool.testConnection().whenComplete((latency, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task -> {
             if (error != null) {
                 sender.sendMessage(lang.get(sender, "mysql.test.failed",
                         Map.of("reason", error.getCause() == null
@@ -236,7 +236,7 @@ public class MySQLCommand extends Command {
         String target = args[1];
         if (target.equalsIgnoreCase("all")) {
             sender.sendMessage(lang.get(sender, "mysql.push.all_start"));
-            economySync.forcePushAll().whenComplete((count, error) -> Bukkit.getScheduler().runTask(expansion, () ->
+            economySync.forcePushAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task ->
                     sender.sendMessage(lang.get(sender, "mysql.push.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))))));
             return;
         }
@@ -254,7 +254,7 @@ public class MySQLCommand extends Command {
         }
         var  balance = manager.getCachedBalance(uuid);
         sender.sendMessage(lang.get(sender, "mysql.push.start", Map.of("name", player.getName())));
-        economySync.push(uuid, player.getName(), balance).whenComplete((v, error) -> Bukkit.getScheduler().runTask(expansion, () ->
+        economySync.push(uuid, player.getName(), balance).whenComplete((v, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task ->
                 sender.sendMessage(lang.get(sender, "mysql.push.done", Map.of("name", player.getName(), "balance", manager.format(balance))))));
     }
 
@@ -270,7 +270,7 @@ public class MySQLCommand extends Command {
         String target = args[1];
         if (target.equalsIgnoreCase("all")) {
             sender.sendMessage(lang.get(sender, "mysql.pull.all_start"));
-            economySync.forcePullAll().whenComplete((count, error) -> Bukkit.getScheduler().runTask(expansion, () ->
+            economySync.forcePullAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task ->
                     sender.sendMessage(lang.get(sender, "mysql.pull.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))))));
             return;
         }
@@ -287,7 +287,7 @@ public class MySQLCommand extends Command {
             return;
         }
         sender.sendMessage(lang.get(sender, "mysql.pull.start", Map.of("name", player.getName())));
-        economySync.pullSingle(player).whenComplete((balance, error) -> Bukkit.getScheduler().runTask(expansion, () -> {
+        economySync.pullSingle(player).whenComplete((balance, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task -> {
             if (error != null || balance == null) {
                 sender.sendMessage(lang.get(sender, "mysql.pull.not_found", Map.of("name", player.getName())));
             } else {
@@ -317,7 +317,7 @@ public class MySQLCommand extends Command {
         final int requestedPage = page;
         int limit = pageSize * page + pageSize;
 
-        economySync.getNetworkTop(limit).whenComplete((entries, error) -> Bukkit.getScheduler().runTask(expansion, () -> {
+        economySync.getNetworkTop(limit).whenComplete((entries, error) -> Bukkit.getGlobalRegionScheduler().runNow(expansion, task -> {
             if (error != null || entries == null || entries.isEmpty()) {
                 sender.sendMessage(lang.get(sender, "mysql.baltop.empty"));
                 return;
