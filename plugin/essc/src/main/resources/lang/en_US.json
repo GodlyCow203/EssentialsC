@@ -698,6 +698,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200>Spawned <amount>x <entity></color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>Usage: /playerlist [page]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= Online Players [<online><gray>/</gray><max>] - Page [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>No players online</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>Invalid page number.</color>",

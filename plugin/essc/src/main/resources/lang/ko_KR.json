@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>현재 언어: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(자동 감지)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>개의 <entity>을(를) 소환했습니다</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>사용법: /playerlist [페이지]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= 접속 중인 플레이어 [<online><gray>/</gray><max>] - 페이지 [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>접속 중인 플레이어가 없습니다</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>잘못된 페이지 번호입니다.</color>",

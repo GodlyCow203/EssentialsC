@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>موجودہ زبان: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(خودکار شناخت شدہ)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> پیدا کیا گیا</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>استعمال: /playerlist [صفحہ]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= آن لائن کھلاڑی [<online><gray>/</gray><max>] - صفحہ [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>کوئی کھلاڑی آن لائن نہیں ہے</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>غلط صفحہ نمبر۔</color>",

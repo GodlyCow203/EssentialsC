@@ -111,20 +111,15 @@ public class LanguageManager {
         return get(sender, key, null);
     }
 
-    /**
-     * Resolves a key to its raw MiniMessage string (placeholders and {@code <prefix>} substituted) without
-     * parsing it into a {@link Component}. Useful when a resolved value must be embedded as a placeholder
-     * inside another message before the combined string is parsed.
-     */
-    public String getRaw(CommandSender sender, String key, Map<String, String> placeholders) {
-        return resolve(sender, key, placeholders);
-    }
-
     public String getRaw(CommandSender sender, String key) {
         return resolve(sender, key, null);
     }
 
     private String resolve(CommandSender sender, String key, Map<String, String> placeholders) {
+        return resolve(sender, null, key, placeholders);
+    }
+
+    private String resolve(CommandSender sender, Player target, String key, Map<String, String> placeholders) {
         String locale = defaultLang;
 
         if (sender instanceof Player player) {
@@ -196,9 +191,18 @@ public class LanguageManager {
         if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
         if (prefix != null) raw = raw.replace("<prefix>", prefix);
 
-        if (isPlaceholderAPIAvailable() && sender instanceof Player player) {
-            raw = PlaceholderAPI.setPlaceholders(player, raw);
-            raw = LegacyColorConverter.toMiniMessage(raw);
+        if (isPlaceholderAPIAvailable()) {
+            Player papiPlayer = target;
+            if (papiPlayer == null && placeholders != null) {
+                papiPlayer = findTargetPlayer(placeholders);
+            }
+            if (papiPlayer == null && sender instanceof Player p) {
+                papiPlayer = p;
+            }
+            if (papiPlayer != null) {
+                raw = PlaceholderAPI.setPlaceholders(papiPlayer, raw);
+                raw = LegacyColorConverter.toMiniMessage(raw);
+            }
         }
 
         return raw;
@@ -229,6 +233,17 @@ public class LanguageManager {
 
     public String getDefaultLang() {
         return defaultLang;
+    }
+
+    private Player findTargetPlayer(Map<String, String> placeholders) {
+        for (String key : new String[]{"player", "target", "name"}) {
+            String name = placeholders.get(key);
+            if (name != null) {
+                Player p = plugin.getServer().getPlayer(name);
+                if (p != null) return p;
+            }
+        }
+        return null;
     }
 
     public void reload() {

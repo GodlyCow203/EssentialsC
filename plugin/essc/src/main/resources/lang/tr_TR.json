@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Mevcut dil: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(otomatik algılandı)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> doğuruldu</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>Kullanım: /playerlist [sayfa]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= Çevrimiçi Oyuncular [<online><gray>/</gray><max>] - Sayfa [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>Çevrimiçi oyuncu yok</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>Geçersiz sayfa numarası.</color>",

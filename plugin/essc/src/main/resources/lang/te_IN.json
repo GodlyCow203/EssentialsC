@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>ప్రస్తుత భాష: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(స్వయంచాలకంగా గుర్తించబడింది)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> స్పాన్ చేయబడింది</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>విధానం: /playerlist [పేజీ]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= ఆన్‌లైన్ ఆటగాళ్లు [<online><gray>/</gray><max>] - పేజీ [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ఆన్‌లైన్‌లో ఎవరూ లేరు</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>చెల్లని పేజీ సంఖ్య.</color>",

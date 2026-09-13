@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Idioma actual: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(detectado automáticamente)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200>Invocadas <amount>x <entity></color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>Uso: /playerlist [página]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= Jugadores en línea [<online><gray>/</gray><max>] - Página [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>No hay jugadores en línea</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>Número de página no válido.</color>",

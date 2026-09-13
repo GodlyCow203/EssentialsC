@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>सध्याची भाषा: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(स्वयं-ओळख)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> स्पॉन केली</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>वापर: /playerlist [पृष्ठ]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= ऑनलाइन खेळाडू [<online><gray>/</gray><max>] - पृष्ठ [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>कोणीही खेळाडू ऑनलाइन नाही</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>अवैध पृष्ठ क्रमांक.</color>",

@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>ภาษาปัจจุบัน: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(ตรวจพบอัตโนมัติ)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200>สปอว์น <amount>x <entity></color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>วิธีใช้: /playerlist [หน้า]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= ผู้เล่นออนไลน์ [<online><gray>/</gray><max>] - หน้า [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ไม่มีผู้เล่นออนไลน์</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>หมายเลขหน้าไม่ถูกต้อง</color>",

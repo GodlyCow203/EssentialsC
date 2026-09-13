@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>தற்போதைய மொழி: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(தானியங்கி கண்டறிதல்)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> உருவாக்கப்பட்டது</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>பயன்பாடு: /playerlist [பக்கம்]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= ஆன்லைன் வீரர்கள் [<online><gray>/</gray><max>] - பக்கம் [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>ஆன்லைனில் வீரர்கள் இல்லை</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>தவறான பக்க எண்.</color>",

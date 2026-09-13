@@ -2,21 +2,14 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.godlycow.org.essc.util.PaginatedList;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.*;
 
 public class PlayerListCommand extends Command {
-
-    private static final MiniMessage MM = MiniMessage.miniMessage();
 
     public PlayerListCommand(EssentialsC plugin) {
         super(plugin, "playerlist", "essentialsc.playerlist", false, 0, "command.usage.playerlist");
@@ -44,41 +37,14 @@ public class PlayerListCommand extends Command {
             }
         }
 
-        boolean useLuckPerms = plugin.getConfigManager().isPlayerListLuckPermsEnabled()
-                && plugin.getServer().getPluginManager().getPlugin("LuckPerms") != null;
-
-        LuckPerms luckPerms = null;
-        if (useLuckPerms) {
-            RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
-            if (provider != null) luckPerms = provider.getProvider();
-        }
-
-        List<String> playerDisplays = new ArrayList<>();
+        List<Map.Entry<Player, String>> playerDisplays = new ArrayList<>();
         for (Player player : onlinePlayers) {
-            String display;
-            if (useLuckPerms && luckPerms != null) {
-                User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-                if (user != null) {
-                    String prefix = user.getCachedData().getMetaData().getPrefix();
-                    String suffix = user.getCachedData().getMetaData().getSuffix();
-
-                    StringBuilder sb = new StringBuilder();
-                    if (prefix != null) sb.append(LegacyColorConverter.toMiniMessage(prefix));
-                    sb.append(player.getName());
-                    if (suffix != null) sb.append(LegacyColorConverter.toMiniMessage(suffix));
-                    display = sb.toString();
-                } else {
-                    display = player.getName();
-                }
-            } else {
-                display = player.getName();
-            }
-            playerDisplays.add(display);
+            playerDisplays.add(new AbstractMap.SimpleEntry<>(player, player.getName()));
         }
 
-        playerDisplays.sort(String.CASE_INSENSITIVE_ORDER);
+        playerDisplays.sort((a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getValue(), b.getValue()));
 
-        PaginatedList<String> paginated = new PaginatedList<>(playerDisplays, 10);
+        PaginatedList<Map.Entry<Player, String>> paginated = new PaginatedList<>(playerDisplays, 10);
         int page = paginated.clamp(requestedPage);
 
         if (!paginated.isValidPage(requestedPage)) {
@@ -93,8 +59,12 @@ public class PlayerListCommand extends Command {
         headerPlaceholders.put("total_pages", String.valueOf(paginated.getTotalPages()));
         sender.sendMessage(lang.get(sender, "playerlist.header", headerPlaceholders));
 
-        for (String display : paginated.getPage(page)) {
-            sender.sendMessage(MM.deserialize("<color:#AAAAAA>• </color>" + display));
+        for (Map.Entry<Player, String> entry : paginated.getPage(page)) {
+            String display = entry.getValue();
+
+            Map<String, String> entryPlaceholders = new HashMap<>();
+            entryPlaceholders.put("name", display);
+            sender.sendMessage(lang.get(sender, "playerlist.entry", entryPlaceholders));
         }
 
         sender.sendMessage(lang.get(sender, "playerlist.footer", headerPlaceholders));
@@ -123,32 +93,8 @@ public class PlayerListCommand extends Command {
             Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
             List<String> playerDisplays = new ArrayList<>();
 
-            boolean useLuckPerms = plugin.getConfigManager().isPlayerListLuckPermsEnabled() && plugin.getServer().getPluginManager().getPlugin("LuckPerms") != null;
-            LuckPerms luckPerms = null;
-            if (useLuckPerms) {
-                RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
-                if (provider != null) luckPerms = provider.getProvider();
-            }
-
             for (Player player : onlinePlayers) {
-                String display;
-                if (useLuckPerms && luckPerms != null) {
-                    User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-                    if (user != null) {
-                        String prefix = user.getCachedData().getMetaData().getPrefix();
-                        String suffix = user.getCachedData().getMetaData().getSuffix();
-                        StringBuilder sb = new StringBuilder();
-                        if (prefix != null) sb.append(LegacyColorConverter.toMiniMessage(prefix));
-                        sb.append(player.getName());
-                        if (suffix != null) sb.append(LegacyColorConverter.toMiniMessage(suffix));
-                        display = sb.toString();
-                    } else {
-                        display = player.getName();
-                    }
-                } else {
-                    display = player.getName();
-                }
-                playerDisplays.add(display);
+                playerDisplays.add(player.getName());
             }
 
             playerDisplays.sort(String.CASE_INSENSITIVE_ORDER);

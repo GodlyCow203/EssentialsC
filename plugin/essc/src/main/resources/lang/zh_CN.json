@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>当前语言: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(自动检测)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200>已生成 <amount>x <entity></color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>用法: /playerlist [页码]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= 在线玩家 [<online><gray>/</gray><max>] - 第 [<page><gray>/</gray><total_pages>] 页 =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>当前没有玩家在线</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>无效的页码。</color>",

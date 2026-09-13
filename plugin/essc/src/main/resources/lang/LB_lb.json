@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Aktuell Sprooch: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(automatesch erkannt)</color>",
@@ -719,6 +719,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount>x <entity> gespawnt</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>Benotzung: /playerlist [Säit]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= Spiller online [<online><gray>/</gray><max>] - Säit [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>Keng Spiller online</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>Ongëlteg Säitennummer.</color>",

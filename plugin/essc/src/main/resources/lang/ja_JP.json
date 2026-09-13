@@ -1,4 +1,4 @@
-{
+﻿{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>現在の言語: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(自動検出)</color>",
@@ -732,6 +732,7 @@
   "spawnentity.success": "<prefix> <color:#FFF200><amount> 体の <entity> をスポーンしました</color>",
   "command.usage.playerlist": "<prefix> <color:#FF0000>使用法: /playerlist [ページ]</color>",
   "playerlist.header": "<prefix> <color:#FFF200>= オンラインプレイヤー [<online><gray>/</gray><max>] - ページ [<page><gray>/</gray><total_pages>] =</color>",
+  "playerlist.entry": "<color:#AAAAAA>• </color><name>",
   "playerlist.empty": "<prefix> <color:#AAAAAA>オンラインのプレイヤーはいません</color>",
   "playerlist.footer": "<prefix> <color:#FFF200><bold>============================= </bold></color>",
   "playerlist.invalid_page": "<prefix> <color:#FF0000>無効なページ番号です。</color>",
