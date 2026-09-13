@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 public class SellListener implements Listener {
     private final EssentialsC plugin;
@@ -60,6 +61,15 @@ public class SellListener implements Listener {
             }
         } else if (event.isShiftClick()) {
             event.setCancelled(true);
+            ItemStack cursorItem = event.getCurrentItem();
+            if (cursorItem == null || cursorItem.getType().isAir()) return;
+            for (int inputSlot : new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34}) {
+                if (gui.getInventory().getItem(inputSlot) == null || gui.getInventory().getItem(inputSlot).getType().isAir()) {
+                    gui.getInventory().setItem(inputSlot, cursorItem.clone());
+                    event.setCurrentItem(null);
+                    break;
+                }
+            }
             return;
         }
 

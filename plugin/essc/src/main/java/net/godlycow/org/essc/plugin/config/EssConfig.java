@@ -625,7 +625,7 @@ public class EssConfig {
     }
 
     public String getSellGUITitle() {
-        return config.getString("sell.gui.title", "<gradient:#06FFA5:#FFE66D>Sell Items</gradient>");
+        return config.getString("sell.gui.title", "<dark_gray>Sell Items</dark_gray>");
     }
 
     public int getSellGUISize() {
