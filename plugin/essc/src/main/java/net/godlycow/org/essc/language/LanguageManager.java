@@ -2,7 +2,9 @@ package net.godlycow.org.essc.language;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -30,6 +32,10 @@ public class LanguageManager {
     public LanguageManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.miniMessage = plugin.getMiniMessage();
+    }
+
+    private boolean isPlaceholderAPIAvailable() {
+        return plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
 
     public void load(String defaultLanguage) {
@@ -189,6 +195,11 @@ public class LanguageManager {
         if (prefix == null && cache.containsKey(fallbackLang)) prefix = cache.get(fallbackLang).get("prefix");
         if (prefix == null && cache.containsKey(defaultLang)) prefix = cache.get(defaultLang).get("prefix");
         if (prefix != null) raw = raw.replace("<prefix>", prefix);
+
+        if (isPlaceholderAPIAvailable() && sender instanceof Player player) {
+            raw = PlaceholderAPI.setPlaceholders(player, raw);
+            raw = LegacyColorConverter.toMiniMessage(raw);
+        }
 
         return raw;
     }
