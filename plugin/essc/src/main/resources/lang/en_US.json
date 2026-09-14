@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Click <gray>to return items",
   "command.usage.shop": "<prefix> <color:#FF0000>Usage: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>The shop is currently disabled.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>The shop is not loaded properly. Contact an admin.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>That category doesn't exist!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>This item cannot be purchased!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>This item cannot be sold!</color>",

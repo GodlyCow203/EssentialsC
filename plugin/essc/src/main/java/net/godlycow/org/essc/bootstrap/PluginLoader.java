@@ -47,6 +47,7 @@ import net.godlycow.org.essc.modules.scoreboard.ScoreboardManager;
 import net.godlycow.org.essc.modules.shop.ShopGuiManager;
 import net.godlycow.org.essc.modules.shop.ShopListener;
 import net.godlycow.org.essc.modules.shop.ShopManager;
+import net.godlycow.org.essc.modules.shop.ShopHolder;
 import net.godlycow.org.essc.modules.shop.ShopSoundManager;
 import net.godlycow.org.essc.modules.shop.sell.SellListener;
 import net.godlycow.org.essc.modules.shop.sell.SellManager;
@@ -58,6 +59,9 @@ import net.godlycow.org.essc.util.StartupBanner;
 import net.godlycow.org.essc.modules.VanishManager;
 import net.godlycow.org.essc.modules.warp.WarpManager;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.RegisteredListener;
 
 public final class PluginLoader {
 
@@ -215,6 +219,8 @@ public final class PluginLoader {
             if (guiFramework != null) {
                 shopManager.setShopGuiManager(new ShopGuiManager(plugin, guiFramework, shopManager, shopSounds));
             }
+        } else {
+            unloadShop();
         }
 
         if (plugin.getConfigManager().isWarpEnabled()) {
@@ -298,6 +304,43 @@ public final class PluginLoader {
 
         plugin.setAhGuiManager(null);
         plugin.debug("Auction House fully unloaded.");
+    }
+
+    private void unloadShop() {
+        plugin.debug("Shop system is disabled in config - umloading");
+
+        CommandRegistration.unregisterCommand("shop");
+        CommandRegistration.unregisterCommand("essentialsc:shop");
+
+        plugin.debug("Shop commands unregistered");
+
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            if (player.getOpenInventory().getTopInventory() != null
+                    && player.getOpenInventory().getTopInventory().getHolder() instanceof ShopHolder) {
+                player.closeInventory();
+            }
+        }
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+
+                    if (name.contains("Shop")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Shop listener: " + name);
+                    }
+                    
+                }
+            }
+        }
+
+        if (plugin.getShopManager() != null) {
+            plugin.getShopManager().shutdown();
+            plugin.setShopManager(null);
+        }
+
+        plugin.debug("Shop system fully unloaded.");
     }
 
     private void registerPlaceholderAPI() {

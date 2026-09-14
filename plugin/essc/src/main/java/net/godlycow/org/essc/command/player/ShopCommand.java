@@ -18,41 +18,13 @@ public class ShopCommand extends Command {
         super(plugin, "shop", "essentialsc.shop", true, 0, "command.usage.shop");
     }
 
-    public static void unregisterCommand() {
-        try {
-            CommandMap commandMap = Bukkit.getServer().getCommandMap();
-
-            Field knownCommandsField = null;
-            Class<?> clazz = commandMap.getClass();
-            while (clazz != null && knownCommandsField == null) {
-                try {
-                    knownCommandsField = clazz.getDeclaredField("knownCommands");
-                } catch (NoSuchFieldException ignored) {
-                    clazz = clazz.getSuperclass();
-                }
-            }
-
-            if (knownCommandsField == null) {
-                Bukkit.getLogger().warning("[EssentialsC] Could not locate knownCommands field to unregister /shop");
-                return;
-            }
-
-            knownCommandsField.setAccessible(true);
-
-            @SuppressWarnings("unchecked")
-            Map<String, org.bukkit.command.Command> knownCommands =
-                    (Map<String, org.bukkit.command.Command>) knownCommandsField.get(commandMap);
-
-            knownCommands.remove("shop");
-            knownCommands.remove("essentialsc:shop");
-
-        } catch (IllegalAccessException e) {
-            Bukkit.getLogger().warning("[EssentialsC] Failed to unregister /shop command: " + e.getMessage());
-        }
-    }
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
+        if (!checkEnabled(sender))
+
+            return true;
+
         Player player = (Player) sender;
 
         if (args.length == 0) {
@@ -86,8 +58,28 @@ public class ShopCommand extends Command {
         return true;
     }
 
+    private boolean checkEnabled(CommandSender sender) {
+
+        if (!plugin.getConfigManager().isShopEnabled()) {
+            sender.sendMessage(lang.get(sender, "shop.disabled"));
+            return false;
+        }
+        if (plugin.getShopManager() == null) {
+            sender.sendMessage(lang.get(sender, "shop.not_loaded"));
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("essentialsc.shop"))
+            return Collections.emptyList();
+
+        
+        if (!plugin.getConfigManager().isShopEnabled())
+            return Collections.emptyList();
+
         if (args.length == 1) {
             List<String> completions = new java.util.ArrayList<>();
             completions.add("reload");

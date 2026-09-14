@@ -80,6 +80,7 @@ public class ShopListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        if (!plugin.getConfigManager().isShopEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
         InventoryHolder holder = event.getInventory().getHolder();
@@ -189,6 +190,7 @@ public class ShopListener implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
+        if (!plugin.getConfigManager().isShopEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
         Inventory topInv = InventoryViewCompat.getTopInventory(player);
@@ -204,6 +206,7 @@ public class ShopListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
+        if (!plugin.getConfigManager().isShopEnabled()) return;
         if (!(event.getPlayer() instanceof Player player)) return;
 
         Inventory inv = event.getInventory();

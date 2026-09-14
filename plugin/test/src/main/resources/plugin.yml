@@ -8,4 +8,6 @@ commands:
     usage: /test-scoreboard
   test-ah:
     usage: /test-ah
+  test-shop:
+    usage: /test-shop
 

@@ -8,6 +8,7 @@ public class EssentialsCTest extends JavaPlugin {
     public void onEnable() {
         getCommand("test-scoreboard").setExecutor(new ScoreboardDisableTestCommand());
         getCommand("test-ah").setExecutor(new AuctionDisableTestCommand());
+        getCommand("test-shop").setExecutor(new ShopDisableTestCommand());
         getLogger().info("EssentialsCTest enabled");
     }
 
