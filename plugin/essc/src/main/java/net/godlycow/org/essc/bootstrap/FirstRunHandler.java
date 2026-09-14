@@ -66,15 +66,35 @@ public class FirstRunHandler implements Listener {
 
         plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, task -> {
             plugin.getLogger().info("Running PlaceholderAPI expansion installs...");
-            for (String expansion : expansions) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download " + expansion);
-            }
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi reload");
-            if (player.isOnline()) {
-                sendNotice(player, "<color:#AAAAAA>Installed: <color:#FFFFFF>Vault, Player, Server, Statistic, LuckPerms</color>. PlaceholderAPI reloaded.");
-                sendNotice(player, "<color:#AAAAAA>This message will not appear again.");
-            }
+            scheduleExpansionDownloads(expansions, 0, player);
         }, 200L);
+    }
+
+    private void scheduleExpansionDownloads(String[] expansions, int index, Player player) {
+        if (index >= expansions.length) {
+            plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, reloadTask -> {
+                try {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi reload");
+                } catch (Exception e) {
+                    plugin.getLogger().warning("Failed to reload PlaceholderAPI: " + e.getMessage());
+                }
+                if (player.isOnline()) {
+                    sendNotice(player, "<color:#AAAAAA>Installed: <color:#FFFFFF>Vault, Player, Server, Statistic, LuckPerms</color>. PlaceholderAPI reloaded.");
+                    sendNotice(player, "<color:#AAAAAA>This message will not appear again.");
+                }
+            }, 40L);
+            return;
+        }
+
+        String expansion = expansions[index];
+        plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, task -> {
+            try {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "papi ecloud download " + expansion);
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to download PlaceholderAPI expansion " + expansion + ": " + e.getMessage());
+            }
+            scheduleExpansionDownloads(expansions, index + 1, player);
+        }, 20L);
     }
 
     private void sendNotice(Player player, String miniMessage) {
