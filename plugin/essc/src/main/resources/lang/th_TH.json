@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>คลิก <gray>เพื่อคืนไอเทม",
   "command.usage.shop": "<prefix> <color:#FF0000>วิธีใช้: /shop [หมวดหมู่] [หน้า]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>ร้านค้าปิดใช้งานอยู่</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>ร้านค้าไม่ได้โหลดอย่างถูกต้อง ติดต่อผู้ดูแลระบบ</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>ไม่มีหมวดหมู่นั้น!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>ไอเทมนี้ไม่สามารถซื้อได้!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>ไอเทมนี้ไม่สามารถขายได้!</color>",

@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>আইটেম ফেরত পেতে <gray>ক্লিক করুন",
   "command.usage.shop": "<prefix> <color:#FF0000>ব্যবহার: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>দোকান বর্তমানে নিষ্ক্রিয়।</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>দোকান সঠিকভাবে লোড হয়নি। একজন অ্যাডমিনের সাথে যোগাযোগ করুন।</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>সেই ক্যাটাগরি বিদ্যমান নেই!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>এই আইটেম কেনা যাবে না!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>এই আইটেম বিক্রি করা যাবে না!</color>",

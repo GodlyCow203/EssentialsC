@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Klik <gray>untuk mengembalikan item",
   "command.usage.shop": "<prefix> <color:#FF0000>Penggunaan: /shop [kategori] [halaman]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Toko saat ini dinonaktifkan.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Toko tidak dimuat dengan benar. Hubungi administrator.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Kategori itu tidak ada!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Item ini tidak dapat dibeli!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Item ini tidak dapat dijual!</color>",

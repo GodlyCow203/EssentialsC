@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Klick <gray>fir Géigestänn zréckzeginn",
   "command.usage.shop": "<prefix> <color:#FF0000>Benotzung: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>De Buttek ass zur Zäit deaktivéiert.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>De Buttek ass net richteg gelueden. Kontaktéiert en Administrateur.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Dës Kategorie gëtt et net!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Dëse Objet kann net kaaft ginn!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Dëse Objet kann net verkaaft ginn!</color>",

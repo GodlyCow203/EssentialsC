@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>वस्तू परत करण्यासाठी <gray>क्लिक करा",
   "command.usage.shop": "<prefix> <color:#FF0000>वापर: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>दुकान सध्या अक्षम आहे.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>दुकान योग्यरित्या लोड झाले नाही. प्रशासकाशी संपर्क साधा.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>तशी श्रेणी अस्तित्वात नाही!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>हे वस्तू खरेदी करता येत नाही!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>हे वस्तू विकता येत नाही!</color>",

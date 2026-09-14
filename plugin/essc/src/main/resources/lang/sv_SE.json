@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Klicka <gray>för att returnera föremål",
   "command.usage.shop": "<prefix> <color:#FF0000>Användning: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Butiken är för närvarande inaktiverad.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Butiken har inte laddats korrekt. Kontakta en administratör.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Den kategorin finns inte!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Detta föremål kan inte köpas!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Detta föremål kan inte säljas!</color>",

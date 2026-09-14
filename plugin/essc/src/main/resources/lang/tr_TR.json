@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Eşyaları iade etmek için <gray>tıklayın",
   "command.usage.shop": "<prefix> <color:#FF0000>Kullanım: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Mağaza şu anda kapalı.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Mağaza düzgün yüklenmedi. Yöneticiyle iletişime geçin.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Bu kategori mevcut değil!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Bu eşya satın alınamaz!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Bu eşya satılamaz!</color>",

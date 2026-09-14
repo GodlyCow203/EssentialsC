@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Нажмите <gray>чтобы вернуть предметы",
   "command.usage.shop": "<prefix> <color:#FF0000>Использование: /shop [категория] [страница]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Магазин временно отключён.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Магазин загружен неправильно. Обратитесь к администратору.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Такой категории не существует!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Этот предмет нельзя купить!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Этот предмет нельзя продать!</color>",

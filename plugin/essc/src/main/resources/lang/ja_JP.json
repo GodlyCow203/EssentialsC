@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>アイテムを返却するには<gray>クリック",
   "command.usage.shop": "<prefix> <color:#FF0000>使い方: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>ショップは現在無効です。</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>ショップが正しく読み込まれていません。管理者に連絡してください。</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>そのカテゴリは存在しません！</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>このアイテムは購入できません！</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>このアイテムは販売できません！</color>",

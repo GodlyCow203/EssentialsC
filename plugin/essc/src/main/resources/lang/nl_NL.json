@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Klik <gray>om voorwerpen terug te geven",
   "command.usage.shop": "<prefix> <color:#FF0000>Gebruik: /shop [categorie] [pagina]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>De winkel is momenteel uitgeschakeld.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>De winkel is niet correct geladen. Neem contact op met een beheerder.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Die categorie bestaat niet!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Dit voorwerp kan niet gekocht worden!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Dit voorwerp kan niet verkocht worden!</color>",

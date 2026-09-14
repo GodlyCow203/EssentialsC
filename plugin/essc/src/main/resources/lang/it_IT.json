@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Clicca <gray>per restituire gli oggetti",
   "command.usage.shop": "<prefix> <color:#FF0000>Uso: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Il negozio è attualmente disabilitato.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Il negozio non è stato caricato correttamente. Contatta un amministratore.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Quella categoria non esiste!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Questo oggetto non può essere acquistato!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Questo oggetto non può essere venduto!</color>",

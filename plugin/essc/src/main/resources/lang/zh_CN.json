@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>点击<gray>归还物品",
   "command.usage.shop": "<prefix> <color:#FF0000>用法: /shop [分类] [页码]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>商店当前已禁用。</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>商店未正确加载。请联系管理员。</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>该分类不存在!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>此物品无法购买!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>此物品无法出售!</color>",

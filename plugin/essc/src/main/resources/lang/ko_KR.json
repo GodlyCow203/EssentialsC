@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>아이템을 돌려받으려면 <gray>클릭하세요",
   "command.usage.shop": "<prefix> <color:#FF0000>사용법: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>상점이 현재 비활성화되어 있습니다.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>상점이 올바르게 로드되지 않았습니다. 관리자에게 문의하세요.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>해당 카테고리가 존재하지 않습니다!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>이 아이템은 구매할 수 없습니다!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>이 아이템은 판매할 수 없습니다!</color>",

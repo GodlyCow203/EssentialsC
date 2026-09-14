@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>వస్తువులను తిరిగి ఇవ్వడానికి <gray>క్లిక్ చేయండి",
   "command.usage.shop": "<prefix> <color:#FF0000>వినియోగం: /shop [వర్గం] [పేజీ]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>షాప్ ప్రస్తుతం నిలిపివేయబడింది.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>షాప్ సరిగ్గా లోడ్ కాలేదు. నిర్వాహకుడిని సంప్రదించండి.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>ఆ వర్గం లేదు!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>ఈ వస్తువును కొనలేము!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>ఈ వస్తువును అమ్మలేము!</color>",

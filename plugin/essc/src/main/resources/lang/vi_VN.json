@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Nhấn <gray>để trả lại vật phẩm",
   "command.usage.shop": "<prefix> <color:#FF0000>Cách dùng: /shop [danh mục] [trang]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Cửa hàng hiện đang tắt.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Cửa hàng chưa được tải đúng. Hãy liên hệ quản trị viên.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Danh mục đó không tồn tại!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Vật phẩm này không thể mua!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Vật phẩm này không thể bán!</color>",

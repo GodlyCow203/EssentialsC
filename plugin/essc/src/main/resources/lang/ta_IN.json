@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>பொருட்களைத் திருப்பித் தர <gray>கிளிக் செய்யவும்",
   "command.usage.shop": "<prefix> <color:#FF0000>பயன்பாடு: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>கடை தற்போது முடக்கப்பட்டுள்ளது.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>கடை சரியாக ஏற்றப்படவில்லை. நிர்வாகியைத் தொடர்பு கொள்ளுங்கள்.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>அந்த வகை இல்லை!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>இந்த பொருளை வாங்க முடியாது!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>இந்த பொருளை விற்க முடியாது!</color>",

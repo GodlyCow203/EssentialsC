@@ -146,6 +146,7 @@
   "sell.gui.cancel.lore.action": "<color:#474747>Mag-click <gray>para ibalik ang mga item",
   "command.usage.shop": "<prefix> <color:#FF0000>Paggamit: /shop [category] [page]</color>",
   "shop.disabled": "<prefix> <color:#FF0000>Ang tindahan ay kasalukuyang hindi pinapagana.</color>",
+  "shop.not_loaded": "<prefix> <color:#FF0000>Ang tindahan ay hindi nai-load nang tama. Makipag-ugnayan sa admin.</color>",
   "shop.invalid-category": "<prefix> <color:#FF0000>Ang kategoryang iyon ay hindi umiiral!</color>",
   "shop.not-buyable": "<prefix> <color:#FF0000>Ang item na ito ay hindi maaaring bilhin!</color>",
   "shop.not-sellable": "<prefix> <color:#FF0000>Ang item na ito ay hindi maaaring ibenta!</color>",
