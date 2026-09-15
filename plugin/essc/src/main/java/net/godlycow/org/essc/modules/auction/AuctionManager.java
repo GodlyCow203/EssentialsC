@@ -43,6 +43,20 @@ public class AuctionManager implements Listener {
         }
     }
 
+    public int getMaxAuctions(Player player) {
+        if (player.hasPermission("essentialsc.ah.bypass.limit")) {
+            return Integer.MAX_VALUE;
+        }
+
+        for (int i = 100; i >= 1; i--) {
+            if (player.hasPermission("essentialsc.ah.listings." + i)) {
+                return i;
+            }
+        }
+
+        return plugin.getConfigManager().getAHMaxAuctions();
+    }
+
     private void loadAuctions() {
         storage.loadActiveAuctions().thenAccept(auctions -> {
             auctions.forEach(a -> activeAuctions.put(a.getId(), a));
@@ -92,7 +106,7 @@ public class AuctionManager implements Listener {
     }
 
     public CompletableFuture<Boolean> createAuction(Player seller, ItemStack item, BigDecimal price, long duration, StringBuilder failReason) {
-        int max = plugin.getConfigManager().getAHMaxAuctions();
+        int max = getMaxAuctions(seller);
         long count = activeAuctions.values().stream()
                 .filter(a -> a.getSellerUuid().equals(seller.getUniqueId()))
                 .count();

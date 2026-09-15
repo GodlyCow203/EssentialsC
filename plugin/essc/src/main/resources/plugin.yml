@@ -976,6 +976,42 @@ permissions:
     description: Allows claiming expired items from other players
     default: op
 
+  essentialsc.ah.listings.1:
+    description: Allows up to 1 active auction listing
+    default: false
+
+  essentialsc.ah.listings.2:
+    description: Allows up to 2 active auction listings
+    default: false
+
+  essentialsc.ah.listings.3:
+    description: Allows up to 3 active auction listings
+    default: false
+
+  essentialsc.ah.listings.5:
+    description: Allows up to 5 active auction listings
+    default: false
+
+  essentialsc.ah.listings.10:
+    description: Allows up to 10 active auction listings
+    default: false
+
+  essentialsc.ah.listings.15:
+    description: Allows up to 15 active auction listings
+    default: false
+
+  essentialsc.ah.listings.20:
+    description: Allows up to 20 active auction listings
+    default: false
+
+  essentialsc.ah.listings.25:
+    description: Allows up to 25 active auction listings
+    default: false
+
+  essentialsc.ah.listings.50:
+    description: Allows up to 50 active auction listings
+    default: false
+
   essentialsc.warp:
     description: Allow using warp command
     default: true

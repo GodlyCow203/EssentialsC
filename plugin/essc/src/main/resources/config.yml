@@ -760,6 +760,8 @@ auction-house:
   enabled: true
 
   # Maximum number of active listings a single player can have at one time.
+  # Players with essentialsc.ah.listings.<number> will use the highest number found.
+  # e.g. essentialsc.ah.listings.10 gives 10 max listings instead of this default.
   max-auctions-per-player: 5
 
   # How long a listing stays active before it expires, in hours.

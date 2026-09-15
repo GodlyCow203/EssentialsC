@@ -220,7 +220,7 @@ public class AhItemFactory {
         }
 
         int active = plugin.getAuctionManager().getPlayerAuctions(player.getUniqueId()).size();
-        int max = plugin.getConfigManager().getAHMaxAuctions();
+        int max = plugin.getAuctionManager().getMaxAuctions(player);
         boolean bypass = player.hasPermission("essentialsc.ah.bypass.limit");
         boolean hasExpired = plugin.getAuctionManager().hasExpiredItems(player.getUniqueId());
 
