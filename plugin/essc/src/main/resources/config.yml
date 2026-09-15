@@ -784,6 +784,9 @@ auction-house:
   # Whether to notify the player when they successfully sell items.
   notify-on-sale: true
 
+  # Whether to show a confirmation GUI before purchasing an auction.
+  confirmation-gui: true
+
 
 
 # Warps

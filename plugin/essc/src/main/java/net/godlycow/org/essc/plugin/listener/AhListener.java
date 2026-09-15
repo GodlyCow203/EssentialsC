@@ -54,12 +54,6 @@ public class AhListener implements Listener {
         ItemStack clicked = event.getCurrentItem();
         if (clicked == null || clicked.getType().isAir()) return;
 
-        Material type = clicked.getType();
-        if (type.name().endsWith("_STAINED_GLASS_PANE") || type.name().endsWith("_GLASS_PANE")) {
-            soundManager.playError(player);
-            return;
-        }
-
         ItemMeta meta = clicked.getItemMeta();
         if (meta == null) return;
 
@@ -89,7 +83,19 @@ public class AhListener implements Listener {
 
         if (container.has(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING)) {
             String action = container.get(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING);
+            if ("ah_confirm_buy".equals(action)) {
+                if (event.getInventory().getHolder() instanceof AhGuiHolder ahHolder) {
+                    handleConfirmBuy(player, ahHolder.getAuctionId());
+                }
+                return;
+            }
             handleAction(player, action);
+            return;
+        }
+
+        Material type = clicked.getType();
+        if (type.name().endsWith("_STAINED_GLASS_PANE") || type.name().endsWith("_GLASS_PANE")) {
+            soundManager.playError(player);
             return;
         }
 
@@ -150,6 +156,7 @@ public class AhListener implements Listener {
                 soundManager.playClick(player);
                 ahCommand.openBuyHistoryGui(player, 1);
             }
+            case "ah_confirm_cancel" -> handleConfirmCancel(player);
             case "close" -> {
                 soundManager.playClose(player);
                 player.closeInventory();
@@ -254,6 +261,48 @@ public class AhListener implements Listener {
         }
 
         soundManager.playClick(player);
+
+        if (!plugin.getConfigManager().isAHConfirmationGuiEnabled()) {
+            player.closeInventory();
+            plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
+                player.getScheduler().run(plugin, scheduledTask -> {
+                    if (success) {
+                        player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
+                                "item", auction.getItem().getType().toString(),
+                                "price", plugin.getEconomyManager().format(auction.getPrice())
+                        )));
+                        soundManager.playPurchase(player);
+                    } else {
+                        player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchase_failed"));
+                        soundManager.playError(player);
+                    }
+                }, null);
+            });
+            return;
+        }
+
+        ahCommand.openConfirmBuyGui(player, auction);
+    }
+
+    private void handleConfirmBuy(Player player, int auctionId) {
+        Optional<Auction> opt = plugin.getAuctionManager().getAuction(auctionId);
+        if (opt.isEmpty()) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.not_found"));
+            soundManager.playError(player);
+            player.closeInventory();
+            return;
+        }
+
+        Auction auction = opt.get();
+
+        if (auction.getSellerUuid().equals(player.getUniqueId())) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cannot_buy_own"));
+            soundManager.playError(player);
+            player.closeInventory();
+            return;
+        }
+
+        soundManager.playClick(player);
         player.closeInventory();
 
         plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
@@ -270,5 +319,10 @@ public class AhListener implements Listener {
                 }
             }, null);
         });
+    }
+
+    private void handleConfirmCancel(Player player) {
+        soundManager.playClick(player);
+        ahCommand.openMainGui(player, 1);
     }
 }

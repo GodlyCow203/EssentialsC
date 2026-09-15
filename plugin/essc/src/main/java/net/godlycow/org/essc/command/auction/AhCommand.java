@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.modules.auction.gui.AhGuiManager;
 import net.godlycow.org.essc.modules.auction.gui.AhItemFactory;
 import net.godlycow.org.essc.modules.auction.AhSoundManager;
+import net.godlycow.org.essc.modules.auction.Auction;
 import net.godlycow.org.essc.command.Command;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -280,6 +281,10 @@ public class AhCommand extends Command {
 
     public void openBuyHistoryGui(Player player, int page) {
         guiManager.openBuyHistoryGui(player, page);
+    }
+
+    public void openConfirmBuyGui(Player player, Auction auction) {
+        guiManager.openConfirmBuyGui(player, auction);
     }
 
     public AhSoundManager getSoundManager() {

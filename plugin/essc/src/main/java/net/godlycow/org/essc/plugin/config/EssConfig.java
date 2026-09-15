@@ -384,6 +384,10 @@ public class EssConfig {
         return config.getBoolean("auction-house.allow-enchanted-books", true);
     }
 
+    public boolean isAHConfirmationGuiEnabled() {
+        return config.getBoolean("auction-house.confirmation-gui", true);
+    }
+
     public List<String> getAHBlacklistedMaterials() {
         return config.getStringList("auction-house.blacklisted-materials");
     }

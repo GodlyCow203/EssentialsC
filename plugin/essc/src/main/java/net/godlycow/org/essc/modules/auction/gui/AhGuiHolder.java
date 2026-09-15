@@ -7,10 +7,17 @@ public class AhGuiHolder implements InventoryHolder {
 
     private final String guiId;
     private final int page;
+    private int auctionId = -1;
 
     public AhGuiHolder(String guiId, int page) {
         this.guiId = guiId;
         this.page = page;
+    }
+
+    public AhGuiHolder(String guiId, int page, int auctionId) {
+        this.guiId = guiId;
+        this.page = page;
+        this.auctionId = auctionId;
     }
 
     @Override
@@ -24,5 +31,9 @@ public class AhGuiHolder implements InventoryHolder {
 
     public int getPage() {
         return page;
+    }
+
+    public int getAuctionId() {
+        return auctionId;
     }
 }

@@ -8,12 +8,17 @@ import net.godlycow.org.essc.modules.auction.SellHistoryEntry;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
+import net.godlycow.org.essc.util.ComponentHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -241,6 +246,93 @@ public class AhGuiManager {
         place(gui, navNext, page < totalPages
                 ? itemFactory.createNavItem(navNext, page + 1, "expired", player)
                 : null);
+
+        openGui(player, gui);
+    }
+
+    public void openConfirmBuyGui(Player player , Auction auction) {
+
+        sounds.playOpen(player);
+        GuiTemplate template = guiFramework.getTemplate("ah_confirm");
+        if (template == null) {
+            plugin.getLogger().warning("[AH] Missing GUI template: ah_confirm.yml");
+            return;
+        }
+
+
+        String priceStr = itemFactory.formatAmount(auction.getPrice());
+
+        Component title = template.resolveTitle(player, plugin);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(),  1, auction.getId()), template.getSize(), title);
+
+        guiFramework.fillStaticItems(gui, "ah_confirm", player);
+
+        GuiButton itemConfig = template.getItem("item");
+        int itemSlot = (itemConfig != null && !itemConfig.getSlots().isEmpty())
+                ? itemConfig.getSlots().get(0) : 13;
+
+        ItemStack display = auction.getItem().clone();
+        ItemMeta displayMeta = display.getItemMeta();
+
+        if (displayMeta != null) {
+            List<Component> lore = new ArrayList<>();
+            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.item.lore.price",
+                    Map.of("price", priceStr))));
+            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.item.lore.seller",
+                    Map.of("seller", auction.getSellerName()))));
+            displayMeta.lore(lore);
+            display.setItemMeta(displayMeta);
+        }
+
+        gui.setItem(itemSlot, display);
+
+        GuiButton confirmConfig = template.getItem("confirm");
+        if (confirmConfig != null) {
+            ItemStack confirmItem  = guiFramework.getItemBuilder().build(confirmConfig, player);
+            ItemMeta confirmMeta = confirmItem.getItemMeta();
+
+            if (confirmMeta != null) {
+                List<Component> confirmLore = new ArrayList<>();
+                confirmLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.confirm.lore1")));
+                confirmLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.confirm.lore2",
+                        Map.of("price", priceStr))));
+
+
+                confirmMeta.lore(confirmLore);
+                confirmMeta.getPersistentDataContainer().set(
+                        new NamespacedKey(plugin, "gui_action"),
+                        PersistentDataType.STRING,
+                        "ah_confirm_buy"
+                );
+
+                confirmItem.setItemMeta(confirmMeta);
+            }
+
+
+            gui.setItem(confirmConfig.getSlots().get(0), confirmItem);
+
+        }
+
+        GuiButton cancelConfig = template.getItem("cancel");
+
+        if (cancelConfig != null) {
+            ItemStack cancelItem = guiFramework.getItemBuilder().build(cancelConfig, player);
+            ItemMeta cancelMeta = cancelItem.getItemMeta();
+            if (cancelMeta != null) {
+
+                List<Component> cancelLore = new ArrayList<>();
+
+
+                cancelLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.cancel.lore1")));
+                cancelLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.cancel.lore2")));
+                cancelMeta.lore(cancelLore);
+
+                cancelMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING, "ah_confirm_cancel");
+                cancelItem.setItemMeta(cancelMeta);
+            }
+            gui.setItem(cancelConfig.getSlots().get(0), cancelItem);
+        }
+        
 
         openGui(player, gui);
     }

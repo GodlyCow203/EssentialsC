@@ -1,0 +1,111 @@
+title: lang:ah.gui.title.confirm
+size: 27
+
+items:
+  item:
+    material: PAPER
+    name: " "
+    slot: 13
+    dynamic: true
+
+  confirm:
+    material: LIME_STAINED_GLASS_PANE
+    name: lang:ah.gui.confirm.confirm.name
+    lore:
+      - lang:ah.gui.confirm.confirm.lore1
+      - lang:ah.gui.confirm.confirm.lore2
+    slot: 11
+    action: ah_confirm_buy
+    hide-attributes: true
+    dynamic: true
+
+  cancel:
+    material: RED_STAINED_GLASS_PANE
+    name: lang:ah.gui.confirm.cancel.name
+    lore:
+      - lang:ah.gui.confirm.cancel.lore1
+      - lang:ah.gui.confirm.cancel.lore2
+    slot: 15
+    action: ah_confirm_cancel
+    hide-attributes: true
+    dynamic: true
+
+  border_top_1:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 0
+    decoration: true
+
+  border_top_2:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 1
+    decoration: true
+
+  border_top_3:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 2
+    decoration: true
+
+  border_top_4:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 3
+    decoration: true
+
+  border_top_5:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 5
+    decoration: true
+
+  border_top_6:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 6
+    decoration: true
+
+  border_top_7:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 7
+    decoration: true
+
+  border_top_8:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 8
+    decoration: true
+
+  border_bottom_1:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 18
+    decoration: true
+
+  border_bottom_2:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 19
+    decoration: true
+
+  border_bottom_3:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 20
+    decoration: true
+
+  border_bottom_4:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 21
+    decoration: true
+
+  border_bottom_5:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 23
+    decoration: true
+
+  border_bottom_6:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 24
+    decoration: true
+
+  border_bottom_7:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 25
+    decoration: true
+
+  border_bottom_8:
+    material: BLACK_STAINED_GLASS_PANE
+    slot: 26
+    decoration: true

@@ -382,7 +382,7 @@ public class AhItemFactory {
         return lore;
     }
 
-    private String formatAmount(BigDecimal amount) {
+    public String formatAmount(BigDecimal amount) {
         if (plugin.getEconomyManager() != null) {
             return plugin.getEconomyManager().format(amount);
         }
