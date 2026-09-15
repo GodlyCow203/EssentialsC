@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -15,6 +16,21 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PlayerScoreboard {
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
     private static final String[] INVISIBLE_ENTRIES = generateInvisibleEntries(32);
+
+    private static Object BLANK_NUMBER_FORMAT;
+    private static Method OBJECTIVE_NUMBER_FORMAT_METHOD;
+
+    static {
+
+        try {
+            Class<?> nfClass = Class.forName("io.papermc.paper.scoreboard.numbers.NumberFormat");
+            BLANK_NUMBER_FORMAT = nfClass.getMethod("blank").invoke( null);
+            OBJECTIVE_NUMBER_FORMAT_METHOD = Objective.class.getMethod("numberFormat", nfClass);
+        } catch (Exception ignored) {
+            BLANK_NUMBER_FORMAT = null;
+            OBJECTIVE_NUMBER_FORMAT_METHOD = null;
+        }
+    }
 
     private final UUID playerId;
     private org.bukkit.scoreboard.Scoreboard scoreboard;
@@ -45,6 +61,7 @@ public class PlayerScoreboard {
         this.objective = scoreboard.registerNewObjective("essc_sb_" + playerId.toString().substring(0, 8), Criteria.DUMMY,
                 Component.empty());
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        applyBlankNumberFormat(objective);
 
         for (int i = 0; i < lineCount; i++) {
             String entry = INVISIBLE_ENTRIES[i];
@@ -126,6 +143,14 @@ public class PlayerScoreboard {
 
     public boolean isActive() {
         return !destroyed.get() && scoreboard != null;
+    }
+
+    private static void applyBlankNumberFormat(Objective objective) {
+        if (objective != null && BLANK_NUMBER_FORMAT != null && OBJECTIVE_NUMBER_FORMAT_METHOD != null) {
+            try {
+                OBJECTIVE_NUMBER_FORMAT_METHOD.invoke(objective, BLANK_NUMBER_FORMAT);
+            } catch (Exception ignored) {}
+        }
     }
 
     private static String[] generateInvisibleEntries(int size) {

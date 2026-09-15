@@ -1,0 +1,138 @@
+title: lang:ah.gui.title.confirm
+size: 27
+
+items:
+  # Decorations are purely visual items. Mark any item with 'decoration: true'
+  # and define material, name, lore, glow, skull-texture and slot/slots freely.
+  # Example:
+  # decoration_example:
+  #   material: SUNFLOWER
+  #   name: "Fancy Decoration"
+  #   lore:
+  #     - "<gray>This item is pure decoration"
+  #   slot: 4
+  #   glow: true
+  #   decoration: true
+  #   hide-attributes: true
+
+  confirm:
+    material: LIME_STAINED_GLASS_PANE
+    name: lang:ah.gui.confirm.confirm-name
+    slot: 15
+    action: ah_confirm_purchase
+
+  cancel:
+    material: RED_STAINED_GLASS_PANE
+    name: lang:ah.gui.confirm.cancel-name
+    slot: 11
+    action: ah_confirm_cancel
+
+  top_1:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 0
+    decoration: true
+
+  top_2:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 1
+    decoration: true
+
+  top_3:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 2
+    decoration: true
+
+  top_4:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 3
+    decoration: true
+
+  top_5:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 4
+    decoration: true
+
+  top_6:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 5
+    decoration: true
+
+  top_7:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 6
+    decoration: true
+
+  top_8:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 7
+    decoration: true
+
+  top_9:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 8
+    decoration: true
+
+  mid_1:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 9
+    decoration: true
+
+  mid_2:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 10
+    decoration: true
+
+  mid_3:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 16
+    decoration: true
+
+  mid_4:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 17
+    decoration: true
+
+  bot_1:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 18
+    decoration: true
+
+  bot_2:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 19
+    decoration: true
+
+  bot_3:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 20
+    decoration: true
+
+  bot_4:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 21
+    decoration: true
+
+  bot_5:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 22
+    decoration: true
+
+  bot_6:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 23
+    decoration: true
+
+  bot_7:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 24
+    decoration: true
+
+  bot_8:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 25
+    decoration: true
+
+  bot_9:
+    material: GRAY_STAINED_GLASS_PANE
+    slot: 26
+    decoration: true
