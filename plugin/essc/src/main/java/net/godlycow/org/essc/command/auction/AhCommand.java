@@ -40,6 +40,7 @@ public class AhCommand extends Command {
             case "cancel", "c" -> handleCancel(player, args);
             case "expired", "e" -> guiManager.openExpiredGui(player, 1);
             case "listings", "l", "my" -> guiManager.openListingsGui(player, 1);
+            case "search", "find" -> handleSearch(player, args);
             case "notifications", "notif", "notify" -> handleNotifications(player);
             case "reload", "rl" -> handleReload(player);
             case "help", "?" -> sendUsage(player);
@@ -47,8 +48,8 @@ public class AhCommand extends Command {
                 try {
                     guiManager.openMainGui(player, Integer.parseInt(sub));
                 } catch (NumberFormatException e) {
-                    player.sendMessage(lang.get(player, "ah.invalid_subcommand"));
-                    soundManager.playError(player);
+                    String query = String.join(" ", args);
+                    guiManager.openSearchGui(player, query, 1);
                 }
             }
         }
@@ -81,6 +82,17 @@ public class AhCommand extends Command {
                 ? "ah.notifications.enabled"
                 : "ah.notifications.disabled"));
         soundManager.playClick(player);
+    }
+
+    private void handleSearch(Player player, String[] args) {
+        if (args.length < 2) {
+            player.sendMessage(lang.get(player, "command.usage.ah_search"));
+            soundManager.playError(player);
+            return;
+        }
+
+        String query = String.join(" ", java.util.Arrays.copyOfRange(args, 1, args.length));
+        guiManager.openSearchGui(player, query, 1);
     }
 
     private void handleSell(Player player, String[] args) {
@@ -237,7 +249,7 @@ public class AhCommand extends Command {
         if (!plugin.getConfigManager().isAHEnabled()) return Collections.emptyList();
 
         if (args.length == 1) {
-            List<String> subs = new ArrayList<>(Arrays.asList("sell", "expired", "listings", "help"));
+            List<String> subs = new ArrayList<>(Arrays.asList("sell", "search", "expired", "listings", "help"));
             if (sender.hasPermission("essentialsc.ah.cancel")) subs.add("cancel");
             if (sender.hasPermission("essentialsc.ah.notifications")) subs.add("notifications");
             if (sender.hasPermission("essentialsc.ah.reload")) subs.add("reload");
@@ -283,8 +295,12 @@ public class AhCommand extends Command {
         guiManager.openBuyHistoryGui(player, page);
     }
 
-    public void openConfirmBuyGui(Player player, Auction auction) {
-        guiManager.openConfirmBuyGui(player, auction);
+    public void openConfirmBuyGui(Player player, Auction auction, String searchQuery) {
+        guiManager.openConfirmBuyGui(player, auction, searchQuery);
+    }
+
+    public void openSearchGui(Player player, String query, int page) {
+        guiManager.openSearchGui(player, query, page);
     }
 
     public AhSoundManager getSoundManager() {

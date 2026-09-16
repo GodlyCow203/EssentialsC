@@ -51,6 +51,7 @@ public class GuiFramework {
                 "auction_history_type.yml",
                 "auction_sell_history.yml",
                 "auction_buy_history.yml",
+                "auction_search.yml",
                 "ah_confirm.yml",
                 "shop_main.yml",
                 "shop_category.yml",

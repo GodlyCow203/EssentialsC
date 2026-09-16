@@ -9,8 +9,10 @@ import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
 import net.godlycow.org.essc.util.ComponentHelper;
+import net.godlycow.org.essc.util.ItemUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,10 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AhGuiManager {
     private static final int[] AUCTION_SLOTS = {
@@ -250,7 +249,7 @@ public class AhGuiManager {
         openGui(player, gui);
     }
 
-    public void openConfirmBuyGui(Player player , Auction auction) {
+    public void openConfirmBuyGui(Player player, Auction auction, String searchQuery) {
 
         sounds.playOpen(player);
         GuiTemplate template = guiFramework.getTemplate("ah_confirm");
@@ -263,7 +262,7 @@ public class AhGuiManager {
         String priceStr = itemFactory.formatAmount(auction.getPrice());
 
         Component title = template.resolveTitle(player, plugin);
-        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(),  1, auction.getId()), template.getSize(), title);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(),  1, auction.getId(), searchQuery), template.getSize(), title);
 
         guiFramework.fillStaticItems(gui, "ah_confirm", player);
 
@@ -333,6 +332,111 @@ public class AhGuiManager {
             gui.setItem(cancelConfig.getSlots().get(0), cancelItem);
         }
         
+
+        openGui(player, gui);
+    }
+
+    public void openSearchGui(Player player, String query, int page) {
+
+        sounds.playOpen(player);
+
+        GuiTemplate template = guiFramework.getTemplate("auction_search");
+        if (template == null) {
+            plugin.getLogger().warning("[AH] Mising GUI template: auction_search.yml");
+            return;
+        }
+
+        ItemUtil itemUtil = ItemUtil.getInstance();
+        List<Auction> results = new ArrayList<>();
+        for (Auction auction : plugin.getAuctionManager().getActiveAuctions()) {
+            if (itemUtil.matchesAny(query, auction.getItem().getType())) {
+                results.add(auction);
+
+                continue;
+            }
+
+            String displayName = "";
+
+
+            if (auction.getItem().getItemMeta() != null && auction.getItem().getItemMeta().hasDisplayName()) {
+                displayName = LegacyComponentSerializer.legacySection().serialize(
+                        auction.getItem().getItemMeta().displayName()).toLowerCase();
+            }
+
+            if (displayName.contains(query.toLowerCase())) {
+                results.add(auction);
+            }
+        }
+
+        int totalPages = Math.max(1, (int) Math.ceil((double) results.size() / PER_PAGE));
+        page = Math.max(1, Math.min(page, totalPages));
+
+        Map<String, String> placeholders = new HashMap<>();
+
+        placeholders.put("query", query);
+        placeholders.put("page", String.valueOf(page));
+        placeholders.put("total", String.valueOf(totalPages));
+        placeholders.put("count", String.valueOf(results.size()));
+
+        Component title = template.resolveTitle(player, plugin, placeholders);
+        Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(), page, query), template.getSize(), title);
+
+        guiFramework.fillStaticItems(gui, "auction_search", player);
+
+        if (results.isEmpty()) {
+            GuiButton emptyConfig = template.getItem("empty");
+            if (emptyConfig != null) {
+                ItemStack emptyItem = guiFramework.getItemBuilder().build(emptyConfig, player);
+                ItemMeta emptyMeta = emptyItem.getItemMeta();
+                if (emptyMeta != null) {
+
+                    List<Component> emptyLore = new ArrayList<>();
+                    emptyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.empty.search.lore1")));
+                    emptyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.empty.search.lore2",
+                            Map.of("query", query))));
+                    emptyMeta.lore(emptyLore);
+                    emptyItem.setItemMeta(emptyMeta);
+                }
+                place(gui, emptyConfig, emptyItem);
+            }
+        } else {
+            int start = (page - 1) * PER_PAGE;
+            int end = Math.min(start + PER_PAGE, results.size());
+            for (int i = start; i < end && (i - start) < AUCTION_SLOTS.length; i++) {
+                gui.setItem(AUCTION_SLOTS[i - start], itemFactory.createAuctionItem(results.get(i), player));
+            }
+        }
+
+        GuiButton navPrev = template.getItem("nav-prev");
+        GuiButton navNext = template.getItem("nav-next");
+
+        place( gui, navPrev, page > 1
+                ? itemFactory.createNavItem(navPrev, page - 1, "search_" + query, player) : null);
+        place(gui, navNext, page < totalPages
+                ? itemFactory.createNavItem(navNext, page + 1, "search_" + query, player)
+                : null);
+
+        GuiButton infoConfig = template.getItem("info");
+
+        if (infoConfig != null) {
+            ItemStack infoItem = guiFramework.getItemBuilder().build(infoConfig, player);
+            ItemMeta infoMeta = infoItem.getItemMeta();
+            if (infoMeta != null) {
+
+                List<Component> infoLore = new ArrayList<>();
+                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore1")));
+                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore2",
+                        Map.of("query", query))));
+                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore3",
+                        Map.of("count", String.valueOf(results.size())))));
+                infoMeta.lore(infoLore);
+                infoItem.setItemMeta(infoMeta);
+            }
+
+
+            place(gui, infoConfig, infoItem);
+        }
+
 
         openGui(player, gui);
     }

@@ -1,0 +1,113 @@
+title: lang:ah.gui.title.search
+size: 54
+
+items:
+  nav-prev:
+    material: SPECTRAL_ARROW
+    name: lang:ah.gui.item.nav.prev.name
+    slot: 48
+    action: page_prev
+    hide-attributes: true
+
+  nav-next:
+    material: SPECTRAL_ARROW
+    name: lang:ah.gui.item.nav.next.name
+    slot: 50
+    action: page_next
+    hide-attributes: true
+
+  refresh:
+    material: BLUE_EGG
+    name: lang:ah.gui.item.refresh.name
+    slot: 52
+    lore:
+      - lang:ah.gui.item.refresh.lore1
+      - lang:ah.gui.item.refresh.lore2
+    action: refresh
+    hide-attributes: true
+
+  listings:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.listings.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Q2MjhkYTk2NjY2ZjZjYTdlNjdiMTJjZjU1ODlhODgxZmE2ZWEzNTVmMTJhYmU2NTJmMmM2Mjc5NGExZGQ3In19fQ==
+    slot: 45
+    lore:
+      - lang:ah.gui.item.listings.lore1
+      - lang:ah.gui.item.listings.lore2
+    action: listings
+    hide-attributes: true
+
+  expired:
+    material: PLAYER_HEAD
+    name: lang:ah.gui.item.expired.name
+    skull-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmUwZmQxMDE5OWU4ZTRmY2RhYmNhZTRmODVjODU5MTgxMjdhN2M1NTUzYWQyMzVmMDFjNTZkMThiYjk0NzBkMyJ9fX0=
+    slot: 46
+    lore:
+      - lang:ah.gui.item.expired.lore1
+      - lang:ah.gui.item.expired.lore_waiting
+    action: expired
+    glow: true
+    hide-attributes: true
+
+  history:
+    material: BOOKSHELF
+    name: lang:ah.gui.item.history.name
+    slot: 53
+    lore:
+      - lang:ah.gui.item.history.lore1
+      - lang:ah.gui.item.history.lore2
+    action: history
+    hide-attributes: true
+
+  close:
+    material: BARRIER
+    name: lang:ah.gui.item.close.name
+    slot: 49
+    action: close
+    hide-attributes: true
+
+  info:
+    material: WRITABLE_BOOK
+    slot: 4
+    name: lang:ah.gui.item.search_info.name
+    hide-attributes: true
+
+  empty:
+    material: NETHER_WART
+    name: lang:ah.gui.item.empty.search.name
+    slot: 31
+    lore:
+      - lang:ah.gui.item.empty.search.lore1
+      - lang:ah.gui.item.empty.search.lore2
+    hide-attributes: true
+    dynamic: true
+
+  left_1:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 0
+    decoration: true
+
+  left_2:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 1
+    decoration: true
+
+  left_3:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 9
+    decoration: true
+
+  right_1:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 7
+    decoration: true
+
+  right_2:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 8
+    decoration: true
+
+  right_3:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 17
+    decoration: true

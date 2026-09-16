@@ -55,6 +55,7 @@ import net.godlycow.org.essc.server.software.ServerSoftware;
 import net.godlycow.org.essc.modules.SpawnManager;
 import net.godlycow.org.essc.modules.tab.TabManager;
 import net.godlycow.org.essc.modules.teleport.TPAManager;
+import net.godlycow.org.essc.util.ItemUtil;
 import net.godlycow.org.essc.util.StartupBanner;
 import net.godlycow.org.essc.modules.VanishManager;
 import net.godlycow.org.essc.modules.warp.WarpManager;
@@ -196,6 +197,10 @@ public final class PluginLoader {
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
+            ItemUtil itemUtil =
+                    ItemUtil.getInstance();
+            plugin.getLogger().info("[AH] Loaded " + itemUtil.size() + " item aliases for search");
+
             AuctionManager auctionManager = new AuctionManager(plugin);
             plugin.setAuctionManager(auctionManager);
 

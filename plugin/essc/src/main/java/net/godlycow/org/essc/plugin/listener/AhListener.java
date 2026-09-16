@@ -71,12 +71,17 @@ public class AhListener implements Listener {
 
             soundManager.playPageTurn(player);
 
-            switch (navType) {
-                case "main" -> ahCommand.openMainGui(player, page);
-                case "listings" -> ahCommand.openListingsGui(player, page);
-                case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
-                case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
-                case "expired" -> ahCommand.openExpiredGui(player, page);
+            if (navType.startsWith("search_")) {
+                String searchQuery = navType.substring(7);
+                ahCommand.openSearchGui(player, searchQuery, page);
+            } else {
+                switch (navType) {
+                    case "main" -> ahCommand.openMainGui(player, page);
+                    case "listings" -> ahCommand.openListingsGui(player, page);
+                    case "sell_history" -> ahCommand.openSellHistoryGui(player, page);
+                    case "buy_history" -> ahCommand.openBuyHistoryGui(player, page);
+                    case "expired" -> ahCommand.openExpiredGui(player, page);
+                }
             }
             return;
         }
@@ -142,7 +147,19 @@ public class AhListener implements Listener {
             case "claim_all" -> handleClaimAll(player);
             case "refresh", "back_main" -> {
                 soundManager.playClick(player);
-                ahCommand.openMainGui(player, 1);
+                String searchQuery = null;
+                if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+                    searchQuery = holder.getSearchQuery();
+                }
+                if (searchQuery != null) {
+                    int currentPage = 1;
+                    if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder h) {
+                        currentPage = h.getPage();
+                    }
+                    ahCommand.openSearchGui(player, searchQuery, currentPage);
+                } else {
+                    ahCommand.openMainGui(player, 1);
+                }
             }
             case "history", "history_type", "back_history" -> {
                 soundManager.playClick(player);
@@ -262,6 +279,11 @@ public class AhListener implements Listener {
 
         soundManager.playClick(player);
 
+        String searchQuery = null;
+        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+            searchQuery = holder.getSearchQuery();
+        }
+
         if (!plugin.getConfigManager().isAHConfirmationGuiEnabled()) {
             player.closeInventory();
             plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
@@ -281,7 +303,7 @@ public class AhListener implements Listener {
             return;
         }
 
-        ahCommand.openConfirmBuyGui(player, auction);
+        ahCommand.openConfirmBuyGui(player, auction, searchQuery);
     }
 
     private void handleConfirmBuy(Player player, int auctionId) {
@@ -323,6 +345,15 @@ public class AhListener implements Listener {
 
     private void handleConfirmCancel(Player player) {
         soundManager.playClick(player);
-        ahCommand.openMainGui(player, 1);
+        // Check if we have a search query stored in the current inventory holder
+        String searchQuery = null;
+        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+            searchQuery = holder.getSearchQuery();
+        }
+        if (searchQuery != null) {
+            ahCommand.openSearchGui(player, searchQuery, 1);
+        } else {
+            ahCommand.openMainGui(player, 1);
+        }
     }
 }
