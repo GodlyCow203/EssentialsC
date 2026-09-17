@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Idioma atual: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(detectado automaticamente)</color>",
@@ -576,6 +576,13 @@
     "ah.gui.item.empty.search.name": "<color:#AAAAAA><b>Nenhum resultado encontrado</b></color>",
     "ah.gui.item.empty.search.lore1": "<color:#AAAAAA>Nenhum leilão encontrado para",
     "ah.gui.item.empty.search.lore2": "<color:#FFFFFF><query></color>",
+  "ah.gui.title.shulker_preview": "<color:#FFFFFF><b>Pré-visualização Shulker</b> <color:#474747>| <color:#AAAAAA>Anúncio de <seller></color>",
+  "ah.gui.item.shulker_preview.back.name": "<color:#F5C827><b>\u2190 Voltar ao Leilão</b></color>",
+  "ah.gui.item.shulker_preview.buy.name": "<color:#F5C827><b>Comprar Item</b></color>",
+  "ah.gui.item.shulker_preview.buy.lore1": "<color:#AAAAAA>Clique para comprar este item",
+  "ah.gui.item.shulker_preview.buy.lore2": "<color:#AAAAAA>por <color:#F5C827><price></color>",
+  "ah.gui.lore.right_click_preview": "<color:#474747>Clique direito para visualizar o conteúdo",
+  "ah.gui.lore.empty_shulker": "<color:#474747>Esta caixa shulker está vazia",
     "command.usage.ah_search": "<prefix> <color:#FF0000>Uso: /ah search <item></color>",
     "ah.search.no_results": "<prefix> <color:#FF0000>Nenhum leilão encontrado para <color:#FFFFFF><query></color>.</color>",
    "kick.success": "<prefix> <color:#FFF200>Expulso <color:#FFFFFF><target></color> do servidor.</color>",

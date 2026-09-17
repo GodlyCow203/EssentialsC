@@ -174,6 +174,8 @@ public class AhListener implements Listener {
                 ahCommand.openBuyHistoryGui(player, 1);
             }
             case "ah_confirm_cancel" -> handleConfirmCancel(player);
+            case "shulker_preview_back" -> handleShulkerPreviewBack(player);
+            case "shulker_preview_buy" -> handleShulkerPreviewBuy(player);
             case "close" -> {
                 soundManager.playClose(player);
                 player.closeInventory();
@@ -230,9 +232,41 @@ public class AhListener implements Listener {
 
         if (isOwn) {
             handleCancel(player, auction, click);
+        } else if (click == ClickType.RIGHT && AhItemFactory.isShulkerBox(auction.getItem().getType())) {
+            handleShulkerPreview(player, auction);
         } else {
             handleBuy(player, auction);
         }
+    }
+
+    private void handleShulkerPreview(Player player, Auction auction) {
+
+        if (!player.hasPermission("essentialsc.ah.use")) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
+            soundManager.playError(player);
+            return;
+        }
+
+        String returnNav = "main";
+        int returnPage = 1;
+        String searchQuery = null;
+
+        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+
+            searchQuery = holder.getSearchQuery();
+            String guiId = holder.getGuiId();
+            returnPage = holder.getPage();
+            if (guiId != null) {
+                returnNav = switch (guiId) {
+                    case "auction_search" -> searchQuery != null ? "search_" + searchQuery : "main";
+                    case "auction_listings" -> "listings";
+                    case "auction_main" -> "main";
+                    default -> "main";
+                };
+            }
+        }
+
+        ahCommand.openShulkerPreviewGui(player, auction, returnNav, returnPage, searchQuery);
     }
 
     private void handleCancel(Player player, Auction auction, ClickType click) {
@@ -355,5 +389,86 @@ public class AhListener implements Listener {
         } else {
             ahCommand.openMainGui(player, 1);
         }
+    }
+
+    private void handleShulkerPreviewBack(Player player) {
+
+        soundManager.playClick(player);
+        if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder)) {
+            ahCommand.openMainGui(player, 1);
+            return;
+        }
+
+        String returnNav = holder.getReturnNav();
+        int returnPage = holder.getReturnPage();
+
+        if (returnNav == null) returnNav = "main";
+
+        if (returnNav.startsWith("search_")) {
+            String query = returnNav.substring(7);
+            ahCommand.openSearchGui(player, query, returnPage);
+
+        } else {
+            
+            switch (returnNav) {
+                case "listings" -> ahCommand.openListingsGui(player, returnPage);
+                case "expired" -> ahCommand.openExpiredGui(player, returnPage);
+                case "sell_history" -> ahCommand.openSellHistoryGui(player, returnPage);
+                case "buy_history" -> ahCommand.openBuyHistoryGui(player, returnPage);
+                default -> ahCommand.openMainGui(player, returnPage);
+            }
+        }
+    }
+
+    private void handleShulkerPreviewBuy(Player player) {
+        if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder)) return;
+
+        int auctionId = holder.getAuctionId();
+        Optional<Auction> opt = plugin.getAuctionManager().getAuction(auctionId);
+        if (opt.isEmpty()) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.not_found"));
+            soundManager.playError(player);
+            player.closeInventory();
+            return;
+        }
+
+        Auction auction = opt.get();
+
+        if (!player.hasPermission("essentialsc.ah.buy")) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.no_permission"));
+            soundManager.playError(player);
+            return;
+        }
+
+        if (auction.getSellerUuid().equals(player.getUniqueId())) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "ah.cannot_buy_own"));
+            soundManager.playError(player);
+            return;
+        }
+
+        soundManager.playClick(player);
+
+        String searchQuery = holder.getSearchQuery();
+
+        if (!plugin.getConfigManager().isAHConfirmationGuiEnabled()) {
+            player.closeInventory();
+            plugin.getAuctionManager().buyAuction(player, auction.getId()).thenAccept(success -> {
+                player.getScheduler().run(plugin, scheduledTask -> {
+                    if (success) {
+                        player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
+                                "item", auction.getItem().getType().toString(),
+                                "price", plugin.getEconomyManager().format(auction.getPrice())
+                        )));
+                        soundManager.playPurchase(player);
+                    } else {
+                        player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchase_failed"));
+                        soundManager.playError(player);
+                    }
+                }, null);
+            });
+            return;
+        }
+
+        ahCommand.openConfirmBuyGui(player, auction, searchQuery);
     }
 }

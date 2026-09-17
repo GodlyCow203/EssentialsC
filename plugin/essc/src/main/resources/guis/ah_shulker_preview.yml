@@ -1,0 +1,98 @@
+title: lang:ah.gui.title.shulker_preview
+size: 54
+
+items:
+  border-top:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+    hide-attributes: true
+
+  border-left:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+      - 9
+      - 18
+      - 27
+      - 36
+    hide-attributes: true
+
+  border-right:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+      - 17
+      - 26
+      - 35
+      - 44
+    hide-attributes: true
+
+  border-bottom:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    slots:
+      - 45
+      - 46
+      - 48
+      - 49
+      - 50
+      - 51
+      - 52
+      - 53
+    hide-attributes: true
+
+  preview-slot:
+    material: AIR
+    slots:
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 42
+      - 43
+
+  back:
+    material: EXPERIENCE_BOTTLE
+    name: lang:ah.gui.item.shulker_preview.back.name
+    slot: 47
+    action: shulker_preview_back
+    hide-attributes: true
+
+  buy:
+    material: EMERALD
+    name: lang:ah.gui.item.shulker_preview.buy.name
+    slot: 49
+    action: shulker_preview_buy
+    hide-attributes: true

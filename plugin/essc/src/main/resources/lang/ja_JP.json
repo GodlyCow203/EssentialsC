@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>現在の言語: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(自動検出)</color>",
@@ -576,6 +576,13 @@
   "ah.gui.item.empty.search.name": "<color:#AAAAAA><b>結果が見つかりません</b></color>",
   "ah.gui.item.empty.search.lore1": "<color:#AAAAAA>オークションが見つかりません:",
   "ah.gui.item.empty.search.lore2": "<color:#FFFFFF><query></color>",
+  "ah.gui.title.shulker_preview": "<color:#FFFFFF><b>シュルカー プレビュー</b> <color:#474747>| <color:#AAAAAA><seller> の出品</color>",
+  "ah.gui.item.shulker_preview.back.name": "<color:#F5C827><b>\u2190 オークションに戻る</b></color>",
+  "ah.gui.item.shulker_preview.buy.name": "<color:#F5C827><b>アイテムを購入</b></color>",
+  "ah.gui.item.shulker_preview.buy.lore1": "<color:#AAAAAA>このアイテムを購入するにはクリック",
+  "ah.gui.item.shulker_preview.buy.lore2": "<color:#AAAAAA>価格: <color:#F5C827><price></color>",
+  "ah.gui.lore.right_click_preview": "<color:#474747>右クリックで中身をプレビュー",
+  "ah.gui.lore.empty_shulker": "<color:#474747>このシュルカーボックスは空です",
   "command.usage.ah_search": "<prefix> <color:#FF0000>使用方法: /ah search <item></color>",
   "ah.search.no_results": "<prefix> <color:#FF0000><color:#FFFFFF><query></color> のオークションが見つかりません。</color>",
   "kick.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> をサーバーからキックしました。</color>",

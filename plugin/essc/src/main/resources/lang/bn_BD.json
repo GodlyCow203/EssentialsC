@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>বর্তমান ভাষা: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(স্বয়ংক্রিয় সনাক্ত)</color>",
@@ -576,6 +576,13 @@
   "ah.gui.item.empty.search.name": "<color:#AAAAAA><b>কোনো ফলাফল পাওয়া যায়নি</b></color>",
   "ah.gui.item.empty.search.lore1": "<color:#AAAAAA>কোনো নিলামি পাওয়া যায়নি",
   "ah.gui.item.empty.search.lore2": "<color:#FFFFFF><query></color>",
+  "ah.gui.title.shulker_preview": "<color:#FFFFFF><b>শালকার প্রিভিউ</b> <color:#474747>| <color:#AAAAAA><seller>'s তালিকা</color>",
+  "ah.gui.item.shulker_preview.back.name": "<color:#F5C827><b>\u2190 নিলামে ফিরুন</b></color>",
+  "ah.gui.item.shulker_preview.buy.name": "<color:#F5C827><b>আইটেম কিনুন</b></color>",
+  "ah.gui.item.shulker_preview.buy.lore1": "<color:#AAAAAA>এই আইটেমটি কিনতে ক্লিক করুন",
+  "ah.gui.item.shulker_preview.buy.lore2": "<color:#AAAAAA>মূল্য <color:#F5C827><price></color>",
+  "ah.gui.lore.right_click_preview": "<color:#474747>বিষয়বস্তু প্রিভিউ করতে ডান ক্লিক করুন",
+  "ah.gui.lore.empty_shulker": "<color:#474747>এই শালকার বক্স খালি",
   "command.usage.ah_search": "<prefix> <color:#FF0000>ব্যবহার: /ah search <item></color>",
   "ah.search.no_results": "<prefix> <color:#FF0000>কোনো নিলামি পাওয়া যায়নি <color:#FFFFFF><query></color>.</color>",
   "kick.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> কে সার্ভার থেকে কিক করা হয়েছে।</color>",

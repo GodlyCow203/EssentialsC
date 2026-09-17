@@ -5,7 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EssConfig {
     private final EssentialsC plugin;
@@ -390,6 +392,26 @@ public class EssConfig {
 
     public List<String> getAHBlacklistedMaterials() {
         return config.getStringList("auction-house.blacklisted-materials");
+    }
+
+    public List<Map<String, Object>> getAHBlacklistedCustomItems() {
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        List<?> list = config.getList("auction-house.blacklisted-custom-items");
+
+        if (list == null)
+            return result;
+
+
+        for (Object entry : list) {
+            if (entry instanceof Map) {
+
+                @SuppressWarnings("unchecked")
+                Map<String, Object> map = (Map<String, Object>) entry;
+                result.add(map);
+            }
+        }
+        return result;
     }
 
     public boolean isAHNotifyOnSale() {

@@ -488,6 +488,76 @@ public class AhGuiManager {
         openGui(player, gui);
     }
 
+    public void openShulkerPreviewGui(Player player,  Auction auction, String returnNav , int returnPage, String searchQuery) {
+
+        sounds.playOpen(player);
+
+        GuiTemplate template = guiFramework.getTemplate("ah_shulker_preview");
+
+        if (template == null) {
+            plugin.getLogger().warning("[AH] Missing GUI template: ah_shulker_preview.yml");
+            return;
+        }
+
+
+        Component title = template.resolveTitle(player, plugin,
+                Map.of("seller", auction.getSellerName()));
+        Inventory gui = Bukkit.createInventory(
+                new AhGuiHolder(template.getId(), 1, auction.getId(), searchQuery, returnNav, returnPage),
+                template.getSize(), title);
+
+        guiFramework.fillStaticItems(gui, "ah_shulker_preview", player);
+
+        GuiButton previewConfig = template.getItem("preview-slot");
+
+        if (previewConfig != null && !previewConfig.getSlots().isEmpty()) {
+
+            ItemStack[] shulkerContents = AhItemFactory.readShulkerContents(auction.getItem());
+            List<Integer> slots = previewConfig.getSlots();
+
+
+            for (int i = 0; i < slots.size() && i < shulkerContents.length; i++) {
+                ItemStack slotItem = shulkerContents[i];
+                if (slotItem != null && slotItem.getType() != Material.AIR) {
+                    gui.setItem(slots.get(i), slotItem.clone());
+                }
+            }
+
+        }
+
+        GuiButton backConfig = template.getItem("back");
+
+        if (backConfig != null) {
+            gui.setItem(backConfig.getSlots().get(0), guiFramework.getItemBuilder().build(backConfig, player));
+        }
+
+        GuiButton buyConfig = template.getItem("buy");
+        if (buyConfig != null) {
+
+            ItemStack buyItem = guiFramework.getItemBuilder().build(buyConfig, player);
+            ItemMeta buyMeta = buyItem.getItemMeta();
+
+            if (buyMeta != null) {
+                String priceStr = itemFactory.formatAmount(auction.getPrice());
+                List<Component> buyLore = new ArrayList<>();
+                buyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.shulker_preview.buy.lore1")));
+                buyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.shulker_preview.buy.lore2",
+                        Map.of("price", priceStr))));
+                buyMeta.lore(buyLore);
+                buyMeta.getPersistentDataContainer().set(
+                        new NamespacedKey(plugin, "gui_action"),
+                        PersistentDataType.STRING,
+                        "shulker_preview_buy"
+                );
+                buyItem.setItemMeta(buyMeta);
+            }
+
+            gui.setItem(buyConfig.getSlots().get(0), buyItem);
+        }
+
+        openGui(player, gui);
+    }
+
     private void place(Inventory gui, GuiButton button, ItemStack item) {
         if (button == null || item == null || button.getSlots().isEmpty()) return;
         int slot = button.getSlots().get(0);

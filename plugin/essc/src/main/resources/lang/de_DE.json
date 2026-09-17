@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Aktuelle Sprache: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(automatisch erkannt)</color>",
@@ -576,6 +576,13 @@
     "ah.gui.item.empty.search.name": "<color:#AAAAAA><b>Keine Ergebnisse gefunden</b></color>",
     "ah.gui.item.empty.search.lore1": "<color:#AAAAAA>Keine Auktionen gefunden für",
     "ah.gui.item.empty.search.lore2": "<color:#FFFFFF><query></color>",
+  "ah.gui.title.shulker_preview": "<color:#FFFFFF><b>Schulker-Vorschau</b> <color:#474747>| <color:#AAAAAA>Angebot von <seller></color>",
+  "ah.gui.item.shulker_preview.back.name": "<color:#F5C827><b>\u2190 Zurück zur Auktion</b></color>",
+  "ah.gui.item.shulker_preview.buy.name": "<color:#F5C827><b>Gegenstand kaufen</b></color>",
+  "ah.gui.item.shulker_preview.buy.lore1": "<color:#AAAAAA>Klicken Sie, um diesen Gegenstand zu kaufen",
+  "ah.gui.item.shulker_preview.buy.lore2": "<color:#AAAAAA>für <color:#F5C827><price></color>",
+  "ah.gui.lore.right_click_preview": "<color:#474747>Rechtsklick zum Vorschauen des Inhalts",
+  "ah.gui.lore.empty_shulker": "<color:#474747>Diese Schulker-Box ist leer",
     "command.usage.ah_search": "<prefix> <color:#FF0000>Verwendung: /ah search <item></color>",
     "ah.search.no_results": "<prefix> <color:#FF0000>Keine Auktionen gefunden für <color:#FFFFFF><query></color>.</color>",
    "kick.success": "<prefix> <color:#FFF200><color:#FFFFFF><target></color> vom Server gekickt.</color>",

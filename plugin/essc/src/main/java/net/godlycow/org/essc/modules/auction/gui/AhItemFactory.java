@@ -14,12 +14,15 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+
+import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class AhItemFactory {
     private final NamespacedKey pageKey;
     private final NamespacedKey navKey;
     private final NamespacedKey claimKey;
+    private final NamespacedKey previewKey;
 
     public AhItemFactory(EssentialsC plugin, GuiItemBuilder guiItemBuilder) {
         this.plugin = plugin;
@@ -47,6 +51,7 @@ public class AhItemFactory {
         this.pageKey = new NamespacedKey(plugin, "ah_page");
         this.navKey = new NamespacedKey(plugin, "ah_nav");
         this.claimKey = new NamespacedKey(plugin, "ah_claim");
+        this.previewKey = new NamespacedKey(plugin, "ah_preview");
     }
 
     public ItemStack createAuctionItem(Auction auction, Player viewer) {
@@ -69,6 +74,9 @@ public class AhItemFactory {
             lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel")));
         } else {
             lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_purchase")));
+            if (isShulkerBox(display.getType())) {
+                lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_preview")));
+            }
         }
 
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id", Map.of("id", String.valueOf(auction.getId())))));
@@ -77,6 +85,7 @@ public class AhItemFactory {
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(auctionKey, PersistentDataType.INTEGER, auction.getId());
         if (isOwn) container.set(ownKey, PersistentDataType.BYTE, (byte) 1);
+        if (isShulkerBox(display.getType())) container.set(previewKey, PersistentDataType.BYTE, (byte) 1);
 
         display.setItemMeta(meta);
         return display;
@@ -425,5 +434,29 @@ public class AhItemFactory {
 
     public NamespacedKey getClaimKey() {
         return claimKey;
+    }
+
+    public NamespacedKey getPreviewKey() {
+        return previewKey;
+    }
+
+    public static boolean isShulkerBox(Material material) {
+        return material != null && material.name().endsWith("_SHULKER_BOX");
+    }
+
+    public static ItemStack[] readShulkerContents(ItemStack  shulkerItem) {
+
+        if (shulkerItem == null || !isShulkerBox(shulkerItem.getType()))
+            return new ItemStack[0];
+
+
+        if (!(shulkerItem.getItemMeta() instanceof BlockStateMeta bsm))
+            return new ItemStack[0];
+
+        if (!(bsm.getBlockState() instanceof Container container))
+            return new ItemStack[0];
+
+        
+        return container.getInventory().getContents().clone();
     }
 }

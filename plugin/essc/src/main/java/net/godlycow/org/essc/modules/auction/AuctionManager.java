@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.auction;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -55,6 +57,56 @@ public class AuctionManager implements Listener {
         }
 
         return plugin.getConfigManager().getAHMaxAuctions();
+    }
+
+    private boolean isCustomItemBlacklisted(ItemStack item,  List<Map<String, Object>> customBlacklist) {
+
+        ItemMeta meta = item.getItemMeta();
+
+
+
+        String displayName = null;
+        Integer customModelData = null;
+
+        if (meta != null) {
+            if (meta.hasDisplayName()) {
+                displayName =
+                        LegacyComponentSerializer.legacySection()
+                        .serialize(meta.displayName()).toLowerCase();
+            }
+
+            if (meta.hasCustomModelData()) {
+                customModelData = meta.getCustomModelData();
+            }
+        }
+
+
+        for ( Map<String, Object> entry : customBlacklist) {
+
+            String entryMaterial = entry.containsKey("material")
+                     ? String.valueOf(entry.get("material")).toUpperCase() : null;
+
+            String entryName = entry.containsKey("name")
+                    ? String.valueOf(entry.get("name")).toLowerCase()
+                     : null;
+
+            Integer entryCmd = entry.containsKey("custom-model-data")
+                    ? Integer.parseInt(String.valueOf(entry.get("custom-model-data"))) : null;
+
+            if (entryMaterial != null && !item.getType().name().equals(entryMaterial))
+                continue;
+
+            if (entryName != null && (displayName == null || !displayName.contains(entryName)))
+                continue;
+
+
+            if (entryCmd != null && (customModelData == null || !customModelData.equals(entryCmd)))
+                continue;
+
+            return true;
+        }
+        
+        return false;
     }
 
     private void loadAuctions() {
@@ -124,6 +176,11 @@ public class AuctionManager implements Listener {
             }
             List<String> blacklist = plugin.getConfigManager().getAHBlacklistedMaterials();
             if (!blacklist.isEmpty() && blacklist.contains(item.getType().name())) {
+                failReason.append("material_blacklisted");
+                return CompletableFuture.completedFuture(false);
+            }
+            List<Map<String, Object>> customBlacklist = plugin.getConfigManager().getAHBlacklistedCustomItems();
+            if (!customBlacklist.isEmpty() && isCustomItemBlacklisted(item, customBlacklist)) {
                 failReason.append("material_blacklisted");
                 return CompletableFuture.completedFuture(false);
             }

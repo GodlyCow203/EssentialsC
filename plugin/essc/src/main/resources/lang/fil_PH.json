@@ -1,4 +1,4 @@
-﻿{
+{
   "prefix": "<#FFF200><b>EssC<reset><dark_gray> » <reset>",
   "language.current": "<prefix> <color:#FFF200>Kasalukuyang wika: <color:#FFFFFF><language></color></color>",
   "language.auto": "<color:#AAAAAA>(awtomatikong natukoy)</color>",
@@ -576,6 +576,13 @@
   "ah.gui.item.empty.search.name": "<color:#AAAAAA><b>Hindi Nakahanap ng Resulta</b></color>",
   "ah.gui.item.empty.search.lore1": "<color:#AAAAAA>Hindi nakahanap ng auction para sa:",
   "ah.gui.item.empty.search.lore2": "<color:#FFFFFF><query></color>",
+  "ah.gui.title.shulker_preview": "<color:#FFFFFF><b>Shulker Preview</b> <color:#474747>| <color:#AAAAAA>Listahan ni <seller></color>",
+  "ah.gui.item.shulker_preview.back.name": "<color:#F5C827><b>\u2190 Bumalik sa Auction</b></color>",
+  "ah.gui.item.shulker_preview.buy.name": "<color:#F5C827><b>Bilhin ang Item</b></color>",
+  "ah.gui.item.shulker_preview.buy.lore1": "<color:#AAAAAA>I-click para bilhin ang item na ito",
+  "ah.gui.item.shulker_preview.buy.lore2": "<color:#AAAAAA>sa halagang <color:#F5C827><price></color>",
+  "ah.gui.lore.right_click_preview": "<color:#474747>Right-click para i-preview ang nilalaman",
+  "ah.gui.lore.empty_shulker": "<color:#474747>Ang shulker box na ito ay walang laman",
   "command.usage.ah_search": "<prefix> <color:#FF0000>Paggamit: /ah search <item></color>",
   "ah.search.no_results": "<prefix> <color:#FF0000>Hindi nakahanap ng auction para sa <color:#FFFFFF><query></color>.</color>",
   "kick.success": "<prefix> <color:#FFF200>Na-kick si <color:#FFFFFF><target></color> mula sa server.</color>",

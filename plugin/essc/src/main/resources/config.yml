@@ -783,6 +783,14 @@ auction-house:
     - BEACON
     - NETHER_STAR
 
+  # List of custom items that cannot be sold.
+  # Each entry can match by material, display name, and/or custom-model-data.
+  # All specified fields must match for the item to be blacklisted
+  blacklisted-custom-items:
+    # - material: WOODEN_SWORD
+    #   name: "Not A Netherite Sword"
+    #   custom-model-data: 2026
+
   # Whether to notify the player when they successfully sell items.
   notify-on-sale: true
 

@@ -303,6 +303,10 @@ public class AhCommand extends Command {
         guiManager.openSearchGui(player, query, page);
     }
 
+    public void openShulkerPreviewGui(Player player, Auction auction, String returnNav, int returnPage, String searchQuery) {
+        guiManager.openShulkerPreviewGui(player, auction, returnNav, returnPage, searchQuery);
+    }
+
     public AhSoundManager getSoundManager() {
         return soundManager;
     }
