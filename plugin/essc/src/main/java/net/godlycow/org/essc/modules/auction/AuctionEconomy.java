@@ -72,8 +72,6 @@ public class AuctionEconomy {
     }
 
     public void deliverItem(Player player, ItemStack item) {
-        Map<Integer, ItemStack> overflow = player.getInventory().addItem(item);
-        overflow.values().forEach(drop ->
-                player.getWorld().dropItemNaturally(player.getLocation(), drop));
+        player.getInventory().addItem(item);
     }
 }

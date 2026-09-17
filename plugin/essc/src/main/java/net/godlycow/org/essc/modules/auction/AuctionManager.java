@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.math.BigDecimal;
@@ -209,8 +210,37 @@ public class AuctionManager implements Listener {
             return CompletableFuture.completedFuture(false);
         }
 
+
+        if (!canFitItem(buyer, auction.getItem())) {
+            return CompletableFuture.completedFuture(false);
+        }
+
         return economy.processPurchase(buyer, auction)
                 .thenCompose(success -> finalizePurchase(buyer, auction, success));
+    }
+
+    private boolean canFitItem(Player player, ItemStack  item) {
+
+        PlayerInventory inv = player.getInventory();
+        int amount = item.getAmount();
+        for (int i = 0; i < 36; i++) {
+
+            ItemStack slot = inv.getItem(i);
+
+
+            if (slot == null) {
+                return true;
+            }
+
+            if (slot.isSimilar(item)) {
+                amount -= slot.getMaxStackSize() - slot.getAmount();
+                if (amount <= 0)
+                    return true;
+            }
+        }
+
+        
+        return false;
     }
 
     private CompletableFuture<Boolean> finalizePurchase(Player buyer, Auction auction, boolean success) {
