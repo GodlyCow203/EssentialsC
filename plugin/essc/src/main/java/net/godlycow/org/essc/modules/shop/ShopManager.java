@@ -332,6 +332,12 @@ public class ShopManager {
 
         double totalPrice = item.getBuyPrice() * amount;
 
+        if (!Double.isFinite(totalPrice)) {
+            shopListener.getSounds().playError(player);
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
+            return;
+        }
+
         ItemStack giveItem = item.createGiveItem(amount * item.getAmount());
 
         if (!canFitInInventory(player, giveItem)) {
@@ -437,6 +443,12 @@ public class ShopManager {
         }
 
         double totalPrice = item.getSellPrice() * amount;
+
+        if (!Double.isFinite(totalPrice)) {
+            shopListener.getSounds().playError(player);
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
+            return;
+        }
 
         if (plugin.getEconomyManager() != null) {
             BigDecimal price = BigDecimal.valueOf(totalPrice);

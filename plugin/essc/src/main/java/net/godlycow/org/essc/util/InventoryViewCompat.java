@@ -22,7 +22,7 @@ public final class InventoryViewCompat {
             return inv == null ? null : inv.getHolder();
         }
 
-        catch (IllegalStateException e)
+        catch (Exception e)
 
         {
             return null;
