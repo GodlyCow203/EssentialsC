@@ -2,6 +2,7 @@ package net.godlycow.org.essc.bootstrap;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.APIProvider;
+import net.godlycow.org.essc.storage.database.Database;
 
 public final class PluginShutdown {
 
@@ -78,6 +79,7 @@ public final class PluginShutdown {
         }
 
         plugin.getFastStatsManager().shutdown();
+        Database.shutdownExecutor();
 
         plugin.debug("All managers shut down.");
     }

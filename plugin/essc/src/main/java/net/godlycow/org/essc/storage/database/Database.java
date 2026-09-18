@@ -10,11 +10,17 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 public class Database {
+    private static final ExecutorService SHARED_EXECUTOR = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "essc-dbase-worker");
+        t.setDaemon(true);
+
+        return t;
+    });
+
     private final EssentialsC plugin;
     private final String dbPath;
     private final String jdbcUrl;
     private Connection connection;
-    private final ExecutorService writeExecutor;
 
     public Database(EssentialsC plugin, String filename) {
         this.plugin = plugin;
@@ -26,11 +32,6 @@ public class Database {
 
         this.dbPath = new File(databasesDir, filename).getAbsolutePath();
         this.jdbcUrl = "jdbc:sqlite:" + dbPath;
-        this.writeExecutor = Executors.newSingleThreadExecutor(r -> {
-            Thread t = new Thread(r, "EssentialsC-DB-" + filename);
-            t.setDaemon(true);
-            return t;
-        });
     }
 
     public void connect() throws SQLException {
@@ -39,7 +40,6 @@ public class Database {
     }
 
     public void disconnect() {
-        writeExecutor.shutdown();
         if (connection != null) {
             try {
                 connection.close();
@@ -48,6 +48,10 @@ public class Database {
                 plugin.getLogger().log(Level.SEVERE, "Error closing database connection", e);
             }
         }
+    }
+
+    public static void shutdownExecutor() {
+        SHARED_EXECUTOR.shutdown();
     }
 
     public String getDbPath() {
@@ -84,7 +88,7 @@ public class Database {
                 plugin.getLogger().log(Level.SEVERE, "Database error", e);
                 throw new RuntimeException(e);
             }
-        }, writeExecutor);
+        }, SHARED_EXECUTOR);
     }
 
     @FunctionalInterface
