@@ -6,6 +6,7 @@ import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.plugin.gui.GuiTemplate;
 import net.godlycow.org.essc.util.ComponentHelper;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -116,12 +117,12 @@ public class TrashCommand extends Command implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        if (event.getInventory().getHolder() instanceof TrashHolder holder) {
+        if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof TrashHolder holder) {
             handleTrashClick(event, player, holder);
             return;
         }
 
-        if (event.getInventory().getHolder() instanceof TrashConfirmHolder holder) {
+        if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof TrashConfirmHolder holder) {
             handleConfirmClick(event, player, holder);
         }
     }
@@ -192,12 +193,12 @@ public class TrashCommand extends Command implements Listener {
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
 
-        if (event.getInventory().getHolder() instanceof TrashHolder holder) {
+        if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof TrashHolder holder) {
             handleTrashClose(event, player, holder);
             return;
         }
 
-        if (event.getInventory().getHolder() instanceof TrashConfirmHolder holder) {
+        if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof TrashConfirmHolder holder) {
             handleConfirmClose(player, holder);
         }
     }

@@ -2,6 +2,7 @@ package net.godlycow.org.essc.util;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.InventoryView;
 
 import java.lang.reflect.Method;
@@ -12,6 +13,20 @@ public final class InventoryViewCompat {
     private static Method getTopInventoryMethod;
 
     private InventoryViewCompat() {
+    }
+
+    public static InventoryHolder safeHolder(Inventory inv) {
+
+        try
+        {
+            return inv == null ? null : inv.getHolder();
+        }
+
+        catch (IllegalStateException e)
+
+        {
+            return null;
+        }
     }
 
     // use reflection to call getTopInventory on the open inventoryView

@@ -541,7 +541,7 @@ public class ShopManager {
         plugin.getEconomyManager().getBalance(player.getUniqueId()).thenAccept(balance -> {
             player.getScheduler().run(plugin, task -> {
                 org.bukkit.inventory.Inventory open = InventoryViewCompat.getTopInventory(player);
-                if (open == null || !(open.getHolder() instanceof ShopHolder holder)) {
+                if (open == null || !(InventoryViewCompat.safeHolder(open) instanceof ShopHolder holder)) {
                     return;
                 }
 

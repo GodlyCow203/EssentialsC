@@ -2,6 +2,7 @@ package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.InventoryViewCompat;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -83,7 +84,7 @@ public class ShopListener implements Listener {
         if (!plugin.getConfigManager().isShopEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        InventoryHolder holder = event.getInventory().getHolder();
+        InventoryHolder holder = InventoryViewCompat.safeHolder(event.getInventory());
         if (!(holder instanceof ShopHolder shopHolder)) return;
 
         if (event.getClickedInventory() != event.getInventory()) {
@@ -194,7 +195,7 @@ public class ShopListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
         Inventory topInv = InventoryViewCompat.getTopInventory(player);
-        if (topInv == null || !(topInv.getHolder() instanceof ShopHolder)) return;
+        if (topInv == null || !(InventoryViewCompat.safeHolder(topInv) instanceof ShopHolder)) return;
 
         for (int slot : event.getRawSlots()) {
             if (slot < topInv.getSize()) {
@@ -210,11 +211,11 @@ public class ShopListener implements Listener {
         if (!(event.getPlayer() instanceof Player player)) return;
 
         Inventory inv = event.getInventory();
-        if (!(inv.getHolder() instanceof ShopHolder)) return;
+        if (!(InventoryViewCompat.safeHolder(inv) instanceof ShopHolder)) return;
 
         player.getScheduler().run(plugin, task -> {
             Inventory current = InventoryViewCompat.getTopInventory(player);
-            if (current == null || !(current.getHolder() instanceof ShopHolder)) {
+            if (current == null || !(InventoryViewCompat.safeHolder(current) instanceof ShopHolder)) {
                 removeSession(player);
             }
         }, null);

@@ -49,7 +49,7 @@ public class SellManager {
 
             gui.onClose();
 
-            if (InventoryViewCompat.getTopInventory(player)instanceof Inventory inv && inv.getHolder() instanceof SellHolder) {
+            if (InventoryViewCompat.getTopInventory(player)instanceof Inventory inv && InventoryViewCompat.safeHolder(inv) instanceof SellHolder) {
                 player.closeInventory();
             }
 

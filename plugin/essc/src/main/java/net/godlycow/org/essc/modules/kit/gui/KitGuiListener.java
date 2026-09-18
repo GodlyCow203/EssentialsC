@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.kit.gui;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +25,7 @@ public class KitGuiListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!(event.getInventory().getHolder() instanceof KitGuiHolder holder)) return;
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof KitGuiHolder holder)) return;
 
         event.setCancelled(true);
 
@@ -62,9 +63,8 @@ public class KitGuiListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
-        if (event.getInventory().getHolder() instanceof KitGuiHolder) {
-            guiManager.handleClose(player);
-            guiManager.clearSession(player.getUniqueId());
-        }
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof KitGuiHolder)) return;
+        guiManager.handleClose(player);
+        guiManager.clearSession(player.getUniqueId());
     }
 }

@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop.sell;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,7 @@ public class SellListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        InventoryHolder holder = event.getInventory().getHolder();
+        InventoryHolder holder = InventoryViewCompat.safeHolder(event.getInventory());
         if (!(holder instanceof SellHolder)) return;
 
         SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
@@ -39,7 +40,7 @@ public class SellListener implements Listener {
         Inventory clickedInv = event.getClickedInventory();
         if (clickedInv == null) return;
 
-        if (clickedInv.getHolder() instanceof SellHolder) {
+        if (InventoryViewCompat.safeHolder(clickedInv) instanceof SellHolder) {
             int slot = event.getRawSlot();
             if (slot < 0 || slot >= event.getInventory().getSize()) return;
 
@@ -85,7 +86,7 @@ public class SellListener implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        InventoryHolder holder = event.getView().getTopInventory().getHolder();
+        InventoryHolder holder = InventoryViewCompat.safeHolder(event.getView().getTopInventory());
         if (!(holder instanceof SellHolder)) return;
 
         SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;
@@ -114,7 +115,7 @@ public class SellListener implements Listener {
     public void onInventoryClose(InventoryCloseEvent event) {
         if (!(event.getPlayer() instanceof Player player)) return;
 
-        InventoryHolder holder = event.getInventory().getHolder();
+        InventoryHolder holder = InventoryViewCompat.safeHolder(event.getInventory());
         if (!(holder instanceof SellHolder)) return;
 
         SellGUI gui = sellManager != null ? sellManager.getActiveGUI(player) : null;

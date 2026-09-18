@@ -50,7 +50,7 @@ public class InvseeListener implements Listener {
         for (Player viewer : plugin.getServer().getOnlinePlayers()) {
             Inventory open = InventoryViewCompat.getTopInventory(viewer);
 
-            if (!(open.getHolder() instanceof InvseeHolder holder)) continue;
+            if (!(InventoryViewCompat.safeHolder(open) instanceof InvseeHolder holder)) continue;
             if (!holder.isOffline()) continue;
             if (!holder.getTargetUuid().equals(targetUuid)) continue;
 
@@ -86,7 +86,7 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
-        if (!(event.getInventory().getHolder() instanceof InvseeHolder holder)) return;
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
 
         int rawSlot = event.getRawSlot();
 
@@ -121,7 +121,7 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
-        if (!(event.getInventory().getHolder() instanceof InvseeHolder holder)) return;
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
 
         boolean affectsDisplaySlots = event.getRawSlots().stream()
                 .anyMatch(slot -> slot >= STORAGE_SIZE && slot < 54);
@@ -154,7 +154,7 @@ public class InvseeListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        if (!(event.getInventory().getHolder() instanceof InvseeHolder holder)) return;
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
 
         if (holder.isOffline()) {
             openOfflineSessions.remove(holder.getTargetUuid());

@@ -6,6 +6,7 @@ import net.godlycow.org.essc.modules.auction.AhSoundManager;
 import net.godlycow.org.essc.modules.auction.Auction;
 import net.godlycow.org.essc.modules.auction.gui.AhGuiHolder;
 import net.godlycow.org.essc.modules.auction.gui.AhItemFactory;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -42,7 +43,7 @@ public class AhListener implements Listener {
         if (!plugin.getConfigManager().isAHEnabled()) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        if (!(event.getInventory().getHolder() instanceof AhGuiHolder)) return;
+        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof AhGuiHolder)) return;
 
         event.setCancelled(true);
 
@@ -89,7 +90,7 @@ public class AhListener implements Listener {
         if (container.has(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING)) {
             String action = container.get(new NamespacedKey(plugin, "gui_action"), PersistentDataType.STRING);
             if ("ah_confirm_buy".equals(action)) {
-                if (event.getInventory().getHolder() instanceof AhGuiHolder ahHolder) {
+                if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof AhGuiHolder ahHolder) {
                     handleConfirmBuy(player, ahHolder.getAuctionId());
                 }
                 return;
@@ -119,7 +120,7 @@ public class AhListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
-        if (event.getInventory().getHolder() instanceof AhGuiHolder) {
+        if (InventoryViewCompat.safeHolder(event.getInventory()) instanceof AhGuiHolder) {
             event.setCancelled(true);
         }
     }

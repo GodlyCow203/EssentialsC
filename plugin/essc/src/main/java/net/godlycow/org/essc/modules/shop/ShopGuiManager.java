@@ -391,7 +391,7 @@ public class ShopGuiManager {
 
     public void updateBalanceSlot(Player player, double balance, String templateId) {
         org.bukkit.inventory.Inventory open = InventoryViewCompat.getTopInventory(player);
-        if (open == null || !(open.getHolder() instanceof ShopHolder)) {
+        if (open == null || !(InventoryViewCompat.safeHolder(open) instanceof ShopHolder)) {
             return;
         }
 

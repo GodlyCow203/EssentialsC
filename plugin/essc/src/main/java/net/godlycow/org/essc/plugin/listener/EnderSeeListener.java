@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.plugin.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +23,7 @@ public class EnderSeeListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
 
         Inventory inventory = event.getInventory();
-        if (!(inventory.getHolder() instanceof Player target)) return;
+        if (!(InventoryViewCompat.safeHolder(inventory) instanceof Player target)) return;
 
         if (!inventory.equals(target.getEnderChest())) return;
 
@@ -42,7 +43,7 @@ public class EnderSeeListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
 
         Inventory inventory = event.getInventory();
-        if (!(inventory.getHolder() instanceof Player target)) return;
+        if (!(InventoryViewCompat.safeHolder(inventory) instanceof Player target)) return;
 
         if (!inventory.equals(target.getEnderChest())) return;
         if (viewer.equals(target)) return;

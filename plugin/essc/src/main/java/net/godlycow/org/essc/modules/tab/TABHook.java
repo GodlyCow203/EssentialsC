@@ -17,8 +17,13 @@ public class TABHook {
     }
 
     public void updateNick(Player player, String nickname) {
-        if (TabAPI.getInstance() == null) {
-            plugin.debug("TABHook: TabAPI not available yet");
+        try {
+            if (TabAPI.getInstance() == null) {
+                plugin.debug("TABHook: TabAPI not available yet");
+                return;
+            }
+        } catch (IllegalStateException e) {
+            plugin.debug("TABHook: TabAPI not initialized yet — " + e.getMessage());
             return;
         }
         TabPlayer tabPlayer = TabAPI.getInstance().getPlayer(player.getUniqueId());
@@ -32,12 +37,16 @@ public class TABHook {
     }
 
     private void setTablistName(TabPlayer tabPlayer, String display) {
-        TabListFormatManager manager = TabAPI.getInstance().getTabListFormatManager();
-        if (manager == null) {
-            plugin.debug("TABHook: TabListFormatManager is null (tablist-name-formatting disabled in TAB?)");
-            return;
+        try {
+            TabListFormatManager manager = TabAPI.getInstance().getTabListFormatManager();
+            if (manager == null) {
+                plugin.debug("TABHook: TabListFormatManager is null (tablist-name-formatting disabled in TAB?)");
+                return;
+            }
+            manager.setName(tabPlayer, display);
+        } catch (IllegalStateException e) {
+            plugin.debug("TABHook: TabAPI became unavailable — " + e.getMessage());
         }
-        manager.setName(tabPlayer, display);
     }
 
     private String buildDisplay(Player player, String nickname) {
