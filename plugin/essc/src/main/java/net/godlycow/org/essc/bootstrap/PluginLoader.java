@@ -354,12 +354,14 @@ public final class PluginLoader {
             return;
         }
 
-        PlaceholderHook placeholderHook = new PlaceholderHook(plugin);
-        if (placeholderHook.register()) {
-            plugin.debug("PlaceholderAPI hook registered successfully.");
-        } else {
-            plugin.getLogger().warning("Failed to register PlaceholderAPI hook.");
-        }
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            PlaceholderHook placeholderHook = new PlaceholderHook(plugin);
+            if (placeholderHook.register()) {
+                plugin.debug("PlaceholderAPI hook registered successfully.");
+            } else {
+                plugin.getLogger().warning("Failed to register PlaceholderAPI hook.");
+            }
+        });
     }
 
     private void saveResourceIfAbsent(String resourcePath) {

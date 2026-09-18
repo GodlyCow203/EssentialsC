@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import net.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -95,16 +97,37 @@ public class LanguageManager {
         }
     }
 
+    private final ThreadLocal<Boolean> resolvingErrorInternal = ThreadLocal.withInitial(() -> false);
+
     public @NotNull Component get(CommandSender sender, String key, Map<String, String> placeholders) {
-        String raw = resolve(sender, key, placeholders);
+        String raw = resolve(sender,  key, placeholders);
+
+        Component component;
+        try
+        {
+            component = miniMessage.deserialize(raw);
+        }
+        catch (ParsingExceptionImpl e) {
+            plugin.getLogger().warning("[EssentialsC] Failed to parse lang key '" + key + "' - legacy formatting codes (§,& ) detected. This only crashes on newer Adventure/MiniMessage versions (bundled with newer server forks) : (. Replace §/& codes with MiniMessage tags (e.g. <light_purple> instead of §d) , raw: " + raw);
+            if (!resolvingErrorInternal.get()) {
+                resolvingErrorInternal.set(true);
+                try {
+                    return get(sender, "error.internal");
+                } finally {
+                    resolvingErrorInternal.remove();
+                }
+            }
+            String fallback = resolve(sender, "error.internal", null);
+            return Component.text(fallback);
+        }
+
 
         if (sender != null && !(sender instanceof Player) && plugin.getConfigManager().isChatStripColorsFromConsole()) {
-            Component component = miniMessage.deserialize(raw);
             String plain = PlainTextComponentSerializer.plainText().serialize(component);
             return Component.text(plain);
         }
 
-        return miniMessage.deserialize(raw);
+        return component;
     }
 
     public Component get(CommandSender sender, String key) {
