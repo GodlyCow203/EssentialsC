@@ -54,16 +54,12 @@ val serversDirectory = layout.projectDirectory.dir("servers")
 val pluginsSubdirectoryName = "plugins"
 
 //java paths can be overridden in gradle.properties
-val java21Path = providers.gradleProperty("minecraft.java21")
-    .orElse("java")
-    .get()
 val java25Path = providers.gradleProperty("minecraft.java25")
-    .orElse("C:/Program Files/Java/jdk-25/bin/java") //adjust if needed
+    .orElse(System.getProperty("user.home") + "/.sdkman/candidates/java/current/bin/java") //adjust if needed
     .get()
 
 enum class MinecraftServerType(val papermcProjectName: String) {
-    PAPER("paper"),
-    FOLIA("folia")
+    PAPER("paper")
 }
 
 data class MinecraftServerDefinition(
@@ -72,11 +68,10 @@ data class MinecraftServerDefinition(
     val javaPath: String
 )
 
-//folia and paper are on 26.+ so they require java 25
+//paper is on 26.+ so it requires java 25
 val minecraftServerDefinitions = listOf(
     MinecraftServerDefinition("paper-26.2", MinecraftServerType.PAPER, java25Path),
-    MinecraftServerDefinition("paper-1.20.6", MinecraftServerType.PAPER, java21Path),
-    MinecraftServerDefinition("folia-26.1.2", MinecraftServerType.FOLIA, java25Path)
+    MinecraftServerDefinition("paper-26.3", MinecraftServerType.PAPER, java25Path)
 )
 
 minecraftServerDefinitions.forEach { serverDefinition ->

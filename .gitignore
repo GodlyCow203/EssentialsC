@@ -126,6 +126,7 @@ run-server/*
 !run-server/eula.txt
 module-test/*
 servers/paper-26.2/
+servers/paper-26.3/
 
 
 # Gradle build folders
