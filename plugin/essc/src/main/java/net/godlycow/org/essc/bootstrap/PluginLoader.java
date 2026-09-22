@@ -354,7 +354,7 @@ public final class PluginLoader {
             return;
         }
 
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
+        plugin.getServer().getGlobalRegionScheduler().execute(plugin, () -> {
             PlaceholderHook placeholderHook = new PlaceholderHook(plugin);
             if (placeholderHook.register()) {
                 plugin.debug("PlaceholderAPI hook registered successfully.");
