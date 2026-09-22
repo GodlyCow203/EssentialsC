@@ -47,6 +47,18 @@ public class HelpManager {
     }
 
     public void sendHelp(CommandSender sender, String commandName, String sub) {
+
+        var cmdConfig = plugin.getCommandsConfig();
+
+        if (cmdConfig.isCustomHelp(commandName)) {
+
+            List<String> customLines = cmdConfig.getCustomHelpLines(commandName);
+            sendLines(sender, customLines.stream().map(mm::deserialize).toList());
+
+
+            return;
+        }
+
         PluginCommand command = plugin.getServer().getPluginCommand(commandName);
 
         String usage       = command != null && command.getUsage() != null       ? command.getUsage().trim()       : "/" + commandName;
@@ -56,6 +68,10 @@ public class HelpManager {
         List<String> args = parseArgs(usage);
         List<Component> lines = buildHelp(commandName, usage, permission, description, args);
 
+        sendLines(sender, lines);
+    }
+
+    private void sendLines(CommandSender sender, List<Component> lines) {
         if (sender instanceof Player) {
             for (Component line : lines) {
                 sender.sendMessage(line);

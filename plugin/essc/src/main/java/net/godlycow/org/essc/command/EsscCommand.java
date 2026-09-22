@@ -52,6 +52,7 @@ public class EsscCommand extends Command {
                 boolean wasEconomyEnabled = plugin.getConfigManager().isEconomyEnabled();
 
                 plugin.getConfigManager().reload();
+                plugin.getCommandsConfig().reload();
                 plugin.getLanguageManager().reload();
                 if (plugin.getHelpManager() != null) plugin.getHelpManager().reload();
 

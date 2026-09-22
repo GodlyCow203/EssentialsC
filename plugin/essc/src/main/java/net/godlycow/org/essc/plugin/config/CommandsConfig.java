@@ -58,6 +58,14 @@ public class CommandsConfig {
         return config.getString(command + ".cooldown-bypass", null);
     }
 
+    public boolean isCustomHelp(String command) {
+        return config.getBoolean(command + ".help.custom", false);
+    }
+
+    public List<String> getCustomHelpLines(String command) {
+        return config.getStringList(command + ".help.lines");
+    }
+
     public FileConfiguration getConfig() {
         return config;
     }

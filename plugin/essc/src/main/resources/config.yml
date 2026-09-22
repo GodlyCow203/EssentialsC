@@ -29,6 +29,7 @@ strip-colors-from-console: true
 #
 # Colors used in the /command help output.
 # Accepts any MiniMessage color tag, e.g. <white>, <gray>, <color:#RRGGBB>
+# To customize the help output for individual commands, see commands.yml.
 help:
   colors:
     # Color for section labels (Usage, Arguments, Permission)

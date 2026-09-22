@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 8
+config-version: 9
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -51,6 +51,27 @@ config-version: 8
 # cooldown-bypass
 #   Permission node that lets a player skip the cooldown defined above.
 #   Omit if you don't need a bypass for this command.
+#
+# help
+#   Override the auto-generated help output for this command.
+#   When custom is set to true, the lines list completely replaces
+#   the default help panel. Each line supports MiniMessage formatting.
+#   When custom is false or omitted, the default help is used.
+#
+#   Example:
+#     kit:
+#       enabled: true
+#       priority: normal
+#       aliases: []
+#       help:
+#         custom: true
+#         lines:
+#           - "<red>A custom Language</red>
+#           - "<dark_gray>--------------------------</dark_gray>"
+#           - "<white>Claim the kits available for your rank."
+#           - "<white>Usage: /kit <kit>"
+#           - ""
+#           - "click:open_url:'https://modrinth.com/plugin/essentialsc' A link"
 
 
 # Player commands
