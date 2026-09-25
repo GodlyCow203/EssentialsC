@@ -1,0 +1,352 @@
+items:
+  wheat:
+    material: WHEAT
+    name: "<#DAA520>Wheat"
+    buy-price: 5
+    sell-price: 2
+    slot: 10
+    page: 1
+
+  wheat_seeds:
+    material: WHEAT_SEEDS
+    name: "<#9ACD32>Wheat Seeds"
+    buy-price: 2
+    sell-price: 1
+    slot: 11
+    page: 1
+
+  carrot:
+    material: CARROT
+    name: "<#FF8C00>Carrots"
+    buy-price: 8
+    sell-price: 3
+    slot: 12
+    page: 1
+
+  potato:
+    material: POTATO
+    name: "<#D2B48C>Potatoes"
+    buy-price: 8
+    sell-price: 3
+    slot: 13
+    page: 1
+
+  beetroot:
+    material: BEETROOT
+    name: "<#8B0000>Beetroots"
+    buy-price: 10
+    sell-price: 4
+    slot: 14
+    page: 1
+
+  beetroot_seeds:
+    material: BEETROOT_SEEDS
+    name: "<#8B4513>Beetroot Seeds"
+    buy-price: 3
+    sell-price: 1
+    slot: 15
+    page: 1
+
+  melon_slice:
+    material: MELON_SLICE
+    name: "<#FF6347>Melon Slice"
+    buy-price: 4
+    sell-price: 2
+    slot: 16
+    page: 1
+
+  cooked_beef:
+    material: COOKED_BEEF
+    name: "<#8B4513>Steak"
+    buy-price: 12
+    sell-price: 5
+    slot: 19
+    page: 1
+
+  cooked_porkchop:
+    material: COOKED_PORKCHOP
+    name: "<#FFA07A>Cooked Porkchop"
+    buy-price: 12
+    sell-price: 5
+    slot: 20
+    page: 1
+
+  cooked_mutton:
+    material: COOKED_MUTTON
+    name: "<#A0522D>Cooked Mutton"
+    buy-price: 10
+    sell-price: 4
+    slot: 21
+    page: 1
+
+  cooked_chicken:
+    material: COOKED_CHICKEN
+    name: "<#F4A460>Cooked Chicken"
+    buy-price: 10
+    sell-price: 4
+    slot: 22
+    page: 1
+
+  cooked_rabbit:
+    material: COOKED_RABBIT
+    name: "<#CD853F>Cooked Rabbit"
+    buy-price: 10
+    sell-price: 4
+    slot: 23
+    page: 1
+
+  cooked_cod:
+    material: COOKED_COD
+    name: "<#D3D3D3>Cooked Cod"
+    buy-price: 8
+    sell-price: 3
+    slot: 24
+    page: 1
+
+  cooked_salmon:
+    material: COOKED_SALMON
+    name: "<#FA8072>Cooked Salmon"
+    buy-price: 10
+    sell-price: 4
+    slot: 25
+    page: 1
+
+  baked_potato:
+    material: BAKED_POTATO
+    name: "<#D2B48C>Baked Potato"
+    buy-price: 8
+    sell-price: 3
+    slot: 28
+    page: 1
+
+  bread:
+    material: BREAD
+    name: "<#DAA520>Bread"
+    buy-price: 6
+    sell-price: 2
+    slot: 29
+    page: 1
+
+  golden_apple:
+    material: GOLDEN_APPLE
+    name: "<#FFD700>Golden Apple"
+    buy-price: 5000
+    sell-price: 20
+    slot: 30
+    page: 1
+
+  enchanted_golden_apple:
+    material: ENCHANTED_GOLDEN_APPLE
+    name: "<#FF00FF>Enchanted Golden Apple"
+    buy-price: 35000
+    sell-price: 200
+    slot: 31
+    page: 1
+
+  golden_carrot:
+    material: GOLDEN_CARROT
+    name: "<#FFA500>Golden Carrot"
+    buy-price: 30
+    sell-price: 12
+    slot: 32
+    page: 1
+
+  cookie:
+    material: COOKIE
+    name: "<#D2691E>Cookie"
+    buy-price: 3
+    sell-price: 1
+    slot: 33
+    page: 1
+
+  pumpkin_pie:
+    material: PUMPKIN_PIE
+    name: "<#FF8C00>Pumpkin Pie"
+    buy-price: 15
+    sell-price: 6
+    slot: 34
+    page: 1
+
+  cake:
+    material: CAKE
+    name: "<#FFFFFF>Cake"
+    buy-price: 25
+    sell-price: 10
+    slot: 37
+    page: 1
+
+  honey_bottle:
+    material: HONEY_BOTTLE
+    name: "<#FFB700>Honey Bottle"
+    buy-price: 15
+    sell-price: 6
+    slot: 38
+    page: 1
+
+  mushroom_stew:
+    material: MUSHROOM_STEW
+    name: "<#CD853F>Mushroom Stew"
+    buy-price: 12
+    sell-price: 5
+    slot: 39
+    page: 1
+
+  beetroot_soup:
+    material: BEETROOT_SOUP
+    name: "<#8B0000>Beetroot Soup"
+    buy-price: 12
+    sell-price: 5
+    slot: 40
+    page: 1
+
+  rabbit_stew:
+    material: RABBIT_STEW
+    name: "<#D2B48C>Rabbit Stew"
+    buy-price: 20
+    sell-price: 8
+    slot: 41
+    page: 1
+
+  suspicious_stew:
+    material: SUSPICIOUS_STEW
+    name: "<#8A2BE2>Suspicious Stew"
+    buy-price: 25
+    sell-price: 10
+    slot: 42
+    page: 1
+
+  dried_kelp:
+    material: DRIED_KELP
+    name: "<#2E8B57>Dried Kelp"
+    buy-price: 2
+    sell-price: 1
+    slot: 43
+    page: 1
+
+  apple:
+    material: APPLE
+    name: "<#FF0000>Apple"
+    buy-price: 25
+    sell-price: 10
+    slot: 10
+    page: 2
+
+  sweet_berries:
+    material: SWEET_BERRIES
+    name: "<#DC143C>Sweet Berries"
+    buy-price: 10
+    sell-price: 4
+    slot: 11
+    page: 2
+
+  glow_berries:
+    material: GLOW_BERRIES
+    name: "<#FFD700>Glow Berries"
+    buy-price: 35
+    sell-price: 15
+    slot: 12
+    page: 2
+
+  chorus_fruit:
+    material: CHORUS_FRUIT
+    name: "<#9932CC>Chorus Fruit"
+    buy-price: 15
+    sell-price: 6
+    slot: 13
+    page: 2
+
+  beef:
+    material: BEEF
+    name: "<#B22222>Raw Beef"
+    buy-price: 5
+    sell-price: 2
+    slot: 14
+    page: 2
+
+  porkchop:
+    material: PORKCHOP
+    name: "<#FFB6C1>Raw Porkchop"
+    buy-price: 5
+    sell-price: 2
+    slot: 15
+    page: 2
+
+  mutton:
+    material: MUTTON
+    name: "<#BC8F8F>Raw Mutton"
+    buy-price: 4
+    sell-price: 2
+    slot: 16
+    page: 2
+
+  chicken:
+    material: CHICKEN
+    name: "<#FFDAB9>Raw Chicken"
+    buy-price: 4
+    sell-price: 2
+    slot: 19
+    page: 2
+
+  rabbit:
+    material: RABBIT
+    name: "<#D2B48C>Raw Rabbit"
+    buy-price: 4
+    sell-price: 2
+    slot: 20
+    page: 2
+
+  cod:
+    material: COD
+    name: "<#C0C0C0>Raw Cod"
+    buy-price: 4
+    sell-price: 2
+    slot: 21
+    page: 2
+
+  salmon:
+    material: SALMON
+    name: "<#FA8072>Raw Salmon"
+    buy-price: 5
+    sell-price: 2
+    slot: 22
+    page: 2
+
+  tropical_fish:
+    material: TROPICAL_FISH
+    name: "<#FF7F50>Tropical Fish"
+    buy-price: 15
+    sell-price: 6
+    slot: 23
+    page: 2
+
+  pufferfish:
+    material: PUFFERFISH
+    name: "<#DAA520>Pufferfish"
+    buy-price: 20
+    sell-price: 8
+    slot: 24
+    page: 2
+
+  rotten_flesh:
+    material: ROTTEN_FLESH
+    name: "<#556B2F>Rotten Flesh"
+    buy-price: 2
+    sell-price: 1
+    slot: 25
+    page: 2
+
+  spider_eye:
+    material: SPIDER_EYE
+    name: "<#8B0000>Spider Eye"
+    buy-price: 5
+    sell-price: 2
+    slot: 28
+    page: 2
+
+  poisonous_potato:
+    material: POISONOUS_POTATO
+    name: "<#3CB371>Poisonous Potato"
+    buy-price: 5
+    sell-price: 2
+    slot: 29
+    page: 2

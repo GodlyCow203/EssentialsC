@@ -1,4 +1,5 @@
 # EssentialsC — config.yml
+# EssentialsC — config.yml
 #
 # After editing this file, run /essc reload to apply changes without restarting.
 # MiniMessage formatting is supported in all message fields.
@@ -6,7 +7,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 18
+config-version: 17
 
 # General settings
 
@@ -33,17 +34,17 @@ strip-colors-from-console: true
 help:
   colors:
     # Color for section labels (Usage, Arguments, Permission)
-    label: "<color:#FFF200>"
+    label: <color:#FFF200>
     # Color for the command name header
-    header: "<color:#FFF200>"
+    header: <color:#FFF200>
     # Color for descriptive / body text
-    body: "<gray>"
+    body: <gray>
     # Color for the divider lines
-    divider: "<dark_gray>"
+    divider: <dark_gray>
     # Color for required argument tokens  e.g. <player>
-    arg-required: "<white>"
+    arg-required: <white>
     # Color for optional argument tokens  e.g. [player]
-    arg-optional: "<gray>"
+    arg-optional: <gray>
 
 # Backup
 #
@@ -91,7 +92,7 @@ enchant:
 
 broadcast:
   # Prefix prepended to all broadcast messages. Supports MiniMessage.
-  prefix: "<#333333>[<#F55E27>Broadcast<#333333>] <white>"
+  prefix: <#333333>[<#F55E27>Broadcast<#333333>] <white>
 
 trash:
   enabled: true
@@ -125,8 +126,9 @@ motd:
 
   # Lines sent to the player on join. Supports MiniMessage, <player>, {PLAYER}, and {ONLINE}.
   lines:
-    - "<gray>You can customize this message in config.yml."
-    - "<gray>Set <white>motd.enabled</white><gray> to <red>false</red><gray> to disable it completely."
+    - <gray>You can customize this message in config.yml.
+    - <gray>Set <white>motd.enabled</white><gray> to <red>false</red><gray> to disable
+      it completely.
 
 
 # DISCORD
@@ -137,13 +139,14 @@ discord:
   # The message(s) sent when a player runs /discord.
   # Supports MiniMessage formatting.
   message:
-    - "<#5865F2><bold>DISCORD</bold> <#444444>┃ <white>Stay Connected</white>"
-    - ""
-    - "<gray>Join our community server to stay updated with</gray>"
-    - "<gray>announcements, participate in events, and chat</gray>"
-    - "<gray>with other players in real-time.</gray>"
-    - ""
-    - "<#5865F2>➜ <click:open_url:'https://discord.gg/example'><hover:show_text:'<gray>Click to open invite'><white><underlined>https://discord.gg/example</underlined></white></hover></click>"
+    - <#5865F2><bold>DISCORD</bold> <#444444>┃ <white>Stay Connected</white>
+    - ''
+    - <gray>Join our community server to stay updated with</gray>
+    - <gray>announcements, participate in events, and chat</gray>
+    - <gray>with other players in real-time.</gray>
+    - ''
+    - <#5865F2>➜ <click:open_url:'https://discord.gg/example'><hover:show_text:'<gray>Click
+      to open invite'><white><underlined>https://discord.gg/example</underlined></white></hover></click>
 
 
 # LuckPerms Integration
@@ -156,13 +159,8 @@ luckperms:
 
   # The chat format used for all players unless overridden by group-formats below.
   # Available placeholders: <DISPLAYNAME>, <USERNAME>, <MESSAGE>
-  chat-format: '<DISPLAYNAME> &7» &f<MESSAGE>'
-
-  # Per-group chat format overrides. The key must match the LuckPerms group name exactly.
-  # Players in a listed group will use that format instead of chat-format above.
-  # Uncomment and add as many groups as needed.
-  group-formats:
-  # owner: '&c[Owner] <USERNAME> &7» &f<MESSAGE>'
+  chat-format: <DISPLAYNAME> &7» &f<MESSAGE>
+    # owner: '&c[Owner] <USERNAME> &7» &f<MESSAGE>'
 
   # Show LuckPerms prefixes in the TAB player list.
   tab-formatting: true
@@ -182,38 +180,38 @@ discordsrv:
   # The name value must match a channel key defined in DiscordSRV's config.yml.
   channels:
     punishments:
-      name: "punishments"
+      name: punishments
 
   # Per-event settings. Set enabled to false to stop relaying that event.
   # Color accepts any hex color code.
   events:
     ban:
       enabled: true
-      color: "#E74C3C"
+      color: '#E74C3C'
     kick:
       enabled: true
-      color: "#F39C12"
+      color: '#F39C12'
     mute:
       enabled: true
-      color: "#9B59B6"
+      color: '#9B59B6'
     kit:
       enabled: true
-      color: "#3498DB"
+      color: '#3498DB'
     home:
       enabled: true
-      color: "#2ECC71"
+      color: '#2ECC71'
     home_delete:
       enabled: true
-      color: "#E74C3C"
+      color: '#E74C3C'
     banip:
       enabled: true
-      color: "#E74C3C"
+      color: '#E74C3C'
 
   # Show a player's avatar next to their name in Discord embeds.
   show-avatar: true
 
   # URL used to fetch player avatars. {uuid} is replaced with the player's UUID.
-  avatar-url: "https://crafthead.net/helm/{uuid}"
+  avatar-url: https://crafthead.net/helm/{uuid}
 
 
 # Economy
@@ -226,25 +224,28 @@ economy:
   enabled: true
 
   # The balance every new player starts with.
-  starting-balance: "100.00"
+  starting-balance: '100.00'
+
+  # Add a space between the currency and amount.
+  currency-space: false
 
   # Put currency before the amount.
-  currency-before-amount: false
+  currency-before-amount: true
 
   currency:
     # Displayed when the amount is exactly 1.
-    singular: "Dollar"
+    singular: $
     # Displayed for all other amounts.
-    plural: "Dollars"
+    plural: $
 
   # The smallest amount allowed in any transaction (pay, eco give, etc.).
-  minimum-transaction: "0.01"
+  minimum-transaction: '0.01'
 
   # The maximum balance a player can hold. Set to -1 for no limit.
   max-balance: -1
 
   # Java DecimalFormat pattern used when displaying amounts.
-  format: "#,##0.00"
+  format: '#,##0.00'
 
 
 # Chat
@@ -255,12 +256,12 @@ chat:
   enabled: true
 
   # the message that will be displayed instead of the link
-  link-removal-message: '<#F54927>[<#FF917D>link removed<#F54927>]'
+  link-removal-message: <#F54927>[<#FF917D>link removed<#F54927>]
 
   # Which links should we allow ?
   link-whitelist:
-    - "youtube.com"
-    - "modrinth.com"
+    - youtube.com
+    - modrinth.com
 
   slow-mode:
     # Whether chat slow mode is enabled.
@@ -280,7 +281,7 @@ chat:
     # Format used when a player is mentioned.
     # Available placeholder: <player>
     # Supports MiniMessage formatting.
-    format: "<#4BA8DE><player><reset>"
+    format: <#4BA8DE><player><reset>
 
 
 # Player List
@@ -341,7 +342,7 @@ rtp:
   worlds:
     world:
       enabled: true
-      display-name: "<#00E05D><b>Overworld"
+      display-name: <#00E05D><b>Overworld
       min-radius: 1000
       max-radius: 10000
       blocked-biomes:
@@ -351,26 +352,26 @@ rtp:
 
     world_nether:
       enabled: true
-      display-name: "<#FF7A52><b>Nether"
+      display-name: <#FF7A52><b>Nether
       min-radius: 500
       max-radius: 5000
       blocked-biomes: []
 
     world_the_end:
       enabled: false
-      display-name: "<#FFE152><b>The End"
+      display-name: <#FFE152><b>The End
       min-radius: 500
       max-radius: 3000
       blocked-biomes: []
 
-    # To add a custom world, duplicate and uncomment the block below.
-    # my_custom_world:
-    #   enabled: true
-    #   display-name: "<gold><b>Custom World"
-    #   min-radius: 500
-    #   max-radius: 8000
-    #   blocked-biomes:
-    #     - ocean
+# To add a custom world, duplicate and uncomment the block below.
+# my_custom_world:
+#   enabled: true
+#   display-name: "<gold><b>Custom World"
+#   min-radius: 500
+#   max-radius: 8000
+#   blocked-biomes:
+#     - ocean
 
 
 # Teleport Requests (TPA)
@@ -413,7 +414,7 @@ home:
 
   # The home name to teleport to when typing /home with no arguments.
   # Set to "" (empty) to show the home list instead.
-  default-teleport-name: ""
+  default-teleport-name: home
 
   # The default maximum number of homes a player can set.
   # This can be overridden per-player with LuckPerms permissions:
@@ -502,16 +503,17 @@ join-leave-messages:
   enabled: true
 
   # The message broadcast when a player joins.
-  join: "<dark_gray>[<#70F40B>+<dark_gray>] <#A3F863><player> joined the game"
+  join: <dark_gray>[<#70F40B>+<dark_gray>] <#A3F863><player> joined the game
 
   # The message broadcast when a player leaves.
-  leave: "<dark_gray>[<#F52727>-<dark_gray>] <#FA8F8F><player> left the game"
+  leave: <dark_gray>[<#F52727>-<dark_gray>] <#FA8F8F><player> left the game
 
   # Whether vanished players should be hidden from other players.
   hide-vanished: true
 
   # Message broadcast when a player joins the server for the first time.
-  first-join: "<#F5CF27><b>Welcome!<reset> <#F8DC63><player> just joined for the first time!"
+  first-join: <#F5CF27><b>Welcome!<reset> <#F8DC63><player> just joined for the first
+    time!
 
 
 
@@ -554,23 +556,23 @@ scoreboard:
   update-interval: 20
 
   # The title shown at the top of the scoreboard. Supports MiniMessage.
-  title: "<#279FF5><b>ꜱᴇʀᴠᴇʀɴᴀᴍᴇ"
+  title: <#279FF5><b>ꜱᴇʀᴠᴇʀɴᴀᴍᴇ
 
   # The lines displayed on the scoreboard, from top to bottom.
   # Supports MiniMessage and PlaceholderAPI placeholders.
   # Use "" for an empty line.
   lines:
-    - ""
-    - "<#279FF5><b>%player_name%:<reset>"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ʀᴀɴᴋ: <white>%luckperms_prefix%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ʙᴀʟᴀɴᴄᴇ: <white>%vault_eco_balance_formatted%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ᴋɪʟʟѕ: <white>%statistic_player_kills%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ᴅᴇᴀᴛʜѕ: <white>%statistic_deaths%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ʟᴀᴛᴇɴᴄʏ: <white>%player_ping%<#9CD6FF>ᴍꜱ"
-    - ""
-    - "<#279FF5><b>|<reset> <#9CD6FF>ᴏɴʟɪɴᴇ: <white>%server_online%<gray>/<white>%server_max_players%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ᴛᴘꜱ: <white>%server_tps_1%"
-    - "<#279FF5><b>|<reset> <#9CD6FF>ᴠᴇʀꜱɪᴏɴ: <white>%server_version%"
+    - ''
+    - <#279FF5><b>%player_name%:<reset>
+    - '<#279FF5><b>|<reset> <#9CD6FF>ʀᴀɴᴋ: <white>%luckperms_prefix%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ʙᴀʟᴀɴᴄᴇ: <white>%vault_eco_balance_formatted%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ᴋɪʟʟѕ: <white>%statistic_player_kills%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ᴅᴇᴀᴛʜѕ: <white>%statistic_deaths%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ʟᴀᴛᴇɴᴄʏ: <white>%player_ping%<#9CD6FF>ᴍꜱ'
+    - ''
+    - '<#279FF5><b>|<reset> <#9CD6FF>ᴏɴʟɪɴᴇ: <white>%server_online%<gray>/<white>%server_max_players%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ᴛᴘꜱ: <white>%server_tps_1%'
+    - '<#279FF5><b>|<reset> <#9CD6FF>ᴠᴇʀꜱɪᴏɴ: <white>%server_version%'
 
 # Small caps font generator: https://www.piliapp.com/cool-text/small-caps/
 
@@ -585,8 +587,8 @@ rename:
 
   # Words that cannot appear in a renamed item's name.
   blacklist-words:
-    - "badword"
-    - "hello"
+    - badword
+    - hello
 
   # Maximum number of characters allowed in a renamed item name.
   max-length: 50
@@ -661,14 +663,14 @@ nickname:
 
   # Character(s) prepended to nicknames so players can distinguish them
   # from real usernames.
-  indicator: "~"
+  indicator: '~'
 
   # Whether to show the player's real username when hovering over their nickname in chat.
   show-realname-on-hover: true
 
   # Format for the hover text when hovering a nickname in chat.
   # Available placeholders: <realname>, <nick>, <prefix>, <suffix>
-  hover-format: "<gray>Real name: <white><realname>"
+  hover-format: '<gray>Real name: <white><realname>'
 
   # Whether clicking a nickname in chat suggests the /msg <player> command.
   click-suggest-msg: true
@@ -693,8 +695,8 @@ shop:
 
   # Currency labels used in shop transaction messages.
   currency:
-    singular: "Dollar"
-    plural: "Dollars"
+    singular: Dollar
+    plural: Dollars
 
 # Sell
 #
@@ -710,7 +712,7 @@ sell:
   gui:
     # The title displayed at the top of the sell GUI.
     # Supports MiniMessage formatting (gradients, colors, etc.)
-    title: "<dark_gray>Sell Items</dark_gray>"
+    title: <dark_gray>Sell Items</dark_gray>
 
     # The size of the sell GUI inventory.
     # Must be a multiple of 9 (9, 18, 27, 36, 45, or 54).
@@ -719,7 +721,7 @@ sell:
 
     # The material used for the GUI border.
     # Must be a valid Bukkit Material name.
-    border-material: "GRAY_STAINED_GLASS_PANE"
+    border-material: GRAY_STAINED_GLASS_PANE
 
     # Play sounds when opening, selling, or cancelling in the GUI.
     sounds: true
@@ -769,10 +771,10 @@ auction-house:
   duration-hours: 48
 
   # Minimum price a player can list an item for.
-  min-price: "1.00"
+  min-price: '1.00'
 
   # Maximum price a player can list an item for. Set to -1 for no limit.
-  max-price: "-1"
+  max-price: '-1'
 
   # Whether enchanted books are allowed to be sold.
   allow-enchanted-books: false
@@ -783,16 +785,11 @@ auction-house:
     - DRAGON_EGG
     - BEACON
     - NETHER_STAR
+      # - material: WOODEN_SWORD
+      #   name: "Not A Netherite Sword"
+      #   custom-model-data: 2026
 
-  # List of custom items that cannot be sold.
-  # Each entry can match by material, display name, and/or custom-model-data.
-  # All specified fields must match for the item to be blacklisted
-  blacklisted-custom-items:
-    # - material: WOODEN_SWORD
-    #   name: "Not A Netherite Sword"
-    #   custom-model-data: 2026
-
-  # Whether to notify the player when they successfully sell items.
+    # Whether to notify the player when they successfully sell items.
   notify-on-sale: true
 
   # Whether to show a confirmation GUI before purchasing an auction.
@@ -863,15 +860,15 @@ afk:
   tab-placeholder-enabled: true
 
   # The prefix shown in TAB while a player is AFK. Supports MiniMessage.
-  tab-placeholder: "<color:#FF6B6B>[AFK]</color> "
+  tab-placeholder: '<color:#FF6B6B>[AFK]</color> '
 
   # Broadcast a message to the server when a player enters or leaves AFK mode.
   broadcast-enabled: true
 
   # Show a title on screen when the player enters AFK mode.
   title-enabled: true
-  title: "<color:#FF6B6B>You are now AFK</color>"
-  subtitle: "<color:#FFE66D>Move to return</color>"
+  title: <color:#FF6B6B>You are now AFK</color>
+  subtitle: <color:#FFE66D>Move to return</color>
 
   # Prevent AFK players from taking damage from any source.
   prevent-damage: true
@@ -902,4 +899,4 @@ afk:
 
   # How to sort the /afklist output.
   # Options: time (longest AFK first), name (alphabetical), world
-  list-sort-by: "time"
+  list-sort-by: time

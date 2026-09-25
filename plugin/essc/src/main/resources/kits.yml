@@ -7,7 +7,7 @@ kits:
 
     cooldown: 86400
     one-time: false
-    first-join: true
+    first-join: false
     max-claims: 10
     gui-slot: 10
     page: 1

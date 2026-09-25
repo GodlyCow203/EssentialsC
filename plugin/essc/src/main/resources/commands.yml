@@ -516,7 +516,9 @@ tpoffline:
 sell:
   enabled: true
   priority: normal
-  aliases: []
+  aliases:
+    - sellg
+    - sellgui
 
 worth:
   enabled: true

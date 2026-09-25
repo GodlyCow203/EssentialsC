@@ -60,6 +60,7 @@ import net.godlycow.org.essc.util.StartupBanner;
 import net.godlycow.org.essc.modules.VanishManager;
 import net.godlycow.org.essc.modules.warp.WarpManager;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.RegisteredListener;
@@ -92,6 +93,7 @@ public final class PluginLoader {
         startPlugin();
         timer.mark("plugin");
         startMetrics();
+        printthis();
         timer.mark("metrics");
         registerPlaceholderAPI();
         timer.mark("placeholderapi");
@@ -197,9 +199,6 @@ public final class PluginLoader {
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
-            ItemUtil itemUtil =
-                    ItemUtil.getInstance();
-            plugin.getLogger().info("[AH] Loaded " + itemUtil.size() + " item aliases for search");
 
             AuctionManager auctionManager = new AuctionManager(plugin);
             plugin.setAuctionManager(auctionManager);
@@ -258,6 +257,11 @@ public final class PluginLoader {
         plugin.getServer().getPluginManager().registerEvents(plugin, plugin);
 
         new CommandRegistrar(plugin).registerAll();
+    }
+
+    private void printthis(){
+        ItemUtil itemUtil = ItemUtil.getInstance();
+        plugin.getLogger().info("Loaded " + itemUtil.size() + " Items from items.json" );
     }
 
     private void startMetrics() {

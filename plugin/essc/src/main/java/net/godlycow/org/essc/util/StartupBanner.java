@@ -44,6 +44,7 @@ public final class StartupBanner {
         }
 
         String[] lines = {
+                paint(white, "For more startup Information, enable debug"),
                 "",
                 paint(yellow, "  ███████╗███████╗███████╗ ██████╗"),
                 paint(yellow, "  ██╔════╝██╔════╝██╔════╝██╔════╝") + paint(gray,"  EssentialsC"),
@@ -53,7 +54,7 @@ public final class StartupBanner {
                 paint(yellow, "  ╚══════╝╚══════╝╚══════╝ ╚═════╝"),
                 "",
                 paint(gray, "  Platform  ") + paint(bold() + swColor, swLabel),
-                paint(gray, "  ANSI      ") + paint(ansi ? green : green, ansi ? "supported" : "not supported"),
+                paint(gray, "  ANSI      ") + paint(ansi ? green : green, ansi ? "Supported" : "Not supported"),
                 "",
         };
 

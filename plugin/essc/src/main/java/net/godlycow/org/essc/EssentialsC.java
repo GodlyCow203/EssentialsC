@@ -47,6 +47,7 @@ import net.godlycow.org.essc.plugin.listener.InvseeListener;
 import net.godlycow.org.essc.plugin.listener.JoinLeaveListener;
 import net.godlycow.org.essc.storage.user.UserManager;
 import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.util.ItemUtil;
 import net.godlycow.org.essc.util.TeleportHelper;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;

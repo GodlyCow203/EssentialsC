@@ -131,6 +131,7 @@ public class AhCommand extends Command {
                                     "price", plugin.getEconomyManager().format(price),
                                     "duration", String.valueOf(duration / 3600000)
                             )));
+                            guiManager.openMainGui(player, 1);
                             soundManager.playSuccess(player);
                         } else {
                             String reason = failReason.toString();

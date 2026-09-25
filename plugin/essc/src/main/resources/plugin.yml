@@ -1144,7 +1144,7 @@ permissions:
     description: Allows RTP to all worlds
     default: op
 
-  essentialsc.rtp.world.overworld:
+  essentialsc.rtp.world.world:
     description: Allows RTP to overworld
     default: true
 

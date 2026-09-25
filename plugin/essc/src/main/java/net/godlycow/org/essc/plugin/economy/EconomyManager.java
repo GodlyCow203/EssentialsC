@@ -3,6 +3,7 @@ package net.godlycow.org.essc.plugin.economy;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.integration.metrics.bstats.EconomyCharts;
 import net.godlycow.org.essc.storage.database.Database;
+import net.godlycow.org.essc.util.FormatUtil;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -310,13 +311,17 @@ public class EconomyManager implements EconomyService, Listener {
     @Override
     public String format(BigDecimal amount) {
         String formattedAmount = decimalFormat.format(amount);
-        String currency = amount.compareTo(BigDecimal.ONE) == 0 ? currencySingular : currencyPlural;
+        String currency = amount.compareTo(BigDecimal.ONE) == 0
+                ? currencySingular
+                : currencyPlural;
+
+        String separator = plugin.getConfigManager().isCurrencySpace() ? " " : "";
 
         if (plugin.getConfigManager().isCurrencyBeforeAmount()) {
-            return currency + " " + formattedAmount;
+            return currency + separator + formattedAmount;
         }
 
-        return formattedAmount + " " + currency;
+        return formattedAmount + separator + currency;
     }
 
     public String formatPlain(BigDecimal amount) {
@@ -348,6 +353,22 @@ public class EconomyManager implements EconomyService, Listener {
         String abbreviated = new java.text.DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US))
                 .format(value / divisor);
         return abbreviated + suffix;
+    }
+
+
+    public String formatCompact(BigDecimal  amount) {
+
+        String formattedAmount = FormatUtil.formatCompact(amount.doubleValue());
+        String currency = amount.compareTo(BigDecimal.ONE) == 0
+                ? currencySingular : currencyPlural;
+        String separator = plugin.getConfigManager().isCurrencySpace() ? " " : "";
+
+        if (plugin.getConfigManager().isCurrencyBeforeAmount()) {
+
+            return currency + separator + formattedAmount;
+        }
+
+        return formattedAmount + separator + currency;
     }
 
     @Override

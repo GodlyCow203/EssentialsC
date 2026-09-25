@@ -1,7 +1,7 @@
 items:
   wheat:
     material: WHEAT
-    name: "<color:#DAA520>Wheat"
+    name: "<#DAA520>Wheat"
     buy-price: 5
     sell-price: 2
     slot: 10
@@ -9,7 +9,7 @@ items:
 
   wheat_seeds:
     material: WHEAT_SEEDS
-    name: "<color:#9ACD32>Wheat Seeds"
+    name: "<#9ACD32>Wheat Seeds"
     buy-price: 2
     sell-price: 1
     slot: 11
@@ -17,7 +17,7 @@ items:
 
   carrot:
     material: CARROT
-    name: "<color:#FF8C00>Carrots"
+    name: "<#FF8C00>Carrots"
     buy-price: 8
     sell-price: 3
     slot: 12
@@ -25,7 +25,7 @@ items:
 
   potato:
     material: POTATO
-    name: "<color:#D2B48C>Potatoes"
+    name: "<#D2B48C>Potatoes"
     buy-price: 8
     sell-price: 3
     slot: 13
@@ -33,7 +33,7 @@ items:
 
   beetroot:
     material: BEETROOT
-    name: "<color:#8B0000>Beetroots"
+    name: "<#8B0000>Beetroots"
     buy-price: 10
     sell-price: 4
     slot: 14
@@ -41,7 +41,7 @@ items:
 
   beetroot_seeds:
     material: BEETROOT_SEEDS
-    name: "<color:#8B4513>Beetroot Seeds"
+    name: "<#8B4513>Beetroot Seeds"
     buy-price: 3
     sell-price: 1
     slot: 15
@@ -49,7 +49,7 @@ items:
 
   melon_slice:
     material: MELON_SLICE
-    name: "<color:#FF6347>Melon Slices"
+    name: "<#FF6347>Melon Slices"
     buy-price: 4
     sell-price: 2
     slot: 16
@@ -57,7 +57,7 @@ items:
 
   melon_seeds:
     material: MELON_SEEDS
-    name: "<color:#556B2F>Melon Seeds"
+    name: "<#556B2F>Melon Seeds"
     buy-price: 3
     sell-price: 1
     slot: 19
@@ -65,7 +65,7 @@ items:
 
   pumpkin:
     material: PUMPKIN
-    name: "<color:#FF8C00>Pumpkins"
+    name: "<#FF8C00>Pumpkins"
     buy-price: 15
     sell-price: 6
     slot: 20
@@ -73,7 +73,7 @@ items:
 
   pumpkin_seeds:
     material: PUMPKIN_SEEDS
-    name: "<color:#DAA520>Pumpkin Seeds"
+    name: "<#DAA520>Pumpkin Seeds"
     buy-price: 3
     sell-price: 1
     slot: 21
@@ -81,7 +81,7 @@ items:
 
   sugar_cane:
     material: SUGAR_CANE
-    name: "<color:#90EE90>Sugar Cane"
+    name: "<#90EE90>Sugar Cane"
     buy-price: 6
     sell-price: 2
     slot: 22
@@ -89,7 +89,7 @@ items:
 
   cactus:
     material: CACTUS
-    name: "<color:#228B22>Cactus"
+    name: "<#228B22>Cactus"
     buy-price: 8
     sell-price: 3
     slot: 23
@@ -97,7 +97,7 @@ items:
 
   cocoa_beans:
     material: COCOA_BEANS
-    name: "<color:#8B4513>Cocoa Beans"
+    name: "<#8B4513>Cocoa Beans"
     buy-price: 12
     sell-price: 5
     slot: 24
@@ -105,7 +105,7 @@ items:
 
   nether_wart:
     material: NETHER_WART
-    name: "<color:#8B0000>Nether Wart"
+    name: "<#8B0000>Nether Wart"
     buy-price: 20
     sell-price: 8
     slot: 25
@@ -113,7 +113,7 @@ items:
 
   brown_mushroom:
     material: BROWN_MUSHROOM
-    name: "<color:#8B4513>Brown Mushroom"
+    name: "<#8B4513>Brown Mushroom"
     buy-price: 15
     sell-price: 6
     slot: 28
@@ -121,7 +121,7 @@ items:
 
   red_mushroom:
     material: RED_MUSHROOM
-    name: "<color:#DC143C>Red Mushroom"
+    name: "<#DC143C>Red Mushroom"
     buy-price: 15
     sell-price: 6
     slot: 29
@@ -129,7 +129,7 @@ items:
 
   apple:
     material: APPLE
-    name: "<color:#FF0000>Apples"
+    name: "<#FF0000>Apples"
     buy-price: 25
     sell-price: 10
     slot: 30
@@ -137,7 +137,7 @@ items:
 
   sweet_berries:
     material: SWEET_BERRIES
-    name: "<color:#DC143C>Sweet Berries"
+    name: "<#DC143C>Sweet Berries"
     buy-price: 10
     sell-price: 4
     slot: 31
@@ -145,7 +145,7 @@ items:
 
   glow_berries:
     material: GLOW_BERRIES
-    name: "<color:#FFD700>Glow Berries"
+    name: "<#FFD700>Glow Berries"
     buy-price: 35
     sell-price: 15
     slot: 32
@@ -153,7 +153,7 @@ items:
 
   bamboo:
     material: BAMBOO
-    name: "<color:#9ACD32>Bamboo"
+    name: "<#9ACD32>Bamboo"
     buy-price: 8
     sell-price: 3
     slot: 33
@@ -161,7 +161,7 @@ items:
 
   kelp:
     material: KELP
-    name: "<color:#228B22>Kelp"
+    name: "<#228B22>Kelp"
     buy-price: 5
     sell-price: 2
     slot: 34
@@ -169,7 +169,7 @@ items:
 
   sea_pickle:
     material: SEA_PICKLE
-    name: "<color:#9ACD32>Sea Pickles"
+    name: "<#9ACD32>Sea Pickles"
     buy-price: 18
     sell-price: 7
     slot: 37

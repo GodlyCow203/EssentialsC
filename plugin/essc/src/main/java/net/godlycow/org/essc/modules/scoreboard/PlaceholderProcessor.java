@@ -2,19 +2,15 @@ package net.godlycow.org.essc.modules.scoreboard;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.plugin.economy.EconomyManager;
+import net.godlycow.org.essc.util.FormatUtil;
 import net.godlycow.org.essc.util.LegacyColorConverter;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
-import java.util.regex.Pattern;
 
 public class PlaceholderProcessor {
 
@@ -71,7 +67,7 @@ public class PlaceholderProcessor {
                 .replace("%server_tps_1%",     String.format("%.1f", Bukkit.getServer().getTPS()[0]))
                 .replace("%server_tps_5%",     String.format("%.1f", Bukkit.getServer().getTPS()[1]))
                 .replace("%server_tps_15%",    String.format("%.1f", Bukkit.getServer().getTPS()[2]))
-                .replace("%server_version%",   Bukkit.getBukkitVersion());
+                .replace("%server_version%", getAWayCleanerServerVersion());
 
         if (processed.contains("%luckperms_prefix%") || processed.contains("%luckperms_suffix%")) {
             String luckpermsPrefix = getLuckPermsPrefix(player);
@@ -112,6 +108,12 @@ public class PlaceholderProcessor {
         return "";
     }
 
+    private String getAWayCleanerServerVersion() {
+        return Bukkit.getBukkitVersion()
+                .replaceFirst("\\.build\\..*$", "")
+                .replaceFirst("-.*$", "");
+    }
+
 
     //same thing but for suffix
     private String getLuckPermsSuffix(Player player) {
@@ -142,27 +144,17 @@ public class PlaceholderProcessor {
     }
 
     private String getVaultFormatted(Player player, BigDecimal balance) {
-        //Vaults own formatter
-        if (plugin.isVaultHooked()) {
-            try {
-                Class<?> economyClass = Class.forName("net.milkbowl.vault.economy.Economy");
-                var rsp = Bukkit.getServicesManager().getRegistration(economyClass);
-                if (rsp != null) {
-                    Object eco = rsp.getProvider();
-                    return (String) eco.getClass().getMethod("format", double.class).invoke(eco, balance.doubleValue());
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        //fallback, format with essentialscs own currency formatter
-        try {
-            if (plugin.getEconomyManager() != null) {
-                return plugin.getEconomyManager().format(balance);
-            }
-        } catch (Exception ignored)
-        {
+        if (balance == null) {
+            return "0";
         }
 
-        return balance == null ? "0" : balance.toPlainString();
+        try {
+            if (plugin.getEconomyManager() != null) {
+                return plugin.getEconomyManager().formatCompact(balance);
+            }
+        } catch (Exception ignored) {
+        }
+
+        return FormatUtil.formatCompact(balance.doubleValue());
     }
 }

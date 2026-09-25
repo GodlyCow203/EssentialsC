@@ -42,6 +42,7 @@ public class SellListener implements Listener {
 
         if (InventoryViewCompat.safeHolder(clickedInv) instanceof SellHolder) {
             int slot = event.getRawSlot();
+
             if (slot < 0 || slot >= event.getInventory().getSize()) return;
 
             if (gui.isConfirmSlot(slot)) {
@@ -60,23 +61,30 @@ public class SellListener implements Listener {
                 event.setCancelled(true);
                 return;
             }
+
         } else if (event.isShiftClick()) {
             event.setCancelled(true);
+
             ItemStack cursorItem = event.getCurrentItem();
             if (cursorItem == null || cursorItem.getType().isAir()) return;
-            for (int inputSlot : new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34}) {
-                if (gui.getInventory().getItem(inputSlot) == null || gui.getInventory().getItem(inputSlot).getType().isAir()) {
+
+            for (int inputSlot : SellGUI.getInputSlots()) {
+                ItemStack existing = gui.getInventory().getItem(inputSlot);
+
+                if (existing == null || existing.getType().isAir()) {
                     gui.getInventory().setItem(inputSlot, cursorItem.clone());
                     event.setCurrentItem(null);
                     break;
                 }
             }
-            return;
         }
 
         player.getScheduler().runDelayed(plugin, task -> {
-            SellGUI currentGUI = sellManager != null ? sellManager.getActiveGUI(player) : null;
-            if (currentGUI != null) {
+            SellGUI currentGUI = sellManager != null
+                    ? sellManager.getActiveGUI(player)
+                    : null;
+
+            if (currentGUI != null && !currentGUI.isProcessed()) {
                 currentGUI.updateButtons();
             }
         }, null, 1L);

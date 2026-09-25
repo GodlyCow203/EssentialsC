@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.FormatUtil;
 import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.plugin.gui.GuiButton;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
@@ -206,13 +207,17 @@ public class ShopGuiManager {
         String buyCurrency = item.getBuyPrice() == 1.0 ? currencySingular : currencyPlural;
         String sellCurrency = item.getSellPrice() == 1.0 ? currencySingular : currencyPlural;
 
+        String formattedBuyPrice = FormatUtil.formatNumber(item.getBuyPrice());
+        String formattedSellPrice = FormatUtil.formatNumber(item.getSellPrice());
+
+
         Component buyLine = plugin.getLanguageManager().get(player, "shop.gui.item.buy-line", Map.of(
-                "price", String.valueOf(item.getBuyPrice()),
+                "price", formattedBuyPrice,
                 "currency", buyCurrency
         )).decoration(TextDecoration.ITALIC, false);
 
         Component sellLine = plugin.getLanguageManager().get(player, "shop.gui.item.sell-line", Map.of(
-                "price", String.valueOf(item.getSellPrice()),
+                "price", formattedSellPrice,
                 "currency", sellCurrency
         )).decoration(TextDecoration.ITALIC, false);
 
@@ -249,7 +254,7 @@ public class ShopGuiManager {
             meta = item.getItemMeta();
         }
 
-        String formattedBalance = String.format("%.2f", balance);
+        String formattedBalance = FormatUtil.formatNumber(balance);
         String currency = balance == 1.0 ?
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural();

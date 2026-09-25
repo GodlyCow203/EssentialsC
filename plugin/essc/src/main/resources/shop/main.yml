@@ -75,3 +75,19 @@ categories:
     file: misc.yml
     lore:
       - <color:#A0A0A0>Rare and miscellaneous items
+
+  coloredblocks:
+    name: <b><#FF6B21>Colored Blocks
+    material: ORANGE_CANDLE
+    slot: 13
+    file: colored_blocks.yml
+    lore:
+      - <color:#A0A0A0>Every colored block !
+
+  food:
+    name: <b><#A6511C>Food
+    material: COOKED_BEEF
+    slot: 31
+    file: food.yml
+    lore:
+      - <color:#A0A0A0>Something to eat

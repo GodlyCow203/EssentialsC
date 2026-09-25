@@ -838,4 +838,8 @@ public class EssConfig {
         return config.getStringList("scoreboard.lines");
     }
 
+    public boolean isCurrencySpace() {
+        return config.getBoolean("economy.currency-space", false);
+    }
+
 }

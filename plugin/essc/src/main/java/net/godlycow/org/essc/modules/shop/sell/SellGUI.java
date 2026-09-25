@@ -287,4 +287,8 @@ public class SellGUI {
     public boolean isProcessed() {
         return processed;
     }
+
+    public static int[] getInputSlots() {
+        return INPUT_SLOTS;
+    }
 }

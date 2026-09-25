@@ -1,4 +1,4 @@
-title: <gradient:#00E5FF:#FFC857><bold><category></bold></gradient>
+title: <dark_gray><b><category>
 size: 54
 items:
   # Decorations are purely visual items. Mark any item with 'decoration: true'
@@ -35,7 +35,6 @@ items:
     material: EMERALD
     name: <color:#F5C827>Your Balance
     slot: 48
-    action: balance
 
   left_1:
     material: WHITE_STAINED_GLASS_PANE
