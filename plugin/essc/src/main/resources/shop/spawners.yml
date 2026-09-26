@@ -2,7 +2,7 @@ items:
   zombie-spawner:
     spawner: true
     spawner-type: ZOMBIE
-    name: "<color:#4A7C59><bold>Zombie Spawner"
+    name: "<color:#4A7C59>Zombie Spawner"
     buy-price: 8000
     sell-price: 1500
     slot: 10
@@ -11,7 +11,7 @@ items:
   skeleton-spawner:
     spawner: true
     spawner-type: SKELETON
-    name: "<color:#E3E3E3><bold>Skeleton Spawner"
+    name: "<color:#E3E3E3>Skeleton Spawner"
     buy-price: 10000
     sell-price: 2000
     slot: 11
@@ -20,7 +20,7 @@ items:
   spider-spawner:
     spawner: true
     spawner-type: SPIDER
-    name: "<color:#8B4513><bold>Spider Spawner"
+    name: "<color:#8B4513>Spider Spawner"
     buy-price: 12000
     sell-price: 2500
     slot: 12
@@ -29,7 +29,7 @@ items:
   creeper-spawner:
     spawner: true
     spawner-type: CREEPER
-    name: "<color:#228B22><bold>Creeper Spawner"
+    name: "<color:#228B22>Creeper Spawner"
     buy-price: 20000
     sell-price: 5000
     slot: 14
@@ -38,7 +38,7 @@ items:
   silverfish-spawner:
     spawner: true
     spawner-type: SILVERFISH
-    name: "<color:#A9A9A9><bold>Silverfish Spawner"
+    name: "<color:#A9A9A9>Silverfish Spawner"
     buy-price: 15000
     sell-price: 4000
     slot: 15
@@ -47,7 +47,7 @@ items:
   slime-spawner:
     spawner: true
     spawner-type: SLIME
-    name: "<color:#7FFF00><bold>Slime Spawner"
+    name: "<color:#7FFF00>Slime Spawner"
     buy-price: 35000
     sell-price: 10000
     slot: 16
@@ -56,7 +56,7 @@ items:
   phantom-spawner:
     spawner: true
     spawner-type: PHANTOM
-    name: "<color:#4B0082><bold>Phantom Spawner"
+    name: "<color:#4B0082>Phantom Spawner"
     buy-price: 18000
     sell-price: 4500
     slot: 19
@@ -65,7 +65,7 @@ items:
   drowned-spawner:
     spawner: true
     spawner-type: DROWNED
-    name: "<color:#4682B4><bold>Drowned Spawner"
+    name: "<color:#4682B4>Drowned Spawner"
     buy-price: 14000
     sell-price: 3500
     slot: 20
@@ -74,7 +74,7 @@ items:
   husk-spawner:
     spawner: true
     spawner-type: HUSK
-    name: "<color:#D2B48C><bold>Husk Spawner"
+    name: "<color:#D2B48C>Husk Spawner"
     buy-price: 13000
     sell-price: 3200
     slot: 21
@@ -83,7 +83,7 @@ items:
   stray-spawner:
     spawner: true
     spawner-type: STRAY
-    name: "<color:#B0C4DE><bold>Stray Spawner"
+    name: "<color:#B0C4DE>Stray Spawner"
     buy-price: 16000
     sell-price: 4000
     slot: 23
@@ -92,7 +92,7 @@ items:
   zombified-piglin-spawner:
     spawner: true
     spawner-type: ZOMBIFIED_PIGLIN
-    name: "<color:#FF6B6B><bold>Zombified Piglin Spawner"
+    name: "<color:#FF6B6B>Zombified Piglin Spawner"
     buy-price: 28000
     sell-price: 7000
     slot: 24
@@ -101,7 +101,7 @@ items:
   piglin-spawner:
     spawner: true
     spawner-type: PIGLIN
-    name: "<color:#F4A460><bold>Piglin Spawner"
+    name: "<color:#F4A460>Piglin Spawner"
     buy-price: 32000
     sell-price: 8000
     slot: 25
@@ -110,7 +110,7 @@ items:
   enderman-spawner:
     spawner: true
     spawner-type: ENDERMAN
-    name: "<color:#9932CC><bold>Enderman Spawner"
+    name: "<color:#9932CC>Enderman Spawner"
     buy-price: 50000
     sell-price: 15000
     slot: 28
@@ -119,7 +119,7 @@ items:
   blaze-spawner:
     spawner: true
     spawner-type: BLAZE
-    name: "<color:#FF8C00><bold>Blaze Spawner"
+    name: "<color:#FF8C00>Blaze Spawner"
     buy-price: 45000
     sell-price: 12000
     slot: 29
@@ -128,7 +128,7 @@ items:
   magma-cube-spawner:
     spawner: true
     spawner-type: MAGMA_CUBE
-    name: "<color:#DC143C><bold>Magma Cube Spawner"
+    name: "<color:#DC143C>Magma Cube Spawner"
     buy-price: 48000
     sell-price: 14000
     slot: 30
@@ -137,7 +137,7 @@ items:
   witch-spawner:
     spawner: true
     spawner-type: WITCH
-    name: "<color:#BA55D3><bold>Witch Spawner"
+    name: "<color:#BA55D3>Witch Spawner"
     buy-price: 55000
     sell-price: 18000
     slot: 32
@@ -146,7 +146,7 @@ items:
   ghast-spawner:
     spawner: true
     spawner-type: GHAST
-    name: "<color:#F0E68C><bold>Ghast Spawner"
+    name: "<color:#F0E68C>Ghast Spawner"
     buy-price: 85000
     sell-price: 22000
     slot: 33
@@ -155,7 +155,7 @@ items:
   wither-skeleton-spawner:
     spawner: true
     spawner-type: WITHER_SKELETON
-    name: "<color:#2F4F4F><bold>Wither Skeleton Spawner"
+    name: "<color:#2F4F4F>Wither Skeleton Spawner"
     buy-price: 95000
     sell-price: 25000
     slot: 34
@@ -164,7 +164,7 @@ items:
   hoglin-spawner:
     spawner: true
     spawner-type: HOGLIN
-    name: "<color:#CD853F><bold>Hoglin Spawner"
+    name: "<color:#CD853F>Hoglin Spawner"
     buy-price: 42000
     sell-price: 11000
     slot: 37
@@ -173,7 +173,7 @@ items:
   piglin-brute-spawner:
     spawner: true
     spawner-type: PIGLIN_BRUTE
-    name: "<color:#8B4513><bold>Piglin Brute Spawner"
+    name: "<color:#8B4513>Piglin Brute Spawner"
     buy-price: 60000
     sell-price: 16000
     slot: 38
@@ -182,7 +182,7 @@ items:
   shulker-spawner:
     spawner: true
     spawner-type: SHULKER
-    name: "<color:#D8BFD8><bold>Shulker Spawner"
+    name: "<color:#D8BFD8>Shulker Spawner"
     buy-price: 75000
     sell-price: 20000
     slot: 39
@@ -191,7 +191,7 @@ items:
   guardian-spawner:
     spawner: true
     spawner-type: GUARDIAN
-    name: "<color:#5F9EA0><bold>Guardian Spawner"
+    name: "<color:#5F9EA0>Guardian Spawner"
     buy-price: 70000
     sell-price: 19000
     slot: 41
@@ -200,7 +200,7 @@ items:
   elder-guardian-spawner:
     spawner: true
     spawner-type: ELDER_GUARDIAN
-    name: "<color:#2F4F4F><bold>Elder Guardian Spawner"
+    name: "<color:#2F4F4F>Elder Guardian Spawner"
     buy-price: 150000
     sell-price: 40000
     slot: 42
@@ -209,7 +209,7 @@ items:
   warden-spawner:
     spawner: true
     spawner-type: WARDEN
-    name: "<color:#00008B><bold>Warden Spawner"
+    name: "<color:#00008B>Warden Spawner"
     buy-price: 500000
     sell-price: 120000
     slot: 43
@@ -218,7 +218,7 @@ items:
   cow-spawner:
     spawner: true
     spawner-type: COW
-    name: "<color:#8B4513><bold>Cow Spawner"
+    name: "<color:#8B4513>Cow Spawner"
     buy-price: 15000
     sell-price: 4000
     slot: 10
@@ -227,7 +227,7 @@ items:
   sheep-spawner:
     spawner: true
     spawner-type: SHEEP
-    name: "<color:#FFFFFF><bold>Sheep Spawner"
+    name: "<color:#FFFFFF>Sheep Spawner"
     buy-price: 12000
     sell-price: 3000
     slot: 11
@@ -236,7 +236,7 @@ items:
   pig-spawner:
     spawner: true
     spawner-type: PIG
-    name: "<color:#FFB6C1><bold>Pig Spawner"
+    name: "<color:#FFB6C1>Pig Spawner"
     buy-price: 12000
     sell-price: 3000
     slot: 12
@@ -245,7 +245,7 @@ items:
   chicken-spawner:
     spawner: true
     spawner-type: CHICKEN
-    name: "<color:#FFD700><bold>Chicken Spawner"
+    name: "<color:#FFD700>Chicken Spawner"
     buy-price: 10000
     sell-price: 2500
     slot: 28
@@ -254,7 +254,7 @@ items:
   rabbit-spawner:
     spawner: true
     spawner-type: RABBIT
-    name: "<color:#D2B48C><bold>Rabbit Spawner"
+    name: "<color:#D2B48C>Rabbit Spawner"
     buy-price: 14000
     sell-price: 3500
     slot: 29
@@ -263,7 +263,7 @@ items:
   horse-spawner:
     spawner: true
     spawner-type: HORSE
-    name: "<color:#8B4513><bold>Horse Spawner"
+    name: "<color:#8B4513>Horse Spawner"
     buy-price: 20000
     sell-price: 5000
     slot: 30
@@ -272,7 +272,7 @@ items:
   donkey-spawner:
     spawner: true
     spawner-type: DONKEY
-    name: "<color:#808080><bold>Donkey Spawner"
+    name: "<color:#808080>Donkey Spawner"
     buy-price: 20000
     sell-price: 5000
     slot: 37
@@ -281,7 +281,7 @@ items:
   mushroom-cow-spawner:
     spawner: true
     spawner-type: MOOSHROOM
-    name: "<color:#FF0000><bold>Mooshroom Spawner"
+    name: "<color:#FF0000>Mooshroom Spawner"
     buy-price: 25000
     sell-price: 6000
     slot: 38
@@ -290,7 +290,7 @@ items:
   goat-spawner:
     spawner: true
     spawner-type: GOAT
-    name: "<color:#D3D3D3><bold>Goat Spawner"
+    name: "<color:#D3D3D3>Goat Spawner"
     buy-price: 18000
     sell-price: 4500
     slot: 39
@@ -299,7 +299,7 @@ items:
   bee-spawner:
     spawner: true
     spawner-type: BEE
-    name: "<color:#FFD700><bold>Bee Spawner"
+    name: "<color:#FFD700>Bee Spawner"
     buy-price: 18000
     sell-price: 4500
     slot: 19
@@ -308,7 +308,7 @@ items:
   camel-spawner:
     spawner: true
     spawner-type: CAMEL
-    name: "<color:#C2B280><bold>Camel Spawner"
+    name: "<color:#C2B280>Camel Spawner"
     buy-price: 25000
     sell-price: 6000
     slot: 20
@@ -317,7 +317,7 @@ items:
   sniffer-spawner:
     spawner: true
     spawner-type: SNIFFER
-    name: "<color:#6B4F3A><bold>Sniffer Spawner"
+    name: "<color:#6B4F3A>Sniffer Spawner"
     buy-price: 30000
     sell-price: 7500
     slot: 21

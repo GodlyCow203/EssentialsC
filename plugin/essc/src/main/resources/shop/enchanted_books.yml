@@ -3,7 +3,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       protection: 1
-    name: "<color:#1E90FF><bold>Protection I"
+    name: "<color:#1E90FF>Protection I"
     lore:
       - "<color:#888888>Reduces damage"
     buy-price: 5000
@@ -15,7 +15,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       protection: 2
-    name: "<color:#1E90FF><bold>Protection II"
+    name: "<color:#1E90FF>Protection II"
     lore:
       - "<color:#888888>Reduces damage"
     buy-price: 8000
@@ -27,7 +27,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       protection: 3
-    name: "<color:#1E90FF><bold>Protection III"
+    name: "<color:#1E90FF>Protection III"
     lore:
       - "<color:#888888>Reduces damage"
     buy-price: 12000
@@ -39,7 +39,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       protection: 4
-    name: "<color:#1E90FF><bold>Protection IV"
+    name: "<color:#1E90FF>Protection IV"
     lore:
       - "<color:#888888>Reduces damage"
     buy-price: 20000
@@ -51,7 +51,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_protection: 1
-    name: "<color:#FF4500><bold>Fire Protection I"
+    name: "<color:#FF4500>Fire Protection I"
     lore:
       - "<color:#888888>Reduces fire damage"
     buy-price: 4000
@@ -63,7 +63,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_protection: 2
-    name: "<color:#FF4500><bold>Fire Protection II"
+    name: "<color:#FF4500>Fire Protection II"
     lore:
       - "<color:#888888>Reduces fire damage"
     buy-price: 6000
@@ -75,7 +75,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_protection: 3
-    name: "<color:#FF4500><bold>Fire Protection III"
+    name: "<color:#FF4500>Fire Protection III"
     lore:
       - "<color:#888888>Reduces fire damage"
     buy-price: 9000
@@ -87,7 +87,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_protection: 4
-    name: "<color:#FF4500><bold>Fire Protection IV"
+    name: "<color:#FF4500>Fire Protection IV"
     lore:
       - "<color:#888888>Reduces fire damage"
     buy-price: 15000
@@ -99,7 +99,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       blast_protection: 1
-    name: "<color:#8B0000><bold>Blast Protection I"
+    name: "<color:#8B0000>Blast Protection I"
     lore:
       - "<color:#888888>Reduces explosion damage"
     buy-price: 4000
@@ -111,7 +111,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       blast_protection: 2
-    name: "<color:#8B0000><bold>Blast Protection II"
+    name: "<color:#8B0000>Blast Protection II"
     lore:
       - "<color:#888888>Reduces explosion damage"
     buy-price: 6000
@@ -123,7 +123,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       blast_protection: 3
-    name: "<color:#8B0000><bold>Blast Protection III"
+    name: "<color:#8B0000>Blast Protection III"
     lore:
       - "<color:#888888>Reduces explosion damage"
     buy-price: 9000
@@ -135,7 +135,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       blast_protection: 4
-    name: "<color:#8B0000><bold>Blast Protection IV"
+    name: "<color:#8B0000>Blast Protection IV"
     lore:
       - "<color:#888888>Reduces explosion damage"
     buy-price: 15000
@@ -147,7 +147,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       projectile_protection: 1
-    name: "<color:#2F4F4F><bold>Projectile Protection I"
+    name: "<color:#2F4F4F>Projectile Protection I"
     lore:
       - "<color:#888888>Reduces projectile damage"
     buy-price: 4000
@@ -159,7 +159,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       projectile_protection: 2
-    name: "<color:#2F4F4F><bold>Projectile Protection II"
+    name: "<color:#2F4F4F>Projectile Protection II"
     lore:
       - "<color:#888888>Reduces projectile damage"
     buy-price: 6000
@@ -171,7 +171,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       projectile_protection: 3
-    name: "<color:#2F4F4F><bold>Projectile Protection III"
+    name: "<color:#2F4F4F>Projectile Protection III"
     lore:
       - "<color:#888888>Reduces projectile damage"
     buy-price: 9000
@@ -183,7 +183,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       projectile_protection: 4
-    name: "<color:#2F4F4F><bold>Projectile Protection IV"
+    name: "<color:#2F4F4F>Projectile Protection IV"
     lore:
       - "<color:#888888>Reduces projectile damage"
     buy-price: 15000
@@ -195,7 +195,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       thorns: 1
-    name: "<color:#8B008B><bold>Thorns I"
+    name: "<color:#8B008B>Thorns I"
     lore:
       - "<color:#888888>Damages attackers"
     buy-price: 6000
@@ -207,7 +207,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       thorns: 2
-    name: "<color:#8B008B><bold>Thorns II"
+    name: "<color:#8B008B>Thorns II"
     lore:
       - "<color:#888888>Damages attackers"
     buy-price: 10000
@@ -219,7 +219,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       thorns: 3
-    name: "<color:#8B008B><bold>Thorns III"
+    name: "<color:#8B008B>Thorns III"
     lore:
       - "<color:#888888>Damages attackers"
     buy-price: 16000
@@ -231,7 +231,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       respiration: 1
-    name: "<color:#00CED1><bold>Respiration I"
+    name: "<color:#00CED1>Respiration I"
     lore:
       - "<color:#888888>Extended underwater breathing"
     buy-price: 5000
@@ -243,7 +243,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       respiration: 2
-    name: "<color:#00CED1><bold>Respiration II"
+    name: "<color:#00CED1>Respiration II"
     lore:
       - "<color:#888888>Extended underwater breathing"
     buy-price: 8000
@@ -255,7 +255,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       respiration: 3
-    name: "<color:#00CED1><bold>Respiration III"
+    name: "<color:#00CED1>Respiration III"
     lore:
       - "<color:#888888>Extended underwater breathing"
     buy-price: 12000
@@ -267,7 +267,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       aqua_affinity: 1
-    name: "<color:#4682B4><bold>Aqua Affinity"
+    name: "<color:#4682B4>Aqua Affinity"
     lore:
       - "<color:#888888>Faster underwater mining"
     buy-price: 15000
@@ -279,7 +279,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       feather_falling: 1
-    name: "<color:#DDA0DD><bold>Feather Falling I"
+    name: "<color:#DDA0DD>Feather Falling I"
     lore:
       - "<color:#888888>Reduces fall damage"
     buy-price: 5000
@@ -291,7 +291,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       feather_falling: 2
-    name: "<color:#DDA0DD><bold>Feather Falling II"
+    name: "<color:#DDA0DD>Feather Falling II"
     lore:
       - "<color:#888888>Reduces fall damage"
     buy-price: 8000
@@ -303,7 +303,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       feather_falling: 3
-    name: "<color:#DDA0DD><bold>Feather Falling III"
+    name: "<color:#DDA0DD>Feather Falling III"
     lore:
       - "<color:#888888>Reduces fall damage"
     buy-price: 12000
@@ -315,7 +315,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       feather_falling: 4
-    name: "<color:#DDA0DD><bold>Feather Falling IV"
+    name: "<color:#DDA0DD>Feather Falling IV"
     lore:
       - "<color:#888888>Reduces fall damage"
     buy-price: 18000
@@ -327,7 +327,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       depth_strider: 1
-    name: "<color:#00FFFF><bold>Depth Strider I"
+    name: "<color:#00FFFF>Depth Strider I"
     lore:
       - "<color:#888888>Faster underwater movement"
     buy-price: 6000
@@ -339,7 +339,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       depth_strider: 2
-    name: "<color:#00FFFF><bold>Depth Strider II"
+    name: "<color:#00FFFF>Depth Strider II"
     lore:
       - "<color:#888888>Faster underwater movement"
     buy-price: 10000
@@ -352,7 +352,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       depth_strider: 3
-    name: "<color:#00FFFF><bold>Depth Strider III"
+    name: "<color:#00FFFF>Depth Strider III"
     lore:
       - "<color:#888888>Faster underwater movement"
     buy-price: 16000
@@ -364,7 +364,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       frost_walker: 1
-    name: "<color:#E0FFFF><bold>Frost Walker I"
+    name: "<color:#E0FFFF>Frost Walker I"
     lore:
       - "<color:#888888>Freezes water under feet"
     buy-price: 12000
@@ -376,7 +376,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       frost_walker: 2
-    name: "<color:#E0FFFF><bold>Frost Walker II"
+    name: "<color:#E0FFFF>Frost Walker II"
     lore:
       - "<color:#888888>Freezes water under feet"
     buy-price: 20000
@@ -388,7 +388,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       soul_speed: 1
-    name: "<color:#4B0082><bold>Soul Speed I"
+    name: "<color:#4B0082>Soul Speed I"
     lore:
       - "<color:#888888>Faster on soul sand"
     buy-price: 8000
@@ -400,7 +400,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       soul_speed: 2
-    name: "<color:#4B0082><bold>Soul Speed II"
+    name: "<color:#4B0082>Soul Speed II"
     lore:
       - "<color:#888888>Faster on soul sand"
     buy-price: 13000
@@ -412,7 +412,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       soul_speed: 3
-    name: "<color:#4B0082><bold>Soul Speed III"
+    name: "<color:#4B0082>Soul Speed III"
     lore:
       - "<color:#888888>Faster on soul sand"
     buy-price: 20000
@@ -424,7 +424,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       swift_sneak: 1
-    name: "<color:#2F2F2F><bold>Swift Sneak I"
+    name: "<color:#2F2F2F>Swift Sneak I"
     lore:
       - "<color:#888888>Faster sneaking"
     buy-price: 15000
@@ -436,7 +436,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       swift_sneak: 2
-    name: "<color:#2F2F2F><bold>Swift Sneak II"
+    name: "<color:#2F2F2F>Swift Sneak II"
     lore:
       - "<color:#888888>Faster sneaking"
     buy-price: 25000
@@ -448,7 +448,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       swift_sneak: 3
-    name: "<color:#2F2F2F><bold>Swift Sneak III"
+    name: "<color:#2F2F2F>Swift Sneak III"
     lore:
       - "<color:#888888>Faster sneaking"
     buy-price: 40000
@@ -460,7 +460,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sharpness: 1
-    name: "<color:#DC143C><bold>Sharpness I"
+    name: "<color:#DC143C>Sharpness I"
     lore:
       - "<color:#888888>Increases damage"
     buy-price: 5000
@@ -472,7 +472,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sharpness: 2
-    name: "<color:#DC143C><bold>Sharpness II"
+    name: "<color:#DC143C>Sharpness II"
     lore:
       - "<color:#888888>Increases damage"
     buy-price: 8000
@@ -484,7 +484,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sharpness: 3
-    name: "<color:#DC143C><bold>Sharpness III"
+    name: "<color:#DC143C>Sharpness III"
     lore:
       - "<color:#888888>Increases damage"
     buy-price: 12000
@@ -496,7 +496,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sharpness: 4
-    name: "<color:#DC143C><bold>Sharpness IV"
+    name: "<color:#DC143C>Sharpness IV"
     lore:
       - "<color:#888888>Increases damage"
     buy-price: 18000
@@ -508,7 +508,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sharpness: 5
-    name: "<color:#DC143C><bold>Sharpness V"
+    name: "<color:#DC143C>Sharpness V"
     lore:
       - "<color:#888888>Increases damage"
     buy-price: 30000
@@ -520,7 +520,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       smite: 1
-    name: "<color:#FFD700><bold>Smite I"
+    name: "<color:#FFD700>Smite I"
     lore:
       - "<color:#888888>Damage to undead"
     buy-price: 4000
@@ -532,7 +532,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       smite: 2
-    name: "<color:#FFD700><bold>Smite II"
+    name: "<color:#FFD700>Smite II"
     lore:
       - "<color:#888888>Damage to undead"
     buy-price: 6000
@@ -544,7 +544,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       smite: 3
-    name: "<color:#FFD700><bold>Smite III"
+    name: "<color:#FFD700>Smite III"
     lore:
       - "<color:#888888>Damage to undead"
     buy-price: 9000
@@ -556,7 +556,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       smite: 4
-    name: "<color:#FFD700><bold>Smite IV"
+    name: "<color:#FFD700>Smite IV"
     lore:
       - "<color:#888888>Damage to undead"
     buy-price: 14000
@@ -568,7 +568,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       smite: 5
-    name: "<color:#FFD700><bold>Smite V"
+    name: "<color:#FFD700>Smite V"
     lore:
       - "<color:#888888>Damage to undead"
     buy-price: 22000
@@ -580,7 +580,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       bane_of_arthropods: 1
-    name: "<color:#556B2F><bold>Bane of Arthropods I"
+    name: "<color:#556B2F>Bane of Arthropods I"
     lore:
       - "<color:#888888>Damage to spiders"
     buy-price: 4000
@@ -592,7 +592,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       bane_of_arthropods: 2
-    name: "<color:#556B2F><bold>Bane of Arthropods II"
+    name: "<color:#556B2F>Bane of Arthropods II"
     lore:
       - "<color:#888888>Damage to spiders"
     buy-price: 6000
@@ -604,7 +604,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       bane_of_arthropods: 3
-    name: "<color:#556B2F><bold>Bane of Arthropods III"
+    name: "<color:#556B2F>Bane of Arthropods III"
     lore:
       - "<color:#888888>Damage to spiders"
     buy-price: 9000
@@ -616,7 +616,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       bane_of_arthropods: 4
-    name: "<color:#556B2F><bold>Bane of Arthropods IV"
+    name: "<color:#556B2F>Bane of Arthropods IV"
     lore:
       - "<color:#888888>Damage to spiders"
     buy-price: 14000
@@ -628,7 +628,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       bane_of_arthropods: 5
-    name: "<color:#556B2F><bold>Bane of Arthropods V"
+    name: "<color:#556B2F>Bane of Arthropods V"
     lore:
       - "<color:#888888>Damage to spiders"
     buy-price: 22000
@@ -640,7 +640,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       knockback: 1
-    name: "<color:#D2691E><bold>Knockback I"
+    name: "<color:#D2691E>Knockback I"
     lore:
       - "<color:#888888>Knocks enemies back"
     buy-price: 6000
@@ -652,7 +652,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       knockback: 2
-    name: "<color:#D2691E><bold>Knockback II"
+    name: "<color:#D2691E>Knockback II"
     lore:
       - "<color:#888888>Knocks enemies back"
     buy-price: 10000
@@ -664,7 +664,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_aspect: 1
-    name: "<color:#FF4500><bold>Fire Aspect I"
+    name: "<color:#FF4500>Fire Aspect I"
     lore:
       - "<color:#888888>Sets target on fire"
     buy-price: 10000
@@ -676,7 +676,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fire_aspect: 2
-    name: "<color:#FF4500><bold>Fire Aspect II"
+    name: "<color:#FF4500>Fire Aspect II"
     lore:
       - "<color:#888888>Sets target on fire"
     buy-price: 18000
@@ -688,7 +688,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       looting: 1
-    name: "<color:#32CD32><bold>Looting I"
+    name: "<color:#32CD32>Looting I"
     lore:
       - "<color:#888888>More mob drops"
     buy-price: 12000
@@ -700,7 +700,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       looting: 2
-    name: "<color:#32CD32><bold>Looting II"
+    name: "<color:#32CD32>Looting II"
     lore:
       - "<color:#888888>More mob drops"
     buy-price: 20000
@@ -712,7 +712,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       looting: 3
-    name: "<color:#32CD32><bold>Looting III"
+    name: "<color:#32CD32>Looting III"
     lore:
       - "<color:#888888>More mob drops"
     buy-price: 35000
@@ -724,7 +724,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sweeping_edge: 1
-    name: "<color:#B22222><bold>Sweeping Edge I"
+    name: "<color:#B22222>Sweeping Edge I"
     lore:
       - "<color:#888888>Increases sweeping damage"
     buy-price: 8000
@@ -736,7 +736,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sweeping_edge: 2
-    name: "<color:#B22222><bold>Sweeping Edge II"
+    name: "<color:#B22222>Sweeping Edge II"
     lore:
       - "<color:#888888>Increases sweeping damage"
     buy-price: 14000
@@ -748,7 +748,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       sweeping_edge: 3
-    name: "<color:#B22222><bold>Sweeping Edge III"
+    name: "<color:#B22222>Sweeping Edge III"
     lore:
       - "<color:#888888>Increases sweeping damage"
     buy-price: 25000
@@ -760,7 +760,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       efficiency: 1
-    name: "<color:#FFD700><bold>Efficiency I"
+    name: "<color:#FFD700>Efficiency I"
     lore:
       - "<color:#888888>Faster mining"
     buy-price: 5000
@@ -772,7 +772,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       efficiency: 2
-    name: "<color:#FFD700><bold>Efficiency II"
+    name: "<color:#FFD700>Efficiency II"
     lore:
       - "<color:#888888>Faster mining"
     buy-price: 8000
@@ -784,7 +784,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       efficiency: 3
-    name: "<color:#FFD700><bold>Efficiency III"
+    name: "<color:#FFD700>Efficiency III"
     lore:
       - "<color:#888888>Faster mining"
     buy-price: 12000
@@ -796,7 +796,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       efficiency: 4
-    name: "<color:#FFD700><bold>Efficiency IV"
+    name: "<color:#FFD700>Efficiency IV"
     lore:
       - "<color:#888888>Faster mining"
     buy-price: 18000
@@ -808,7 +808,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       efficiency: 5
-    name: "<color:#FFD700><bold>Efficiency V"
+    name: "<color:#FFD700>Efficiency V"
     lore:
       - "<color:#888888>Faster mining"
     buy-price: 30000
@@ -820,7 +820,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       silk_touch: 1
-    name: "<color:#E0FFFF><bold>Silk Touch"
+    name: "<color:#E0FFFF>Silk Touch"
     lore:
       - "<color:#888888>Mined blocks drop themselves"
     buy-price: 50000
@@ -832,7 +832,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       unbreaking: 1
-    name: "<color:#4169E1><bold>Unbreaking I"
+    name: "<color:#4169E1>Unbreaking I"
     lore:
       - "<color:#888888>Increases durability"
     buy-price: 6000
@@ -844,7 +844,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       unbreaking: 2
-    name: "<color:#4169E1><bold>Unbreaking II"
+    name: "<color:#4169E1>Unbreaking II"
     lore:
       - "<color:#888888>Increases durability"
     buy-price: 10000
@@ -856,7 +856,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       unbreaking: 3
-    name: "<color:#4169E1><bold>Unbreaking III"
+    name: "<color:#4169E1>Unbreaking III"
     lore:
       - "<color:#888888>Increases durability"
     buy-price: 18000
@@ -868,7 +868,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fortune: 1
-    name: "<color:#32CD32><bold>Fortune I"
+    name: "<color:#32CD32>Fortune I"
     lore:
       - "<color:#888888>More ore drops"
     buy-price: 12000
@@ -880,7 +880,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fortune: 2
-    name: "<color:#32CD32><bold>Fortune II"
+    name: "<color:#32CD32>Fortune II"
     lore:
       - "<color:#888888>More ore drops"
     buy-price: 22000
@@ -892,7 +892,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       fortune: 3
-    name: "<color:#32CD32><bold>Fortune III"
+    name: "<color:#32CD32>Fortune III"
     lore:
       - "<color:#888888>More ore drops"
     buy-price: 45000
@@ -904,7 +904,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       mending: 1
-    name: "<color:#00FF7F><bold>Mending"
+    name: "<color:#00FF7F>Mending"
     lore:
       - "<color:#888888>Repairs with XP"
     buy-price: 60000
@@ -916,7 +916,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       power: 1
-    name: "<color:#FF6347><bold>Power I"
+    name: "<color:#FF6347>Power I"
     lore:
       - "<color:#888888>Increases arrow damage"
     buy-price: 5000
@@ -928,7 +928,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       power: 2
-    name: "<color:#FF6347><bold>Power II"
+    name: "<color:#FF6347>Power II"
     lore:
       - "<color:#888888>Increases arrow damage"
     buy-price: 8000
@@ -940,7 +940,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       power: 3
-    name: "<color:#FF6347><bold>Power III"
+    name: "<color:#FF6347>Power III"
     lore:
       - "<color:#888888>Increases arrow damage"
     buy-price: 12000
@@ -952,7 +952,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       power: 4
-    name: "<color:#FF6347><bold>Power IV"
+    name: "<color:#FF6347>Power IV"
     lore:
       - "<color:#888888>Increases arrow damage"
     buy-price: 18000
@@ -964,7 +964,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       power: 5
-    name: "<color:#FF6347><bold>Power V"
+    name: "<color:#FF6347>Power V"
     lore:
       - "<color:#888888>Increases arrow damage"
     buy-price: 30000
@@ -976,7 +976,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       punch: 1
-    name: "<color:#FF8C00><bold>Punch I"
+    name: "<color:#FF8C00>Punch I"
     lore:
       - "<color:#888888>Knocks targets back"
     buy-price: 10000
@@ -988,7 +988,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       punch: 2
-    name: "<color:#FF8C00><bold>Punch II"
+    name: "<color:#FF8C00>Punch II"
     lore:
       - "<color:#888888>Knocks targets back"
     buy-price: 18000
@@ -1000,7 +1000,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       flame: 1
-    name: "<color:#FF4500><bold>Flame"
+    name: "<color:#FF4500>Flame"
     lore:
       - "<color:#888888>Arrows set fire"
     buy-price: 25000
@@ -1012,7 +1012,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       infinity: 1
-    name: "<color:#191970><bold>Infinity"
+    name: "<color:#191970>Infinity"
     lore:
       - "<color:#888888>Infinite normal arrows"
     buy-price: 40000
@@ -1024,7 +1024,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       loyalty: 1
-    name: "<color:#4169E1><bold>Loyalty I"
+    name: "<color:#4169E1>Loyalty I"
     lore:
       - "<color:#888888>Trident returns"
     buy-price: 10000
@@ -1036,7 +1036,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       loyalty: 2
-    name: "<color:#4169E1><bold>Loyalty II"
+    name: "<color:#4169E1>Loyalty II"
     lore:
       - "<color:#888888>Trident returns faster"
     buy-price: 16000
@@ -1048,7 +1048,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       loyalty: 3
-    name: "<color:#4169E1><bold>Loyalty III"
+    name: "<color:#4169E1>Loyalty III"
     lore:
       - "<color:#888888>Trident returns instantly"
     buy-price: 26000
@@ -1060,7 +1060,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       impaling: 1
-    name: "<color:#1E90FF><bold>Impaling I"
+    name: "<color:#1E90FF>Impaling I"
     lore:
       - "<color:#888888>Damage to aquatic mobs"
     buy-price: 6000
@@ -1072,7 +1072,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       impaling: 2
-    name: "<color:#1E90FF><bold>Impaling II"
+    name: "<color:#1E90FF>Impaling II"
     lore:
       - "<color:#888888>Damage to aquatic mobs"
     buy-price: 9000
@@ -1084,7 +1084,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       impaling: 3
-    name: "<color:#1E90FF><bold>Impaling III"
+    name: "<color:#1E90FF>Impaling III"
     lore:
       - "<color:#888888>Damage to aquatic mobs"
     buy-price: 14000
@@ -1096,7 +1096,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       impaling: 4
-    name: "<color:#1E90FF><bold>Impaling IV"
+    name: "<color:#1E90FF>Impaling IV"
     lore:
       - "<color:#888888>Damage to aquatic mobs"
     buy-price: 22000
@@ -1108,7 +1108,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       impaling: 5
-    name: "<color:#1E90FF><bold>Impaling V"
+    name: "<color:#1E90FF>Impaling V"
     lore:
       - "<color:#888888>Damage to aquatic mobs"
     buy-price: 35000
@@ -1120,7 +1120,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       riptide: 1
-    name: "<color:#4682B4><bold>Riptide I"
+    name: "<color:#4682B4>Riptide I"
     lore:
       - "<color:#888888>Launch when throwing"
     buy-price: 15000
@@ -1132,7 +1132,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       riptide: 2
-    name: "<color:#4682B4><bold>Riptide II"
+    name: "<color:#4682B4>Riptide II"
     lore:
       - "<color:#888888>Launch when throwing"
     buy-price: 24000
@@ -1144,7 +1144,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       riptide: 3
-    name: "<color:#4682B4><bold>Riptide III"
+    name: "<color:#4682B4>Riptide III"
     lore:
       - "<color:#888888>Launch when throwing"
     buy-price: 38000
@@ -1156,7 +1156,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       channeling: 1
-    name: "<color:#87CEEB><bold>Channeling"
+    name: "<color:#87CEEB>Channeling"
     lore:
       - "<color:#888888>Summons lightning"
     buy-price: 45000
@@ -1168,7 +1168,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       multishot: 1
-    name: "<color:#DAA520><bold>Multishot"
+    name: "<color:#DAA520>Multishot"
     lore:
       - "<color:#888888>Shoot 3 arrows"
     buy-price: 35000
@@ -1180,7 +1180,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       quick_charge: 1
-    name: "<color:#CD853F><bold>Quick Charge I"
+    name: "<color:#CD853F>Quick Charge I"
     lore:
       - "<color:#888888>Faster crossbow loading"
     buy-price: 8000
@@ -1192,7 +1192,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       quick_charge: 2
-    name: "<color:#CD853F><bold>Quick Charge II"
+    name: "<color:#CD853F>Quick Charge II"
     lore:
       - "<color:#888888>Faster crossbow loading"
     buy-price: 14000
@@ -1204,7 +1204,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       quick_charge: 3
-    name: "<color:#CD853F><bold>Quick Charge III"
+    name: "<color:#CD853F>Quick Charge III"
     lore:
       - "<color:#888888>Faster crossbow loading"
     buy-price: 25000
@@ -1216,7 +1216,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       piercing: 1
-    name: "<color:#708090><bold>Piercing I"
+    name: "<color:#708090>Piercing I"
     lore:
       - "<color:#888888>Arrows pierce mobs"
     buy-price: 8000
@@ -1228,7 +1228,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       piercing: 2
-    name: "<color:#708090><bold>Piercing II"
+    name: "<color:#708090>Piercing II"
     lore:
       - "<color:#888888>Arrows pierce mobs"
     buy-price: 13000
@@ -1240,7 +1240,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       piercing: 3
-    name: "<color:#708090><bold>Piercing III"
+    name: "<color:#708090>Piercing III"
     lore:
       - "<color:#888888>Arrows pierce mobs"
     buy-price: 20000
@@ -1252,7 +1252,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       piercing: 4
-    name: "<color:#708090><bold>Piercing IV"
+    name: "<color:#708090>Piercing IV"
     lore:
       - "<color:#888888>Arrows pierce mobs"
     buy-price: 32000
@@ -1264,7 +1264,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       luck_of_the_sea: 1
-    name: "<color:#00FA9A><bold>Luck of the Sea I"
+    name: "<color:#00FA9A>Luck of the Sea I"
     lore:
       - "<color:#888888>Better fishing loot"
     buy-price: 6000
@@ -1276,7 +1276,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       luck_of_the_sea: 2
-    name: "<color:#00FA9A><bold>Luck of the Sea II"
+    name: "<color:#00FA9A>Luck of the Sea II"
     lore:
       - "<color:#888888>Better fishing loot"
     buy-price: 10000
@@ -1288,7 +1288,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       luck_of_the_sea: 3
-    name: "<color:#00FA9A><bold>Luck of the Sea III"
+    name: "<color:#00FA9A>Luck of the Sea III"
     lore:
       - "<color:#888888>Better fishing loot"
     buy-price: 18000
@@ -1300,7 +1300,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       lure: 1
-    name: "<color:#87CEFA><bold>Lure I"
+    name: "<color:#87CEFA>Lure I"
     lore:
       - "<color:#888888>Faster fishing"
     buy-price: 5000
@@ -1312,7 +1312,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       lure: 2
-    name: "<color:#87CEFA><bold>Lure II"
+    name: "<color:#87CEFA>Lure II"
     lore:
       - "<color:#888888>Faster fishing"
     buy-price: 8000
@@ -1324,7 +1324,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       lure: 3
-    name: "<color:#87CEFA><bold>Lure III"
+    name: "<color:#87CEFA>Lure III"
     lore:
       - "<color:#888888>Faster fishing"
     buy-price: 14000
@@ -1336,7 +1336,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       binding_curse: 1
-    name: "<color:#800080><bold>Curse of Binding"
+    name: "<color:#800080>Curse of Binding"
     lore:
       - "<color:#888888>Cannot remove armor"
     buy-price: 1000
@@ -1348,7 +1348,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       vanishing_curse: 1
-    name: "<color:#800080><bold>Curse of Vanishing"
+    name: "<color:#800080>Curse of Vanishing"
     lore:
       - "<color:#888888>Item disappears on death"
     buy-price: 1000
@@ -1360,7 +1360,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       density: 1
-    name: "<color:#A9A9A9><bold>Density I"
+    name: "<color:#A9A9A9>Density I"
     lore:
       - "<color:#888888>Increased mace damage"
     buy-price: 8000
@@ -1372,7 +1372,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       density: 2
-    name: "<color:#A9A9A9><bold>Density II"
+    name: "<color:#A9A9A9>Density II"
     lore:
       - "<color:#888888>Increased mace damage"
     buy-price: 13000
@@ -1384,7 +1384,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       density: 3
-    name: "<color:#A9A9A9><bold>Density III"
+    name: "<color:#A9A9A9>Density III"
     lore:
       - "<color:#888888>Increased mace damage"
     buy-price: 21000
@@ -1396,7 +1396,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       density: 4
-    name: "<color:#A9A9A9><bold>Density IV"
+    name: "<color:#A9A9A9>Density IV"
     lore:
       - "<color:#888888>Increased mace damage"
     buy-price: 34000
@@ -1408,7 +1408,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       density: 5
-    name: "<color:#A9A9A9><bold>Density V"
+    name: "<color:#A9A9A9>Density V"
     lore:
       - "<color:#888888>Increased mace damage"
     buy-price: 55000
@@ -1420,7 +1420,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       breach: 1
-    name: "<color:#CD5C5C><bold>Breach I"
+    name: "<color:#CD5C5C>Breach I"
     lore:
       - "<color:#888888>Ignores armor"
     buy-price: 10000
@@ -1432,7 +1432,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       breach: 2
-    name: "<color:#CD5C5C><bold>Breach II"
+    name: "<color:#CD5C5C>Breach II"
     lore:
       - "<color:#888888>Ignores armor"
     buy-price: 16000
@@ -1444,7 +1444,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       breach: 3
-    name: "<color:#CD5C5C><bold>Breach III"
+    name: "<color:#CD5C5C>Breach III"
     lore:
       - "<color:#888888>Ignores armor"
     buy-price: 26000
@@ -1456,7 +1456,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       breach: 4
-    name: "<color:#CD5C5C><bold>Breach IV"
+    name: "<color:#CD5C5C>Breach IV"
     lore:
       - "<color:#888888>Ignores armor"
     buy-price: 42000
@@ -1468,7 +1468,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       wind_burst: 1
-    name: "<color:#B0E0E6><bold>Wind Burst I"
+    name: "<color:#B0E0E6>Wind Burst I"
     lore:
       - "<color:#888888>Launch after smash attack"
     buy-price: 12000
@@ -1480,7 +1480,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       wind_burst: 2
-    name: "<color:#B0E0E6><bold>Wind Burst II"
+    name: "<color:#B0E0E6>Wind Burst II"
     lore:
       - "<color:#888888>Launch after smash attack"
     buy-price: 20000
@@ -1492,7 +1492,7 @@ items:
     enchanted-book: true
     enchanted-book-enchants:
       wind_burst: 3
-    name: "<color:#B0E0E6><bold>Wind Burst III"
+    name: "<color:#B0E0E6>Wind Burst III"
     lore:
       - "<color:#888888>Launch after smash attack"
     buy-price: 35000

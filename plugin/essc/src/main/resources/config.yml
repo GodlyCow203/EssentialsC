@@ -774,7 +774,7 @@ auction-house:
   min-price: '1.00'
 
   # Maximum price a player can list an item for. Set to -1 for no limit.
-  max-price: '-1'
+  max-price: '5000000'
 
   # Whether enchanted books are allowed to be sold.
   allow-enchanted-books: false

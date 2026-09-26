@@ -1,7 +1,7 @@
 ﻿items:
   oak_log:
     material: OAK_LOG
-    name: "<color:#B8945F><bold>Oak Log"
+    name: "<color:#B8945F>Oak Log"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -9,7 +9,7 @@
 
   stripped_oak_log:
     material: STRIPPED_OAK_LOG
-    name: "<color:#B8945F><bold>Stripped Oak Log"
+    name: "<color:#B8945F>Stripped Oak Log"
     buy-price: 3
     sell-price: 0.6
     slot: 11
@@ -17,7 +17,7 @@
 
   oak_wood:
     material: OAK_WOOD
-    name: "<color:#B8945F><bold>Oak Wood"
+    name: "<color:#B8945F>Oak Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 12
@@ -25,7 +25,7 @@
 
   stripped_oak_wood:
     material: STRIPPED_OAK_WOOD
-    name: "<color:#B8945F><bold>Stripped Oak Wood"
+    name: "<color:#B8945F>Stripped Oak Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 13
@@ -33,7 +33,7 @@
 
   oak_planks:
     material: OAK_PLANKS
-    name: "<color:#B8945F><bold>Oak Planks"
+    name: "<color:#B8945F>Oak Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -41,7 +41,7 @@
 
   oak_stairs:
     material: OAK_STAIRS
-    name: "<color:#B8945F><bold>Oak Stairs"
+    name: "<color:#B8945F>Oak Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 15
@@ -49,7 +49,7 @@
 
   oak_slab:
     material: OAK_SLAB
-    name: "<color:#B8945F><bold>Oak Slab"
+    name: "<color:#B8945F>Oak Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 16
@@ -57,7 +57,7 @@
 
   oak_fence:
     material: OAK_FENCE
-    name: "<color:#B8945F><bold>Oak Fence"
+    name: "<color:#B8945F>Oak Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 19
@@ -65,7 +65,7 @@
 
   oak_fence_gate:
     material: OAK_FENCE_GATE
-    name: "<color:#B8945F><bold>Oak Fence Gate"
+    name: "<color:#B8945F>Oak Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -73,7 +73,7 @@
 
   oak_door:
     material: OAK_DOOR
-    name: "<color:#B8945F><bold>Oak Door"
+    name: "<color:#B8945F>Oak Door"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -81,7 +81,7 @@
 
   oak_trapdoor:
     material: OAK_TRAPDOOR
-    name: "<color:#B8945F><bold>Oak Trapdoor"
+    name: "<color:#B8945F>Oak Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -89,7 +89,7 @@
 
   oak_sign:
     material: OAK_SIGN
-    name: "<color:#B8945F><bold>Oak Sign"
+    name: "<color:#B8945F>Oak Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -97,7 +97,7 @@
 
   oak_hanging_sign:
     material: OAK_HANGING_SIGN
-    name: "<color:#B8945F><bold>Oak Hanging Sign"
+    name: "<color:#B8945F>Oak Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -105,7 +105,7 @@
 
   spruce_log:
     material: SPRUCE_LOG
-    name: "<color:#6B4F2E><bold>Spruce Log"
+    name: "<color:#6B4F2E>Spruce Log"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -113,7 +113,7 @@
 
   stripped_spruce_log:
     material: STRIPPED_SPRUCE_LOG
-    name: "<color:#6B4F2E><bold>Stripped Spruce Log"
+    name: "<color:#6B4F2E>Stripped Spruce Log"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -121,7 +121,7 @@
 
   spruce_wood:
     material: SPRUCE_WOOD
-    name: "<color:#6B4F2E><bold>Spruce Wood"
+    name: "<color:#6B4F2E>Spruce Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 29
@@ -129,7 +129,7 @@
 
   stripped_spruce_wood:
     material: STRIPPED_SPRUCE_WOOD
-    name: "<color:#6B4F2E><bold>Stripped Spruce Wood"
+    name: "<color:#6B4F2E>Stripped Spruce Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 30
@@ -137,7 +137,7 @@
 
   spruce_planks:
     material: SPRUCE_PLANKS
-    name: "<color:#6B4F2E><bold>Spruce Planks"
+    name: "<color:#6B4F2E>Spruce Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -145,7 +145,7 @@
 
   spruce_stairs:
     material: SPRUCE_STAIRS
-    name: "<color:#6B4F2E><bold>Spruce Stairs"
+    name: "<color:#6B4F2E>Spruce Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 32
@@ -153,7 +153,7 @@
 
   spruce_slab:
     material: SPRUCE_SLAB
-    name: "<color:#6B4F2E><bold>Spruce Slab"
+    name: "<color:#6B4F2E>Spruce Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 33
@@ -161,7 +161,7 @@
 
   spruce_fence:
     material: SPRUCE_FENCE
-    name: "<color:#6B4F2E><bold>Spruce Fence"
+    name: "<color:#6B4F2E>Spruce Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 34
@@ -169,7 +169,7 @@
 
   spruce_fence_gate:
     material: SPRUCE_FENCE_GATE
-    name: "<color:#6B4F2E><bold>Spruce Fence Gate"
+    name: "<color:#6B4F2E>Spruce Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -177,7 +177,7 @@
 
   spruce_door:
     material: SPRUCE_DOOR
-    name: "<color:#6B4F2E><bold>Spruce Door"
+    name: "<color:#6B4F2E>Spruce Door"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -185,7 +185,7 @@
 
   spruce_trapdoor:
     material: SPRUCE_TRAPDOOR
-    name: "<color:#6B4F2E><bold>Spruce Trapdoor"
+    name: "<color:#6B4F2E>Spruce Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 39
@@ -193,7 +193,7 @@
 
   spruce_sign:
     material: SPRUCE_SIGN
-    name: "<color:#6B4F2E><bold>Spruce Sign"
+    name: "<color:#6B4F2E>Spruce Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -201,7 +201,7 @@
 
   spruce_hanging_sign:
     material: SPRUCE_HANGING_SIGN
-    name: "<color:#6B4F2E><bold>Spruce Hanging Sign"
+    name: "<color:#6B4F2E>Spruce Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 41
@@ -209,7 +209,7 @@
 
   birch_log:
     material: BIRCH_LOG
-    name: "<color:#D7C58A><bold>Birch Log"
+    name: "<color:#D7C58A>Birch Log"
     buy-price: 2
     sell-price: 0.4
     slot: 42
@@ -217,7 +217,7 @@
 
   stripped_birch_log:
     material: STRIPPED_BIRCH_LOG
-    name: "<color:#D7C58A><bold>Stripped Birch Log"
+    name: "<color:#D7C58A>Stripped Birch Log"
     buy-price: 3
     sell-price: 0.6
     slot: 43
@@ -225,7 +225,7 @@
 
   birch_wood:
     material: BIRCH_WOOD
-    name: "<color:#D7C58A><bold>Birch Wood"
+    name: "<color:#D7C58A>Birch Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 10
@@ -233,7 +233,7 @@
 
   stripped_birch_wood:
     material: STRIPPED_BIRCH_WOOD
-    name: "<color:#D7C58A><bold>Stripped Birch Wood"
+    name: "<color:#D7C58A>Stripped Birch Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 11
@@ -241,7 +241,7 @@
 
   birch_planks:
     material: BIRCH_PLANKS
-    name: "<color:#D7C58A><bold>Birch Planks"
+    name: "<color:#D7C58A>Birch Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -249,7 +249,7 @@
 
   birch_stairs:
     material: BIRCH_STAIRS
-    name: "<color:#D7C58A><bold>Birch Stairs"
+    name: "<color:#D7C58A>Birch Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 13
@@ -257,7 +257,7 @@
 
   birch_slab:
     material: BIRCH_SLAB
-    name: "<color:#D7C58A><bold>Birch Slab"
+    name: "<color:#D7C58A>Birch Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -265,7 +265,7 @@
 
   birch_fence:
     material: BIRCH_FENCE
-    name: "<color:#D7C58A><bold>Birch Fence"
+    name: "<color:#D7C58A>Birch Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 15
@@ -273,7 +273,7 @@
 
   birch_fence_gate:
     material: BIRCH_FENCE_GATE
-    name: "<color:#D7C58A><bold>Birch Fence Gate"
+    name: "<color:#D7C58A>Birch Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -281,7 +281,7 @@
 
   birch_door:
     material: BIRCH_DOOR
-    name: "<color:#D7C58A><bold>Birch Door"
+    name: "<color:#D7C58A>Birch Door"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -289,7 +289,7 @@
 
   birch_trapdoor:
     material: BIRCH_TRAPDOOR
-    name: "<color:#D7C58A><bold>Birch Trapdoor"
+    name: "<color:#D7C58A>Birch Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -297,7 +297,7 @@
 
   birch_sign:
     material: BIRCH_SIGN
-    name: "<color:#D7C58A><bold>Birch Sign"
+    name: "<color:#D7C58A>Birch Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -305,7 +305,7 @@
 
   birch_hanging_sign:
     material: BIRCH_HANGING_SIGN
-    name: "<color:#D7C58A><bold>Birch Hanging Sign"
+    name: "<color:#D7C58A>Birch Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -313,7 +313,7 @@
 
   jungle_log:
     material: JUNGLE_LOG
-    name: "<color:#B07B4F><bold>Jungle Log"
+    name: "<color:#B07B4F>Jungle Log"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -321,7 +321,7 @@
 
   stripped_jungle_log:
     material: STRIPPED_JUNGLE_LOG
-    name: "<color:#B07B4F><bold>Stripped Jungle Log"
+    name: "<color:#B07B4F>Stripped Jungle Log"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -329,7 +329,7 @@
 
   jungle_wood:
     material: JUNGLE_WOOD
-    name: "<color:#B07B4F><bold>Jungle Wood"
+    name: "<color:#B07B4F>Jungle Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 25
@@ -337,7 +337,7 @@
 
   stripped_jungle_wood:
     material: STRIPPED_JUNGLE_WOOD
-    name: "<color:#B07B4F><bold>Stripped Jungle Wood"
+    name: "<color:#B07B4F>Stripped Jungle Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 28
@@ -345,7 +345,7 @@
 
   jungle_planks:
     material: JUNGLE_PLANKS
-    name: "<color:#B07B4F><bold>Jungle Planks"
+    name: "<color:#B07B4F>Jungle Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -353,7 +353,7 @@
 
   jungle_stairs:
     material: JUNGLE_STAIRS
-    name: "<color:#B07B4F><bold>Jungle Stairs"
+    name: "<color:#B07B4F>Jungle Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -361,7 +361,7 @@
 
   jungle_slab:
     material: JUNGLE_SLAB
-    name: "<color:#B07B4F><bold>Jungle Slab"
+    name: "<color:#B07B4F>Jungle Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 31
@@ -369,7 +369,7 @@
 
   jungle_fence:
     material: JUNGLE_FENCE
-    name: "<color:#B07B4F><bold>Jungle Fence"
+    name: "<color:#B07B4F>Jungle Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 32
@@ -377,7 +377,7 @@
 
   jungle_fence_gate:
     material: JUNGLE_FENCE_GATE
-    name: "<color:#B07B4F><bold>Jungle Fence Gate"
+    name: "<color:#B07B4F>Jungle Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -385,7 +385,7 @@
 
   jungle_door:
     material: JUNGLE_DOOR
-    name: "<color:#B07B4F><bold>Jungle Door"
+    name: "<color:#B07B4F>Jungle Door"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -393,7 +393,7 @@
 
   jungle_trapdoor:
     material: JUNGLE_TRAPDOOR
-    name: "<color:#B07B4F><bold>Jungle Trapdoor"
+    name: "<color:#B07B4F>Jungle Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -401,7 +401,7 @@
 
   jungle_sign:
     material: JUNGLE_SIGN
-    name: "<color:#B07B4F><bold>Jungle Sign"
+    name: "<color:#B07B4F>Jungle Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -409,7 +409,7 @@
 
   jungle_hanging_sign:
     material: JUNGLE_HANGING_SIGN
-    name: "<color:#B07B4F><bold>Jungle Hanging Sign"
+    name: "<color:#B07B4F>Jungle Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -417,7 +417,7 @@
 
   acacia_log:
     material: ACACIA_LOG
-    name: "<color:#B05B3B><bold>Acacia Log"
+    name: "<color:#B05B3B>Acacia Log"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -425,7 +425,7 @@
 
   stripped_acacia_log:
     material: STRIPPED_ACACIA_LOG
-    name: "<color:#B05B3B><bold>Stripped Acacia Log"
+    name: "<color:#B05B3B>Stripped Acacia Log"
     buy-price: 3
     sell-price: 0.6
     slot: 41
@@ -433,7 +433,7 @@
 
   acacia_wood:
     material: ACACIA_WOOD
-    name: "<color:#B05B3B><bold>Acacia Wood"
+    name: "<color:#B05B3B>Acacia Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -441,7 +441,7 @@
 
   stripped_acacia_wood:
     material: STRIPPED_ACACIA_WOOD
-    name: "<color:#B05B3B><bold>Stripped Acacia Wood"
+    name: "<color:#B05B3B>Stripped Acacia Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 43
@@ -449,7 +449,7 @@
 
   acacia_planks:
     material: ACACIA_PLANKS
-    name: "<color:#B05B3B><bold>Acacia Planks"
+    name: "<color:#B05B3B>Acacia Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -457,7 +457,7 @@
 
   acacia_stairs:
     material: ACACIA_STAIRS
-    name: "<color:#B05B3B><bold>Acacia Stairs"
+    name: "<color:#B05B3B>Acacia Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 11
@@ -465,7 +465,7 @@
 
   acacia_slab:
     material: ACACIA_SLAB
-    name: "<color:#B05B3B><bold>Acacia Slab"
+    name: "<color:#B05B3B>Acacia Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 12
@@ -473,7 +473,7 @@
 
   acacia_fence:
     material: ACACIA_FENCE
-    name: "<color:#B05B3B><bold>Acacia Fence"
+    name: "<color:#B05B3B>Acacia Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 13
@@ -481,7 +481,7 @@
 
   acacia_fence_gate:
     material: ACACIA_FENCE_GATE
-    name: "<color:#B05B3B><bold>Acacia Fence Gate"
+    name: "<color:#B05B3B>Acacia Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -489,7 +489,7 @@
 
   acacia_door:
     material: ACACIA_DOOR
-    name: "<color:#B05B3B><bold>Acacia Door"
+    name: "<color:#B05B3B>Acacia Door"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -497,7 +497,7 @@
 
   acacia_trapdoor:
     material: ACACIA_TRAPDOOR
-    name: "<color:#B05B3B><bold>Acacia Trapdoor"
+    name: "<color:#B05B3B>Acacia Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -505,7 +505,7 @@
 
   acacia_sign:
     material: ACACIA_SIGN
-    name: "<color:#B05B3B><bold>Acacia Sign"
+    name: "<color:#B05B3B>Acacia Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -513,7 +513,7 @@
 
   acacia_hanging_sign:
     material: ACACIA_HANGING_SIGN
-    name: "<color:#B05B3B><bold>Acacia Hanging Sign"
+    name: "<color:#B05B3B>Acacia Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 20
@@ -521,7 +521,7 @@
 
   dark_oak_log:
     material: DARK_OAK_LOG
-    name: "<color:#4A3220><bold>Dark Oak Log"
+    name: "<color:#4A3220>Dark Oak Log"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -529,7 +529,7 @@
 
   stripped_dark_oak_log:
     material: STRIPPED_DARK_OAK_LOG
-    name: "<color:#4A3220><bold>Stripped Dark Oak Log"
+    name: "<color:#4A3220>Stripped Dark Oak Log"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -537,7 +537,7 @@
 
   dark_oak_wood:
     material: DARK_OAK_WOOD
-    name: "<color:#4A3220><bold>Dark Oak Wood"
+    name: "<color:#4A3220>Dark Oak Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 23
@@ -545,7 +545,7 @@
 
   stripped_dark_oak_wood:
     material: STRIPPED_DARK_OAK_WOOD
-    name: "<color:#4A3220><bold>Stripped Dark Oak Wood"
+    name: "<color:#4A3220>Stripped Dark Oak Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 24
@@ -553,7 +553,7 @@
 
   dark_oak_planks:
     material: DARK_OAK_PLANKS
-    name: "<color:#4A3220><bold>Dark Oak Planks"
+    name: "<color:#4A3220>Dark Oak Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -561,7 +561,7 @@
 
   dark_oak_stairs:
     material: DARK_OAK_STAIRS
-    name: "<color:#4A3220><bold>Dark Oak Stairs"
+    name: "<color:#4A3220>Dark Oak Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -569,7 +569,7 @@
 
   dark_oak_slab:
     material: DARK_OAK_SLAB
-    name: "<color:#4A3220><bold>Dark Oak Slab"
+    name: "<color:#4A3220>Dark Oak Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 29
@@ -577,7 +577,7 @@
 
   dark_oak_fence:
     material: DARK_OAK_FENCE
-    name: "<color:#4A3220><bold>Dark Oak Fence"
+    name: "<color:#4A3220>Dark Oak Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 30
@@ -585,7 +585,7 @@
 
   dark_oak_fence_gate:
     material: DARK_OAK_FENCE_GATE
-    name: "<color:#4A3220><bold>Dark Oak Fence Gate"
+    name: "<color:#4A3220>Dark Oak Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -593,7 +593,7 @@
 
   dark_oak_door:
     material: DARK_OAK_DOOR
-    name: "<color:#4A3220><bold>Dark Oak Door"
+    name: "<color:#4A3220>Dark Oak Door"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -601,7 +601,7 @@
 
   dark_oak_trapdoor:
     material: DARK_OAK_TRAPDOOR
-    name: "<color:#4A3220><bold>Dark Oak Trapdoor"
+    name: "<color:#4A3220>Dark Oak Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -609,7 +609,7 @@
 
   dark_oak_sign:
     material: DARK_OAK_SIGN
-    name: "<color:#4A3220><bold>Dark Oak Sign"
+    name: "<color:#4A3220>Dark Oak Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -617,7 +617,7 @@
 
   dark_oak_hanging_sign:
     material: DARK_OAK_HANGING_SIGN
-    name: "<color:#4A3220><bold>Dark Oak Hanging Sign"
+    name: "<color:#4A3220>Dark Oak Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 37
@@ -625,7 +625,7 @@
 
   mangrove_log:
     material: MANGROVE_LOG
-    name: "<color:#8C3B3B><bold>Mangrove Log"
+    name: "<color:#8C3B3B>Mangrove Log"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -633,7 +633,7 @@
 
   stripped_mangrove_log:
     material: STRIPPED_MANGROVE_LOG
-    name: "<color:#8C3B3B><bold>Stripped Mangrove Log"
+    name: "<color:#8C3B3B>Stripped Mangrove Log"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -641,7 +641,7 @@
 
   mangrove_wood:
     material: MANGROVE_WOOD
-    name: "<color:#8C3B3B><bold>Mangrove Wood"
+    name: "<color:#8C3B3B>Mangrove Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 40
@@ -649,7 +649,7 @@
 
   stripped_mangrove_wood:
     material: STRIPPED_MANGROVE_WOOD
-    name: "<color:#8C3B3B><bold>Stripped Mangrove Wood"
+    name: "<color:#8C3B3B>Stripped Mangrove Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 41
@@ -657,7 +657,7 @@
 
   mangrove_planks:
     material: MANGROVE_PLANKS
-    name: "<color:#8C3B3B><bold>Mangrove Planks"
+    name: "<color:#8C3B3B>Mangrove Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 42
@@ -665,7 +665,7 @@
 
   mangrove_stairs:
     material: MANGROVE_STAIRS
-    name: "<color:#8C3B3B><bold>Mangrove Stairs"
+    name: "<color:#8C3B3B>Mangrove Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 43
@@ -673,7 +673,7 @@
 
   mangrove_slab:
     material: MANGROVE_SLAB
-    name: "<color:#8C3B3B><bold>Mangrove Slab"
+    name: "<color:#8C3B3B>Mangrove Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 10
@@ -681,7 +681,7 @@
 
   mangrove_fence:
     material: MANGROVE_FENCE
-    name: "<color:#8C3B3B><bold>Mangrove Fence"
+    name: "<color:#8C3B3B>Mangrove Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 11
@@ -689,7 +689,7 @@
 
   mangrove_fence_gate:
     material: MANGROVE_FENCE_GATE
-    name: "<color:#8C3B3B><bold>Mangrove Fence Gate"
+    name: "<color:#8C3B3B>Mangrove Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -697,7 +697,7 @@
 
   mangrove_door:
     material: MANGROVE_DOOR
-    name: "<color:#8C3B3B><bold>Mangrove Door"
+    name: "<color:#8C3B3B>Mangrove Door"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -705,7 +705,7 @@
 
   mangrove_trapdoor:
     material: MANGROVE_TRAPDOOR
-    name: "<color:#8C3B3B><bold>Mangrove Trapdoor"
+    name: "<color:#8C3B3B>Mangrove Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -713,7 +713,7 @@
 
   mangrove_sign:
     material: MANGROVE_SIGN
-    name: "<color:#8C3B3B><bold>Mangrove Sign"
+    name: "<color:#8C3B3B>Mangrove Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -721,7 +721,7 @@
 
   mangrove_hanging_sign:
     material: MANGROVE_HANGING_SIGN
-    name: "<color:#8C3B3B><bold>Mangrove Hanging Sign"
+    name: "<color:#8C3B3B>Mangrove Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -729,7 +729,7 @@
 
   cherry_log:
     material: CHERRY_LOG
-    name: "<color:#E8A0A8><bold>Cherry Log"
+    name: "<color:#E8A0A8>Cherry Log"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -737,7 +737,7 @@
 
   stripped_cherry_log:
     material: STRIPPED_CHERRY_LOG
-    name: "<color:#E8A0A8><bold>Stripped Cherry Log"
+    name: "<color:#E8A0A8>Stripped Cherry Log"
     buy-price: 3
     sell-price: 0.6
     slot: 20
@@ -745,7 +745,7 @@
 
   cherry_wood:
     material: CHERRY_WOOD
-    name: "<color:#E8A0A8><bold>Cherry Wood"
+    name: "<color:#E8A0A8>Cherry Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 21
@@ -753,7 +753,7 @@
 
   stripped_cherry_wood:
     material: STRIPPED_CHERRY_WOOD
-    name: "<color:#E8A0A8><bold>Stripped Cherry Wood"
+    name: "<color:#E8A0A8>Stripped Cherry Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 22
@@ -761,7 +761,7 @@
 
   cherry_planks:
     material: CHERRY_PLANKS
-    name: "<color:#E8A0A8><bold>Cherry Planks"
+    name: "<color:#E8A0A8>Cherry Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -769,7 +769,7 @@
 
   cherry_stairs:
     material: CHERRY_STAIRS
-    name: "<color:#E8A0A8><bold>Cherry Stairs"
+    name: "<color:#E8A0A8>Cherry Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -777,7 +777,7 @@
 
   cherry_slab:
     material: CHERRY_SLAB
-    name: "<color:#E8A0A8><bold>Cherry Slab"
+    name: "<color:#E8A0A8>Cherry Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 25
@@ -785,7 +785,7 @@
 
   cherry_fence:
     material: CHERRY_FENCE
-    name: "<color:#E8A0A8><bold>Cherry Fence"
+    name: "<color:#E8A0A8>Cherry Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 28
@@ -793,7 +793,7 @@
 
   cherry_fence_gate:
     material: CHERRY_FENCE_GATE
-    name: "<color:#E8A0A8><bold>Cherry Fence Gate"
+    name: "<color:#E8A0A8>Cherry Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -801,7 +801,7 @@
 
   cherry_door:
     material: CHERRY_DOOR
-    name: "<color:#E8A0A8><bold>Cherry Door"
+    name: "<color:#E8A0A8>Cherry Door"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -809,7 +809,7 @@
 
   cherry_trapdoor:
     material: CHERRY_TRAPDOOR
-    name: "<color:#E8A0A8><bold>Cherry Trapdoor"
+    name: "<color:#E8A0A8>Cherry Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -817,7 +817,7 @@
 
   cherry_sign:
     material: CHERRY_SIGN
-    name: "<color:#E8A0A8><bold>Cherry Sign"
+    name: "<color:#E8A0A8>Cherry Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -825,7 +825,7 @@
 
   cherry_hanging_sign:
     material: CHERRY_HANGING_SIGN
-    name: "<color:#E8A0A8><bold>Cherry Hanging Sign"
+    name: "<color:#E8A0A8>Cherry Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -833,7 +833,7 @@
 
   pale_oak_log:
     material: PALE_OAK_LOG
-    name: "<color:#DED3AE><bold>Pale Oak Log"
+    name: "<color:#DED3AE>Pale Oak Log"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -841,7 +841,7 @@
 
   stripped_pale_oak_log:
     material: STRIPPED_PALE_OAK_LOG
-    name: "<color:#DED3AE><bold>Stripped Pale Oak Log"
+    name: "<color:#DED3AE>Stripped Pale Oak Log"
     buy-price: 3
     sell-price: 0.6
     slot: 37
@@ -849,7 +849,7 @@
 
   pale_oak_wood:
     material: PALE_OAK_WOOD
-    name: "<color:#DED3AE><bold>Pale Oak Wood"
+    name: "<color:#DED3AE>Pale Oak Wood"
     buy-price: 3
     sell-price: 0.6
     slot: 38
@@ -857,7 +857,7 @@
 
   stripped_pale_oak_wood:
     material: STRIPPED_PALE_OAK_WOOD
-    name: "<color:#DED3AE><bold>Stripped Pale Oak Wood"
+    name: "<color:#DED3AE>Stripped Pale Oak Wood"
     buy-price: 4
     sell-price: 0.8
     slot: 39
@@ -865,7 +865,7 @@
 
   pale_oak_planks:
     material: PALE_OAK_PLANKS
-    name: "<color:#DED3AE><bold>Pale Oak Planks"
+    name: "<color:#DED3AE>Pale Oak Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -873,7 +873,7 @@
 
   pale_oak_stairs:
     material: PALE_OAK_STAIRS
-    name: "<color:#DED3AE><bold>Pale Oak Stairs"
+    name: "<color:#DED3AE>Pale Oak Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 41
@@ -881,7 +881,7 @@
 
   pale_oak_slab:
     material: PALE_OAK_SLAB
-    name: "<color:#DED3AE><bold>Pale Oak Slab"
+    name: "<color:#DED3AE>Pale Oak Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 42
@@ -889,7 +889,7 @@
 
   pale_oak_fence:
     material: PALE_OAK_FENCE
-    name: "<color:#DED3AE><bold>Pale Oak Fence"
+    name: "<color:#DED3AE>Pale Oak Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 43
@@ -897,7 +897,7 @@
 
   pale_oak_fence_gate:
     material: PALE_OAK_FENCE_GATE
-    name: "<color:#DED3AE><bold>Pale Oak Fence Gate"
+    name: "<color:#DED3AE>Pale Oak Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -905,7 +905,7 @@
 
   pale_oak_door:
     material: PALE_OAK_DOOR
-    name: "<color:#DED3AE><bold>Pale Oak Door"
+    name: "<color:#DED3AE>Pale Oak Door"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -913,7 +913,7 @@
 
   pale_oak_trapdoor:
     material: PALE_OAK_TRAPDOOR
-    name: "<color:#DED3AE><bold>Pale Oak Trapdoor"
+    name: "<color:#DED3AE>Pale Oak Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -921,7 +921,7 @@
 
   pale_oak_sign:
     material: PALE_OAK_SIGN
-    name: "<color:#DED3AE><bold>Pale Oak Sign"
+    name: "<color:#DED3AE>Pale Oak Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -929,7 +929,7 @@
 
   pale_oak_hanging_sign:
     material: PALE_OAK_HANGING_SIGN
-    name: "<color:#DED3AE><bold>Pale Oak Hanging Sign"
+    name: "<color:#DED3AE>Pale Oak Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 14
@@ -937,7 +937,7 @@
 
   crimson_stem:
     material: CRIMSON_STEM
-    name: "<color:#A03A3A><bold>Crimson Stem"
+    name: "<color:#A03A3A>Crimson Stem"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -945,7 +945,7 @@
 
   stripped_crimson_stem:
     material: STRIPPED_CRIMSON_STEM
-    name: "<color:#A03A3A><bold>Stripped Crimson Stem"
+    name: "<color:#A03A3A>Stripped Crimson Stem"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -953,7 +953,7 @@
 
   crimson_hyphae:
     material: CRIMSON_HYPHAE
-    name: "<color:#A03A3A><bold>Crimson Hyphae"
+    name: "<color:#A03A3A>Crimson Hyphae"
     buy-price: 3
     sell-price: 0.6
     slot: 19
@@ -961,7 +961,7 @@
 
   stripped_crimson_hyphae:
     material: STRIPPED_CRIMSON_HYPHAE
-    name: "<color:#A03A3A><bold>Stripped Crimson Hyphae"
+    name: "<color:#A03A3A>Stripped Crimson Hyphae"
     buy-price: 4
     sell-price: 0.8
     slot: 20
@@ -969,7 +969,7 @@
 
   crimson_planks:
     material: CRIMSON_PLANKS
-    name: "<color:#A03A3A><bold>Crimson Planks"
+    name: "<color:#A03A3A>Crimson Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -977,7 +977,7 @@
 
   crimson_stairs:
     material: CRIMSON_STAIRS
-    name: "<color:#A03A3A><bold>Crimson Stairs"
+    name: "<color:#A03A3A>Crimson Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -985,7 +985,7 @@
 
   crimson_slab:
     material: CRIMSON_SLAB
-    name: "<color:#A03A3A><bold>Crimson Slab"
+    name: "<color:#A03A3A>Crimson Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 23
@@ -993,7 +993,7 @@
 
   crimson_fence:
     material: CRIMSON_FENCE
-    name: "<color:#A03A3A><bold>Crimson Fence"
+    name: "<color:#A03A3A>Crimson Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 24
@@ -1001,7 +1001,7 @@
 
   crimson_fence_gate:
     material: CRIMSON_FENCE_GATE
-    name: "<color:#A03A3A><bold>Crimson Fence Gate"
+    name: "<color:#A03A3A>Crimson Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -1009,7 +1009,7 @@
 
   crimson_door:
     material: CRIMSON_DOOR
-    name: "<color:#A03A3A><bold>Crimson Door"
+    name: "<color:#A03A3A>Crimson Door"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -1017,7 +1017,7 @@
 
   crimson_trapdoor:
     material: CRIMSON_TRAPDOOR
-    name: "<color:#A03A3A><bold>Crimson Trapdoor"
+    name: "<color:#A03A3A>Crimson Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -1025,7 +1025,7 @@
 
   crimson_sign:
     material: CRIMSON_SIGN
-    name: "<color:#A03A3A><bold>Crimson Sign"
+    name: "<color:#A03A3A>Crimson Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -1033,7 +1033,7 @@
 
   crimson_hanging_sign:
     material: CRIMSON_HANGING_SIGN
-    name: "<color:#A03A3A><bold>Crimson Hanging Sign"
+    name: "<color:#A03A3A>Crimson Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -1041,7 +1041,7 @@
 
   warped_stem:
     material: WARPED_STEM
-    name: "<color:#3A8A8A><bold>Warped Stem"
+    name: "<color:#3A8A8A>Warped Stem"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -1049,7 +1049,7 @@
 
   stripped_warped_stem:
     material: STRIPPED_WARPED_STEM
-    name: "<color:#3A8A8A><bold>Stripped Warped Stem"
+    name: "<color:#3A8A8A>Stripped Warped Stem"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -1057,7 +1057,7 @@
 
   warped_hyphae:
     material: WARPED_HYPHAE
-    name: "<color:#3A8A8A><bold>Warped Hyphae"
+    name: "<color:#3A8A8A>Warped Hyphae"
     buy-price: 3
     sell-price: 0.6
     slot: 34
@@ -1065,7 +1065,7 @@
 
   stripped_warped_hyphae:
     material: STRIPPED_WARPED_HYPHAE
-    name: "<color:#3A8A8A><bold>Stripped Warped Hyphae"
+    name: "<color:#3A8A8A>Stripped Warped Hyphae"
     buy-price: 4
     sell-price: 0.8
     slot: 37
@@ -1073,7 +1073,7 @@
 
   warped_planks:
     material: WARPED_PLANKS
-    name: "<color:#3A8A8A><bold>Warped Planks"
+    name: "<color:#3A8A8A>Warped Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -1081,7 +1081,7 @@
 
   warped_stairs:
     material: WARPED_STAIRS
-    name: "<color:#3A8A8A><bold>Warped Stairs"
+    name: "<color:#3A8A8A>Warped Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -1089,7 +1089,7 @@
 
   warped_slab:
     material: WARPED_SLAB
-    name: "<color:#3A8A8A><bold>Warped Slab"
+    name: "<color:#3A8A8A>Warped Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 40
@@ -1097,7 +1097,7 @@
 
   warped_fence:
     material: WARPED_FENCE
-    name: "<color:#3A8A8A><bold>Warped Fence"
+    name: "<color:#3A8A8A>Warped Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 41
@@ -1105,7 +1105,7 @@
 
   warped_fence_gate:
     material: WARPED_FENCE_GATE
-    name: "<color:#3A8A8A><bold>Warped Fence Gate"
+    name: "<color:#3A8A8A>Warped Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 42
@@ -1113,7 +1113,7 @@
 
   warped_door:
     material: WARPED_DOOR
-    name: "<color:#3A8A8A><bold>Warped Door"
+    name: "<color:#3A8A8A>Warped Door"
     buy-price: 2
     sell-price: 0.4
     slot: 43
@@ -1121,7 +1121,7 @@
 
   warped_trapdoor:
     material: WARPED_TRAPDOOR
-    name: "<color:#3A8A8A><bold>Warped Trapdoor"
+    name: "<color:#3A8A8A>Warped Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -1129,7 +1129,7 @@
 
   warped_sign:
     material: WARPED_SIGN
-    name: "<color:#3A8A8A><bold>Warped Sign"
+    name: "<color:#3A8A8A>Warped Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -1137,7 +1137,7 @@
 
   warped_hanging_sign:
     material: WARPED_HANGING_SIGN
-    name: "<color:#3A8A8A><bold>Warped Hanging Sign"
+    name: "<color:#3A8A8A>Warped Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 12
@@ -1145,7 +1145,7 @@
 
   bamboo_block:
     material: BAMBOO_BLOCK
-    name: "<color:#C8B860><bold>Bamboo Block"
+    name: "<color:#C8B860>Bamboo Block"
     buy-price: 3
     sell-price: 0.6
     slot: 13
@@ -1153,7 +1153,7 @@
 
   stripped_bamboo_block:
     material: STRIPPED_BAMBOO_BLOCK
-    name: "<color:#C8B860><bold>Stripped Bamboo Block"
+    name: "<color:#C8B860>Stripped Bamboo Block"
     buy-price: 4
     sell-price: 0.8
     slot: 14
@@ -1161,7 +1161,7 @@
 
   bamboo_planks:
     material: BAMBOO_PLANKS
-    name: "<color:#C8B860><bold>Bamboo Planks"
+    name: "<color:#C8B860>Bamboo Planks"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -1169,7 +1169,7 @@
 
   bamboo_mosaic:
     material: BAMBOO_MOSAIC
-    name: "<color:#C8B860><bold>Bamboo Mosaic"
+    name: "<color:#C8B860>Bamboo Mosaic"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -1177,7 +1177,7 @@
 
   bamboo_stairs:
     material: BAMBOO_STAIRS
-    name: "<color:#C8B860><bold>Bamboo Stairs"
+    name: "<color:#C8B860>Bamboo Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 19
@@ -1185,7 +1185,7 @@
 
   bamboo_slab:
     material: BAMBOO_SLAB
-    name: "<color:#C8B860><bold>Bamboo Slab"
+    name: "<color:#C8B860>Bamboo Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 20
@@ -1193,7 +1193,7 @@
 
   bamboo_fence:
     material: BAMBOO_FENCE
-    name: "<color:#C8B860><bold>Bamboo Fence"
+    name: "<color:#C8B860>Bamboo Fence"
     buy-price: 1
     sell-price: 0.2
     slot: 21
@@ -1201,7 +1201,7 @@
 
   bamboo_fence_gate:
     material: BAMBOO_FENCE_GATE
-    name: "<color:#C8B860><bold>Bamboo Fence Gate"
+    name: "<color:#C8B860>Bamboo Fence Gate"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -1209,7 +1209,7 @@
 
   bamboo_door:
     material: BAMBOO_DOOR
-    name: "<color:#C8B860><bold>Bamboo Door"
+    name: "<color:#C8B860>Bamboo Door"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -1217,7 +1217,7 @@
 
   bamboo_trapdoor:
     material: BAMBOO_TRAPDOOR
-    name: "<color:#C8B860><bold>Bamboo Trapdoor"
+    name: "<color:#C8B860>Bamboo Trapdoor"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -1225,7 +1225,7 @@
 
   bamboo_sign:
     material: BAMBOO_SIGN
-    name: "<color:#C8B860><bold>Bamboo Sign"
+    name: "<color:#C8B860>Bamboo Sign"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -1233,7 +1233,7 @@
 
   bamboo_hanging_sign:
     material: BAMBOO_HANGING_SIGN
-    name: "<color:#C8B860><bold>Bamboo Hanging Sign"
+    name: "<color:#C8B860>Bamboo Hanging Sign"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -1241,7 +1241,7 @@
 
   stone:
     material: STONE
-    name: "<color:#808080><bold>Stone"
+    name: "<color:#808080>Stone"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -1249,7 +1249,7 @@
 
   stone_stairs:
     material: STONE_STAIRS
-    name: "<color:#808080><bold>Stone Stairs"
+    name: "<color:#808080>Stone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -1257,7 +1257,7 @@
 
   stone_slab:
     material: STONE_SLAB
-    name: "<color:#808080><bold>Stone Slab"
+    name: "<color:#808080>Stone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 31
@@ -1265,7 +1265,7 @@
 
   stone_pressure_plate:
     material: STONE_PRESSURE_PLATE
-    name: "<color:#808080><bold>Stone Pressure Plate"
+    name: "<color:#808080>Stone Pressure Plate"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -1273,7 +1273,7 @@
 
   stone_button:
     material: STONE_BUTTON
-    name: "<color:#808080><bold>Stone Button"
+    name: "<color:#808080>Stone Button"
     buy-price: 1
     sell-price: 0.2
     slot: 33
@@ -1281,7 +1281,7 @@
 
   cobblestone:
     material: COBBLESTONE
-    name: "<color:#808080><bold>Cobblestone"
+    name: "<color:#808080>Cobblestone"
     buy-price: 1
     sell-price: 0.2
     slot: 34
@@ -1289,7 +1289,7 @@
 
   cobblestone_stairs:
     material: COBBLESTONE_STAIRS
-    name: "<color:#808080><bold>Cobblestone Stairs"
+    name: "<color:#808080>Cobblestone Stairs"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -1297,7 +1297,7 @@
 
   cobblestone_slab:
     material: COBBLESTONE_SLAB
-    name: "<color:#808080><bold>Cobblestone Slab"
+    name: "<color:#808080>Cobblestone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 38
@@ -1305,7 +1305,7 @@
 
   cobblestone_wall:
     material: COBBLESTONE_WALL
-    name: "<color:#808080><bold>Cobblestone Wall"
+    name: "<color:#808080>Cobblestone Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 39
@@ -1313,7 +1313,7 @@
 
   mossy_cobblestone:
     material: MOSSY_COBBLESTONE
-    name: "<color:#808080><bold>Mossy Cobblestone"
+    name: "<color:#808080>Mossy Cobblestone"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -1321,7 +1321,7 @@
 
   mossy_cobblestone_stairs:
     material: MOSSY_COBBLESTONE_STAIRS
-    name: "<color:#808080><bold>Mossy Cobblestone Stairs"
+    name: "<color:#808080>Mossy Cobblestone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 41
@@ -1329,7 +1329,7 @@
 
   mossy_cobblestone_slab:
     material: MOSSY_COBBLESTONE_SLAB
-    name: "<color:#808080><bold>Mossy Cobblestone Slab"
+    name: "<color:#808080>Mossy Cobblestone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 42
@@ -1337,7 +1337,7 @@
 
   mossy_cobblestone_wall:
     material: MOSSY_COBBLESTONE_WALL
-    name: "<color:#808080><bold>Mossy Cobblestone Wall"
+    name: "<color:#808080>Mossy Cobblestone Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 43
@@ -1345,7 +1345,7 @@
 
   smooth_stone:
     material: SMOOTH_STONE
-    name: "<color:#808080><bold>Smooth Stone"
+    name: "<color:#808080>Smooth Stone"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -1353,7 +1353,7 @@
 
   smooth_stone_slab:
     material: SMOOTH_STONE_SLAB
-    name: "<color:#808080><bold>Smooth Stone Slab"
+    name: "<color:#808080>Smooth Stone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 11
@@ -1361,7 +1361,7 @@
 
   stone_bricks:
     material: STONE_BRICKS
-    name: "<color:#808080><bold>Stone Bricks"
+    name: "<color:#808080>Stone Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -1369,7 +1369,7 @@
 
   stone_brick_stairs:
     material: STONE_BRICK_STAIRS
-    name: "<color:#808080><bold>Stone Brick Stairs"
+    name: "<color:#808080>Stone Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 13
@@ -1377,7 +1377,7 @@
 
   stone_brick_slab:
     material: STONE_BRICK_SLAB
-    name: "<color:#808080><bold>Stone Brick Slab"
+    name: "<color:#808080>Stone Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -1385,7 +1385,7 @@
 
   stone_brick_wall:
     material: STONE_BRICK_WALL
-    name: "<color:#808080><bold>Stone Brick Wall"
+    name: "<color:#808080>Stone Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -1393,7 +1393,7 @@
 
   cracked_stone_bricks:
     material: CRACKED_STONE_BRICKS
-    name: "<color:#808080><bold>Cracked Stone Bricks"
+    name: "<color:#808080>Cracked Stone Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -1401,7 +1401,7 @@
 
   mossy_stone_bricks:
     material: MOSSY_STONE_BRICKS
-    name: "<color:#808080><bold>Mossy Stone Bricks"
+    name: "<color:#808080>Mossy Stone Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -1409,7 +1409,7 @@
 
   mossy_stone_brick_stairs:
     material: MOSSY_STONE_BRICK_STAIRS
-    name: "<color:#808080><bold>Mossy Stone Brick Stairs"
+    name: "<color:#808080>Mossy Stone Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 20
@@ -1417,7 +1417,7 @@
 
   mossy_stone_brick_slab:
     material: MOSSY_STONE_BRICK_SLAB
-    name: "<color:#808080><bold>Mossy Stone Brick Slab"
+    name: "<color:#808080>Mossy Stone Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 21
@@ -1425,7 +1425,7 @@
 
   mossy_stone_brick_wall:
     material: MOSSY_STONE_BRICK_WALL
-    name: "<color:#808080><bold>Mossy Stone Brick Wall"
+    name: "<color:#808080>Mossy Stone Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -1433,7 +1433,7 @@
 
   granite:
     material: GRANITE
-    name: "<color:#808080><bold>Granite"
+    name: "<color:#808080>Granite"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -1441,7 +1441,7 @@
 
   granite_stairs:
     material: GRANITE_STAIRS
-    name: "<color:#808080><bold>Granite Stairs"
+    name: "<color:#808080>Granite Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -1449,7 +1449,7 @@
 
   granite_slab:
     material: GRANITE_SLAB
-    name: "<color:#808080><bold>Granite Slab"
+    name: "<color:#808080>Granite Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 25
@@ -1457,7 +1457,7 @@
 
   granite_wall:
     material: GRANITE_WALL
-    name: "<color:#808080><bold>Granite Wall"
+    name: "<color:#808080>Granite Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -1465,7 +1465,7 @@
 
   polished_granite:
     material: POLISHED_GRANITE
-    name: "<color:#808080><bold>Polished Granite"
+    name: "<color:#808080>Polished Granite"
     buy-price: 3
     sell-price: 0.6
     slot: 29
@@ -1473,7 +1473,7 @@
 
   polished_granite_stairs:
     material: POLISHED_GRANITE_STAIRS
-    name: "<color:#808080><bold>Polished Granite Stairs"
+    name: "<color:#808080>Polished Granite Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 30
@@ -1481,7 +1481,7 @@
 
   polished_granite_slab:
     material: POLISHED_GRANITE_SLAB
-    name: "<color:#808080><bold>Polished Granite Slab"
+    name: "<color:#808080>Polished Granite Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -1489,7 +1489,7 @@
 
   diorite:
     material: DIORITE
-    name: "<color:#808080><bold>Diorite"
+    name: "<color:#808080>Diorite"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -1497,7 +1497,7 @@
 
   diorite_stairs:
     material: DIORITE_STAIRS
-    name: "<color:#808080><bold>Diorite Stairs"
+    name: "<color:#808080>Diorite Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -1505,7 +1505,7 @@
 
   diorite_slab:
     material: DIORITE_SLAB
-    name: "<color:#808080><bold>Diorite Slab"
+    name: "<color:#808080>Diorite Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 34
@@ -1513,7 +1513,7 @@
 
   diorite_wall:
     material: DIORITE_WALL
-    name: "<color:#808080><bold>Diorite Wall"
+    name: "<color:#808080>Diorite Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -1521,7 +1521,7 @@
 
   polished_diorite:
     material: POLISHED_DIORITE
-    name: "<color:#808080><bold>Polished Diorite"
+    name: "<color:#808080>Polished Diorite"
     buy-price: 3
     sell-price: 0.6
     slot: 38
@@ -1529,7 +1529,7 @@
 
   polished_diorite_stairs:
     material: POLISHED_DIORITE_STAIRS
-    name: "<color:#808080><bold>Polished Diorite Stairs"
+    name: "<color:#808080>Polished Diorite Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 39
@@ -1537,7 +1537,7 @@
 
   polished_diorite_slab:
     material: POLISHED_DIORITE_SLAB
-    name: "<color:#808080><bold>Polished Diorite Slab"
+    name: "<color:#808080>Polished Diorite Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -1545,7 +1545,7 @@
 
   andesite:
     material: ANDESITE
-    name: "<color:#808080><bold>Andesite"
+    name: "<color:#808080>Andesite"
     buy-price: 2
     sell-price: 0.4
     slot: 41
@@ -1553,7 +1553,7 @@
 
   andesite_stairs:
     material: ANDESITE_STAIRS
-    name: "<color:#808080><bold>Andesite Stairs"
+    name: "<color:#808080>Andesite Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -1561,7 +1561,7 @@
 
   andesite_slab:
     material: ANDESITE_SLAB
-    name: "<color:#808080><bold>Andesite Slab"
+    name: "<color:#808080>Andesite Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 43
@@ -1569,7 +1569,7 @@
 
   andesite_wall:
     material: ANDESITE_WALL
-    name: "<color:#808080><bold>Andesite Wall"
+    name: "<color:#808080>Andesite Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -1577,7 +1577,7 @@
 
   polished_andesite:
     material: POLISHED_ANDESITE
-    name: "<color:#808080><bold>Polished Andesite"
+    name: "<color:#808080>Polished Andesite"
     buy-price: 3
     sell-price: 0.6
     slot: 11
@@ -1585,7 +1585,7 @@
 
   polished_andesite_stairs:
     material: POLISHED_ANDESITE_STAIRS
-    name: "<color:#808080><bold>Polished Andesite Stairs"
+    name: "<color:#808080>Polished Andesite Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 12
@@ -1593,7 +1593,7 @@
 
   polished_andesite_slab:
     material: POLISHED_ANDESITE_SLAB
-    name: "<color:#808080><bold>Polished Andesite Slab"
+    name: "<color:#808080>Polished Andesite Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -1601,7 +1601,7 @@
 
   cobbled_deepslate:
     material: COBBLED_DEEPSLATE
-    name: "<color:#808080><bold>Cobbled Deepslate"
+    name: "<color:#808080>Cobbled Deepslate"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -1609,7 +1609,7 @@
 
   cobbled_deepslate_stairs:
     material: COBBLED_DEEPSLATE_STAIRS
-    name: "<color:#808080><bold>Cobbled Deepslate Stairs"
+    name: "<color:#808080>Cobbled Deepslate Stairs"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -1617,7 +1617,7 @@
 
   cobbled_deepslate_slab:
     material: COBBLED_DEEPSLATE_SLAB
-    name: "<color:#808080><bold>Cobbled Deepslate Slab"
+    name: "<color:#808080>Cobbled Deepslate Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 16
@@ -1625,7 +1625,7 @@
 
   cobbled_deepslate_wall:
     material: COBBLED_DEEPSLATE_WALL
-    name: "<color:#808080><bold>Cobbled Deepslate Wall"
+    name: "<color:#808080>Cobbled Deepslate Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -1633,7 +1633,7 @@
 
   polished_deepslate:
     material: POLISHED_DEEPSLATE
-    name: "<color:#808080><bold>Polished Deepslate"
+    name: "<color:#808080>Polished Deepslate"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -1641,7 +1641,7 @@
 
   polished_deepslate_stairs:
     material: POLISHED_DEEPSLATE_STAIRS
-    name: "<color:#808080><bold>Polished Deepslate Stairs"
+    name: "<color:#808080>Polished Deepslate Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 21
@@ -1649,7 +1649,7 @@
 
   polished_deepslate_slab:
     material: POLISHED_DEEPSLATE_SLAB
-    name: "<color:#808080><bold>Polished Deepslate Slab"
+    name: "<color:#808080>Polished Deepslate Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 22
@@ -1657,7 +1657,7 @@
 
   polished_deepslate_wall:
     material: POLISHED_DEEPSLATE_WALL
-    name: "<color:#808080><bold>Polished Deepslate Wall"
+    name: "<color:#808080>Polished Deepslate Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -1665,7 +1665,7 @@
 
   deepslate_bricks:
     material: DEEPSLATE_BRICKS
-    name: "<color:#808080><bold>Deepslate Bricks"
+    name: "<color:#808080>Deepslate Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -1673,7 +1673,7 @@
 
   deepslate_brick_stairs:
     material: DEEPSLATE_BRICK_STAIRS
-    name: "<color:#808080><bold>Deepslate Brick Stairs"
+    name: "<color:#808080>Deepslate Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 25
@@ -1681,7 +1681,7 @@
 
   deepslate_brick_slab:
     material: DEEPSLATE_BRICK_SLAB
-    name: "<color:#808080><bold>Deepslate Brick Slab"
+    name: "<color:#808080>Deepslate Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 28
@@ -1689,7 +1689,7 @@
 
   deepslate_brick_wall:
     material: DEEPSLATE_BRICK_WALL
-    name: "<color:#808080><bold>Deepslate Brick Wall"
+    name: "<color:#808080>Deepslate Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -1697,7 +1697,7 @@
 
   cracked_deepslate_bricks:
     material: CRACKED_DEEPSLATE_BRICKS
-    name: "<color:#808080><bold>Cracked Deepslate Bricks"
+    name: "<color:#808080>Cracked Deepslate Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -1705,7 +1705,7 @@
 
   deepslate_tiles:
     material: DEEPSLATE_TILES
-    name: "<color:#808080><bold>Deepslate Tiles"
+    name: "<color:#808080>Deepslate Tiles"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -1713,7 +1713,7 @@
 
   deepslate_tile_stairs:
     material: DEEPSLATE_TILE_STAIRS
-    name: "<color:#808080><bold>Deepslate Tile Stairs"
+    name: "<color:#808080>Deepslate Tile Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 32
@@ -1721,7 +1721,7 @@
 
   deepslate_tile_slab:
     material: DEEPSLATE_TILE_SLAB
-    name: "<color:#808080><bold>Deepslate Tile Slab"
+    name: "<color:#808080>Deepslate Tile Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 33
@@ -1729,7 +1729,7 @@
 
   deepslate_tile_wall:
     material: DEEPSLATE_TILE_WALL
-    name: "<color:#808080><bold>Deepslate Tile Wall"
+    name: "<color:#808080>Deepslate Tile Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -1737,7 +1737,7 @@
 
   cracked_deepslate_tiles:
     material: CRACKED_DEEPSLATE_TILES
-    name: "<color:#808080><bold>Cracked Deepslate Tiles"
+    name: "<color:#808080>Cracked Deepslate Tiles"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -1745,7 +1745,7 @@
 
   deepslate:
     material: DEEPSLATE
-    name: "<color:#808080><bold>Deepslate"
+    name: "<color:#808080>Deepslate"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -1753,7 +1753,7 @@
 
   tuff:
     material: TUFF
-    name: "<color:#808080><bold>Tuff"
+    name: "<color:#808080>Tuff"
     buy-price: 2
     sell-price: 0.4
     slot: 39
@@ -1761,7 +1761,7 @@
 
   tuff_stairs:
     material: TUFF_STAIRS
-    name: "<color:#808080><bold>Tuff Stairs"
+    name: "<color:#808080>Tuff Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 40
@@ -1769,7 +1769,7 @@
 
   tuff_slab:
     material: TUFF_SLAB
-    name: "<color:#808080><bold>Tuff Slab"
+    name: "<color:#808080>Tuff Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 41
@@ -1777,7 +1777,7 @@
 
   tuff_wall:
     material: TUFF_WALL
-    name: "<color:#808080><bold>Tuff Wall"
+    name: "<color:#808080>Tuff Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 42
@@ -1785,7 +1785,7 @@
 
   polished_tuff:
     material: POLISHED_TUFF
-    name: "<color:#808080><bold>Polished Tuff"
+    name: "<color:#808080>Polished Tuff"
     buy-price: 3
     sell-price: 0.6
     slot: 43
@@ -1793,7 +1793,7 @@
 
   polished_tuff_stairs:
     material: POLISHED_TUFF_STAIRS
-    name: "<color:#808080><bold>Polished Tuff Stairs"
+    name: "<color:#808080>Polished Tuff Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 10
@@ -1801,7 +1801,7 @@
 
   polished_tuff_slab:
     material: POLISHED_TUFF_SLAB
-    name: "<color:#808080><bold>Polished Tuff Slab"
+    name: "<color:#808080>Polished Tuff Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -1809,7 +1809,7 @@
 
   polished_tuff_wall:
     material: POLISHED_TUFF_WALL
-    name: "<color:#808080><bold>Polished Tuff Wall"
+    name: "<color:#808080>Polished Tuff Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 12
@@ -1817,7 +1817,7 @@
 
   tuff_bricks:
     material: TUFF_BRICKS
-    name: "<color:#808080><bold>Tuff Bricks"
+    name: "<color:#808080>Tuff Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 13
@@ -1825,7 +1825,7 @@
 
   tuff_brick_stairs:
     material: TUFF_BRICK_STAIRS
-    name: "<color:#808080><bold>Tuff Brick Stairs"
+    name: "<color:#808080>Tuff Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 14
@@ -1833,7 +1833,7 @@
 
   tuff_brick_slab:
     material: TUFF_BRICK_SLAB
-    name: "<color:#808080><bold>Tuff Brick Slab"
+    name: "<color:#808080>Tuff Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -1841,7 +1841,7 @@
 
   tuff_brick_wall:
     material: TUFF_BRICK_WALL
-    name: "<color:#808080><bold>Tuff Brick Wall"
+    name: "<color:#808080>Tuff Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -1849,7 +1849,7 @@
 
   blackstone:
     material: BLACKSTONE
-    name: "<color:#808080><bold>Blackstone"
+    name: "<color:#808080>Blackstone"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -1857,7 +1857,7 @@
 
   blackstone_stairs:
     material: BLACKSTONE_STAIRS
-    name: "<color:#808080><bold>Blackstone Stairs"
+    name: "<color:#808080>Blackstone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 20
@@ -1865,7 +1865,7 @@
 
   blackstone_slab:
     material: BLACKSTONE_SLAB
-    name: "<color:#808080><bold>Blackstone Slab"
+    name: "<color:#808080>Blackstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 21
@@ -1873,7 +1873,7 @@
 
   blackstone_wall:
     material: BLACKSTONE_WALL
-    name: "<color:#808080><bold>Blackstone Wall"
+    name: "<color:#808080>Blackstone Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -1881,7 +1881,7 @@
 
   polished_blackstone:
     material: POLISHED_BLACKSTONE
-    name: "<color:#808080><bold>Polished Blackstone"
+    name: "<color:#808080>Polished Blackstone"
     buy-price: 3
     sell-price: 0.6
     slot: 23
@@ -1889,7 +1889,7 @@
 
   polished_blackstone_stairs:
     material: POLISHED_BLACKSTONE_STAIRS
-    name: "<color:#808080><bold>Polished Blackstone Stairs"
+    name: "<color:#808080>Polished Blackstone Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 24
@@ -1897,7 +1897,7 @@
 
   polished_blackstone_slab:
     material: POLISHED_BLACKSTONE_SLAB
-    name: "<color:#808080><bold>Polished Blackstone Slab"
+    name: "<color:#808080>Polished Blackstone Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -1905,7 +1905,7 @@
 
   polished_blackstone_wall:
     material: POLISHED_BLACKSTONE_WALL
-    name: "<color:#808080><bold>Polished Blackstone Wall"
+    name: "<color:#808080>Polished Blackstone Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -1913,7 +1913,7 @@
 
   polished_blackstone_button:
     material: POLISHED_BLACKSTONE_BUTTON
-    name: "<color:#808080><bold>Polished Blackstone Button"
+    name: "<color:#808080>Polished Blackstone Button"
     buy-price: 1
     sell-price: 0.2
     slot: 29
@@ -1921,7 +1921,7 @@
 
   polished_blackstone_pressure_plate:
     material: POLISHED_BLACKSTONE_PRESSURE_PLATE
-    name: "<color:#808080><bold>Polished Blackstone Pressure Plate"
+    name: "<color:#808080>Polished Blackstone Pressure Plate"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -1929,7 +1929,7 @@
 
   chiseled_polished_blackstone:
     material: CHISELED_POLISHED_BLACKSTONE
-    name: "<color:#808080><bold>Chiseled Polished Blackstone"
+    name: "<color:#808080>Chiseled Polished Blackstone"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -1937,7 +1937,7 @@
 
   cracked_polished_blackstone_bricks:
     material: CRACKED_POLISHED_BLACKSTONE_BRICKS
-    name: "<color:#808080><bold>Cracked Polished Blackstone Bricks"
+    name: "<color:#808080>Cracked Polished Blackstone Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 32
@@ -1945,7 +1945,7 @@
 
   polished_blackstone_bricks:
     material: POLISHED_BLACKSTONE_BRICKS
-    name: "<color:#808080><bold>Polished Blackstone Bricks"
+    name: "<color:#808080>Polished Blackstone Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -1953,7 +1953,7 @@
 
   basalt:
     material: BASALT
-    name: "<color:#808080><bold>Basalt"
+    name: "<color:#808080>Basalt"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -1961,7 +1961,7 @@
 
   smooth_basalt:
     material: SMOOTH_BASALT
-    name: "<color:#808080><bold>Smooth Basalt"
+    name: "<color:#808080>Smooth Basalt"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -1969,7 +1969,7 @@
 
   polished_basalt:
     material: POLISHED_BASALT
-    name: "<color:#808080><bold>Polished Basalt"
+    name: "<color:#808080>Polished Basalt"
     buy-price: 3
     sell-price: 0.6
     slot: 38
@@ -1977,7 +1977,7 @@
 
   prismarine:
     material: PRISMARINE
-    name: "<color:#808080><bold>Prismarine"
+    name: "<color:#808080>Prismarine"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -1985,7 +1985,7 @@
 
   prismarine_stairs:
     material: PRISMARINE_STAIRS
-    name: "<color:#808080><bold>Prismarine Stairs"
+    name: "<color:#808080>Prismarine Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 40
@@ -1993,7 +1993,7 @@
 
   prismarine_slab:
     material: PRISMARINE_SLAB
-    name: "<color:#808080><bold>Prismarine Slab"
+    name: "<color:#808080>Prismarine Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 41
@@ -2001,7 +2001,7 @@
 
   prismarine_wall:
     material: PRISMARINE_WALL
-    name: "<color:#808080><bold>Prismarine Wall"
+    name: "<color:#808080>Prismarine Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -2009,7 +2009,7 @@
 
   prismarine_bricks:
     material: PRISMARINE_BRICKS
-    name: "<color:#808080><bold>Prismarine Bricks"
+    name: "<color:#808080>Prismarine Bricks"
     buy-price: 4
     sell-price: 0.8
     slot: 43
@@ -2017,7 +2017,7 @@
 
   prismarine_brick_stairs:
     material: PRISMARINE_BRICK_STAIRS
-    name: "<color:#808080><bold>Prismarine Brick Stairs"
+    name: "<color:#808080>Prismarine Brick Stairs"
     buy-price: 5
     sell-price: 1.0
     slot: 10
@@ -2025,7 +2025,7 @@
 
   prismarine_brick_slab:
     material: PRISMARINE_BRICK_SLAB
-    name: "<color:#808080><bold>Prismarine Brick Slab"
+    name: "<color:#808080>Prismarine Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -2033,7 +2033,7 @@
 
   dark_prismarine:
     material: DARK_PRISMARINE
-    name: "<color:#808080><bold>Dark Prismarine"
+    name: "<color:#808080>Dark Prismarine"
     buy-price: 4
     sell-price: 0.8
     slot: 12
@@ -2041,7 +2041,7 @@
 
   dark_prismarine_stairs:
     material: DARK_PRISMARINE_STAIRS
-    name: "<color:#808080><bold>Dark Prismarine Stairs"
+    name: "<color:#808080>Dark Prismarine Stairs"
     buy-price: 5
     sell-price: 1.0
     slot: 13
@@ -2049,7 +2049,7 @@
 
   dark_prismarine_slab:
     material: DARK_PRISMARINE_SLAB
-    name: "<color:#808080><bold>Dark Prismarine Slab"
+    name: "<color:#808080>Dark Prismarine Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -2057,7 +2057,7 @@
 
   sandstone:
     material: SANDSTONE
-    name: "<color:#808080><bold>Sandstone"
+    name: "<color:#808080>Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -2065,7 +2065,7 @@
 
   sandstone_stairs:
     material: SANDSTONE_STAIRS
-    name: "<color:#808080><bold>Sandstone Stairs"
+    name: "<color:#808080>Sandstone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -2073,7 +2073,7 @@
 
   sandstone_slab:
     material: SANDSTONE_SLAB
-    name: "<color:#808080><bold>Sandstone Slab"
+    name: "<color:#808080>Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 19
@@ -2081,7 +2081,7 @@
 
   sandstone_wall:
     material: SANDSTONE_WALL
-    name: "<color:#808080><bold>Sandstone Wall"
+    name: "<color:#808080>Sandstone Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -2089,7 +2089,7 @@
 
   smooth_sandstone:
     material: SMOOTH_SANDSTONE
-    name: "<color:#808080><bold>Smooth Sandstone"
+    name: "<color:#808080>Smooth Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -2097,7 +2097,7 @@
 
   smooth_sandstone_stairs:
     material: SMOOTH_SANDSTONE_STAIRS
-    name: "<color:#808080><bold>Smooth Sandstone Stairs"
+    name: "<color:#808080>Smooth Sandstone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -2105,7 +2105,7 @@
 
   smooth_sandstone_slab:
     material: SMOOTH_SANDSTONE_SLAB
-    name: "<color:#808080><bold>Smooth Sandstone Slab"
+    name: "<color:#808080>Smooth Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 23
@@ -2113,7 +2113,7 @@
 
   cut_sandstone:
     material: CUT_SANDSTONE
-    name: "<color:#808080><bold>Cut Sandstone"
+    name: "<color:#808080>Cut Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -2121,7 +2121,7 @@
 
   cut_sandstone_slab:
     material: CUT_SANDSTONE_SLAB
-    name: "<color:#808080><bold>Cut Sandstone Slab"
+    name: "<color:#808080>Cut Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 25
@@ -2129,7 +2129,7 @@
 
   chiseled_sandstone:
     material: CHISELED_SANDSTONE
-    name: "<color:#808080><bold>Chiseled Sandstone"
+    name: "<color:#808080>Chiseled Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -2137,7 +2137,7 @@
 
   red_sandstone:
     material: RED_SANDSTONE
-    name: "<color:#808080><bold>Red Sandstone"
+    name: "<color:#808080>Red Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -2145,7 +2145,7 @@
 
   red_sandstone_stairs:
     material: RED_SANDSTONE_STAIRS
-    name: "<color:#808080><bold>Red Sandstone Stairs"
+    name: "<color:#808080>Red Sandstone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -2153,7 +2153,7 @@
 
   red_sandstone_slab:
     material: RED_SANDSTONE_SLAB
-    name: "<color:#808080><bold>Red Sandstone Slab"
+    name: "<color:#808080>Red Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 31
@@ -2161,7 +2161,7 @@
 
   red_sandstone_wall:
     material: RED_SANDSTONE_WALL
-    name: "<color:#808080><bold>Red Sandstone Wall"
+    name: "<color:#808080>Red Sandstone Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -2169,7 +2169,7 @@
 
   smooth_red_sandstone:
     material: SMOOTH_RED_SANDSTONE
-    name: "<color:#808080><bold>Smooth Red Sandstone"
+    name: "<color:#808080>Smooth Red Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -2177,7 +2177,7 @@
 
   smooth_red_sandstone_stairs:
     material: SMOOTH_RED_SANDSTONE_STAIRS
-    name: "<color:#808080><bold>Smooth Red Sandstone Stairs"
+    name: "<color:#808080>Smooth Red Sandstone Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 34
@@ -2185,7 +2185,7 @@
 
   smooth_red_sandstone_slab:
     material: SMOOTH_RED_SANDSTONE_SLAB
-    name: "<color:#808080><bold>Smooth Red Sandstone Slab"
+    name: "<color:#808080>Smooth Red Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 37
@@ -2193,7 +2193,7 @@
 
   cut_red_sandstone:
     material: CUT_RED_SANDSTONE
-    name: "<color:#808080><bold>Cut Red Sandstone"
+    name: "<color:#808080>Cut Red Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -2201,7 +2201,7 @@
 
   cut_red_sandstone_slab:
     material: CUT_RED_SANDSTONE_SLAB
-    name: "<color:#808080><bold>Cut Red Sandstone Slab"
+    name: "<color:#808080>Cut Red Sandstone Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 39
@@ -2209,7 +2209,7 @@
 
   chiseled_red_sandstone:
     material: CHISELED_RED_SANDSTONE
-    name: "<color:#808080><bold>Chiseled Red Sandstone"
+    name: "<color:#808080>Chiseled Red Sandstone"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -2217,7 +2217,7 @@
 
   block_of_quartz:
     material: QUARTZ_BLOCK
-    name: "<color:#808080><bold>Block of Quartz"
+    name: "<color:#808080>Block of Quartz"
     buy-price: 4
     sell-price: 0.8
     slot: 41
@@ -2225,7 +2225,7 @@
 
   quartz_stairs:
     material: QUARTZ_STAIRS
-    name: "<color:#808080><bold>Quartz Stairs"
+    name: "<color:#808080>Quartz Stairs"
     buy-price: 5
     sell-price: 1.0
     slot: 42
@@ -2233,7 +2233,7 @@
 
   quartz_slab:
     material: QUARTZ_SLAB
-    name: "<color:#808080><bold>Quartz Slab"
+    name: "<color:#808080>Quartz Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 43
@@ -2241,7 +2241,7 @@
 
   smooth_quartz_block:
     material: SMOOTH_QUARTZ
-    name: "<color:#808080><bold>Smooth Quartz Block"
+    name: "<color:#808080>Smooth Quartz Block"
     buy-price: 4
     sell-price: 0.8
     slot: 10
@@ -2249,7 +2249,7 @@
 
   smooth_quartz_stairs:
     material: SMOOTH_QUARTZ_STAIRS
-    name: "<color:#808080><bold>Smooth Quartz Stairs"
+    name: "<color:#808080>Smooth Quartz Stairs"
     buy-price: 5
     sell-price: 1.0
     slot: 11
@@ -2257,7 +2257,7 @@
 
   smooth_quartz_slab:
     material: SMOOTH_QUARTZ_SLAB
-    name: "<color:#808080><bold>Smooth Quartz Slab"
+    name: "<color:#808080>Smooth Quartz Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -2265,7 +2265,7 @@
 
   chiseled_quartz_block:
     material: CHISELED_QUARTZ_BLOCK
-    name: "<color:#808080><bold>Chiseled Quartz Block"
+    name: "<color:#808080>Chiseled Quartz Block"
     buy-price: 4
     sell-price: 0.8
     slot: 13
@@ -2273,7 +2273,7 @@
 
   quartz_bricks:
     material: QUARTZ_BRICKS
-    name: "<color:#808080><bold>Quartz Bricks"
+    name: "<color:#808080>Quartz Bricks"
     buy-price: 4
     sell-price: 0.8
     slot: 14
@@ -2281,7 +2281,7 @@
 
   calcite:
     material: CALCITE
-    name: "<color:#808080><bold>Calcite"
+    name: "<color:#808080>Calcite"
     buy-price: 3
     sell-price: 0.6
     slot: 15
@@ -2289,7 +2289,7 @@
 
   dripstone_block:
     material: DRIPSTONE_BLOCK
-    name: "<color:#808080><bold>Dripstone Block"
+    name: "<color:#808080>Dripstone Block"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -2297,7 +2297,7 @@
 
   pointed_dripstone:
     material: POINTED_DRIPSTONE
-    name: "<color:#808080><bold>Pointed Dripstone"
+    name: "<color:#808080>Pointed Dripstone"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -2305,7 +2305,7 @@
 
   obsidian:
     material: OBSIDIAN
-    name: "<color:#808080><bold>Obsidian"
+    name: "<color:#808080>Obsidian"
     buy-price: 10
     sell-price: 2.0
     slot: 20
@@ -2313,7 +2313,7 @@
 
   crying_obsidian:
     material: CRYING_OBSIDIAN
-    name: "<color:#808080><bold>Crying Obsidian"
+    name: "<color:#808080>Crying Obsidian"
     buy-price: 15
     sell-price: 3.0
     slot: 21
@@ -2321,7 +2321,7 @@
 
   end_stone:
     material: END_STONE
-    name: "<color:#808080><bold>End Stone"
+    name: "<color:#808080>End Stone"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -2329,7 +2329,7 @@
 
   end_stone_bricks:
     material: END_STONE_BRICKS
-    name: "<color:#808080><bold>End Stone Bricks"
+    name: "<color:#808080>End Stone Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 23
@@ -2337,7 +2337,7 @@
 
   end_stone_brick_stairs:
     material: END_STONE_BRICK_STAIRS
-    name: "<color:#808080><bold>End Stone Brick Stairs"
+    name: "<color:#808080>End Stone Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 24
@@ -2345,7 +2345,7 @@
 
   end_stone_brick_slab:
     material: END_STONE_BRICK_SLAB
-    name: "<color:#808080><bold>End Stone Brick Slab"
+    name: "<color:#808080>End Stone Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -2353,7 +2353,7 @@
 
   end_stone_brick_wall:
     material: END_STONE_BRICK_WALL
-    name: "<color:#808080><bold>End Stone Brick Wall"
+    name: "<color:#808080>End Stone Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -2361,7 +2361,7 @@
 
   purpur_block:
     material: PURPUR_BLOCK
-    name: "<color:#808080><bold>Purpur Block"
+    name: "<color:#808080>Purpur Block"
     buy-price: 4
     sell-price: 0.8
     slot: 29
@@ -2369,7 +2369,7 @@
 
   purpur_pillar:
     material: PURPUR_PILLAR
-    name: "<color:#808080><bold>Purpur Pillar"
+    name: "<color:#808080>Purpur Pillar"
     buy-price: 4
     sell-price: 0.8
     slot: 30
@@ -2377,7 +2377,7 @@
 
   purpur_stairs:
     material: PURPUR_STAIRS
-    name: "<color:#808080><bold>Purpur Stairs"
+    name: "<color:#808080>Purpur Stairs"
     buy-price: 5
     sell-price: 1.0
     slot: 31
@@ -2385,7 +2385,7 @@
 
   purpur_slab:
     material: PURPUR_SLAB
-    name: "<color:#808080><bold>Purpur Slab"
+    name: "<color:#808080>Purpur Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -2394,7 +2394,7 @@
   # Note: Comments are generated by AI.
   bricks:
     material: BRICKS
-    name: "<color:#808080><bold>Bricks"
+    name: "<color:#808080>Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -2402,7 +2402,7 @@
 
   brick_stairs:
     material: BRICK_STAIRS
-    name: "<color:#808080><bold>Brick Stairs"
+    name: "<color:#808080>Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 34
@@ -2410,7 +2410,7 @@
 
   brick_slab:
     material: BRICK_SLAB
-    name: "<color:#808080><bold>Brick Slab"
+    name: "<color:#808080>Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 37
@@ -2418,7 +2418,7 @@
 
   brick_wall:
     material: BRICK_WALL
-    name: "<color:#808080><bold>Brick Wall"
+    name: "<color:#808080>Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -2426,7 +2426,7 @@
 
   mud:
     material: MUD
-    name: "<color:#808080><bold>Mud"
+    name: "<color:#808080>Mud"
     buy-price: 1
     sell-price: 0.2
     slot: 39
@@ -2434,7 +2434,7 @@
 
   packed_mud:
     material: PACKED_MUD
-    name: "<color:#808080><bold>Packed Mud"
+    name: "<color:#808080>Packed Mud"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -2442,7 +2442,7 @@
 
   mud_bricks:
     material: MUD_BRICKS
-    name: "<color:#808080><bold>Mud Bricks"
+    name: "<color:#808080>Mud Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 41
@@ -2450,7 +2450,7 @@
 
   mud_brick_stairs:
     material: MUD_BRICK_STAIRS
-    name: "<color:#808080><bold>Mud Brick Stairs"
+    name: "<color:#808080>Mud Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -2458,7 +2458,7 @@
 
   mud_brick_slab:
     material: MUD_BRICK_SLAB
-    name: "<color:#808080><bold>Mud Brick Slab"
+    name: "<color:#808080>Mud Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 43
@@ -2466,7 +2466,7 @@
 
   mud_brick_wall:
     material: MUD_BRICK_WALL
-    name: "<color:#808080><bold>Mud Brick Wall"
+    name: "<color:#808080>Mud Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -2474,7 +2474,7 @@
 
   resin_block:
     material: RESIN_BLOCK
-    name: "<color:#808080><bold>Resin Block"
+    name: "<color:#808080>Resin Block"
     buy-price: 3
     sell-price: 0.6
     slot: 11
@@ -2482,7 +2482,7 @@
 
   resin_bricks:
     material: RESIN_BRICKS
-    name: "<color:#808080><bold>Resin Bricks"
+    name: "<color:#808080>Resin Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 12
@@ -2490,7 +2490,7 @@
 
   resin_brick_stairs:
     material: RESIN_BRICK_STAIRS
-    name: "<color:#808080><bold>Resin Brick Stairs"
+    name: "<color:#808080>Resin Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 13
@@ -2498,7 +2498,7 @@
 
   resin_brick_slab:
     material: RESIN_BRICK_SLAB
-    name: "<color:#808080><bold>Resin Brick Slab"
+    name: "<color:#808080>Resin Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -2506,7 +2506,7 @@
 
   resin_brick_wall:
     material: RESIN_BRICK_WALL
-    name: "<color:#808080><bold>Resin Brick Wall"
+    name: "<color:#808080>Resin Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 15
@@ -2514,7 +2514,7 @@
 
   chiseled_resin_bricks:
     material: CHISELED_RESIN_BRICKS
-    name: "<color:#808080><bold>Chiseled Resin Bricks"
+    name: "<color:#808080>Chiseled Resin Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 16
@@ -2522,7 +2522,7 @@
 
   cinnabar_bricks:
     material: CINNABAR_BRICKS
-    name: "<color:#808080><bold>Cinnabar Bricks"
+    name: "<color:#808080>Cinnabar Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 19
@@ -2530,7 +2530,7 @@
 
   cinnabar_brick_stairs:
     material: CINNABAR_BRICK_STAIRS
-    name: "<color:#808080><bold>Cinnabar Brick Stairs"
+    name: "<color:#808080>Cinnabar Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 20
@@ -2538,7 +2538,7 @@
 
   cinnabar_brick_slab:
     material: CINNABAR_BRICK_SLAB
-    name: "<color:#808080><bold>Cinnabar Brick Slab"
+    name: "<color:#808080>Cinnabar Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -2546,7 +2546,7 @@
 
   cinnabar_brick_wall:
     material: CINNABAR_BRICK_WALL
-    name: "<color:#808080><bold>Cinnabar Brick Wall"
+    name: "<color:#808080>Cinnabar Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -2554,7 +2554,7 @@
 
   sulfur_block:
     material: SULFUR
-    name: "<color:#808080><bold>Sulfur Block"
+    name: "<color:#808080>Sulfur Block"
     buy-price: 3
     sell-price: 0.6
     slot: 23
@@ -2562,7 +2562,7 @@
 
   sulfur_bricks:
     material: SULFUR_BRICKS
-    name: "<color:#808080><bold>Sulfur Bricks"
+    name: "<color:#808080>Sulfur Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -2570,7 +2570,7 @@
 
   sulfur_brick_stairs:
     material: SULFUR_BRICK_STAIRS
-    name: "<color:#808080><bold>Sulfur Brick Stairs"
+    name: "<color:#808080>Sulfur Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 25
@@ -2578,7 +2578,7 @@
 
   sulfur_brick_slab:
     material: SULFUR_BRICK_SLAB
-    name: "<color:#808080><bold>Sulfur Brick Slab"
+    name: "<color:#808080>Sulfur Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -2586,7 +2586,7 @@
 
   sulfur_brick_wall:
     material: SULFUR_BRICK_WALL
-    name: "<color:#808080><bold>Sulfur Brick Wall"
+    name: "<color:#808080>Sulfur Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 29
@@ -2594,7 +2594,7 @@
 
   nether_bricks:
     material: NETHER_BRICKS
-    name: "<color:#808080><bold>Nether Bricks"
+    name: "<color:#808080>Nether Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -2602,7 +2602,7 @@
 
   nether_brick_stairs:
     material: NETHER_BRICK_STAIRS
-    name: "<color:#808080><bold>Nether Brick Stairs"
+    name: "<color:#808080>Nether Brick Stairs"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -2610,7 +2610,7 @@
 
   nether_brick_slab:
     material: NETHER_BRICK_SLAB
-    name: "<color:#808080><bold>Nether Brick Slab"
+    name: "<color:#808080>Nether Brick Slab"
     buy-price: 1
     sell-price: 0.2
     slot: 32
@@ -2618,7 +2618,7 @@
 
   nether_brick_wall:
     material: NETHER_BRICK_WALL
-    name: "<color:#808080><bold>Nether Brick Wall"
+    name: "<color:#808080>Nether Brick Wall"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -2626,7 +2626,7 @@
 
   nether_brick_fence:
     material: NETHER_BRICK_FENCE
-    name: "<color:#808080><bold>Nether Brick Fence"
+    name: "<color:#808080>Nether Brick Fence"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -2634,7 +2634,7 @@
 
   cracked_nether_bricks:
     material: CRACKED_NETHER_BRICKS
-    name: "<color:#808080><bold>Cracked Nether Bricks"
+    name: "<color:#808080>Cracked Nether Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -2642,7 +2642,7 @@
 
   chiseled_nether_bricks:
     material: CHISELED_NETHER_BRICKS
-    name: "<color:#808080><bold>Chiseled Nether Bricks"
+    name: "<color:#808080>Chiseled Nether Bricks"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -2650,7 +2650,7 @@
 
   red_nether_bricks:
     material: RED_NETHER_BRICKS
-    name: "<color:#808080><bold>Red Nether Bricks"
+    name: "<color:#808080>Red Nether Bricks"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -2658,7 +2658,7 @@
 
   red_nether_brick_stairs:
     material: RED_NETHER_BRICK_STAIRS
-    name: "<color:#808080><bold>Red Nether Brick Stairs"
+    name: "<color:#808080>Red Nether Brick Stairs"
     buy-price: 4
     sell-price: 0.8
     slot: 40
@@ -2666,7 +2666,7 @@
 
   red_nether_brick_slab:
     material: RED_NETHER_BRICK_SLAB
-    name: "<color:#808080><bold>Red Nether Brick Slab"
+    name: "<color:#808080>Red Nether Brick Slab"
     buy-price: 2
     sell-price: 0.4
     slot: 41
@@ -2674,7 +2674,7 @@
 
   red_nether_brick_wall:
     material: RED_NETHER_BRICK_WALL
-    name: "<color:#808080><bold>Red Nether Brick Wall"
+    name: "<color:#808080>Red Nether Brick Wall"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -2682,7 +2682,7 @@
 
   netherrack:
     material: NETHERRACK
-    name: "<color:#808080><bold>Netherrack"
+    name: "<color:#808080>Netherrack"
     buy-price: 2
     sell-price: 0.2
     slot: 43
@@ -2690,7 +2690,7 @@
 
   grass_block:
     material: GRASS_BLOCK
-    name: "<color:#808080><bold>Grass Block"
+    name: "<color:#808080>Grass Block"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -2698,7 +2698,7 @@
 
   dirt:
     material: DIRT
-    name: "<color:#808080><bold>Dirt"
+    name: "<color:#808080>Dirt"
     buy-price: 1
     sell-price: 0.2
     slot: 11
@@ -2706,7 +2706,7 @@
 
   coarse_dirt:
     material: COARSE_DIRT
-    name: "<color:#808080><bold>Coarse Dirt"
+    name: "<color:#808080>Coarse Dirt"
     buy-price: 1
     sell-price: 0.2
     slot: 12
@@ -2714,7 +2714,7 @@
 
   rooted_dirt:
     material: ROOTED_DIRT
-    name: "<color:#808080><bold>Rooted Dirt"
+    name: "<color:#808080>Rooted Dirt"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -2722,7 +2722,7 @@
 
   clay:
     material: CLAY
-    name: "<color:#808080><bold>Clay"
+    name: "<color:#808080>Clay"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -2730,7 +2730,7 @@
 
   gravel:
     material: GRAVEL
-    name: "<color:#808080><bold>Gravel"
+    name: "<color:#808080>Gravel"
     buy-price: 1
     sell-price: 0.2
     slot: 15
@@ -2738,7 +2738,7 @@
 
   sand:
     material: SAND
-    name: "<color:#808080><bold>Sand"
+    name: "<color:#808080>Sand"
     buy-price: 1
     sell-price: 0.2
     slot: 16
@@ -2746,7 +2746,7 @@
 
   ice:
     material: ICE
-    name: "<color:#808080><bold>Ice"
+    name: "<color:#808080>Ice"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -2754,7 +2754,7 @@
 
   packed_ice:
     material: PACKED_ICE
-    name: "<color:#808080><bold>Packed Ice"
+    name: "<color:#808080>Packed Ice"
     buy-price: 4
     sell-price: 0.8
     slot: 20
@@ -2762,7 +2762,7 @@
 
   blue_ice:
     material: BLUE_ICE
-    name: "<color:#808080><bold>Blue Ice"
+    name: "<color:#808080>Blue Ice"
     buy-price: 8
     sell-price: 1.6
     slot: 21
@@ -2770,7 +2770,7 @@
 
   snow:
     material: SNOW_BLOCK
-    name: "<color:#808080><bold>Snow Block"
+    name: "<color:#808080>Snow Block"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -2778,7 +2778,7 @@
 
   moss_block:
     material: MOSS_BLOCK
-    name: "<color:#808080><bold>Moss Block"
+    name: "<color:#808080>Moss Block"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -2786,7 +2786,7 @@
 
   pale_moss_block:
     material: PALE_MOSS_BLOCK
-    name: "<color:#808080><bold>Pale Moss Block"
+    name: "<color:#808080>Pale Moss Block"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -2794,7 +2794,7 @@
 
   magma_block:
     material: MAGMA_BLOCK
-    name: "<color:#808080><bold>Magma Block"
+    name: "<color:#808080>Magma Block"
     buy-price: 3
     sell-price: 0.6
     slot: 25
@@ -2802,7 +2802,7 @@
 
   soul_sand:
     material: SOUL_SAND
-    name: "<color:#808080><bold>Soul Sand"
+    name: "<color:#808080>Soul Sand"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -2810,7 +2810,7 @@
 
   soul_soil:
     material: SOUL_SOIL
-    name: "<color:#808080><bold>Soul Soil"
+    name: "<color:#808080>Soul Soil"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -2818,7 +2818,7 @@
 
   brown_mushroom_block:
     material: BROWN_MUSHROOM_BLOCK
-    name: "<color:#808080><bold>Brown Mushroom Block"
+    name: "<color:#808080>Brown Mushroom Block"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -2826,7 +2826,7 @@
 
   red_mushroom_block:
     material: RED_MUSHROOM_BLOCK
-    name: "<color:#808080><bold>Red Mushroom Block"
+    name: "<color:#808080>Red Mushroom Block"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -2834,7 +2834,7 @@
 
   shroomlight:
     material: SHROOMLIGHT
-    name: "<color:#808080><bold>Shroomlight"
+    name: "<color:#808080>Shroomlight"
     buy-price: 5
     sell-price: 1.0
     slot: 32
@@ -2842,7 +2842,7 @@
 
   hay_bale:
     material: HAY_BLOCK
-    name: "<color:#808080><bold>Hay Bale"
+    name: "<color:#808080>Hay Bale"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -2850,7 +2850,7 @@
 
   sponge:
     material: SPONGE
-    name: "<color:#808080><bold>Sponge"
+    name: "<color:#808080>Sponge"
     buy-price: 10
     sell-price: 2.0
     slot: 34
@@ -2858,7 +2858,7 @@
 
   wet_sponge:
     material: WET_SPONGE
-    name: "<color:#808080><bold>Wet Sponge"
+    name: "<color:#808080>Wet Sponge"
     buy-price: 8
     sell-price: 1.6
     slot: 37
@@ -2866,7 +2866,7 @@
 
   ochre_froglight:
     material: OCHRE_FROGLIGHT
-    name: "<color:#808080><bold>Ochre Froglight"
+    name: "<color:#808080>Ochre Froglight"
     buy-price: 8
     sell-price: 1.6
     slot: 38
@@ -2874,7 +2874,7 @@
 
   verdant_froglight:
     material: VERDANT_FROGLIGHT
-    name: "<color:#808080><bold>Verdant Froglight"
+    name: "<color:#808080>Verdant Froglight"
     buy-price: 8
     sell-price: 1.6
     slot: 39
@@ -2882,7 +2882,7 @@
 
   pearlescent_froglight:
     material: PEARLESCENT_FROGLIGHT
-    name: "<color:#808080><bold>Pearlescent Froglight"
+    name: "<color:#808080>Pearlescent Froglight"
     buy-price: 8
     sell-price: 1.6
     slot: 40
@@ -2890,7 +2890,7 @@
 
   sculk:
     material: SCULK
-    name: "<color:#808080><bold>Sculk"
+    name: "<color:#808080>Sculk"
     buy-price: 5
     sell-price: 1.0
     slot: 41

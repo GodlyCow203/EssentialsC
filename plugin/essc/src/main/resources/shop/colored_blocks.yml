@@ -2,7 +2,7 @@
 items:
   white_wool:
     material: WHITE_WOOL
-    name: "<#E9ECEC><bold>White Wool"
+    name: "<#E9ECEC>White Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -10,7 +10,7 @@ items:
 
   orange_wool:
     material: ORANGE_WOOL
-    name: "<#F07613><bold>Orange Wool"
+    name: "<#F07613>Orange Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -18,7 +18,7 @@ items:
 
   magenta_wool:
     material: MAGENTA_WOOL
-    name: "<#BD30B9><bold>Magenta Wool"
+    name: "<#BD30B9>Magenta Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -26,7 +26,7 @@ items:
 
   light_blue_wool:
     material: LIGHT_BLUE_WOOL
-    name: "<#3AAFD9><bold>Light Blue Wool"
+    name: "<#3AAFD9>Light Blue Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -34,7 +34,7 @@ items:
 
   yellow_wool:
     material: YELLOW_WOOL
-    name: "<#F8C627><bold>Yellow Wool"
+    name: "<#F8C627>Yellow Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 14
@@ -42,7 +42,7 @@ items:
 
   lime_wool:
     material: LIME_WOOL
-    name: "<#70B919><bold>Lime Wool"
+    name: "<#70B919>Lime Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -50,7 +50,7 @@ items:
 
   pink_wool:
     material: PINK_WOOL
-    name: "<#ED8DAC><bold>Pink Wool"
+    name: "<#ED8DAC>Pink Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -58,7 +58,7 @@ items:
 
   gray_wool:
     material: GRAY_WOOL
-    name: "<#3E4447><bold>Gray Wool"
+    name: "<#3E4447>Gray Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -66,7 +66,7 @@ items:
 
   light_gray_wool:
     material: LIGHT_GRAY_WOOL
-    name: "<#8E8E86><bold>Light Gray Wool"
+    name: "<#8E8E86>Light Gray Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -74,7 +74,7 @@ items:
 
   cyan_wool:
     material: CYAN_WOOL
-    name: "<#158991><bold>Cyan Wool"
+    name: "<#158991>Cyan Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -82,7 +82,7 @@ items:
 
   purple_wool:
     material: PURPLE_WOOL
-    name: "<#7B2FBE><bold>Purple Wool"
+    name: "<#7B2FBE>Purple Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -90,7 +90,7 @@ items:
 
   blue_wool:
     material: BLUE_WOOL
-    name: "<#35399D><bold>Blue Wool"
+    name: "<#35399D>Blue Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -98,7 +98,7 @@ items:
 
   brown_wool:
     material: BROWN_WOOL
-    name: "<#724728><bold>Brown Wool"
+    name: "<#724728>Brown Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -106,7 +106,7 @@ items:
 
   green_wool:
     material: GREEN_WOOL
-    name: "<#546D1B><bold>Green Wool"
+    name: "<#546D1B>Green Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -114,7 +114,7 @@ items:
 
   red_wool:
     material: RED_WOOL
-    name: "<#A02722><bold>Red Wool"
+    name: "<#A02722>Red Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -122,7 +122,7 @@ items:
 
   black_wool:
     material: BLACK_WOOL
-    name: "<#141519><bold>Black Wool"
+    name: "<#141519>Black Wool"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -130,7 +130,7 @@ items:
 
   white_terracotta:
     material: WHITE_TERRACOTTA
-    name: "<#D1B1A1><bold>White Terracotta"
+    name: "<#D1B1A1>White Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -138,7 +138,7 @@ items:
 
   orange_terracotta:
     material: ORANGE_TERRACOTTA
-    name: "<#A15325><bold>Orange Terracotta"
+    name: "<#A15325>Orange Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -146,7 +146,7 @@ items:
 
   magenta_terracotta:
     material: MAGENTA_TERRACOTTA
-    name: "<#994B65><bold>Magenta Terracotta"
+    name: "<#994B65>Magenta Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -154,7 +154,7 @@ items:
 
   light_blue_terracotta:
     material: LIGHT_BLUE_TERRACOTTA
-    name: "<#716D8A><bold>Light Blue Terracotta"
+    name: "<#716D8A>Light Blue Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -162,7 +162,7 @@ items:
 
   yellow_terracotta:
     material: YELLOW_TERRACOTTA
-    name: "<#BA8523><bold>Yellow Terracotta"
+    name: "<#BA8523>Yellow Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -170,7 +170,7 @@ items:
 
   lime_terracotta:
     material: LIME_TERRACOTTA
-    name: "<#677535><bold>Lime Terracotta"
+    name: "<#677535>Lime Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 37
@@ -178,7 +178,7 @@ items:
 
   pink_terracotta:
     material: PINK_TERRACOTTA
-    name: "<#A14E4E><bold>Pink Terracotta"
+    name: "<#A14E4E>Pink Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 38
@@ -186,7 +186,7 @@ items:
 
   gray_terracotta:
     material: GRAY_TERRACOTTA
-    name: "<#3A2A24><bold>Gray Terracotta"
+    name: "<#3A2A24>Gray Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 39
@@ -194,7 +194,7 @@ items:
 
   light_gray_terracotta:
     material: LIGHT_GRAY_TERRACOTTA
-    name: "<#876B62><bold>Light Gray Terracotta"
+    name: "<#876B62>Light Gray Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 40
@@ -202,7 +202,7 @@ items:
 
   cyan_terracotta:
     material: CYAN_TERRACOTTA
-    name: "<#575C5C><bold>Cyan Terracotta"
+    name: "<#575C5C>Cyan Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 41
@@ -210,7 +210,7 @@ items:
 
   purple_terracotta:
     material: PURPLE_TERRACOTTA
-    name: "<#7A4B5B><bold>Purple Terracotta"
+    name: "<#7A4B5B>Purple Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 42
@@ -218,7 +218,7 @@ items:
 
   blue_terracotta:
     material: BLUE_TERRACOTTA
-    name: "<#4A3C5B><bold>Blue Terracotta"
+    name: "<#4A3C5B>Blue Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 43
@@ -226,7 +226,7 @@ items:
 
   brown_terracotta:
     material: BROWN_TERRACOTTA
-    name: "<#4D3323><bold>Brown Terracotta"
+    name: "<#4D3323>Brown Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 10
@@ -234,7 +234,7 @@ items:
 
   green_terracotta:
     material: GREEN_TERRACOTTA
-    name: "<#4C532A><bold>Green Terracotta"
+    name: "<#4C532A>Green Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 11
@@ -242,7 +242,7 @@ items:
 
   red_terracotta:
     material: RED_TERRACOTTA
-    name: "<#8F3D2E><bold>Red Terracotta"
+    name: "<#8F3D2E>Red Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 12
@@ -250,7 +250,7 @@ items:
 
   black_terracotta:
     material: BLACK_TERRACOTTA
-    name: "<#251610><bold>Black Terracotta"
+    name: "<#251610>Black Terracotta"
     buy-price: 2
     sell-price: 0.4
     slot: 13
@@ -258,7 +258,7 @@ items:
 
   terracotta:
     material: TERRACOTTA
-    name: "<#985E43><bold>Terracotta"
+    name: "<#985E43>Terracotta"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -266,7 +266,7 @@ items:
 
   white_concrete:
     material: WHITE_CONCRETE
-    name: "<#CFD5D6><bold>White Concrete"
+    name: "<#CFD5D6>White Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 15
@@ -274,7 +274,7 @@ items:
 
   orange_concrete:
     material: ORANGE_CONCRETE
-    name: "<#E06100><bold>Orange Concrete"
+    name: "<#E06100>Orange Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 16
@@ -282,7 +282,7 @@ items:
 
   magenta_concrete:
     material: MAGENTA_CONCRETE
-    name: "<#A9309F><bold>Magenta Concrete"
+    name: "<#A9309F>Magenta Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 19
@@ -290,7 +290,7 @@ items:
 
   light_blue_concrete:
     material: LIGHT_BLUE_CONCRETE
-    name: "<#2389C7><bold>Light Blue Concrete"
+    name: "<#2389C7>Light Blue Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 20
@@ -298,7 +298,7 @@ items:
 
   yellow_concrete:
     material: YELLOW_CONCRETE
-    name: "<#F0AF15><bold>Yellow Concrete"
+    name: "<#F0AF15>Yellow Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 21
@@ -306,7 +306,7 @@ items:
 
   lime_concrete:
     material: LIME_CONCRETE
-    name: "<#5EA818><bold>Lime Concrete"
+    name: "<#5EA818>Lime Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 22
@@ -314,7 +314,7 @@ items:
 
   pink_concrete:
     material: PINK_CONCRETE
-    name: "<#D5658E><bold>Pink Concrete"
+    name: "<#D5658E>Pink Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 23
@@ -322,7 +322,7 @@ items:
 
   gray_concrete:
     material: GRAY_CONCRETE
-    name: "<#36393D><bold>Gray Concrete"
+    name: "<#36393D>Gray Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 24
@@ -330,7 +330,7 @@ items:
 
   light_gray_concrete:
     material: LIGHT_GRAY_CONCRETE
-    name: "<#7D7D73><bold>Light Gray Concrete"
+    name: "<#7D7D73>Light Gray Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 25
@@ -338,7 +338,7 @@ items:
 
   cyan_concrete:
     material: CYAN_CONCRETE
-    name: "<#157788><bold>Cyan Concrete"
+    name: "<#157788>Cyan Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 28
@@ -346,7 +346,7 @@ items:
 
   purple_concrete:
     material: PURPLE_CONCRETE
-    name: "<#64209C><bold>Purple Concrete"
+    name: "<#64209C>Purple Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 29
@@ -354,7 +354,7 @@ items:
 
   blue_concrete:
     material: BLUE_CONCRETE
-    name: "<#2C2E8F><bold>Blue Concrete"
+    name: "<#2C2E8F>Blue Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 30
@@ -362,7 +362,7 @@ items:
 
   brown_concrete:
     material: BROWN_CONCRETE
-    name: "<#603B1F><bold>Brown Concrete"
+    name: "<#603B1F>Brown Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 31
@@ -370,7 +370,7 @@ items:
 
   green_concrete:
     material: GREEN_CONCRETE
-    name: "<#495B24><bold>Green Concrete"
+    name: "<#495B24>Green Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 32
@@ -378,7 +378,7 @@ items:
 
   red_concrete:
     material: RED_CONCRETE
-    name: "<#8E2020><bold>Red Concrete"
+    name: "<#8E2020>Red Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 33
@@ -386,7 +386,7 @@ items:
 
   black_concrete:
     material: BLACK_CONCRETE
-    name: "<080A0F><bold>Black Concrete"
+    name: "<080A0F>Black Concrete"
     buy-price: 2
     sell-price: 0.4
     slot: 34
@@ -394,7 +394,7 @@ items:
 
   white_concrete_powder:
     material: WHITE_CONCRETE_POWDER
-    name: "<#E1E5E5><bold>White Concrete Powder"
+    name: "<#E1E5E5>White Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 37
@@ -402,7 +402,7 @@ items:
 
   orange_concrete_powder:
     material: ORANGE_CONCRETE_POWDER
-    name: "<#E38320><bold>Orange Concrete Powder"
+    name: "<#E38320>Orange Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 38
@@ -410,7 +410,7 @@ items:
 
   magenta_concrete_powder:
     material: MAGENTA_CONCRETE_POWDER
-    name: "<#C146B7><bold>Magenta Concrete Powder"
+    name: "<#C146B7>Magenta Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 39
@@ -418,7 +418,7 @@ items:
 
   light_blue_concrete_powder:
     material: LIGHT_BLUE_CONCRETE_POWDER
-    name: "<#4AB4D5><bold>Light Blue Concrete Powder"
+    name: "<#4AB4D5>Light Blue Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 40
@@ -426,7 +426,7 @@ items:
 
   yellow_concrete_powder:
     material: YELLOW_CONCRETE_POWDER
-    name: "<#E9C737><bold>Yellow Concrete Powder"
+    name: "<#E9C737>Yellow Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 41
@@ -434,7 +434,7 @@ items:
 
   lime_concrete_powder:
     material: LIME_CONCRETE_POWDER
-    name: "<#7CBD2B><bold>Lime Concrete Powder"
+    name: "<#7CBD2B>Lime Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 42
@@ -442,7 +442,7 @@ items:
 
   pink_concrete_powder:
     material: PINK_CONCRETE_POWDER
-    name: "<#E498B4><bold>Pink Concrete Powder"
+    name: "<#E498B4>Pink Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 43
@@ -450,7 +450,7 @@ items:
 
   gray_concrete_powder:
     material: GRAY_CONCRETE_POWDER
-    name: "<#4C5154><bold>Gray Concrete Powder"
+    name: "<#4C5154>Gray Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 10
@@ -458,7 +458,7 @@ items:
 
   light_gray_concrete_powder:
     material: LIGHT_GRAY_CONCRETE_POWDER
-    name: "<#9A9A94><bold>Light Gray Concrete Powder"
+    name: "<#9A9A94>Light Gray Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 11
@@ -466,7 +466,7 @@ items:
 
   cyan_concrete_powder:
     material: CYAN_CONCRETE_POWDER
-    name: "<#24929A><bold>Cyan Concrete Powder"
+    name: "<#24929A>Cyan Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 12
@@ -474,7 +474,7 @@ items:
 
   purple_concrete_powder:
     material: PURPLE_CONCRETE_POWDER
-    name: "<#8438BE><bold>Purple Concrete Powder"
+    name: "<#8438BE>Purple Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 13
@@ -482,7 +482,7 @@ items:
 
   blue_concrete_powder:
     material: BLUE_CONCRETE_POWDER
-    name: "<#4649A6><bold>Blue Concrete Powder"
+    name: "<#4649A6>Blue Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -490,7 +490,7 @@ items:
 
   brown_concrete_powder:
     material: BROWN_CONCRETE_POWDER
-    name: "<#7D5332><bold>Brown Concrete Powder"
+    name: "<#7D5332>Brown Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 15
@@ -498,7 +498,7 @@ items:
 
   green_concrete_powder:
     material: GREEN_CONCRETE_POWDER
-    name: "<#617B2C><bold>Green Concrete Powder"
+    name: "<#617B2C>Green Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 16
@@ -506,7 +506,7 @@ items:
 
   red_concrete_powder:
     material: RED_CONCRETE_POWDER
-    name: "<#A83A32><bold>Red Concrete Powder"
+    name: "<#A83A32>Red Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 19
@@ -514,7 +514,7 @@ items:
 
   black_concrete_powder:
     material: BLACK_CONCRETE_POWDER
-    name: "<1B1C20><bold>Black Concrete Powder"
+    name: "<1B1C20>Black Concrete Powder"
     buy-price: 1
     sell-price: 0.2
     slot: 20
@@ -522,7 +522,7 @@ items:
 
   white_stained_glass:
     material: WHITE_STAINED_GLASS
-    name: "<#FFFFFF><bold>White Stained Glass"
+    name: "<#FFFFFF>White Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 21
@@ -530,7 +530,7 @@ items:
 
   orange_stained_glass:
     material: ORANGE_STAINED_GLASS
-    name: "<#F07613><bold>Orange Stained Glass"
+    name: "<#F07613>Orange Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 22
@@ -538,7 +538,7 @@ items:
 
   magenta_stained_glass:
     material: MAGENTA_STAINED_GLASS
-    name: "<#BD30B9><bold>Magenta Stained Glass"
+    name: "<#BD30B9>Magenta Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 23
@@ -546,7 +546,7 @@ items:
 
   light_blue_stained_glass:
     material: LIGHT_BLUE_STAINED_GLASS
-    name: "<#3AAFD9><bold>Light Blue Stained Glass"
+    name: "<#3AAFD9>Light Blue Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 24
@@ -554,7 +554,7 @@ items:
 
   yellow_stained_glass:
     material: YELLOW_STAINED_GLASS
-    name: "<#F8C627><bold>Yellow Stained Glass"
+    name: "<#F8C627>Yellow Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 25
@@ -562,7 +562,7 @@ items:
 
   lime_stained_glass:
     material: LIME_STAINED_GLASS
-    name: "<#70B919><bold>Lime Stained Glass"
+    name: "<#70B919>Lime Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -570,7 +570,7 @@ items:
 
   pink_stained_glass:
     material: PINK_STAINED_GLASS
-    name: "<#ED8DAC><bold>Pink Stained Glass"
+    name: "<#ED8DAC>Pink Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 29
@@ -578,7 +578,7 @@ items:
 
   gray_stained_glass:
     material: GRAY_STAINED_GLASS
-    name: "<#3E4447><bold>Gray Stained Glass"
+    name: "<#3E4447>Gray Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -586,7 +586,7 @@ items:
 
   light_gray_stained_glass:
     material: LIGHT_GRAY_STAINED_GLASS
-    name: "<#8E8E86><bold>Light Gray Stained Glass"
+    name: "<#8E8E86>Light Gray Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -594,7 +594,7 @@ items:
 
   cyan_stained_glass:
     material: CYAN_STAINED_GLASS
-    name: "<#158991><bold>Cyan Stained Glass"
+    name: "<#158991>Cyan Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 32
@@ -602,7 +602,7 @@ items:
 
   purple_stained_glass:
     material: PURPLE_STAINED_GLASS
-    name: "<#7B2FBE><bold>Purple Stained Glass"
+    name: "<#7B2FBE>Purple Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -610,7 +610,7 @@ items:
 
   blue_stained_glass:
     material: BLUE_STAINED_GLASS
-    name: "<#35399D><bold>Blue Stained Glass"
+    name: "<#35399D>Blue Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 34
@@ -618,7 +618,7 @@ items:
 
   brown_stained_glass:
     material: BROWN_STAINED_GLASS
-    name: "<#724728><bold>Brown Stained Glass"
+    name: "<#724728>Brown Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 37
@@ -626,7 +626,7 @@ items:
 
   green_stained_glass:
     material: GREEN_STAINED_GLASS
-    name: "<#546D1B><bold>Green Stained Glass"
+    name: "<#546D1B>Green Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 38
@@ -634,7 +634,7 @@ items:
 
   red_stained_glass:
     material: RED_STAINED_GLASS
-    name: "<#A02722><bold>Red Stained Glass"
+    name: "<#A02722>Red Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -642,7 +642,7 @@ items:
 
   black_stained_glass:
     material: BLACK_STAINED_GLASS
-    name: "<#141519><bold>Black Stained Glass"
+    name: "<#141519>Black Stained Glass"
     buy-price: 3
     sell-price: 0.6
     slot: 40
@@ -650,7 +650,7 @@ items:
 
   white_stained_glass_pane:
     material: WHITE_STAINED_GLASS_PANE
-    name: "<#FFFFFF><bold>White Stained Glass Pane"
+    name: "<#FFFFFF>White Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 41
@@ -658,7 +658,7 @@ items:
 
   orange_stained_glass_pane:
     material: ORANGE_STAINED_GLASS_PANE
-    name: "<#F07613><bold>Orange Stained Glass Pane"
+    name: "<#F07613>Orange Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 42
@@ -666,7 +666,7 @@ items:
 
   magenta_stained_glass_pane:
     material: MAGENTA_STAINED_GLASS_PANE
-    name: "<#BD30B9><bold>Magenta Stained Glass Pane"
+    name: "<#BD30B9>Magenta Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 43
@@ -674,7 +674,7 @@ items:
 
   light_blue_stained_glass_pane:
     material: LIGHT_BLUE_STAINED_GLASS_PANE
-    name: "<#3AAFD9><bold>Light Blue Stained Glass Pane"
+    name: "<#3AAFD9>Light Blue Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 10
@@ -682,7 +682,7 @@ items:
 
   yellow_stained_glass_pane:
     material: YELLOW_STAINED_GLASS_PANE
-    name: "<#F8C627><bold>Yellow Stained Glass Pane"
+    name: "<#F8C627>Yellow Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 11
@@ -690,7 +690,7 @@ items:
 
   lime_stained_glass_pane:
     material: LIME_STAINED_GLASS_PANE
-    name: "<#70B919><bold>Lime Stained Glass Pane"
+    name: "<#70B919>Lime Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 12
@@ -698,7 +698,7 @@ items:
 
   pink_stained_glass_pane:
     material: PINK_STAINED_GLASS_PANE
-    name: "<#ED8DAC><bold>Pink Stained Glass Pane"
+    name: "<#ED8DAC>Pink Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 13
@@ -706,7 +706,7 @@ items:
 
   gray_stained_glass_pane:
     material: GRAY_STAINED_GLASS_PANE
-    name: "<#3E4447><bold>Gray Stained Glass Pane"
+    name: "<#3E4447>Gray Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 14
@@ -714,7 +714,7 @@ items:
 
   light_gray_stained_glass_pane:
     material: LIGHT_GRAY_STAINED_GLASS_PANE
-    name: "<#8E8E86><bold>Light Gray Stained Glass Pane"
+    name: "<#8E8E86>Light Gray Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 15
@@ -722,7 +722,7 @@ items:
 
   cyan_stained_glass_pane:
     material: CYAN_STAINED_GLASS_PANE
-    name: "<#158991><bold>Cyan Stained Glass Pane"
+    name: "<#158991>Cyan Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 16
@@ -730,7 +730,7 @@ items:
 
   purple_stained_glass_pane:
     material: PURPLE_STAINED_GLASS_PANE
-    name: "<#7B2FBE><bold>Purple Stained Glass Pane"
+    name: "<#7B2FBE>Purple Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 19
@@ -738,7 +738,7 @@ items:
 
   blue_stained_glass_pane:
     material: BLUE_STAINED_GLASS_PANE
-    name: "<#35399D><bold>Blue Stained Glass Pane"
+    name: "<#35399D>Blue Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 20
@@ -746,7 +746,7 @@ items:
 
   brown_stained_glass_pane:
     material: BROWN_STAINED_GLASS_PANE
-    name: "<#724728><bold>Brown Stained Glass Pane"
+    name: "<#724728>Brown Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 21
@@ -754,7 +754,7 @@ items:
 
   green_stained_glass_pane:
     material: GREEN_STAINED_GLASS_PANE
-    name: "<#546D1B><bold>Green Stained Glass Pane"
+    name: "<#546D1B>Green Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 22
@@ -762,7 +762,7 @@ items:
 
   red_stained_glass_pane:
     material: RED_STAINED_GLASS_PANE
-    name: "<#A02722><bold>Red Stained Glass Pane"
+    name: "<#A02722>Red Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 23
@@ -770,7 +770,7 @@ items:
 
   black_stained_glass_pane:
     material: BLACK_STAINED_GLASS_PANE
-    name: "<#141519><bold>Black Stained Glass Pane"
+    name: "<#141519>Black Stained Glass Pane"
     buy-price: 1
     sell-price: 0.2
     slot: 24
@@ -778,7 +778,7 @@ items:
 
   white_glazed_terracotta:
     material: WHITE_GLAZED_TERRACOTTA
-    name: "<#BDD1C8><bold>White Glazed Terracotta"
+    name: "<#BDD1C8>White Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 25
@@ -786,7 +786,7 @@ items:
 
   orange_glazed_terracotta:
     material: ORANGE_GLAZED_TERRACOTTA
-    name: "<#9A5C24><bold>Orange Glazed Terracotta"
+    name: "<#9A5C24>Orange Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 28
@@ -794,7 +794,7 @@ items:
 
   magenta_glazed_terracotta:
     material: MAGENTA_GLAZED_TERRACOTTA
-    name: "<#A740A3><bold>Magenta Glazed Terracotta"
+    name: "<#A740A3>Magenta Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 29
@@ -802,7 +802,7 @@ items:
 
   light_blue_glazed_terracotta:
     material: LIGHT_BLUE_GLAZED_TERRACOTTA
-    name: "<#5CA8C6><bold>Light Blue Glazed Terracotta"
+    name: "<#5CA8C6>Light Blue Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 30
@@ -810,7 +810,7 @@ items:
 
   yellow_glazed_terracotta:
     material: YELLOW_GLAZED_TERRACOTTA
-    name: "<#E0A82E><bold>Yellow Glazed Terracotta"
+    name: "<#E0A82E>Yellow Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 31
@@ -818,7 +818,7 @@ items:
 
   lime_glazed_terracotta:
     material: LIME_GLAZED_TERRACOTTA
-    name: "<#A2C33A><bold>Lime Glazed Terracotta"
+    name: "<#A2C33A>Lime Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 32
@@ -826,7 +826,7 @@ items:
 
   pink_glazed_terracotta:
     material: PINK_GLAZED_TERRACOTTA
-    name: "<#EB9AB5><bold>Pink Glazed Terracotta"
+    name: "<#EB9AB5>Pink Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 33
@@ -834,7 +834,7 @@ items:
 
   gray_glazed_terracotta:
     material: GRAY_GLAZED_TERRACOTTA
-    name: "<#535A5D><bold>Gray Glazed Terracotta"
+    name: "<#535A5D>Gray Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 34
@@ -842,7 +842,7 @@ items:
 
   light_gray_glazed_terracotta:
     material: LIGHT_GRAY_GLAZED_TERRACOTTA
-    name: "<#929898><bold>Light Gray Glazed Terracotta"
+    name: "<#929898>Light Gray Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 37
@@ -850,7 +850,7 @@ items:
 
   cyan_glazed_terracotta:
     material: CYAN_GLAZED_TERRACOTTA
-    name: "<#347A83><bold>Cyan Glazed Terracotta"
+    name: "<#347A83>Cyan Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 38
@@ -858,7 +858,7 @@ items:
 
   purple_glazed_terracotta:
     material: PURPLE_GLAZED_TERRACOTTA
-    name: "<#6D3198><bold>Purple Glazed Terracotta"
+    name: "<#6D3198>Purple Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 39
@@ -866,7 +866,7 @@ items:
 
   blue_glazed_terracotta:
     material: BLUE_GLAZED_TERRACOTTA
-    name: "<#2D4199><bold>Blue Glazed Terracotta"
+    name: "<#2D4199>Blue Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 40
@@ -874,7 +874,7 @@ items:
 
   brown_glazed_terracotta:
     material: BROWN_GLAZED_TERRACOTTA
-    name: "<#7D5A3D><bold>Brown Glazed Terracotta"
+    name: "<#7D5A3D>Brown Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 41
@@ -882,7 +882,7 @@ items:
 
   green_glazed_terracotta:
     material: GREEN_GLAZED_TERRACOTTA
-    name: "<#728B37><bold>Green Glazed Terracotta"
+    name: "<#728B37>Green Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 42
@@ -890,7 +890,7 @@ items:
 
   red_glazed_terracotta:
     material: RED_GLAZED_TERRACOTTA
-    name: "<#B63531><bold>Red Glazed Terracotta"
+    name: "<#B63531>Red Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 43
@@ -898,7 +898,7 @@ items:
 
   black_glazed_terracotta:
     material: BLACK_GLAZED_TERRACOTTA
-    name: "<#434447><bold>Black Glazed Terracotta"
+    name: "<#434447>Black Glazed Terracotta"
     buy-price: 3
     sell-price: 0.6
     slot: 10

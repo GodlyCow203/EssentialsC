@@ -55,3 +55,37 @@ items:
     material: LIME_STAINED_GLASS_PANE
     slot: 17
     decoration: true
+
+  green_bottom_0:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 36
+    decoration: true
+
+  green_bottom_1:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 45
+    decoration: true
+
+  green_bottom_2:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 46
+    decoration: true
+
+  white_bottom:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 44
+    decoration: true
+
+  white_bottom_0:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 53
+    decoration: true
+
+  white_bottom_3231:
+    material: WHITE_STAINED_GLASS_PANE
+    slot: 52
+    decoration: true
+
+
+
+
