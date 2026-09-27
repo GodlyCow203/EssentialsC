@@ -31,7 +31,7 @@ public class WorthCommand extends Command {
 
             double worth = plugin.getSellManager().calculateInventoryWorth(player);
             Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("worth", FormatUtil.formatNumberWithDecimals(worth));
+            placeholders.put("worth", FormatUtil.formatMoney(worth, plugin.getConfigManager().getEconomyFormat()));
             placeholders.put("currency", worth == 1.0 ?
                     plugin.getConfigManager().getShopCurrencySingular() :
                     plugin.getConfigManager().getShopCurrencyPlural());
@@ -56,7 +56,7 @@ public class WorthCommand extends Command {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", itemName);
         placeholders.put("amount", FormatUtil.formatNumber(hand.getAmount()));
-        placeholders.put("worth", FormatUtil.formatNumberWithDecimals(worth));
+        placeholders.put("worth", FormatUtil.formatMoney(worth, plugin.getConfigManager().getEconomyFormat()));
         placeholders.put("currency", worth == 1.0 ?
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural());

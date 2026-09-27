@@ -16,11 +16,11 @@ items:
 
   prev-page:
     material: SPECTRAL_ARROW
-    name: <color:#474747>Previous Page
+    name: lang:shop.gui.category.prev-page
     slot: 45
   next-page:
     material: SPECTRAL_ARROW
-    name: <color:#474747>Next Page
+    name: lang:shop.gui.category.next-page
     slot: 53
   page-indicator:
     material: WRITABLE_BOOK
@@ -28,12 +28,12 @@ items:
     slot: 4
   back:
     material: EXPERIENCE_BOTTLE
-    name: <color:#F52727>Back to Categories
+    name: lang:shop.gui.category.back
     slot: 50
     action: back
   balance:
     material: EMERALD
-    name: <color:#F5C827>Your Balance
+    name: lang:shop.gui.main.balance-name
     slot: 48
 
   left_1:

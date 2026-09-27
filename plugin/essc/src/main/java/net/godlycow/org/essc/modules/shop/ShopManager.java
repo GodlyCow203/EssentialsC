@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.FormatUtil;
 import net.godlycow.org.essc.util.InventoryViewCompat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -415,10 +416,13 @@ public class ShopManager {
 
         shopListener.getSounds().playPurchase(player);
 
+        String formattedBuyPrice = FormatUtil.formatMoney(totalPrice, plugin.getConfigManager().getEconomyFormat());
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
         placeholders.put("amount", String.valueOf(totalItems));
-        placeholders.put("price", String.valueOf(totalPrice));
+        placeholders.put("price", String.valueOf(formattedBuyPrice));
+        placeholders.put("currency", plugin.getConfigManager().getShopCurrencyPlural());
         player.sendMessage(plugin.getLanguageManager().get(player, "shop.purchase-success", placeholders));
 
         refreshPlayerGUI(player);
@@ -539,7 +543,8 @@ public class ShopManager {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
         placeholders.put("amount", String.valueOf(totalItems));
-        placeholders.put("price", String.valueOf(totalPrice));
+        placeholders.put("price", FormatUtil.formatMoney(totalPrice, plugin.getConfigManager().getEconomyFormat()));
+        placeholders.put("currency", plugin.getConfigManager().getShopCurrencyPlural());
         player.sendMessage(plugin.getLanguageManager().get(player, "shop.sale-success", placeholders));
 
         refreshPlayerGUI(player);

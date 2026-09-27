@@ -17,7 +17,7 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     private final RtpManagerImpl rtpManagerImpl;
     private final HomeManagerImpl homeManagerImpl;
     private final WarpManagerImpl warpManagerImpl;
-    private static final String API_VERSION = "1.2.0";
+    private static final String API_VERSION = "1.3.0";
 
     public EssentialsCAPIImpl(EssentialsC plugin) {
         this.plugin = plugin;

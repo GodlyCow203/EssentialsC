@@ -1,6 +1,8 @@
 package net.godlycow.org.essc.util;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -61,6 +63,10 @@ public class FormatUtil {
         } else {
             return ((long)(truncated / 10)) + suffix;
         }
+    }
+
+    public static String formatMoney(double number, String pattern) {
+        return new DecimalFormat(pattern, new DecimalFormatSymbols(Locale.US)).format(number);
     }
 
     public static String formatTime(long seconds) {

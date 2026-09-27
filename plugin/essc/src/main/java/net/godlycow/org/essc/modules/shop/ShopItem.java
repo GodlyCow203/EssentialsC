@@ -273,8 +273,7 @@ public class ShopItem {
                                        net.kyori.adventure.text.Component sellLine,
                                        net.kyori.adventure.text.Component stockLine,
                                        net.kyori.adventure.text.Component leftClick,
-                                       net.kyori.adventure.text.Component rightClick,
-                                       net.kyori.adventure.text.Component shiftClick) {
+                                       net.kyori.adventure.text.Component rightClick) {
         ItemStack item = createItemStack();
         ItemMeta meta = item.getItemMeta();
 
@@ -300,7 +299,6 @@ public class ShopItem {
 
         newLore.add(leftClick);
         newLore.add(rightClick);
-        newLore.add(shiftClick);
 
         meta.lore(newLore);
         item.setItemMeta(meta);

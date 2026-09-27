@@ -207,8 +207,9 @@ public class ShopGuiManager {
         String buyCurrency = item.getBuyPrice() == 1.0 ? currencySingular : currencyPlural;
         String sellCurrency = item.getSellPrice() == 1.0 ? currencySingular : currencyPlural;
 
-        String formattedBuyPrice = FormatUtil.formatNumber(item.getBuyPrice());
-        String formattedSellPrice = FormatUtil.formatNumber(item.getSellPrice());
+        String moneyFormat = plugin.getConfigManager().getEconomyFormat();
+        String formattedBuyPrice = FormatUtil.formatMoney(item.getBuyPrice(), moneyFormat);
+        String formattedSellPrice = FormatUtil.formatMoney(item.getSellPrice(), moneyFormat);
 
 
         Component buyLine = plugin.getLanguageManager().get(player, "shop.gui.item.buy-line", Map.of(
@@ -227,9 +228,8 @@ public class ShopGuiManager {
 
         Component leftClick = plugin.getLanguageManager().get(player, "shop.gui.item.left-click").decoration(TextDecoration.ITALIC, false);
         Component rightClick = plugin.getLanguageManager().get(player, "shop.gui.item.right-click").decoration(TextDecoration.ITALIC, false);
-        Component shiftClick = plugin.getLanguageManager().get(player, "shop.gui.item.shift-click").decoration(TextDecoration.ITALIC, false);
 
-        ItemStack display = item.createDisplayItem(balance, buyLine, sellLine, stockLine, leftClick, rightClick, shiftClick);
+        ItemStack display = item.createDisplayItem(balance, buyLine, sellLine, stockLine, leftClick, rightClick);
         ItemMeta meta = display.getItemMeta();
         if (meta != null) {
             meta.getPersistentDataContainer().set(shopItemKey, PersistentDataType.STRING, item.getId());
@@ -259,13 +259,14 @@ public class ShopGuiManager {
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural();
 
-        meta.displayName(mm.deserialize(config.getName()).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(resolveText(config.getName(), player).decoration(TextDecoration.ITALIC, false));
 
         List<Component> lore = new ArrayList<>();
 
         Map<String, String> balancePlaceholders = Map.of(
-                "balance", formattedBalance,
-                "currency", currency
+                "currency", currency,
+                "balance", formattedBalance
+
         );
         lore.add(plugin.getLanguageManager().get(player, "shop.gui.main.balance-line", balancePlaceholders).decoration(TextDecoration.ITALIC, false));
         lore.add(mm.deserialize("").decoration(TextDecoration.ITALIC, false));

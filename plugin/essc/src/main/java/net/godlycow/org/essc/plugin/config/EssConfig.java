@@ -174,6 +174,10 @@ public class EssConfig {
         return config.getBoolean("kits.sounds", true);
     }
 
+    public boolean isKitStripItemNames() {
+        return config.getBoolean("kits.strip-item-names", false);
+    }
+
     public boolean isBedHomeCountsInLimit() {
         return config.getBoolean("home.bed-counts-in-limit", true);
     }

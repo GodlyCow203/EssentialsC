@@ -20,4 +20,5 @@ public interface KitManager {
     CompletableFuture<Void> claimKitForPlayer(Player player, Kit kit);
     int getTotalLoadedKitCount();
     boolean isKitLoaded(String name);
+    boolean areItemNamesStrippedOnClaim();
 }

@@ -52,10 +52,11 @@ public class LanguageCommand extends Command {
                 showHelp(sender);
             }
             default -> {
-                if (isValidLanguage(subCommand)) {
-                    setLanguage(player, subCommand);
+                String resolved = plugin.getLanguageManager().resolveLanguageCode(args[0]);
+                if (resolved != null) {
+                    setLanguage(player, resolved);
                 } else {
-                    sender.sendMessage(lang.get(sender, "language.error.invalid_lang", Map.of("lang", subCommand)));
+                    sender.sendMessage(lang.get(sender, "language.error.invalid_lang", Map.of("lang", args[0])));
                 }
             }
         }
@@ -75,21 +76,22 @@ public class LanguageCommand extends Command {
 
 
     private void setLanguage(Player player, String langCode) {
-        if (!isValidLanguage(langCode)) {
+        String resolved = plugin.getLanguageManager().resolveLanguageCode(langCode);
+        if (resolved == null) {
             player.sendMessage(lang.get(player, "language.error.not_found", Map.of("lang", langCode)));
             return;
         }
 
-        plugin.getLanguageManager().setPlayerLanguage(player.getUniqueId(), langCode);
+        plugin.getLanguageManager().setPlayerLanguage(player.getUniqueId(), resolved);
 
         UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
         if (profile != null) {
-            profile.setLanguageCode(langCode);
+            profile.setLanguageCode(resolved);
             plugin.getUserManager().saveAsync(profile); //save language to db
         }
 
-        player.sendMessage(lang.get(player, "language.set.success", Map.of("language", langCode)));
-        plugin.debug("Player " + player.getName() + " set language to: " + langCode);
+        player.sendMessage(lang.get(player, "language.set.success", Map.of("language", resolved)));
+        plugin.debug("Player " + player.getName() + " set language to: " + resolved);
     }
 
     private void resetLanguage(Player player) {
@@ -118,11 +120,6 @@ public class LanguageCommand extends Command {
         sender.sendMessage(lang.get(sender, "language.help.reset"));
         sender.sendMessage(lang.get(sender, "language.help.list"));
         sender.sendMessage(lang.get(sender, "language.help.current"));
-    }
-
-    private boolean isValidLanguage(String langCode) {
-        File langFile = new File(plugin.getDataFolder(), "lang/" + langCode + ".json");
-        return langFile.exists();
     }
 
     private List<String> getAvailableLanguages() {

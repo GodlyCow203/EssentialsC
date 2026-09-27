@@ -8,6 +8,7 @@ import net.godlycow.org.essc.api.kit.event.KitPostClaimEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,11 @@ public class KitClaims {
         }
 
         List<ItemStack> itemsToGive = new ArrayList<>(kit.getItems());
+
+        if (plugin.getConfigManager().isKitStripItemNames()) {
+            stripItemNames(itemsToGive);
+        }
+
         KitGiveEvent giveEvent = new KitGiveEvent(player, apiKit, itemsToGive);
         Bukkit.getPluginManager().callEvent(giveEvent);
 
@@ -86,5 +92,26 @@ public class KitClaims {
         }
 
         plugin.debug("Player " + player.getName() + " claimed kit " + kit.getName());
+    }
+
+    private void stripItemNames( List<ItemStack> items) {
+
+        for (int i = 0; i < items.size(); i++) {
+            ItemStack item = items.get(i);
+
+            if (item == null) {
+                continue;
+            }
+
+            ItemStack clone = item.clone();
+            ItemMeta meta  = clone.getItemMeta();
+
+            if (meta != null && meta.hasDisplayName()) {
+                meta.displayName(null);
+                clone.setItemMeta(meta);
+            }
+
+            items.set(i, clone);
+        }
     }
 }

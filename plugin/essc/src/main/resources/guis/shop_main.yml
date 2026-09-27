@@ -18,12 +18,12 @@ items:
 
   close:
     material: NETHER_WART
-    name: <color:#F52727>Close
+    name: lang:shop.gui.main.close
     slot: 50
     action: close
   balance:
     material: EMERALD
-    name: <color:#F5C827>Your Balance
+    name: lang:shop.gui.main.balance-name
     slot: 48
 
   left_1:

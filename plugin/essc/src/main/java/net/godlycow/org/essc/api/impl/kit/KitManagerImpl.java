@@ -147,4 +147,9 @@ public class KitManagerImpl implements KitManager {
         boolean loaded = internal != null;
         return loaded;
     }
+
+    @Override
+    public boolean areItemNamesStrippedOnClaim() {
+        return plugin.getConfigManager().isKitStripItemNames();
+    }
 }

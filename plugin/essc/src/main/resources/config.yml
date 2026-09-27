@@ -7,7 +7,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 17
+config-version: 18
 
 # General settings
 
@@ -463,6 +463,11 @@ kits:
   # Play sounds when opening, claiming, turning pages, or closing the GUI.
   sounds: true
 
+  # If true, the custom name set for an item in kits.yml is removed when the kit
+  # is claimed, so players receive the item with its default vanilla name.
+  # Kit previews in the GUI are not affected.
+  strip-item-names: true
+
 
 # Spawn
 
@@ -695,8 +700,8 @@ shop:
 
   # Currency labels used in shop transaction messages.
   currency:
-    singular: Dollar
-    plural: Dollars
+    singular: $
+    plural: $
 
 # Sell
 #

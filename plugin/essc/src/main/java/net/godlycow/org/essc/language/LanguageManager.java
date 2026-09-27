@@ -74,6 +74,10 @@ public class LanguageManager {
 
 
     private void loadIntoCache(String code) {
+        String resolved = resolveLanguageCode(code);
+        if (resolved != null) {
+            code = resolved;
+        }
         File file = new File(plugin.getDataFolder(), "lang/" + code + ".json");
         if (!file.exists()) {
             if (code.equals(defaultLang)) {
@@ -155,7 +159,13 @@ public class LanguageManager {
         }
 
         if (!cache.containsKey(locale)) {
-            loadIntoCache(locale);
+            String resolvedLocale = resolveLanguageCode(locale);
+            if (resolvedLocale != null) {
+                locale = resolvedLocale;
+            }
+            if (!cache.containsKey(locale)) {
+                loadIntoCache(locale);
+            }
         }
 
         String fallbackLang = plugin.getConfigManager().getFallbackLanguage();
@@ -232,10 +242,35 @@ public class LanguageManager {
     }
 
     public void setPlayerLanguage(UUID playerUuid, String languageCode) {
-        playerLanguages.put(playerUuid, languageCode);
-        if (!cache.containsKey(languageCode)) {
-            loadIntoCache(languageCode);
+        String resolved = resolveLanguageCode(languageCode);
+        String code = resolved != null ? resolved : languageCode;
+        playerLanguages.put(playerUuid, code);
+        if (!cache.containsKey(code)) {
+            loadIntoCache(code);
         }
+    }
+
+    public String resolveLanguageCode(String langCode) {
+
+        if (langCode == null || langCode.isEmpty()) {
+            return null;
+        }
+
+        File langFolder = new File(plugin.getDataFolder(), "lang");
+        File[] files = langFolder.listFiles((dir, name) -> name.endsWith(".json"));
+
+        if (files == null) {
+            return null;
+        }
+
+        for (File file : files) {
+            String base = file.getName().substring(0, file.getName().length() - ".json".length());
+            if (base.equalsIgnoreCase(langCode)) {
+                return base;
+            }
+        }
+
+        return null;
     }
 
     public void removePlayerLanguage(UUID playerUuid) {

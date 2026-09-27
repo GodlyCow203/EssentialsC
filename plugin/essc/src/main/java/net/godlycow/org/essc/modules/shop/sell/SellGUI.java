@@ -127,7 +127,7 @@ public class SellGUI {
 
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("amount", String.valueOf(countItems()));
-            placeholders.put("worth", FormatUtil.formatNumberWithDecimals(totalWorth));
+            placeholders.put("worth", FormatUtil.formatMoney(totalWorth, plugin.getConfigManager().getEconomyFormat()));
             placeholders.put("currency", currency);
 
             List<Component> lore = new ArrayList<>();
@@ -220,7 +220,7 @@ public class SellGUI {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("amount", String.valueOf(totalItems));
-        placeholders.put("worth", FormatUtil.formatNumberWithDecimals(totalWorth));
+        placeholders.put("worth", FormatUtil.formatMoney(totalWorth, plugin.getConfigManager().getEconomyFormat()));
         placeholders.put("currency", totalWorth == 1.0 ?
                 plugin.getConfigManager().getShopCurrencySingular() :
                 plugin.getConfigManager().getShopCurrencyPlural());
