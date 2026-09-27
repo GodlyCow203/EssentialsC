@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class AhGuiManager {
@@ -259,7 +260,7 @@ public class AhGuiManager {
         }
 
 
-        String priceStr = itemFactory.formatAmount(auction.getPrice());
+        String pricePlain = itemFactory.formatAmountPlain(auction.getPrice());
 
         Component title = template.resolveTitle(player, plugin);
         Inventory gui = Bukkit.createInventory(new AhGuiHolder(template.getId(),  1, auction.getId(), searchQuery), template.getSize(), title);
@@ -272,11 +273,15 @@ public class AhGuiManager {
 
         ItemStack display = auction.getItem().clone();
         ItemMeta displayMeta = display.getItemMeta();
+        String currency = auction.getPrice().compareTo(BigDecimal.ONE) == 0
+                ? plugin.getConfigManager().getCurrencySingular()
+                : plugin.getConfigManager().getCurrencyPlural();
+
 
         if (displayMeta != null) {
             List<Component> lore = new ArrayList<>();
             lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.item.lore.price",
-                    Map.of("price", priceStr))));
+                    Map.of("currency", currency, "price", pricePlain))));
             lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.item.lore.seller",
                     Map.of("seller", auction.getSellerName()))));
             displayMeta.lore(lore);
@@ -284,6 +289,7 @@ public class AhGuiManager {
         }
 
         gui.setItem(itemSlot, display);
+
 
         GuiButton confirmConfig = template.getItem("confirm");
         if (confirmConfig != null) {
@@ -294,7 +300,7 @@ public class AhGuiManager {
                 List<Component> confirmLore = new ArrayList<>();
                 confirmLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.confirm.lore1")));
                 confirmLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.confirm.confirm.lore2",
-                        Map.of("price", priceStr))));
+                        Map.of("currency", currency, "price", pricePlain))));
 
 
                 confirmMeta.lore(confirmLore);
@@ -391,9 +397,8 @@ public class AhGuiManager {
                 if (emptyMeta != null) {
 
                     List<Component> emptyLore = new ArrayList<>();
-                    emptyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.empty.search.lore1")));
-                    emptyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.empty.search.lore2",
-                            Map.of("query", query))));
+                    emptyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.empty.search.lore1",
+                            Map.of("query",query))));
                     emptyMeta.lore(emptyLore);
                     emptyItem.setItemMeta(emptyMeta);
                 }
@@ -424,8 +429,7 @@ public class AhGuiManager {
             if (infoMeta != null) {
 
                 List<Component> infoLore = new ArrayList<>();
-                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore1")));
-                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore2",
+                infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore1",
                         Map.of("query", query))));
                 infoLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.search_info.lore3",
                         Map.of("count", String.valueOf(results.size())))));
@@ -538,11 +542,14 @@ public class AhGuiManager {
             ItemMeta buyMeta = buyItem.getItemMeta();
 
             if (buyMeta != null) {
-                String priceStr = itemFactory.formatAmount(auction.getPrice());
+                String priceStr = itemFactory.formatAmountPlain(auction.getPrice());
+                String currency = auction.getPrice().compareTo(BigDecimal.ONE) == 0
+                        ? plugin.getConfigManager().getCurrencySingular()
+                        : plugin.getConfigManager().getCurrencyPlural();
                 List<Component> buyLore = new ArrayList<>();
                 buyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.shulker_preview.buy.lore1")));
                 buyLore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.shulker_preview.buy.lore2",
-                        Map.of("price", priceStr))));
+                        Map.of("currency", currency, "price", priceStr))));
                 buyMeta.lore(buyLore);
                 buyMeta.getPersistentDataContainer().set(
                         new NamespacedKey(plugin, "gui_action"),

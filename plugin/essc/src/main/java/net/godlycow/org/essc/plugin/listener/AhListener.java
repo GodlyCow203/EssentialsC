@@ -325,8 +325,9 @@ public class AhListener implements Listener {
                 player.getScheduler().run(plugin, scheduledTask -> {
                     if (success) {
                         player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
-                                "item", auction.getItem().getType().toString(),
-                                "price", plugin.getEconomyManager().format(auction.getPrice())
+                                "currency",plugin.getConfigManager().getCurrencyPlural(),
+                                "item", plugin.getAuctionManager().getItemDisplayName(auction.getItem()),
+                                "price", plugin.getEconomyManager().formatPlain(auction.getPrice())
                         )));
                         soundManager.playPurchase(player);
                     } else {
@@ -366,8 +367,9 @@ public class AhListener implements Listener {
             player.getScheduler().run(plugin, scheduledTask -> {
                 if (success) {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
-                            "item", auction.getItem().getType().toString(),
-                            "price", plugin.getEconomyManager().format(auction.getPrice())
+                            "currency",plugin.getConfigManager().getCurrencyPlural(),
+                            "item", plugin.getAuctionManager().getItemDisplayName(auction.getItem()),
+                            "price", plugin.getEconomyManager().formatPlain(auction.getPrice())
                     )));
                     soundManager.playPurchase(player);
                 } else {
@@ -457,8 +459,9 @@ public class AhListener implements Listener {
                 player.getScheduler().run(plugin, scheduledTask -> {
                     if (success) {
                         player.sendMessage(plugin.getLanguageManager().get(player, "ah.purchased", Map.of(
-                                "item", auction.getItem().getType().toString(),
-                                "price", plugin.getEconomyManager().format(auction.getPrice())
+                                "currency",plugin.getConfigManager().getCurrencyPlural(),
+                                "item", plugin.getAuctionManager().getItemDisplayName(auction.getItem()),
+                                "price", plugin.getEconomyManager().formatPlain(auction.getPrice())
                         )));
                         soundManager.playPurchase(player);
                     } else {

@@ -1,9 +1,14 @@
 package net.godlycow.org.essc.modules.auction;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.modules.shop.ShopItem;
+import net.godlycow.org.essc.modules.shop.sell.SellManager;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -150,7 +155,8 @@ public class AuctionManager implements Listener {
                 for (AuctionStorage.SaleNotification n : notifications) {
                     player.sendMessage(plugin.getLanguageManager().get(player, "ah.sold", Map.of(
                             "item", n.itemName(),
-                            "price", plugin.getEconomyManager().format(BigDecimal.valueOf(n.price())),
+                            "currency",plugin.getConfigManager().getCurrencyPlural(),
+                            "price", plugin.getEconomyManager().formatPlain(BigDecimal.valueOf(n.price())),
                             "buyer", n.buyerName()
                     )));
                 }
@@ -327,12 +333,59 @@ public class AuctionManager implements Listener {
                             Player seller = Bukkit.getPlayer(auction.getSellerUuid());
                             if (seller != null && seller.isOnline()) {
                                 seller.sendMessage(plugin.getLanguageManager().get(seller, "ah.expired",
-                                        Map.of("item", auction.getItem().getType().toString())));
+                                        Map.of("item", getItemDisplayName(auction.getItem()))));
                             }
                         });
             }
         }, 1, 1, TimeUnit.MINUTES);
     }
+
+    public String getItemDisplayName(ItemStack item) {
+
+        if (item == null || item.getType() == Material.AIR)
+            return "";
+
+        SellManager sellManager = plugin.getSellManager();
+        ShopItem shopItem = sellManager == null ? null : sellManager.findMatchingShopItem(item);
+        if (shopItem != null && shopItem.getDisplayName() != null && !shopItem.getDisplayName().isBlank()) {
+            return shopItem.getDisplayName();
+        }
+
+        ItemMeta meta = item.getItemMeta();
+
+        if (meta != null && meta.hasDisplayName()) {
+            String custom = ChatColor.stripColor(meta.getDisplayName());
+            if (custom != null && !custom.isBlank())
+                return escapeMiniMessage(custom);
+        }
+
+        return escapeMiniMessage(makeMaterialReadable(item.getType().name()));
+    }
+
+
+    private static String escapeMiniMessage( String text) {
+        return MiniMessage.miniMessage().escapeTags(text);
+    }
+
+    private static String makeMaterialReadable(String materialName) {
+
+        StringBuilder out = new StringBuilder();
+        for (String part : materialName.split("_")) {
+
+            if (part.isEmpty())
+                continue;
+
+            if (!out.isEmpty())
+                out.append(' ');
+            out.append(Character.toUpperCase(part.charAt(0)));
+            if (part.length() > 1)
+                out.append(part.substring(1).toLowerCase(Locale.ROOT));
+        }
+
+        return out.toString();
+    }
+
+
 
     private void notifySeller(Auction auction, String buyerName) {
         if (!plugin.getConfigManager().isAHNotifyOnSale()) return;
@@ -341,13 +394,14 @@ public class AuctionManager implements Listener {
         if (!notificationsEnabled) return;
 
         Player seller = Bukkit.getPlayer(auction.getSellerUuid());
-        String itemName = auction.getItem().getType().toString();
+        String itemName = getItemDisplayName(auction.getItem());
 
         if (seller != null && seller.isOnline()) {
             seller.getScheduler().run(plugin, task -> {
                 seller.sendMessage(plugin.getLanguageManager().get(seller, "ah.sold", Map.of(
                         "item", itemName,
-                        "price", plugin.getEconomyManager().format(auction.getPrice()),
+                        "currency",plugin.getConfigManager().getCurrencyPlural(),
+                        "price", plugin.getEconomyManager().formatPlain(auction.getPrice()),
                         "buyer", buyerName
                 )));
             }, null);

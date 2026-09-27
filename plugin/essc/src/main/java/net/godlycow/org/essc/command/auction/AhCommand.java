@@ -128,7 +128,8 @@ public class AhCommand extends Command {
                         if (success) {
                             player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                             player.sendMessage(lang.get(player, "ah.listed", Map.of(
-                                    "price", plugin.getEconomyManager().format(price),
+                                    "currency",plugin.getConfigManager().getCurrencyPlural(),
+                                    "price", plugin.getEconomyManager().formatPlain(price),
                                     "duration", String.valueOf(duration / 3600000)
                             )));
                             guiManager.openMainGui(player, 1);

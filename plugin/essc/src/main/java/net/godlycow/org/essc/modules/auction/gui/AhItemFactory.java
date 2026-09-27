@@ -66,13 +66,9 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller", Map.of("seller", auction.getSellerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left", Map.of("time", formatTime(auction.getTimeRemaining())))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         boolean isOwn = auction.getSellerUuid().equals(viewer.getUniqueId());
-        if (isOwn) {
-            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.your_auction")));
-            lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel")));
-        } else {
+        if (!isOwn) {
             lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_purchase")));
             if (isShulkerBox(display.getType())) {
                 lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_preview")));
@@ -102,8 +98,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.price", Map.of("price", priceStr))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.time_left", Map.of("time", formatTime(auction.getTimeRemaining())))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.right_click_cancel")));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.id", Map.of("id", String.valueOf(auction.getId())))));
 
         meta.lore(lore);
@@ -124,7 +118,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.buyer", Map.of("buyer", entry.getBuyerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when", Map.of("time", formatTimeAgo(entry.getTimestamp())))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         display.setItemMeta(meta);
@@ -141,7 +134,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.seller_name", Map.of("seller", entry.getSellerName()))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.when", Map.of("time", formatTimeAgo(entry.getTimestamp())))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         display.setItemMeta(meta);
@@ -156,7 +148,6 @@ public class AhItemFactory {
 
         List<Component> lore = meta.hasLore() ? new ArrayList<>(meta.lore()) : new ArrayList<>();
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.click_claim")));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.lore.slot", Map.of("slot", String.valueOf(slot)))));
 
@@ -234,7 +225,6 @@ public class AhItemFactory {
         boolean hasExpired = plugin.getAuctionManager().hasExpiredItems(player.getUniqueId());
 
         List<Component> lore = new ArrayList<>();
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator_top")));
         lore.add(Component.empty());
 
         String maxStr = bypass ? "∞" : String.valueOf(max);
@@ -250,7 +240,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_expired")));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.info.lore.help_listings")));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
 
         meta.lore(lore);
 
@@ -287,7 +276,6 @@ public class AhItemFactory {
         lore.add(Component.empty());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.click_individual")));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.stats.lore.claim_all")));
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -311,7 +299,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_sales", Map.of("count", String.valueOf(history.size())))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.sell_stats.lore.total_earnings", Map.of("amount", formatAmount(totalEarnings)))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -335,7 +322,6 @@ public class AhItemFactory {
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_purchases", Map.of("count", String.valueOf(history.size())))));
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.item.buy_stats.lore.total_spent", Map.of("amount", formatAmount(totalSpent)))));
         lore.add(Component.empty());
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator")));
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -362,12 +348,10 @@ public class AhItemFactory {
         }
 
         List<Component> lore = new ArrayList<>();
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
         lore.add(Component.empty());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.total", Map.of("count", String.valueOf(totalItems)))));
         lore.add(Component.empty());
         lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.item.listings_info.lore.cancel_tip")));
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(player, "ah.gui.separator")));
 
         meta.lore(lore);
 
@@ -386,7 +370,6 @@ public class AhItemFactory {
 
     private List<Component> createBaseLore(Player viewer) {
         List<Component> lore = new ArrayList<>();
-        lore.add(ComponentHelper.noItalic(plugin.getLanguageManager().get(viewer, "ah.gui.separator_top")));
         lore.add(Component.empty());
         return lore;
     }
@@ -398,6 +381,13 @@ public class AhItemFactory {
         Economy vaultEconomy = Bukkit.getServicesManager().load(Economy.class);
         if (vaultEconomy != null) {
             return vaultEconomy.format(amount.doubleValue());
+        }
+        return amount.toPlainString();
+    }
+
+    public String formatAmountPlain(BigDecimal amount) {
+        if (plugin.getEconomyManager() != null) {
+            return plugin.getEconomyManager().formatPlain(amount);
         }
         return amount.toPlainString();
     }
@@ -441,7 +431,9 @@ public class AhItemFactory {
     }
 
     public static boolean isShulkerBox(Material material) {
-        return material != null && material.name().endsWith("_SHULKER_BOX");
+        if (material == null) return false;
+        String name = material.name();
+        return name.equals("SHULKER_BOX") || name.endsWith("_SHULKER_BOX");
     }
 
     public static ItemStack[] readShulkerContents(ItemStack  shulkerItem) {
