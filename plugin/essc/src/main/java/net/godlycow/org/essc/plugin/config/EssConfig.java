@@ -162,6 +162,10 @@ public class EssConfig {
         return config.getString("home.default-teleport-name", "");
     }
 
+    public boolean isKitsEnabled() {
+        return config.getBoolean("kits.enabled", true);
+    }
+
     public String getKitMode() {
         return config.getString("kits.mode", "command").toLowerCase();
     }

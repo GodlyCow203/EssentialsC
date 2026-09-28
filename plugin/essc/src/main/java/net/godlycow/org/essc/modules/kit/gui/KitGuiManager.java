@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -31,15 +32,22 @@ public class KitGuiManager {
     private final EssentialsC plugin;
     private final GuiFramework guiFramework;
     private final KitSoundManager sounds;
+    private final KitGuiListener listener;
     private final Map<UUID, Integer> activeSessions = new ConcurrentHashMap<>();
 
     public KitGuiManager(EssentialsC plugin, GuiFramework guiFramework) {
         this.plugin = plugin;
         this.guiFramework = guiFramework;
         this.sounds = new KitSoundManager(plugin);
+        this.listener = new KitGuiListener(plugin, this);
 
-        plugin.getServer().getPluginManager().registerEvents(
-                new KitGuiListener(plugin, this), plugin);
+        plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+    }
+
+    public void shutdown() {
+        HandlerList.unregisterAll(listener);
+        activeSessions.clear();
+        plugin.debug("[KitGUI] Kit GUI unloaded");
     }
 
     public void openKitList(Player player, int page) {

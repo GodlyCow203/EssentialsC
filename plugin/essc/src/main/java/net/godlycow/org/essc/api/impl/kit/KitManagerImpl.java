@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -20,6 +21,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public Collection<Kit> getLoadedKits() {
+        if (plugin.getKitManager() == null) {
+            return Collections.emptyList();
+        }
         List<Kit> result = new ArrayList<>();
         for (var internalKit : plugin.getKitManager().getKits()) {
             Kit apiKit = new KitImpl(internalKit);
@@ -30,6 +34,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public Kit findKitByName(String name) {
+        if (plugin.getKitManager() == null) {
+            return null;
+        }
         var internal = plugin.getKitManager().getKit(name);
         if (internal == null) {
             return null;
@@ -40,6 +47,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public Collection<Kit> getKitsAvailableTo(Player player) {
+        if (plugin.getKitManager() == null) {
+            return Collections.emptyList();
+        }
         List<Kit> result = new ArrayList<>();
         for (var internalKit : plugin.getKitManager().getKits()) {
             Kit apiKit = new KitImpl(internalKit);
@@ -60,6 +70,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public CompletableFuture<Long> fetchCooldownRemainingAsync(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return CompletableFuture.completedFuture(0L);
+        }
         var impl = (KitImpl) kit;
         CompletableFuture<Long> future = plugin.getKitManager().getCooldownRemainingAsync(player, impl.getInternalKit());
         return future.thenApply(remaining -> remaining);
@@ -67,6 +80,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public long getRemainingCooldownSeconds(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return 0;
+        }
         var impl = (KitImpl) kit;
         long remaining = plugin.getKitManager().getCooldownRemaining(player, impl.getInternalKit());
         return remaining;
@@ -74,6 +90,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public boolean hasPlayerClaimed(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return false;
+        }
         var impl = (KitImpl) kit;
         boolean claimed = plugin.getKitManager().hasClaimed(player, impl.getInternalKit());
         return claimed;
@@ -81,6 +100,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public int getPlayerClaimCount(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return 0;
+        }
         var impl = (KitImpl) kit;
         int count = plugin.getKitManager().getClaimCount(player, impl.getInternalKit());
         return count;
@@ -88,6 +110,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public KitClaimProfile fetchClaimProfile(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return new KitClaimProfileImpl(player.getUniqueId(), kit.getName(), 0, 0, false);
+        }
         var impl = (KitImpl) kit;
         var internal = impl.getInternalKit();
         boolean claimed = plugin.getKitManager().hasClaimed(player, internal);
@@ -101,6 +126,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public boolean isClaimAllowedFor(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return false;
+        }
         var impl = (KitImpl) kit;
         boolean result = plugin.getKitManager().canClaim(player, impl.getInternalKit());
         return result;
@@ -108,6 +136,9 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public boolean isPermittedToUse(Player player, Kit kit) {
+        if (plugin.getKitManager() == null) {
+            return false;
+        }
         var impl = (KitImpl) kit;
         boolean result = plugin.getKitManager().hasPermission(player, impl.getInternalKit());
         return result;
@@ -115,6 +146,10 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public void reloadKitDefinitions() {
+        if (plugin.getKitManager() == null) {
+            plugin.debug("Ignoring kit reload request — kit system is disabled.");
+            return;
+        }
         plugin.getKitManager().reload();
     }
 
@@ -122,6 +157,11 @@ public class KitManagerImpl implements KitManager {
     public CompletableFuture<Void> claimKitForPlayer(Player player, Kit kit) {
         var impl = (KitImpl) kit;
         CompletableFuture<Void> future = new CompletableFuture<>();
+
+        if (plugin.getKitManager() == null) {
+            future.completeExceptionally(new IllegalStateException("Kit system is disabled (kits.enabled = false)"));
+            return future;
+        }
 
         player.getScheduler().run(plugin, task -> {
             try {
@@ -137,12 +177,18 @@ public class KitManagerImpl implements KitManager {
 
     @Override
     public int getTotalLoadedKitCount() {
+        if (plugin.getKitManager() == null) {
+            return 0;
+        }
         int count = plugin.getKitManager().getKits().size();
         return count;
     }
 
     @Override
     public boolean isKitLoaded(String name) {
+        if (plugin.getKitManager() == null) {
+            return false;
+        }
         var internal = plugin.getKitManager().getKit(name);
         boolean loaded = internal != null;
         return loaded;

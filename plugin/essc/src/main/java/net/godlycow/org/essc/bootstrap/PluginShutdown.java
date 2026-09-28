@@ -41,6 +41,9 @@ public final class PluginShutdown {
         if (plugin.getKitManager() != null) {
             plugin.getKitManager().shutdown();
         }
+        if (plugin.getKitGuiManager() != null) {
+            plugin.getKitGuiManager().shutdown();
+        }
         if (plugin.getNickManager() != null) {
             plugin.getNickManager().shutdown();
         }

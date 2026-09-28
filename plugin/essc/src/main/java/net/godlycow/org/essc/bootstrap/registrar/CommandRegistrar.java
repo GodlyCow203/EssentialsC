@@ -108,8 +108,6 @@ public class CommandRegistrar {
         register("back",           new BackCommand(plugin));
         register("dback",          new DBackCommand(plugin));
         register("tphereall",      new TPHereAllCommand(plugin));
-        register("kit",            new KitCommand(plugin));
-        register("kits",           new KitsCommand(plugin));
         register("playtime",       new PlaytimeCommand(plugin));
         register("uptime",         new UptimeCommand(plugin));
         register("tphere",         new TPHereCommand(plugin));
@@ -206,6 +204,17 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("trash");
             CommandRegistration.unregisterCommand("essentialsc:trash");
             plugin.debug("Trash command unregistered ( trash.enabled is false");
+        }
+
+        if (plugin.getConfigManager().isKitsEnabled()) {
+            register("kit", new KitCommand(plugin));
+            register("kits", new KitsCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("kit");
+            CommandRegistration.unregisterCommand("essentialsc:kit");
+            CommandRegistration.unregisterCommand("kits");
+            CommandRegistration.unregisterCommand("essentialsc:kits");
+            plugin.debug("Kit commands unregistered (kits.enabled is false)");
         }
     }
 

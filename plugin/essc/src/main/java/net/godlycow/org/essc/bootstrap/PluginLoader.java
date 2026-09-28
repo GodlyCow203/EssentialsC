@@ -24,12 +24,14 @@ import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
 import net.godlycow.org.essc.modules.fly.FlyMigration;
+import net.godlycow.org.essc.modules.kit.gui.KitGuiManager;
 import net.godlycow.org.essc.modules.punishment.IpHistoryMigration;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
 import net.godlycow.org.essc.modules.home.HomeManager;
 import net.godlycow.org.essc.modules.home.HomeNotificationManager;
 import net.godlycow.org.essc.storage.user.UserManager;
 import net.godlycow.org.essc.modules.kit.KitManager;
+import net.godlycow.org.essc.modules.kit.gui.KitGuiHolder;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.plugin.listener.AhListener;
@@ -135,7 +137,12 @@ public final class PluginLoader {
         plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
         plugin.setSpawnManager(new SpawnManager(plugin));
         plugin.setBackManager(new BackManager(plugin));
-        plugin.setKitManager(new KitManager(plugin));
+        if (plugin.getConfigManager().isKitsEnabled()) {
+            plugin.setKitManager(new KitManager(plugin));
+        } else {
+
+            unloadKits();
+        }
         plugin.setVanishManager(new VanishManager(plugin));
         plugin.setReplyManager(new ReplyManager());
         if (plugin.getConfigManager().isChatSystemEnabled()) {
@@ -187,15 +194,14 @@ public final class PluginLoader {
         }
 
         GuiFramework guiFramework = null;
-        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled()
-                || plugin.getConfigManager().isTrashEnabled() || plugin.getConfigManager().isKitGuiMode()) {
+        if (plugin.getConfigManager().isAHEnabled() || plugin.getConfigManager().isShopEnabled() || plugin.getConfigManager().isTrashEnabled() || isKitGuiAvailable()) {
             guiFramework = new GuiFramework(plugin);
             guiFramework.loadTemplates();
             plugin.setGuiFramework(guiFramework);
         }
 
-        if (plugin.getConfigManager().isKitGuiMode() && guiFramework != null) {
-            plugin.setKitGuiManager(new net.godlycow.org.essc.modules.kit.gui.KitGuiManager(plugin, guiFramework));
+        if (isKitGuiAvailable() && guiFramework != null) {
+            plugin.setKitGuiManager(new KitGuiManager(plugin, guiFramework));
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
@@ -313,6 +319,43 @@ public final class PluginLoader {
 
         plugin.setAhGuiManager(null);
         plugin.debug("Auction House fully unloaded.");
+    }
+
+
+    private boolean isKitGuiAvailable() {
+        return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
+    }
+
+
+    private void unloadKits() {
+        plugin.debug("Kits are disabled in config,fully unloading");
+
+        CommandRegistration.unregisterCommand("kit");
+        CommandRegistration.unregisterCommand("essentialsc:kit");
+        CommandRegistration.unregisterCommand("kits");
+        CommandRegistration.unregisterCommand("essentialsc:kits");
+        plugin.debug("Unregistered Kit Commands");
+
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            if (player.getOpenInventory().getTopInventory() != null
+                    && player.getOpenInventory().getTopInventory().getHolder() instanceof KitGuiHolder) {
+                player.closeInventory();
+            }
+        }
+
+        if (plugin.getKitGuiManager() != null) {
+            plugin.getKitGuiManager().shutdown();
+            plugin.setKitGuiManager(null);
+        }
+
+
+        if (plugin.getKitManager() != null) {
+            HandlerList.unregisterAll(plugin.getKitManager());
+            plugin.getKitManager().shutdown();
+            plugin.setKitManager(null);
+        }
+
+        plugin.debug("Kits fully unloaded");
     }
 
     private void unloadShop() {

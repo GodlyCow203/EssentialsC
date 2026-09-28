@@ -140,7 +140,7 @@ public class DumpSectionCollector {
         modules.put("afk", moduleStatus(plugin.getConfigManager().isAfkEnabled(), plugin.getAfkManager() != null));
         modules.put("vanish", moduleStatus(true, plugin.getVanishManager() != null));
         modules.put("fly", moduleStatus(true, plugin.getFlyManager() != null));
-        modules.put("kits", moduleStatus(true, plugin.getKitManager() != null));
+        modules.put("kits", moduleStatus(plugin.getConfigManager().isKitsEnabled(), plugin.getKitManager() != null));
         modules.put("shop", moduleStatus(plugin.getConfigManager().isShopEnabled(), plugin.getShopManager() != null));
         modules.put("auction", moduleStatus(plugin.getConfigManager().isAHEnabled(), plugin.getAuctionManager() != null));
         modules.put("sell", moduleStatus(plugin.getConfigManager().isSellEnabled(), plugin.getSellManager() != null));
@@ -246,6 +246,7 @@ public class DumpSectionCollector {
         config.put("afkEnabled", plugin.getConfigManager().isAfkEnabled());
         config.put("afkTimeout", plugin.getConfigManager().getAfkTimeout());
         config.put("backupKeepLast", plugin.getConfigManager().getBackupKeepLast());
+        config.put("kitEnabled", plugin.getConfigManager().isKitsEnabled());
         config.put("kitMode", plugin.getConfigManager().getKitMode());
         config.put("nickEnabled", plugin.getConfigManager().isNickEnabled());
         config.put("scoreboardEnabled", plugin.getConfigManager().isScoreboardEnabled());
