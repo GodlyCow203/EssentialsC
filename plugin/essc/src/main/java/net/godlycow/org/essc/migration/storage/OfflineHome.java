@@ -15,10 +15,15 @@ public class OfflineHome {
 
     public OfflineHome(EssentialsC plugin) {
         this.plugin = plugin;
-        this.database = plugin.getHomeManager().getDatabase();
+        var homeManager = plugin.getHomeManager();
+        this.database = homeManager == null ? null : homeManager.getDatabase();
     }
 
     public CompletableFuture<Boolean> setHomeOffline(UUID owner, String name, Location location, String ownerName) {
+        if (database == null) {
+            return CompletableFuture.completedFuture(false);
+        }
+
         return database.async(conn -> {
             try (PreparedStatement stmt = conn.prepareStatement("""
                 INSERT INTO homes (uuid, name, world, x, y, z, yaw, pitch)
@@ -52,7 +57,7 @@ public class OfflineHome {
     }
 
     public boolean isAvailable() {
-        return plugin.getHomeManager() != null;
+        return plugin.getHomeManager() != null && database != null;
     }
 
     public void shutdown() {

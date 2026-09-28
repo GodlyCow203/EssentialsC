@@ -133,8 +133,12 @@ public final class PluginLoader {
         }
 
         plugin.setTpaManager(new TPAManager(plugin));
-        plugin.setHomeManager(new HomeManager(plugin));
-        plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
+        if (plugin.getConfigManager().isHomesEnabled()) {
+            plugin.setHomeManager(new HomeManager(plugin));
+            plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
+        } else {
+            unloadHomes();
+        }
         plugin.setSpawnManager(new SpawnManager(plugin));
         plugin.setBackManager(new BackManager(plugin));
         if (plugin.getConfigManager().isKitsEnabled()) {
@@ -326,6 +330,40 @@ public final class PluginLoader {
         return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
     }
 
+    private void unloadHomes() {
+        plugin.debug("Homes are disabled in config, fully unloading");
+
+        CommandRegistration.unregisterCommand("home");
+        CommandRegistration.unregisterCommand("essentialsc:home");
+        CommandRegistration.unregisterCommand("sethome");
+        CommandRegistration.unregisterCommand("essentialsc:sethome");
+        CommandRegistration.unregisterCommand("delhome");
+        CommandRegistration.unregisterCommand("essentialsc:delhome");
+        CommandRegistration.unregisterCommand("homes");
+        CommandRegistration.unregisterCommand("essentialsc:homes");
+        plugin.debug("Unregistered Home Commands");
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("Home") || name.contains("TeleportHandler")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Home listener: " + name);
+                    }
+                }
+            }
+        }
+
+        if (plugin.getHomeManager() != null) {
+            plugin.getHomeManager().shutdown();
+            plugin.setHomeManager(null);
+        }
+
+        plugin.setHomeNotificationManager(null);
+
+        plugin.debug("Homes fully unloaded ");
+    }
 
     private void unloadKits() {
         plugin.debug("Kits are disabled in config,fully unloading");

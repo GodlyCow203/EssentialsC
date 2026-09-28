@@ -10,6 +10,7 @@ public class EssentialsCTest extends JavaPlugin {
         getCommand("test-ah").setExecutor(new AuctionDisableTestCommand());
         getCommand("test-shop").setExecutor(new ShopDisableTestCommand());
         getCommand("test-kits").setExecutor(new KitDisableTestCommand());
+        getCommand("test-homes").setExecutor(new HomeDisableTestCommand());
         getLogger().info("EssentialsCTest enabled");
     }
 

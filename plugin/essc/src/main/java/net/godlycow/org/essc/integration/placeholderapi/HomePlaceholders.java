@@ -24,6 +24,10 @@ public class HomePlaceholders {
     public String onRequest(Player player, String identifier) {
         if (!identifier.startsWith("home_")) return null;
 
+        if (plugin.getHomeManager() == null) {
+            return "";
+        }
+
         refreshCacheIfNeeded(player);
 
         List<Home> homes = homeCache.getOrDefault(player.getUniqueId(), Collections.emptyList());

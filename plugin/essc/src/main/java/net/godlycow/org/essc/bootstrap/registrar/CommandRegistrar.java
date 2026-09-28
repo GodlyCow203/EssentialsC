@@ -86,13 +86,9 @@ public class CommandRegistrar {
         register("tpaignore",      new TPAIgnoreCommand(plugin));
         register("tpatoggle",      new TPAToggleCommand(plugin));
         register("tpaqueue",       new TPAQueueCommand(plugin));
-        register("sethome",        new SetHomeCommand(plugin));
         register("itemid",         new ItemIdCommand(plugin));
         register("rules",          new RulesCommand(plugin));
         register("spawnentity",    new SpawnEntityCommand(plugin));
-        register("home",           new HomeCommand(plugin));
-        register("delhome",        new DelHomeCommand(plugin));
-        register("homes",          new HomesCommand(plugin));
         register("spawn",          new SpawnCommand(plugin));
         register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
@@ -215,6 +211,23 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("kits");
             CommandRegistration.unregisterCommand("essentialsc:kits");
             plugin.debug("Kit commands unregistered (kits.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isHomesEnabled()) {
+            register("sethome", new SetHomeCommand(plugin));
+            register("home", new HomeCommand(plugin));
+            register("delhome", new DelHomeCommand(plugin));
+            register("homes", new HomesCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("home");
+            CommandRegistration.unregisterCommand("essentialsc:home");
+            CommandRegistration.unregisterCommand("sethome");
+            CommandRegistration.unregisterCommand("essentialsc:sethome");
+            CommandRegistration.unregisterCommand("delhome");
+            CommandRegistration.unregisterCommand("essentialsc:delhome");
+            CommandRegistration.unregisterCommand("homes");
+            CommandRegistration.unregisterCommand("essentialsc:homes");
+            plugin.debug("Home commands unregistered (home.enabled is false)");
         }
     }
 

@@ -162,7 +162,9 @@ public final class EssentialsC extends JavaPlugin implements Listener {
                 }
             });
         }
-        getHomeManager().getHomes(player.getUniqueId());
+        if (getHomeManager() != null) {
+            getHomeManager().getHomes(player.getUniqueId());
+        }
         if (homeNotificationManager != null) {
             homeNotificationManager.deliverPending(player);
         }
@@ -179,7 +181,9 @@ public final class EssentialsC extends JavaPlugin implements Listener {
                 getUserManager().clearCache(uuid);
             }
         }
-        getHomeManager().clearCache(event.getPlayer().getUniqueId());
+        if (getHomeManager() != null) {
+            getHomeManager().clearCache(event.getPlayer().getUniqueId());
+        }
     }
 
     public void debug(String message) {

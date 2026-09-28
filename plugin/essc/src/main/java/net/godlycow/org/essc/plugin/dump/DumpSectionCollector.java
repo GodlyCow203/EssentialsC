@@ -133,7 +133,7 @@ public class DumpSectionCollector {
         Map<String, Object> modules = new LinkedHashMap<>();
 
         modules.put("economy", moduleStatus(plugin.getConfigManager().isEconomyEnabled(), plugin.getEconomyManager() != null));
-        modules.put("homes", moduleStatus(true, plugin.getHomeManager() != null));
+        modules.put("homes", moduleStatus(plugin.getConfigManager().isHomesEnabled(), plugin.getHomeManager() != null));
         modules.put("warps", moduleStatus(plugin.getConfigManager().isWarpEnabled(), plugin.getWarpManager() != null));
         modules.put("spawn", moduleStatus(true, plugin.getSpawnManager() != null));
         modules.put("back", moduleStatus(true, plugin.getBackManager() != null));
@@ -232,6 +232,7 @@ public class DumpSectionCollector {
         config.put("defaultLanguage", plugin.getConfigManager().getDefaultLanguage());
         config.put("debug", plugin.getConfigManager().isDebug());
         config.put("economyEnabled", plugin.getConfigManager().isEconomyEnabled());
+        config.put("homeEnabled", plugin.getConfigManager().isHomesEnabled());
         config.put("homeMaxHomes", plugin.getConfigManager().getMaxHomes());
         config.put("homeCooldown", plugin.getConfigManager().getHomeCooldown());
         config.put("homeWarmup", plugin.getConfigManager().getHomeWarmup());

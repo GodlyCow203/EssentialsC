@@ -7,7 +7,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 19
+config-version: 20
 
 # General settings
 
@@ -409,6 +409,10 @@ tpa:
 # Homes
 
 home:
+  # Set to false to disable the entire home system and unregister /home, /sethome,
+  # /delhome and /homes. No home data or home listeners are loaded. Requires a restart.
+  enabled: true
+
   # The home name used when no name argument is given in command mode
   default-name: home
 
@@ -457,7 +461,7 @@ home:
 kits:
   # Set to false to disable the entire kit system and unregister /kit and /kits.
   # Kit data, the kit GUI and all kit listeners are then not loaded. Requires a restart.
-  enabled: false
+  enabled: true
 
   # How players interact with the kit list.
   # "command" — players type /kits to see a chat list.

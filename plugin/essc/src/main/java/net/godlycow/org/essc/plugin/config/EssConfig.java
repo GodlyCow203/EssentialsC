@@ -154,6 +154,10 @@ public class EssConfig {
         return config.getStringList("home.blocked-worlds");
     }
 
+    public boolean isHomesEnabled() {
+        return config.getBoolean("home.enabled", true);
+    }
+
     public String getDefaultHomeName() {
         return config.getString("home.default-name", "home");
     }

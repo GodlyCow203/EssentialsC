@@ -12,4 +12,6 @@ commands:
     usage: /test-shop
   test-kits:
     usage: /test-kits
+  test-homes:
+    usage: /test-homes
 
