@@ -77,20 +77,10 @@ public class CommandRegistrar {
             plugin.debug("Scoreboard command unregistered (scoreboard.enabled is false)");
         }
 
-        register("tpa",            new TPACommand(plugin));
-        register("tpahere",        new TPAHereCommand(plugin));
-        register("tpaccept",       new TPAcceptCommand(plugin));
         register("playerlist",     new PlayerListCommand(plugin));
-        register("tpdeny",         new TPADenyCommand(plugin));
-        register("tpcancel",       new TPACancelCommand(plugin));
-        register("tpaignore",      new TPAIgnoreCommand(plugin));
-        register("tpatoggle",      new TPAToggleCommand(plugin));
-        register("tpaqueue",       new TPAQueueCommand(plugin));
         register("itemid",         new ItemIdCommand(plugin));
         register("rules",          new RulesCommand(plugin));
         register("spawnentity",    new SpawnEntityCommand(plugin));
-        register("spawn",          new SpawnCommand(plugin));
-        register("setspawn",       new SetSpawnCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
         register("ban-ip",         new BanIpCommand(plugin, punishmentManager));
         register("tpoffline",      new TpOfflineCommand(plugin, plugin.getUserManager()));
@@ -228,6 +218,46 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("homes");
             CommandRegistration.unregisterCommand("essentialsc:homes");
             plugin.debug("Home commands unregistered (home.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isTPAEnabled()) {
+            register("tpa", new TPACommand(plugin));
+            register("tpahere", new TPAHereCommand(plugin));
+            register("tpaccept", new TPAcceptCommand(plugin));
+            register("tpdeny", new TPADenyCommand(plugin));
+            register("tpcancel", new TPACancelCommand(plugin));
+            register("tpaignore", new TPAIgnoreCommand(plugin));
+            register("tpatoggle", new TPAToggleCommand(plugin));
+            register("tpaqueue", new TPAQueueCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("tpa");
+            CommandRegistration.unregisterCommand("essentialsc:tpa");
+            CommandRegistration.unregisterCommand("tpahere");
+            CommandRegistration.unregisterCommand("essentialsc:tpahere");
+            CommandRegistration.unregisterCommand("tpaccept");
+            CommandRegistration.unregisterCommand("essentialsc:tpaccept");
+            CommandRegistration.unregisterCommand("tpdeny");
+            CommandRegistration.unregisterCommand("essentialsc:tpdeny");
+            CommandRegistration.unregisterCommand("tpcancel");
+            CommandRegistration.unregisterCommand("essentialsc:tpcancel");
+            CommandRegistration.unregisterCommand("tpaignore");
+            CommandRegistration.unregisterCommand("essentialsc:tpaignore");
+            CommandRegistration.unregisterCommand("tpatoggle");
+            CommandRegistration.unregisterCommand("essentialsc:tpatoggle");
+            CommandRegistration.unregisterCommand("tpaqueue");
+            CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
+            plugin.debug("TPA commands unregistered (tpa.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isSpawnEnabled()) {
+            register("spawn", new SpawnCommand(plugin));
+            register("setspawn", new SetSpawnCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("spawn");
+            CommandRegistration.unregisterCommand("essentialsc:spawn");
+            CommandRegistration.unregisterCommand("setspawn");
+            CommandRegistration.unregisterCommand("essentialsc:setspawn");
+            plugin.debug("Spawn commands unregistered (spawn.enabled is false)");
         }
     }
 

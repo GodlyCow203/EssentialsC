@@ -7,7 +7,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 20
+config-version: 22
 
 # General settings
 
@@ -377,6 +377,11 @@ rtp:
 # Teleport Requests (TPA)
 
 tpa:
+  # Set to false to disable the entire TPA request system and unregister /tpa,
+  # /tpahere, /tpaccept, /tpdeny, /tpcancel, /tpaignore, /tpatoggle and /tpaqueue.
+  # No requests are tracked and no TPA listeners are registered. Requires a restart.
+  enabled: true
+
   # Seconds a player must wait between sending /tpa requests.
   cooldown: 60
 
@@ -480,6 +485,11 @@ kits:
 # Spawn
 
 spawn:
+  # Set to false to disable the entire spawn system and unregister /spawn and /setspawn.
+  # No spawn location is loaded and no spawn listeners (first-join, respawn,
+  # warmup cancel) are registered. Requires a restart.
+  enabled: true
+
   # Seconds a player must wait between uses of /spawn.
   cooldown: 5
 

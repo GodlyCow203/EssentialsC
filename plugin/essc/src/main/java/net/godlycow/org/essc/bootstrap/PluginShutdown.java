@@ -29,6 +29,9 @@ public final class PluginShutdown {
         if (plugin.getHomeManager() != null) {
             plugin.getHomeManager().shutdown();
         }
+        if (plugin.getTPAManager() != null) {
+            plugin.getTPAManager().shutdown();
+        }
         if (plugin.getUserManager() != null) {
             plugin.getUserManager().shutdown();
         }

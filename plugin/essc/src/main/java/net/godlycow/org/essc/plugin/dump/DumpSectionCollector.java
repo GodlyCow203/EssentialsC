@@ -133,9 +133,10 @@ public class DumpSectionCollector {
         Map<String, Object> modules = new LinkedHashMap<>();
 
         modules.put("economy", moduleStatus(plugin.getConfigManager().isEconomyEnabled(), plugin.getEconomyManager() != null));
+        modules.put("tpa", moduleStatus(plugin.getConfigManager().isTPAEnabled(), plugin.getTPAManager() != null));
         modules.put("homes", moduleStatus(plugin.getConfigManager().isHomesEnabled(), plugin.getHomeManager() != null));
         modules.put("warps", moduleStatus(plugin.getConfigManager().isWarpEnabled(), plugin.getWarpManager() != null));
-        modules.put("spawn", moduleStatus(true, plugin.getSpawnManager() != null));
+        modules.put("spawn", moduleStatus(plugin.getConfigManager().isSpawnEnabled(), plugin.getSpawnManager() != null));
         modules.put("back", moduleStatus(true, plugin.getBackManager() != null));
         modules.put("afk", moduleStatus(plugin.getConfigManager().isAfkEnabled(), plugin.getAfkManager() != null));
         modules.put("vanish", moduleStatus(true, plugin.getVanishManager() != null));
@@ -233,6 +234,7 @@ public class DumpSectionCollector {
         config.put("debug", plugin.getConfigManager().isDebug());
         config.put("economyEnabled", plugin.getConfigManager().isEconomyEnabled());
         config.put("homeEnabled", plugin.getConfigManager().isHomesEnabled());
+        config.put("tpaEnabled", plugin.getConfigManager().isTPAEnabled());
         config.put("homeMaxHomes", plugin.getConfigManager().getMaxHomes());
         config.put("homeCooldown", plugin.getConfigManager().getHomeCooldown());
         config.put("homeWarmup", plugin.getConfigManager().getHomeWarmup());
@@ -242,6 +244,7 @@ public class DumpSectionCollector {
 
 
 
+        config.put("spawnEnabled", plugin.getConfigManager().isSpawnEnabled());
         config.put("spawnCooldown", plugin.getConfigManager().getSpawnCooldown());
         config.put("spawnWarmup", plugin.getConfigManager().getSpawnWarmup());
         config.put("afkEnabled", plugin.getConfigManager().isAfkEnabled());

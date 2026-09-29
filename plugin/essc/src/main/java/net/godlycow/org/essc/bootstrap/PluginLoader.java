@@ -132,14 +132,22 @@ public final class PluginLoader {
             plugin.setMotdManager(new MOTDManager(plugin));
         }
 
-        plugin.setTpaManager(new TPAManager(plugin));
+        if (plugin.getConfigManager().isTPAEnabled()) {
+            plugin.setTpaManager(new TPAManager(plugin));
+        } else {
+            unloadTPA();
+        }
         if (plugin.getConfigManager().isHomesEnabled()) {
             plugin.setHomeManager(new HomeManager(plugin));
             plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
         } else {
             unloadHomes();
         }
-        plugin.setSpawnManager(new SpawnManager(plugin));
+        if (plugin.getConfigManager().isSpawnEnabled()) {
+            plugin.setSpawnManager(new SpawnManager(plugin));
+        } else {
+            unloadSpawn();
+        }
         plugin.setBackManager(new BackManager(plugin));
         if (plugin.getConfigManager().isKitsEnabled()) {
             plugin.setKitManager(new KitManager(plugin));
@@ -330,6 +338,48 @@ public final class PluginLoader {
         return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
     }
 
+    private void unloadTPA() {
+        plugin.debug("TPA is disabled in the config, unloading");
+
+        CommandRegistration.unregisterCommand("tpa");
+        CommandRegistration.unregisterCommand("essentialsc:tpa");
+        CommandRegistration.unregisterCommand("tpahere");
+        CommandRegistration.unregisterCommand("essentialsc:tpahere");
+        CommandRegistration.unregisterCommand("tpaccept");
+        CommandRegistration.unregisterCommand("essentialsc:tpaccept");
+        CommandRegistration.unregisterCommand("tpdeny");
+        CommandRegistration.unregisterCommand("essentialsc:tpdeny");
+        CommandRegistration.unregisterCommand("tpcancel");
+        CommandRegistration.unregisterCommand("essentialsc:tpcancel");
+        CommandRegistration.unregisterCommand("tpaignore");
+        CommandRegistration.unregisterCommand("essentialsc:tpaignore");
+        CommandRegistration.unregisterCommand("tpatoggle");
+        CommandRegistration.unregisterCommand("essentialsc:tpatoggle");
+        CommandRegistration.unregisterCommand("tpaqueue");
+        CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
+
+        plugin.debug("Unregistered all TPA Commands");
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("TPA")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered TPA listener: " + name);
+                    }
+                }
+            }
+        }
+
+        if (plugin.getTPAManager() != null) {
+            plugin.getTPAManager().shutdown();
+            plugin.setTpaManager(null);
+        }
+
+        plugin.debug("TPA fully unloaded");
+    }
+
     private void unloadHomes() {
         plugin.debug("Homes are disabled in config, fully unloading");
 
@@ -363,6 +413,38 @@ public final class PluginLoader {
         plugin.setHomeNotificationManager(null);
 
         plugin.debug("Homes fully unloaded ");
+    }
+
+    private void unloadSpawn() {
+        plugin.debug("Spawn is disabled in the config, unloading...");
+
+        CommandRegistration.unregisterCommand("spawn");
+        CommandRegistration.unregisterCommand("essentialsc:spawn");
+        CommandRegistration.unregisterCommand("setspawn");
+        CommandRegistration.unregisterCommand("essentialsc:setspawn");
+
+        plugin.debug("Unregistered Spawn");
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("Spawn")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Spawn listener: " + name);
+                    }
+                }
+            }
+        }
+
+
+
+        if (plugin.getSpawnManager() != null) {
+            plugin.getSpawnManager().shutdown();
+            plugin.setSpawnManager(null);
+        }
+
+        plugin.debug("Spawn fully unloaded");
     }
 
     private void unloadKits() {

@@ -98,6 +98,10 @@ public class EssConfig {
         return config.getString("economy.format", "#,##0.00");
     }
 
+    public boolean isTPAEnabled() {
+        return config.getBoolean("tpa.enabled", true);
+    }
+
     public long getTPACooldown() {
         return config.getLong("tpa.cooldown", 60);
     }
@@ -188,6 +192,10 @@ public class EssConfig {
 
     public boolean isBedHomeCountsInLimit() {
         return config.getBoolean("home.bed-counts-in-limit", true);
+    }
+
+    public boolean isSpawnEnabled() {
+        return config.getBoolean("spawn.enabled", true);
     }
 
     public long getSpawnCooldown() {

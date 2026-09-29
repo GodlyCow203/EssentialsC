@@ -14,4 +14,8 @@ commands:
     usage: /test-kits
   test-homes:
     usage: /test-homes
+  test-spawn:
+    usage: /test-spawn
+  test-tpa:
+    usage: /test-tpa
 

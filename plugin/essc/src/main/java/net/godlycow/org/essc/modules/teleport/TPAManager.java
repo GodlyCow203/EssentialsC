@@ -9,6 +9,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -33,6 +34,8 @@ public class TPAManager implements Listener {
     private final Map<UUID, Set<UUID>> ignoredPlayers = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
     private final Map<UUID, ScheduledTask> warmupTasks = new ConcurrentHashMap<>();
+    private final Map<UUID, ScheduledTask> particleTasks = new ConcurrentHashMap<>();
+    private ScheduledTask cleanupTask;
     private long cooldownDuration;
     private long warmupDuration;
     private long timeoutDuration;
@@ -55,6 +58,25 @@ public class TPAManager implements Listener {
     public void reload() {
         loadConfig();
         plugin.debug("TPA configuration reloaded");
+    }
+
+    public void shutdown() {
+        if (cleanupTask != null) {
+            cleanupTask.cancel();
+            cleanupTask = null;
+        }
+        warmupTasks.values().forEach(ScheduledTask::cancel);
+        warmupTasks.clear();
+        particleTasks.values().forEach(ScheduledTask::cancel);
+        particleTasks.clear();
+        incomingRequests.clear();
+        outgoingRequests.clear();
+        teleporting.clear();
+        cooldowns.clear();
+        ignoredPlayers.clear();
+        blockedPlayers.clear();
+        HandlerList.unregisterAll(this);
+        plugin.debug("Shutting down the TPA Manager");
     }
 
     private void loadConfig() {
@@ -266,12 +288,16 @@ public class TPAManager implements Listener {
         }
 
         final ScheduledTask finalParticleTask = particleTask;
+        if (particleTask != null) {
+            particleTasks.put(teleporter.getUniqueId(), particleTask);
+        }
 
         ScheduledTask task = teleporter.getScheduler().runDelayed(plugin, task1 -> {
             if (teleporting.contains(teleporter.getUniqueId())) {
                 executeTeleport(teleporter, destination);
             }
             warmupTasks.remove(teleporter.getUniqueId());
+            particleTasks.remove(teleporter.getUniqueId());
             if (finalParticleTask != null) finalParticleTask.cancel();
         }, null, warmupDuration);
 
@@ -396,7 +422,7 @@ public class TPAManager implements Listener {
     }
 
     private void startCleanupTask() {
-        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
+        cleanupTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             long now = System.currentTimeMillis();
 
             List<TPARequest> toRemove = new ArrayList<>();
