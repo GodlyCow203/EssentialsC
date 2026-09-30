@@ -289,6 +289,10 @@ public class EssConfig {
         return config.getBoolean("rename.strip-colors-for-check", true);
     }
 
+    public boolean isVanishEnabled() {
+        return config.getBoolean("vanish.enabled", true);
+    }
+
     public boolean isVanishHideFromTab() {
         return config.getBoolean("vanish.hide-from-tab", true);
     }

@@ -139,7 +139,7 @@ public class DumpSectionCollector {
         modules.put("spawn", moduleStatus(plugin.getConfigManager().isSpawnEnabled(), plugin.getSpawnManager() != null));
         modules.put("back", moduleStatus(plugin.getConfigManager().isBackEnabled(), plugin.getBackManager() != null));
         modules.put("afk", moduleStatus(plugin.getConfigManager().isAfkEnabled(), plugin.getAfkManager() != null));
-        modules.put("vanish", moduleStatus(true, plugin.getVanishManager() != null));
+        modules.put("vanish", moduleStatus(plugin.getConfigManager().isVanishEnabled(), plugin.getVanishManager() != null));
         modules.put("fly", moduleStatus(true, plugin.getFlyManager() != null));
         modules.put("kits", moduleStatus(plugin.getConfigManager().isKitsEnabled(), plugin.getKitManager() != null));
         modules.put("shop", moduleStatus(plugin.getConfigManager().isShopEnabled(), plugin.getShopManager() != null));
@@ -253,6 +253,7 @@ public class DumpSectionCollector {
         config.put("backupKeepLast", plugin.getConfigManager().getBackupKeepLast());
         config.put("kitEnabled", plugin.getConfigManager().isKitsEnabled());
         config.put("kitMode", plugin.getConfigManager().getKitMode());
+        config.put("vanishEnabled", plugin.getConfigManager().isVanishEnabled());
         config.put("nickEnabled", plugin.getConfigManager().isNickEnabled());
         config.put("scoreboardEnabled", plugin.getConfigManager().isScoreboardEnabled());
         return config;

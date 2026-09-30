@@ -22,4 +22,6 @@ commands:
     usage: /test-punishments
   test-back:
     usage: /test-back
+  test-vanish:
+    usage: /test-vanish
 

@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 24
+config-version: 25
 
 # General settings
 
@@ -643,6 +643,11 @@ spawnentity:
 # Vanish
 
 vanish:
+  # Set to false to disable the entire vanish system and unregister /vanish.
+  # No vanish state is tracked and no vanish listeners are registered.
+  # Requires a restart.
+  enabled: true
+
   # Remove the player from the TAB list while vanished.
   hide-from-tab: true
 

@@ -25,9 +25,11 @@ public class ListenerRegistrar {
             plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
         }
         plugin.getServer().getPluginManager().registerEvents(new VersionCheckUtil(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new VanishTabCompleteListener(plugin), plugin);
+        if (plugin.getConfigManager().isVanishEnabled()) {
+            plugin.getServer().getPluginManager().registerEvents(new VanishTabCompleteListener(plugin), plugin);
+        }
 
-        if (plugin.getConfigManager().isVanishHideFromServerList()) {
+        if (plugin.getConfigManager().isVanishEnabled() && plugin.getConfigManager().isVanishHideFromServerList()) {
             plugin.getServer().getPluginManager().registerEvents(new ServerListPingListener(plugin), plugin);
         }
     }

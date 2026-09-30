@@ -159,7 +159,11 @@ public final class PluginLoader {
 
             unloadKits();
         }
-        plugin.setVanishManager(new VanishManager(plugin));
+        if (plugin.getConfigManager().isVanishEnabled()) {
+            plugin.setVanishManager(new VanishManager(plugin));
+        } else {
+            unloadVanish();
+        }
         plugin.setReplyManager(new ReplyManager());
         if (plugin.getConfigManager().isChatSystemEnabled()) {
             plugin.setChatManager(new ChatManager(plugin));
@@ -346,6 +350,31 @@ public final class PluginLoader {
 
     private boolean isKitGuiAvailable() {
         return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
+    }
+
+    private void unloadVanish() {
+        plugin.debug("vanish is disabled in the config, unloading");
+
+        CommandRegistration.unregisterCommand("vanish");
+        CommandRegistration.unregisterCommand("essentialsc:vanish");
+
+        plugin.debug("Unregistered All Vanish Commands");
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("Vanish") || name.contains("ServerListPing")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Vanish listener: " + name);
+                    }
+                }
+            }
+        }
+
+        plugin.setVanishManager(null);
+
+        plugin.debug("Vanish fully unloaded");
     }
 
     private void unloadBack() {

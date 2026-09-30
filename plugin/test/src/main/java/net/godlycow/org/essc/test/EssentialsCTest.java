@@ -15,6 +15,7 @@ public class EssentialsCTest extends JavaPlugin {
         getCommand("test-tpa").setExecutor(new TPADisableTestCommand());
         getCommand("test-punishments").setExecutor(new PunishmentDisableTestCommand());
         getCommand("test-back").setExecutor(new BackDisableTestCommand());
+        getCommand("test-vanish").setExecutor(new VanishDisableTestCommand());
         getLogger().info("EssentialsCTest enabled");
     }
 

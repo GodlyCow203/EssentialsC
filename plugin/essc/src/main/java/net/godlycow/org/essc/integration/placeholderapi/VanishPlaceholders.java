@@ -19,6 +19,10 @@ public class VanishPlaceholders {
             return null;
         }
 
+        if (plugin.getVanishManager() == null) {
+            return "";
+        }
+
         boolean isVanished = plugin.getVanishManager().isVanished(player);
 
         return switch (identifier.toLowerCase()) {

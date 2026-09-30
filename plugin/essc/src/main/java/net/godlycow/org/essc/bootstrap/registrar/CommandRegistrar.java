@@ -65,7 +65,6 @@ public class CommandRegistrar {
         register("ping",           new PingCommand(plugin));
         register("fly",            new FlyCommand(plugin));
         register("god",            new GodCommand(plugin));
-        register("vanish",         new VanishCommand(plugin));
         register("repair",         new RepairCommand(plugin));
         register("rename",         new RenameCommand(plugin));
 
@@ -237,6 +236,14 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("tpaqueue");
             CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
             plugin.debug("TPA commands unregistered (tpa.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isVanishEnabled()) {
+            register("vanish", new VanishCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("vanish");
+            CommandRegistration.unregisterCommand("essentialsc:vanish");
+            plugin.debug("Vanish command unregistered (vanish.enabled is false)");
         }
 
         if (plugin.getConfigManager().isBackEnabled()) {
