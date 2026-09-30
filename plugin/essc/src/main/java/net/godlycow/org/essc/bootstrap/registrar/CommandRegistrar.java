@@ -78,7 +78,6 @@ public class CommandRegistrar {
 
         register("playerlist",     new PlayerListCommand(plugin));
         register("itemid",         new ItemIdCommand(plugin));
-        register("rules",          new RulesCommand(plugin));
         register("spawnentity",    new SpawnEntityCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
         register("tpoffline",      new TpOfflineCommand(plugin, plugin.getUserManager()));
@@ -236,6 +235,14 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("tpaqueue");
             CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
             plugin.debug("TPA commands unregistered (tpa.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isRulesEnabled()) {
+            register("rules", new RulesCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("rules");
+            CommandRegistration.unregisterCommand("essentialsc:rules");
+            plugin.debug("Rules command unregistered (rules.enabled is false)");
         }
 
         if (plugin.getConfigManager().isVanishEnabled()) {

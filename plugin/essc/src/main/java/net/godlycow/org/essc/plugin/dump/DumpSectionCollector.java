@@ -151,6 +151,7 @@ public class DumpSectionCollector {
         modules.put("backup", moduleStatus(plugin.getConfigManager().isBackupEnabled(), plugin.getBackupManager() != null));
         modules.put("chat", moduleStatus(plugin.getConfigManager().isChatSystemEnabled(), plugin.getChatManager() != null));
         modules.put("rtp", moduleStatus(plugin.getConfigManager().isRTPEnabled(), plugin.getRtpManager() != null));
+        modules.put("rules", moduleStatus(plugin.getConfigManager().isRulesEnabled(), plugin.getRulesManager() != null));
 
         return modules;
     }
@@ -256,6 +257,7 @@ public class DumpSectionCollector {
         config.put("vanishEnabled", plugin.getConfigManager().isVanishEnabled());
         config.put("nickEnabled", plugin.getConfigManager().isNickEnabled());
         config.put("scoreboardEnabled", plugin.getConfigManager().isScoreboardEnabled());
+        config.put("rulesEnabled", plugin.getConfigManager().isRulesEnabled());
         return config;
     }
 

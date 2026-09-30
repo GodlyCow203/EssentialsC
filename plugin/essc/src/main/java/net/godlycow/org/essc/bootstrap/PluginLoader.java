@@ -180,9 +180,13 @@ public final class PluginLoader {
         new FlyMigration(plugin).runIfNeeded();
         new IpHistoryMigration(plugin).runIfNeeded();
 
-        RulesManager rulesManager = new RulesManager(plugin);
-        rulesManager.load();
-        plugin.setRulesManager(rulesManager);
+        if (plugin.getConfigManager().isRulesEnabled()) {
+            RulesManager rulesManager = new RulesManager(plugin);
+            rulesManager.load();
+            plugin.setRulesManager(rulesManager);
+        } else {
+            unloadRules();
+        }
 
         FloodgateHook floodgateHook = new FloodgateHook(plugin);
         plugin.setBedrockUtil(new BedrockUtil(plugin, floodgateHook));
@@ -350,6 +354,19 @@ public final class PluginLoader {
 
     private boolean isKitGuiAvailable() {
         return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
+    }
+
+    private void unloadRules() {
+        plugin.debug("Rules are disabled in the config, unloading");
+
+        CommandRegistration.unregisterCommand("rules");
+        CommandRegistration.unregisterCommand("essentialsc:rules");
+
+        plugin.debug("Unregistered Rules Command");
+
+        plugin.setRulesManager(null);
+
+        plugin.debug("Rules fully unloaded");
     }
 
     private void unloadVanish() {

@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 25
+config-version: 26
 
 # General settings
 
@@ -940,5 +940,13 @@ punishments:
   # Set to false to disable the entire punishment system and unregister /ban,
   # /ban-ip, /unban, /unban-ip, /banlist, /mute, /unmute and /checkpunish.
   # No punishment data is loaded and no ban/mute listeners are registered.
+  # Requires a restart.
+  enabled: true
+
+# Rules
+
+rules:
+  # Set to false to disable the /rules command entirely.
+  # The rules themselves are stored in rules.txt.
   # Requires a restart.
   enabled: true

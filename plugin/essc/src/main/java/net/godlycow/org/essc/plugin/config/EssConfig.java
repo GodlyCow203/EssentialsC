@@ -802,6 +802,10 @@ public class EssConfig {
         return config.getBoolean("trash.enabled", true);
     }
 
+    public boolean isRulesEnabled() {
+        return config.getBoolean("rules.enabled", true);
+    }
+
     public boolean isTrashLogDisposals() {
         return config.getBoolean("trash.log-disposals", false);
     }
