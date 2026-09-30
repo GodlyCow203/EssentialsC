@@ -63,15 +63,13 @@ public class RulesManager {
 
     private void createDefaultRules() {
         List<String> defaultRules = List.of(
-                "<#FFD700><bold>=== Server Rules ===</bold></#FFD700>",
-                "",
-                "<#FF5555>1.</#FF5555> <#FFFF55>Be respectful to all players</#FFFF55>",
-                "<#FF5555>2.</#FF5555> <#55FFFF>No griefing or stealing</#55FFFF>",
-                "<#FF5555>3.</#FF5555> <#FF55FF>No cheating or hacked clients</#FF55FF>",
-                "<#FF5555>4.</#FF5555> <#55FF55>No spamming or advertising</#55FF55>",
-                "<#FF5555>5.</#FF5555> <#FFAA00>Have fun!</#FFAA00>",
-                "",
-                "<#FFD700><bold>======================</bold></#FFD700>"
+                "<#FFF200><b>==== Server Rules =====</b>",
+                "<#FFF200>1.</#FFF200> <white>Be respectful to all players</white>",
+                "<#FFF200>2.</#FFF200> <white>No griefing or stealing</white>",
+                "<#FFF200>3.</#FFF200> <white>No cheating or hacked clients</white>",
+                "<#FFF200>4.</#FFF200> <white>No spamming or advertising</white>",
+                "<#FFF200>5.</#FFF200> <white>Have fun!</white>",
+                "<#FFF200><b>======================</#FFF200>"
         );
 
         try (BufferedWriter writer = new BufferedWriter(
