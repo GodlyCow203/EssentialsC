@@ -137,7 +137,7 @@ public class DumpSectionCollector {
         modules.put("homes", moduleStatus(plugin.getConfigManager().isHomesEnabled(), plugin.getHomeManager() != null));
         modules.put("warps", moduleStatus(plugin.getConfigManager().isWarpEnabled(), plugin.getWarpManager() != null));
         modules.put("spawn", moduleStatus(plugin.getConfigManager().isSpawnEnabled(), plugin.getSpawnManager() != null));
-        modules.put("back", moduleStatus(true, plugin.getBackManager() != null));
+        modules.put("back", moduleStatus(plugin.getConfigManager().isBackEnabled(), plugin.getBackManager() != null));
         modules.put("afk", moduleStatus(plugin.getConfigManager().isAfkEnabled(), plugin.getAfkManager() != null));
         modules.put("vanish", moduleStatus(true, plugin.getVanishManager() != null));
         modules.put("fly", moduleStatus(true, plugin.getFlyManager() != null));
@@ -145,7 +145,7 @@ public class DumpSectionCollector {
         modules.put("shop", moduleStatus(plugin.getConfigManager().isShopEnabled(), plugin.getShopManager() != null));
         modules.put("auction", moduleStatus(plugin.getConfigManager().isAHEnabled(), plugin.getAuctionManager() != null));
         modules.put("sell", moduleStatus(plugin.getConfigManager().isSellEnabled(), plugin.getSellManager() != null));
-        modules.put("punishments", moduleStatus(true, plugin.getPunishmentManager() != null));
+        modules.put("punishments", moduleStatus(plugin.getConfigManager().isPunishmentsEnabled(), plugin.getPunishmentManager() != null));
         modules.put("nick", moduleStatus(plugin.getConfigManager().isNickEnabled(), plugin.getNickManager() != null));
         modules.put("scoreboard", moduleStatus(plugin.getConfigManager().isScoreboardEnabled(), plugin.getScoreboardManager() != null));
         modules.put("backup", moduleStatus(plugin.getConfigManager().isBackupEnabled(), plugin.getBackupManager() != null));
@@ -239,6 +239,7 @@ public class DumpSectionCollector {
         config.put("homeCooldown", plugin.getConfigManager().getHomeCooldown());
         config.put("homeWarmup", plugin.getConfigManager().getHomeWarmup());
         config.put("warpEnabled", plugin.getConfigManager().isWarpEnabled());
+        config.put("backEnabled", plugin.getConfigManager().isBackEnabled());
         config.put("warpCooldown", plugin.getConfigManager().getWarpCooldown());
         config.put("warpWarmup", plugin.getConfigManager().getWarpWarmup());
 

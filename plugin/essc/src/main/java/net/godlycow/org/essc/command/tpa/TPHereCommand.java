@@ -48,7 +48,9 @@ public class TPHereCommand extends Command {
             return true;
         }
 
-        plugin.getBackManager().setBackLocation(target, target.getLocation());
+        if (plugin.getBackManager() != null) {
+            plugin.getBackManager().setBackLocation(target, target.getLocation());
+        }
 
         Location dest = player.getLocation();
         plugin.teleportHelper().teleportAsync(target, dest).thenAccept(success -> {

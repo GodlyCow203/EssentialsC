@@ -21,7 +21,9 @@ public class ListenerRegistrar {
         plugin.getServer().getPluginManager().registerEvents(joinLeaveListener, plugin);
 
         plugin.getServer().getPluginManager().registerEvents(new EnderSeeListener(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
+        if (plugin.getConfigManager().isPunishmentsEnabled()) {
+            plugin.getServer().getPluginManager().registerEvents(new MuteListener(plugin), plugin);
+        }
         plugin.getServer().getPluginManager().registerEvents(new VersionCheckUtil(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VanishTabCompleteListener(plugin), plugin);
 

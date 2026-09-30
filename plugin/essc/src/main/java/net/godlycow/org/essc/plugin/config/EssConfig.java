@@ -233,6 +233,10 @@ public class EssConfig {
         return config.getString("join-leave-messages.leave", "<yellow><player> left the game");
     }
 
+    public boolean isBackEnabled() {
+        return config.getBoolean("back.enabled", true);
+    }
+
     public long getBackWarmup() {
         return config.getLong("back.warmup", 0);
     }
@@ -668,6 +672,10 @@ public class EssConfig {
 
     public boolean isSellEnabled() {
         return config.getBoolean("sell.enabled", true);
+    }
+
+    public boolean isPunishmentsEnabled() {
+        return config.getBoolean("punishments.enabled", true);
     }
 
     public String getSellGUITitle() {

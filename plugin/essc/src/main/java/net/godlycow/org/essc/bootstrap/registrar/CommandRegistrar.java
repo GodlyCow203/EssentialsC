@@ -82,17 +82,13 @@ public class CommandRegistrar {
         register("rules",          new RulesCommand(plugin));
         register("spawnentity",    new SpawnEntityCommand(plugin));
         register("invsee",         new InvseeCommand(plugin));
-        register("ban-ip",         new BanIpCommand(plugin, punishmentManager));
         register("tpoffline",      new TpOfflineCommand(plugin, plugin.getUserManager()));
-        register("banlist",        new BanListCommand(plugin, punishmentManager));
         register("clearinventory", new ClearInventoryCommand(plugin));
         register("enderchest",     new EnderChestCommand(plugin));
         register("endersee",       new EnderSeeCommand(plugin));
         register("speed",          new SpeedCommand(plugin));
         register("anvil",          new AnvilCommand(plugin));
         register("craftingtable",  new CraftingTableCommand(plugin));
-        register("back",           new BackCommand(plugin));
-        register("dback",          new DBackCommand(plugin));
         register("tphereall",      new TPHereAllCommand(plugin));
         register("playtime",       new PlaytimeCommand(plugin));
         register("uptime",         new UptimeCommand(plugin));
@@ -103,11 +99,6 @@ public class CommandRegistrar {
         register("hat",            new HatCommand(plugin));
         register("sudo",           new SudoCommand(plugin));
         register("kick",           new KickCommand(plugin));
-        register("ban",            new BanCommand(plugin, punishmentManager));
-        register("unban",          new UnbanCommand(plugin, punishmentManager));
-        register("mute",           new MuteCommand(plugin, punishmentManager));
-        register("unmute",         new UnmuteCommand(plugin, punishmentManager));
-        register("checkpunish",    new CheckpunishCommand(plugin, punishmentManager));
         register("ignore",         new IgnoreCommand(plugin));
         register("msg",            new MsgCommand(plugin));
         register("reply",          new ReplyCommand(plugin));
@@ -134,7 +125,6 @@ public class CommandRegistrar {
         register("gmsp",           gamemodeCommand);
         register("gma",            gamemodeCommand);
         register("stonecutter",    new StonecutterCommand(plugin));
-        register("unban-ip",       new UnbanIpCommand(plugin, punishmentManager));
         register("discord",        new DiscordCommand(plugin));
 
 
@@ -247,6 +237,46 @@ public class CommandRegistrar {
             CommandRegistration.unregisterCommand("tpaqueue");
             CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
             plugin.debug("TPA commands unregistered (tpa.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isBackEnabled()) {
+            register("back", new BackCommand(plugin));
+            register("dback", new DBackCommand(plugin));
+        } else {
+            CommandRegistration.unregisterCommand("back");
+            CommandRegistration.unregisterCommand("essentialsc:back");
+            CommandRegistration.unregisterCommand("dback");
+            CommandRegistration.unregisterCommand("essentialsc:dback");
+            plugin.debug("Back commands unregistered (back.enabled is false)");
+        }
+
+        if (plugin.getConfigManager().isPunishmentsEnabled()) {
+            register("ban", new BanCommand(plugin, punishmentManager));
+            register("ban-ip", new BanIpCommand(plugin, punishmentManager));
+            register("unban", new UnbanCommand(plugin, punishmentManager));
+            register("unban-ip", new UnbanIpCommand(plugin, punishmentManager));
+            register("banlist", new BanListCommand(plugin, punishmentManager));
+            register("mute", new MuteCommand(plugin, punishmentManager));
+            register("unmute", new UnmuteCommand(plugin, punishmentManager));
+            register("checkpunish", new CheckpunishCommand(plugin, punishmentManager));
+        } else {
+            CommandRegistration.unregisterCommand("ban");
+            CommandRegistration.unregisterCommand("essentialsc:ban");
+            CommandRegistration.unregisterCommand("ban-ip");
+            CommandRegistration.unregisterCommand("essentialsc:ban-ip");
+            CommandRegistration.unregisterCommand("unban");
+            CommandRegistration.unregisterCommand("essentialsc:unban");
+            CommandRegistration.unregisterCommand("unban-ip");
+            CommandRegistration.unregisterCommand("essentialsc:unban-ip");
+            CommandRegistration.unregisterCommand("banlist");
+            CommandRegistration.unregisterCommand("essentialsc:banlist");
+            CommandRegistration.unregisterCommand("mute");
+            CommandRegistration.unregisterCommand("essentialsc:mute");
+            CommandRegistration.unregisterCommand("unmute");
+            CommandRegistration.unregisterCommand("essentialsc:unmute");
+            CommandRegistration.unregisterCommand("checkpunish");
+            CommandRegistration.unregisterCommand("essentialsc:checkpunish");
+            plugin.debug("Punishment commands unregistered (punishments.enabled is false)");
         }
 
         if (plugin.getConfigManager().isSpawnEnabled()) {

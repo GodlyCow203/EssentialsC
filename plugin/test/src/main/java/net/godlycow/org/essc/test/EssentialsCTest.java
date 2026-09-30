@@ -13,6 +13,8 @@ public class EssentialsCTest extends JavaPlugin {
         getCommand("test-homes").setExecutor(new HomeDisableTestCommand());
         getCommand("test-spawn").setExecutor(new SpawnDisableTestCommand());
         getCommand("test-tpa").setExecutor(new TPADisableTestCommand());
+        getCommand("test-punishments").setExecutor(new PunishmentDisableTestCommand());
+        getCommand("test-back").setExecutor(new BackDisableTestCommand());
         getLogger().info("EssentialsCTest enabled");
     }
 

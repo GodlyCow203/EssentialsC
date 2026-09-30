@@ -148,7 +148,11 @@ public final class PluginLoader {
         } else {
             unloadSpawn();
         }
-        plugin.setBackManager(new BackManager(plugin));
+        if (plugin.getConfigManager().isBackEnabled()) {
+            plugin.setBackManager(new BackManager(plugin));
+        } else {
+            unloadBack();
+        }
         if (plugin.getConfigManager().isKitsEnabled()) {
             plugin.setKitManager(new KitManager(plugin));
         } else {
@@ -163,7 +167,11 @@ public final class PluginLoader {
             plugin.getLogger().info("Chat system is disabled in config.");
         }
         plugin.setUserManager(new UserManager(plugin));
-        plugin.setPunishmentManager(new PunishmentManager(plugin));
+        if (plugin.getConfigManager().isPunishmentsEnabled()) {
+            plugin.setPunishmentManager(new PunishmentManager(plugin));
+        } else {
+            unloadPunishments();
+        }
         plugin.setFlyManager(new FlyManager(plugin));
         new FlyMigration(plugin).runIfNeeded();
         new IpHistoryMigration(plugin).runIfNeeded();
@@ -271,7 +279,9 @@ public final class PluginLoader {
         new FirstRunHandler(plugin);
 
         new ListenerRegistrar(plugin);
-        plugin.getServer().getPluginManager().registerEvents(new BanListener(plugin, plugin.getPunishmentManager()), plugin);
+        if (plugin.getConfigManager().isPunishmentsEnabled()) {
+            plugin.getServer().getPluginManager().registerEvents(new BanListener(plugin, plugin.getPunishmentManager()), plugin);
+        }
         plugin.getServer().getPluginManager().registerEvents(plugin, plugin);
 
         new CommandRegistrar(plugin).registerAll();
@@ -336,6 +346,81 @@ public final class PluginLoader {
 
     private boolean isKitGuiAvailable() {
         return plugin.getConfigManager().isKitsEnabled() && plugin.getConfigManager().isKitGuiMode();
+    }
+
+    private void unloadBack() {
+        plugin.debug("Back is disabled in the config, fully unloading");
+
+        CommandRegistration.unregisterCommand("back");
+        CommandRegistration.unregisterCommand("essentialsc:back");
+        CommandRegistration.unregisterCommand("dback");
+        CommandRegistration.unregisterCommand("essentialsc:dback");
+
+
+        plugin.debug("Unregistered Back Commands");
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("Back")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Back listener: " + name);
+                    }
+                }
+            }
+        }
+
+        if (plugin.getBackManager() != null) {
+            plugin.getBackManager().shutdown();
+            plugin.setBackManager(null);
+        }
+
+        plugin.debug("Back fully unloaded");
+    }
+
+    private void unloadPunishments() {
+
+        plugin.debug("Punishments are disabled in the config, unloading");
+
+        CommandRegistration.unregisterCommand("ban");
+        CommandRegistration.unregisterCommand("essentialsc:ban");
+        CommandRegistration.unregisterCommand("ban-ip");
+        CommandRegistration.unregisterCommand("essentialsc:ban-ip");
+        CommandRegistration.unregisterCommand("unban");
+        CommandRegistration.unregisterCommand("essentialsc:unban");
+        CommandRegistration.unregisterCommand("unban-ip");
+        CommandRegistration.unregisterCommand("essentialsc:unban-ip");
+        CommandRegistration.unregisterCommand("banlist");
+        CommandRegistration.unregisterCommand("essentialsc:banlist");
+        CommandRegistration.unregisterCommand("mute");
+        CommandRegistration.unregisterCommand("essentialsc:mute");
+        CommandRegistration.unregisterCommand("unmute");
+        CommandRegistration.unregisterCommand("essentialsc:unmute");
+        CommandRegistration.unregisterCommand("checkpunish");
+        CommandRegistration.unregisterCommand("essentialsc:checkpunish");
+
+        plugin.debug("Unregistered all Punishment Commands");
+
+
+        for (HandlerList handlerList : HandlerList.getHandlerLists()) {
+            for (RegisteredListener rl : handlerList.getRegisteredListeners()) {
+                if (rl.getPlugin().equals(plugin)) {
+                    String name = rl.getListener().getClass().getSimpleName();
+                    if (name.contains("Ban") || name.contains("Mute") || name.contains("Punish")) {
+                        handlerList.unregister(rl);
+                        plugin.debug("Unregistered Punishment listener: " + name);
+                    }
+                }
+            }
+        }
+
+        if (plugin.getPunishmentManager() != null) {
+            plugin.getPunishmentManager().shutdown();
+            plugin.setPunishmentManager(null);
+        }
+
+        plugin.debug("Punishments fully unloaded");
     }
 
     private void unloadTPA() {

@@ -18,4 +18,8 @@ commands:
     usage: /test-spawn
   test-tpa:
     usage: /test-tpa
+  test-punishments:
+    usage: /test-punishments
+  test-back:
+    usage: /test-back
 

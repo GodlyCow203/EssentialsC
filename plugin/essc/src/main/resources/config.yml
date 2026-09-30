@@ -1,5 +1,4 @@
 # EssentialsC — config.yml
-# EssentialsC — config.yml
 #
 # After editing this file, run /essc reload to apply changes without restarting.
 # MiniMessage formatting is supported in all message fields.
@@ -7,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 22
+config-version: 24
 
 # General settings
 
@@ -546,6 +545,11 @@ join-leave-messages:
 # previous location after a teleport or death.
 
 back:
+  # Set to false to disable the entire back system and unregister /back and /dback.
+  # No back locations are tracked and no back listeners are registered.
+  # Requires a restart.
+  enabled: true
+
   # Seconds the player must stand still before being teleported back.
   # Set to 0 to teleport instantly.
   warmup: 3
@@ -923,3 +927,13 @@ afk:
   # How to sort the /afklist output.
   # Options: time (longest AFK first), name (alphabetical), world
   list-sort-by: time
+
+
+# Punishments
+
+punishments:
+  # Set to false to disable the entire punishment system and unregister /ban,
+  # /ban-ip, /unban, /unban-ip, /banlist, /mute, /unmute and /checkpunish.
+  # No punishment data is loaded and no ban/mute listeners are registered.
+  # Requires a restart.
+  enabled: true
