@@ -1,5 +1,32 @@
 <div align="center">
 
+# Comparison
+
+</div>
+
+EssentialsC started as an alternative to EssentialsX, so here is a straight comparison. I appreciate every single one of you using EssentialsC
+
+### Where EssentialsC differs
+
+| Area | EssentialsC | EssentialsX |
+| :--- | :--- | :--- |
+| **Vanilla commands** | Every command ships at `normal` priority, so vanilla `/gamemode`, `/give` and friends keep working no matter what. You can still reach everything through `/essentialsc:<command>`, and each command can be turned off, reprioritized, aliased, cooled down or given custom help text in `commands.yml` | Takes over vanilla commands by default, and you have to dig through `overridden-commands` and `disabled-commands` to stop it |
+| **Modularity** | Almost everything can be switched off completely. Don't use homes, kits, TPA or punishments? Turn them off and they are really gone: no background tasks, no listeners, commands unregistered like the feature never existed | Mostly everything loads whether you use it or not |
+| **Storage** | One SQLite database (or MySQL if you want) holding players, homes, kits, punishments and economy. No pile of per-player files | One YAML file per player on disk |
+| **Languages & formatting** | 29 languages built in, and each player picks their own with `/language`. Messages use MiniMessage, so gradients, hover text and RGB just work | One language for the whole server, and old school `&` color codes |
+| **Player-facing GUIs** | Shop, auction house, kits and RTP open real inventories you can click through. No chat walls, and no extra plugins needed for a shop or an AH | Mostly chat and commands. A shop or an auction house means installing something else |
+| **Switching over** | Coming from EssentialsX? `/migration essentialsx` pulls over users, homes, warps, bans, mutes and economy, and dry-run mode shows what would happen first | No importer, you start from zero |
+
+### Where EssentialsX still wins
+
+* **Older setups.** EssentialsX runs on Spigot and on versions going back years. EssentialsC needs Paper and 1.20.6+, so on old setups EssentialsX is your only pick of the two.
+* **Mail.** EssentialsX has `/mail`. EssentialsC doesn't, so for offline messages you are stuck with `/msg` history or Discord.
+* **Track record.** EssentialsX has been around for over a decade and half the plugin world builds on it. EssentialsC is younger, so check the [issue tracker](https://github.com/GodlyCow203/EssentialsC/issues) before moving a big network over.
+
+---
+
+<div align="center">
+
 # About
 
 </div>
