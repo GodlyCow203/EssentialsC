@@ -58,6 +58,14 @@ public class CommandsConfig {
         return config.getString(command + ".cooldown-bypass", null);
     }
 
+    public double getCost(String command) {
+        return config.getDouble(command + ".cost", 0D);
+    }
+
+    public String getCostBypassPermission(String command) {
+        return config.getString(command + ".cost-bypass", null);
+    }
+
     public boolean isCustomHelp(String command) {
         return config.getBoolean(command + ".help.custom", false);
     }

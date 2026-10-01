@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
+import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +12,8 @@ import org.bukkit.entity.Player;
 
 import net.godlycow.org.essc.util.TabCompletionUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -77,26 +80,118 @@ public abstract class Command implements CommandExecutor, TabCompleter {
         }
 
         if (sender instanceof Player player) {
-            long cooldownSeconds = plugin.getCommandsConfig().getCooldown(name);
-            if (cooldownSeconds > 0) {
-                String bypassPermission = plugin.getCommandsConfig().getCooldownBypassPermission(name);
+            if (!checkCooldown(player)) {
+                return true;
+            }
+
+            double cost = plugin.getCommandsConfig().getCost(name);
+            if (cost > 0 && plugin.getConfigManager().isEconomyEnabled() && plugin.getEconomyManager() != null) {
+                String bypassPermission = plugin.getCommandsConfig().getCostBypassPermission(name);
                 boolean hasBypass = bypassPermission != null && player.hasPermission(bypassPermission);
 
                 if (!hasBypass) {
-                    CommandCooldownManager cooldownManager = plugin.getCommandCooldownManager();
-                    long remaining = cooldownManager.getRemainingSeconds(player.getUniqueId(), name);
-
-                    if (remaining > 0) {
-                        sender.sendMessage(lang.get(sender, "error.command_cooldown",
-                                Map.of("seconds", String.valueOf(remaining), "command", name)));
-                        return true;
-                    }
-
-                    cooldownManager.setCooldown(player.getUniqueId(), name, cooldownSeconds);
+                    chargeAndRun(player, cost, label, args);
+                    return true;
                 }
             }
+
+            startCooldown(player);
         }
 
+        return runExecute(sender, label, args);
+    }
+
+    private boolean checkCooldown(Player player) {
+        long cooldownSeconds = plugin.getCommandsConfig().getCooldown(name);
+        if (cooldownSeconds <= 0) {
+            return true;
+        }
+
+        String bypassPermission = plugin.getCommandsConfig().getCooldownBypassPermission(name);
+        if (bypassPermission  != null && player.hasPermission(bypassPermission)) {
+            return true;
+        }
+
+        CommandCooldownManager cooldownManager = plugin.getCommandCooldownManager();
+        long remaining = cooldownManager.getRemainingSeconds(player.getUniqueId(),  name);
+
+
+        if (remaining > 0) {
+            player.sendMessage(lang.get(player, "error.command_cooldown",
+                    Map.of("seconds", String.valueOf(remaining), "command", name)));
+            return false;
+        }
+
+        return true;
+    }
+
+    private void startCooldown(Player player) {
+        long cooldownSeconds = plugin.getCommandsConfig().getCooldown(name);
+        if (cooldownSeconds <= 0) {
+            return;
+        }
+
+        String bypassPermission = plugin.getCommandsConfig().getCooldownBypassPermission(name);
+        if (bypassPermission != null && player.hasPermission(bypassPermission)) {
+            return;
+        }
+
+        plugin.getCommandCooldownManager().setCooldown(player.getUniqueId(), name, cooldownSeconds);
+    }
+
+    private void chargeAndRun(Player player,  double cost, String label, String[] args) {
+        EconomyManager economy = plugin.getEconomyManager();
+
+        BigDecimal amount = BigDecimal.valueOf(cost).setScale(2, RoundingMode.HALF_UP);
+        String formattedAmount = economy.formatPlain(amount);
+
+        String currency = amount.compareTo(BigDecimal.ONE) == 0
+                ? plugin.getConfigManager().getCurrencySingular()
+                : plugin.getConfigManager().getCurrencyPlural();
+
+
+
+        economy.has(player.getUniqueId(), amount).thenAccept(hasFunds -> {
+            if (!hasFunds) {
+
+                player.sendMessage(lang.get(player, "error.insufficient_funds",
+                        Map.of("amount", formattedAmount, "currency", currency)));
+                plugin.debug("Denied: " + player.getName() + " cannot afford /" + name
+                        + " (cost " + economy.format(amount) + ")");
+
+                return;
+            }
+
+            economy.withdraw(player.getUniqueId(), amount).thenAccept(withdrawn -> {
+                if (!withdrawn) {
+                    player.sendMessage(lang.get(player, "error.insufficient_funds",
+                            Map.of("amount", formattedAmount, "currency", currency)));
+
+                    plugin.debug("Denied: " + player.getName() + " failed to pay /" + name
+                            + " (cost " + economy.format(amount) + ")");
+                    return;
+                }
+
+
+                player.getScheduler().run(plugin, task -> {
+                    if (!player.isOnline()) {
+                        economy.deposit(player.getUniqueId(), amount);
+                        return;
+                    }
+
+                    startCooldown(player);
+                    player.sendMessage(lang.get(player, "command.cost_charged",
+                            Map.of("amount", formattedAmount, "currency", currency, "command", name)));
+                    plugin.debug(player.getName() + " paid " + economy.format(amount) + " to run /" + name);
+
+                    runExecute(player, label, args);
+                }, () -> economy.deposit(player.getUniqueId(), amount));
+            });
+        });
+
+    }
+
+    private boolean runExecute(CommandSender sender, String label, String[] args) {
         try {
             return execute(sender, label, args);
         } catch (Exception e) {

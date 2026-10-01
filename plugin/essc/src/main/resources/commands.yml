@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 9
+config-version: 10
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -52,6 +52,24 @@ config-version: 9
 #   Permission node that lets a player skip the cooldown defined above.
 #   Omit if you don't need a bypass for this command.
 #
+# cost
+#   Amount of money charged to a player each time they run this command.
+#   Set to 0 (or omit the key) to make the command free.
+#   Requires economy.enabled in config.yml — if the economy is disabled the
+#   command runs for free. Console is never charged.
+#
+# cost-bypass
+#   Permission node that lets a player use the command without paying the
+#   cost defined above. Omit if you don't need a bypass for this command.
+#
+#   Example:
+#     home:
+#       enabled: true
+#       priority: normal
+#       aliases: []
+#       cost: 10.0
+#       cost-bypass: essentialsc.home.bypass.cost
+#
 # help
 #   Override the auto-generated help output for this command.
 #   When custom is set to true, the lines list completely replaces
@@ -81,6 +99,7 @@ feed:
   enabled: true
   priority: normal
   aliases: []
+  cost: 100
 
 fly:
   enabled: true
