@@ -99,7 +99,6 @@ feed:
   enabled: true
   priority: normal
   aliases: []
-  cost: 100
 
 fly:
   enabled: true
