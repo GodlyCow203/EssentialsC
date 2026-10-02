@@ -156,7 +156,7 @@ public class InvseeCommand extends Command {
         fillBottomRow(gui);
         viewer.openInventory(gui);
 
-        getInvseeListener().registerOfflineSession(targetUuid);
+        getInvseeListener().registerOfflineSession(targetUuid, gui);
     }
 
     private InvseeListener getInvseeListener() {

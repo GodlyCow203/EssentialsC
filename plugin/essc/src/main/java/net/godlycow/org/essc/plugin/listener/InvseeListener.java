@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import org.bukkit.inventory.InventoryHolder;
 
 public class InvseeListener implements Listener {
 
@@ -29,17 +30,45 @@ public class InvseeListener implements Listener {
     private final EssentialsC plugin;
     private final Set<UUID> openOfflineSessions = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Map<UUID, Inventory> onlineSessionGuis = new ConcurrentHashMap<>();
+    private final Set<Inventory> trackedGuis = ConcurrentHashMap.newKeySet();
 
     public InvseeListener(EssentialsC plugin) {
         this.plugin = plugin;
     }
 
-    public void registerOfflineSession(UUID targetUuid) {
+    public void registerOfflineSession(UUID targetUuid, Inventory gui) {
         openOfflineSessions.add(targetUuid);
+        track(gui);
     }
 
     public void registerOnlineSession(UUID targetUuid, Inventory gui) {
         onlineSessionGuis.put(targetUuid, gui);
+        track(gui);
+    }
+
+    public void track(Inventory  gui) {
+        if (gui != null) {
+            trackedGuis.add(gui);
+        }
+    }
+
+    public void untrack(Inventory gui) {
+        if (gui != null) {
+            trackedGuis.remove(gui);
+        }
+    }
+
+
+    private InvseeHolder resolveHolder(Inventory inv) {
+
+        if (inv == null || !trackedGuis.contains(inv)) {
+
+            return null;
+        }
+        InventoryHolder holder = InventoryViewCompat.safeHolder(inv);
+
+
+        return holder instanceof InvseeHolder invseeHolder ? invseeHolder : null;
     }
 
     public boolean hasOpenOfflineSession(UUID targetUuid) {
@@ -50,12 +79,16 @@ public class InvseeListener implements Listener {
         for (Player viewer : plugin.getServer().getOnlinePlayers()) {
             Inventory open = InventoryViewCompat.getTopInventory(viewer);
 
-            if (!(InventoryViewCompat.safeHolder(open) instanceof InvseeHolder holder)) continue;
+            InvseeHolder holder = resolveHolder(open);
+
+            if (holder == null)
+                continue;
             if (!holder.isOffline()) continue;
             if (!holder.getTargetUuid().equals(targetUuid)) continue;
 
             ItemStack[] slots = extractSlotsFromGui(open);
             openOfflineSessions.remove(targetUuid);
+            untrack(open);
             viewer.closeInventory();
 
             plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
@@ -86,7 +119,9 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
-        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
+        InvseeHolder holder = resolveHolder(event.getInventory());
+        if (holder == null)
+            return;
 
         int rawSlot = event.getRawSlot();
 
@@ -121,7 +156,9 @@ public class InvseeListener implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
         if (!(event.getWhoClicked() instanceof Player viewer)) return;
-        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
+        InvseeHolder holder = resolveHolder(event.getInventory());
+        if (holder == null)
+            return;
 
         boolean affectsDisplaySlots = event.getRawSlots().stream()
                 .anyMatch(slot -> slot >= STORAGE_SIZE && slot < 54);
@@ -154,7 +191,11 @@ public class InvseeListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        if (!(InventoryViewCompat.safeHolder(event.getInventory()) instanceof InvseeHolder holder)) return;
+
+        InvseeHolder holder = resolveHolder(event.getInventory());
+        if (holder == null)
+            return;
+        untrack(event.getInventory());
 
         if (holder.isOffline()) {
             openOfflineSessions.remove(holder.getTargetUuid());

@@ -149,12 +149,12 @@ public class AhListener implements Listener {
             case "refresh", "back_main" -> {
                 soundManager.playClick(player);
                 String searchQuery = null;
-                if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+                if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder) {
                     searchQuery = holder.getSearchQuery();
                 }
                 if (searchQuery != null) {
                     int currentPage = 1;
-                    if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder h) {
+                    if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder h) {
                         currentPage = h.getPage();
                     }
                     ahCommand.openSearchGui(player, searchQuery, currentPage);
@@ -252,7 +252,7 @@ public class AhListener implements Listener {
         int returnPage = 1;
         String searchQuery = null;
 
-        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+        if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder) {
 
             searchQuery = holder.getSearchQuery();
             String guiId = holder.getGuiId();
@@ -315,7 +315,7 @@ public class AhListener implements Listener {
         soundManager.playClick(player);
 
         String searchQuery = null;
-        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+        if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder) {
             searchQuery = holder.getSearchQuery();
         }
 
@@ -384,7 +384,7 @@ public class AhListener implements Listener {
         soundManager.playClick(player);
         // Check if we have a search query stored in the current inventory holder
         String searchQuery = null;
-        if (player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder) {
+        if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder) {
             searchQuery = holder.getSearchQuery();
         }
         if (searchQuery != null) {
@@ -397,7 +397,7 @@ public class AhListener implements Listener {
     private void handleShulkerPreviewBack(Player player) {
 
         soundManager.playClick(player);
-        if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder)) {
+        if (!(InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder)) {
             ahCommand.openMainGui(player, 1);
             return;
         }
@@ -424,7 +424,7 @@ public class AhListener implements Listener {
     }
 
     private void handleShulkerPreviewBuy(Player player) {
-        if (!(player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder holder)) return;
+        if (!(InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder holder)) return;
 
         int auctionId = holder.getAuctionId();
         Optional<Auction> opt = plugin.getAuctionManager().getAuction(auctionId);

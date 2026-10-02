@@ -58,6 +58,7 @@ import net.godlycow.org.essc.modules.SpawnManager;
 import net.godlycow.org.essc.modules.tab.TabManager;
 import net.godlycow.org.essc.modules.teleport.TPAManager;
 import net.godlycow.org.essc.util.ItemUtil;
+import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.util.StartupBanner;
 import net.godlycow.org.essc.modules.VanishManager;
 import net.godlycow.org.essc.modules.warp.WarpManager;
@@ -324,8 +325,7 @@ public final class PluginLoader {
         plugin.debug("AH commands unregistered.");
 
         for (org.bukkit.entity.Player player : plugin.getServer().getOnlinePlayers()) {
-            if (player.getOpenInventory().getTopInventory() != null
-                    && player.getOpenInventory().getTopInventory().getHolder() instanceof AhGuiHolder) {
+            if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof AhGuiHolder) {
                 player.closeInventory();
             }
         }
@@ -588,8 +588,7 @@ public final class PluginLoader {
         plugin.debug("Unregistered Kit Commands");
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if (player.getOpenInventory().getTopInventory() != null
-                    && player.getOpenInventory().getTopInventory().getHolder() instanceof KitGuiHolder) {
+            if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof KitGuiHolder) {
                 player.closeInventory();
             }
         }
@@ -618,8 +617,7 @@ public final class PluginLoader {
         plugin.debug("Shop commands unregistered");
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if (player.getOpenInventory().getTopInventory() != null
-                    && player.getOpenInventory().getTopInventory().getHolder() instanceof ShopHolder) {
+            if (InventoryViewCompat.safeHolder(InventoryViewCompat.getTopInventory(player)) instanceof ShopHolder) {
                 player.closeInventory();
             }
         }

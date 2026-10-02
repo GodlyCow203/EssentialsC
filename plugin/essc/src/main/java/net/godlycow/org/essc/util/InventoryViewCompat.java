@@ -7,7 +7,7 @@ import org.bukkit.inventory.InventoryView;
 
 import java.lang.reflect.Method;
 
-// avoids IncompatibleClassChangeError on paper 1.20.x where InventoryView is a class, not an interface :/ Thanks faststats
+// avoids IncompatibleClassChangeError on paper 1.20.x where InventoryView is a class, not an interface
 public final class InventoryViewCompat {
 
     private static Method getTopInventoryMethod;
@@ -16,15 +16,17 @@ public final class InventoryViewCompat {
     }
 
     public static InventoryHolder safeHolder(Inventory inv) {
-
-        try
-        {
-            return inv == null ? null : inv.getHolder();
+        if (inv == null) {
+            return null;
         }
+        try {
+            return inv.getHolder();
+        } catch (Throwable e) {
+            // Folia/Canvas, CraftInventory#getHolder() can access the block behind
+            // the inventory, if the region thread doesnt
+            // own that block, it throws, so just ignore it to avoid breaking other
+            // inventory events
 
-        catch (Exception e)
-
-        {
             return null;
         }
     }
