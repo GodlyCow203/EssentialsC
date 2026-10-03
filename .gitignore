@@ -127,6 +127,7 @@ run-server/*
 module-test/*
 servers/paper-26.2/
 servers/paper-26.3/
+servers/folia-26.2/
 
 
 # Gradle build folders

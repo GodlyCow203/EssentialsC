@@ -59,7 +59,8 @@ val java25Path = providers.gradleProperty("minecraft.java25")
     .get()
 
 enum class MinecraftServerType(val papermcProjectName: String) {
-    PAPER("paper")
+    PAPER("paper"),
+    FOLIA("folia")
 }
 
 data class MinecraftServerDefinition(
@@ -71,7 +72,8 @@ data class MinecraftServerDefinition(
 //paper is on 26.+ so it requires java 25
 val minecraftServerDefinitions = listOf(
     MinecraftServerDefinition("paper-26.2", MinecraftServerType.PAPER, java25Path),
-    MinecraftServerDefinition("paper-26.3", MinecraftServerType.PAPER, java25Path)
+    MinecraftServerDefinition("paper-26.3", MinecraftServerType.PAPER, java25Path),
+    MinecraftServerDefinition("folia-26.2", MinecraftServerType.FOLIA, java25Path)
 )
 
 minecraftServerDefinitions.forEach { serverDefinition ->
