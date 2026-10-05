@@ -11,6 +11,7 @@ import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.server.software.ServerSoftware;
 import net.godlycow.org.essc.storage.user.UserManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -416,11 +417,30 @@ public class DumpSectionCollector {
         SpawnManager spawnManager = plugin.getSpawnManager();
         spawn.put("enabled", true);
         spawn.put("spawnSet", spawnManager.isSpawnSet());
-        spawn.put("spawnLocation", spawnManager.getSpawn());
+        spawn.put("spawnLocation", serializeLocation(spawnManager.getSpawn()));
         spawn.put("cooldown", plugin.getConfigManager().getSpawnCooldown());
         spawn.put("warmup", plugin.getConfigManager().getSpawnWarmup());
 
         return spawn;
+    }
+
+    private Map<String, Object> serializeLocation(Location location) {
+
+        if (location == null) {
+            return null;
+        }
+
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("world", location.getWorld()
+                != null ? location.getWorld().getName() : null);
+        map.put("x", location.getX());
+        map.put("y", location.getY());
+        map.put("z", location.getZ());
+        map.put("yaw", location.getYaw());
+        map.put("pitch", location.getPitch());
+
+        return map;
     }
 
     private Map<String, Object> buildBackups() {
