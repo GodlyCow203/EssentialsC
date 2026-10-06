@@ -6,6 +6,12 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+/**
+ * Fired when a home teleport starts.
+ *
+ * <p>Cancelling this event blocks the teleport. Communicate why via
+ * {@link #setCancelReason(String)}.
+ */
 public class HomeTeleportEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private final Player player;
@@ -13,6 +19,12 @@ public class HomeTeleportEvent extends Event implements Cancellable {
     private boolean cancelled;
     private String cancelReason;
 
+    /**
+     * Creates a new home teleport event.
+     *
+     * @param player the teleporting player
+     * @param home the destination home
+     */
     public HomeTeleportEvent(Player player, Home home) {
         this.player = player;
         this.home = home;
@@ -20,18 +32,38 @@ public class HomeTeleportEvent extends Event implements Cancellable {
         this.cancelReason = "";
     }
 
+    /**
+     * Returns the teleporting player.
+     *
+     * @return the player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns the destination home.
+     *
+     * @return the home
+     */
     public Home getHome() {
         return home;
     }
 
+    /**
+     * Returns why the event was cancelled, or an empty string if not cancelled.
+     *
+     * @return the cancel reason
+     */
     public String getCancelReason() {
         return cancelReason;
     }
 
+    /**
+     * Sets why the event is being cancelled.
+     *
+     * @param cancelReason the cancel reason
+     */
     public void setCancelReason(String cancelReason) {
         this.cancelReason = cancelReason;
     }
