@@ -47,9 +47,7 @@ allprojects {
 }
 
 val essentialsCProjectPath = ":plugin:essc"
-val testProjectPath = ":plugin:test"
 val essentialsCJarBaseName = "EssentialsC"
-val testJarBaseName = "EssentialsCTest"
 val serversDirectory = layout.projectDirectory.dir("servers")
 val pluginsSubdirectoryName = "plugins"
 
@@ -104,28 +102,10 @@ minecraftServerDefinitions.forEach { serverDefinition ->
         into(serverPluginsDirectory)
     }
 
-    val deployTestTask = tasks.register<Copy>("deployTestPluginTo$taskNameSuffix") {
-        group = "minecraft servers"
-        description = "Copies the EssentialsCTest jar to ${serverDefinition.identifier}."
-        dependsOn("$testProjectPath:shadowJar")
-
-        doFirst {
-            serverPluginsDirectory.mkdirs()
-
-            //remove old test jars first
-            fileTree(serverPluginsDirectory) {
-                include("$testJarBaseName-*.jar")
-            }.forEach { it.delete() }
-        }
-
-        from(project(testProjectPath).tasks.named<Jar>("shadowJar").get().outputs.files)
-        into(serverPluginsDirectory)
-    }
-
     tasks.register<Exec>("run$taskNameSuffix") {
         group = "minecraft servers"
         description = "Starts the ${serverDefinition.identifier} server."
-        dependsOn(deployTask, deployTestTask)
+        dependsOn(deployTask)
 
         workingDir = serverDirectory
         commandLine(serverDefinition.javaPath, "-jar", serverJarFile.absolutePath, "--nogui")
@@ -134,26 +114,5 @@ minecraftServerDefinitions.forEach { serverDefinition ->
         standardInput = System.`in`
         standardOutput = System.out
         errorOutput = System.err
-    }
-
-    tasks.register<Delete>("cleanupTestPluginFrom$taskNameSuffix") {
-        group = "minecraft servers"
-        description = "Removes EssentialsCTest jar from ${serverDefinition.identifier}"
-        delete(fileTree(serverPluginsDirectory) {
-            include("$testJarBaseName-*.jar")
-        })
-    }
-}
-
-// globla cleanup task
-tasks.register<Delete>("cleanupAllTestPlugins") {
-    group = "minecraft servers"
-    description = "Removes EssentialsCTest jar from all server plugins folders"
-    minecraftServerDefinitions.forEach { serverDefinition ->
-        val serverPluginsDirectory = serversDirectory.dir(serverDefinition.identifier)
-            .dir(pluginsSubdirectoryName).asFile
-        delete(fileTree(serverPluginsDirectory) {
-            include("$testJarBaseName-*.jar")
-        })
     }
 }

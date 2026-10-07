@@ -1,13 +1,10 @@
-plugins {
-    id("com.gradleup.shadow")
-}
-
-tasks.shadowJar {
-    archiveBaseName = "EssentialsCTest"
-}
-
 dependencies {
-    compileOnly(project(":api"))
-    compileOnly(project(":plugin:essc"))
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    testImplementation(project(":api"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.11.4")
+}
+
+tasks.withType<org.gradle.api.tasks.testing.Test> {
+    useJUnitPlatform()
 }
