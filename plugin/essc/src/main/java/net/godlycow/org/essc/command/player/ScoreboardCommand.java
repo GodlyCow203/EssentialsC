@@ -10,7 +10,7 @@ import java.util.List;
 public class ScoreboardCommand extends Command {
 
     public ScoreboardCommand(EssentialsC plugin) {
-        super(plugin, "scoreboard", "Toggle or reload the scoreboard", false, 0);
+        super(plugin, "scoreboard", null, false, 0);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ScoreboardCommand extends Command {
                     return true;
                 }
 
-                if (!sender.hasPermission("essentialsc.scoreboard.toggle")) {
+                if (!canToggle(sender)) {
                     sender.sendMessage(lang.get(sender, "error.no_permission"));
                     return true;
                 }
@@ -77,7 +77,7 @@ public class ScoreboardCommand extends Command {
 
     private void showUsage(CommandSender sender) {
         sender.sendMessage(lang.get(sender, "scoreboard.usage"));
-        if (sender.hasPermission("essentialsc.scoreboard.toggle")) {
+        if (canToggle(sender)) {
             sender.sendMessage(lang.get(sender, "scoreboard.help_toggle"));
         }
         if (sender.hasPermission("essentialsc.scoreboard.reload")) {
@@ -90,7 +90,7 @@ public class ScoreboardCommand extends Command {
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
             List<String> subs = new java.util.ArrayList<>();
-            if (sender.hasPermission("essentialsc.scoreboard.toggle")) {
+            if (canToggle(sender)) {
                 subs.add("toggle");
             }
             if (sender.hasPermission("essentialsc.scoreboard.reload")) {
@@ -102,5 +102,9 @@ public class ScoreboardCommand extends Command {
                     .toList();
         }
         return super.tabComplete(sender, args);
+    }
+
+    private boolean canToggle(CommandSender sender) {
+        return sender.hasPermission("essentialsc.scoreboard.toggle");
     }
 }

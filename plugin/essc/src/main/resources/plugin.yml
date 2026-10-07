@@ -142,8 +142,8 @@ commands:
 
   scoreboard:
     description: Toggle or manage scoreboard
-    usage: /scoreboard [toggle|reload]
-    permission: essentialsc.scoreboard.toggle
+    usage: /scoreboard [toggle|reload|status]
+    permission: essentialsc.scoreboard
 
   feed:
     description: Feed yourself or another player
@@ -684,9 +684,13 @@ permissions:
     description: Toggle kit cooldown notifications with /kit notifications
     default: true
 
+  essentialsc.scoreboard:
+    default: true
+    description: Use the scoreboard command
+
   essentialsc.scoreboard.toggle:
     default: true
-    description: Reload the Scoreboard
+    description: Toggle scoreboard visibility
 
   essentialsc.scoreboard.reload:
     default: op
