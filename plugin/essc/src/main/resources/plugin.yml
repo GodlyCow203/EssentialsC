@@ -505,6 +505,16 @@ commands:
     usage: /discord
     permission: essentialsc.discord
 
+  freeze:
+    description: Freeze a player in place
+    usage: /freeze <player>
+    permission: essentialsc.freeze
+
+  unfreeze:
+    description: Unfreeze a player
+    usage: /unfreeze <player>
+    permission: essentialsc.unfreeze
+
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  # ------------------------------------------------- PERMISSIONS ---------------------------------------------------------------------------------------------------------------------------
@@ -1407,4 +1417,20 @@ permissions:
   essentialsc.unbanip:
     description: Unban IP addresses
     default: op
+
+  essentialsc.freeze:
+    description: Freeze players with /freeze
+    default: op
+
+  essentialsc.unfreeze:
+    description: Unfreeze players with /unfreeze
+    default: op
+
+  essentialsc.freeze.bypass:
+    description: Cannot be frozen, freeze restrictions do not apply
+    default: op
+
+  essentialsc.freeze.bypass.override:
+    description: Allows freezing players who have essentialsc.freeze.bypass
+    default: false
 

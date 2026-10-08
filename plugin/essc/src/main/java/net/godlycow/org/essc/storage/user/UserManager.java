@@ -44,6 +44,7 @@ public class UserManager {
             if (cached != null) {
 
                 profile.setVanished(cached.isVanished());
+                profile.setFrozen(cached.isFrozen());
                 profile.setFlyEnabled(cached.isFlyEnabled());
                 profile.setTpaBlocked(cached.isTpaBlocked());
                 profile.setScoreboardDisabled(cached.isScoreboardDisabled());
@@ -121,6 +122,19 @@ public class UserManager {
         UserProfile profile = cache.get(uuid);
 
         return profile != null && profile.isVanished();
+    }
+
+    public void setFrozen(UUID uuid, boolean frozen) {
+        UserProfile profile = cache.get(uuid);
+        if (profile != null) {
+            profile.setFrozen(frozen);
+            saveAsync(profile);
+        }
+    }
+
+    public boolean isFrozen(UUID uuid) {
+        UserProfile profile = cache.get(uuid);
+        return profile != null && profile.isFrozen();
     }
 
     public boolean isTpaBlocked(UUID uuid) {

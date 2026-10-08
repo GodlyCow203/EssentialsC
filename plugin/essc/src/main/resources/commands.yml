@@ -607,3 +607,13 @@ discord:
   enabled: true
   priority: normal
   aliases: []
+
+freeze:
+  enabled: true
+  priority: normal
+  aliases: []
+
+unfreeze:
+  enabled: true
+  priority: normal
+  aliases: []

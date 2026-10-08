@@ -97,6 +97,8 @@ public class CommandRegistrar {
         register("hat",            new HatCommand(plugin));
         register("sudo",           new SudoCommand(plugin));
         register("kick",           new KickCommand(plugin));
+        register("freeze",         new FreezeCommand(plugin));
+        register("unfreeze",       new UnfreezeCommand(plugin));
         register("ignore",         new IgnoreCommand(plugin));
         register("msg",            new MsgCommand(plugin));
         register("reply",          new ReplyCommand(plugin));

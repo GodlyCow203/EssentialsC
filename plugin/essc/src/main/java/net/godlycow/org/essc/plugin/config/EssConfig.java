@@ -642,6 +642,8 @@ public class EssConfig {
 
     public int getSpawnEntityMaxAmount() { return config.getInt("spawnentity.max-amount", 10);}
 
+
+    // TODO - Implement config Option
     public boolean isPlayerListLuckPermsEnabled() {
         return config.getBoolean("playerlist.show-luckperms-prefix", true);
     }
@@ -790,6 +792,7 @@ public class EssConfig {
         return config.getString("chat.mention.format", "<yellow>@<player></yellow>");
     }
 
+    // TODO - Implement config Option
     public boolean isDiscordNickShowRealname() {
         return config.getBoolean("nickname.discord-show-realname", true);
     }
@@ -876,6 +879,39 @@ public class EssConfig {
 
     public boolean isCurrencySpace() {
         return config.getBoolean("economy.currency-space", false);
+    }
+
+
+    public boolean isFreezeAllowLook() {
+        return config.getBoolean("freeze.allow-look", true);
+    }
+
+    public boolean isFreezeBlockTeleport() {
+        return config.getBoolean("freeze.block-teleport", true);
+    }
+
+    public boolean isFreezeBlockDropPickup() {
+        return config.getBoolean("freeze.block-drop-pickup", true);
+    }
+
+    public boolean isFreezeBlockInventory() {
+        return config.getBoolean("freeze.block-inventory", true);
+    }
+
+    public boolean isFreezeBlockBreakPlace() {
+        return config.getBoolean("freeze.block-break-place", true);
+    }
+
+    public boolean isFreezeBlockInteract() {
+        return config.getBoolean("freeze.block-interact", true);
+    }
+
+    public boolean isFreezePersistOnReconnect() {
+        return config.getBoolean("freeze.persist-on-reconnect", true);
+    }
+
+    public List<String> getFreezeAllowedCommands() {
+        return config.getStringList("freeze.allowed-commands");
     }
 
 }

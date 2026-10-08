@@ -950,3 +950,39 @@ rules:
   # The rules themselves are stored in rules.txt.
   # Requires a restart.
   enabled: true
+
+# Freeze
+#
+# Settings for the /freeze and /unfreeze commands.
+# Frozen players can move their camera when allow-look is true,
+# but position changes are reverted on the region thread.
+
+freeze:
+  # Allow frozen players to look around (yaw/pitch) while their position stays locked.
+  allow-look: true
+
+  # Cancel PlayerTeleportEvent for frozen players (pearls, chorus, commands, plugins).
+  block-teleport: true
+
+  # Cancel item drops (pickup is denied via inventory lock + drop cancel).
+  block-drop-pickup: true
+
+  # Cancel inventory clicks and drags for frozen players.
+  block-inventory: true
+
+  # Cancel block breaking and placing for frozen players.
+  block-break-place: true
+
+  # Cancel right/left-click and entity interactions + outgoing attacks.
+  block-interact: true
+
+  # Keep players frozen across reconnects (persisted in the user database).
+  persist-on-reconnect: true
+
+  # Commands frozen players may still run (without slash, lowercase).
+  # Everything else is blocked with freeze.command_blocked.
+  allowed-commands:
+    - msg
+    - reply
+    - r
+    - help

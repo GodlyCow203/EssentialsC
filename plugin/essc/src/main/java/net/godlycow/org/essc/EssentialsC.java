@@ -24,6 +24,7 @@ import net.godlycow.org.essc.modules.back.BackManager;
 import net.godlycow.org.essc.modules.backup.BackupManager;
 import net.godlycow.org.essc.modules.chat.ChatManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
+import net.godlycow.org.essc.modules.FreezeManager;
 import net.godlycow.org.essc.modules.home.HomeManager;
 import net.godlycow.org.essc.modules.home.HomeNotificationManager;
 import net.godlycow.org.essc.modules.kit.KitManager;
@@ -90,6 +91,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private RTPGuiManager rtpGuiManager;
     private TabManager tabManager;
     private FlyManager flyManager;
+    private FreezeManager freezeManager;
     private BedrockUtil bedrockUtil;
     private RulesManager rulesManager;
     private MOTDManager motdManager;
@@ -423,6 +425,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setFlyManager(FlyManager flyManager) {
         this.flyManager = flyManager;
+    }
+
+    public FreezeManager getFreezeManager() {
+        return freezeManager;
+    }
+
+    public void setFreezeManager(FreezeManager freezeManager) {
+        this.freezeManager = freezeManager;
     }
 
     public BedrockUtil getBedrockUtil() {

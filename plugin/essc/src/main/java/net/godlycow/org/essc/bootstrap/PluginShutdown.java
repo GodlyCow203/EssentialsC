@@ -74,6 +74,9 @@ public final class PluginShutdown {
         if (plugin.getFlyManager() != null) {
             plugin.getFlyManager().shutdown();
         }
+        if (plugin.getFreezeManager() != null) {
+            plugin.getFreezeManager().shutdown();
+        }
         if (plugin.getTabManager() != null) {
             plugin.getTabManager().shutdown();
         }

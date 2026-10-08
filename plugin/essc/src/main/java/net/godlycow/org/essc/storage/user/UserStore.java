@@ -22,7 +22,7 @@ public class UserStore {
     private final Database database;
     private final EssentialsC plugin;
 
-    private static final int SCHEMA_VERSION = 2;
+    private static final int SCHEMA_VERSION = 3;
 
 
     // create all tables for the user db
@@ -41,6 +41,7 @@ public class UserStore {
                 death_location TEXT,
                 fly_enabled BOOLEAN DEFAULT FALSE,
                 vanished BOOLEAN DEFAULT FALSE,
+                frozen BOOLEAN DEFAULT FALSE,
                 tpa_blocked BOOLEAN DEFAULT FALSE,
                 last_reply_target TEXT,
                 rtp_last_used INTEGER DEFAULT 0,
@@ -192,6 +193,34 @@ public class UserStore {
         }
         if (fromVersion < 2) {
             clearLegacyDefaultLanguageCodes(conn);
+        }
+        if (fromVersion < 3) {
+            addFrozenColumn(conn);
+        }
+    }
+
+    private void addFrozenColumn(Connection conn)
+            throws SQLException
+    {
+        boolean hasFrozen = false;
+
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("PRAGMA table_info(users)")) {
+            while (rs.next())
+            {
+                if ("frozen".equals(rs.getString("name")))
+                {
+                    hasFrozen = true;
+                    break;
+                }
+            }
+        }
+        if (!hasFrozen) {
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("ALTER TABLE users ADD COLUMN frozen BOOLEAN DEFAULT FALSE");
+            }
+
+            plugin.getLogger().info("[UserStore] Added frozen column to users table");
         }
     }
 
@@ -353,9 +382,9 @@ public class UserStore {
         }
         try (Connection conn = database.openFreshConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO users (uuid, username, last_known_name, first_join_time, last_join_time, last_ip, logout_location, logout_time, language_code, back_location, death_location, fly_enabled, vanished, tpa_blocked, last_reply_target, rtp_last_used, spawn_last_teleport, ban_reason, ban_banner, ban_time, ban_expires, mute_reason, mute_muter, mute_time, mute_expires, mute_offline_notification, scoreboard_disabled, rules_accepted, created_at, updated_at) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-                     "ON CONFLICT(uuid) DO UPDATE SET " +
+                      "INSERT INTO users (uuid, username, last_known_name, first_join_time, last_join_time, last_ip, logout_location, logout_time, language_code, back_location, death_location, fly_enabled, vanished, frozen, tpa_blocked, last_reply_target, rtp_last_used, spawn_last_teleport, ban_reason, ban_banner, ban_time, ban_expires, mute_reason, mute_muter, mute_time, mute_expires, mute_offline_notification, scoreboard_disabled, rules_accepted, created_at, updated_at) " +
+                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                      "ON CONFLICT(uuid) DO UPDATE SET " +
                      "username = excluded.username, " +
                      "last_known_name = excluded.last_known_name, " +
                      "first_join_time = excluded.first_join_time, " +
@@ -366,9 +395,10 @@ public class UserStore {
                      "language_code = excluded.language_code, " +
                      "back_location = excluded.back_location, " +
                      "death_location = excluded.death_location, " +
-                     "fly_enabled = excluded.fly_enabled, " +
-                     "vanished = excluded.vanished, " +
-                     "tpa_blocked = excluded.tpa_blocked, " +
+                      "fly_enabled = excluded.fly_enabled, " +
+                      "vanished = excluded.vanished, " +
+                      "frozen = excluded.frozen, " +
+                      "tpa_blocked = excluded.tpa_blocked, " +
                      "last_reply_target = excluded.last_reply_target, " +
                      "rtp_last_used = excluded.rtp_last_used, " +
                      "spawn_last_teleport = excluded.spawn_last_teleport, " +
@@ -399,6 +429,7 @@ public class UserStore {
             stmt.setString(i++, profile.getRawDeathLocation());
             stmt.setBoolean(i ++, profile.isFlyEnabled());
             stmt.setBoolean(i++, profile.isVanished());
+            stmt.setBoolean(i++, profile.isFrozen());
             stmt.setBoolean(i++,  profile.isTpaBlocked());
             stmt.setString(i++, profile.getRawLastReplyTarget());
             stmt.setLong(i++, profile.getRtpLastUsed());
@@ -579,6 +610,12 @@ public class UserStore {
         profile.setRawDeathLocation(row.getString("death_location"));
         profile.setFlyEnabled(row.getBoolean("fly_enabled"));
         profile.setVanished(row.getBoolean("vanished"));
+        try {
+            profile.setFrozen(row.getBoolean("frozen"));
+        } catch (SQLException ignored) {
+            // pre-v3 database: column added by migrate() on next startup
+            profile.setFrozen(false);
+        }
         profile.setTpaBlocked(row.getBoolean("tpa_blocked"));
         profile.setRawLastReplyTarget(row.getString("last_reply_target"));
         profile.setRtpLastUsed(row.getLong("rtp_last_used"));

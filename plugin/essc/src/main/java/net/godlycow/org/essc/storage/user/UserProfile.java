@@ -19,6 +19,7 @@ public class UserProfile {
     private String deathLocation;
     private boolean flyEnabled;
     private boolean vanished;
+    private boolean frozen;
     private boolean tpaBlocked;
     private String lastReplyTarget;
     private long rtpLastUsed;
@@ -179,6 +180,14 @@ public class UserProfile {
         this.vanished = vanished;
     }
 
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
+
     public boolean isTpaBlocked() {
         return tpaBlocked;
     }
@@ -333,6 +342,8 @@ public class UserProfile {
             sb.append("Fly ");
         if (vanished)
             sb.append("Vanished ");
+        if (frozen)
+            sb.append("Frozen ");
         if (tpaBlocked)
             sb.append("TPA-Blocked ");
         if (scoreboardDisabled)

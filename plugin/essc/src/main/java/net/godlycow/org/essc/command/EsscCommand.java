@@ -187,6 +187,11 @@ public class EsscCommand extends Command {
                     plugin.debug("FlyManager reloaded");
                 }
 
+                if (plugin.getFreezeManager() != null) {
+                    plugin.getFreezeManager().reload();
+                    plugin.debug("FreezeManager reloaded");
+                }
+
                 sender.sendMessage(lang.get(sender, "essc.reload.success", Map.of(
                         "version", plugin.getDescription().getVersion()
                 )));

@@ -24,6 +24,7 @@ import net.godlycow.org.essc.integration.discord.DiscordSRVHook;
 import net.godlycow.org.essc.integration.metrics.faststats.FastStatsManager;
 import net.godlycow.org.essc.modules.fly.FlyManager;
 import net.godlycow.org.essc.modules.fly.FlyMigration;
+import net.godlycow.org.essc.modules.FreezeManager;
 import net.godlycow.org.essc.modules.kit.gui.KitGuiManager;
 import net.godlycow.org.essc.modules.punishment.IpHistoryMigration;
 import net.godlycow.org.essc.plugin.gui.GuiFramework;
@@ -180,6 +181,8 @@ public final class PluginLoader {
         plugin.setFlyManager(new FlyManager(plugin));
         new FlyMigration(plugin).runIfNeeded();
         new IpHistoryMigration(plugin).runIfNeeded();
+
+        plugin.setFreezeManager(new FreezeManager(plugin));
 
         if (plugin.getConfigManager().isRulesEnabled()) {
             RulesManager rulesManager = new RulesManager(plugin);

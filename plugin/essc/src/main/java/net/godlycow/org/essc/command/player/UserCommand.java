@@ -138,6 +138,9 @@ public class UserCommand extends Command {
         sender.sendMessage(lang.get(sender, "user.states.vanished",
                 Map.of("value", booleanKey(plugin.getUserManager().isVanished(targetUuid)))));
 
+        sender.sendMessage(lang.get(sender, "user.states.frozen",
+                Map.of("value", booleanKey(plugin.getUserManager().isFrozen(targetUuid)))));
+
         sender.sendMessage(lang.get(sender, "user.states.tpa_blocked",
                 Map.of("value", booleanKey(plugin.getUserManager().isTpaBlocked(targetUuid)))));
 
