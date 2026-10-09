@@ -29,8 +29,10 @@ repositories {
 
 dependencies {
     api(project(":api"))
-
-    compileOnly("com.discordsrv:discordsrv:1.26.0")
+    
+    compileOnly("com.discordsrv:discordsrv:1.26.0") {
+        isTransitive = false
+    }
     compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
         exclude("org.bukkit", "bukkit")
     }

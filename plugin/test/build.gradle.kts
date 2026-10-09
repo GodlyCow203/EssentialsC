@@ -1,7 +1,5 @@
 repositories {
-    maven("https://jitpack.io")
     maven("https://repo.faststats.dev/releases")
-    maven("https://repo.helpch.at/releases/")
 }
 
 dependencies {
