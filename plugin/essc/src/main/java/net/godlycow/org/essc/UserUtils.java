@@ -1,4 +1,4 @@
-package net.godlycow.org.essc.storage.user;
+package net.godlycow.org.essc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

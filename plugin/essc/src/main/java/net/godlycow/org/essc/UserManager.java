@@ -1,10 +1,7 @@
-package net.godlycow.org.essc.storage.user;
+package net.godlycow.org.essc;
 
-import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.Location;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;

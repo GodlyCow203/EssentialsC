@@ -2,6 +2,7 @@ package net.godlycow.org.essc.modules.back;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.UserProfile;
 import net.godlycow.org.essc.util.SafeLocationFinder;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -72,7 +73,7 @@ public class BackManager implements Listener {
     public boolean hasBackLocation(Player player) {
         if (backLocations.containsKey(player.getUniqueId())) return true;
         if (plugin.getUserManager() == null) return false;
-        net.godlycow.org.essc.storage.user.UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+        UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
         if (profile != null && profile.getBackLocation() != null) {
             backLocations.put(player.getUniqueId(), profile.getBackLocation());
             return true;
@@ -158,7 +159,7 @@ public class BackManager implements Listener {
 
         Location target = deathLocations.get(player.getUniqueId());
         if (target == null && plugin.getUserManager() != null) {
-            net.godlycow.org.essc.storage.user.UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
+            UserProfile profile = plugin.getUserManager().getCachedProfile(player.getUniqueId());
             if (profile != null && profile.getDeathLocation() != null) {
                 target = profile.getDeathLocation();
                 deathLocations.put(player.getUniqueId(), target);

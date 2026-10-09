@@ -2,7 +2,7 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.UserProfile;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;

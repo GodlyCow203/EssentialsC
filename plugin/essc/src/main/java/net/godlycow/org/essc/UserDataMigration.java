@@ -1,6 +1,4 @@
-package net.godlycow.org.essc.storage.user;
-
-import net.godlycow.org.essc.EssentialsC;
+package net.godlycow.org.essc;
 
 import java.io.File;
 import java.io.IOException;

@@ -9,14 +9,12 @@ import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.modules.warp.WarpManager;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
 import net.godlycow.org.essc.server.software.ServerSoftware;
-import net.godlycow.org.essc.storage.user.UserManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;

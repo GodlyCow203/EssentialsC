@@ -2,7 +2,7 @@ package net.godlycow.org.essc.language;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
-import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.UserProfile;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

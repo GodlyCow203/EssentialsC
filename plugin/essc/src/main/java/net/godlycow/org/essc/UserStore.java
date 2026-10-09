@@ -1,6 +1,5 @@
-package net.godlycow.org.essc.storage.user;
+package net.godlycow.org.essc;
 
-import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 
 import java.io.File;

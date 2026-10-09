@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.punishment;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.UserProfile;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

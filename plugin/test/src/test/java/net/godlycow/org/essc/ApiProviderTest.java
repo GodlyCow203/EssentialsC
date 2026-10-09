@@ -1,4 +1,4 @@
-package net.godlycow.org.essc.test;
+package net.godlycow.org.essc;
 
 import net.godlycow.org.essc.api.APIProvider;
 import net.godlycow.org.essc.api.EssentialsCAPI;

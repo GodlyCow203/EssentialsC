@@ -1,7 +1,7 @@
 package net.godlycow.org.essc.modules.fly;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.godlycow.org.essc.storage.user.UserProfile;
+import net.godlycow.org.essc.UserProfile;
 
 import java.io.BufferedReader;
 import java.io.File;
