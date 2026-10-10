@@ -187,7 +187,20 @@ public class SellGUI {
         if (processed) return;
         processed = true;
 
-        double totalWorth = calculateTotalWorth();
+        double totalWorth;
+        try
+        {
+            totalWorth = calculateTotalWorth();
+        }
+        catch (Exception e)
+        {
+            plugin.getLogger().warning("[EssentialsC] SellGUI pricing failed, returning items: " + e.getMessage());
+            returnItems();
+            player.sendMessage(plugin.getLanguageManager().get(player, "error.internal"));
+            player.closeInventory();
+
+            return;
+        }
 
         if (totalWorth <= 0) {
             returnItems();

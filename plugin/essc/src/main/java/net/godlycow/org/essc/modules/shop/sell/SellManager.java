@@ -5,6 +5,7 @@ import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.modules.shop.ShopCategory;
 import net.godlycow.org.essc.modules.shop.ShopItem;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -147,7 +148,19 @@ public class SellManager {
         for (ShopCategory category : plugin.getShopManager().getCategories().values()) {
             for (int page = 1; page <= category.getMaxPage(); page++) {
                 for (ShopItem shopItem : category.getPageItems(page).values()) {
-                    if (shopItem.getMaterial() != type) continue;
+
+                    Material expected = shopItem.getMaterial();
+                    if (shopItem.isSpawner() && expected != Material.SPAWNER)
+                    {
+                        expected = Material.SPAWNER;
+                    }
+                    if (shopItem.isEnchantedBook() && expected != Material.ENCHANTED_BOOK)
+                    {
+                        expected = Material.ENCHANTED_BOOK;
+                    }
+
+                    if (expected != type)
+                        continue;
 
                     if (shopItem.isEnchantedBook() && type == Material.ENCHANTED_BOOK) {
                         if (meta instanceof org.bukkit.inventory.meta.EnchantmentStorageMeta bookMeta) {
@@ -161,7 +174,10 @@ public class SellManager {
                     if (shopItem.isSpawner() && type == Material.SPAWNER) {
                         if (meta instanceof org.bukkit.inventory.meta.BlockStateMeta blockMeta) {
                             if (blockMeta.getBlockState() instanceof org.bukkit.block.CreatureSpawner spawner) {
-                                if (spawner.getSpawnedType().name().equalsIgnoreCase(shopItem.getSpawnerType())) {
+
+                               EntityType spawnedType = spawner.getSpawnedType();
+
+                                if (spawnedType != null && spawnedType.name().equalsIgnoreCase(shopItem.getSpawnerType())) {
                                     return shopItem;
                                 }
                             }

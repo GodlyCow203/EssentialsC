@@ -2,7 +2,10 @@ package net.godlycow.org.essc.modules.shop;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.SkullTextureUtil;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
@@ -193,6 +196,7 @@ public class ShopItem {
                 blockMeta.getPersistentDataContainer().set(
                         spawnerKey, PersistentDataType.STRING, spawnerType.toUpperCase()
                 );
+                applyDisplayMeta(blockMeta);
                 item.setItemMeta(blockMeta);
             }
             return item;
@@ -202,20 +206,65 @@ public class ShopItem {
             ItemMeta rawMeta = item.getItemMeta();
             if (rawMeta instanceof EnchantmentStorageMeta bookMeta) {
                 storedEnchantments.forEach((ench, level) -> bookMeta.addStoredEnchant(ench, level, true));
+                applyDisplayMeta(bookMeta);
                 item.setItemMeta(bookMeta);
             }
             return item;
         }
 
-        if (!enchantments.isEmpty()) {
-            ItemMeta rawMeta = item.getItemMeta();
-            if (rawMeta != null) {
-                enchantments.forEach((ench, level) -> rawMeta.addEnchant(ench, level, true));
-                item.setItemMeta(rawMeta);
-            }
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            enchantments.forEach((ench, level) -> meta.addEnchant(ench, level, true));
+            applyDisplayMeta(meta);
+            item.setItemMeta(meta);
         }
 
         return item;
+    }
+
+
+    private void applyDisplayMeta(ItemMeta meta) {
+        if (meta == null) {
+            return;
+        }
+
+        if (displayName != null)
+        {
+            meta.displayName(MiniMessage.miniMessage()
+                    .deserialize(displayName)
+                    .decoration(TextDecoration.ITALIC, false));
+        }
+
+        if (!lore.isEmpty())
+        {
+            List<Component> loreComponents = new ArrayList<>();
+            for (String line : lore) {
+                loreComponents.add(MiniMessage.miniMessage()
+                        .deserialize(line)
+                        .decoration(TextDecoration.ITALIC, false));
+            }
+
+            meta.lore(loreComponents);
+        }
+
+        if (glow)
+        {
+            meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        if (meta instanceof SkullMeta skullMeta
+                && (textureUrl != null || base64Texture != null || skullOwner != null))
+        {
+            if (skullOwner != null)
+            {
+                skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
+            } else {
+                String textureValue = textureUrl != null ? textureUrl : base64Texture;
+                SkullTextureUtil.applyTexture(skullMeta, textureValue,
+                        JavaPlugin.getPlugin(EssentialsC.class).getLogger());
+            }
+        }
     }
 
     public ItemStack createComparisonItem(int amount) {

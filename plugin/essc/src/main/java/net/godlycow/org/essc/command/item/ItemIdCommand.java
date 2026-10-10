@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command.item;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -42,14 +43,18 @@ public class ItemIdCommand extends Command {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             if (meta.hasDisplayName()) {
-                String displayName = meta.getDisplayName();
+                String displayName = LegacyColorConverter.toMiniMessage(meta.getDisplayName());
                 Map<String, String> namePlaceholders = new HashMap<>();
                 namePlaceholders.put("name", displayName);
                 player.sendMessage(lang.get(player, "itemid.display_name", namePlaceholders));
             }
 
             if (meta.hasLore() && meta.getLore() != null) {
-                String lore = String.join(", ", meta.getLore());
+
+                String lore = String.join(", ", meta.getLore().stream()
+                        .map(LegacyColorConverter::toMiniMessage)
+                        .toList());
+
                 Map<String, String> lorePlaceholders = new HashMap<>();
                 lorePlaceholders.put("lore", lore);
                 player.sendMessage(lang.get(player, "itemid.lore", lorePlaceholders));
