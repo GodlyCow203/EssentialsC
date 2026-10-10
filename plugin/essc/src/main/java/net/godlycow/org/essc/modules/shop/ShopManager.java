@@ -218,7 +218,7 @@ public class ShopManager {
         {
             return single.isEmpty() ? List.of() : List.of(single);
         }
-        
+
         return section.getStringList("lore");
     }
 

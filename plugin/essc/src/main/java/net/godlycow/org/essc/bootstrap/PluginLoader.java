@@ -319,10 +319,10 @@ public final class PluginLoader {
     private void unloadAuctionHouse() {
         plugin.debug("Auction House is disabled in config – fully unloading.");
 
-        CommandRegistration.unregisterCommand("ah");
-        CommandRegistration.unregisterCommand("essentialsc:ah");
-        CommandRegistration.unregisterCommand("auction");
-        CommandRegistration.unregisterCommand("essentialsc:auction");
+        CommandRegistration.unregisterIfOwnedByE("ah");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:ah");
+        CommandRegistration.unregisterIfOwnedByE("auction");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:auction");
         plugin.debug("AH commands unregistered.");
 
         for (org.bukkit.entity.Player player : plugin.getServer().getOnlinePlayers()) {
@@ -360,8 +360,8 @@ public final class PluginLoader {
     private void unloadRules() {
         plugin.debug("Rules are disabled in the config, unloading");
 
-        CommandRegistration.unregisterCommand("rules");
-        CommandRegistration.unregisterCommand("essentialsc:rules");
+        CommandRegistration.unregisterIfOwnedByE("rules");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:rules");
 
         plugin.debug("Unregistered Rules Command");
 
@@ -373,8 +373,8 @@ public final class PluginLoader {
     private void unloadVanish() {
         plugin.debug("vanish is disabled in the config, unloading");
 
-        CommandRegistration.unregisterCommand("vanish");
-        CommandRegistration.unregisterCommand("essentialsc:vanish");
+        CommandRegistration.unregisterIfOwnedByE("vanish");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:vanish");
 
         plugin.debug("Unregistered All Vanish Commands");
 
@@ -398,10 +398,10 @@ public final class PluginLoader {
     private void unloadBack() {
         plugin.debug("Back is disabled in the config, fully unloading");
 
-        CommandRegistration.unregisterCommand("back");
-        CommandRegistration.unregisterCommand("essentialsc:back");
-        CommandRegistration.unregisterCommand("dback");
-        CommandRegistration.unregisterCommand("essentialsc:dback");
+        CommandRegistration.unregisterIfOwnedByE("back");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:back");
+        CommandRegistration.unregisterIfOwnedByE("dback");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:dback");
 
 
         plugin.debug("Unregistered Back Commands");
@@ -430,22 +430,22 @@ public final class PluginLoader {
 
         plugin.debug("Punishments are disabled in the config, unloading");
 
-        CommandRegistration.unregisterCommand("ban");
-        CommandRegistration.unregisterCommand("essentialsc:ban");
-        CommandRegistration.unregisterCommand("ban-ip");
-        CommandRegistration.unregisterCommand("essentialsc:ban-ip");
-        CommandRegistration.unregisterCommand("unban");
-        CommandRegistration.unregisterCommand("essentialsc:unban");
-        CommandRegistration.unregisterCommand("unban-ip");
-        CommandRegistration.unregisterCommand("essentialsc:unban-ip");
-        CommandRegistration.unregisterCommand("banlist");
-        CommandRegistration.unregisterCommand("essentialsc:banlist");
-        CommandRegistration.unregisterCommand("mute");
-        CommandRegistration.unregisterCommand("essentialsc:mute");
-        CommandRegistration.unregisterCommand("unmute");
-        CommandRegistration.unregisterCommand("essentialsc:unmute");
-        CommandRegistration.unregisterCommand("checkpunish");
-        CommandRegistration.unregisterCommand("essentialsc:checkpunish");
+        CommandRegistration.unregisterIfOwnedByE("ban");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:ban");
+        CommandRegistration.unregisterIfOwnedByE("ban-ip");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:ban-ip");
+        CommandRegistration.unregisterIfOwnedByE("unban");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:unban");
+        CommandRegistration.unregisterIfOwnedByE("unban-ip");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:unban-ip");
+        CommandRegistration.unregisterIfOwnedByE("banlist");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:banlist");
+        CommandRegistration.unregisterIfOwnedByE("mute");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:mute");
+        CommandRegistration.unregisterIfOwnedByE("unmute");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:unmute");
+        CommandRegistration.unregisterIfOwnedByE("checkpunish");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:checkpunish");
 
         plugin.debug("Unregistered all Punishment Commands");
 
@@ -473,22 +473,22 @@ public final class PluginLoader {
     private void unloadTPA() {
         plugin.debug("TPA is disabled in the config, unloading");
 
-        CommandRegistration.unregisterCommand("tpa");
-        CommandRegistration.unregisterCommand("essentialsc:tpa");
-        CommandRegistration.unregisterCommand("tpahere");
-        CommandRegistration.unregisterCommand("essentialsc:tpahere");
-        CommandRegistration.unregisterCommand("tpaccept");
-        CommandRegistration.unregisterCommand("essentialsc:tpaccept");
-        CommandRegistration.unregisterCommand("tpdeny");
-        CommandRegistration.unregisterCommand("essentialsc:tpdeny");
-        CommandRegistration.unregisterCommand("tpcancel");
-        CommandRegistration.unregisterCommand("essentialsc:tpcancel");
-        CommandRegistration.unregisterCommand("tpaignore");
-        CommandRegistration.unregisterCommand("essentialsc:tpaignore");
-        CommandRegistration.unregisterCommand("tpatoggle");
-        CommandRegistration.unregisterCommand("essentialsc:tpatoggle");
-        CommandRegistration.unregisterCommand("tpaqueue");
-        CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
+        CommandRegistration.unregisterIfOwnedByE("tpa");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpa");
+        CommandRegistration.unregisterIfOwnedByE("tpahere");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpahere");
+        CommandRegistration.unregisterIfOwnedByE("tpaccept");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaccept");
+        CommandRegistration.unregisterIfOwnedByE("tpdeny");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpdeny");
+        CommandRegistration.unregisterIfOwnedByE("tpcancel");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpcancel");
+        CommandRegistration.unregisterIfOwnedByE("tpaignore");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaignore");
+        CommandRegistration.unregisterIfOwnedByE("tpatoggle");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpatoggle");
+        CommandRegistration.unregisterIfOwnedByE("tpaqueue");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaqueue");
 
         plugin.debug("Unregistered all TPA Commands");
 
@@ -515,14 +515,14 @@ public final class PluginLoader {
     private void unloadHomes() {
         plugin.debug("Homes are disabled in config, fully unloading");
 
-        CommandRegistration.unregisterCommand("home");
-        CommandRegistration.unregisterCommand("essentialsc:home");
-        CommandRegistration.unregisterCommand("sethome");
-        CommandRegistration.unregisterCommand("essentialsc:sethome");
-        CommandRegistration.unregisterCommand("delhome");
-        CommandRegistration.unregisterCommand("essentialsc:delhome");
-        CommandRegistration.unregisterCommand("homes");
-        CommandRegistration.unregisterCommand("essentialsc:homes");
+        CommandRegistration.unregisterIfOwnedByE("home");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:home");
+        CommandRegistration.unregisterIfOwnedByE("sethome");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:sethome");
+        CommandRegistration.unregisterIfOwnedByE("delhome");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:delhome");
+        CommandRegistration.unregisterIfOwnedByE("homes");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:homes");
         plugin.debug("Unregistered Home Commands");
 
         for (HandlerList handlerList : HandlerList.getHandlerLists()) {
@@ -550,10 +550,10 @@ public final class PluginLoader {
     private void unloadSpawn() {
         plugin.debug("Spawn is disabled in the config, unloading...");
 
-        CommandRegistration.unregisterCommand("spawn");
-        CommandRegistration.unregisterCommand("essentialsc:spawn");
-        CommandRegistration.unregisterCommand("setspawn");
-        CommandRegistration.unregisterCommand("essentialsc:setspawn");
+        CommandRegistration.unregisterIfOwnedByE("spawn");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:spawn");
+        CommandRegistration.unregisterIfOwnedByE("setspawn");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:setspawn");
 
         plugin.debug("Unregistered Spawn");
 
@@ -582,10 +582,10 @@ public final class PluginLoader {
     private void unloadKits() {
         plugin.debug("Kits are disabled in config,fully unloading");
 
-        CommandRegistration.unregisterCommand("kit");
-        CommandRegistration.unregisterCommand("essentialsc:kit");
-        CommandRegistration.unregisterCommand("kits");
-        CommandRegistration.unregisterCommand("essentialsc:kits");
+        CommandRegistration.unregisterIfOwnedByE("kit");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:kit");
+        CommandRegistration.unregisterIfOwnedByE("kits");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:kits");
         plugin.debug("Unregistered Kit Commands");
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
@@ -612,8 +612,8 @@ public final class PluginLoader {
     private void unloadShop() {
         plugin.debug("Shop system is disabled in config - umloading");
 
-        CommandRegistration.unregisterCommand("shop");
-        CommandRegistration.unregisterCommand("essentialsc:shop");
+        CommandRegistration.unregisterIfOwnedByE("shop");
+        CommandRegistration.unregisterIfOwnedByE("essentialsc:shop");
 
         plugin.debug("Shop commands unregistered");
 

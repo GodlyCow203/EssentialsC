@@ -68,6 +68,11 @@ public class CommandRegistration {
         commands.forEach(CommandRegistration::unregisterCommand);
     }
 
+    /** Ownership-checked variant: only removes commands registered by EssentialsC. */
+    public static void unregisterIfOwnedByE(List<String> commands) {
+        commands.forEach(CommandRegistration::unregisterIfOwnedByE);
+    }
+
     public static boolean isRegistered(String name) {
         initReflection();
         if (knownCommands == null) return false;

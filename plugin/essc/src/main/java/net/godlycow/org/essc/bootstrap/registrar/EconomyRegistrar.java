@@ -62,7 +62,7 @@ public class EconomyRegistrar {
             }
         }
 
-        CommandRegistration.unregisterCommands(ECONOMY_COMMANDS);
+        CommandRegistration.unregisterIfOwnedByE(ECONOMY_COMMANDS);
         CommandRegistration.syncCommands();
     }
 

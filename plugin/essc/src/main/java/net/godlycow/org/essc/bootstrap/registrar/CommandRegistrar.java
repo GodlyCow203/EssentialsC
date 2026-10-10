@@ -71,8 +71,8 @@ public class CommandRegistrar {
         if (plugin.getConfigManager().isScoreboardEnabled()) {
             register("scoreboard", new ScoreboardCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("scoreboard");
-            CommandRegistration.unregisterCommand("essentialsc:scoreboard");
+            CommandRegistration.unregisterIfOwnedByE("scoreboard");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:scoreboard");
             plugin.debug("Scoreboard command unregistered (scoreboard.enabled is false)");
         }
 
@@ -138,16 +138,16 @@ public class CommandRegistrar {
         if (plugin.getConfigManager().isShopEnabled()) {
             register("shop", new ShopCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("shop");
-            CommandRegistration.unregisterCommand("essentialsc:shop");
+            CommandRegistration.unregisterIfOwnedByE("shop");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:shop");
             plugin.debug("Shop command unregistered (shop.enabled is false)");
         }
 
         if (plugin.getConfigManager().isRTPCommandRegistered()) {
             register("rtp", new RTPCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("rtp");
-            CommandRegistration.unregisterCommand("essentialsc:rtp");
+            CommandRegistration.unregisterIfOwnedByE("rtp");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:rtp");
             plugin.debug("RTP command unregistered (rtp.register-command is false)");
         }
 
@@ -156,20 +156,20 @@ public class CommandRegistrar {
             register("worth", new WorthCommand(plugin));
             register("quicksell", new QuickSellCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("sell");
-            CommandRegistration.unregisterCommand("essentialsc:sell");
-            CommandRegistration.unregisterCommand("worth");
-            CommandRegistration.unregisterCommand("essentialsc:worth");
-            CommandRegistration.unregisterCommand("quicksell");
-            CommandRegistration.unregisterCommand("essentialsc:quicksell");
+            CommandRegistration.unregisterIfOwnedByE("sell");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:sell");
+            CommandRegistration.unregisterIfOwnedByE("worth");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:worth");
+            CommandRegistration.unregisterIfOwnedByE("quicksell");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:quicksell");
             plugin.debug("Sell commands unregistered (sell.enabled is false)");
         }
 
         if (plugin.getConfigManager().isAHEnabled()) {
             register("ah", new AhCommand(plugin, ahGuiManager));
         } else {
-            CommandRegistration.unregisterCommand("ah");
-            CommandRegistration.unregisterCommand("essentialsc:ah");
+            CommandRegistration.unregisterIfOwnedByE("ah");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:ah");
             plugin.debug("AH command unregistered (ah.enabled is false)");
         }
 
@@ -177,8 +177,8 @@ public class CommandRegistrar {
             register("trash", new TrashCommand(plugin, plugin.getGuiFramework()));
 
         } else {
-            CommandRegistration.unregisterCommand("trash");
-            CommandRegistration.unregisterCommand("essentialsc:trash");
+            CommandRegistration.unregisterIfOwnedByE("trash");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:trash");
             plugin.debug("Trash command unregistered ( trash.enabled is false");
         }
 
@@ -186,10 +186,10 @@ public class CommandRegistrar {
             register("kit", new KitCommand(plugin));
             register("kits", new KitsCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("kit");
-            CommandRegistration.unregisterCommand("essentialsc:kit");
-            CommandRegistration.unregisterCommand("kits");
-            CommandRegistration.unregisterCommand("essentialsc:kits");
+            CommandRegistration.unregisterIfOwnedByE("kit");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:kit");
+            CommandRegistration.unregisterIfOwnedByE("kits");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:kits");
             plugin.debug("Kit commands unregistered (kits.enabled is false)");
         }
 
@@ -199,14 +199,14 @@ public class CommandRegistrar {
             register("delhome", new DelHomeCommand(plugin));
             register("homes", new HomesCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("home");
-            CommandRegistration.unregisterCommand("essentialsc:home");
-            CommandRegistration.unregisterCommand("sethome");
-            CommandRegistration.unregisterCommand("essentialsc:sethome");
-            CommandRegistration.unregisterCommand("delhome");
-            CommandRegistration.unregisterCommand("essentialsc:delhome");
-            CommandRegistration.unregisterCommand("homes");
-            CommandRegistration.unregisterCommand("essentialsc:homes");
+            CommandRegistration.unregisterIfOwnedByE("home");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:home");
+            CommandRegistration.unregisterIfOwnedByE("sethome");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:sethome");
+            CommandRegistration.unregisterIfOwnedByE("delhome");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:delhome");
+            CommandRegistration.unregisterIfOwnedByE("homes");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:homes");
             plugin.debug("Home commands unregistered (home.enabled is false)");
         }
 
@@ -220,38 +220,38 @@ public class CommandRegistrar {
             register("tpatoggle", new TPAToggleCommand(plugin));
             register("tpaqueue", new TPAQueueCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("tpa");
-            CommandRegistration.unregisterCommand("essentialsc:tpa");
-            CommandRegistration.unregisterCommand("tpahere");
-            CommandRegistration.unregisterCommand("essentialsc:tpahere");
-            CommandRegistration.unregisterCommand("tpaccept");
-            CommandRegistration.unregisterCommand("essentialsc:tpaccept");
-            CommandRegistration.unregisterCommand("tpdeny");
-            CommandRegistration.unregisterCommand("essentialsc:tpdeny");
-            CommandRegistration.unregisterCommand("tpcancel");
-            CommandRegistration.unregisterCommand("essentialsc:tpcancel");
-            CommandRegistration.unregisterCommand("tpaignore");
-            CommandRegistration.unregisterCommand("essentialsc:tpaignore");
-            CommandRegistration.unregisterCommand("tpatoggle");
-            CommandRegistration.unregisterCommand("essentialsc:tpatoggle");
-            CommandRegistration.unregisterCommand("tpaqueue");
-            CommandRegistration.unregisterCommand("essentialsc:tpaqueue");
+            CommandRegistration.unregisterIfOwnedByE("tpa");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpa");
+            CommandRegistration.unregisterIfOwnedByE("tpahere");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpahere");
+            CommandRegistration.unregisterIfOwnedByE("tpaccept");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaccept");
+            CommandRegistration.unregisterIfOwnedByE("tpdeny");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpdeny");
+            CommandRegistration.unregisterIfOwnedByE("tpcancel");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpcancel");
+            CommandRegistration.unregisterIfOwnedByE("tpaignore");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaignore");
+            CommandRegistration.unregisterIfOwnedByE("tpatoggle");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpatoggle");
+            CommandRegistration.unregisterIfOwnedByE("tpaqueue");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:tpaqueue");
             plugin.debug("TPA commands unregistered (tpa.enabled is false)");
         }
 
         if (plugin.getConfigManager().isRulesEnabled()) {
             register("rules", new RulesCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("rules");
-            CommandRegistration.unregisterCommand("essentialsc:rules");
+            CommandRegistration.unregisterIfOwnedByE("rules");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:rules");
             plugin.debug("Rules command unregistered (rules.enabled is false)");
         }
 
         if (plugin.getConfigManager().isVanishEnabled()) {
             register("vanish", new VanishCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("vanish");
-            CommandRegistration.unregisterCommand("essentialsc:vanish");
+            CommandRegistration.unregisterIfOwnedByE("vanish");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:vanish");
             plugin.debug("Vanish command unregistered (vanish.enabled is false)");
         }
 
@@ -259,10 +259,10 @@ public class CommandRegistrar {
             register("back", new BackCommand(plugin));
             register("dback", new DBackCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("back");
-            CommandRegistration.unregisterCommand("essentialsc:back");
-            CommandRegistration.unregisterCommand("dback");
-            CommandRegistration.unregisterCommand("essentialsc:dback");
+            CommandRegistration.unregisterIfOwnedByE("back");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:back");
+            CommandRegistration.unregisterIfOwnedByE("dback");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:dback");
             plugin.debug("Back commands unregistered (back.enabled is false)");
         }
 
@@ -276,22 +276,22 @@ public class CommandRegistrar {
             register("unmute", new UnmuteCommand(plugin, punishmentManager));
             register("checkpunish", new CheckpunishCommand(plugin, punishmentManager));
         } else {
-            CommandRegistration.unregisterCommand("ban");
-            CommandRegistration.unregisterCommand("essentialsc:ban");
-            CommandRegistration.unregisterCommand("ban-ip");
-            CommandRegistration.unregisterCommand("essentialsc:ban-ip");
-            CommandRegistration.unregisterCommand("unban");
-            CommandRegistration.unregisterCommand("essentialsc:unban");
-            CommandRegistration.unregisterCommand("unban-ip");
-            CommandRegistration.unregisterCommand("essentialsc:unban-ip");
-            CommandRegistration.unregisterCommand("banlist");
-            CommandRegistration.unregisterCommand("essentialsc:banlist");
-            CommandRegistration.unregisterCommand("mute");
-            CommandRegistration.unregisterCommand("essentialsc:mute");
-            CommandRegistration.unregisterCommand("unmute");
-            CommandRegistration.unregisterCommand("essentialsc:unmute");
-            CommandRegistration.unregisterCommand("checkpunish");
-            CommandRegistration.unregisterCommand("essentialsc:checkpunish");
+            CommandRegistration.unregisterIfOwnedByE("ban");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:ban");
+            CommandRegistration.unregisterIfOwnedByE("ban-ip");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:ban-ip");
+            CommandRegistration.unregisterIfOwnedByE("unban");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:unban");
+            CommandRegistration.unregisterIfOwnedByE("unban-ip");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:unban-ip");
+            CommandRegistration.unregisterIfOwnedByE("banlist");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:banlist");
+            CommandRegistration.unregisterIfOwnedByE("mute");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:mute");
+            CommandRegistration.unregisterIfOwnedByE("unmute");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:unmute");
+            CommandRegistration.unregisterIfOwnedByE("checkpunish");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:checkpunish");
             plugin.debug("Punishment commands unregistered (punishments.enabled is false)");
         }
 
@@ -299,10 +299,10 @@ public class CommandRegistrar {
             register("spawn", new SpawnCommand(plugin));
             register("setspawn", new SetSpawnCommand(plugin));
         } else {
-            CommandRegistration.unregisterCommand("spawn");
-            CommandRegistration.unregisterCommand("essentialsc:spawn");
-            CommandRegistration.unregisterCommand("setspawn");
-            CommandRegistration.unregisterCommand("essentialsc:setspawn");
+            CommandRegistration.unregisterIfOwnedByE("spawn");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:spawn");
+            CommandRegistration.unregisterIfOwnedByE("setspawn");
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:setspawn");
             plugin.debug("Spawn commands unregistered (spawn.enabled is false)");
         }
     }
@@ -310,8 +310,8 @@ public class CommandRegistrar {
     private void register(String name, Command command) {
 
         if (!commandsConfig.isEnabled(name)) {
-            CommandRegistration.unregisterCommand(name);
-            CommandRegistration.unregisterCommand("essentialsc:" + name);
+            CommandRegistration.unregisterIfOwnedByE(name);
+            CommandRegistration.unregisterIfOwnedByE("essentialsc:" + name);
             plugin.debug("Command '" + name + "' disabled in commands.yml – unregistered.");
             return;
         }
