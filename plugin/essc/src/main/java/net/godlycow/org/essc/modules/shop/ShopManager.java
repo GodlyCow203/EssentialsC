@@ -105,7 +105,7 @@ public class ShopManager {
         category.setDisplayName(section.getString("name", id));
         category.setIcon(Material.valueOf(section.getString("material", "CHEST")));
         category.setTextureUrl(section.getString("texture"));
-        category.setLore(section.getStringList("lore"));
+        category.setLore(readLore(section));
         category.setSlot(section.getInt("slot", 0));
         category.setFileName(section.getString("file", id + ".yml"));
         category.setPermission(section.getString("permission"));
@@ -136,7 +136,7 @@ public class ShopManager {
             item.setMaterial(Material.valueOf(itemSec.getString("material", "STONE")));
             item.setAmount(itemSec.getInt("amount", 1));
             item.setDisplayName(itemSec.getString("name"));
-            item.setLore(itemSec.getStringList("lore"));
+            item.setLore(readLore(itemSec));
             item.setBuyPrice(itemSec.getDouble("buy-price", 0));
             item.setSellPrice(itemSec.getDouble("sell-price", 0));
             item.setBuyable(itemSec.getBoolean("buyable", true));
@@ -208,6 +208,18 @@ public class ShopManager {
         for (ShopItem item : collected) {
             category.addItem(item);
         }
+    }
+
+
+    private List<String> readLore(ConfigurationSection section)
+    {
+        Object raw = section.get("lore");
+        if (raw instanceof String single)
+        {
+            return single.isEmpty() ? List.of() : List.of(single);
+        }
+        
+        return section.getStringList("lore");
     }
 
     private int[] buildAutoSlots(int itemsPerPage) {

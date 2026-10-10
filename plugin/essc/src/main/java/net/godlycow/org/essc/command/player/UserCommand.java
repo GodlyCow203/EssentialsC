@@ -269,7 +269,6 @@ public class UserCommand extends Command {
             if (firstPlayed > 0) return firstPlayed / 1000L;
         }
          catch (Exception ignored) {}
-
         return profile.getFirstJoinTime();
     }
 
