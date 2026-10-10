@@ -34,7 +34,6 @@ public class UserProfile {
     private long muteExpires;
     private boolean muteOfflineNotification;
     private boolean scoreboardDisabled;
-    private boolean rulesAccepted;
     private long createdAt;
     private long updatedAt;
 
@@ -311,14 +310,6 @@ public class UserProfile {
         this.scoreboardDisabled = scoreboardDisabled;
     }
 
-    public boolean isRulesAccepted() {
-        return rulesAccepted;
-    }
-
-    public void setRulesAccepted(boolean rulesAccepted) {
-        this.rulesAccepted = rulesAccepted;
-    }
-
     public long getCreatedAt() {
         return createdAt;
     }
@@ -348,8 +339,6 @@ public class UserProfile {
             sb.append("TPA-Blocked ");
         if (scoreboardDisabled)
             sb.append("NoScoreboard ");
-        if (!rulesAccepted)
-            sb.append("UnreadyRules ");
 
 
         String s = sb.toString().trim();

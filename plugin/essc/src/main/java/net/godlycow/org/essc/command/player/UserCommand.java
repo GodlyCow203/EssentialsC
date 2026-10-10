@@ -104,10 +104,10 @@ public class UserCommand extends Command {
 
         Map<String, String> p = new HashMap<>();
         p.put("uuid", profile.getUuid().toString());
-        p.put("username", profile.getUsername());
-        p.put("last_known_name", profile.getLastKnownName());
-        p.put("language", profile.getLanguageCode());
-        p.put("first_join", formatTimestamp(profile.getFirstJoinTime()));
+        p.put("username", profile.getUsername() != null ? profile.getUsername() : "-");
+        p.put("last_known_name", profile.getLastKnownName() != null ? profile.getLastKnownName() : "-");
+        p.put("language", profile.getLanguageCode() != null ? profile.getLanguageCode() : "-");
+        p.put("first_join", formatTimestamp(resolveFirstJoinSeconds(profile, profile.getUuid())));
         p.put("last_join", formatTimestamp(profile.getLastJoinTime()));
         p.put("created_at", formatTimestamp(profile.getCreatedAt()));
         p.put("updated_at", formatTimestamp(profile.getUpdatedAt()));
@@ -133,22 +133,19 @@ public class UserCommand extends Command {
                 Map.of("summary", plugin.getUserManager().getStatesSummary(targetUuid))));
 
         sender.sendMessage(lang.get(sender, "user.states.fly",
-                Map.of("value", booleanKey(plugin.getUserManager().isFlyEnabled(targetUuid)))));
+                Map.of("value", booleanKey(sender, isFlying(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.vanished",
-                Map.of("value", booleanKey(plugin.getUserManager().isVanished(targetUuid)))));
+                Map.of("value", booleanKey(sender, plugin.getUserManager().isVanished(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.frozen",
-                Map.of("value", booleanKey(plugin.getUserManager().isFrozen(targetUuid)))));
+                Map.of("value", booleanKey(sender, plugin.getUserManager().isFrozen(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.tpa_blocked",
-                Map.of("value", booleanKey(plugin.getUserManager().isTpaBlocked(targetUuid)))));
+                Map.of("value", booleanKey(sender, isTpaBlocked(targetUuid)))));
 
         sender.sendMessage(lang.get(sender, "user.states.scoreboard_disabled",
-                Map.of("value", booleanKey(plugin.getUserManager().isScoreboardDisabled(targetUuid)))));
-
-        sender.sendMessage(lang.get(sender, "user.states.rules_accepted",
-                Map.of("value", booleanKey(plugin.getUserManager().hasAcceptedRules(targetUuid)))));
+                Map.of("value", booleanKey(sender, plugin.getUserManager().isScoreboardDisabled(targetUuid)))));
 
         UUID lastReplyTarget = plugin.getUserManager().getLastReplyTarget(targetUuid);
         if (lastReplyTarget != null) {
@@ -184,7 +181,7 @@ public class UserCommand extends Command {
             p.put("muter", profile.getMuteMuter() != null ? profile.getMuteMuter() : "-");
             p.put("time", profile.getMuteTime() > 0 ? formatTimestamp(profile.getMuteTime()) : "-");
             p.put("expires", profile.getMuteExpires() == 0 ? "Never" : formatTimestamp(profile.getMuteExpires()));
-            p.put("offline_notification", booleanKey(plugin.getUserManager().isMuteOfflineNotification(targetUuid)));
+            p.put("offline_notification", booleanKey(sender, plugin.getUserManager().isMuteOfflineNotification(targetUuid)));
             sender.sendMessage(lang.get(sender, "user.punishments.muted", p));
         } else {
             sender.sendMessage(lang.get(sender, "user.punishments.not_muted"));
@@ -245,8 +242,31 @@ public class UserCommand extends Command {
         return p;
     }
 
-    private String booleanKey(boolean value) {
-        return value ? "yes" : "no";
+    private String booleanKey(CommandSender sender, boolean value) {
+        return lang.getRaw(sender, value ? "user.states.value.yes" : "user.states.value.no");
+    }
+
+    /** Live fly state: the DB flag only tracks /fly, so also honor actual flight ability. */
+    private boolean isFlying(UUID uuid) {
+        if (plugin.getUserManager().isFlyEnabled(uuid)) return true;
+        Player online = plugin.getServer().getPlayer(uuid);
+        return online != null && online.getAllowFlight();
+    }
+
+    /** Live TPA state: /tpatoggle lives in TPAManager, the DB flag is only its backup. */
+    private boolean isTpaBlocked(UUID uuid) {
+        if (plugin.getTPAManager() != null) return plugin.getTPAManager().isBlocked(uuid);
+        return plugin.getUserManager().isTpaBlocked(uuid);
+    }
+
+    /** Real first join from the playerdata file, falling back to the profile timestamp. */
+    private long resolveFirstJoinSeconds(UserProfile profile, UUID uuid) {
+        try {
+            long firstPlayed = plugin.getServer().getOfflinePlayer(uuid).getFirstPlayed();
+            if (firstPlayed > 0) return firstPlayed / 1000L;
+        } catch (Exception ignored) {
+        }
+        return profile.getFirstJoinTime();
     }
 
     private String formatTimestamp(long epochSeconds) {

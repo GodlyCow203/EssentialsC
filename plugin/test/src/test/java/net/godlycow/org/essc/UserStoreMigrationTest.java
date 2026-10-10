@@ -125,14 +125,15 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void migratesV2DatabaseToV3(@TempDir Path dataFolder) throws Exception {
+    void migratesV2DatabaseToV4(@TempDir Path dataFolder) throws Exception {
         Path dbFile = dataFolder.resolve("databases").resolve("users.db");
         createV2Database(dbFile);
 
         UserStore store = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(3, getSchemaVersion(dbFile));
+        assertEquals(4, getSchemaVersion(dbFile));
         assertTrue(getUserColumns(dbFile).contains("frozen"));
+        assertFalse(getUserColumns(dbFile).contains("rules_accepted"));
 
         UserProfile profile = store.findByUuid(PLAYER_ID);
 
@@ -152,7 +153,7 @@ class UserStoreMigrationTest {
 
         UserStore reopened = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(3, getSchemaVersion(dbFile));
+        assertEquals(4, getSchemaVersion(dbFile));
 
         UserProfile savedProfile = reopened.findByUuid(PLAYER_ID);
         assertNotNull(savedProfile);
@@ -162,7 +163,7 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void newDatabaseUsesV3Schema(@TempDir Path dataFolder) {
+    void newDatabaseUsesV4Schema(@TempDir Path dataFolder) {
         UserStore store = new UserStore(createPlugin(dataFolder));
 
         UUID uuid = UUID.randomUUID();

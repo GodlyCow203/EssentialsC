@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -244,11 +245,27 @@ public class TPAManager implements Listener {
         UUID uuid = player.getUniqueId();
         if (blockedPlayers.contains(uuid)) {
             blockedPlayers.remove(uuid);
+            if (plugin.getUserManager() != null) plugin.getUserManager().setTpaBlocked(uuid, false);
             player.sendMessage(plugin.getLanguageManager().get(player, "tpa.toggle.enabled"));
         } else {
             blockedPlayers.add(uuid);
+            if (plugin.getUserManager() != null) plugin.getUserManager().setTpaBlocked(uuid, true);
             player.sendMessage(plugin.getLanguageManager().get(player, "tpa.toggle.disabled"));
         }
+    }
+
+    /** Live toggle state (mirrored to the user database for persistence). */
+    public boolean isBlocked(UUID uuid) {
+        return blockedPlayers.contains(uuid);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (plugin.getUserManager() == null) return;
+        UUID uuid = event.getPlayer().getUniqueId();
+        plugin.getUserManager().findProfile(uuid).thenAccept(profile -> {
+            if (profile != null && profile.isTpaBlocked()) blockedPlayers.add(uuid);
+        });
     }
 
     public void toggleIgnore(Player player, Player target) {
