@@ -215,6 +215,7 @@ public class LanguageManager {
 
         if (placeholders != null) {
             for (var entry : placeholders.entrySet()) {
+                if (entry.getValue() == null) continue;
                 raw = raw.replace("<" + entry.getKey() + ">", entry.getValue());
             }
         }

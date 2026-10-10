@@ -45,7 +45,6 @@ public class UserManager {
                 profile.setFlyEnabled(cached.isFlyEnabled());
                 profile.setTpaBlocked(cached.isTpaBlocked());
                 profile.setScoreboardDisabled(cached.isScoreboardDisabled());
-                profile.setRulesAccepted(cached.isRulesAccepted());
             }
             
             if (!username.equals(profile.getUsername())) {
@@ -139,6 +138,14 @@ public class UserManager {
         return profile != null && profile.isTpaBlocked();
     }
 
+    public void setTpaBlocked(UUID uuid, boolean blocked) {
+        UserProfile profile = cache.get(uuid);
+        if (profile != null) {
+            profile.setTpaBlocked(blocked);
+            saveAsync(profile);
+        }
+    }
+
     public void setScoreboardDisabled(UUID uuid, boolean disabled) {
         UserProfile profile = cache.get(uuid);
         if (profile != null) {
@@ -150,11 +157,6 @@ public class UserManager {
     public boolean isScoreboardDisabled(UUID uuid) {
         UserProfile profile = cache.get(uuid);
         return profile != null && profile.isScoreboardDisabled();
-    }
-
-    public boolean hasAcceptedRules(UUID uuid) {
-        UserProfile profile = cache.get(uuid);
-        return profile != null && profile.isRulesAccepted();
     }
 
     public UUID getLastReplyTarget(UUID uuid) {

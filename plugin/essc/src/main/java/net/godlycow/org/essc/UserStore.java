@@ -21,7 +21,7 @@ public class UserStore {
     private final Database database;
     private final EssentialsC plugin;
 
-    private static final int SCHEMA_VERSION = 3;
+    private static final int SCHEMA_VERSION = 4;
 
 
     // create all tables for the user db
@@ -55,7 +55,6 @@ public class UserStore {
                 mute_expires INTEGER DEFAULT 0,
                 mute_offline_notification BOOLEAN DEFAULT FALSE,
                 scoreboard_disabled BOOLEAN DEFAULT FALSE,
-                rules_accepted BOOLEAN DEFAULT FALSE,
                 created_at INTEGER DEFAULT (strftime('%s','now')),
                 updated_at INTEGER DEFAULT (strftime('%s','now'))
             );
@@ -196,6 +195,9 @@ public class UserStore {
         if (fromVersion < 3) {
             addFrozenColumn(conn);
         }
+        if (fromVersion < 4) {
+            dropRulesAcceptedColumn(conn);
+        }
     }
 
     private void addFrozenColumn(Connection conn)
@@ -220,6 +222,25 @@ public class UserStore {
             }
 
             plugin.getLogger().info("[UserStore] Added frozen column to users table");
+        }
+    }
+
+    private void dropRulesAcceptedColumn(Connection conn) throws SQLException {
+        boolean hasRules = false;
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("PRAGMA table_info(users)")) {
+            while (rs.next()) {
+                if ("rules_accepted".equals(rs.getString("name"))) {
+                    hasRules = true;
+                    break;
+                }
+            }
+        }
+        if (hasRules) {
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("ALTER TABLE users DROP COLUMN rules_accepted");
+            }
+            plugin.getLogger().info("[UserStore] Dropped rules_accepted column from users table");
         }
     }
 
@@ -381,8 +402,8 @@ public class UserStore {
         }
         try (Connection conn = database.openFreshConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                      "INSERT INTO users (uuid, username, last_known_name, first_join_time, last_join_time, last_ip, logout_location, logout_time, language_code, back_location, death_location, fly_enabled, vanished, frozen, tpa_blocked, last_reply_target, rtp_last_used, spawn_last_teleport, ban_reason, ban_banner, ban_time, ban_expires, mute_reason, mute_muter, mute_time, mute_expires, mute_offline_notification, scoreboard_disabled, rules_accepted, created_at, updated_at) " +
-                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                      "INSERT INTO users (uuid, username, last_known_name, first_join_time, last_join_time, last_ip, logout_location, logout_time, language_code, back_location, death_location, fly_enabled, vanished, frozen, tpa_blocked, last_reply_target, rtp_last_used, spawn_last_teleport, ban_reason, ban_banner, ban_time, ban_expires, mute_reason, mute_muter, mute_time, mute_expires, mute_offline_notification, scoreboard_disabled, created_at, updated_at) " +
+                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                       "ON CONFLICT(uuid) DO UPDATE SET " +
                      "username = excluded.username, " +
                      "last_known_name = excluded.last_known_name, " +
@@ -411,7 +432,6 @@ public class UserStore {
                      "mute_expires = excluded.mute_expires, " +
                      "mute_offline_notification = excluded.mute_offline_notification, " +
                      "scoreboard_disabled = excluded.scoreboard_disabled, " +
-                     "rules_accepted = excluded.rules_accepted, " +
                      "created_at = excluded.created_at, " +
                      "updated_at = excluded.updated_at")) {
             int i = 1;
@@ -443,7 +463,6 @@ public class UserStore {
             stmt.setLong(i++,  profile.getMuteExpires());
             stmt.setBoolean(i++, profile.isMuteOfflineNotification());
             stmt.setBoolean (i++, profile.isScoreboardDisabled());
-            stmt.setBoolean(i++, profile.isRulesAccepted());
             stmt.setLong(i++,  profile.getCreatedAt());
             stmt.setLong(i, profile.getUpdatedAt());
 
@@ -629,7 +648,6 @@ public class UserStore {
         profile.setMuteExpires(row.getLong("mute_expires"));
         profile.setMuteOfflineNotification(row.getBoolean("mute_offline_notification"));
         profile.setScoreboardDisabled(row.getBoolean("scoreboard_disabled"));
-        profile.setRulesAccepted(row.getBoolean("rules_accepted"));
         profile.setCreatedAt(row.getLong("created_at"));
         profile.setUpdatedAt(row.getLong("updated_at"));
 
