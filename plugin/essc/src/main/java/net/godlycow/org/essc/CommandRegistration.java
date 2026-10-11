@@ -8,7 +8,9 @@ import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -35,49 +37,142 @@ public class CommandRegistration {
         }
     }
 
-    public static boolean isOwnedByE(String name) {
-        initReflection();
-        if (knownCommands == null) return false;
-        Command cmd = knownCommands.get(name.toLowerCase());
-        if (cmd == null) return false;
-        if (cmd instanceof PluginCommand pc) {
+    private static boolean isOwnedByEssentials(Command command) {
+        if (command instanceof PluginCommand pc) {
             return pc.getPlugin() instanceof EssentialsC;
         }
         return false;
     }
 
     public static void unregisterIfOwnedByE(String name) {
-        if (isOwnedByE(name)) {
-            unregisterCommand(name);
+        initReflection();
+        if (knownCommands == null)
+            return;
+
+        String key = name.toLowerCase(Locale.ROOT);
+        Command existing = knownCommands.get(key);
+        if (existing == null || !isOwnedByEssentials(existing)) {
+            return;
         }
+
+        List<String> labelsToRestore = new ArrayList<>();
+
+        String bareName = key.contains(":") ? key.substring(key.indexOf(':') + 1) : key;
+        labelsToRestore.add(bareName);
+
+        for (String alias : new ArrayList<>(existing.getAliases()))
+        {
+            labelsToRestore.add(alias.toLowerCase(Locale.ROOT));
+        }
+
+
+        List<String> keysToRemove = new ArrayList<>();
+        for (Map.Entry<String, Command> entry : knownCommands.entrySet())
+        {
+            if (entry.getValue() == existing)
+            {
+                keysToRemove.add(entry.getKey());
+            }
+        }
+
+
+        for (String removeKey : keysToRemove)
+        {
+            knownCommands.remove(removeKey, existing);
+        }
+
+        try {
+            existing.unregister(commandMap);
+        } catch (Exception ignored) {}
+
+
+        for (String label : labelsToRestore)
+        {
+            String bare = label.toLowerCase(Locale.ROOT);
+            if (bare.contains(":"))
+            {
+                bare = bare.substring(bare.indexOf(':') + 1);
+            }
+
+            if (bare.isEmpty() || knownCommands.containsKey(bare))
+                continue;
+
+            Command candidate = knownCommands.get("minecraft:" + bare);
+            String candidateKey = "minecraft:" + bare;
+
+
+            if (candidate == null)
+            {
+                for (Map.Entry<String, Command> entry : knownCommands.entrySet())
+                {
+                    String entryKey =  entry.getKey();
+                    if (entryKey.endsWith(":" + bare)) {
+                        if (entryKey.startsWith("essentialsc:"))
+                            continue;
+                        if (isOwnedByEssentials(entry.getValue()))
+                            continue;
+                        candidate = entry.getValue();
+                        candidateKey = entryKey;
+
+
+                        break;
+                    }
+                }
+            }
+
+            if (candidate != null)
+            {
+                knownCommands.put(bare, candidate);
+                try {
+                    candidate.setLabel(bare);
+                } catch (Exception ignored) {}
+                Bukkit.getLogger().info("[EssentialsC] Restored command /" + bare + " from " + candidateKey);
+            }
+        }
+
+        Bukkit.getLogger().info("[EssentialsC] Unregistered command: " + name);
     }
 
     public static void unregisterCommand(String name) {
         initReflection();
         if (knownCommands == null) return;
 
-        Command removed = knownCommands.remove(name.toLowerCase());
-        if (removed != null) {
-            removed.getAliases().forEach(alias -> knownCommands.remove(alias.toLowerCase()));
-            removed.unregister(commandMap);
+        String key = name.toLowerCase(Locale.ROOT);
+
+        if (key.contains(":")) {
+            return;
+        }
+
+        Command removed = knownCommands.remove(key);
+        if (removed != null)
+        {
+            for (String alias : new ArrayList<>(removed.getAliases()))
+            {
+                knownCommands.remove(alias.toLowerCase(Locale.ROOT), removed);
+            }
+            try {
+                removed.unregister(commandMap);
+            } catch (Exception ignored) {}
+
+
             Bukkit.getLogger().info("[EssentialsC] Unregistered command: " + name);
         }
     }
 
     public static void unregisterCommands(List<String> commands) {
-        commands.forEach(CommandRegistration::unregisterCommand);
+        commands.forEach(CommandRegistration::unregisterIfOwnedByE);
     }
 
     public static boolean isRegistered(String name) {
         initReflection();
         if (knownCommands == null) return false;
-        return knownCommands.containsKey(name.toLowerCase());
+        return knownCommands.containsKey(name.toLowerCase(Locale.ROOT));
     }
 
     public static void registerAlias(String alias, Command command) {
         initReflection();
         if (knownCommands == null) return;
-        knownCommands.put(alias.toLowerCase(), command);
+        knownCommands.put(alias.toLowerCase(Locale.ROOT), command);
     }
 
     public static List<String> getEssentialsCCommands() {
