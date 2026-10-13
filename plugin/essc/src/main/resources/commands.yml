@@ -3,7 +3,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 10
+config-version: 11
 
 
 # Controls which commands EssentialsC registers and how they compete for their
@@ -348,10 +348,6 @@ kits:
   priority: normal
   aliases: []
 
-kiteditor:
-  enabled: true
-  priority: normal
-  aliases: []
 
 repair:
   enabled: true
@@ -378,10 +374,6 @@ hat:
   priority: normal
   aliases: []
 
-schedules:
-  enabled: true
-  priority: normal
-  aliases: []
 
 itemid:
   enabled: true

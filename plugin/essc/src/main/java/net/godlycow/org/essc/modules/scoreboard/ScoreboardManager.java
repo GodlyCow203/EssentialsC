@@ -343,12 +343,12 @@ public class ScoreboardManager implements Listener {
 
         if (currentlyDisabled) {
             disabledPlayers.remove(uuid);
-            plugin.getUserManager().setScoreboardDisabled(uuid, false);
+            if (config.isPersistent()) plugin.getUserManager().setScoreboardDisabled(uuid, false);
             addPlayer(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "scoreboard.enabled"));
         } else {
             disabledPlayers.add(uuid);
-            plugin.getUserManager().setScoreboardDisabled(uuid, true);
+            if (config.isPersistent()) plugin.getUserManager().setScoreboardDisabled(uuid, true);
             removePlayer(player);
             placeholderCache.remove(uuid);
             try {
@@ -391,7 +391,9 @@ public class ScoreboardManager implements Listener {
         Player joining = event.getPlayer();
         UUID uuid = joining.getUniqueId();
 
-        if (plugin.getUserManager() != null) {
+        if (!config.isPersistent()) {
+            disabledPlayers.remove(uuid);
+        } else if (plugin.getUserManager() != null) {
             boolean dbDisabled = plugin.getUserManager().isScoreboardDisabled(uuid);
             if (dbDisabled) {
                 disabledPlayers.add(uuid);

@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
 
 public class ConfigMigrator {
 
-    private static final int CURRENT_CONFIG_VERSION = 26;
-    private static final int CURRENT_COMMANDS_VERSION = 10;
+    private static final int CURRENT_CONFIG_VERSION = 27;
+    private static final int CURRENT_COMMANDS_VERSION = 11;
 
     private final EssentialsC plugin;
 

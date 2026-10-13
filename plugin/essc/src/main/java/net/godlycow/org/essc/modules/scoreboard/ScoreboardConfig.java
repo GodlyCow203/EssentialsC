@@ -53,6 +53,10 @@ public class ScoreboardConfig {
         return line.split("(?=%)", -1);
     }
 
+    public boolean isPersistent() {
+        return persistent;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }

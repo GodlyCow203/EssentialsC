@@ -643,7 +643,6 @@ public class EssConfig {
     public int getSpawnEntityMaxAmount() { return config.getInt("spawnentity.max-amount", 10);}
 
 
-    // TODO - Implement config Option
     public boolean isPlayerListLuckPermsEnabled() {
         return config.getBoolean("playerlist.show-luckperms-prefix", true);
     }
@@ -790,11 +789,6 @@ public class EssConfig {
 
     public String getChatMentionFormat() {
         return config.getString("chat.mention.format", "<yellow>@<player></yellow>");
-    }
-
-    // TODO - Implement config Option
-    public boolean isDiscordNickShowRealname() {
-        return config.getBoolean("nickname.discord-show-realname", true);
     }
 
     public boolean isCurrencyBeforeAmount() {

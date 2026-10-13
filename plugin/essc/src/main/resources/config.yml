@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 26
+config-version: 27
 
 # General settings
 
@@ -579,6 +579,9 @@ scoreboard:
   # Set to false to disable the scoreboard entirely.
   enabled: true
 
+  # Keep each player's scoreboard visibility choice (/scoreboard toggle) across relogs.
+  persistent: true
+
   # How often the scoreboard refreshes, in ticks. 20 ticks = 1 second.
   update-interval: 20
 
@@ -707,10 +710,6 @@ nickname:
   # Whether clicking a nickname in chat suggests the /msg <player> command.
   click-suggest-msg: true
 
-  # When a player has a nickname, show "Nick (RealName)" in Discord
-  # instead of just the plain nickname. Requires DiscordSRV.
-  discord-show-realname: true
-
 
 
 # Shop
@@ -754,6 +753,13 @@ sell:
     # The material used for the GUI border.
     # Must be a valid Bukkit Material name.
     border-material: GRAY_STAINED_GLASS_PANE
+
+    # Fill empty GUI slots with filler panes.
+    fill-empty: true
+
+    # The material used to fill empty slots. Only used when fill-empty is true.
+    # Must be a valid Bukkit Material name.
+    fill-material: BLACK_STAINED_GLASS_PANE
 
     # Play sounds when opening, selling, or cancelling in the GUI.
     sounds: true
@@ -817,11 +823,15 @@ auction-house:
     - DRAGON_EGG
     - BEACON
     - NETHER_STAR
-      # - material: WOODEN_SWORD
-      #   name: "Not A Netherite Sword"
-      #   custom-model-data: 2026
 
-    # Whether to notify the player when they successfully sell items.
+  # Custom items that cannot be sold, matched by material, name and/or custom model data.
+  # Example:
+  #   - material: WOODEN_SWORD
+  #     name: "Not A Netherite Sword"
+  #     custom-model-data: 2026
+  blacklisted-custom-items: []
+
+  # Whether to notify the player when they successfully sell items.
   notify-on-sale: true
 
   # Whether to show a confirmation GUI before purchasing an auction.

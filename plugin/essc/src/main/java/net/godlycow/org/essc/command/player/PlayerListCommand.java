@@ -2,7 +2,9 @@ package net.godlycow.org.essc.command.player;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.util.LegacyColorConverter;
 import net.godlycow.org.essc.util.PaginatedList;
+import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -52,6 +54,9 @@ public class PlayerListCommand extends Command {
             return true;
         }
 
+        boolean showPrefix = plugin.getConfigManager().isPlayerListLuckPermsEnabled()
+                && plugin.getServer().getPluginManager().isPluginEnabled("LuckPerms");
+
         Map<String, String> headerPlaceholders = new HashMap<>();
         headerPlaceholders.put("online", String.valueOf(total));
         headerPlaceholders.put("max", String.valueOf(max));
@@ -60,7 +65,7 @@ public class PlayerListCommand extends Command {
         sender.sendMessage(lang.get(sender, "playerlist.header", headerPlaceholders));
 
         for (Map.Entry<Player, String> entry : paginated.getPage(page)) {
-            String display = entry.getValue();
+            String display = showPrefix ? withLuckPermsPrefix(entry.getKey()) : entry.getValue();
 
             Map<String, String> entryPlaceholders = new HashMap<>();
             entryPlaceholders.put("name", display);
@@ -85,6 +90,20 @@ public class PlayerListCommand extends Command {
         }
 
         return true;
+    }
+
+    private String withLuckPermsPrefix(Player player) {
+        try
+        {
+            String prefix = LuckPermsProvider.get().getPlayerAdapter(Player.class).getMetaData(player).getPrefix();
+            if (prefix == null || prefix.isEmpty())
+                return player.getName();
+
+            return LegacyColorConverter.toMiniMessage(prefix) + "<reset>" + player.getName();
+        } catch (IllegalStateException e)
+        {
+            return player.getName();
+        }
     }
 
     @Override
