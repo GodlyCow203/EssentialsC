@@ -8,6 +8,7 @@ import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
 import github.scarsz.discordsrv.dependencies.jda.api.JDA;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.modules.kit.Kit;
+import net.godlycow.org.essc.modules.shop.ShopTransaction;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
@@ -26,6 +27,9 @@ public class DiscordSRVHook {
     private final HomeNotifier homeNotifier;
     private final HomeDeleteNotifier homeDeleteNotifier;
     private final BanIpNotifier banIpNotifier;
+    private final ShopBuyNotifier shopBuyNotifier;
+    private final ShopSellNotifier shopSellNotifier;
+    private final SellGuiNotifier sellGuiNotifier;
 
 
     public DiscordSRVHook(EssentialsC plugin) {
@@ -37,6 +41,9 @@ public class DiscordSRVHook {
         this.homeNotifier = new HomeNotifier(plugin, this);
         this.homeDeleteNotifier = new HomeDeleteNotifier(plugin, this);
         this.banIpNotifier = new BanIpNotifier(plugin, this);
+        this.shopBuyNotifier = new ShopBuyNotifier(plugin, this);
+        this.shopSellNotifier = new ShopSellNotifier(plugin, this);
+        this.sellGuiNotifier = new SellGuiNotifier(plugin, this);
     }
 
     public void init() {
@@ -97,6 +104,14 @@ public class DiscordSRVHook {
             plugin.getLogger().warning("DiscordSRV channel '" + punishmentsChannel + "' not found! " +
                     "Check your DiscordSRV config.yml Channels section.");
         }
+
+        if (plugin.getConfigManager().isDiscordShopBuyEnabled() || plugin.getConfigManager().isDiscordShopSellEnabled() || plugin.getConfigManager().isDiscordSellGuiEnabled()) {
+            String shopChannel = plugin.getConfigManager().getDiscordSRVShopChannelName();
+            if (getChannel(shopChannel) == null) {
+                plugin.getLogger().warning("DiscordSRV channel '" + shopChannel + "' not found! " +
+                        "Check your DiscordSRV config.yml Channels section.");
+            }
+        }
     }
 
     public void sendBanEmbed(UUID targetUUID, String targetName, String reason, String banner, long expires) {
@@ -138,6 +153,19 @@ public class DiscordSRVHook {
     public void sendBanIpEmbed(String ip, String targetName, String reason, String banner, long expires) {
         if (isHooked()) {
             banIpNotifier.notifyBanIp(ip, targetName, reason, banner, expires);
+        }
+    }
+
+    public void sendShopTransactionEmbed(ShopTransaction transaction) {
+        if (!isHooked()) {
+            return;
+        }
+        if (transaction.type() == ShopTransaction.Type.BUY) {
+            shopBuyNotifier.notifyBuy(transaction);
+        } else if (transaction.source() == ShopTransaction.Source.SELL_GUI) {
+            sellGuiNotifier.notifySellGui(transaction);
+        } else {
+            shopSellNotifier.notifySell(transaction);
         }
     }
 }

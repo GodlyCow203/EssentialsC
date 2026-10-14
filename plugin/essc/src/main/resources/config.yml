@@ -180,6 +180,9 @@ discordsrv:
   channels:
     punishments:
       name: punishments
+    # Used for shop_buy, shop_sell and sell_gui events.
+    shop:
+      name: shop
 
   # Per-event settings. Set enabled to false to stop relaying that event.
   # Color accepts any hex color code.
@@ -205,6 +208,20 @@ discordsrv:
     banip:
       enabled: true
       color: '#E74C3C'
+    # Shop transactions. All three are sent to the shop channel above.
+    # See shop.transaction-log.discord-min-total to only send large transactions.
+    # Purchases made in /shop.
+    shop_buy:
+      enabled: true
+      color: '#34BE49'
+    # Items sold in /shop and with /quicksell.
+    shop_sell:
+      enabled: true
+      color: '#F1C40F'
+    # Items sold through the /sell GUI.
+    sell_gui:
+      enabled: true
+      color: '#E67E22'
 
   # Show a player's avatar next to their name in Discord embeds.
   show-avatar: true
@@ -721,8 +738,22 @@ shop:
   # Set to false to disable the shop system and unregister /shop.
   enabled: true
 
-  # Log every buy and sell transaction to the console and plugin log.
+  # Save every /shop buy and sell to the shop database (shop.db).
   log-transactions: true
+
+  # Economy logging for /shop, /sell and /quicksell transactions.
+  # Useful for spotting abuse or exploits in your shop prices.
+  transaction-log:
+    # Write every transaction to plugins/EssentialsC/logs/shop/<date>.log
+    file: true
+
+    # Also print every transaction to the server console.
+    console: false
+
+    # Only send DiscordSRV notifications (discordsrv.events.shop_buy / shop_sell / sell_gui)
+    # for transactions with a total of at least this amount. 0 sends every transaction.
+    # The file and console logs always include every transaction.
+    discord-min-total: 0
 
   # Currency labels used in shop transaction messages.
   currency:

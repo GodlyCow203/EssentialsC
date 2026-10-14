@@ -4,6 +4,7 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.util.InventoryViewCompat;
 import net.godlycow.org.essc.modules.shop.ShopCategory;
 import net.godlycow.org.essc.modules.shop.ShopItem;
+import net.godlycow.org.essc.modules.shop.ShopTransaction;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -12,7 +13,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SellManager {
@@ -91,7 +94,15 @@ public class SellManager {
             plugin.getEconomyManager().deposit(player.getUniqueId(), BigDecimal.valueOf(totalPrice));
         }
 
-        return new SellResult(item.getAmount(), totalPrice, true);
+        return new SellResult(item.getAmount(), totalPrice, true,
+                ShopTransaction.Entry.of(shopItem, item.getAmount(), totalPrice));
+    }
+
+    public void logSale(Player player, ShopTransaction.Source source, List<ShopTransaction.Entry> entries) {
+        if (plugin.getShopManager() == null || entries.isEmpty()) return;
+
+        plugin.getShopManager().getTransactionLogger()
+                .log(ShopTransaction.of(ShopTransaction.Type.SELL, player, source, entries));
     }
 
     public SellResult sellHand(Player player) {
@@ -103,6 +114,9 @@ public class SellManager {
         SellResult result = sellItem(player, hand);
         if (result.isSuccess()) {
             player.getInventory().setItemInMainHand(null);
+            if (result.getEntry() != null) {
+                logSale(player, ShopTransaction.Source.QUICKSELL_HAND, List.of(result.getEntry()));
+            }
         }
         return result;
     }
@@ -110,6 +124,7 @@ public class SellManager {
     public SellResult sellInventory(Player player) {
         double totalWorth = 0.0;
         int totalItems = 0;
+        List<ShopTransaction.Entry> entries = new ArrayList<>();
 
         for (int i = 0; i < 36; i++) {
             ItemStack item = player.getInventory().getItem(i);
@@ -121,12 +136,15 @@ public class SellManager {
             double price = shopItem.getSellPrice() * item.getAmount();
             totalWorth += price;
             totalItems += item.getAmount();
+            entries.add(ShopTransaction.Entry.of(shopItem, item.getAmount(), price));
             player.getInventory().setItem(i, null);
         }
 
         if (totalWorth > 0 && plugin.getEconomyManager() != null) {
             plugin.getEconomyManager().deposit(player.getUniqueId(), BigDecimal.valueOf(totalWorth));
         }
+
+        logSale(player, ShopTransaction.Source.QUICKSELL_INVENTORY, entries);
 
         return new SellResult(totalItems, totalWorth, totalItems > 0);
     }
@@ -205,11 +223,17 @@ public class SellManager {
         private final int amount;
         private final double price;
         private final boolean success;
+        private final ShopTransaction.Entry entry;
 
         public SellResult(int amount, double price, boolean success) {
+            this(amount, price, success, null);
+        }
+
+        public SellResult(int amount, double price, boolean success, ShopTransaction.Entry entry) {
             this.amount = amount;
             this.price = price;
             this.success = success;
+            this.entry = entry;
         }
 
         public int getAmount() {
@@ -222,6 +246,10 @@ public class SellManager {
 
         public boolean isSuccess() {
             return success;
+        }
+
+        public ShopTransaction.Entry getEntry() {
+            return entry;
         }
     }
 }

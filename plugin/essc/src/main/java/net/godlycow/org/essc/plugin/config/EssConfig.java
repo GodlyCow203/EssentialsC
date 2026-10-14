@@ -369,6 +369,18 @@ public class EssConfig {
         return config.getBoolean("shop.log-transactions", true);
     }
 
+    public boolean isShopTransactionFileLog() {
+        return config.getBoolean("shop.transaction-log.file", true);
+    }
+
+    public boolean isShopTransactionConsoleLog() {
+        return config.getBoolean("shop.transaction-log.console", false);
+    }
+
+    public double getShopTransactionDiscordMinTotal() {
+        return config.getDouble("shop.transaction-log.discord-min-total", 0.0);
+    }
+
     public boolean isHatBlacklistEnabled() {
         return config.getBoolean("hat.blacklist-enabled", true);
     }
@@ -673,6 +685,34 @@ public class EssConfig {
 
     public String getDiscordBanIpColor() {
         return config.getString("discordsrv.events.banip.color", "#E74C3C");
+    }
+
+    public String getDiscordSRVShopChannelName() {
+        return config.getString("discordsrv.channels.shop.name", "shop");
+    }
+
+    public boolean isDiscordShopBuyEnabled() {
+        return config.getBoolean("discordsrv.events.shop_buy.enabled", false);
+    }
+
+    public String getDiscordShopBuyColor() {
+        return config.getString("discordsrv.events.shop_buy.color", "#2ECC71");
+    }
+
+    public boolean isDiscordShopSellEnabled() {
+        return config.getBoolean("discordsrv.events.shop_sell.enabled", false);
+    }
+
+    public String getDiscordShopSellColor() {
+        return config.getString("discordsrv.events.shop_sell.color", "#F1C40F");
+    }
+
+    public boolean isDiscordSellGuiEnabled() {
+        return config.getBoolean("discordsrv.events.sell_gui.enabled", false);
+    }
+
+    public String getDiscordSellGuiColor() {
+        return config.getString("discordsrv.events.sell_gui.color", "#E67E22");
     }
 
     public boolean isSellEnabled() {

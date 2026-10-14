@@ -22,6 +22,7 @@ import java.util.*;
 public class ShopManager {
     private final EssentialsC plugin;
     private final ShopDatabase database;
+    private final ShopTransactionLogger transactionLogger;
     private final Map<String, ShopCategory> categories;
     private File shopFolder;
     private YamlConfiguration mainConfig;
@@ -32,6 +33,7 @@ public class ShopManager {
     public ShopManager(EssentialsC plugin) {
         this.plugin = plugin;
         this.database = new ShopDatabase(plugin);
+        this.transactionLogger = new ShopTransactionLogger(plugin);
         this.categories = new HashMap<>();
 
         if (!plugin.getConfigManager().isShopEnabled()) {
@@ -53,6 +55,10 @@ public class ShopManager {
 
     public ShopListener getShopListener() {
         return shopListener;
+    }
+
+    public ShopTransactionLogger getTransactionLogger() {
+        return transactionLogger;
     }
 
     public void setShopGuiManager(ShopGuiManager shopGuiManager) {
@@ -419,6 +425,9 @@ public class ShopManager {
 
         int totalItems = amount * item.getAmount();
 
+        transactionLogger.log(ShopTransaction.of(ShopTransaction.Type.BUY, player, ShopTransaction.Source.SHOP,
+                List.of(ShopTransaction.Entry.of(item, totalItems, totalPrice))));
+
         for (String cmd : item.getCommands()) {
             String formatted = cmd.replace("%player%", player.getName())
                     .replace("%amount%", String.valueOf(totalItems));
@@ -552,6 +561,9 @@ public class ShopManager {
 
         int totalItems = amount * item.getAmount();
 
+        transactionLogger.log(ShopTransaction.of(ShopTransaction.Type.SELL, player, ShopTransaction.Source.SHOP,
+                List.of(ShopTransaction.Entry.of(item, totalItems, totalPrice))));
+
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("item", item.getDisplayName() != null ? item.getDisplayName() : item.getId());
         placeholders.put("amount", String.valueOf(totalItems));
@@ -629,5 +641,6 @@ public class ShopManager {
 
     public void shutdown() {
         database.disconnect();
+        transactionLogger.shutdown();
     }
 }

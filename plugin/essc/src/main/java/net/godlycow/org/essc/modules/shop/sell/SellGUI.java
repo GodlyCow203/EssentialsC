@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.modules.shop.sell;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.modules.shop.ShopTransaction;
 import net.godlycow.org.essc.util.ComponentHelper;
 import net.godlycow.org.essc.util.FormatUtil;
 import net.kyori.adventure.text.Component;
@@ -213,6 +214,7 @@ public class SellGUI {
         }
 
         int totalItems = 0;
+        List<ShopTransaction.Entry> entries = new ArrayList<>();
 
         for (int slot : INPUT_SLOTS) {
             ItemStack item = inv.getItem(slot);
@@ -221,9 +223,14 @@ public class SellGUI {
             SellManager.SellResult result = sellManager.sellItem(player, item);
             if (result.isSuccess()) {
                 totalItems += result.getAmount();
+                if (result.getEntry() != null) {
+                    entries.add(result.getEntry());
+                }
                 inv.setItem(slot, null);
             }
         }
+
+        sellManager.logSale(player, ShopTransaction.Source.SELL_GUI, entries);
 
         returnItems();
 
