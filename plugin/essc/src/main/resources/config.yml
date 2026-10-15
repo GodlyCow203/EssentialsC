@@ -368,7 +368,7 @@ rtp:
 
     world_nether:
       enabled: true
-      display-name: <#FF7A52><b>Nether
+      display-name: <#C33100><b>Nether
       min-radius: 500
       max-radius: 5000
       blocked-biomes: []

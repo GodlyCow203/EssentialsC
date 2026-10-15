@@ -438,7 +438,8 @@ public class RTPManager {
                         placeholders.put("y", String.valueOf(destination.getBlockY()));
                         placeholders.put("z", String.valueOf(destination.getBlockZ()));
 
-                        placeholders.put("world", world.getName());
+                        WorldRTPSettings worldConfig = worldSettings.get(world.getName());
+                        placeholders.put("world", worldConfig != null ? worldConfig.displayName() : defaultDisplayName(world.getName()));
                         player.sendMessage(plugin.getLanguageManager().get(player, "rtp.success", placeholders));
 
                         if (particles) spawnTeleportParticles(destination);

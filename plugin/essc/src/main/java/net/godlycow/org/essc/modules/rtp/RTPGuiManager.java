@@ -145,6 +145,9 @@ public class RTPGuiManager implements Listener {
         }
 
         lore.add(lang(viewer, "rtp.gui.players", map("count", String.valueOf(playerCount), "world", worldName)));
+        lore.add(lang(viewer, "rtp.gui.radius",
+                map("min", String.valueOf(settings.minRadius()), "max", String.valueOf(settings.maxRadius()))));
+        lore.add(Component.empty());
 
         if (!hasPermission) {
             lore.add(lang(viewer, "rtp.gui.locked"));
@@ -153,9 +156,6 @@ public class RTPGuiManager implements Listener {
         } else {
             lore.add(lang(viewer, "rtp.gui.world_disabled_lore"));
         }
-
-        lore.add(lang(viewer, "rtp.gui.radius",
-                map("min", String.valueOf(settings.minRadius()), "max", String.valueOf(settings.maxRadius()))));
 
         meta.lore(lore);
         item.setItemMeta(meta);

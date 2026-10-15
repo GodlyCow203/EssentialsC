@@ -152,7 +152,7 @@ public class LanguageManager {
                 player.sendMessage(get(player, key, placeholders));
             }
         }
-        
+
         CommandSender console = plugin.getServer().getConsoleSender();
         console.sendMessage(get(console, key, placeholders));
     }
