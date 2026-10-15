@@ -359,6 +359,18 @@ public class ShopManager {
 
         ItemStack giveItem = item.createGiveItem(amount * item.getAmount());
 
+        if (plugin.getConfigManager().isShopStripItemNames()) {
+
+            ItemMeta giveMeta = giveItem.getItemMeta();
+            if (giveMeta != null && giveMeta.hasDisplayName())
+
+            {
+                giveMeta.displayName(null);
+                giveItem.setItemMeta(giveMeta);
+            }
+
+        }
+
         if (!canFitInInventory(player, giveItem)) {
             shopListener.getSounds().playInventoryFull(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.inventory-full"));

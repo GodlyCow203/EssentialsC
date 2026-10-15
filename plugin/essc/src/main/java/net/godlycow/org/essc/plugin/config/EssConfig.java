@@ -365,6 +365,10 @@ public class EssConfig {
         return config.getString("shop.currency.plural", "Dollars");
     }
 
+    public boolean isShopStripItemNames() {
+        return config.getBoolean("shop.strip-item-names", false);
+    }
+
     public boolean isShopLogTransactions() {
         return config.getBoolean("shop.log-transactions", true);
     }

@@ -738,6 +738,11 @@ shop:
   # Set to false to disable the shop system and unregister /shop.
   enabled: true
 
+  # If true, the custom name set for a shop item is removed when it is bought
+  # so players receive the item with its default vanilla name.
+  # The item still shows its custom name in the shop GUI
+  strip-item-names: false
+
   # Save every /shop buy and sell to the shop database (shop.db).
   log-transactions: true
 
