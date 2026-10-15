@@ -86,7 +86,7 @@ public class BanIpCommand extends Command {
             reasonStart = 2;
         }
 
-        String reason = buildReason(args, reasonStart, "Breaking server rules");
+        String reason = buildReason(args, reasonStart, lang.getRaw(null, "banip.default_reason"));
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
 
         plugin.debug("IP Banning " + ip + " (resolved from: " + targetName + ") by " + sender.getName()
@@ -97,14 +97,14 @@ public class BanIpCommand extends Command {
         int kickedCount = kickPlayersWithIp(ip, sender, reason, duration);
         String durationStr = DurationParser.format(duration);
 
-        plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "banip.broadcast_temp" : "banip.broadcast", Map.of(
+        lang.broadcast("essentialsc.banip.notify", duration > 0 ? "banip.broadcast_temp" : "banip.broadcast", Map.of(
                 "ip",       ip,
                 "target",   targetName,
                 "banner",   sender.getName(),
                 "reason",   reason,
                 "duration", durationStr,
                 "count",    String.valueOf(kickedCount)
-        )), "essentialsc.banip.notify");
+        ));
 
         sender.sendMessage(lang.get(sender, "banip.success", Map.of(
                 "ip",       ip,

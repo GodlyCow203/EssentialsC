@@ -147,7 +147,7 @@ public class EcoCommand extends Command {
                 }
             } else {
                 sender.sendMessage(lang.get(sender, "eco.take.failed",
-                        Map.of("player", targetName)));
+                        Map.of("amount", formatted, "player", targetName)));
             }
         });
     }

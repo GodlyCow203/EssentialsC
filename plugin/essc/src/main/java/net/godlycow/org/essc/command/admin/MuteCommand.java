@@ -62,7 +62,7 @@ public class MuteCommand extends Command {
             reasonStart = 2;
         }
 
-        String reason = buildReason(args, reasonStart, "Breaking chat rules");
+        String reason = buildReason(args, reasonStart, lang.getRaw(null, "mute.default_reason"));
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
 
         boolean wasOffline = !target.isOnline();
@@ -79,12 +79,12 @@ public class MuteCommand extends Command {
             )));
         }
 
-        plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "mute.broadcast_temp" : "mute.broadcast", Map.of(
+        lang.broadcast("essentialsc.mute.notify", duration > 0 ? "mute.broadcast_temp" : "mute.broadcast", Map.of(
                 "target",   target.getName(),
                 "muter",    sender.getName(),
                 "reason",   reason,
                 "duration", durationStr
-        )), "essentialsc.mute.notify");
+        ));
 
         sender.sendMessage(lang.get(sender, "mute.success", Map.of(
                 "target",   target.getName(),

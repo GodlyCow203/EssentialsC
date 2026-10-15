@@ -29,7 +29,7 @@ public class UnbanIpCommand extends Command {
 
         punishmentManager.unbanIp(ip);
 
-        plugin.getServer().broadcast(lang.get(sender, "unbanip.broadcast", Map.of("ip", ip, "unbanner", sender.getName())), "essentialsc.banip.notify");//broadcast
+        lang.broadcast("essentialsc.banip.notify", "unbanip.broadcast", Map.of("ip", ip, "unbanner", sender.getName()));//broadcast
 
         sender.sendMessage(lang.get(sender, "unbanip.success", Map.of("ip", ip)));
         return true;

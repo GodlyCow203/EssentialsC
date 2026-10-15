@@ -78,7 +78,6 @@ items:
     slot: 31
     lore:
       - lang:ah.gui.item.empty.search.lore1
-      - lang:ah.gui.item.empty.search.lore2
     hide-attributes: true
     dynamic: true
 

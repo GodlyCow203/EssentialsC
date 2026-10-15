@@ -211,7 +211,7 @@ NEW_TRANSLATIONS = {
     }
 }
 
-current_folder = Path(".")
+current_folder = Path(__file__).resolve().parent.parent / "plugin/essc/src/main/resources/lang"
 
 for lang_code, translations in NEW_TRANSLATIONS.items():
 

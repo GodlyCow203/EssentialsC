@@ -142,6 +142,21 @@ public class LanguageManager {
         return resolve(sender, key, null);
     }
 
+    public void broadcast(String permission, String key, Map < String, String > placeholders) {
+
+        for (Player player : plugin.getServer().getOnlinePlayers())
+        {
+            if (player.hasPermission(permission))
+
+            {
+                player.sendMessage(get(player, key, placeholders));
+            }
+        }
+        
+        CommandSender console = plugin.getServer().getConsoleSender();
+        console.sendMessage(get(console, key, placeholders));
+    }
+
     private String resolve(CommandSender sender, String key, Map<String, String> placeholders) {
         return resolve(sender, null, key, placeholders);
     }

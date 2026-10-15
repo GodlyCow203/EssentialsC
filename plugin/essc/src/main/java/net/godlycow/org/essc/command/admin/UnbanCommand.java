@@ -30,16 +30,16 @@ public class UnbanCommand extends Command {
         }
 
         if (!punishmentManager.isBanned(target.getUniqueId())) {
-            sender.sendMessage(lang.get(sender, "unban.not_banned", Map.of("target", target.getName())));
+            sender.sendMessage(lang.get(sender, "unban.not_banned", Map.of("player", target.getName())));
             return true;
         }
 
         punishmentManager.unbanPlayer(target.getUniqueId());
 
-        plugin.getServer().broadcast(lang.get(sender, "unban.broadcast", Map.of(
+        lang.broadcast("essentialsc.ban.notify", "unban.broadcast", Map.of(
                 "target", target.getName(),
                 "unbanner", sender.getName()
-        )), "essentialsc.ban.notify");
+        ));
 
         sender.sendMessage(lang.get(sender, "unban.success", Map.of("target", target.getName())));
         return true;

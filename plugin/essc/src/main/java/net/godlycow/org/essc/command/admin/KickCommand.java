@@ -50,7 +50,7 @@ public class KickCommand extends Command {
             }
             reason = reasonBuilder.toString().trim();
         } else {
-            reason = "No reason provided";
+            reason = lang.getRaw(null, "kick.default_reason");
         }
 
         plugin.debug("Kicking " + target.getName() + " by " + sender.getName() + " for: " + reason);
@@ -68,7 +68,7 @@ public class KickCommand extends Command {
         broadcastPlaceholders.put("kicker", sender.getName());
         broadcastPlaceholders.put("reason", reason);
 
-        plugin.getServer().broadcast(lang.get(sender, "kick.broadcast", broadcastPlaceholders), "essentialsc.kick.notify");
+        lang.broadcast("essentialsc.kick.notify", "kick.broadcast", broadcastPlaceholders);
 
         Map<String, String> senderPlaceholders = new HashMap<>();
         senderPlaceholders.put("target", target.getName());

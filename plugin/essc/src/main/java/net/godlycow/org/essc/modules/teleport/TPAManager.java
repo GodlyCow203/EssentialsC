@@ -359,7 +359,7 @@ public class TPAManager implements Listener {
         String msgKey = switch (reason) {
             case "move" -> "tpa.teleport.cancelled.move";
             case "damage" -> "tpa.teleport.cancelled.damage";
-            default -> "tpa.teleport.cancelled";
+            default -> "tpa.teleport.cancelled.quit";
         };
 
         player.sendMessage(plugin.getLanguageManager().get(player, msgKey));

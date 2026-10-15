@@ -5,6 +5,7 @@ import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Map;
@@ -30,16 +31,21 @@ public class UnmuteCommand extends Command {
         }
 
         if (!punishmentManager.isMuted(target.getUniqueId())) {
-            sender.sendMessage(lang.get(sender, "unmute.not_muted", Map.of("target", target.getName())));
+            sender.sendMessage(lang.get(sender, "unmute.not_muted", Map.of("player", target.getName())));
             return true;
         }
 
         punishmentManager.unmutePlayer(target.getUniqueId());
 
-        plugin.getServer().broadcast(lang.get(sender, "unmute.broadcast", Map.of(
+        Player onlineTarget = target.getPlayer();
+        if (onlineTarget != null) {
+            onlineTarget.sendMessage(lang.get(onlineTarget, "unmute.target_message"));
+        }
+
+        lang.broadcast("essentialsc.mute.notify", "unmute.broadcast", Map.of(
                 "target", target.getName(),
                 "unmuter", sender.getName()
-        )), "essentialsc.mute.notify");
+        ));
 
         sender.sendMessage(lang.get(sender, "unmute.success", Map.of("target", target.getName())));
         return true;

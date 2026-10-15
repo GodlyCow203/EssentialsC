@@ -68,9 +68,11 @@ public class LanguageCommand extends Command {
         LanguageManager lm = plugin.getLanguageManager();
         String playerLang = lm.getPlayerLanguage(player.getUniqueId());
 
-        String langStr = (playerLang != null) ? playerLang + " (custom)" : player.locale().toString() + " (auto)";
+        String langStr = (playerLang != null)
+                ? playerLang + " " + lm.getRaw(player, "language.custom")
+                : player.locale().toString() + " " + lm.getRaw(player, "language.auto");
 
-        return lm.get(player, "language.current").replaceText(t -> t.matchLiteral("<language>").replacement(langStr));
+        return lm.get(player, "language.current", Map.of("language", langStr));
     }
 
 

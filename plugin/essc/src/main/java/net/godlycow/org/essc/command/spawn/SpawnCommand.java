@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Map;
 
 public class SpawnCommand extends Command {
 
@@ -21,7 +22,7 @@ public class SpawnCommand extends Command {
         if (args.length > 0 && player.hasPermission("essentialsc.spawn.admin")) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                player.sendMessage(lang.get(player, "error.player_not_found"));
+                player.sendMessage(lang.get(player, "error.player_not_found", Map.of("player", args[0])));
                 return true;
             }
 

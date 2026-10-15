@@ -112,7 +112,8 @@ public class TeleportHandler implements Listener {
 
         Location loc = home.toLocation(plugin.getServer());
         if (loc == null || loc.getWorld() == null) {
-            player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.invalid_world"));
+            player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.invalid_world",
+                    Map.of("world", home.getWorld())));
             return;
         }
 

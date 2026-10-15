@@ -66,7 +66,7 @@ public class BanCommand extends Command {
             reasonStart = 2;
         }
 
-        String reason = buildReason(args, reasonStart, "Breaking server rules");
+        String reason = buildReason(args, reasonStart, lang.getRaw(null, "ban.default_reason"));
 
         long expires = duration > 0 ? System.currentTimeMillis() + duration : -1;
         plugin.debug("Banning " + target.getName() + " by " + sender.getName() + " for: " + reason + " expires: " + expires);
@@ -85,12 +85,12 @@ public class BanCommand extends Command {
         }
 
         String durationStr = DurationParser.format(duration);
-        plugin.getServer().broadcast(lang.get(sender, duration > 0 ? "ban.broadcast_temp" : "ban.broadcast", Map.of(
+        lang.broadcast("essentialsc.ban.notify", duration > 0 ? "ban.broadcast_temp" : "ban.broadcast", Map.of(
                 "target",   target.getName(),
                 "banner",   sender.getName(),
                 "reason",   reason,
                 "duration", durationStr
-        )), "essentialsc.ban.notify");
+        ));
 
         sender.sendMessage(lang.get(sender, "ban.success", Map.of(
                 "target",   target.getName(),

@@ -308,9 +308,10 @@ public class BackManager implements Listener {
         if (task == null && deathTask == null)
             return;
 
+        String prefix = deathTask != null ? "dback" : "back";
         msgKey = switch (reason) {
-            case "move" -> "back.cancelled.move";
-            default -> "back.cancelled";
+            case "move" -> prefix + ".cancelled.move";
+            default -> prefix + ".cancelled";
         };
 
         player.sendMessage(plugin.getLanguageManager().get(player, msgKey));
