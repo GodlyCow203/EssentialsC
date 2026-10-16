@@ -128,9 +128,9 @@ class LanguageApiTest {
 
         assertTrue(Files.exists(addonFolder.resolve("lang/en_US.json")));
         assertTrue(api.hasKey("plugin.welcome"));
-        assertEquals("[EssC] Welcome, Steve!",
+        assertEquals("[EssC] Welcome Steve",
                 plain(api.get(null, "plugin.welcome", Map.of("player", "Steve"))));
-        assertEquals("[EssC] Welcome, Steve!",
+        assertEquals("[EssC] Welcome Steve",
                 api.getRaw(null, "plugin.welcome", Map.of("player", "Steve")));
     }
 
@@ -189,7 +189,7 @@ class LanguageApiTest {
 
         ArgumentCaptor<Component> captor = ArgumentCaptor.forClass(Component.class);
         verify(sender).sendMessage(captor.capture());
-        assertEquals("[EssC] Welcome, Alex!", plain(captor.getValue()));
+        assertEquals("[EssC] Welcome Alex", plain(captor.getValue()));
     }
 
     @Test
