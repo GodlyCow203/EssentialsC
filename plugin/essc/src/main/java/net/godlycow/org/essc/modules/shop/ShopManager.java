@@ -371,7 +371,7 @@ public class ShopManager {
 
         }
 
-        if (!canFitInInventory(player, giveItem)) {
+        if (plugin.getConfigManager().isShopBlockBuyWhenInventoryFull() && !canFitInInventory(player, giveItem)) {
             shopListener.getSounds().playInventoryFull(player);
             player.sendMessage(plugin.getLanguageManager().get(player, "shop.inventory-full"));
             return;

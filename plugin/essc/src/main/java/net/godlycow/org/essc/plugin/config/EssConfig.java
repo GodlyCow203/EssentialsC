@@ -369,6 +369,10 @@ public class EssConfig {
         return config.getBoolean("shop.strip-item-names", false);
     }
 
+    public boolean isShopBlockBuyWhenInventoryFull() {
+        return config.getBoolean("shop.block-buy-when-inventory-full", true);
+    }
+
     public boolean isShopLogTransactions() {
         return config.getBoolean("shop.log-transactions", true);
     }

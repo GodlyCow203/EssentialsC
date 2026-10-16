@@ -743,6 +743,10 @@ shop:
   # The item still shows its custom name in the shop GUI
   strip-item-names: false
 
+  # If true, players can't buy items while their inventory is full.
+  # If false, the purchase goes through and items that don't fit are dropped at the player's feet.
+  block-buy-when-inventory-full: true
+
   # Save every /shop buy and sell to the shop database (shop.db).
   log-transactions: true
 
