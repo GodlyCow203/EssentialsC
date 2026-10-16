@@ -4,8 +4,10 @@ import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.api.EssentialsCAPI;
 import net.godlycow.org.essc.api.home.HomeManager;
 import net.godlycow.org.essc.api.impl.home.HomeManagerImpl;
+import net.godlycow.org.essc.api.impl.language.LanguageManagerImpl;
 import net.godlycow.org.essc.api.impl.warp.WarpManagerImpl;
 import net.godlycow.org.essc.api.kit.KitManager;
+import net.godlycow.org.essc.api.language.LanguageManager;
 import net.godlycow.org.essc.api.rtp.RtpManager;
 import net.godlycow.org.essc.api.impl.kit.KitManagerImpl;
 import net.godlycow.org.essc.api.impl.rtp.RtpManagerImpl;
@@ -17,7 +19,8 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     private final RtpManagerImpl rtpManagerImpl;
     private final HomeManagerImpl homeManagerImpl;
     private final WarpManagerImpl warpManagerImpl;
-    private static final String API_VERSION = "1.3.0";
+    private final LanguageManagerImpl languageManagerImpl;
+    private static final String API_VERSION = "1.4.0";
 
     public EssentialsCAPIImpl(EssentialsC plugin) {
         this.plugin = plugin;
@@ -25,6 +28,7 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
         this.rtpManagerImpl = new RtpManagerImpl(plugin);
         this.homeManagerImpl = new HomeManagerImpl(plugin);
         this.warpManagerImpl = new WarpManagerImpl(plugin);
+        this.languageManagerImpl = new LanguageManagerImpl(plugin);
     }
 
     @Override
@@ -45,6 +49,11 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     @Override
     public WarpManager getWarpManager() {
         return warpManagerImpl;
+    }
+
+    @Override
+    public LanguageManager getLanguageManager() {
+        return languageManagerImpl;
     }
 
     @Override

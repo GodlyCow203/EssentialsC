@@ -10,6 +10,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import net.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl;
@@ -18,8 +19,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class LanguageManager {
@@ -29,6 +34,7 @@ public class LanguageManager {
 
     private final Map<String, Map<String, String>> cache = new HashMap<>();
     private final Map<UUID, String> playerLanguages = new HashMap<>();
+    private final Map<String, File> addonLangFolders = new LinkedHashMap<>(); // addon name -> its lang folder
     private String defaultLang;
 
     public LanguageManager(EssentialsC plugin) {
@@ -60,7 +66,7 @@ public class LanguageManager {
             if (!file.exists()) {
                 plugin.saveResource("lang/" + lang + ".json", false);
             }
-            migrateLangFile(lang);
+            migrateLangFile(plugin, "lang/" + lang + ".json", file);
         }
         loadIntoCache(defaultLanguage);
         for (String lang : languages) {
@@ -93,12 +99,76 @@ public class LanguageManager {
             if (json != null) {
                 json.entrySet().forEach(e -> messages.put(e.getKey(), e.getValue().getAsString()));
             }
+            mergeAddonMessages(code, messages);
             cache.put(code, messages);
             plugin.debug("Cached language: " + code + " (" + messages.size() + " keys)");
         } catch (Exception e) {
             plugin.getLogger().severe("Failed to load language " + code + ": " + e.getMessage());
             plugin.debug("Exception loading " + code + ": " + e.getMessage());
         }
+    }
+
+    private void mergeAddonMessages(String code , Map<String,  String> messages) {
+
+        for (var entry : addonLangFolders.entrySet())
+
+        {
+            File file = new File(entry.getValue(), code + ".json");
+            if (!file.exists())
+                continue;
+
+            try (var reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))
+
+            {
+                JsonObject json = gson.fromJson(reader, JsonObject.class);
+
+                if (json == null)
+                    continue;
+
+                for (var e : json.entrySet())
+                {
+                    if (messages.putIfAbsent(e.getKey(), e.getValue().getAsString()) != null && code.equals(defaultLang))
+                    {
+                        plugin.getLogger().warning("[EssentialsC] " + entry.getKey() + " lang key '" + e.getKey() + "' already exists, skipping it");
+                    }
+                }
+
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to load " + entry.getKey() + " language " + code + ": " + e.getMessage());
+            }
+        }
+    }
+
+    public void registerAddon(Plugin addon, String... languageCodes)
+    {
+        File langFolder = new File(addon.getDataFolder(), "lang");
+
+        if (!langFolder.exists())
+             langFolder.mkdirs();
+
+        for (String code : languageCodes)
+        {
+
+            String resourcePath = "lang/" + code + ".json";
+            File file = new File(langFolder, code + ".json");
+            if (!file.exists())
+
+            {
+                if (addon.getResource(resourcePath) == null) {
+                    plugin.getLogger().warning("[EssentialsC] " + addon.getName() + " has no " + resourcePath + " in its jar !!!");
+                    continue;
+                }
+
+                addon.saveResource(resourcePath, false);
+            }
+            migrateLangFile(addon, resourcePath, file);
+        }
+
+        addonLangFolders.put(addon.getName(), langFolder);
+        for (String code : new ArrayList<>(cache.keySet())) {
+            loadIntoCache(code);
+        }
+        plugin.debug("Registered language files for " + addon.getName());
     }
 
     private final ThreadLocal<Boolean> resolvingErrorInternal = ThreadLocal.withInitial(() -> false);
@@ -142,6 +212,42 @@ public class LanguageManager {
         return resolve(sender, key, null);
     }
 
+    public String getRaw(CommandSender sender, String key, Map<String, String> placeholders) {
+        return resolve(sender, key, placeholders);
+    }
+
+    public boolean hasKey(String key)
+    {
+        for (Map<String, String> messages : cache.values())
+
+        {
+            if (messages.containsKey(key))
+                return true;
+        }
+
+        return false;
+    }
+
+    public Set<String> getLoadedLanguages() {
+        return new HashSet<>(cache.keySet());
+    }
+
+    public String getEffectiveLanguage(CommandSender sender)
+    {
+
+        String locale = resolveLocale(sender);
+
+        if (cache.containsKey(locale))
+            return locale;
+        String fallbackLang = plugin.getConfigManager().getFallbackLanguage();
+
+        if (cache.containsKey(fallbackLang))
+            return fallbackLang;
+
+
+        return defaultLang;
+    }
+
     public void broadcast(String permission, String key, Map < String, String > placeholders) {
 
         for (Player player : plugin.getServer().getOnlinePlayers())
@@ -161,7 +267,7 @@ public class LanguageManager {
         return resolve(sender, null, key, placeholders);
     }
 
-    private String resolve(CommandSender sender, Player target, String key, Map<String, String> placeholders) {
+    private String resolveLocale(CommandSender sender) {
         String locale = defaultLang;
 
         if (sender instanceof Player player) {
@@ -182,6 +288,11 @@ public class LanguageManager {
                 loadIntoCache(locale);
             }
         }
+        return locale;
+    }
+
+    private String resolve(CommandSender sender, Player target, String key, Map<String, String> placeholders) {
+        String locale = resolveLocale(sender);
 
         String fallbackLang = plugin.getConfigManager().getFallbackLanguage();
 
@@ -330,11 +441,10 @@ public class LanguageManager {
             .disableHtmlEscaping()
             .create();
 
-    private void migrateLangFile(String code) {
-        File file = new File(plugin.getDataFolder(), "lang/" + code + ".json");
+    private void migrateLangFile(Plugin source, String resourcePath, File file) {
         if (!file.exists()) return;
 
-        var resource = plugin.getResource("lang/" + code + ".json");
+        var resource = source.getResource(resourcePath);
         if (resource == null) return;
 
         try (var reader = new InputStreamReader(resource, StandardCharsets.UTF_8)) {
@@ -352,7 +462,7 @@ public class LanguageManager {
                 if (!existing.has(entry.getKey())) {
                     existing.add(entry.getKey(), entry.getValue());
                     dirty = true;
-                    plugin.debug("Migrated missing lang key '" + entry.getKey() + "' in " + code);
+                    plugin.debug("Migrated missing lang key '" + entry.getKey() + "' in " + file.getPath());
                 }
             }
 
@@ -360,10 +470,10 @@ public class LanguageManager {
                 try (var writer = new java.io.FileWriter(file, StandardCharsets.UTF_8)) {
                     PRETTY_GSON.toJson(existing, writer);
                 }
-                plugin.debug("[EssentialsC] Migrated missing keys in lang/" + code + ".json");
+                plugin.debug("[EssentialsC] Migrated missing keys in " + file.getPath());
             }
         } catch (Exception e) {
-            plugin.getLogger().warning("Failed to migrate lang file " + code + ": " + e.getMessage());
+            plugin.getLogger().warning("Failed to migrate lang file " + file.getPath() + ": " + e.getMessage());
         }
     }
 }

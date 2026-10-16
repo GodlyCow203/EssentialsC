@@ -2,6 +2,7 @@ package net.godlycow.org.essc.api;
 
 import net.godlycow.org.essc.api.home.HomeManager;
 import net.godlycow.org.essc.api.kit.KitManager;
+import net.godlycow.org.essc.api.language.LanguageManager;
 import net.godlycow.org.essc.api.rtp.RtpManager;
 import net.godlycow.org.essc.api.warp.WarpManager;
 
@@ -41,6 +42,13 @@ public interface EssentialsCAPI {
     WarpManager getWarpManager();
 
     /**
+     * Gets the language manager. Always active, there is no toggle for it
+     *
+     * @return the language manager, never null
+     */
+    LanguageManager getLanguageManager();
+
+    /**
      * Checks if kits are enabled.
      *
      * @return true if enabled
@@ -69,7 +77,7 @@ public interface EssentialsCAPI {
     boolean isWarpSystemEnabled();
 
     /**
-     * Gets the API version, for example "1.3.0". Separate from the plugin version.
+     * Gets the API version, for example "1.4.0". Separate from the plugin version.
      *
      * @return the API version, never null
      */
