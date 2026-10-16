@@ -11,6 +11,7 @@ import net.godlycow.org.essc.api.rtp.event.RtpSearchStartEvent;
 import net.godlycow.org.essc.api.rtp.event.RtpTeleportEvent;
 import net.godlycow.org.essc.api.rtp.event.RtpWarmupCancelEvent;
 import net.godlycow.org.essc.api.rtp.event.RtpWarmupStartEvent;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -150,6 +151,31 @@ public class RTPManager {
     public List<String> getConfiguredWorldNames() {
         return worldSettings.keySet().stream()
                 .filter(name -> resolveWorld(name) != null).sorted().collect(Collectors.toList());
+    }
+
+
+    public String getWorldAlias(String configuredName)
+    {
+        String lower = configuredName.toLowerCase();
+
+        return lower.startsWith("world_") ? lower.substring("world_".length()) : lower;
+    }
+
+    public String findConfiguredWorld(String input)
+    {
+        String arg = input.toLowerCase().replace(" ", "_");
+
+        for (String name : worldSettings.keySet())
+        {
+            String displayName = PlainTextComponentSerializer.plainText().serialize(plugin.getMiniMessage().deserialize(worldSettings.get(name).displayName())).toLowerCase().replace(" ", "_");
+
+            if (name.equalsIgnoreCase(arg) || getWorldAlias(name).equals(arg) || displayName.equals(arg))
+            {
+                return name;
+            }
+        }
+
+        return null;
     }
 
     public World resolveWorld(String configuredName) {

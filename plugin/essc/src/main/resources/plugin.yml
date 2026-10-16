@@ -52,7 +52,7 @@ commands:
 
   rtp:
     description: Rtp to a random location
-    usage: /rtp
+    usage: /rtp [world]
     permission: essentialsc.rtp
 
   tpa:
