@@ -125,13 +125,13 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void migratesV2DatabaseToV4(@TempDir Path dataFolder) throws Exception {
+    void migratesV2DatabaseToV5(@TempDir Path dataFolder) throws Exception {
         Path dbFile = dataFolder.resolve("databases").resolve("users.db");
         createV2Database(dbFile);
 
         UserStore store = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(4, getSchemaVersion(dbFile));
+        assertEquals(5, getSchemaVersion(dbFile));
         assertTrue(getUserColumns(dbFile).contains("frozen"));
         assertFalse(getUserColumns(dbFile).contains("rules_accepted"));
 
@@ -153,7 +153,7 @@ class UserStoreMigrationTest {
 
         UserStore reopened = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(4, getSchemaVersion(dbFile));
+        assertEquals(5, getSchemaVersion(dbFile));
 
         UserProfile savedProfile = reopened.findByUuid(PLAYER_ID);
         assertNotNull(savedProfile);
@@ -163,7 +163,7 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void newDatabaseUsesV4Schema(@TempDir Path dataFolder) {
+    void newDatabaseUsesV5Schema(@TempDir Path dataFolder) {
         UserStore store = new UserStore(createPlugin(dataFolder));
 
         UUID uuid = UUID.randomUUID();
@@ -175,5 +175,103 @@ class UserStoreMigrationTest {
         UserProfile savedProfile = store.findByUuid(uuid);
         assertNotNull(savedProfile);
         assertFalse(savedProfile.isFrozen());
+    }
+
+    @Test
+    void migratesLegacyHomesDatabase(@TempDir Path dataFolder) throws Exception {
+
+        Path databases = dataFolder.resolve("databases");
+        Path legacyFile = databases.resolve("homes.db");
+        databases.toFile().mkdirs();
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + legacyFile.toAbsolutePath());
+             Statement stmt = conn.createStatement())
+
+        {
+
+            stmt.execute("PRAGMA journal_mode=WAL");
+            stmt.execute("""
+                    CREATE TABLE homes (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        uuid TEXT NOT NULL,
+                        name TEXT NOT NULL,
+                        world TEXT NOT NULL,
+                        x REAL NOT NULL,
+                        y REAL NOT NULL,
+                        z REAL NOT NULL,
+                        yaw REAL NOT NULL,
+                        pitch REAL NOT NULL,
+                        created_at INTEGER DEFAULT (strftime('%s', 'now')),
+                        UNIQUE(uuid, name)
+                    )
+                    """);
+            stmt.execute("INSERT INTO homes (uuid, name, world, x, y, z, yaw, pitch, created_at) VALUES ('"
+                    + PLAYER_ID + "', 'base', 'world', 1.5, 64, -3.5, 90, 10, 1700000000)");
+            stmt.execute("INSERT INTO homes (uuid, name, world, x, y, z, yaw, pitch, created_at) VALUES ('"
+                    + PLAYER_ID + "', 'farm', 'world_nether', 10, 70, 20, 0, 0, 1700000001)");
+            stmt.execute("""
+                    CREATE TABLE home_notifications (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        target_uuid TEXT NOT NULL,
+                        type TEXT NOT NULL,
+                        home_name TEXT NOT NULL,
+                        extra TEXT,
+                        admin_name TEXT NOT NULL,
+                        created_at INTEGER NOT NULL
+                    )
+                    """);
+            stmt.execute("INSERT INTO home_notifications (target_uuid, type, home_name, extra, admin_name, created_at) VALUES ('"
+                    + PLAYER_ID + "', 'RENAMED', 'base', 'home', 'Admin', 1700000002)");
+            stmt.execute("CREATE TABLE home_notification_settings (uuid TEXT PRIMARY KEY, enabled INTEGER NOT NULL DEFAULT 1)");
+            stmt.execute("INSERT INTO home_notification_settings (uuid, enabled) VALUES ('" + PLAYER_ID + "', 0)");
+        }
+
+        new UserStore(createPlugin(dataFolder));
+
+        Path dbFile = databases.resolve("users.db");
+        assertEquals(5, getSchemaVersion(dbFile));
+        assertFalse(legacyFile.toFile().exists());
+        String[] backups = dataFolder.resolve("backups").toFile().list((dir,  name) -> name.startsWith("homes-") && name.endsWith(".db") );
+        assertNotNull(backups);
+        assertEquals(1,  backups.length);
+
+        //try try try try try try
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.toAbsolutePath());
+             Statement stmt = conn.createStatement())
+        {
+            try (ResultSet rs = stmt.executeQuery("SELECT * FROM homes WHERE name = 'base'")) {
+                assertTrue(rs.next());
+                assertEquals(PLAYER_ID.toString(), rs.getString("uuid"));
+                assertEquals("world", rs.getString("world"));
+                assertEquals(1.5,  rs.getDouble("x"));
+                assertEquals(-3.5, rs.getDouble("z") );
+                assertEquals(90f, rs.getFloat("yaw"));
+                assertEquals(1700000000L, rs.getLong("created_at"));
+            }
+
+            try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM homes")) {
+                assertEquals(2, rs.getInt(1));
+            }
+
+            try (ResultSet rs = stmt.executeQuery("SELECT type, extra FROM home_notifications")) {
+                assertTrue(rs.next());
+                assertEquals("RENAMED", rs.getString("type"));
+                assertEquals("home", rs.getString("extra"));
+            }
+
+            try (ResultSet rs = stmt.executeQuery("SELECT enabled FROM home_notification_settings")) {
+                assertTrue(rs.next());
+                assertEquals(0, rs.getInt("enabled"));
+            }
+        }
+
+        new UserStore(createPlugin(dataFolder));
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.toAbsolutePath());
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM home_notifications"))
+        {
+            assertEquals(1, rs.getInt(1));
+        }
     }
 }

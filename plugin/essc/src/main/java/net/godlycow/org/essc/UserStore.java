@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class UserStore {
     private final Database database;
     private final EssentialsC plugin;
 
-    private static final int SCHEMA_VERSION = 4;
+    private static final int SCHEMA_VERSION = 5;
 
 
     // create all tables for the user db
@@ -120,6 +121,44 @@ public class UserStore {
             );
             """;
 
+    private static final String CREATE_HOMES_TABLE = """
+            CREATE TABLE IF NOT EXISTS homes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                uuid TEXT NOT NULL,
+                name TEXT NOT NULL,
+                world TEXT NOT NULL,
+                x REAL NOT NULL,
+                y REAL NOT NULL,
+                z REAL NOT NULL,
+                yaw REAL NOT NULL,
+                pitch REAL NOT NULL,
+                created_at INTEGER DEFAULT (strftime('%s', 'now')),
+                UNIQUE(uuid, name)
+            );
+            """;
+
+    private static final String CREATE_HOMES_INDEX =
+            "CREATE INDEX IF NOT EXISTS idx_homes_uuid ON homes(uuid)";
+
+    private static final String CREATE_HOME_NOTIFICATIONS_TABLE = """
+            CREATE TABLE IF NOT EXISTS home_notifications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                target_uuid TEXT NOT NULL,
+                type TEXT NOT NULL,
+                home_name TEXT NOT NULL,
+                extra TEXT,
+                admin_name TEXT NOT NULL,
+                created_at INTEGER NOT NULL
+            );
+            """;
+
+    private static final String CREATE_HOME_NOTIFICATION_SETTINGS_TABLE = """
+            CREATE TABLE IF NOT EXISTS home_notification_settings (
+                uuid TEXT PRIMARY KEY,
+                enabled INTEGER NOT NULL DEFAULT 1
+            );
+            """;
+
     private static final String CREATE_SCHEMA_VERSION_TABLE = """
             CREATE TABLE IF NOT EXISTS _schema_version (
                 version INTEGER PRIMARY KEY
@@ -155,6 +194,10 @@ public class UserStore {
             stmt.execute(CREATE_PUNISHMENT_BANS_TABLE);
             stmt.execute(CREATE_PUNISHMENT_IP_BANS_TABLE);
             stmt.execute(CREATE_PUNISHMENT_MUTES_TABLE);
+            stmt.execute(CREATE_HOMES_TABLE);
+            stmt.execute(CREATE_HOMES_INDEX);
+            stmt.execute(CREATE_HOME_NOTIFICATIONS_TABLE);
+            stmt.execute(CREATE_HOME_NOTIFICATION_SETTINGS_TABLE);
         } catch (SQLException e) {
             throw new RuntimeException("Failed to initialize user database", e);
         }
@@ -197,6 +240,103 @@ public class UserStore {
         }
         if (fromVersion < 4) {
             dropRulesAcceptedColumn(conn);
+        }
+        if (fromVersion < 5) {
+            migrateLegacyHomes(conn);
+        }
+    }
+
+
+    private void migrateLegacyHomes(Connection conn)
+            throws SQLException
+    {
+
+        File legacyFile = new File(new File(plugin.getDataFolder(), "databases"),  "homes.db");
+        if (!legacyFile.exists()) {
+            return;
+        }
+
+        try (Connection legacy = DriverManager.getConnection("jdbc:sqlite:" + legacyFile.getAbsolutePath());
+             Statement stmt = legacy.createStatement())
+        {
+            stmt.execute("PRAGMA wal_checkpoint(TRUNCATE)");
+        }
+
+        try (PreparedStatement attach = conn.prepareStatement("ATTACH DATABASE ? AS legacy_homes")) {
+            attach.setString(1,  legacyFile.getAbsolutePath());
+            attach.execute();
+        }
+
+        int homeCount = 0, notificationCount = 0, settingCount = 0;
+        try {
+
+            Set<String> legacyTables = new HashSet<>();
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT name FROM legacy_homes.sqlite_master WHERE type = 'table'"))
+            {
+
+                while (rs.next())
+
+                {
+                    legacyTables.add(rs.getString("name"));
+                }
+            }
+
+            conn.setAutoCommit(false );
+            try (Statement stmt = conn.createStatement()) {
+                if (legacyTables.contains("homes")) {
+                    homeCount = stmt.executeUpdate("""
+                            INSERT OR IGNORE INTO main.homes (uuid, name, world, x, y, z, yaw, pitch, created_at)
+                            SELECT uuid, name, world, x, y, z, yaw, pitch, created_at FROM legacy_homes.homes
+                            """);
+                }
+                if (legacyTables.contains("home_notifications"))
+                {
+                    notificationCount = stmt.executeUpdate("""
+                            INSERT INTO main.home_notifications (target_uuid, type, home_name, extra, admin_name, created_at)
+                            SELECT target_uuid, type, home_name, extra, admin_name, created_at
+                            FROM legacy_homes.home_notifications ORDER BY id
+                            """);
+                }
+                if (legacyTables.contains("home_notification_settings")) {
+                    settingCount = stmt.executeUpdate("""
+                            INSERT OR IGNORE INTO main.home_notification_settings (uuid, enabled)
+                            SELECT uuid, enabled FROM legacy_homes.home_notification_settings
+                            """);
+                }
+
+                conn.commit();
+            } catch (SQLException e) { //undo the half copied homes
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit( true);
+            }
+        } finally {
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("DETACH DATABASE legacy_homes");
+            }
+        }
+
+        plugin.getLogger().info("[UserStore] Migrated " + homeCount + " homes, " + notificationCount
+                + " home notifications, " + settingCount + " notification settings from homes.db");
+
+        String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        File backupDir = new File(plugin.getDataFolder(),  "backups");
+        backupDir.mkdirs();
+
+        for (String suffix : new String[]{"", "-wal", "-shm"})
+        {
+            File file = new File(legacyFile.getPath() + suffix);
+            if (!file.exists()) continue;
+
+            try {
+                Files.move(file.toPath(), new File(backupDir, "homes-" + timestamp + ".db" + suffix).toPath(),
+                        StandardCopyOption.REPLACE_EXISTING );
+            } catch (IOException e) {
+                plugin.getLogger().warning("[UserStore] Could not move " + file.getName()
+                        + " to backups, it is no longer used and can be deleted: " + e.getMessage());
+            }
         }
     }
 
@@ -557,21 +697,23 @@ public class UserStore {
         }
     }
 
-    List<String> getIpHistory(UUID uuid) {
-        List<String> entries = new ArrayList<>();
-        try (Connection conn = database.openFreshConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT ip FROM user_ip_history WHERE uuid = ? ORDER BY recorded_at DESC")) {
-            stmt.setString(1, uuid.toString());
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    entries.add(rs.getString("ip"));
-                }
-            }
-        } catch (SQLException e) {
-            plugin.getLogger().severe("Error getting IP history for " + uuid + ": " + e.getMessage());
-        }
-        return entries;
-    }
+      // I dont see any use for this methode but ill keep it for the future
+
+//    List<String> getIpHistory(UUID uuid) {
+//        List<String> entries = new ArrayList<>();
+//        try (Connection conn = database.openFreshConnection();
+//             PreparedStatement stmt = conn.prepareStatement("SELECT ip FROM user_ip_history WHERE uuid = ? ORDER BY recorded_at DESC")) {
+//            stmt.setString(1, uuid.toString());
+//            try (ResultSet rs = stmt.executeQuery()) {
+//                while (rs.next()) {
+//                    entries.add(rs.getString("ip"));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            plugin.getLogger().severe("Error getting IP history for " + uuid + ": " + e.getMessage());
+//        }
+//        return entries;
+//    }
 
     boolean saveInventory(UUID uuid, String base64) {
         try (Connection conn = database.openFreshConnection();

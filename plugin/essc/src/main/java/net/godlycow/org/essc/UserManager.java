@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.storage.database.Database;
 import org.bukkit.Location;
 
 import java.util.Map;
@@ -85,6 +86,11 @@ public class UserManager {
 
     public CompletableFuture<UserProfile> findProfile(UUID uuid) {
         return async(() -> store.findByUuid(uuid));
+    }
+
+    public Database getDatabase()
+    {
+        return store.getDatabase();
     }
 
     public void shutdown() {

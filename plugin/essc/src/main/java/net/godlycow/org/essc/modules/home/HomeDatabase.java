@@ -5,7 +5,6 @@ import net.godlycow.org.essc.storage.database.Database;
 
 import org.bukkit.Location;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,46 +16,11 @@ public class HomeDatabase {
     private final EssentialsC plugin;
     private final Database database;
 
-    public HomeDatabase(EssentialsC plugin) {
+    public HomeDatabase(EssentialsC plugin,  Database database)
+    {
+
         this.plugin = plugin;
-        this.database = new Database(plugin, "homes.db");
-        try {
-            database.connect();
-            createTables();
-        } catch (SQLException e) {
-            plugin.getLogger().severe("Failed to initialize home database: " + e.getMessage());
-        }
-        plugin.debug("HomeRepository initialized with homes.db");
-    }
-
-    private void createTables() throws SQLException {
-        try (Connection conn = database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("""
-                CREATE TABLE IF NOT EXISTS homes (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    uuid TEXT NOT NULL,
-                    name TEXT NOT NULL,
-                    world TEXT NOT NULL,
-                    x REAL NOT NULL,
-                    y REAL NOT NULL,
-                    z REAL NOT NULL,
-                    yaw REAL NOT NULL,
-                    pitch REAL NOT NULL,
-                    created_at INTEGER DEFAULT (strftime('%s', 'now')),
-                    UNIQUE(uuid, name)
-                )
-             """)) {
-            stmt.execute();
-        }
-
-        try (Connection conn = database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(
-                     "CREATE INDEX IF NOT EXISTS idx_homes_uuid ON homes(uuid)"
-             )) {
-            stmt.execute();
-        }
-
-        plugin.debug("Home database tables initialized.");
+        this.database = database;
     }
 
     public CompletableFuture<Integer> getTotalHomeCount() {
@@ -205,7 +169,6 @@ public class HomeDatabase {
     }
 
     public void shutdown() {
-        database.disconnect();
         plugin.debug("HomeRepository shutdown complete.");
     }
 }

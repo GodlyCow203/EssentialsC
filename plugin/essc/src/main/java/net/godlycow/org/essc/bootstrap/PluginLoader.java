@@ -137,6 +137,7 @@ public final class PluginLoader {
         } else {
             unloadTPA();
         }
+        plugin.setUserManager(new UserManager(plugin));
         if (plugin.getConfigManager().isHomesEnabled()) {
             plugin.setHomeManager(new HomeManager(plugin));
             plugin.setHomeNotificationManager(new HomeNotificationManager(plugin));
@@ -170,7 +171,6 @@ public final class PluginLoader {
         } else {
             plugin.getLogger().info("Chat system is disabled in config.");
         }
-        plugin.setUserManager(new UserManager(plugin));
         if (plugin.getConfigManager().isPunishmentsEnabled()) {
             plugin.setPunishmentManager(new PunishmentManager(plugin));
         } else {

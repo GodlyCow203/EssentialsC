@@ -22,7 +22,7 @@ public class HomeManager {
 
     public HomeManager(EssentialsC plugin) {
         this.plugin = plugin;
-        this.repository = new HomeDatabase(plugin);
+        this.repository = new HomeDatabase(plugin,  plugin.getUserManager().getDatabase() );
         this.teleportHandler = new TeleportHandler(plugin, repository);
         repository.getTotalHomeCount().thenAccept(count -> plugin.debug("HomeManager initialized (" + count + " homes)"));
     }
