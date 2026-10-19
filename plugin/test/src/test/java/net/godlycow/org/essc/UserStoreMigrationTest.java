@@ -125,13 +125,13 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void migratesV2DatabaseToV5(@TempDir Path dataFolder) throws Exception {
+    void migratesV2DatabaseToV6(@TempDir Path dataFolder) throws Exception {
         Path dbFile = dataFolder.resolve("databases").resolve("users.db");
         createV2Database(dbFile);
 
         UserStore store = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(5, getSchemaVersion(dbFile));
+        assertEquals(6, getSchemaVersion(dbFile));
         assertTrue(getUserColumns(dbFile).contains("frozen"));
         assertFalse(getUserColumns(dbFile).contains("rules_accepted"));
 
@@ -153,7 +153,7 @@ class UserStoreMigrationTest {
 
         UserStore reopened = new UserStore(createPlugin(dataFolder));
 
-        assertEquals(5, getSchemaVersion(dbFile));
+        assertEquals(6, getSchemaVersion(dbFile));
 
         UserProfile savedProfile = reopened.findByUuid(PLAYER_ID);
         assertNotNull(savedProfile);
@@ -163,7 +163,7 @@ class UserStoreMigrationTest {
     }
 
     @Test
-    void newDatabaseUsesV5Schema(@TempDir Path dataFolder) {
+    void newDatabaseUsesV6Schema(@TempDir Path dataFolder) {
         UserStore store = new UserStore(createPlugin(dataFolder));
 
         UUID uuid = UUID.randomUUID();
@@ -229,7 +229,7 @@ class UserStoreMigrationTest {
         new UserStore(createPlugin(dataFolder));
 
         Path dbFile = databases.resolve("users.db");
-        assertEquals(5, getSchemaVersion(dbFile));
+        assertEquals(6, getSchemaVersion(dbFile));
         assertFalse(legacyFile.toFile().exists());
         String[] backups = dataFolder.resolve("backups").toFile().list((dir,  name) -> name.startsWith("homes-") && name.endsWith(".db") );
         assertNotNull(backups);
