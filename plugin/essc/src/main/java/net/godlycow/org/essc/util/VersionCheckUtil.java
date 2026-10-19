@@ -38,7 +38,7 @@ public class VersionCheckUtil implements Listener {
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);
                 conn.setRequestProperty("Accept", "application/json");
-                conn.setRequestProperty("User-Agent", "EssentialsC/" + plugin.getDescription().getVersion());
+                conn.setRequestProperty("User-Agent", "GodlyCow203/EssentialsC/" + plugin.getDescription().getVersion() + " (godlycowcow@gmail.com)");
 
                 int responseCode = conn.getResponseCode();
                 if (responseCode != 200) {
