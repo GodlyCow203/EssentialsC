@@ -22,7 +22,7 @@ public class UserStore {
     private final Database database;
     private final EssentialsC plugin;
 
-    private static final int SCHEMA_VERSION = 5;
+    private static final int SCHEMA_VERSION = 6;
 
 
     // create all tables for the user db
@@ -84,7 +84,8 @@ public class UserStore {
             CREATE TABLE IF NOT EXISTS user_inventories (
                 uuid TEXT PRIMARY KEY,
                 inventory_data TEXT NOT NULL,
-                saved_at INTEGER DEFAULT (strftime('%s','now'))
+                saved_at INTEGER DEFAULT (strftime('%s','now')),
+                modified BOOLEAN DEFAULT FALSE
             );
             """;
 
@@ -243,6 +244,30 @@ public class UserStore {
         }
         if (fromVersion < 5) {
             migrateLegacyHomes(conn);
+        }
+        if (fromVersion < 6) {
+            addInventoryModifiedColumn(conn);
+        }
+    }
+
+    private void addInventoryModifiedColumn(Connection conn) throws SQLException {
+        boolean hasModified = false;
+
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("PRAGMA table_info(user_inventories)")) {
+            while (rs.next()) {
+                if ("modified".equals(rs.getString("name"))) {
+                    hasModified = true;
+                    break;
+                }
+            }
+        }
+        if (!hasModified) {
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("ALTER TABLE user_inventories ADD COLUMN modified BOOLEAN DEFAULT FALSE");
+            }
+
+            plugin.getLogger().info("[UserStore] Added modified column to user_inventories table");
         }
     }
 
@@ -715,13 +740,14 @@ public class UserStore {
 //        return entries;
 //    }
 
-    boolean saveInventory(UUID uuid, String base64) {
+    boolean saveInventory(UUID uuid, String base64, boolean modified) {
         try (Connection conn = database.openFreshConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO user_inventories (uuid, inventory_data, saved_at) VALUES (?, ?, strftime('%s','now')) " +
-                     "ON CONFLICT(uuid) DO UPDATE SET inventory_data = excluded.inventory_data, saved_at = excluded.saved_at")) {
+                     "INSERT INTO user_inventories (uuid, inventory_data, saved_at, modified) VALUES (?, ?, strftime('%s','now'), ?) " +
+                     "ON CONFLICT(uuid) DO UPDATE SET inventory_data = excluded.inventory_data, saved_at = excluded.saved_at, modified = excluded.modified")) {
             stmt.setString(1, uuid.toString());
             stmt.setString(2, base64);
+            stmt.setBoolean(3, modified);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             plugin.getLogger().severe("Error saving inventory for " + uuid + ": " + e.getMessage());
@@ -738,6 +764,21 @@ public class UserStore {
             }
         } catch (SQLException e) {
             plugin.getLogger().severe("Error loading inventory for " + uuid + ": " + e.getMessage());
+            return null;
+        }
+    }
+
+    String loadModifiedInventory(UUID uuid) {
+        try (Connection conn = database.openFreshConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT inventory_data FROM user_inventories WHERE uuid = ? AND modified = 1")) {
+            stmt.setString(1, uuid.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getString("inventory_data") : null;
+            }
+
+        } catch (SQLException e) {
+            plugin.getLogger().severe("error loading modified inventory for " + uuid + ": " + e.getMessage());
             return null;
         }
     }

@@ -367,12 +367,16 @@ public class UserManager {
         return async(() -> store.removeIgnoredPlayer(uuid, ignoredUuid));
     }
 
-    public CompletableFuture<Boolean> saveInventory(UUID uuid, String base64) {
-        return async(() -> store.saveInventory(uuid, base64));
+    public CompletableFuture<Boolean> saveInventory(UUID uuid, String base64, boolean modified) {
+        return async(() -> store.saveInventory(uuid, base64, modified));
     }
 
     public CompletableFuture<String> loadInventory(UUID uuid) {
         return async(() -> store.loadInventory(uuid));
+    }
+
+    public CompletableFuture<String> loadModifiedInventory(UUID uuid) {
+        return async(() -> store.loadModifiedInventory(uuid));
     }
 
     public CompletableFuture<Boolean> deleteInventory(UUID uuid) {

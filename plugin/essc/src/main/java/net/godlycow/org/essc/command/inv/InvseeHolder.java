@@ -3,6 +3,7 @@ package net.godlycow.org.essc.command.inv;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class InvseeHolder implements InventoryHolder {
     private final boolean offline;
     private Player liveTarget;
     private Inventory inventory;
+    private ItemStack[] originalSlots;
 
     public InvseeHolder(UUID targetUuid, String targetName, boolean offline) {
         this.targetUuid = targetUuid;
@@ -47,5 +49,13 @@ public class InvseeHolder implements InventoryHolder {
 
     public void setLiveTarget(Player liveTarget) {
         this.liveTarget = liveTarget;
+    }
+
+    public ItemStack[] getOriginalSlots() {
+        return originalSlots;
+    }
+
+    public void setOriginalSlots(ItemStack[] originalSlots) {
+        this.originalSlots = originalSlots;
     }
 }

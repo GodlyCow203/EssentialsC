@@ -11,7 +11,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class JoinLeaveListener implements Listener {
 
@@ -33,18 +32,8 @@ public class JoinLeaveListener implements Listener {
 
             if (invseeListener != null && invseeListener.hasOpenOfflineSession(joiningPlayer.getUniqueId())) {
                 invseeListener.closeSessionsForPlayer(joiningPlayer.getUniqueId(), joiningPlayer);
-            } else {
-                plugin.getUserManager().loadInventory(joiningPlayer.getUniqueId()).thenAccept(base64 -> {
-                    if (base64 == null) return;
-                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
-                        if (!joiningPlayer.isOnline()) return;
-                        ItemStack[] slots = InventorySerializer.deserialize(base64);
-                        InventorySerializer.applyToInventory(slots, joiningPlayer.getInventory());
-                        joiningPlayer.updateInventory();
-                        plugin.debug("Restored modified offline inventory for " + joiningPlayer.getName());
-                    });
-                    plugin.getUserManager().deleteInventory(joiningPlayer.getUniqueId());
-                });
+            } else if (invseeListener != null) {
+                invseeListener.restoreModifiedInventory(joiningPlayer);
             }
         }
 
@@ -88,7 +77,7 @@ public class JoinLeaveListener implements Listener {
 
         if (plugin.getUserManager() != null) {
             String base64 = InventorySerializer.serialize(quittingPlayer.getInventory());
-            plugin.getUserManager().saveInventory(quittingPlayer.getUniqueId(), base64);
+            plugin.getUserManager().saveInventory(quittingPlayer.getUniqueId(), base64, false);
         }
 
         if (!plugin.getConfigManager().isJoinLeaveEnabled()) {

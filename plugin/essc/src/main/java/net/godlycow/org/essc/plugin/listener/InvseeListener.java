@@ -39,6 +39,18 @@ public class InvseeListener implements Listener {
     public void registerOfflineSession(UUID targetUuid, Inventory gui) {
         openOfflineSessions.add(targetUuid);
         track(gui);
+
+        InvseeHolder holder = resolveHolder(gui);
+        if (holder != null) {
+            ItemStack[] original = extractSlotsFromGui(gui);
+
+            for (int i = 0; i <  original.length; i++ ) {
+                if (original[i] != null)
+                    original[i] = original[i].clone();
+            }
+
+            holder.setOriginalSlots(original);
+        }
     }
 
     public void registerOnlineSession(UUID targetUuid, Inventory gui) {
@@ -90,6 +102,11 @@ public class InvseeListener implements Listener {
             openOfflineSessions.remove(targetUuid);
             untrack(open);
             viewer.closeInventory();
+
+            if (!isModified(holder, slots)) {
+                restoreModifiedInventory(rejoiningPlayer);
+                continue;
+            }
 
             plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
                 if (!rejoiningPlayer.isOnline()) return;
@@ -255,13 +272,50 @@ public class InvseeListener implements Listener {
         return item;
     }
 
+    public void restoreModifiedInventory(Player player) {
+        if (plugin.getUserManager() == null) return;
+
+        plugin.getUserManager().loadModifiedInventory(player.getUniqueId()).thenAccept(base64 -> {
+            if (base64 == null) return;
+            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
+                if (!player.isOnline()) return;
+                ItemStack[] slots = InventorySerializer.deserialize(base64);
+                InventorySerializer.applyToInventory(slots, player.getInventory());
+                player.updateInventory();
+                plugin.debug("Restored modified offline inventory for " + player.getName());
+            });
+            plugin.getUserManager().deleteInventory(player.getUniqueId());
+        });
+    }
+
+    private boolean isModified(InvseeHolder holder, ItemStack[] slots) {
+        ItemStack[] original = holder.getOriginalSlots();
+        if (original == null) return true;
+
+        for (int i = 0; i < slots.length; i++) {
+            ItemStack before = i < original.length ? original[i] : null;
+            ItemStack after = slots[i];
+            boolean beforeEmpty = before == null || before.getType().isAir();
+            boolean afterEmpty = after == null || after.getType().isAir();
+
+            if (beforeEmpty && afterEmpty) continue;
+            if (beforeEmpty != afterEmpty || !before.equals(after)) return true;
+        }
+        return false;
+    }
+
     private void persistOfflineGui(InvseeHolder holder) {
         if (plugin.getUserManager() == null) return;
 
         ItemStack[] slots = extractSlotsFromGui(holder.getInventory());
+        if (!isModified(holder, slots)) {
+            plugin.debug("Offline inventory of " + holder.getTargetName() + " was not changed, not saving");
+            return;
+        }
+
         String base64 = InventorySerializer.serializeSlots(slots);
 
-        plugin.getUserManager().saveInventory(holder.getTargetUuid(), base64);
+        plugin.getUserManager().saveInventory(holder.getTargetUuid(), base64, true);
         plugin.debug("Persisted modified offline inventory for " + holder.getTargetName());
     }
 }
