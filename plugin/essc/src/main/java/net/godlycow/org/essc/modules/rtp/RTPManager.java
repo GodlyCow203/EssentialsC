@@ -269,6 +269,10 @@ public class RTPManager {
     }
 
     public void startRTP(Player player, World world) {
+        startRTP(player, world, () -> {});
+    }
+
+    public void startRTP(Player player, World world, Runnable onSuccess) {
         if (!player.hasPermission("essentialsc.rtp")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "rtp.error.no_permission"));
             Bukkit.getPluginManager().callEvent(new RtpFailEvent(player, world, RtpFailEvent.FailureReason.NO_PERMISSION));
@@ -321,13 +325,13 @@ public class RTPManager {
         long actualWarmup = hasBypassPermission(player, "warmup") ? 0L : warmup;
 
         if (actualWarmup > 0) {
-            startWarmup(player, world, actualWarmup);
+            startWarmup(player, world, actualWarmup, onSuccess);
         } else {
-            executeRTP(player, world);
+            executeRTP(player, world, onSuccess);
         }
     }
 
-    private void startWarmup(Player player, World world, long actualWarmup) {
+    private void startWarmup(Player player, World world, long actualWarmup, Runnable onSuccess) {
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("time", String.valueOf(actualWarmup));
         player.sendMessage(plugin.getLanguageManager().get(player, "rtp.warmup.start", placeholders));
@@ -369,7 +373,7 @@ public class RTPManager {
             if (seconds.decrementAndGet() <= 0) {
                 ScheduledTask t = pendingTeleports.remove(player.getUniqueId());
                 if (t != null) t.cancel();
-                executeRTP(player, world);
+                executeRTP(player, world, onSuccess);
             } else {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 0.5f, 1.0f);
                 Map<String, String> ph = new HashMap<>();
@@ -393,7 +397,7 @@ public class RTPManager {
         return from.getBlockX() != to.getBlockX() || from.getBlockY() != to.getBlockY() || from.getBlockZ() != to.getBlockZ();
     }
 
-    private void executeRTP(Player player, World world) {
+    private void executeRTP(Player player, World world, Runnable onSuccess) {
         player.sendMessage(plugin.getLanguageManager().get(player, "rtp.searching"));
 
         RtpSearchStartEvent searchStartEvent = new RtpSearchStartEvent(player, world);
@@ -449,6 +453,7 @@ public class RTPManager {
                             return;
                         }
 
+                        onSuccess.run();
                         cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
                         rtpInProgress.remove(player.getUniqueId());
 

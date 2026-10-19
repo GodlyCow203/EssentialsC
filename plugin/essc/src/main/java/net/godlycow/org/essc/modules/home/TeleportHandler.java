@@ -89,6 +89,10 @@ public class TeleportHandler implements Listener {
     }
 
     public void startTeleport(Player player, Home home) {
+        startTeleport(player, home, () -> {});
+    }
+
+    public void startTeleport(Player player, Home home, Runnable onSuccess) {
         cancelTeleport(player);
 
         List<String> blocked = plugin.getConfigManager().getHomeBlockedWorlds();
@@ -135,11 +139,11 @@ public class TeleportHandler implements Listener {
             plugin.debug("Starting warmup for " + player.getName() + " to home '" + home.getName() + "' (" + warmup + "s)");
 
             ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 ->
-                    completeTeleport(player, home), null, warmup * 20L);
+                    completeTeleport(player, home, onSuccess), null, warmup * 20L);
 
             pendingTeleports.put(player.getUniqueId(), task);
         } else {
-            completeTeleport(player, home);
+            completeTeleport(player, home, onSuccess);
         }
     }
 
@@ -150,7 +154,7 @@ public class TeleportHandler implements Listener {
                 || entity instanceof Strider;
     }
 
-    private void completeTeleport(Player player, Home home) {
+    private void completeTeleport(Player player, Home home, Runnable onSuccess) {
         pendingTeleports.remove(player.getUniqueId());
         pendingDestination.remove(player.getUniqueId());
 
@@ -169,6 +173,7 @@ public class TeleportHandler implements Listener {
 
         plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
             if (!success) return;
+            onSuccess.run();
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
             lastCooldownExpireNotified.remove(player.getUniqueId());
 

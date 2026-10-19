@@ -120,6 +120,10 @@ public class SpawnManager implements Listener {
     }
 
     public void teleportToSpawn(Player player, boolean bypassWarmup) {
+        teleportToSpawn(player, bypassWarmup, () -> {});
+    }
+
+    public void teleportToSpawn(Player player, boolean bypassWarmup,  Runnable onSuccess) {
         if (!isSpawnSet()) {
             player.sendMessage(plugin.getLanguageManager().get(player, "spawn.not_set"));
             plugin.debug("Teleport failed: spawn not set");
@@ -146,20 +150,21 @@ public class SpawnManager implements Listener {
             plugin.debug("Starting spawn warmup for " + player.getName() + " (" + warmup + "s)");
 
             ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
-                completeTeleport(player, spawn);
+                completeTeleport(player, spawn, onSuccess);
             }, null, warmup * 20L);
 
             pendingTeleports.put(player.getUniqueId(), task);
         } else {
-            completeTeleport(player, spawn);
+            completeTeleport(player, spawn, onSuccess);
         }
     }
 
-    private void completeTeleport(Player player, Location location) {
+    private void completeTeleport(Player player, Location location, Runnable onSuccess) {
         pendingTeleports.remove(player.getUniqueId());
 
         plugin.teleportHelper().teleportAsync(player, location).thenAccept(success -> {
             if (!success) return;
+            onSuccess.run();
             teleportCooldowns.put(player.getUniqueId(), System.currentTimeMillis());
 
             if (plugin.getUserManager() != null) {

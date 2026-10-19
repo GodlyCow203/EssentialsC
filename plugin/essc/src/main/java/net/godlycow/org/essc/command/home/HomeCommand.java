@@ -23,6 +23,13 @@ public class HomeCommand extends Command {
         super(plugin, "home", "essentialsc.home", true, 0, "command.usage.home");
     }
 
+
+    @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
@@ -33,6 +40,7 @@ public class HomeCommand extends Command {
                 teleportToHome(player, player.getUniqueId(), defaultHome.toLowerCase(), null);
                 return true;
             }
+            chargeCost(player);
             showHomeList(player);
             return true;
         }
@@ -61,6 +69,7 @@ public class HomeCommand extends Command {
             }
             plugin.teleportHelper().teleportAsync(player, bedLoc).thenAccept(success -> {
                 if (success) {
+                    chargeCost(player);
                     player.getScheduler().run(plugin, task ->
                             player.sendMessage(lang.get(player, "home.bed.teleported")), null);
                 }
@@ -89,12 +98,14 @@ public class HomeCommand extends Command {
                     Location loc = home.toLocation(plugin.getServer());
                     if (loc != null) {
                         plugin.teleportHelper().teleportAsync(player, loc).thenAccept(success -> {
-                            if (success) player.sendMessage(lang.get(player, "home.admin.teleported_to_other",
+                            if (!success) return;
+                            chargeCost(player);
+                            player.sendMessage(lang.get(player, "home.admin.teleported_to_other",
                                     Map.of("player", targetName, "name", name)));
                         });
                     }
                 } else {
-                    plugin.getHomeManager().startTeleport(player, home);
+                    plugin.getHomeManager().startTeleport(player, home, () -> chargeCost(player));
                 }
             }, null);
         });

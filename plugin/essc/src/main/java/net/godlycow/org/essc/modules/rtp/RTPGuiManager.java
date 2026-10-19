@@ -31,6 +31,7 @@ public class RTPGuiManager implements Listener {
     private final Map<UUID, Inventory> openInventories = new HashMap<>();
     private final Map<UUID, ScheduledTask> updateTasks = new HashMap<>();
     private final Map<UUID, Integer> playerPages = new HashMap<>();
+    private final Map<UUID, Runnable> successCallbacks = new HashMap<>();
     private static final int[] WORLD_SLOTS = {11, 13, 15};
 
     private static final int SLOT_PREV = 18;
@@ -47,6 +48,10 @@ public class RTPGuiManager implements Listener {
     }
 
     public void openGUI(Player player) {
+        openGUI(player, () -> {});
+    }
+
+    public void openGUI(Player player, Runnable onSuccess) {
 
         if (!player.hasPermission("essentialsc.rtp")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "rtp.error.no_permission"));
@@ -54,6 +59,7 @@ public class RTPGuiManager implements Listener {
         }
 
         playerPages.put(player.getUniqueId(), 0);
+        successCallbacks.put(player.getUniqueId(), onSuccess);
 
         Component title = plugin.getLanguageManager().get(player, "rtp.gui.title");
         Inventory inv = Bukkit.createInventory(null, 27, title);
@@ -280,8 +286,9 @@ public class RTPGuiManager implements Listener {
         }
 
         player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+        Runnable onSuccess = successCallbacks.getOrDefault(player.getUniqueId(), () -> {}) ;
         player.closeInventory();
-        rtpManager.startRTP(player, world);
+        rtpManager.startRTP(player, world, onSuccess);
     }
 
     @EventHandler
@@ -294,6 +301,7 @@ public class RTPGuiManager implements Listener {
 
         openInventories.remove(uuid);
         playerPages.remove(uuid);
+        successCallbacks.remove(uuid);
 
         ScheduledTask task = updateTasks.remove(uuid);
         if (task != null) task.cancel();
@@ -321,6 +329,7 @@ public class RTPGuiManager implements Listener {
         updateTasks.clear();
         openInventories.clear();
         playerPages.clear();
+        successCallbacks.clear();
     }
 
     private int worldSlotIndex(int slot) {

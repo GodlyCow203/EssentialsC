@@ -32,6 +32,11 @@ public class WarpCommand extends Command {
     }
 
     @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+    @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
@@ -44,6 +49,7 @@ public class WarpCommand extends Command {
         WarpManager warpManager = plugin.getWarpManager();
 
         if (args.length == 0) {
+            chargeCost(player);
             player.performCommand("warps");
             return true;
         }
@@ -219,6 +225,7 @@ public class WarpCommand extends Command {
         Location dest = warp.getLocation();
         plugin.teleportHelper().teleportAsync(player, dest).thenAccept(success -> {
             if (!success) return;
+            chargeCost(player);
 
             Bukkit.getPluginManager().callEvent(new WarpPostTeleportEvent(player, new WarpImpl(warp), dest));
 

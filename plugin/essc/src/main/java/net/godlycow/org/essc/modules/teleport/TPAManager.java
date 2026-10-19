@@ -125,7 +125,7 @@ public class TPAManager implements Listener {
         List<TPARequest> currentOutgoing = outgoingRequests.getOrDefault(requester.getUniqueId(), new ArrayList<>());
         if (currentOutgoing.size() >= maxOutgoing) {
             requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.max_outgoing"));
-            return true;
+            return false;
         }
 
         List<TPARequest> targetIncoming = incomingRequests.getOrDefault(target.getUniqueId(), new ArrayList<>());

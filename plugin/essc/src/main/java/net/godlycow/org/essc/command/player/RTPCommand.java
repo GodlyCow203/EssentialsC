@@ -20,6 +20,11 @@ public class RTPCommand extends Command {
     }
 
     @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+    @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
@@ -36,7 +41,7 @@ public class RTPCommand extends Command {
         }
 
         if (args.length == 0) {
-            plugin.getRtpGuiManager().openGUI(player);
+            plugin.getRtpGuiManager().openGUI(player, () -> chargeCost(player));
             return true;
         }
 
@@ -47,7 +52,7 @@ public class RTPCommand extends Command {
             return true;
         }
 
-        manager.startRTP(player, world);
+        manager.startRTP(player, world, () -> chargeCost(player));
         return true;
     }
 

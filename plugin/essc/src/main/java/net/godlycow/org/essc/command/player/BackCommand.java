@@ -15,13 +15,18 @@ public class BackCommand extends Command {
     }
 
     @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+    @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
         boolean confirm = args.length > 0 && args[0].equalsIgnoreCase("confirm");
 
         plugin.debug("Back command executed by " + player.getName() + (confirm ? " (confirm)" : ""));
-        plugin.getBackManager().teleportBack(player, confirm);
+        plugin.getBackManager().teleportBack(player, confirm, () -> chargeCost(player));
 
         return true;
     }

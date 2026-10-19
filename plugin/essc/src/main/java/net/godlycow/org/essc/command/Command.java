@@ -90,7 +90,11 @@ public abstract class Command implements CommandExecutor, TabCompleter {
                 boolean hasBypass = bypassPermission != null && player.hasPermission(bypassPermission);
 
                 if (!hasBypass) {
-                    chargeAndRun(player, cost, label, args);
+                    if (chargesOnSuccess()) {
+                        checkFundsAndRun(player, cost, label, args);
+                    } else {
+                        chargeAndRun(player, cost, label, args);
+                    }
                     return true;
                 }
             }
@@ -189,6 +193,61 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             });
         });
 
+    }
+
+    private void checkFundsAndRun(Player player,  double cost, String label, String[] args) {
+        EconomyManager economy = plugin.getEconomyManager();
+        BigDecimal amount = BigDecimal.valueOf(cost).setScale(2, RoundingMode.HALF_UP);
+
+        String currency = amount.compareTo(BigDecimal.ONE) == 0
+                ? plugin.getConfigManager().getCurrencySingular()
+                : plugin.getConfigManager().getCurrencyPlural();
+
+        economy.has(player.getUniqueId(), amount).thenAccept(hasFunds -> {
+            if (!hasFunds) {
+                player.sendMessage(lang.get(player, "error.insufficient_funds",
+                        Map.of("amount", economy.formatPlain(amount), "currency", currency)));
+                plugin.debug("Denied: " + player.getName() + " cannot afford /" + name);
+                return;
+            }
+
+
+            player.getScheduler().run(plugin, task -> {
+                startCooldown(player);
+                runExecute(player, label, args);
+            }, null);
+        });
+    }
+
+    protected boolean chargesOnSuccess() {
+        return false;
+    }
+
+    protected void chargeCost(Player player) {
+        double cost = plugin.getCommandsConfig().getCost(name);
+        EconomyManager economy = plugin.getEconomyManager();
+        if (cost <= 0 || !plugin.getConfigManager().isEconomyEnabled() || economy == null)
+            return;
+
+        String bypassPermission = plugin.getCommandsConfig().getCostBypassPermission(name);
+        if (bypassPermission != null && player.hasPermission(bypassPermission))
+            return;
+
+        BigDecimal amount = BigDecimal.valueOf(cost).setScale(2, RoundingMode.HALF_UP);
+        String currency = amount.compareTo(BigDecimal.ONE) == 0
+                ? plugin.getConfigManager().getCurrencySingular()
+                : plugin.getConfigManager().getCurrencyPlural();
+
+        economy.withdraw(player.getUniqueId(),  amount).thenAccept(withdrawn -> {
+            if (!withdrawn) {
+                plugin.debug(player.getName() + " failed to pay for /" + name);
+                return;
+            }
+
+            player.sendMessage(lang.get(player, "command.cost_charged",
+                    Map.of("amount", economy.formatPlain(amount), "currency", currency, "command", name)));
+            plugin.debug(player.getName() + " paid " + economy.format(amount) + " for /" + name);
+        });
     }
 
     private boolean runExecute(CommandSender sender, String label, String[] args) {

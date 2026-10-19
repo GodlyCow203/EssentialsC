@@ -81,7 +81,7 @@ public class BackManager implements Listener {
         return false;
     }
 
-    public void teleportBack(Player player, boolean confirm) {
+    public void teleportBack(Player player, boolean confirm, Runnable onSuccess) {
         if (warmupTasks.containsKey(player.getUniqueId())) {
             player.sendMessage(plugin.getLanguageManager().get(player, "back.already_pending"));
             return;
@@ -99,7 +99,7 @@ public class BackManager implements Listener {
                 return;
             }
 
-            completeUnsafeTeleport(player, pending, false);
+            completeUnsafeTeleport(player, pending, false, onSuccess);
             return;
         }
 
@@ -121,7 +121,7 @@ public class BackManager implements Listener {
         }
 
         if (warmup <= 0 || player.hasPermission("essentialsc.back.admin")) {
-            completeTeleport(player, target, false);
+            completeTeleport(player, target, false, onSuccess);
             return;
         }
 
@@ -129,13 +129,13 @@ public class BackManager implements Listener {
                 Map.of("seconds", String.valueOf(warmup))));
 
         ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
-            completeTeleport(player, target, false);
+            completeTeleport(player, target, false, onSuccess);
         }, null, warmup * 20L);
 
         warmupTasks.put(player.getUniqueId(), task);
     }
 
-    public void teleportDeathBack(Player player, boolean confirm) {
+    public void teleportDeathBack(Player player, boolean confirm, Runnable onSuccess) {
         if (deathWarmupTasks.containsKey(player.getUniqueId())) {
             player.sendMessage(plugin.getLanguageManager().get(player, "dback.already_pending"));
             return;
@@ -153,7 +153,7 @@ public class BackManager implements Listener {
                 return;
             }
 
-            completeUnsafeTeleport(player, pending, true);
+            completeUnsafeTeleport(player, pending, true, onSuccess);
             return;
         }
 
@@ -182,7 +182,7 @@ public class BackManager implements Listener {
         }
 
         if (warmup <= 0 || player.hasPermission("essentialsc.dback.admin")) {
-            completeTeleport(player, target, true);
+            completeTeleport(player, target, true, onSuccess);
             return;
         }
 
@@ -191,13 +191,13 @@ public class BackManager implements Listener {
 
         Location finalTarget = target;
         ScheduledTask task = player.getScheduler().runDelayed(plugin, task1 -> {
-            completeTeleport(player, finalTarget, true);
+            completeTeleport(player, finalTarget, true, onSuccess);
         }, null, warmup * 20L);
 
         deathWarmupTasks.put(player.getUniqueId(), task);
     }
 
-    private void completeTeleport(Player player, Location location, boolean isDeath) {
+    private void completeTeleport(Player player, Location location, boolean isDeath, Runnable onSuccess) {
         if (isDeath) {
             deathWarmupTasks.remove(player.getUniqueId());
         } else {
@@ -209,11 +209,11 @@ public class BackManager implements Listener {
 
         plugin.getServer().getRegionScheduler().run(plugin, location, scheduledTask -> {
             Location safeLocation = SafeLocationFinder.findSafe(location);
-            resolveSafeTeleport(player, location, safeLocation, isDeath);
+            resolveSafeTeleport(player, location, safeLocation, isDeath, onSuccess);
         });
     }
 
-    private void resolveSafeTeleport(Player player, Location location, Location safeLocation, boolean isDeath) {
+    private void resolveSafeTeleport(Player player, Location location, Location safeLocation, boolean isDeath, Runnable onSuccess) {
         if (!player.isOnline())
             return;
 
@@ -236,6 +236,8 @@ public class BackManager implements Listener {
         plugin.teleportHelper().teleportAsync(player, safeLocation, false).thenAccept(success -> {
             if (!success)
                 return;
+
+            onSuccess.run();
 
             if (isDeath) {
                 if (cooldown > 0) {
@@ -263,12 +265,14 @@ public class BackManager implements Listener {
         });
     }
 
-    private void completeUnsafeTeleport(Player player, Location location, boolean isDeath) {
+    private void completeUnsafeTeleport(Player player, Location location, boolean isDeath, Runnable onSuccess) {
         Location preBackLocation = player.getLocation().clone();
 
         plugin.teleportHelper().teleportAsync(player, location, false).thenAccept(success -> {
             if (!success)
                 return;
+
+            onSuccess.run();
 
             if (isDeath) {
                 if (cooldown > 0) {

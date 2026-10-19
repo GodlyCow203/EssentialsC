@@ -155,6 +155,10 @@ public class HomeManager {
         teleportHandler.startTeleport(player, home);
     }
 
+    public void startTeleport(Player player, Home home, Runnable onSuccess) {
+        teleportHandler.startTeleport(player, home, onSuccess);
+    }
+
     public Database getDatabase() {
         return repository.getDatabase();
     }

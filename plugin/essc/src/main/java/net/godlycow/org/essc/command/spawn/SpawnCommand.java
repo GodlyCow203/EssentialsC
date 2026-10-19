@@ -16,6 +16,11 @@ public class SpawnCommand extends Command {
     }
 
     @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+    @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
@@ -27,14 +32,14 @@ public class SpawnCommand extends Command {
             }
 
             plugin.debug("Admin " + player.getName() + " teleporting " + target.getName() + " to spawn");
-            plugin.getSpawnManager().teleportToSpawn(target, true);
+            plugin.getSpawnManager().teleportToSpawn(target, true, () -> chargeCost(player));
             player.sendMessage(lang.get(player, "spawn.admin.teleported_other",
                     java.util.Map.of("player", target.getName())));
             return true;
         }
 
         plugin.debug("Spawn command by " + player.getName());
-        plugin.getSpawnManager().teleportToSpawn(player);
+        plugin.getSpawnManager().teleportToSpawn(player, false, () -> chargeCost(player));
         return true;
     }
 

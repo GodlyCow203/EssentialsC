@@ -18,6 +18,11 @@ public class TPACommand extends Command {
     }
 
     @Override
+    protected boolean chargesOnSuccess() {
+        return true;
+    }
+
+    @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
         Player target = Bukkit.getPlayer(args[0]);
@@ -32,7 +37,9 @@ public class TPACommand extends Command {
             return true;
         }
 
-        plugin.getTPAManager().requestTeleport(player, target, TPARequest.Type.TPA);
+        if (plugin.getTPAManager().requestTeleport(player, target, TPARequest.Type.TPA)) {
+            chargeCost(player);
+        }
         return true;
     }
 
