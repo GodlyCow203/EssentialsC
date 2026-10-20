@@ -42,7 +42,7 @@ public class TPAManager implements Listener {
     private long timeoutDuration;
     private int maxPending;
     private int maxOutgoing;
-    private boolean denyMovement;
+    private boolean cancelOnMovement;
     private boolean useParticles;
     private boolean useSounds;
     private List<String> blockedWorlds;
@@ -87,7 +87,7 @@ public class TPAManager implements Listener {
         this.timeoutDuration = cm.getTPATimeout() * 1000;
         this.maxPending = cm.getTPAMaxPending();
         this.maxOutgoing = cm.getTPAMaxOutgoing();
-        this.denyMovement = cm.isTPADenyMovement();
+        this.cancelOnMovement = cm.isTPACancelOnMovement();
 
         this.useParticles = cm.isTPAParticles();
         this.useSounds = cm.isTPASounds();
@@ -379,7 +379,7 @@ public class TPAManager implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!denyMovement) return;
+        if (!cancelOnMovement) return;
 
         Player player = event.getPlayer();
         if (!teleporting.contains(player.getUniqueId())) return;

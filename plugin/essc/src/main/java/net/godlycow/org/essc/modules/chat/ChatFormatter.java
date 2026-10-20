@@ -23,6 +23,8 @@ import java.util.regex.Pattern;
 
 public class ChatFormatter {
 
+    private static final Pattern INTERACTIVE_CHAT_TAG = Pattern.compile("<(?:cmd|chat)=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?::.*?:)?>");
+
     private final EssentialsC plugin;
     private final EssConfig config;
     private final MiniMessage miniMessage;
@@ -48,6 +50,17 @@ public class ChatFormatter {
 
     public Component formatMessage(Player player, String raw) {
 
+        List<String> icTags = new ArrayList<>();
+        Matcher icMatcher = INTERACTIVE_CHAT_TAG.matcher(raw);
+
+        while (icMatcher.find()) {
+            icTags.add(icMatcher.group());
+        }
+
+        for (int i = 0; i < icTags.size(); i++) {
+            raw = raw.replace(icTags.get(i), "\u0000IC_" + i + "\u0000");
+        }
+
         raw = applyFormatPermissions(player, raw);
 
         List<String> urls = new ArrayList<>();
@@ -64,6 +77,12 @@ public class ChatFormatter {
 
         Component message = buildComponent(player, placeholderRaw);
         message = processLinks(player, message, urls);
+
+        for (int i = 0; i < icTags.size(); i++) {
+            String token = "\u0000IC_" + i + "\u0000";
+            Component tag = Component.text(icTags.get(i));
+            message = message.replaceText(b -> b.matchLiteral(token).replacement(tag));
+        }
 
         return message;
     }

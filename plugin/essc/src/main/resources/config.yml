@@ -6,7 +6,7 @@
 
 # The Config Version
 # Do NOT CHANGE this
-config-version: 27
+config-version: 28
 
 # General settings
 
@@ -399,9 +399,12 @@ tpa:
   enabled: true
 
   # Seconds a player must wait between sending /tpa requests.
+  # Set to 0 to disable the cooldown.
+  # Bypassed by: essentialsc.tpa.bypass.cooldown
   cooldown: 60
 
   # Seconds the player must stand still before being teleported.
+  # Set to 0 to teleport instantly.
   warmup: 3
 
   # Seconds before an unanswered request automatically expires.
@@ -414,7 +417,7 @@ tpa:
   max-outgoing: 1
 
   # Cancel the teleport if the sender moves during the warmup.
-  deny-movement: true
+  cancel-on-movement: true
 
   # Play particles during the warmup.
   particles: true
@@ -507,9 +510,13 @@ spawn:
   enabled: true
 
   # Seconds a player must wait between uses of /spawn.
+  # Set to 0 to disable the cooldown.
+  # Bypassed by: essentialsc.spawn.admin
   cooldown: 5
 
   # Seconds the player must stand still before being teleported.
+  # Set to 0 to teleport instantly.
+  # Bypassed by: essentialsc.spawn.admin
   warmup: 3
 
   # Teleport players to spawn the first time they join the server.
@@ -530,6 +537,11 @@ spawn:
   # Whether beds can override the spawn location.
   # If false, players will always respawn at the configured spawn.
   allow-beds-to-override: true
+
+  # Worlds where players cannot use /spawn.
+  # Admins can still send players to spawn with /spawn <player>.
+  # Use the exact world folder name.
+  blocked-worlds: []
 
 
 
@@ -583,6 +595,10 @@ back:
 
   # Cancel the teleport if the player moves during the warmup.
   cancel-on-movement: true
+
+  # Worlds where /back and /dback cannot be used, and that they will
+  # never send a player back into. Use the exact world folder name.
+  blocked-worlds: []
 
 
 # Scoreboard

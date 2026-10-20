@@ -15,6 +15,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,6 +37,7 @@ public class BackManager implements Listener {
     private boolean particles;
     private boolean sounds;
     private boolean cancelOnMovement;
+    private List<String> blockedWorlds;
 
     public BackManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -56,6 +58,7 @@ public class BackManager implements Listener {
         this.particles = cfg.isBackParticles();
         this.sounds = cfg.isBackSounds();
         this.cancelOnMovement = cfg.isBackCancelOnMovement();
+        this.blockedWorlds = cfg.getBackBlockedWorlds();
     }
 
     public void setBackLocation(Player player, Location location) {
@@ -87,6 +90,11 @@ public class BackManager implements Listener {
             return;
         }
 
+        if (isWorldBlocked(player.getLocation())) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
+            return;
+        }
+
         if (confirm) {
             Location pending = pendingUnsafeBack.remove(player.getUniqueId());
             if (pending == null) {
@@ -96,6 +104,11 @@ public class BackManager implements Listener {
 
             if (pending.getWorld() == null) {
                 player.sendMessage(plugin.getLanguageManager().get(player, "back.world_unloaded"));
+                return;
+            }
+
+            if (isWorldBlocked(pending)) {
+                player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
                 return;
             }
 
@@ -120,6 +133,11 @@ public class BackManager implements Listener {
             return;
         }
 
+        if (isWorldBlocked(target)) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
+            return;
+        }
+
         if (warmup <= 0 || player.hasPermission("essentialsc.back.admin")) {
             completeTeleport(player, target, false, onSuccess);
             return;
@@ -141,6 +159,11 @@ public class BackManager implements Listener {
             return;
         }
 
+        if (isWorldBlocked(player.getLocation())) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
+            return;
+        }
+
         if (confirm) {
             Location pending = pendingUnsafeDeathBack.remove(player.getUniqueId());
             if (pending == null) {
@@ -150,6 +173,11 @@ public class BackManager implements Listener {
 
             if (pending.getWorld() == null) {
                 player.sendMessage(plugin.getLanguageManager().get(player, "dback.world_unloaded"));
+                return;
+            }
+
+            if (isWorldBlocked(pending)) {
+                player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
                 return;
             }
 
@@ -178,6 +206,11 @@ public class BackManager implements Listener {
 
         if (target.getWorld() == null) {
             player.sendMessage(plugin.getLanguageManager().get(player, "dback.world_unloaded"));
+            return;
+        }
+
+        if (isWorldBlocked(target)) {
+            player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
             return;
         }
 
@@ -320,6 +353,10 @@ public class BackManager implements Listener {
 
         player.sendMessage(plugin.getLanguageManager().get(player, msgKey));
         plugin.debug("Cancelled back/dback teleport for " + player.getName() + " (" + reason + ")");
+    }
+
+    private boolean isWorldBlocked(Location location) {
+        return location.getWorld() != null && blockedWorlds.contains(location.getWorld().getName());
     }
 
     private boolean isOnCooldown(Player player) {

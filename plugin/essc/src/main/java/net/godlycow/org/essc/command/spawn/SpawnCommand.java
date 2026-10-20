@@ -38,6 +38,11 @@ public class SpawnCommand extends Command {
             return true;
         }
 
+        if (plugin.getConfigManager().getSpawnBlockedWorlds().contains(player.getWorld().getName())) {
+            player.sendMessage(lang.get(player, "spawn.blocked_world"));
+            return true;
+        }
+
         plugin.debug("Spawn command by " + player.getName());
         plugin.getSpawnManager().teleportToSpawn(player, false, () -> chargeCost(player));
         return true;

@@ -117,8 +117,8 @@ public class EssConfig {
     public int getTPAMaxOutgoing() {
         return config.getInt("tpa.max-outgoing", 1);
     }
-    public boolean isTPADenyMovement() {
-        return config.getBoolean("tpa.deny-movement", true);
+    public boolean isTPACancelOnMovement() {
+        return config.getBoolean("tpa.cancel-on-movement", true);
     }
     public boolean isTPAParticles() {
         return config.getBoolean("tpa.particles", true);
@@ -222,6 +222,10 @@ public class EssConfig {
         return config.getBoolean("spawn.cancel-on-movement", true);
     }
 
+    public List<String> getSpawnBlockedWorlds() {
+        return config.getStringList("spawn.blocked-worlds");
+    }
+
     public boolean isJoinLeaveEnabled() {
         return config.getBoolean("join-leave-messages.enabled", true);
     }
@@ -255,6 +259,10 @@ public class EssConfig {
 
     public boolean isBackCancelOnMovement() {
         return config.getBoolean("back.cancel-on-movement", true);
+    }
+
+    public List<String> getBackBlockedWorlds() {
+        return config.getStringList("back.blocked-worlds");
     }
 
     public FileConfiguration getConfig() {

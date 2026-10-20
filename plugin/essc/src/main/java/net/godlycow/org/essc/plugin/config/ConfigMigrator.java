@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ConfigMigrator {
 
-    private static final int CURRENT_CONFIG_VERSION = 27;
+    private static final int CURRENT_CONFIG_VERSION = 28;
     private static final int CURRENT_COMMANDS_VERSION = 11;
 
     private final EssentialsC plugin;
@@ -36,6 +36,13 @@ public class ConfigMigrator {
 
         boolean dirty = false;
 
+        if (version != CURRENT_CONFIG_VERSION) {
+            runConfigVersionMigrations(config, version);
+            config.set("config-version", CURRENT_CONFIG_VERSION);
+            dirty = true;
+            plugin.debug("[EssentialsC] config.yml updated from version " + version + " to " + CURRENT_CONFIG_VERSION);
+        }
+
         for (String key : defaults.getKeys(true)) {
             if (key.equals("config-version")) {
                 continue;
@@ -48,13 +55,6 @@ public class ConfigMigrator {
                 plugin.debug("[EssentialsC] config.yml — added missing key: " + key);
                 dirty = true;
             }
-        }
-
-        if (version != CURRENT_CONFIG_VERSION) {
-            runConfigVersionMigrations(config, version);
-            config.set("config-version", CURRENT_CONFIG_VERSION);
-            dirty = true;
-            plugin.debug("[EssentialsC] config.yml updated from version " + version + " to " + CURRENT_CONFIG_VERSION);
         }
 
         if (dirty) {
@@ -103,9 +103,27 @@ public class ConfigMigrator {
         if (fromVersion < 1) {
             applyConfigV1Migrations(config);
         }
+        if (fromVersion < 28) {
+            applyConfigV28Migrations(config);
+        }
     }
 
     private void applyConfigV1Migrations(FileConfiguration config) {
+    }
+
+    private void applyConfigV28Migrations(FileConfiguration config) {
+        renameKey(config, "tpa.deny-movement", "tpa.cancel-on-movement");
+    }
+
+    private void renameKey(FileConfiguration config, String from, String to) {
+        if (!config.isSet(from)) {
+            return;
+        }
+        if (!config.isSet(to)) {
+            config.set(to, config.get(from));
+        }
+        config.set(from, null);
+        plugin.debug("[EssentialsC] config.yml — renamed key " + from + " to " + to);
     }
 
     private void runCommandsVersionMigrations(FileConfiguration config, int fromVersion) {
