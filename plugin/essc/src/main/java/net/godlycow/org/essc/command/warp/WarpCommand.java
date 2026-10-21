@@ -10,6 +10,7 @@ import net.godlycow.org.essc.api.warp.event.WarpWarmupStartEvent;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.warp.Warp;
 import net.godlycow.org.essc.modules.warp.WarpManager;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -72,7 +73,7 @@ public class WarpCommand extends Command {
         }
 
         List<String> blockedWorlds = plugin.getConfigManager().getWarpBlockedWorlds();
-        if (!blockedWorlds.isEmpty() && blockedWorlds.contains(player.getWorld().getName())) {
+        if (BlockedWorlds.isBlocked(player, blockedWorlds, "essentialsc.warp.bypass.blocked-worlds", player.getLocation())) {
             player.sendMessage(lang.get(player, "warp.blocked_world"));
             plugin.debug("Blocked: " + player.getName() + " tried to warp from blocked world " + player.getWorld().getName());
             return true;

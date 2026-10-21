@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command.spawn;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,7 +39,8 @@ public class SpawnCommand extends Command {
             return true;
         }
 
-        if (plugin.getConfigManager().getSpawnBlockedWorlds().contains(player.getWorld().getName())) {
+        if (BlockedWorlds.isBlocked(player, plugin.getConfigManager().getSpawnBlockedWorlds(),
+                "essentialsc.spawn.bypass.blocked-worlds", player.getLocation())) {
             player.sendMessage(lang.get(player, "spawn.blocked_world"));
             return true;
         }

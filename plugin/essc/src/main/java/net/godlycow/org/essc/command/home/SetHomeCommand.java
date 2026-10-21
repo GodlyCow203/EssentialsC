@@ -2,6 +2,7 @@ package net.godlycow.org.essc.command.home;
 
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -58,7 +59,8 @@ public class SetHomeCommand extends Command {
         }
 
         String worldName = executor.getWorld().getName();
-        if (plugin.getConfigManager().getHomeBlockedWorlds().contains(worldName)) {
+        if (BlockedWorlds.isBlocked(executor, plugin.getConfigManager().getHomeBlockedWorlds(),
+                "essentialsc.home.bypass.blocked-worlds", worldName)) {
             executor.sendMessage(lang.get(executor, "home.set.blocked_world",
                     Map.of("world", worldName)));
             return;

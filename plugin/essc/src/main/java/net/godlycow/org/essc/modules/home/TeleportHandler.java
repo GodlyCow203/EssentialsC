@@ -8,6 +8,7 @@ import net.godlycow.org.essc.api.home.event.HomeTeleportEvent;
 import net.godlycow.org.essc.api.home.event.HomeWarmupCancelEvent;
 import net.godlycow.org.essc.api.home.event.HomeWarmupStartEvent;
 import net.godlycow.org.essc.api.impl.home.HomeImpl;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -96,7 +97,7 @@ public class TeleportHandler implements Listener {
         cancelTeleport(player);
 
         List<String> blocked = plugin.getConfigManager().getHomeBlockedWorlds();
-        if (blocked.contains(home.getWorld())) {
+        if (BlockedWorlds.isBlocked(player, blocked, "essentialsc.home.bypass.blocked-worlds", home.getWorld())) {
             player.sendMessage(plugin.getLanguageManager().get(player, "home.teleport.blocked_world",
                     Map.of("world", home.getWorld())));
             return;

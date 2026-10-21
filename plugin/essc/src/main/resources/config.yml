@@ -426,6 +426,7 @@ tpa:
   sounds: true
 
   # Worlds where /tpa and /tpahere are blocked.
+  # Bypassed by: essentialsc.tpa.bypass.blocked-worlds
   blocked-worlds: []
 
 
@@ -476,6 +477,7 @@ home:
 
   # Worlds where /home and /sethome are completely blocked.
   # Use the exact world folder name.
+  # Bypassed by: essentialsc.home.bypass.blocked-worlds
   blocked-worlds:
     - world_example_blocked
 
@@ -541,6 +543,7 @@ spawn:
   # Worlds where players cannot use /spawn.
   # Admins can still send players to spawn with /spawn <player>.
   # Use the exact world folder name.
+  # Bypassed by: essentialsc.spawn.bypass.blocked-worlds
   blocked-worlds: []
 
 
@@ -598,6 +601,7 @@ back:
 
   # Worlds where /back and /dback cannot be used, and that they will
   # never send a player back into. Use the exact world folder name.
+  # Bypassed by: essentialsc.back.bypass.blocked-worlds and essentialsc.dback.bypass.blocked-worlds
   blocked-worlds: []
 
 
@@ -917,6 +921,7 @@ warp:
   sounds: true
 
   # Worlds where warping is blocked.
+  # Bypassed by: essentialsc.warp.bypass.blocked-worlds
   blocked-worlds:
     - world_nether
     - world_the_end

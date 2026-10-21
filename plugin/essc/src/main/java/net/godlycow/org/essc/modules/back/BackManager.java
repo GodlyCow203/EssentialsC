@@ -3,6 +3,7 @@ package net.godlycow.org.essc.modules.back;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.UserProfile;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import net.godlycow.org.essc.util.SafeLocationFinder;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -90,7 +91,7 @@ public class BackManager implements Listener {
             return;
         }
 
-        if (isWorldBlocked(player.getLocation())) {
+        if (isWorldBlocked(player, player.getLocation(), "essentialsc.back.bypass.blocked-worlds")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
             return;
         }
@@ -107,7 +108,7 @@ public class BackManager implements Listener {
                 return;
             }
 
-            if (isWorldBlocked(pending)) {
+            if (isWorldBlocked(player, pending, "essentialsc.back.bypass.blocked-worlds")) {
                 player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
                 return;
             }
@@ -133,7 +134,7 @@ public class BackManager implements Listener {
             return;
         }
 
-        if (isWorldBlocked(target)) {
+        if (isWorldBlocked(player, target, "essentialsc.back.bypass.blocked-worlds")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "back.blocked_world"));
             return;
         }
@@ -159,7 +160,7 @@ public class BackManager implements Listener {
             return;
         }
 
-        if (isWorldBlocked(player.getLocation())) {
+        if (isWorldBlocked(player, player.getLocation(), "essentialsc.dback.bypass.blocked-worlds")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
             return;
         }
@@ -176,7 +177,7 @@ public class BackManager implements Listener {
                 return;
             }
 
-            if (isWorldBlocked(pending)) {
+            if (isWorldBlocked(player, pending, "essentialsc.dback.bypass.blocked-worlds")) {
                 player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
                 return;
             }
@@ -209,7 +210,7 @@ public class BackManager implements Listener {
             return;
         }
 
-        if (isWorldBlocked(target)) {
+        if (isWorldBlocked(player, target, "essentialsc.dback.bypass.blocked-worlds")) {
             player.sendMessage(plugin.getLanguageManager().get(player, "dback.blocked_world"));
             return;
         }
@@ -355,8 +356,8 @@ public class BackManager implements Listener {
         plugin.debug("Cancelled back/dback teleport for " + player.getName() + " (" + reason + ")");
     }
 
-    private boolean isWorldBlocked(Location location) {
-        return location.getWorld() != null && blockedWorlds.contains(location.getWorld().getName());
+    private boolean isWorldBlocked(Player player, Location location, String bypassPermission) {
+        return BlockedWorlds.isBlocked(player, blockedWorlds, bypassPermission, location);
     }
 
     private boolean isOnCooldown(Player player) {

@@ -588,6 +588,10 @@ permissions:
     description: Bypass TPA cost
     default: op
 
+  essentialsc.tpa.bypass.blocked-worlds:
+    description: Use /tpa and /tpahere in worlds listed in tpa.blocked-worlds
+    default: op
+
   essentialsc.sethome:
     description: Allow setting homes
     default: true
@@ -635,9 +639,15 @@ permissions:
   essentialsc.sethome.admin:
     description: Bypass home limits and blocked worlds, set other players homes (including offline players)
     default: op
+    children:
+      essentialsc.home.bypass.blocked-worlds: true
 
   essentialsc.home.admin:
     description: Teleport to other players homes (including offline players)
+    default: op
+
+  essentialsc.home.bypass.blocked-worlds:
+    description: Set and teleport to homes in worlds listed in home.blocked-worlds
     default: op
 
   essentialsc.delhome.admin:
@@ -656,6 +666,10 @@ permissions:
     description: Bypass spawn cooldowns/warmup and teleport others
     default: op
 
+  essentialsc.spawn.bypass.blocked-worlds:
+    description: Use /spawn in worlds listed in spawn.blocked-worlds
+    default: op
+
   essentialsc.setspawn:
     description: Allow setting the spawn location
     default: op
@@ -666,6 +680,10 @@ permissions:
 
   essentialsc.back.admin:
     description: Bypass cooldowns and warmup for /back
+    default: op
+
+  essentialsc.back.bypass.blocked-worlds:
+    description: Use /back from or into worlds listed in back.blocked-worlds
     default: op
 
   essentialsc.kit:
@@ -1046,6 +1064,10 @@ permissions:
     description: Bypass warp warmup
     default: op
 
+  essentialsc.warp.bypass.blocked-worlds:
+    description: Warp from worlds listed in warp.blocked-worlds
+    default: op
+
   essentialsc.warp.free:
     description: Free warps regardless of cost
     default: op
@@ -1280,6 +1302,10 @@ permissions:
 
   essentialsc.dback.admin:
     description: Bypass warmup and cooldown for /dback
+    default: op
+
+  essentialsc.dback.bypass.blocked-worlds:
+    description: Use /dback from or into worlds listed in back.blocked-worlds
     default: op
 
   essentialsc.nick.minimessage:

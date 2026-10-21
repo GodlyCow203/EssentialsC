@@ -2,6 +2,7 @@ package net.godlycow.org.essc.modules.teleport;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.util.BlockedWorlds;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -95,7 +96,7 @@ public class TPAManager implements Listener {
     }
 
     public boolean requestTeleport(Player requester, Player target, TPARequest.Type type) {
-        if (blockedWorlds.contains(requester.getWorld().getName())) {
+        if (BlockedWorlds.isBlocked(requester, blockedWorlds, "essentialsc.tpa.bypass.blocked-worlds", requester.getLocation())) {
             requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.blocked_world"));
             return false;
         }
