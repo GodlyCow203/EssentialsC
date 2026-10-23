@@ -589,7 +589,7 @@ permissions:
     default: op
 
   essentialsc.tpa.bypass.blocked-worlds:
-    description: Use /tpa and /tpahere in worlds listed in tpa.blocked-worlds
+    description: Use /tpa and /tpahere from or into worlds listed in tpa.blocked-worlds
     default: op
 
   essentialsc.sethome:

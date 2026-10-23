@@ -96,7 +96,7 @@ public class TPAManager implements Listener {
     }
 
     public boolean requestTeleport(Player requester, Player target, TPARequest.Type type) {
-        if (BlockedWorlds.isBlocked(requester, blockedWorlds, "essentialsc.tpa.bypass.blocked-worlds", requester.getLocation())) {
+        if (isWorldBlocked(requester, target)) {
             requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.blocked_world"));
             return false;
         }
@@ -187,6 +187,12 @@ public class TPAManager implements Listener {
 
         removeRequestFromBothMaps(request);
 
+        if (isWorldBlocked(requester, target)) {
+            target.sendMessage(plugin.getLanguageManager().get(target, "tpa.error.blocked_world"));
+            requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.blocked_world"));
+            return true;
+        }
+
         Player toTeleport = request.getType() == TPARequest.Type.TPA ? requester : target;
         Player destination = request.getType() == TPARequest.Type.TPA ? target : requester;
 
@@ -200,6 +206,12 @@ public class TPAManager implements Listener {
         setCooldown(requester);
 
         return true;
+    }
+
+    private boolean isWorldBlocked(Player requester, Player target) {
+        String bypass = "essentialsc.tpa.bypass.blocked-worlds";
+        
+        return BlockedWorlds.isBlocked(requester, blockedWorlds, bypass, requester.getLocation()) || BlockedWorlds.isBlocked(requester, blockedWorlds, bypass, target.getLocation());
     }
 
     public boolean denyRequest(Player target, Player requester) {

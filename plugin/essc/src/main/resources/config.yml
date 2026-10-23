@@ -425,7 +425,7 @@ tpa:
   # Play sounds during TPA events.
   sounds: true
 
-  # Worlds where /tpa and /tpahere are blocked.
+  # Worlds where /tpa and /tpahere are blocked, both from and into.
   # Bypassed by: essentialsc.tpa.bypass.blocked-worlds
   blocked-worlds: []
 
