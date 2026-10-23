@@ -131,6 +131,7 @@ servers/folia-26.2/
 servers/paper-26.3-legacy-homes/
 servers/paper-26.3-fresh/
 servers/paper-26.3-ic/
+servers/paper-26.3-essx/
 
 
 # Gradle build folders
