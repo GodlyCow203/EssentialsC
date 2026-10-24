@@ -374,7 +374,7 @@ public class BackManager implements Listener {
 
     private long getRemainingCooldown(Player player) {
         long last = cooldowns.getOrDefault(player.getUniqueId(), 0L);
-        return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
+        return Math.max(0, Math.ceilDiv(last + (cooldown * 1000) - System.currentTimeMillis(), 1000));
     }
 
     private boolean isOnDeathCooldown(Player player) {
@@ -390,7 +390,7 @@ public class BackManager implements Listener {
 
     private long getRemainingDeathCooldown(Player player) {
         long last = deathCooldowns.getOrDefault(player.getUniqueId(), 0L);
-        return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
+        return Math.max(0, Math.ceilDiv(last + (cooldown * 1000) - System.currentTimeMillis(), 1000));
     }
 
 

@@ -112,7 +112,7 @@ public class SpawnManager implements Listener {
     public long getRemainingCooldown(Player player) {
         long cooldown = plugin.getConfigManager().getSpawnCooldown();
         long last = teleportCooldowns.getOrDefault(player.getUniqueId(), 0L);
-        return Math.max(0, (last + (cooldown * 1000) - System.currentTimeMillis()) / 1000);
+        return Math.max(0, Math.ceilDiv(last + (cooldown * 1000) - System.currentTimeMillis(), 1000));
     }
 
     public void teleportToSpawn(Player player) {

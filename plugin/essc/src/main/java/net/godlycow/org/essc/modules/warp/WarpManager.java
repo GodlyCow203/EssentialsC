@@ -322,7 +322,7 @@ public class WarpManager {
         if (lastUse == null) return 0;
 
         long remaining = (lastUse + cooldownMs) - System.currentTimeMillis();
-        return Math.max(0, remaining / 1000);
+        return Math.max(0, Math.ceilDiv(remaining, 1000));
     }
 
     public void trackMovement(UUID uuid, Location location) {

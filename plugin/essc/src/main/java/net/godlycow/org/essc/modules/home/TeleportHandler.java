@@ -61,7 +61,7 @@ public class TeleportHandler implements Listener {
     public long getRemainingCooldown(Player player) {
         long cooldown = plugin.getConfigManager().getHomeCooldown();
         long last = teleportCooldowns.getOrDefault(player.getUniqueId(), 0L);
-        long remaining = Math.max(0, (last + (cooldown * 1000L) - System.currentTimeMillis()) / 1000L);
+        long remaining = Math.max(0, Math.ceilDiv(last + (cooldown * 1000L) - System.currentTimeMillis(), 1000L));
         if (remaining == 0 && cooldown > 0 && last > 0) {
             Long notifiedAt = lastCooldownExpireNotified.get(player.getUniqueId());
             if (notifiedAt == null || notifiedAt != last) {

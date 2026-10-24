@@ -115,7 +115,7 @@ public class TPAManager implements Listener {
         }
 
         if (hasCooldown(requester)) {
-            long remaining = (cooldowns.get(requester.getUniqueId()) - System.currentTimeMillis()) / 1000;
+            long remaining = Math.ceilDiv(cooldowns.get(requester.getUniqueId()) - System.currentTimeMillis(), 1000);
             requester.sendMessage(plugin.getLanguageManager().get(requester, "tpa.error.cooldown",
                     Map.of("seconds", String.valueOf(remaining))));
             return false;
