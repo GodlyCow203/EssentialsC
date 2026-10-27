@@ -51,6 +51,13 @@ public class DelHomeCommand extends Command {
 
         String name = args[0].toLowerCase();
 
+        if (!plugin.getConfigManager().isHomeDeleteConfirm() || player.hasPermission("essentialsc.delhome.bypass")) {
+            cancelPending(player.getUniqueId());
+            deleteHome(player, player.getUniqueId(), name, null);
+            
+            return true;
+        }
+
         String pending = pendingDeletions.get(player.getUniqueId());
 
         if (pending != null && pending.equals(name)) {

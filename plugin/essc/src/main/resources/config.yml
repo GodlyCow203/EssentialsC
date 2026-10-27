@@ -475,6 +475,11 @@ home:
   # Set to false to let the bed home be a free bonus slot.
   bed-counts-in-limit: true
 
+  # Ask players to run /delhome <name> twice to confirm deleting a home
+  # Set to false to delete homes instantly
+  # Bypassed by: essentialsc.delhome.bypass
+  delete-confirm: true
+
   # Worlds where /home and /sethome are completely blocked.
   # Use the exact world folder name.
   # Bypassed by: essentialsc.home.bypass.blocked-worlds

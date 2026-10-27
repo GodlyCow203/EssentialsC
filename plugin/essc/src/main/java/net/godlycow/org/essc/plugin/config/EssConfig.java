@@ -194,6 +194,10 @@ public class EssConfig {
         return config.getBoolean("home.bed-counts-in-limit", true);
     }
 
+    public boolean isHomeDeleteConfirm() {
+        return config.getBoolean("home.delete-confirm", true);
+    }
+
     public boolean isSpawnEnabled() {
         return config.getBoolean("spawn.enabled", true);
     }

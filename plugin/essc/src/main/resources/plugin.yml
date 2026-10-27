@@ -654,6 +654,10 @@ permissions:
     description: Delete other players homes (including offline players)
     default: op
 
+  essentialsc.delhome.bypass:
+    description: Delete homes withou the confirmation prompt
+    default: op
+
   essentialsc.home.notifications:
     description: Toggle admin home action notifications with /homes notifications
     default: true
