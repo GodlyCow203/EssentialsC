@@ -31,10 +31,7 @@ public class ScoreboardManager implements Listener {
     private final AtomicBoolean reloading = new AtomicBoolean(false);
     private final Object lock = new Object();
 
-    private final Map<UUID, ProcessedData> placeholderCache = new ConcurrentHashMap<>();
-    private static final long CACHE_TTL_MS = 3000L;
-
-    private record ProcessedData(String title, String[] lines, long timestamp) {}
+    private final AtomicBoolean updateInFlight = new AtomicBoolean(false);
 
     public ScoreboardManager(EssentialsC plugin) {
         this.plugin = plugin;
@@ -156,7 +153,6 @@ public class ScoreboardManager implements Listener {
             synchronized (lock) {
                 stop();
 
-                placeholderCache.clear();
                 plugin.getConfigManager().reload();
                 loadConfig();
 
@@ -246,92 +242,67 @@ public class ScoreboardManager implements Listener {
                     it.remove();
                 }
             }
-            placeholderCache.clear();
         }
     }
 
     private void updateAll() {
         if (!config.isEnabled() || reloading.get()) return;
 
-        final long now = System.currentTimeMillis();
-        final List<Player> stale = new ArrayList<>();
-        final List<Object[]> cached = new ArrayList<>();
-
-        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-
+        final List<Player> targets = new ArrayList<>();
         synchronized (boards) {
-            for (Player player : onlinePlayers) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 PlayerScoreboard board = boards.get(player.getUniqueId());
-                if (board == null || !board.isActive()) continue;
-
-                ProcessedData data = placeholderCache.get(player.getUniqueId());
-                if (data != null && (now - data.timestamp()) < CACHE_TTL_MS) {
-                    cached.add(new Object[]{player, board, data});
-                } else {
-                    stale.add(player);
-                }
+                if (board != null && board.isActive()) targets.add(player);
             }
         }
 
-        if (!cached.isEmpty()) {
-            plugin.getServer().getGlobalRegionScheduler().run(plugin, task -> {
-                for (Object[] entry : cached) {
-                    Player player = (Player) entry[0];
-                    PlayerScoreboard board = (PlayerScoreboard) entry[1];
-                    ProcessedData data = (ProcessedData) entry[2];
-                    if (!player.isOnline() || !board.isActive()) continue;
-                    board.updateProcessed(player, data.title(), Arrays.asList(data.lines()));
-                }
-            });
-        }
+        if (targets.isEmpty()) return;
+        if (!updateInFlight.compareAndSet(false, true)) return;
 
-        if (stale.isEmpty()) return;
-
-        plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
-            List<ProcessedResult> results = new ArrayList<>(stale.size());
-
-            for (Player player : stale) {
-                if (!player.isOnline()) continue;
+        try {
+            plugin.getServer().getAsyncScheduler().runNow(plugin, task -> {
                 try {
-                    String title = LegacyColorConverter.toMiniMessage(
-                            processor.processString(player, config.getTitleRaw()));
-                    List<String> lineList = config.getLines();
-                    String[] lines = new String[lineList.size()];
-                    for (int i = 0; i < lineList.size(); i++) {
-                        lines[i] = LegacyColorConverter.toMiniMessage(
-                                processor.processString(player, lineList.get(i)));
+                    List<ProcessedResult> results = new ArrayList<>(targets.size());
+
+                    for (Player player : targets) {
+                        if (!player.isOnline()) continue;
+                        try {
+                            String title = LegacyColorConverter.toMiniMessage(
+                                    processor.processString(player, config.getTitleRaw()));
+                            List<String> lineList = config.getLines();
+                            String[] lines = new String[lineList.size()];
+                            for (int i = 0; i < lineList.size(); i++) {
+                                lines[i] = LegacyColorConverter.toMiniMessage(
+                                        processor.processString(player, lineList.get(i)));
+                            }
+                            results.add(new ProcessedResult(player.getUniqueId(), title, lines));
+                        } catch (Exception e) {
+                            plugin.getLogger().log(Level.WARNING,
+                                    "Error processing scoreboard placeholders for " + player.getName(), e);
+                        }
                     }
-                    results.add(new ProcessedResult(player.getUniqueId(), title, lines));
-                } catch (Exception e) {
-                    plugin.getLogger().log(Level.WARNING,
-                            "Error processing scoreboard placeholders for " + player.getName(), e);
-                }
-            }
 
-            if (results.isEmpty()) return;
+                    if (results.isEmpty()) return;
 
-            final long applyTime = System.currentTimeMillis();
-            for (ProcessedResult result : results) {
-                placeholderCache.put(result.uuid(),
-                        new ProcessedData(result.title(), result.lines(), applyTime));
-            }
-
-            plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> {
-                for (ProcessedResult result : results) {
-                    Player player = Bukkit.getPlayer(result.uuid());
-                    if (player == null || !player.isOnline()) continue;
-                    PlayerScoreboard board;
-                    synchronized (boards) {
-                        board = boards.get(result.uuid());
-                    }
-                    if (board == null || !board.isActive()) continue;
-                    board.updateProcessed(player, result.title(), Arrays.asList(result.lines()));
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, task1 -> {
+                        for (ProcessedResult result : results) {
+                            Player player = Bukkit.getPlayer(result.uuid());
+                            if (player == null || !player.isOnline()) continue;
+                            PlayerScoreboard board;
+                            synchronized (boards) {
+                                board = boards.get(result.uuid());
+                            }
+                            if (board == null || !board.isActive()) continue;
+                            board.updateProcessed(player, result.title(), Arrays.asList(result.lines()));
+                        }
+                    });
+                } finally {
+                    updateInFlight.set(false);
                 }
             });
-        });
-
-        if ((now & 0x1F) == 0) {
-            placeholderCache.entrySet().removeIf(e -> (now - e.getValue().timestamp()) > CACHE_TTL_MS * 2);
+        } catch (RuntimeException e) {
+            updateInFlight.set(false);
+            throw e;
         }
     }
 
@@ -350,7 +321,6 @@ public class ScoreboardManager implements Listener {
             disabledPlayers.add(uuid);
             if (config.isPersistent()) plugin.getUserManager().setScoreboardDisabled(uuid, true);
             removePlayer(player);
-            placeholderCache.remove(uuid);
             try {
                 player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
             } catch (Exception e) {
@@ -381,7 +351,6 @@ public class ScoreboardManager implements Listener {
                 plugin.getLogger().warning("Error removing scoreboard: " + e.getMessage());
             }
         }
-        placeholderCache.remove(player.getUniqueId());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
