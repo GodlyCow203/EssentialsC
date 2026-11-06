@@ -41,6 +41,7 @@ dependencies {
     compileOnly("net.luckperms:api:5.5")
     compileOnly("net.skinsrestorer:skinsrestorer-api:15.0.12")
     compileOnly("org.geysermc.floodgate:api:2.2.4-SNAPSHOT")
+    compileOnly("org.apache.logging.log4j:log4j-core:2.20.0")
     implementation("de.rapha149.signgui:signgui:2.5.3")
     implementation("dev.faststats.metrics:bukkit:0.27.1")
     implementation("org.bstats:bstats-bukkit:3.1.0")

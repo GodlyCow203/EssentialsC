@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.plugin.listener;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.modules.punishment.BannedConnectionLogFilter;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.util.DurationParser;
 import net.kyori.adventure.text.Component;
@@ -23,10 +24,12 @@ public class BanListener implements Listener {
 
     private final EssentialsC plugin;
     private final PunishmentManager punishmentManager;
+    private final BannedConnectionLogFilter logFilter;
 
-    public BanListener(EssentialsC plugin, PunishmentManager punishmentManager) {
+    public BanListener(EssentialsC plugin, PunishmentManager punishmentManager, BannedConnectionLogFilter logFilter) {
         this.plugin = plugin;
         this.punishmentManager = punishmentManager;
+        this.logFilter = logFilter;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -52,6 +55,10 @@ public class BanListener implements Listener {
                 kickMessage = Component.text("You are banned from this server.");
             }
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, kickMessage);
+            if (logFilter != null) {
+                logFilter.onRejected(event.getName(), uuid, ip, false,
+                        BannedConnectionLogFilter.banKey(banEntry, uuid), kickMessage);
+            }
             plugin.debug("Prevented banned player " + event.getName() + " from joining");
             return;
         }
@@ -71,6 +78,10 @@ public class BanListener implements Listener {
                 kickMessage = Component.text("Your IP is banned from this server.");
             }
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, kickMessage);
+            if (logFilter != null) {
+                logFilter.onRejected(event.getName(), uuid, ip, true,
+                        BannedConnectionLogFilter.ipBanKey(ipEntry, ip), kickMessage);
+            }
             plugin.debug("Prevented IP-banned player " + event.getName() + " (" + ip + ") from joining");
         }
     }

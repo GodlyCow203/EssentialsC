@@ -36,6 +36,7 @@ import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.plugin.listener.AhListener;
 import net.godlycow.org.essc.plugin.listener.BanListener;
+import net.godlycow.org.essc.modules.punishment.BannedConnectionLogFilter;
 import net.godlycow.org.essc.plugin.listener.WarpListener;
 import net.godlycow.org.essc.modules.MOTDManager;
 import net.godlycow.org.essc.modules.ReplyManager;
@@ -290,7 +291,10 @@ public final class PluginLoader {
 
         new ListenerRegistrar(plugin);
         if (plugin.getConfigManager().isPunishmentsEnabled()) {
-            plugin.getServer().getPluginManager().registerEvents(new BanListener(plugin, plugin.getPunishmentManager()), plugin);
+            BannedConnectionLogFilter logFilter = new BannedConnectionLogFilter(plugin, plugin.getPunishmentManager());
+            logFilter.install();
+            plugin.setBannedConnectionLogFilter(logFilter);
+            plugin.getServer().getPluginManager().registerEvents(new BanListener(plugin, plugin.getPunishmentManager(), logFilter), plugin);
         }
         plugin.getServer().getPluginManager().registerEvents(plugin, plugin);
 

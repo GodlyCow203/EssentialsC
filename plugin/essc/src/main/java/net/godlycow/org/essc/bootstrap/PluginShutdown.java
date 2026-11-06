@@ -68,6 +68,9 @@ public final class PluginShutdown {
         if (plugin.getWarpManager() != null) {
             plugin.getWarpManager().shutdown();
         }
+        if (plugin.getBannedConnectionLogFilter() != null) {
+            plugin.getBannedConnectionLogFilter().uninstall();
+        }
         if (plugin.getPunishmentManager() != null) {
             plugin.getPunishmentManager().shutdown();
         }

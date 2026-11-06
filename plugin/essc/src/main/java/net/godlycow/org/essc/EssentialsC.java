@@ -30,6 +30,7 @@ import net.godlycow.org.essc.modules.home.HomeNotificationManager;
 import net.godlycow.org.essc.modules.kit.KitManager;
 import net.godlycow.org.essc.modules.kit.gui.KitGuiManager;
 import net.godlycow.org.essc.modules.nick.NickManager;
+import net.godlycow.org.essc.modules.punishment.BannedConnectionLogFilter;
 import net.godlycow.org.essc.modules.punishment.PunishmentManager;
 import net.godlycow.org.essc.modules.rtp.RTPGuiManager;
 import net.godlycow.org.essc.modules.rtp.RTPManager;
@@ -78,6 +79,7 @@ public final class EssentialsC extends JavaPlugin implements Listener {
     private ShopManager shopManager;
     private NickManager nickManager;
     private PunishmentManager punishmentManager;
+    private BannedConnectionLogFilter bannedConnectionLogFilter;
     private ReplyManager replyManager;
     private AuctionManager auctionManager;
     private WarpManager warpManager;
@@ -341,6 +343,14 @@ public final class EssentialsC extends JavaPlugin implements Listener {
 
     public void setPunishmentManager(PunishmentManager punishmentManager) {
         this.punishmentManager = punishmentManager;
+    }
+
+    public BannedConnectionLogFilter getBannedConnectionLogFilter() {
+        return bannedConnectionLogFilter;
+    }
+
+    public void setBannedConnectionLogFilter(BannedConnectionLogFilter bannedConnectionLogFilter) {
+        this.bannedConnectionLogFilter = bannedConnectionLogFilter;
     }
 
 

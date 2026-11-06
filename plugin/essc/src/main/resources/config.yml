@@ -1019,6 +1019,21 @@ punishments:
   # Requires a restart.
   enabled: true
 
+# Logging
+
+logging:
+  # Console output caused by EssentialsC rejecting banned / IP-banned players at login
+  # ("UUID of player ...", "Disconnecting ...", "... lost connection: ...").
+  # Banned players are always blocked regardless of this setting,
+  # and normal disconnects or other connection errors are never touched.
+  banned-player-connections:
+    # normal - log every attempt (vanilla behaviour)
+    # rate-limited - log the first attempt per player/IP and ban, hide repeats for interval-seconds,
+    # then print a summary of how many attempts were hidden on the next attempt
+    # hidden - hide these lines completely
+    mode: normal
+    interval-seconds: 600
+
 # Rules
 
 rules:
