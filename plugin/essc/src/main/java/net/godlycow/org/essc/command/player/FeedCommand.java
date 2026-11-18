@@ -22,7 +22,7 @@ public class FeedCommand extends Command {
         Player target;
 
         if (args.length > 0) {
-            target = plugin.getServer().getPlayer(args[0]);
+            target = plugin.getBedrockUtil().matchPlayer(args[0]);
             if (target == null) {
                 Map<String, String> placeholders = new HashMap<>();
                 placeholders.put("player", args[0]);

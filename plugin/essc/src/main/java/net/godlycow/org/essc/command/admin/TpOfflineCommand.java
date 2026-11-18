@@ -31,7 +31,7 @@ public class TpOfflineCommand extends Command {
         Player player = (Player) sender;
         String targetName = args[0];
 
-        OfflinePlayer target = plugin.getServer().getOfflinePlayer(targetName);
+        OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {
             Map<String, String> placeholders = new HashMap<>();

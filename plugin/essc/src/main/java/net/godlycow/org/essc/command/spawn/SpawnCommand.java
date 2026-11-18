@@ -26,7 +26,7 @@ public class SpawnCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length > 0 && player.hasPermission("essentialsc.spawn.admin")) {
-            Player target = Bukkit.getPlayer(args[0]);
+            Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
             if (target == null) {
                 player.sendMessage(lang.get(player, "error.player_not_found", Map.of("player", args[0])));
                 return true;

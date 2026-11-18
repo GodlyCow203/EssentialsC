@@ -31,10 +31,10 @@ public class InvseeCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        Player target = plugin.getServer().getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
 
         if (target == null) {
-            OfflinePlayer offlineTarget = plugin.getServer().getOfflinePlayer(args[0]);
+            OfflinePlayer offlineTarget = plugin.getBedrockUtil().getOfflinePlayer(args[0]);
 
             if (!offlineTarget.hasPlayedBefore()) {
                 Map<String, String> placeholders = new HashMap<>();

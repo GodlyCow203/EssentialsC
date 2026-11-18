@@ -33,7 +33,7 @@ public class SetHomeCommand extends Command {
             String targetName = args[0];
             String homeName = args[1];
 
-            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
                 player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
                 return true;

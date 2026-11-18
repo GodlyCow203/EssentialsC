@@ -19,7 +19,7 @@ public class TPAIgnoreCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
 
         if (target == null) {
             sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));

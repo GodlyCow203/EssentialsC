@@ -22,7 +22,7 @@ public class UnbanCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         String targetName = args[0];
-        OfflinePlayer target = plugin.getServer().getOfflinePlayer(targetName);
+        OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {
             sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));

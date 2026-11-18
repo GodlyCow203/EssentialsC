@@ -49,7 +49,7 @@ public class HomeCommand extends Command {
             String targetName = args[0];
             String homeName = args[1];
 
-            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
                 player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
                 return true;
@@ -192,7 +192,7 @@ public class HomeCommand extends Command {
         } else if (args.length == 2 && player.hasPermission("essentialsc.home.admin")) {
             String targetName = args[0];
             String partial = args[1].toLowerCase();
-            Player target = plugin.getServer().getPlayer(targetName);
+            Player target = plugin.getBedrockUtil().matchPlayer(targetName);
 
             if (target != null) {
                 Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(target.getUniqueId());

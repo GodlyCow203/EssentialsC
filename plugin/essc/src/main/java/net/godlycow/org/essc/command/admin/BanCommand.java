@@ -29,7 +29,7 @@ public class BanCommand extends Command {
         if (onlineResolved != null) {
             target = onlineResolved;
         } else {
-            target = plugin.getServer().getOfflinePlayer(targetName);
+            target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
         }
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {

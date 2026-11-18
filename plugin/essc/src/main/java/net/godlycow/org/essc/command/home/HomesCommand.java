@@ -30,7 +30,7 @@ public class HomesCommand extends Command {
         }
 
         if (args.length > 0 && player.hasPermission("essentialsc.home.admin")) {
-            OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(args[0]);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
                 player.sendMessage(lang.get(player, "error.player_not_found", Map.of("player", args[0])));
                 return true;

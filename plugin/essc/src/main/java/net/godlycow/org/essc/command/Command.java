@@ -1,6 +1,7 @@
 package net.godlycow.org.essc.command;
 
 import net.godlycow.org.essc.EssentialsC;
+import net.godlycow.org.essc.integration.bedrock.BedrockUtil;
 import net.godlycow.org.essc.language.HelpManager;
 import net.godlycow.org.essc.language.LanguageManager;
 import net.godlycow.org.essc.plugin.economy.EconomyManager;
@@ -292,7 +293,42 @@ public abstract class Command implements CommandExecutor, TabCompleter {
             result = tabComplete(sender, alias, args);
         }
 
+        result = withBedrockMatches(sender, alias, args, result);
         return TabCompletionUtils.filterCompletions(plugin, sender, result);
+    }
+
+    // lets (for example) "Ste" also complete ".Steve"
+    private List<String> withBedrockMatches(CommandSender sender, String alias, String[] args, List<String> result) {
+        if (result == null || args.length == 0)
+            return result;
+
+        BedrockUtil bedrock = plugin.getBedrockUtil();
+        if (bedrock == null ||  !bedrock.isAvailable() || bedrock.getHook().getBedrockPlayerCount() == 0)
+            return result;
+
+        String prefix = bedrock.getPrefix();
+        String last = args[args.length - 1];
+        if (prefix.isEmpty() || last.isEmpty() || last.startsWith(prefix))
+            return result;
+
+        String[] prefixedArgs = args.clone();
+        prefixedArgs[prefixedArgs.length - 1] = prefix + last;
+
+        List<String> extra;
+        try {
+            extra = tabComplete(sender, alias, prefixedArgs);
+        } catch (Exception e) {
+            plugin.debug("bedrock tab-completion retry failed for " + name + ": " + e.getMessage());
+            return result;
+        }
+        if (extra == null || extra.isEmpty())
+            return result;
+
+        List<String> merged = new ArrayList<>(result);
+        for (String s : extra) {
+            if (s != null && !merged.contains(s)) merged.add(s);
+        }
+        return merged;
     }
 
     public List<String> tabComplete(CommandSender sender, String[] args) {

@@ -5,6 +5,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import net.godlycow.org.essc.integration.bedrock.BedrockUtil;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -140,6 +141,12 @@ public class VaultHook {
 
     public class VaultEconomy implements Economy {
 
+        @SuppressWarnings("deprecation")
+        private OfflinePlayer lookup(String playerName) {
+            BedrockUtil bedrock = economyManager.getPlugin().getBedrockUtil();
+            return bedrock != null ? bedrock.getOfflinePlayer(playerName) : Bukkit.getOfflinePlayer(playerName);
+        }
+
         @Override
         public boolean isEnabled() {
             return true;
@@ -177,7 +184,7 @@ public class VaultHook {
 
         @Override
         public boolean hasAccount(String playerName) {
-            return hasAccount(Bukkit.getOfflinePlayer(playerName));
+            return hasAccount(lookup(playerName));
         }
 
         @Override
@@ -197,7 +204,7 @@ public class VaultHook {
 
         @Override
         public double getBalance(String playerName) {
-            return getBalance(Bukkit.getOfflinePlayer(playerName));
+            return getBalance(lookup(playerName));
         }
 
         @Override
@@ -217,7 +224,7 @@ public class VaultHook {
 
         @Override
         public boolean has(String playerName, double amount) {
-            return has(Bukkit.getOfflinePlayer(playerName), amount);
+            return has(lookup(playerName), amount);
         }
 
         @Override
@@ -237,7 +244,7 @@ public class VaultHook {
 
         @Override
         public EconomyResponse withdrawPlayer(String playerName, double amount) {
-            return withdrawPlayer(Bukkit.getOfflinePlayer(playerName), amount);
+            return withdrawPlayer(lookup(playerName), amount);
         }
 
         @Override
@@ -265,7 +272,7 @@ public class VaultHook {
 
         @Override
         public EconomyResponse depositPlayer(String playerName, double amount) {
-            return depositPlayer(Bukkit.getOfflinePlayer(playerName), amount);
+            return depositPlayer(lookup(playerName), amount);
         }
 
         @Override
@@ -351,7 +358,7 @@ public class VaultHook {
 
         @Override
         public boolean createPlayerAccount(String playerName) {
-            return createPlayerAccount(Bukkit.getOfflinePlayer(playerName));
+            return createPlayerAccount(lookup(playerName));
         }
 
         @Override

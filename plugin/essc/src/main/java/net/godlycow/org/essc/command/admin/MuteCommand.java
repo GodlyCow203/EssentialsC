@@ -26,7 +26,7 @@ public class MuteCommand extends Command {
         if (onlineTarget != null) {
             target = onlineTarget;
         } else {
-            target = plugin.getServer().getOfflinePlayer(args[0]);
+            target = plugin.getBedrockUtil().getOfflinePlayer(args[0]);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
                 return true;

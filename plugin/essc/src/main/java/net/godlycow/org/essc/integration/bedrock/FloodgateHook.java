@@ -3,6 +3,7 @@ package net.godlycow.org.essc.integration.bedrock;
 import net.godlycow.org.essc.EssentialsC;
 import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.FloodgateApi;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.UUID;
 
@@ -50,6 +51,60 @@ public class FloodgateHook {
 
     public boolean isBedrockPlayer(Player player) {
         return isBedrockPlayer(player.getUniqueId());
+    }
+
+    public boolean isBedrockId(UUID uuid) {
+        if (!available || uuid == null)
+            return false;
+        try {
+            return api.isFloodgateId(uuid) || api.isFloodgatePlayer(uuid);
+        } catch (Exception e) {
+            plugin.debug("FloodgateHook: isFloodgateId threw for " + uuid + ": " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getGamertag(UUID uuid) {
+        FloodgatePlayer fp = getFloodgatePlayer(uuid);
+        return fp == null ? null : fp.getUsername();
+    }
+
+    public String getDeviceOs(UUID uuid) {
+
+        FloodgatePlayer fp = getFloodgatePlayer(uuid);
+        if (fp == null | fp.getDeviceOs() ==   null)
+            return null;
+
+        return fp.getDeviceOs().toString();
+    }
+
+    public String getInputMode(UUID uuid) {
+        FloodgatePlayer fp = getFloodgatePlayer(uuid);
+        if (fp == null || fp.getInputMode() == null)
+            return null;
+
+        return fp.getInputMode().name();
+    }
+
+    public int getBedrockPlayerCount() {
+        if (!available)
+            return 0;
+        try {
+            return api.getPlayerCount();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private FloodgatePlayer getFloodgatePlayer(UUID uuid) {
+        if (!available || uuid == null)
+            return null;
+        try {
+            return api.getPlayer(uuid);
+        } catch (Exception e) {
+            plugin.debug("FloodgateHook: getPlayer threw for " + uuid + ": " + e.getMessage());
+            return null;
+        }
     }
 
     public String getPrefix() {

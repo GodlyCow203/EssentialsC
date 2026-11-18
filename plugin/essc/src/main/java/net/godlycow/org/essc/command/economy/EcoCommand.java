@@ -50,7 +50,7 @@ public class EcoCommand extends Command {
             if (isEveryone) {
                 handleResetEveryone(sender);
             } else {
-                OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+                OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
                 if (!target.hasPlayedBefore() && !target.isOnline()) {
                     sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
                     return true;
@@ -85,7 +85,7 @@ public class EcoCommand extends Command {
                 default -> sendUsage(sender);
             }
         } else {
-            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
             if (!target.hasPlayedBefore() && !target.isOnline()) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", targetName)));
                 return true;

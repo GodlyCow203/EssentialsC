@@ -6,6 +6,8 @@ import net.godlycow.org.essc.api.language.LanguageManager;
 import net.godlycow.org.essc.api.rtp.RtpManager;
 import net.godlycow.org.essc.api.warp.WarpManager;
 
+import java.util.UUID;
+
 /**
  * The main API. Grab it from {@link APIProvider#get()} and use the managers
  * below. Managers are always returned, even if their system is turned off,
@@ -75,6 +77,16 @@ public interface EssentialsCAPI {
      * @return true if enabled
      */
     boolean isWarpSystemEnabled();
+
+    /**
+     * Checks if the player is a Bedrock player.
+     */
+    boolean isBedrockPlayer(UUID uuid);
+
+    /**
+     * Gets the Floodgate name prefix.
+     */
+    String getBedrockPrefix();
 
     /**
      * Gets the API version, for example "1.4.0". Separate from the plugin version.

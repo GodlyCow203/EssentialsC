@@ -28,7 +28,7 @@ public class TPADenyCommand extends Command {
 
         Player target;
         if (args.length > 0) {
-            target = Bukkit.getPlayer(args[0]);
+            target = plugin.getBedrockUtil().matchPlayer(args[0]);
             if (target == null) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
                 return true;

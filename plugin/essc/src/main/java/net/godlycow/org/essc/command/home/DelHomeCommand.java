@@ -38,7 +38,7 @@ public class DelHomeCommand extends Command {
             String targetName = args[0];
             String name = args[1].toLowerCase();
 
-            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(targetName);
             if (!target.hasPlayedBefore()  && !target.isOnline()) {
                 player.sendMessage(lang.get(player, "home.admin.player_not_found", Map.of("player", targetName)));
 
@@ -140,7 +140,7 @@ public class DelHomeCommand extends Command {
             String partial = args[1].toLowerCase();
             List<String> completions = new ArrayList<>();
 
-            OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+            OfflinePlayer target = plugin.getBedrockUtil().getOfflinePlayer(args[0]);
             if (target.hasPlayedBefore() || target.isOnline()) {
                 Set<String> homeNames = plugin.getHomeManager().getCachedHomeNames(target.getUniqueId());
                 for (String homeName : homeNames) {

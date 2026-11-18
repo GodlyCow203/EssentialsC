@@ -30,7 +30,7 @@ public class BalanceCommand extends Command {
                 return true;
             }
 
-            Player target = Bukkit.getPlayer(args[0]);
+            Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
             if (target == null) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
                 return true;

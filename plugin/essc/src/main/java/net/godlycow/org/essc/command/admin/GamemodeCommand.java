@@ -96,7 +96,7 @@ public class GamemodeCommand extends Command {
 
     private Player resolveTarget(Player sender, String[] args, int argIndex) {
         if (args.length > argIndex) {
-            Player found = plugin.getServer().getPlayer(args[argIndex]);
+            Player found = plugin.getBedrockUtil().matchPlayer(args[argIndex]);
             if (found == null) {
                 sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[argIndex])));
                 return null;

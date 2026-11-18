@@ -13,6 +13,8 @@ import net.godlycow.org.essc.api.impl.kit.KitManagerImpl;
 import net.godlycow.org.essc.api.impl.rtp.RtpManagerImpl;
 import net.godlycow.org.essc.api.warp.WarpManager;
 
+import java.util.UUID;
+
 public class EssentialsCAPIImpl implements EssentialsCAPI {
     private final EssentialsC plugin;
     private final KitManagerImpl kitManagerImpl;
@@ -91,5 +93,15 @@ public class EssentialsCAPIImpl implements EssentialsCAPI {
     @Override
     public String getApiVersion() {
         return API_VERSION;
+    }
+
+    @Override
+    public boolean isBedrockPlayer(UUID uuid) {
+        return plugin.getBedrockUtil() != null && plugin.getBedrockUtil().isBedrockPlayer(uuid);
+    }
+
+    @Override
+    public String getBedrockPrefix() {
+        return plugin.getBedrockUtil() == null ? "" : plugin.getBedrockUtil().getPrefix();
     }
 }

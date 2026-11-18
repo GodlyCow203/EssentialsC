@@ -24,7 +24,7 @@ public class UnfreezeCommand extends Command {
             return true;
         }
 
-        Player target = plugin.getServer().getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
         if (target == null) {
             sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
             return true;

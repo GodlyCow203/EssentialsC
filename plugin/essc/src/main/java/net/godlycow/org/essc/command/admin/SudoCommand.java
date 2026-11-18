@@ -20,7 +20,7 @@ public class SudoCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        Player target = Bukkit.getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
 
         if (target == null) {
             Map<String, String> placeholders = new HashMap<>();

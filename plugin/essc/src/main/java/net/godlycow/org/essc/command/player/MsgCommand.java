@@ -21,7 +21,7 @@ public class MsgCommand extends Command {
         }
 
         String targetName = args[0];
-        Player target = plugin.getServer().getPlayer(targetName);
+        Player target = plugin.getBedrockUtil().matchPlayer(targetName);
 
         if (target == null) {
             Map<String, String> placeholders = new HashMap<>();

@@ -21,7 +21,7 @@ public class TPHereCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        Player target = plugin.getServer().getPlayer(args[0]);
+        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
         if (target == null) {
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("player", args[0]);

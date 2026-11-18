@@ -28,6 +28,7 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
     private final AuctionPlaceholders auctionPlaceholders;
     private final PunishmentPlaceholders punishmentPlaceholders;
     private final PlaytimePlaceholders playtimePlaceholders;
+    private final BedrockPlaceholders bedrockPlaceholders;
 
     public PlaceholderHook(EssentialsC plugin) {
         this.plugin = plugin;
@@ -44,6 +45,7 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         this.auctionPlaceholders = new AuctionPlaceholders(plugin);
         this.punishmentPlaceholders = new PunishmentPlaceholders(plugin);
         this.playtimePlaceholders = new PlaytimePlaceholders(plugin);
+        this.bedrockPlaceholders = new BedrockPlaceholders(plugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -125,6 +127,9 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         result = playtimePlaceholders.onRequest(player, identifier);
         if (result != null) return result;
 
+        result = bedrockPlaceholders.onRequest(player, identifier);
+        if (result != null) return result;
+
         return null;
     }
 
@@ -151,6 +156,7 @@ public class PlaceholderHook extends PlaceholderExpansion implements Listener {
         placeholders.addAll(AuctionPlaceholders.getPlaceholderList());
         placeholders.addAll(PunishmentPlaceholders.getPlaceholderList());
         placeholders.addAll(PlaytimePlaceholders.getPlaceholderList());
+        placeholders.addAll(BedrockPlaceholders.getPlaceholderList());
 
         return placeholders;
     }

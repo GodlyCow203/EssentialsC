@@ -38,7 +38,7 @@ public class BanIpCommand extends Command {
                 ip = onlineTarget.getAddress().getAddress().getHostAddress();
                 targetName = onlineTarget.getName();
             } else {
-                OfflinePlayer offlineTarget = plugin.getServer().getOfflinePlayer(target);
+                OfflinePlayer offlineTarget = plugin.getBedrockUtil().getOfflinePlayer(target);
                 if (offlineTarget.hasPlayedBefore()) {
                     String storedIp = plugin.getUserManager() != null
                             ? plugin.getUserManager().getLastIp(offlineTarget.getUniqueId())
