@@ -7,10 +7,13 @@ import net.godlycow.org.essc.expansion.mysql.storage.ConnectionPool;
 import net.godlycow.org.essc.expansion.mysql.storage.SchemaManager;
 import net.godlycow.org.essc.expansion.mysql.sync.EconomySyncListener;
 import net.godlycow.org.essc.expansion.mysql.sync.EconomySyncService;
+import net.godlycow.org.essc.expansion.mysql.sync.NicknameSyncListener;
+import net.godlycow.org.essc.expansion.mysql.sync.NicknameSyncService;
 import net.godlycow.org.essc.language.LanguageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
@@ -27,6 +30,8 @@ public class MySQLExpansion extends JavaPlugin {
     private SchemaManager schema;
     private EconomySyncService economySync;
     private EconomySyncListener listener;
+    private NicknameSyncService nicknameSync;
+    private NicknameSyncListener nicknameListener;
 
     private long startTime;
 
@@ -79,7 +84,37 @@ public class MySQLExpansion extends JavaPlugin {
             console.sendMessage(lang.get(console, "mysql.enable.economy_disabled"));
         }
 
+        startNicknameSync();
+
         registerCommand();
+    }
+
+    private void startNicknameSync() {
+        this.nicknameSync = new NicknameSyncService(this, essentialsC, pool,schema,config, config.getServerId());
+
+        this.nicknameSync.init();
+        this.nicknameSync.start();
+
+        if ( nicknameSync.isEnabled()  )
+        {
+            this.nicknameListener = new NicknameSyncListener(nicknameSync);
+            Bukkit.getPluginManager().registerEvents(nicknameListener, this);
+        }
+    }
+
+    private void stopNicknameSync() {
+        if ( nicknameSync != null ) {
+            nicknameSync.stop();
+        }
+
+        if ( nicknameListener != null ) {
+            HandlerList.unregisterAll(nicknameListener);
+            nicknameListener = null;
+        }
+    }
+
+    public NicknameSyncService getNicknameSync() {
+        return nicknameSync;
     }
 
     private void registerCommand() {
@@ -98,6 +133,7 @@ public class MySQLExpansion extends JavaPlugin {
             org.bukkit.event.HandlerList.unregisterAll(listener);
             listener = null;
         }
+        stopNicknameSync();
         if (pool != null) {
             pool.close();
         }
@@ -111,6 +147,8 @@ public class MySQLExpansion extends JavaPlugin {
         if (economySync != null) {
             economySync.stop();
         }
+
+        stopNicknameSync();
 
         if (pool != null) {
             pool.close();
@@ -136,6 +174,7 @@ public class MySQLExpansion extends JavaPlugin {
         }
 
 
+        startNicknameSync();
 
         return connected;
     }

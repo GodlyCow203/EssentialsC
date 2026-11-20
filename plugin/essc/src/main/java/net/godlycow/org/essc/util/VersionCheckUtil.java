@@ -1,7 +1,6 @@
 package net.godlycow.org.essc.util;
 
 import net.godlycow.org.essc.EssentialsC;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +21,6 @@ public class VersionCheckUtil implements Listener {
     private static final String MODRINTH_API_URL = "https://api.modrinth.com/v2/project/" + MODRINTH_PROJECT_ID + "/version";
     private static String latestVersion = "unknown";
     private static boolean updateAvailable = false;
-    private static final MiniMessage MINI = MiniMessage.miniMessage();
     private static final Pattern VERSION_PATTERN = Pattern.compile("\"version_number\"\\s*:\\s*\"([^\"]+)\"");
 
     public VersionCheckUtil(EssentialsC plugin) {
@@ -109,13 +108,10 @@ public class VersionCheckUtil implements Listener {
         player.getScheduler().runDelayed(plugin, task -> {
             if (!player.isOnline()) return;
 
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
-            player.sendMessage(MINI.deserialize("<color:#FFF200>EssentialsC Update Available</color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>Current: <color:#FF0000>" + plugin.getDescription().getVersion() + "</color></color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>Latest: <color:#00AA00>" + latestVersion + "</color></color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>Download: <color:#66AAFF><click:open_url:'https://modrinth.com/plugin/essentialsc'><hover:show_text:'<color:#AAAAAA>Click to open Modrinth'>https://modrinth.com/plugin/essentialsc</hover></click></color></color>"));
-            player.sendMessage(MINI.deserialize("<color:#AAAAAA>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>"));
+            player.sendMessage(plugin.getLanguageManager().get(player, "update.available", Map.of(
+                    "current", plugin.getDescription().getVersion(),
+                    "latest", latestVersion,
+                    "url", "https://modrinth.com/plugin/essentialsc")));
         }, null, 20L);
     }
 

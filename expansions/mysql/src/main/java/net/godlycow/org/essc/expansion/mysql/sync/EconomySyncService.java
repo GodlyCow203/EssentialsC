@@ -78,7 +78,7 @@ public class EconomySyncService {
         int pushInterval = Math.max(1, config.getPushIntervalSeconds());
 
         pushTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, task -> pushOnline(),
-                20L * pushInterval, 20L * pushInterval, TimeUnit.MILLISECONDS);
+                pushInterval, pushInterval, TimeUnit.SECONDS);
 
         plugin.debug("Scheduled economy push (on change) every " + pushInterval + "s");
 
@@ -87,7 +87,7 @@ public class EconomySyncService {
             int mirrorInterval = Math.max(1, config.getMirrorIntervalSeconds());
 
             mirrorTask = Bukkit.getAsyncScheduler().runAtFixedRate(plugin, task -> mirror(),
-                    20L * mirrorInterval, 20L * mirrorInterval, TimeUnit.MILLISECONDS);
+                    mirrorInterval, mirrorInterval, TimeUnit.SECONDS);
             plugin.debug("Scheduled local  network mirror every " + mirrorInterval + "s");
         }
     }

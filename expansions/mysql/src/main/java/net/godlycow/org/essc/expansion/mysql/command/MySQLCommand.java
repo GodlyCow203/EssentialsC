@@ -88,7 +88,7 @@ public class MySQLCommand extends Command {
 
     private boolean checkPermission(CommandSender sender, String permission) {
         if (!sender.hasPermission(permission)) {
-            sender.sendMessage(lang.get(sender, "error.no_permission"));
+            sender.sendMessage(lang.get(sender, "mysql.error.no_permission"));
             return false;
         }
         return true;
@@ -170,6 +170,18 @@ public class MySQLCommand extends Command {
                 Map.of("state", lang.getRaw(sender, connected ? "mysql.status.connected" : "mysql.status.disconnected"))));
         sender.sendMessage(lang.get(sender, "mysql.status.database",
                 Map.of("database", config.getMysqlDatabase(), "host", config.getMysqlHost(), "port", String.valueOf(config.getMysqlPort()))));
+        int[] stats = pool.getPoolStats();
+
+        if (stats != null) {
+            String waiting = stats[3] > 0
+                    ? lang.getRaw(sender, "mysql.status.pool_waiting", Map.of("waiting", String.valueOf(stats[3])))
+                    : "";
+            sender.sendMessage(lang.get(sender, "mysql.status.pool", Map.of(
+                    "active", String.valueOf(stats[0]),
+                    "idle", String.valueOf(stats[1]),
+                    "total", String.valueOf(stats[2]),
+                    "waiting", waiting)));
+        }
         sender.sendMessage(lang.get(sender, "mysql.status.server_id", Map.of("id", config.getServerId())));
         sender.sendMessage(lang.get(sender, "mysql.status.economy",
                 Map.of("state", lang.getRaw(sender, economySync.isEnabled() ? "mysql.status.economy_enabled" : "mysql.status.economy_disabled"))));
@@ -182,17 +194,23 @@ public class MySQLCommand extends Command {
     private void version(CommandSender sender) {
 
         sender.sendMessage(lang.get(sender, "mysql.version.header"));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Version", "value", expansion.getDescription().getVersion())));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "MySQL Host", "value", config.getMysqlHost() + ":" + config.getMysqlPort())));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Database", "value", config.getMysqlDatabase())));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Table Prefix", "value",  config.getTablePrefix())));
+        String enabled = lang.getRaw(sender, "mysql.status.economy_enabled");
+        String disabled = lang.getRaw(sender, "mysql.status.economy_disabled");
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.version"), "value", expansion.getDescription().getVersion())));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.host"), "value", config.getMysqlHost() + ":" + config.getMysqlPort())));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.database"), "value", config.getMysqlDatabase())));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.table_prefix"), "value",  config.getTablePrefix())));
         sender.sendMessage(lang.get(sender, "mysql.version.server_id", Map.of("id", config.getServerId())));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Economy Sync", "value", economySync.isEnabled() ? "enabled" : "disabled")));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Homes", "value", config.isHomesEnabled() ? "enabled" : "disabled")));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Warps", "value", config.isWarpsEnabled() ? "enabled" : "disabled")));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Nicknames", "value", config.isNicknamesEnabled()  ? "enabled" : "disabled")));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Punishments", "value", config.isPunishmentsEnabled() ? "enabled" : "disabled")));
-        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", "Kits", "value",  config.isKitsEnabled() ? "enabled" : "disabled")));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.economy_sync"), "value", economySync.isEnabled() ? enabled : disabled)));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.homes"), "value", config.isHomesEnabled() ? enabled : disabled)));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.warps"), "value", config.isWarpsEnabled() ? enabled : disabled)));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.nicknames"), "value", isNicknameSyncActive() ? enabled : disabled)));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.punishments"), "value", config.isPunishmentsEnabled() ? enabled : disabled)));
+        sender.sendMessage(lang.get(sender, "mysql.version.line", Map.of("name", lang.getRaw(sender, "mysql.version.label.kits"), "value",  config.isKitsEnabled() ? enabled : disabled)));
+    }
+
+    private boolean isNicknameSyncActive() {
+        return expansion.getNicknameSync() != null && expansion.getNicknameSync().isEnabled();
     }
 
     private void reload(CommandSender sender) {
@@ -202,7 +220,7 @@ public class MySQLCommand extends Command {
         if (success) {
             sender.sendMessage(lang.get(sender, "mysql.reload.success"));
         } else {
-            sender.sendMessage(lang.get(sender, "mysql.reload.failed", Map.of("reason", "could not (re)connect to MySQL")));
+            sender.sendMessage(lang.get(sender, "mysql.reload.failed", Map.of("reason", lang.getRaw(sender, "mysql.reload.reason_connect"))));
         }
     }
 
@@ -236,8 +254,13 @@ public class MySQLCommand extends Command {
         String target = args[1];
         if (target.equalsIgnoreCase("all")) {
             sender.sendMessage(lang.get(sender, "mysql.push.all_start"));
-            economySync.forcePushAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task ->
-                    sender.sendMessage(lang.get(sender, "mysql.push.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))))));
+            economySync.forcePushAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task -> {
+                if (error != null) {
+                    reportError(sender, "push all", error);
+                    return;
+                }
+                sender.sendMessage(lang.get(sender, "mysql.push.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))));
+            }));
             return;
         }
 
@@ -254,8 +277,19 @@ public class MySQLCommand extends Command {
         }
         var  balance = manager.getCachedBalance(uuid);
         sender.sendMessage(lang.get(sender, "mysql.push.start", Map.of("name", player.getName())));
-        economySync.push(uuid, player.getName(), balance).whenComplete((v, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task ->
-                sender.sendMessage(lang.get(sender, "mysql.push.done", Map.of("name", player.getName(), "balance", manager.format(balance))))));
+        economySync.push(uuid, player.getName(), balance).whenComplete((v, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task -> {
+            if (error != null) {
+                reportError(sender, "push " + player.getName(), error);
+                return;
+            }
+            sender.sendMessage(lang.get(sender, "mysql.push.done", Map.of("name", player.getName(), "balance", manager.format(balance))));
+        }));
+    }
+
+    private void reportError(CommandSender sender, String action, Throwable error) {
+        Throwable cause = error.getCause() != null ? error.getCause() : error;
+        expansion.getLogger().warning("MySQL " + action + " failed: " + cause.getMessage());
+        sender.sendMessage(lang.get(sender, "mysql.error.internal"));
     }
 
     private void pull(CommandSender sender, String[] args) {
@@ -270,8 +304,13 @@ public class MySQLCommand extends Command {
         String target = args[1];
         if (target.equalsIgnoreCase("all")) {
             sender.sendMessage(lang.get(sender, "mysql.pull.all_start"));
-            economySync.forcePullAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task ->
-                    sender.sendMessage(lang.get(sender, "mysql.pull.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))))));
+            economySync.forcePullAll().whenComplete((count, error) -> Bukkit.getGlobalRegionScheduler().run(expansion, task -> {
+                if (error != null) {
+                    reportError(sender, "pull all", error);
+                    return;
+                }
+                sender.sendMessage(lang.get(sender, "mysql.pull.all_done", Map.of("count", String.valueOf(count == null ? 0 : count))));
+            }));
             return;
         }
 
@@ -280,7 +319,6 @@ public class MySQLCommand extends Command {
             sender.sendMessage(lang.get(sender, "mysql.error.player_not_found", Map.of("name", target)));
             return;
         }
-        UUID uuid = player.getUniqueId();
         var manager = plugin.getEconomyManager();
         if (manager == null) {
             sender.sendMessage(lang.get(sender, "mysql.error.economy_disabled"));

@@ -132,15 +132,23 @@ public class ExpansionConfig {
         return config.getBoolean("sync.warps.enabled", false);
     }
 
-    public boolean isNicknamesEnabled() {
-        return config.getBoolean("sync.nicknames.enabled", false);
-    }
-
     public boolean isPunishmentsEnabled() {
         return config.getBoolean("sync.punishments.enabled", false);
     }
 
     public boolean isKitsEnabled() {
         return config.getBoolean("sync.kits.enabled", false);
+    }
+
+    public boolean isNicknamesEnabled() {
+        return config.getBoolean("sync.nicknames.enabled", true);
+    }
+
+    public boolean isNicknamePullOnJoin() {
+        return config.getBoolean("sync.nicknames.pull-on-join",  true);
+    }
+
+    public int getNicknameMirrorIntervalSeconds() {
+        return Math.max(1, config.getInt("sync.nicknames.mirror-interval-seconds", 5));
     }
 }

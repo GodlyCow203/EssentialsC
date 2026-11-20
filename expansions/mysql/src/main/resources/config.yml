@@ -65,3 +65,7 @@ sync:
     # Number of entries shown per page by /mysql baltop.
     baltop-page-size: 10
 
+  nicknames:
+    enabled: true
+    pull-on-join: true
+    mirror-interval-seconds: 5

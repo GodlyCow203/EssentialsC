@@ -112,7 +112,7 @@ public class InvseeCommand extends Command {
         InvseeHolder holder = new InvseeHolder(target.getUniqueId(), target.getName(), false);
         holder.setLiveTarget(target);
 
-        Component title = plugin.getMiniMessage().deserialize("<gray>" + target.getName() + "'s Inventory");
+        Component title = lang.get(viewer, "invsee.gui.title", Map.of("target", target.getName()));
         Inventory gui = Bukkit.createInventory(holder, 54, title);
         holder.setInventory(gui);
 
@@ -126,9 +126,7 @@ public class InvseeCommand extends Command {
     private void openOfflineGui(Player viewer, java.util.UUID targetUuid, String targetName, ItemStack[] slots) {
         InvseeHolder holder = new InvseeHolder(targetUuid, targetName, true);
 
-        Component title = plugin.getMiniMessage().deserialize(
-                "<gray>" + targetName + "'s Inventory <dark_gray>(offline)</dark_gray>"
-        );
+        Component title = lang.get(viewer, "invsee.gui.title_offline", Map.of("target", targetName));
         Inventory gui = Bukkit.createInventory(holder, 54, title);
         holder.setInventory(gui);
 

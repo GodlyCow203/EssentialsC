@@ -2,6 +2,7 @@ package net.godlycow.org.essc.expansion.mysql.storage;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariPoolMXBean;
 import net.godlycow.org.essc.expansion.mysql.MySQLExpansion;
 import net.godlycow.org.essc.expansion.mysql.config.ExpansionConfig;
 
@@ -76,6 +77,14 @@ public class ConnectionPool {
 
     public boolean isConnected() {
         return source != null && !source.isClosed() && healthy;
+    }
+
+    public int[] getPoolStats() {
+        if (source == null || source.isClosed()) return null;
+        HikariPoolMXBean bean = source.getHikariPoolMXBean();
+        if (bean == null) return null;
+        return new int[]{bean.getActiveConnections(), bean.getIdleConnections(),
+                bean.getTotalConnections(), bean.getThreadsAwaitingConnection()};
     }
 
     public CompletableFuture<Integer> update(String sql, Object... params) {

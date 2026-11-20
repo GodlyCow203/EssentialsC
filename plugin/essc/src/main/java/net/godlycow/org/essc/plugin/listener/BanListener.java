@@ -52,7 +52,7 @@ public class BanListener implements Listener {
                 );
                 kickMessage = plugin.getLanguageManager().get(null, "ban.screen_message", placeholders);
             } else {
-                kickMessage = Component.text("You are banned from this server.");
+                kickMessage = plugin.getLanguageManager().get(null, "ban.screen_message_default");
             }
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, kickMessage);
             if (logFilter != null) {
@@ -75,7 +75,7 @@ public class BanListener implements Listener {
                 );
                 kickMessage = plugin.getLanguageManager().get(null, "banip.screen_message", placeholders);
             } else {
-                kickMessage = Component.text("Your IP is banned from this server.");
+                kickMessage = plugin.getLanguageManager().get(null, "banip.screen_message_default");
             }
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, kickMessage);
             if (logFilter != null) {
