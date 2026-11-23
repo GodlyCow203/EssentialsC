@@ -26,6 +26,21 @@ Homes, warps, kits, a shop, an auction house and 90+ commands. Almost everything
 
 <div align="center">
 
+## Official Partner
+
+[![RealisticNode](.github/assets/banner.png)](https://realisticnode.com/essc)
+
+Looking for reliable Minecraft hosting? EssentialsC is officially partnered with **RealisticNode**.<br>
+Use code **`ESSC`** for **20% off** your first payment and **10% off** every renewal.
+
+[Website](https://realisticnode.com/essc) · [Discord](https://discord.gg/MNPZ6MZJ2x)
+
+</div>
+
+---
+
+<div align="center">
+
 # EssentialsC vs EssentialsX
 
 EssentialsC started as an alternative to EssentialsX, so here's a straight comparison.

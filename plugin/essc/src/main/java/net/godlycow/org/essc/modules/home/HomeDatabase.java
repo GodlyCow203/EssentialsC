@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.modules.home;
 
+import net.godlycow.org.essc.exception.StorageException;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 
@@ -85,7 +86,7 @@ public class HomeDatabase {
                 return true;
             } catch (SQLException e) {
                 plugin.getLogger().severe("Failed to save home: " + e.getMessage());
-                throw new RuntimeException(e);
+                throw new StorageException(e);
             }
         });
     }

@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.util;
 
+import net.godlycow.org.essc.exception.SerializationException;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -46,7 +47,7 @@ public final class InventorySerializer {
 
             return Base64.getEncoder().encodeToString(out.toByteArray());
         } catch (Exception e) {
-            throw new RuntimeException("Failed to serialize inventory slots", e);
+            throw new SerializationException("Failed to serialize inventory slots", e);
         }
     }
 
@@ -72,7 +73,7 @@ public final class InventorySerializer {
 
             return slots;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to deserialize inventory", e);
+            throw new SerializationException("Failed to deserialize inventory", e);
         }
     }
 

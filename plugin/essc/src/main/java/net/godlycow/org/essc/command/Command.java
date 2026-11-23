@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.command;
 
+import net.godlycow.org.essc.exception.CommandAbortException;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.integration.bedrock.BedrockUtil;
 import net.godlycow.org.essc.language.HelpManager;
@@ -254,11 +255,39 @@ public abstract class Command implements CommandExecutor, TabCompleter {
     private boolean runExecute(CommandSender sender, String label, String[] args) {
         try {
             return execute(sender, label, args);
+        } catch (CommandAbortException e) {
+            if (e.isUsage()) sendUsage(sender);
+            else sender.sendMessage(lang.get(sender, e.getLangKey(), e.getPlaceholders()));
+            return true;
         } catch (Exception e) {
             sender.sendMessage(lang.get(sender, "error.internal"));
             plugin.debug("Exception in " + name + ": " + e.getMessage());
             e.printStackTrace();
             return true;
+        }
+    }
+
+    protected Player requireOnlinePlayer(String name) {
+        Player target = plugin.getBedrockUtil().matchPlayer(name);
+
+        if (target == null)
+            throw new CommandAbortException("error.player_not_found", Map.of("player", name));
+
+        return target;
+    }
+
+    protected int parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new CommandAbortException("error.invalid_number", Map.of("input", input));
+        }
+    }
+
+    protected void requirePermission(CommandSender sender, String  permission) {
+        if (!sender.hasPermission(permission)) {
+            plugin.debug("Denied: " + sender.getName() + " lacks permission " + permission);
+            throw new CommandAbortException("error.no_permission");
         }
     }
 

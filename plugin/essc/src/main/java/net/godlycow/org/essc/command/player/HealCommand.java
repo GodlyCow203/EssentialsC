@@ -24,19 +24,9 @@ public class HealCommand extends Command {
         Player target;
 
         if (args.length > 0) {
-            target = plugin.getBedrockUtil().matchPlayer(args[0]);
-            if (target == null) {
-                Map<String, String> placeholders = new HashMap<>();
-                placeholders.put("player", args[0]);
-                player.sendMessage(lang.get(player, "error.player_not_found", placeholders));
-                return true;
-            }
-
-            if (target != player && !player.hasPermission("essentialsc.heal.others")) {
-                player.sendMessage(lang.get(player, "error.no_permission"));
-                plugin.debug("Denied: " + player.getName() + " lacks permission essentialsc.heal.others");
-                return true;
-            }
+            target = requireOnlinePlayer(args[0]);
+            if (target != player)
+                requirePermission(player, "essentialsc.heal.others");
         } else {
             target = player;
         }

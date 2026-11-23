@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.modules.nick;
 
+import net.godlycow.org.essc.exception.StorageException;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 import net.kyori.adventure.text.Component;
@@ -115,7 +116,7 @@ public class NickManager implements Listener {
                 return true;
             } catch (SQLException e) {
                 plugin.getLogger().severe("Failed to set nickname: " + e.getMessage());
-                throw new RuntimeException(e);
+                throw new StorageException(e);
             }
         });
     }

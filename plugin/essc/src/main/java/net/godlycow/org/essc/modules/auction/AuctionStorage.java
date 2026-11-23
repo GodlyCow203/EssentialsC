@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.modules.auction;
 
+import net.godlycow.org.essc.exception.SerializationException;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.storage.database.Database;
 import org.bukkit.inventory.ItemStack;
@@ -264,7 +265,7 @@ public class AuctionStorage {
             data.close();
             return Base64.getEncoder().encodeToString(out.toByteArray());
         } catch (Exception e) {
-            throw new RuntimeException("Serialization failed", e);
+            throw new SerializationException("Serialization failed", e);
         }
     }
 
@@ -276,7 +277,7 @@ public class AuctionStorage {
             data.close();
             return item;
         } catch (Exception e) {
-            throw new RuntimeException("Deserialization failed", e);
+            throw new SerializationException("Deserialization failed", e);
         }
     }
 

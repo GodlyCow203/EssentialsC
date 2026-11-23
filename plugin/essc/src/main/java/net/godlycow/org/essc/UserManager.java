@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.exception.StorageException;
 import net.godlycow.org.essc.storage.database.Database;
 import org.bukkit.Location;
 
@@ -22,7 +23,7 @@ public class UserManager {
     private <T> CompletableFuture<T> async(StoreTask<T> task) {
         return store.getDatabase().async(conn -> {
             try { return task.run(); }
-            catch (Exception e) { throw new RuntimeException(e); }
+            catch (Exception e) { throw new StorageException(e); }
         });
     }
 

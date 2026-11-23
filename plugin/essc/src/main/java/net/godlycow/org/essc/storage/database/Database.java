@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.storage.database;
 
+import net.godlycow.org.essc.exception.StorageException;
 import net.godlycow.org.essc.EssentialsC;
 
 import java.io.File;
@@ -86,7 +87,7 @@ public class Database {
                 return query.execute(conn);
             } catch (SQLException e) {
                 plugin.getLogger().log(Level.SEVERE, "Database error", e);
-                throw new RuntimeException(e);
+                throw new StorageException(e);
             }
         }, SHARED_EXECUTOR);
     }

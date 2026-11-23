@@ -1,5 +1,6 @@
 package net.godlycow.org.essc.command.player;
 
+import net.godlycow.org.essc.exception.CommandAbortException;
 import net.godlycow.org.essc.EssentialsC;
 import net.godlycow.org.essc.command.Command;
 import net.godlycow.org.essc.modules.FreezeManager;
@@ -25,22 +26,13 @@ public class FreezeCommand extends Command {
             return true;
         }
 
-        Player target = plugin.getBedrockUtil().matchPlayer(args[0]);
-        if (target == null) {
-            sender.sendMessage(lang.get(sender, "error.player_not_found", Map.of("player", args[0])));
-            return true;
-        }
+        Player target = requireOnlinePlayer(args[0]);
 
+        if (freeze.isExempt(target) && !sender.hasPermission("essentialsc.freeze.bypass.override"))
+            throw new CommandAbortException("freeze.exempt", Map.of("player", target.getName()));
 
-        if (freeze.isExempt(target) && !sender.hasPermission("essentialsc.freeze.bypass.override")) {
-            sender.sendMessage(lang.get(sender, "freeze.exempt", Map.of("player", target.getName())));
-            return true;
-        }
-
-        if (freeze.isFrozen(target)) {
-            sender.sendMessage(lang.get(sender, "freeze.already_frozen", Map.of("player", target.getName())));
-            return true;
-        }
+        if (freeze.isFrozen(target))
+            throw new CommandAbortException("freeze.already_frozen", Map.of("player", target.getName()));
 
         freeze.freeze(target);
         plugin.debug("Froze " + target.getName() + " by " + sender.getName());

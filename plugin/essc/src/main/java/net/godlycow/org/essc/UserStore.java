@@ -1,5 +1,6 @@
 package net.godlycow.org.essc;
 
+import net.godlycow.org.essc.exception.StorageException;
 import net.godlycow.org.essc.storage.database.Database;
 
 import java.io.File;
@@ -200,7 +201,7 @@ public class UserStore {
             stmt.execute(CREATE_HOME_NOTIFICATIONS_TABLE);
             stmt.execute(CREATE_HOME_NOTIFICATION_SETTINGS_TABLE);
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to initialize user database", e);
+            throw new StorageException("Failed to initialize user database", e);
         }
     }
 
